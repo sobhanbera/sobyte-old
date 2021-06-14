@@ -1,16 +1,16 @@
 {
     "compilerOptions": {
-        "baseUrl": "./",
+        "baseUrl": ".",
         "paths": {
-            "@assets": ["app/assets/*"],
-            "@components": ["app/components/*"],
-            "@constants": ["app/constants/*"],
-            "@navigations": ["app/navigations/*"],
-            "@screens": ["app/screens/*"],
-            "@styles": ["app/styles/*"],
-            "@store": ["app/store/*"],
-            "@themes": ["app/themes/*"],
-            "@utils": ["app/utils*"]
+            // "@assets/*": ["./app/assets/*"],
+            // "@components/*": ["./app/components/*"],
+            // "@constants/*": ["./app/constants/*"],
+            // "@navigations/*": ["./app/navigations/*"],
+            // "@screens/*": ["./app/screens/*"],
+            // "@styles/*": ["./app/styles/*"],
+            // "@store/*": ["./app/store/*"],
+            // "@themes/*": ["./app/themes/*"],
+            // "@utils/*": ["./app/utils*"]
         },
         "target": "esnext",
         "module": "commonjs",
