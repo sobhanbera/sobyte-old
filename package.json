@@ -2,18 +2,24 @@
     "name": "sobyte",
     "version": "0.0.1",
     "private": true,
+    "license": "MIT",
+    "description": "Listen to evergreen free musics anywhere, anytime. Free download any song.",
     "author": "Sobhan Bera",
     "scripts": {
         "android": "react-native run-android",
         "ios": "react-native run-ios",
         "start": "react-native start",
         "dev:start": "react-native start",
+        "dev:reset": "yarn dev:start --reset-cache",
         "test": "jest",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {
+        "axios": "^0.21.1",
         "react": "17.0.1",
         "react-native": "0.64.1",
+        "react-native-svg": "^12.1.1",
+        "react-native-webview": "^11.6.4",
         "styled-components": "^5.3.0"
     },
     "devDependencies": {
@@ -31,6 +37,11 @@
         "react-test-renderer": "17.0.1",
         "typescript": "^3.8.3"
     },
+    "homepage": "https://github.com/sobhanbera/sobyte",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sobhanbera/sobyte.git"
+    },
     "resolutions": {
         "@types/react": "^17"
     },
@@ -44,5 +55,21 @@
             "json",
             "node"
         ]
-    }
+    },
+    "keywords": [
+        "sobyte",
+        "music player",
+        "music api",
+        "online music player",
+        "offline music player",
+        "music streamer",
+        "music downloader",
+        "free music",
+        "listen to free songs",
+        "songs everytime",
+        "listen to offline songs",
+        "share your songs",
+        "social media",
+        "songs"
+    ]
 }
