@@ -24,18 +24,17 @@ export default function Scaler(props: ScalerProps) {
         outputRange: [1, props.scale ?? 0.9],
     })
 
-    const onPressIn = () => {
+    const onPressIn = () =>
         Animated.spring(animation, {
             toValue: 1,
             useNativeDriver: true,
         }).start()
-    }
-    const onPressOut = () => {
+
+    const onPressOut = () =>
         Animated.spring(animation, {
             toValue: 0,
             useNativeDriver: true,
         }).start()
-    }
 
     return (
         <Animated.View
@@ -59,12 +58,12 @@ export default function Scaler(props: ScalerProps) {
 
 const styles = StyleSheet.create({
     containerStyle: {
-        height: 100,
-        width: 100,
-        backgroundColor: '#7f7f7f',
+        height: 35,
+        width: 35,
+        backgroundColor: '#0F60B6',
         marginBottom: 20,
         overflow: 'hidden',
-        borderRadius: 10,
+        borderRadius: 5,
     },
     buttonStyle: {
         flex: 1,
