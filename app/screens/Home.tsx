@@ -5,12 +5,12 @@ import LinearGradient from 'react-native-linear-gradient'
 const Home = () => {
     return (
         <View>
-            <LinearGradient colors={['#303030', '#fff']}>
-                <Text>ASD</Text>
-                <View>
-                    <Text>HOME PAGEasfd</Text>
-                </View>
-            </LinearGradient>
+            {/* <LinearGradient colors={['#303030', '#fff']}> */}
+            <Text style={{fontFamily: 'verdana'}}>ASD</Text>
+            <View>
+                <Text>HOME PAGEasfd</Text>
+            </View>
+            {/* </LinearGradient> */}
         </View>
     )
 }

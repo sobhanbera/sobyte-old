@@ -28,6 +28,10 @@
 		04C93EA62046459FBA47E46E /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF3923A2134F42AB242418 /* Octicons.ttf */; };
 		5B484D7B49B949B691BE054E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF957E448BAE4E9DA05C84B2 /* SimpleLineIcons.ttf */; };
 		E673D2E5BE734699890C3878 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45D856547A8F43E1B12F884B /* Zocial.ttf */; };
+		1591AD383E79487FAE412241 /* Helvetica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DDCF060F80D845E4A2DF4325 /* Helvetica.ttf */; };
+		8CE6BBC681134FB49DEE3A47 /* LucidaGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC4E4E5A500E4DE482168B66 /* LucidaGrande.ttf */; };
+		67DB6577D5B642148719ED31 /* Tahoma Regular font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 946B762F6CD54D97925ECF6C /* Tahoma Regular font.ttf */; };
+		3BF62E11D4AA4A4CB55CA1CC /* verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3F2977142004F5A8338F8B1 /* verdana.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +72,10 @@
 		6DDF3923A2134F42AB242418 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		DF957E448BAE4E9DA05C84B2 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		45D856547A8F43E1B12F884B /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DDCF060F80D845E4A2DF4325 /* Helvetica.ttf */ = {isa = PBXFileReference; name = "Helvetica.ttf"; path = "../app/assets/fonts/Helvetica.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FC4E4E5A500E4DE482168B66 /* LucidaGrande.ttf */ = {isa = PBXFileReference; name = "LucidaGrande.ttf"; path = "../app/assets/fonts/LucidaGrande.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		946B762F6CD54D97925ECF6C /* Tahoma Regular font.ttf */ = {isa = PBXFileReference; name = "Tahoma Regular font.ttf"; path = "../app/assets/fonts/Tahoma Regular font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E3F2977142004F5A8338F8B1 /* verdana.ttf */ = {isa = PBXFileReference; name = "verdana.ttf"; path = "../app/assets/fonts/verdana.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +184,10 @@
 				6DDF3923A2134F42AB242418 /* Octicons.ttf */,
 				DF957E448BAE4E9DA05C84B2 /* SimpleLineIcons.ttf */,
 				45D856547A8F43E1B12F884B /* Zocial.ttf */,
+				DDCF060F80D845E4A2DF4325 /* Helvetica.ttf */,
+				FC4E4E5A500E4DE482168B66 /* LucidaGrande.ttf */,
+				946B762F6CD54D97925ECF6C /* Tahoma Regular font.ttf */,
+				E3F2977142004F5A8338F8B1 /* verdana.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -287,6 +299,10 @@
 				04C93EA62046459FBA47E46E /* Octicons.ttf in Resources */,
 				5B484D7B49B949B691BE054E /* SimpleLineIcons.ttf in Resources */,
 				E673D2E5BE734699890C3878 /* Zocial.ttf in Resources */,
+				1591AD383E79487FAE412241 /* Helvetica.ttf in Resources */,
+				8CE6BBC681134FB49DEE3A47 /* LucidaGrande.ttf in Resources */,
+				67DB6577D5B642148719ED31 /* Tahoma Regular font.ttf in Resources */,
+				3BF62E11D4AA4A4CB55CA1CC /* verdana.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
