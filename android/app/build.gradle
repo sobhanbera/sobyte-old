@@ -189,14 +189,17 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     /** All custom added packages starts **/
     implementation project(':react-native-webview')
     implementation project(':react-native-svg')
     implementation project(':@react-native-community_async-storage')
+    implementation project(':react-native-linear-gradient')
+    implementation project(':react-native-shimmer')
+    implementation project(':react-native-vector-icons')
 
-    implementation 'com.facebook.fresco:fresco:2.0.0'
+    implementation 'com.facebook.fresco:fresco:2.2.0'
     // For animated GIF support
     implementation 'com.facebook.fresco:animated-gif:2.0.0'
     // For WebP support, including animated WebP

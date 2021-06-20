@@ -13,31 +13,37 @@ import java.util.List;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.horcrux.svg.SvgPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.oblador.shimmer.RNShimmerPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
-        @Override
-        public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
-        }
+          @Override
+          public boolean getUseDeveloperSupport() {
+              return BuildConfig.DEBUG;
+          }
 
-        @Override
-        protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-//          packages.add(new SvgPackage());
-//            packages.add(new AsyncStoragePackage());
-          return packages;
-        }
+          @Override
+          protected List<ReactPackage> getPackages() {
+              @SuppressWarnings("UnnecessaryLocalVariable")
+              List<ReactPackage> packages = new PackageList(this).getPackages();
+              // Packages that cannot be autolinked yet can be added manually here, for example:
+              // packages.add(new MyReactNativePackage());
+              // packages.add(new SvgPackage());
+              // packages.add(new AsyncStoragePackage());
+              // packages.add(new LinearGradientPackage());
+              // packages.add(new RNShimmerPackage());
+              // packages.add(new VectorIconsPackage());
+              return packages;
+          }
 
-        @Override
-        protected String getJSMainModuleName() {
-          return "index";
-        }
+          @Override
+          protected String getJSMainModuleName() {
+              return "index";
+          }
       };
 
   @Override

@@ -1,6 +1,7 @@
 import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
-import Home from 'app/screens/Home'
+
+import Home from '../screens/Home'
 
 const AppStackNavigator = createStackNavigator()
 const MainAppNavigationStartingPoint = () => {
@@ -9,10 +10,6 @@ const MainAppNavigationStartingPoint = () => {
             <AppStackNavigator.Screen name="Home" component={Home} />
         </AppStackNavigator.Navigator>
     )
-}
-
-const InternationalizationWrapper = ({t}) => {
-    return <MainAppNavigationStartingPoint />
 }
 
 export default MainAppNavigationStartingPoint
