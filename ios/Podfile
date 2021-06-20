@@ -14,6 +14,8 @@ target 'Sobyte' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing

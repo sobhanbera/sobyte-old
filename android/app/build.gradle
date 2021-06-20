@@ -153,6 +153,7 @@ android {
             keyPassword 'android'
         }
     }
+    buildToolsVersion buildToolsVersion
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -193,6 +194,7 @@ dependencies {
     /** All custom added packages starts **/
     implementation project(':react-native-webview')
     implementation project(':react-native-svg')
+    implementation project(':@react-native-community_async-storage')
 
     implementation 'com.facebook.fresco:fresco:2.0.0'
     // For animated GIF support
