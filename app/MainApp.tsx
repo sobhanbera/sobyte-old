@@ -1,13 +1,19 @@
-import {NavigationContainer} from '@react-navigation/native'
 import React from 'react'
-import MainAppNavigationStartingPoint from './controller/MainAppNavigationStartingPoint'
+import {StatusBar} from 'react-native'
+import {NavigationContainer} from '@react-navigation/native'
+
 import Home from './screens/Home'
+import AppStartingPoint from './controller/AppStartingPoint'
+import MusicApi from './api'
 
 const MainApp = () => {
     return (
         <NavigationContainer>
-            <Home />
-            {/* <MainAppNavigationStartingPoint /> */}
+            <MusicApi>
+                <StatusBar backgroundColor="black" barStyle="light-content" />
+
+                <AppStartingPoint />
+            </MusicApi>
         </NavigationContainer>
     )
 }

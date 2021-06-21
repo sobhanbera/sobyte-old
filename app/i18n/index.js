@@ -19,7 +19,7 @@ const languageDetector = {
         const savedDataJSON = await AsyncStorage.getItem(STORAGE_KEY)
         const lng = savedDataJSON ? savedDataJSON : null
         const selectLanguage = lng || locale
-        console.log('Language Detected:: ', selectLanguage)
+        console.log('Detected Language:: ', selectLanguage)
         callback(selectLanguage)
     },
     cacheUserLanguage: () => {},

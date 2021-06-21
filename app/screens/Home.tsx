@@ -1,16 +1,19 @@
 import React from 'react'
-import {View, Text, Animated, Image} from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
+import {View, Text} from 'react-native'
+import {FontHelvetica} from '../constants'
 
 const Home = () => {
     return (
         <View>
-            {/* <LinearGradient colors={['#303030', '#fff']}> */}
-            <Text style={{fontFamily: 'verdana'}}>ASD</Text>
-            <View>
-                <Text>HOME PAGEasfd</Text>
-            </View>
-            {/* </LinearGradient> */}
+            <Text>ASKLAJDSLKAS</Text>
+            <Text>ASKLAJDSLKAS</Text>
+            <Text>ASKLAJDSLKAS</Text>
+            <Text>ASKLAJDSLKAS</Text>
+            <Text>ASKLAJDSLKAS</Text>
+            <Text>ASKLAJDSLKAS</Text>
+            <Text>ASKLAJDSLKAS</Text>
+            <Text>ASKLAJDSLKAS</Text>
+            {/* <Text style={{fontSize: 25, fontFamily: FontHelvetica}}>aASD</Text> */}
         </View>
     )
 }
