@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -16,6 +17,8 @@ import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.shimmer.RNShimmerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.zoontek.rnlocalize.RNLocalizePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -37,6 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
               // packages.add(new LinearGradientPackage());
               // packages.add(new RNShimmerPackage());
               // packages.add(new VectorIconsPackage());
+              // packages.add(new RNDeviceInfo());
+              // packages.add(new RNLocalizePackage());
               return packages;
           }
 

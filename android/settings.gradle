@@ -1,5 +1,13 @@
 rootProject.name = 'Sobyte'
 
+/** each and mostly every device details are provided by this package */
+include ':react-native-device-info'
+project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
+
+/** localization package */
+include ':react-native-localize'
+project(':react-native-localize').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localize/android')
+
 /** react native icon */
 include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
