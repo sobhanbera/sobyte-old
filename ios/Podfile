@@ -18,6 +18,8 @@ target 'Sobyte' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing

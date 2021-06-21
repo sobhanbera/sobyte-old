@@ -32,6 +32,7 @@
 		8CE6BBC681134FB49DEE3A47 /* LucidaGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC4E4E5A500E4DE482168B66 /* LucidaGrande.ttf */; };
 		67DB6577D5B642148719ED31 /* Tahoma Regular font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 946B762F6CD54D97925ECF6C /* Tahoma Regular font.ttf */; };
 		3BF62E11D4AA4A4CB55CA1CC /* verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3F2977142004F5A8338F8B1 /* verdana.ttf */; };
+		75315298EAA3412AAA37B563 /* libRNIntl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1281E5DC8C243EBBE54D818 /* libRNIntl.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		FC4E4E5A500E4DE482168B66 /* LucidaGrande.ttf */ = {isa = PBXFileReference; name = "LucidaGrande.ttf"; path = "../app/assets/fonts/LucidaGrande.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		946B762F6CD54D97925ECF6C /* Tahoma Regular font.ttf */ = {isa = PBXFileReference; name = "Tahoma Regular font.ttf"; path = "../app/assets/fonts/Tahoma Regular font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E3F2977142004F5A8338F8B1 /* verdana.ttf */ = {isa = PBXFileReference; name = "verdana.ttf"; path = "../app/assets/fonts/verdana.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0AE42986D89C449F9BFE1364 /* RNIntl.xcodeproj */ = {isa = PBXFileReference; name = "RNIntl.xcodeproj"; path = "../node_modules/react-native-intl/RNIntl.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		C1281E5DC8C243EBBE54D818 /* libRNIntl.a */ = {isa = PBXFileReference; name = "libRNIntl.a"; path = "libRNIntl.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75315298EAA3412AAA37B563 /* libRNIntl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +141,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0AE42986D89C449F9BFE1364 /* RNIntl.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -396,6 +401,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sobyte.app/Sobyte";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-intl/RNIntl",
+				);
 			};
 			name = Debug;
 		};
@@ -419,6 +432,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sobyte.app/Sobyte";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-intl/RNIntl",
+				);
 			};
 			name = Release;
 		};
@@ -444,6 +465,10 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-intl/RNIntl",
+				);
 			};
 			name = Debug;
 		};
@@ -467,6 +492,10 @@
 				PRODUCT_NAME = Sobyte;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-intl/RNIntl",
+				);
 			};
 			name = Release;
 		};
