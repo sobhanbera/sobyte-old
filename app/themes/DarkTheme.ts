@@ -14,29 +14,30 @@ export const DarkTheme: ThemeColors = {
      * This is the object for Dark Theme
      */
     primary: {
-        main: '#0F60B6',
-        light: '#0F60B6',
-        dark: '#0F60B6',
+        main: ['#0F60B6'],
+        light: ['#0F60B6'],
+        dark: ['#0F60B6'],
     },
     secondary: {
-        main: '#0F60B6',
-        light: '#0F60B6',
-        dark: '#0F60B6',
+        main: ['#0F60B6'],
+        light: ['#0F60B6'],
+        dark: ['#0F60B6'],
     },
     accent: {
-        main: '#0F60B6',
-        light: '#0F60B6',
-        dark: '#0F60B6',
+        main: ['#0F60B6'],
+        light: ['#0F60B6'],
+        dark: ['#0F60B6'],
     },
 
-    background: '',
-    surface: '',
-    border: '',
+    background: ['#0E003E', '#10003B', '#07012B', '#0A032B', '#0F002D'],
+    backgroundgradient: ['#0E003E', '#10003B', '#07012B', '#0A032B', '#0F002D'],
+    surface: [''],
+    border: [''],
 
-    onSuccess: '#0FFA50',
-    onError: '#FF500A',
-    onWarning: '',
-    onDanger: '#FF500A',
+    onSuccess: ['#0FFA50'],
+    onError: ['#FF500A'],
+    onWarning: [''],
+    onDanger: ['#FF500A'],
 
     ...RequiredCommonColors,
 }
