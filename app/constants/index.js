@@ -17,6 +17,13 @@ export const FontLucida = 'LucidaGrande'
 export const FontTahoma = 'Tahoma Regular font'
 export const FontVerdana = 'verdana'
 export const FontElikaGorica = 'Elika Gorica'
+export const FontUbuntuLight = 'Ubuntu Light'
+export const FontUbuntu = 'Ubuntu'
+export const FontUbuntuBold = 'Ubuntu Bold'
+
+/** links and website redirects */
+export const PRIVACY_POLICY_LINK = 'https://sobhanbera.vercel.app'
+export const TERM_AND_CONDITIONS_LINK = 'https://sobhanbera.vercel.app'
 
 /**
  * 000@webhosting .com
