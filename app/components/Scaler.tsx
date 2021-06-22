@@ -15,6 +15,7 @@ export interface ScalerProps {
     touchableOpacity?: number
     onLongPress?: Function
     onPress?: Function
+    center?: boolean
 }
 
 export default function Scaler(props: ScalerProps) {
@@ -44,12 +45,15 @@ export default function Scaler(props: ScalerProps) {
                 {transform: [{scale}]},
             ]}>
             <TouchableOpacity
-                style={[styles.buttonStyle, props.buttonStyle]}
+                style={[
+                    props.center ? styles.buttonStyle : {},
+                    props.buttonStyle,
+                ]}
                 activeOpacity={props.touchableOpacity ?? 0.85}
                 onPressIn={onPressIn}
                 onPressOut={onPressOut}
-                onPress={() => props.onPress ?? {}}
-                onLongPress={() => props.onLongPress ?? {}}>
+                onPress={() => props.onPress() ?? {}}
+                onLongPress={() => props.onLongPress() ?? {}}>
                 {props.children}
             </TouchableOpacity>
         </Animated.View>
@@ -58,15 +62,9 @@ export default function Scaler(props: ScalerProps) {
 
 const styles = StyleSheet.create({
     containerStyle: {
-        height: 35,
-        width: 35,
-        backgroundColor: '#0F60B6',
-        marginBottom: 20,
         overflow: 'hidden',
-        borderRadius: 5,
     },
     buttonStyle: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
