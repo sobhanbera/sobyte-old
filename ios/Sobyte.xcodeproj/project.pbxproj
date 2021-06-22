@@ -33,6 +33,8 @@
 		67DB6577D5B642148719ED31 /* Tahoma Regular font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 946B762F6CD54D97925ECF6C /* Tahoma Regular font.ttf */; };
 		3BF62E11D4AA4A4CB55CA1CC /* verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3F2977142004F5A8338F8B1 /* verdana.ttf */; };
 		75315298EAA3412AAA37B563 /* libRNIntl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1281E5DC8C243EBBE54D818 /* libRNIntl.a */; };
+		C470AF791BF748F9A8B5EEEF /* Elika Gorica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8454040A45E747D4823BC1AE /* Elika Gorica.ttf */; };
+		AD7DBEFB4E3149F08DC5165A /* FocusDisplay.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E23BAF4429C4657B3C0192A /* FocusDisplay.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		E3F2977142004F5A8338F8B1 /* verdana.ttf */ = {isa = PBXFileReference; name = "verdana.ttf"; path = "../app/assets/fonts/verdana.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		0AE42986D89C449F9BFE1364 /* RNIntl.xcodeproj */ = {isa = PBXFileReference; name = "RNIntl.xcodeproj"; path = "../node_modules/react-native-intl/RNIntl.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		C1281E5DC8C243EBBE54D818 /* libRNIntl.a */ = {isa = PBXFileReference; name = "libRNIntl.a"; path = "libRNIntl.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		8454040A45E747D4823BC1AE /* Elika Gorica.ttf */ = {isa = PBXFileReference; name = "Elika Gorica.ttf"; path = "../app/assets/fonts/Elika Gorica.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7E23BAF4429C4657B3C0192A /* FocusDisplay.ttf */ = {isa = PBXFileReference; name = "FocusDisplay.ttf"; path = "../app/assets/fonts/FocusDisplay.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +197,8 @@
 				FC4E4E5A500E4DE482168B66 /* LucidaGrande.ttf */,
 				946B762F6CD54D97925ECF6C /* Tahoma Regular font.ttf */,
 				E3F2977142004F5A8338F8B1 /* verdana.ttf */,
+				8454040A45E747D4823BC1AE /* Elika Gorica.ttf */,
+				7E23BAF4429C4657B3C0192A /* FocusDisplay.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -308,6 +314,8 @@
 				8CE6BBC681134FB49DEE3A47 /* LucidaGrande.ttf in Resources */,
 				67DB6577D5B642148719ED31 /* Tahoma Regular font.ttf in Resources */,
 				3BF62E11D4AA4A4CB55CA1CC /* verdana.ttf in Resources */,
+				C470AF791BF748F9A8B5EEEF /* Elika Gorica.ttf in Resources */,
+				AD7DBEFB4E3149F08DC5165A /* FocusDisplay.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

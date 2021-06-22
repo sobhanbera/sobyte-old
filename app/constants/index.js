@@ -16,7 +16,7 @@ export const FontHelvetica = 'Helvetica'
 export const FontLucida = 'LucidaGrande'
 export const FontTahoma = 'Tahoma Regular font'
 export const FontVerdana = 'verdana'
-export const FontFocusDisplay = 'FocusDisplay'
+export const FontElikaGorica = 'Elika Gorica'
 
 /**
  * 000@webhosting .com
