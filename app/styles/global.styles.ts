@@ -1,4 +1,4 @@
-import {FontFocusDisplay} from '../constants'
+import {FontElikaGorica} from '../constants'
 import {StyleSheet} from 'react-native'
 
 const globalStyles = StyleSheet.create({
@@ -8,8 +8,11 @@ const globalStyles = StyleSheet.create({
     blackText: {
         color: 'black',
     },
-    textFontFocusDisplay: {
-        fontFamily: FontFocusDisplay,
+    textFontElikaGorica: {
+        fontFamily: FontElikaGorica,
+    },
+    circle: {
+        borderRadius: 1000,
     },
 })
 

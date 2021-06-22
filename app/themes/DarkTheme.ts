@@ -14,14 +14,14 @@ export const DarkTheme: ThemeColors = {
      * This is the object for Dark Theme
      */
     primary: {
-        main: ['#0F60B6'],
-        light: ['#0F60B6'],
-        dark: ['#0F60B6'],
+        main: ['#0077b6'],
+        light: ['#81E4DA'],
+        dark: ['#0E003E'],
     },
     secondary: {
-        main: ['#0F60B6'],
-        light: ['#0F60B6'],
-        dark: ['#0F60B6'],
+        main: ['#EF1559'],
+        light: ['#F9B5AC'],
+        dark: ['#EE7674'],
     },
     accent: {
         main: ['#0F60B6'],
@@ -30,14 +30,22 @@ export const DarkTheme: ThemeColors = {
     },
 
     background: ['#0E003E', '#10003B', '#07012B', '#0A032B', '#0F002D'],
-    backgroundgradient: ['#0E003E', '#10003B', '#07012B', '#0A032B', '#0F002D'],
-    surface: [''],
-    border: [''],
+    backgroundgradient: [
+        '#233151',
+        '#0E003E',
+        '#10003B',
+        '#07012B',
+        '#0A032B',
+        '#0F002D',
+        '#233151',
+    ],
+    surface: ['#00369F'],
+    border: ['#00369F'],
 
-    onSuccess: ['#0FFA50'],
-    onError: ['#FF500A'],
-    onWarning: [''],
-    onDanger: ['#FF500A'],
+    onSuccess: ['#0496FF'],
+    onError: ['#D81159'],
+    onWarning: ['#FCFC62'],
+    onDanger: ['#EF0000'],
 
     ...RequiredCommonColors,
 }

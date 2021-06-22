@@ -35,6 +35,9 @@
 		75315298EAA3412AAA37B563 /* libRNIntl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1281E5DC8C243EBBE54D818 /* libRNIntl.a */; };
 		C470AF791BF748F9A8B5EEEF /* Elika Gorica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8454040A45E747D4823BC1AE /* Elika Gorica.ttf */; };
 		AD7DBEFB4E3149F08DC5165A /* FocusDisplay.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E23BAF4429C4657B3C0192A /* FocusDisplay.ttf */; };
+		C6EBAB0500B440A5970C90C0 /* Ubuntu Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B484362F4FF434DA5951080 /* Ubuntu Bold.ttf */; };
+		149C6A08E21A4FF68F639182 /* Ubuntu Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69CF771E21774DFD91DC0600 /* Ubuntu Light.ttf */; };
+		5A67490990914455A184D7D7 /* Ubuntu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35C30173946B428888369EC4 /* Ubuntu.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		C1281E5DC8C243EBBE54D818 /* libRNIntl.a */ = {isa = PBXFileReference; name = "libRNIntl.a"; path = "libRNIntl.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		8454040A45E747D4823BC1AE /* Elika Gorica.ttf */ = {isa = PBXFileReference; name = "Elika Gorica.ttf"; path = "../app/assets/fonts/Elika Gorica.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		7E23BAF4429C4657B3C0192A /* FocusDisplay.ttf */ = {isa = PBXFileReference; name = "FocusDisplay.ttf"; path = "../app/assets/fonts/FocusDisplay.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1B484362F4FF434DA5951080 /* Ubuntu Bold.ttf */ = {isa = PBXFileReference; name = "Ubuntu Bold.ttf"; path = "../app/assets/fonts/Ubuntu Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		69CF771E21774DFD91DC0600 /* Ubuntu Light.ttf */ = {isa = PBXFileReference; name = "Ubuntu Light.ttf"; path = "../app/assets/fonts/Ubuntu Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		35C30173946B428888369EC4 /* Ubuntu.ttf */ = {isa = PBXFileReference; name = "Ubuntu.ttf"; path = "../app/assets/fonts/Ubuntu.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +205,9 @@
 				E3F2977142004F5A8338F8B1 /* verdana.ttf */,
 				8454040A45E747D4823BC1AE /* Elika Gorica.ttf */,
 				7E23BAF4429C4657B3C0192A /* FocusDisplay.ttf */,
+				1B484362F4FF434DA5951080 /* Ubuntu Bold.ttf */,
+				69CF771E21774DFD91DC0600 /* Ubuntu Light.ttf */,
+				35C30173946B428888369EC4 /* Ubuntu.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -316,6 +325,9 @@
 				3BF62E11D4AA4A4CB55CA1CC /* verdana.ttf in Resources */,
 				C470AF791BF748F9A8B5EEEF /* Elika Gorica.ttf in Resources */,
 				AD7DBEFB4E3149F08DC5165A /* FocusDisplay.ttf in Resources */,
+				C6EBAB0500B440A5970C90C0 /* Ubuntu Bold.ttf in Resources */,
+				149C6A08E21A4FF68F639182 /* Ubuntu Light.ttf in Resources */,
+				5A67490990914455A184D7D7 /* Ubuntu.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

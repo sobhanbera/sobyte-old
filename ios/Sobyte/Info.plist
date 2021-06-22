@@ -75,6 +75,9 @@
 		<string>verdana.ttf</string>
 		<string>Elika Gorica.ttf</string>
 		<string>FocusDisplay.ttf</string>
+		<string>Ubuntu Bold.ttf</string>
+		<string>Ubuntu Light.ttf</string>
+		<string>Ubuntu.ttf</string>
 	</array>
 </dict>
 </plist>
