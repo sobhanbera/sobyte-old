@@ -1,16 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 
-import Home from '../screens/Home'
+import AuthenticationNavigation from './Authentication'
+import AppNavigation from './AppInside'
 
-const AppStack = createStackNavigator()
 const AppStartingPoint = () => {
-    return (
-        <AppStack.Navigator>
-            <AppStack.Screen name="Home" component={Home} />
-            <AppStack.Screen name="Home2" component={Home} />
-        </AppStack.Navigator>
-    )
+    const [userLoggedIn, setUserLoggedIn] = useState(false)
+
+    return !userLoggedIn ? <AuthenticationNavigation /> : <AppNavigation />
 }
 
 export default AppStartingPoint
