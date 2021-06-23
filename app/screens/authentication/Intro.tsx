@@ -12,8 +12,7 @@ import LinearGradient from 'react-native-linear-gradient'
 
 import {useTheme} from '../../themes/ThemeProvider'
 import globalStyles from '../../styles/global.styles'
-import AuthButton from '../../components/AuthButton'
-import Scaler from '../../components/Scaler'
+import {AuthButton, HeartBeatView, Scaler} from '../../components'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import {PRIVACY_POLICY_LINK, TERM_AND_CONDITIONS_LINK} from '../../constants'
 
@@ -43,14 +42,14 @@ const Intro = (props: IntroProps) => {
             colors={themeColors.backgroundgradient}>
             <View style={styles.wrapper}>
                 <View>
-                    <Scaler scale={0.98}>
+                    <Scaler scale={1}>
                         <Image
                             style={styles.appLogo}
                             source={require('../../assets/images/logo_name.png')}
                         />
                     </Scaler>
                     <Text style={[globalStyles.whiteText, styles.detailsText]}>
-                        Let's Enjoy Music
+                        Feel The Music
                     </Text>
                 </View>
 
