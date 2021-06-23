@@ -12,7 +12,7 @@ import LinearGradient from 'react-native-linear-gradient'
 
 import {useTheme} from '../../themes/ThemeProvider'
 import globalStyles from '../../styles/global.styles'
-import {AuthButton, HeartBeatView, Scaler} from '../../components'
+import {AuthButton, Scaler} from '../../components'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import {PRIVACY_POLICY_LINK, TERM_AND_CONDITIONS_LINK} from '../../constants'
 
