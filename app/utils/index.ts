@@ -1,4 +1,7 @@
 import {isColorDark, isColorLight} from './Colors'
 
-export {isColorLight}
-export {isColorDark}
+import {returnNullCallback} from './Objects'
+
+export {isColorLight, isColorDark}
+
+export {returnNullCallback}
