@@ -7,16 +7,16 @@ import {
     TouchableOpacity,
 } from 'react-native'
 
-export interface ScalerProps {
+interface ScalerProps {
     buttonStyle?: StyleProp<any>
     children?: React.ReactNode
     containerStyle?: StyleProp<any>
     scale?: number
     touchableOpacity?: number
-    onLongPress?: Function
     onPress?: Function
+    onLongPress?: Function
+    center?: boolean
 }
-
 export default function Scaler(props: ScalerProps) {
     const animation = new Animated.Value(0)
     const scale = animation.interpolate({
@@ -43,30 +43,52 @@ export default function Scaler(props: ScalerProps) {
                 props.containerStyle,
                 {transform: [{scale}]},
             ]}>
-            <TouchableOpacity
-                style={[styles.buttonStyle, props.buttonStyle]}
-                activeOpacity={props.touchableOpacity ?? 0.85}
-                onPressIn={onPressIn}
-                onPressOut={onPressOut}
-                onPress={() => props.onPress ?? {}}
-                onLongPress={() => props.onLongPress ?? {}}>
-                {props.children}
-            </TouchableOpacity>
+            {props.onPress && props.onLongPress ? (
+                <TouchableOpacity
+                    style={[
+                        props.center ? styles.buttonStyle : {},
+                        props.buttonStyle,
+                    ]}
+                    activeOpacity={props.touchableOpacity ?? 0.85}
+                    onPressIn={onPressIn}
+                    onPressOut={onPressOut}
+                    onPress={() => props.onPress()}
+                    onLongPress={() => props.onLongPress()}>
+                    {props.children}
+                </TouchableOpacity>
+            ) : props.onPress ? (
+                <TouchableOpacity
+                    style={[
+                        props.center ? styles.buttonStyle : {},
+                        props.buttonStyle,
+                    ]}
+                    activeOpacity={props.touchableOpacity ?? 0.85}
+                    onPressIn={onPressIn}
+                    onPressOut={onPressOut}
+                    onPress={() => props.onPress()}>
+                    {props.children}
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity
+                    style={[
+                        props.center ? styles.buttonStyle : {},
+                        props.buttonStyle,
+                    ]}
+                    activeOpacity={props.touchableOpacity ?? 0.85}
+                    onPressIn={onPressIn}
+                    onPressOut={onPressOut}>
+                    {props.children}
+                </TouchableOpacity>
+            )}
         </Animated.View>
     )
 }
 
 const styles = StyleSheet.create({
     containerStyle: {
-        height: 35,
-        width: 35,
-        backgroundColor: '#0F60B6',
-        marginBottom: 20,
         overflow: 'hidden',
-        borderRadius: 5,
     },
     buttonStyle: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
