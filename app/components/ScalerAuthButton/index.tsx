@@ -6,7 +6,7 @@ import globalStyles from '../../styles/global.styles'
 
 interface ScalerAuthButtonProps {
     title: string
-    onPress: Function
+    buttonOnPress?: Function
     gradient?: boolean
     gradientAngle?: number
     gradientColor?: Array<string>
@@ -20,7 +20,7 @@ interface ScalerAuthButtonProps {
     containerStyle?: StyleProp<any>
     scale?: number
     touchableOpacity?: number
-    scalerOnPress?: Function
+    onPress: Function
     onLongPress?: Function
     center?: boolean
 
@@ -34,13 +34,13 @@ const ScalerAuthButton: React.FC<ScalerAuthButtonProps> = props => {
                 containerStyle={props.containerStyle}
                 scale={props.scale}
                 touchableOpacity={props.touchableOpacity}
-                onPress={props.scalerOnPress}
+                onPress={props.onPress}
                 onLongPress={props.onLongPress}
                 center={props.center}>
                 <AuthButton
                     simpleGradientColor={props.simpleGradientColor}
                     title={props.title}
-                    onPress={props.onPress}
+                    onPress={props.buttonOnPress}
                     gradient={props.gradient}
                     gradientAngle={props.gradientAngle}
                     gradientColor={props.gradientColor}

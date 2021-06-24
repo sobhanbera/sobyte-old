@@ -7,11 +7,12 @@ import {
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import globalStyles from '../../styles/global.styles'
-import {useTheme} from '../../themes/ThemeProvider'
+import {useTheme} from '../../context'
 
 interface SobyteTextInputProps extends TextInputProps {
     error?: boolean
     errorText?: string
+    reversedColor?: boolean
 }
 const SobyteTextInput: React.FC<SobyteTextInputProps> = props => {
     const {themeColors} = useTheme()
@@ -24,12 +25,25 @@ const SobyteTextInput: React.FC<SobyteTextInputProps> = props => {
                 useAngle={true}
                 angle={90}
                 angleCenter={{x: 0.5, y: 0.5}}
-                colors={[
-                    themeColors.primary.main[0] + 'ef',
-                    themeColors.secondary.dark[0] + 'ff',
-                ]}>
+                colors={
+                    props.reversedColor
+                        ? [
+                              themeColors.primary.main[0] + 'ef',
+                              themeColors.secondary.main[0] + 'ff',
+                          ]
+                        : [
+                              themeColors.secondary.main[0] + 'ff',
+                              themeColors.primary.main[0] + 'ef',
+                          ]
+                }>
                 <TouchableWithoutFeedback>
                     <TextInput
+                        allowFontScaling
+                        selectionColor={
+                            props.reversedColor
+                                ? themeColors.secondary.main[0]
+                                : themeColors.primary.main[0]
+                        }
                         onFocus={() => setFocused(true)}
                         onBlur={() => setFocused(false)}
                         style={[

@@ -1,8 +1,10 @@
 import React from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
+import FeatherIcon from 'react-native-vector-icons/Feather'
 
-import {useTheme} from '../../themes/ThemeProvider'
+import {useTheme} from '../../context'
+import {Scaler} from '../'
 
 interface HeaderProps {
     headerTitle?: string
@@ -13,6 +15,7 @@ interface HeaderProps {
     color?: string
     transparency?: string
     goBack: boolean
+    rightIconsList?: Array<React.ReactNode>
 }
 const Header = (props: HeaderProps) => {
     const {ChooseThemeOptions} = useTheme()
@@ -30,15 +33,18 @@ const Header = (props: HeaderProps) => {
                 },
             ]}>
             <View style={styles.innerHeader}>
-                <Icon
+                <Scaler
+                    scale={0.9}
                     onPress={() =>
                         props.goBack ? props.navigation.goBack() : null
-                    }
-                    style={styles.headerIcon}
-                    name="arrow-left"
-                    size={props.iconSize ?? 20}
-                    color={props.iconColor ?? '#ffffff'}
-                />
+                    }>
+                    <Icon
+                        style={styles.headerIcon}
+                        name="arrow-left"
+                        size={props.iconSize ?? 20}
+                        color={props.iconColor ?? '#ffffff'}
+                    />
+                </Scaler>
                 <Text
                     style={[
                         styles.headerTitle,
@@ -49,6 +55,11 @@ const Header = (props: HeaderProps) => {
                         : ''}
                 </Text>
             </View>
+            {props.rightIconsList
+                ? props.rightIconsList.map((icon, _) => {
+                      return <View key={_}>{icon}</View>
+                  })
+                : null}
         </View>
     )
 }

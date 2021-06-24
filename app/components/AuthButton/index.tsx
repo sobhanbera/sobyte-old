@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
-import {useTheme} from '../../themes/ThemeProvider'
+import {useTheme} from '../../context'
 import {FontLucida, FontTahoma, FontUbuntu, FontVerdana} from '../../constants'
 
 interface ButtonProps {
