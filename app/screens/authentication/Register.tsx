@@ -2,11 +2,7 @@ import React, {useState} from 'react'
 import {
     Keyboard,
     KeyboardAvoidingView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
     TouchableWithoutFeedback,
-    View,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import FeatherIcon from 'react-native-vector-icons/Feather'
@@ -18,7 +14,7 @@ import {
     ScalerAuthButton,
 } from '../../components'
 
-import {useTheme, useLoader} from '../../context'
+import {useTheme, useApp} from '../../context'
 
 const lrcString = `[ti: I still love you]
     [ar:Wang Leehom]
@@ -51,15 +47,17 @@ interface RegisterProps {
 }
 const Register = (props: RegisterProps) => {
     const {themeColors} = useTheme()
-    const {setShowLoading, toggleLoader} = useLoader()
+    const {setShowLoading, setAlertTitle, Alert} = useApp()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [hidePassword, setHidePassword] = useState(true)
 
     const RegisterNewUser = () => {
-        console.log('USER REGIS')
-        toggleLoader()
+        console.log('USER REGISTRATION STARTED...')
+        Alert(() => {
+            console.log('asdf')
+        }).show()
     }
 
     return (

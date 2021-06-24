@@ -38,7 +38,7 @@ export const DarkTheme: ThemeColors = {
         '#0E003E',
         '#10003E',
     ],
-    surface: ['#00369F'],
+    surface: ['#272727'],
     border: ['#00369F'],
     placeholder: ['#CFCFCF'],
 
