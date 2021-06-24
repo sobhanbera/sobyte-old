@@ -45,7 +45,7 @@ npm install yarn@latest -g
 npm install npm@latest -g
 ```
 
-### Installation
+### Environment Setup
 
 1. Fork this repository
 2. Clone the repository.
