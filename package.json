@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "@react-native-community/async-storage": "^1.12.1",
+        "@react-native-community/blur": "^3.6.0",
         "@react-native-community/masked-view": "^0.1.11",
         "@react-navigation/native": "^5.9.4",
         "@react-navigation/stack": "^5.14.5",
@@ -32,6 +33,7 @@
         "react-native-linear-gradient": "^2.5.6",
         "react-native-locale-detector": "^1.0.1",
         "react-native-localize": "^2.1.1",
+        "react-native-lrc": "^1.0.0-beta.1",
         "react-native-reanimated": "^2.2.0",
         "react-native-safe-area-context": "^3.2.0",
         "react-native-screens": "^3.4.0",
