@@ -1,4 +1,13 @@
-import {FontElikaGorica} from '../constants'
+import {
+    FontElikaGorica,
+    FontHelvetica,
+    FontLucida,
+    FontTahoma,
+    FontUbuntu,
+    FontVerdana,
+    FontRoboto,
+    FontRobotoBold,
+} from '../constants'
 import {StyleSheet} from 'react-native'
 
 const globalStyles = StyleSheet.create({
@@ -38,11 +47,12 @@ const globalStyles = StyleSheet.create({
     },
     sobyteTextInput: {
         color: '#FFFFFFEF',
-        fontSize: 19,
+        fontSize: 17,
+        fontFamily: FontRoboto,
         paddingHorizontal: 20,
         paddingVertical: 0,
         borderRadius: 1000,
-        height: 50,
+        height: 48,
         borderWidth: 0.6,
     },
 })
