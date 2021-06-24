@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-    Animated,
-    StyleProp,
-    StyleSheet,
-    StyleSheetProperties,
-    TouchableOpacity,
-} from 'react-native'
+import {Animated, StyleProp, StyleSheet, TouchableOpacity} from 'react-native'
 
 interface ScalerProps {
     buttonStyle?: StyleProp<any>
@@ -21,7 +15,7 @@ export default function Scaler(props: ScalerProps) {
     const animation = new Animated.Value(0)
     const scale = animation.interpolate({
         inputRange: [0, 1],
-        outputRange: [1, props.scale ?? 0.9],
+        outputRange: [1, props.scale ?? 0.95],
     })
 
     const onPressIn = () =>

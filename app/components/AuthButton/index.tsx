@@ -1,12 +1,9 @@
 import React from 'react'
 import {
-    Button,
     StyleProp,
     StyleSheet,
-    StyleSheetProperties,
     Text,
     TextStyle,
-    TouchableOpacity,
     View,
     ViewStyle,
 } from 'react-native'
@@ -22,6 +19,7 @@ interface ButtonProps {
     gradient?: boolean
     gradientAngle?: number
     gradientColor?: Array<string>
+    simpleGradientColor?: boolean
     style?: StyleProp<ViewStyle>
     touchableButtonTextStyle?: StyleProp<TextStyle>
 
@@ -36,10 +34,12 @@ const AuthButton = (props: ButtonProps) => {
             angleCenter={{x: 0.5, y: 0.5}}
             style={[props.style, styles.touchableButton]}
             colors={
-                props.gradientColor ?? [
-                    themeColors.primary.main[0],
-                    themeColors.secondary.main[0],
-                ]
+                props.simpleGradientColor
+                    ? [themeColors.primary.main[0], themeColors.primary.main[0]]
+                    : props.gradientColor ?? [
+                          themeColors.primary.main[0],
+                          themeColors.secondary.main[0],
+                      ]
             }>
             <Text
                 style={[
@@ -48,7 +48,9 @@ const AuthButton = (props: ButtonProps) => {
                 ]}>
                 {props.title}
             </Text>
-            <View style={styles.iconHolder}>{props.buttonRight}</View>
+            {props.buttonRight && (
+                <View style={styles.iconHolder}>{props.buttonRight}</View>
+            )}
         </LinearGradient>
     ) : (
         <View style={[props.style, styles.touchableButton]}>
