@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useState} from 'react'
 import {ActivityIndicator, Modal, View} from 'react-native'
 import {useTheme} from '../../context'
+import {Scaler} from '../'
 
 const Loader = () => {
     const {themeColors} = useTheme()
@@ -20,14 +21,16 @@ const Loader = () => {
                     alignItems: 'center',
                     backgroundColor: '#00000046',
                 }}>
-                <View
-                    style={{
-                        padding: 30,
-                        backgroundColor: themeColors.primary.main[0] + '1f',
-                        borderRadius: 8,
-                    }}>
-                    <ActivityIndicator color="white" size={40} />
-                </View>
+                <Scaler>
+                    <View
+                        style={{
+                            padding: 30,
+                            backgroundColor: themeColors.primary.main[0] + '1f',
+                            borderRadius: 8,
+                        }}>
+                        <ActivityIndicator color="white" size={40} />
+                    </View>
+                </Scaler>
             </View>
         </Modal>
     )

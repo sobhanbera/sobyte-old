@@ -28,6 +28,7 @@ export default function Scaler(props: ScalerProps) {
         Animated.spring(animation, {
             toValue: 0,
             useNativeDriver: true,
+            mass: 2,
         }).start()
 
     return (
