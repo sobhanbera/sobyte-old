@@ -38,6 +38,8 @@
 		C6EBAB0500B440A5970C90C0 /* Ubuntu Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B484362F4FF434DA5951080 /* Ubuntu Bold.ttf */; };
 		149C6A08E21A4FF68F639182 /* Ubuntu Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69CF771E21774DFD91DC0600 /* Ubuntu Light.ttf */; };
 		5A67490990914455A184D7D7 /* Ubuntu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35C30173946B428888369EC4 /* Ubuntu.ttf */; };
+		D680E45FE5DB407AAAEEC751 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C535C454FBED42A8919E4CD7 /* Roboto-Bold.ttf */; };
+		59B715594E194E1891FB1187 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5464799A3B5B457A98A9D9C1 /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		1B484362F4FF434DA5951080 /* Ubuntu Bold.ttf */ = {isa = PBXFileReference; name = "Ubuntu Bold.ttf"; path = "../app/assets/fonts/Ubuntu Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		69CF771E21774DFD91DC0600 /* Ubuntu Light.ttf */ = {isa = PBXFileReference; name = "Ubuntu Light.ttf"; path = "../app/assets/fonts/Ubuntu Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		35C30173946B428888369EC4 /* Ubuntu.ttf */ = {isa = PBXFileReference; name = "Ubuntu.ttf"; path = "../app/assets/fonts/Ubuntu.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C535C454FBED42A8919E4CD7 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; name = "Roboto-Bold.ttf"; path = "../app/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5464799A3B5B457A98A9D9C1 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; name = "Roboto-Regular.ttf"; path = "../app/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,8 @@
 				1B484362F4FF434DA5951080 /* Ubuntu Bold.ttf */,
 				69CF771E21774DFD91DC0600 /* Ubuntu Light.ttf */,
 				35C30173946B428888369EC4 /* Ubuntu.ttf */,
+				C535C454FBED42A8919E4CD7 /* Roboto-Bold.ttf */,
+				5464799A3B5B457A98A9D9C1 /* Roboto-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -328,6 +334,8 @@
 				C6EBAB0500B440A5970C90C0 /* Ubuntu Bold.ttf in Resources */,
 				149C6A08E21A4FF68F639182 /* Ubuntu Light.ttf in Resources */,
 				5A67490990914455A184D7D7 /* Ubuntu.ttf in Resources */,
+				D680E45FE5DB407AAAEEC751 /* Roboto-Bold.ttf in Resources */,
+				59B715594E194E1891FB1187 /* Roboto-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
