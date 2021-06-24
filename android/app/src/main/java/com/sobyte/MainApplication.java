@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.cmcewen.blurview.BlurViewPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -19,6 +20,7 @@ import com.oblador.shimmer.RNShimmerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.zoontek.rnlocalize.RNLocalizePackage;
+import com.cmcewen.blurview.BlurViewPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -42,6 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
               // packages.add(new VectorIconsPackage());
               // packages.add(new RNDeviceInfo());
               // packages.add(new RNLocalizePackage());
+              // packages.add(new BlurViewPackage());
               return packages;
           }
 
