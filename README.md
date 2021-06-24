@@ -15,7 +15,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#">Dev Environment Setup</a></li>
+        <li><a href="#environment-setup">Dev Environment Setup</a></li>
       </ul>
     </li>
   </ol>
