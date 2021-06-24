@@ -1,37 +1,19 @@
 import React from 'react'
-import {
-    Image,
-    Linking,
-    StyleSheet,
-    Text,
-    ToastAndroid,
-    TouchableOpacity,
-    View,
-} from 'react-native'
+import {Image, StyleSheet, Text, View} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
-import {useTheme} from '../../themes/ThemeProvider'
+import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
 import {AuthButton, Scaler} from '../../components'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import {PRIVACY_POLICY_LINK, TERM_AND_CONDITIONS_LINK} from '../../constants'
+
+import {T_C_PrivacyPolicy} from '../../components'
 
 interface IntroProps {
     navigation: any
 }
 const Intro = (props: IntroProps) => {
     const {themeColors} = useTheme()
-
-    const openLink = async (url: string) => {
-        if (await Linking.canOpenURL(url)) {
-            Linking.openURL(url)
-        } else {
-            ToastAndroid.show(
-                "Looks like you device doesn't support opening this link.",
-                ToastAndroid.SHORT,
-            )
-        }
-    }
 
     return (
         <LinearGradient
@@ -105,34 +87,7 @@ const Intro = (props: IntroProps) => {
                         </Scaler>
                     </View>
 
-                    <View style={styles.privacyHolder}>
-                        <Text style={styles.privacyAndTCText}>
-                            By signing up, you agree to our{' '}
-                            <TouchableOpacity
-                                onPress={() =>
-                                    openLink(TERM_AND_CONDITIONS_LINK)
-                                }>
-                                <Text
-                                    style={[
-                                        styles.privacyAndTCText,
-                                        styles.privacyKeyWords,
-                                    ]}>
-                                    Terms & Conditions
-                                </Text>
-                            </TouchableOpacity>
-                            {' and '}
-                            <TouchableOpacity
-                                onPress={() => openLink(PRIVACY_POLICY_LINK)}>
-                                <Text
-                                    style={[
-                                        styles.privacyAndTCText,
-                                        styles.privacyKeyWords,
-                                    ]}>
-                                    Privacy Policy.
-                                </Text>
-                            </TouchableOpacity>
-                        </Text>
-                    </View>
+                    <T_C_PrivacyPolicy padding={10} />
                 </View>
             </View>
         </LinearGradient>
