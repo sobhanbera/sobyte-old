@@ -12,6 +12,8 @@ export const STORAGE_KEY = '@APP:languageCode' // Storage key where the app lang
 export const THEME_STORAGE_KEY = '@APP:theme' // Storage key for the app's theme
 
 /** Fonts Short Name */
+export const FontRoboto = 'Roboto-Regular'
+export const FontRobotoBold = 'Roboto-Bold'
 export const FontHelvetica = 'Helvetica'
 export const FontLucida = 'LucidaGrande'
 export const FontTahoma = 'Tahoma Regular font'
