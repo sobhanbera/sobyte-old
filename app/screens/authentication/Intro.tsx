@@ -35,7 +35,7 @@ const Intro = (props: IntroProps) => {
 
     return (
         <LinearGradient
-            angle={320}
+            angle={315}
             angleCenter={{x: 0.5, y: 0.5}}
             useAngle={true}
             style={{width: '100%', flex: 1}}
@@ -95,10 +95,7 @@ const Intro = (props: IntroProps) => {
                                 }
                                 style={styles.button}
                                 gradient
-                                gradientColor={[
-                                    themeColors.primary.main[0],
-                                    themeColors.primary.main[0],
-                                ]}
+                                simpleGradientColor
                                 gradientAngle={4}
                                 title="Login with Email"
                                 onPress={() => {

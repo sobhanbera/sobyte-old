@@ -31,16 +31,16 @@ export const DarkTheme: ThemeColors = {
 
     background: ['#0E003E', '#10003B', '#07012B', '#0A032B', '#0F002D'],
     backgroundgradient: [
-        '#233151',
-        '#0E003E',
-        '#10003B',
-        '#07012B',
-        '#0A032B',
         '#0F002D',
-        '#233151',
+        '#0A032B',
+        '#07012B',
+        '#10004E',
+        '#0E003E',
+        '#10003E',
     ],
     surface: ['#00369F'],
     border: ['#00369F'],
+    placeholder: ['#CFCFCF'],
 
     onSuccess: ['#0496FF'],
     onError: ['#D81159'],
