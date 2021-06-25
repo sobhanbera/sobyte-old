@@ -21,7 +21,7 @@ const AppStartingPoint = () => {
         <>
             {!userLoggedIn ? <AuthenticationNavigation /> : <AppNavigation />}
 
-            {loading ? <FullScreenLoading /> : null}
+            <FullScreenLoading visible={loading} />
         </>
     )
 }
