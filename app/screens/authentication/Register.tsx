@@ -12,6 +12,7 @@ import {
     PaddingView,
     SobyteTextInput,
     ScalerAuthButton,
+    SobyteAlertBox,
 } from '../../components'
 
 import {useTheme, useApp} from '../../context'
@@ -48,6 +49,7 @@ interface RegisterProps {
 const Register = (props: RegisterProps) => {
     const {themeColors} = useTheme()
     const {setShowLoading} = useApp()
+    const [visible, setVisibility] = useState(false)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -55,6 +57,7 @@ const Register = (props: RegisterProps) => {
 
     const RegisterNewUser = () => {
         console.log('USER REGISTRATION STARTED...')
+        setVisibility(true)
     }
 
     return (
@@ -65,6 +68,12 @@ const Register = (props: RegisterProps) => {
                 useAngle={true}
                 style={{width: '100%', flex: 1}}
                 colors={themeColors.backgroundgradient}>
+                <SobyteAlertBox
+                    visible={visible}
+                    setVisibility={setVisibility}
+                    onlyConfirmButton
+                />
+
                 <Header
                     navigation={props.navigation}
                     headerTitle="Sign Up"
