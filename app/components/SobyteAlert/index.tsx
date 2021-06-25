@@ -16,8 +16,11 @@ export interface SobyteAlertProps {
     confirmText?: string
     cancelText?: string
     visible: boolean
+
+    onlyConfirmButton?: boolean
+    activeOpacity?: number
     setVisibility: (value: any) => void
-    onConfirm: () => null
+    onConfirm?: () => void
 }
 const SobyteAlert: React.FC<SobyteAlertProps> = props => {
     const {themeColors} = useTheme()
@@ -31,7 +34,7 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                     alignItems: 'center',
                     backgroundColor: '#00000050',
                 }}>
-                <Scaler touchableOpacity={1} scale={0.95}>
+                <Scaler touchableOpacity={1} scale={0.96}>
                     <ImageBackground
                         source={require('../../assets/images/phone_screen.png')}
                         blurRadius={100}
@@ -81,41 +84,53 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                 flexDirection: 'row',
                                 paddingTop: 12.5,
                             }}>
-                            <TouchableOpacity
-                                onPress={() => props.setVisibility(false)}
-                                style={{
-                                    width: '50%',
-                                    paddingVertical: 10,
-                                    paddingHorizontal: 8,
-                                    backgroundColor:
-                                        themeColors.onDanger[0] + '7F',
-                                    borderBottomLeftRadius: 8,
-                                }}>
-                                <Text
+                            {!props.onlyConfirmButton && (
+                                <TouchableOpacity
+                                    activeOpacity={props.activeOpacity ?? 0.75}
+                                    onPress={() => props.setVisibility(false)}
                                     style={{
-                                        fontSize: 16,
-                                        fontFamily: FontRoboto,
-                                        width: '100%',
-                                        color: themeColors.white[0],
-                                        textAlignVertical: 'center',
-                                        textAlign: 'center',
+                                        width: '50%',
+                                        paddingVertical: 10,
+                                        paddingHorizontal: 8,
+                                        backgroundColor:
+                                            themeColors.onDanger[0] + '7F',
+                                        borderBottomLeftRadius: 8,
                                     }}>
-                                    {props.cancelText ?? 'Cancel'}
-                                </Text>
-                            </TouchableOpacity>
+                                    <Text
+                                        style={{
+                                            fontSize: 16,
+                                            fontFamily: FontRoboto,
+                                            width: '100%',
+                                            color: themeColors.white[0],
+                                            textAlignVertical: 'center',
+                                            textAlign: 'center',
+                                        }}>
+                                        {props.cancelText ?? 'Cancel'}
+                                    </Text>
+                                </TouchableOpacity>
+                            )}
                             <TouchableOpacity
-                                onPress={() =>
-                                    props.onConfirm
-                                        ? props.onConfirm()
-                                        : props.setVisibility(false)
-                                }
+                                activeOpacity={props.activeOpacity ?? 0.75}
+                                onPress={() => {
+                                    if (props.onConfirm) {
+                                        props.onConfirm()
+                                        props.setVisibility(false)
+                                        return
+                                    }
+                                    props.setVisibility(false)
+                                }}
                                 style={{
-                                    width: '50%',
+                                    width: props.onlyConfirmButton
+                                        ? '100%'
+                                        : '50%',
                                     paddingVertical: 10,
                                     paddingHorizontal: 8,
-                                    backgroundColor:
-                                        themeColors.primary.dark[0] + 'FF',
+                                    backgroundColor: props.onlyConfirmButton
+                                        ? themeColors.black[0] + '2F'
+                                        : themeColors.primary.dark[0] + 'FF',
                                     borderBottomRightRadius: 8,
+                                    borderBottomLeftRadius:
+                                        props.onlyConfirmButton ? 8 : 0,
                                 }}>
                                 <Text
                                     style={{

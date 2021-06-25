@@ -11,6 +11,8 @@ import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
 import {AnimatedGradient} from './AnimatedGradient'
 import SobyteAlert from './SobyteAlert'
 
+import FullScreenLoading from './FullScreenLoading'
+
 export {
     Scaler,
     AuthButton,
@@ -24,4 +26,5 @@ export {
     AnimatedGradient,
     T_C_PrivacyPolicy,
     SobyteAlert as SobyteAlertBox,
+    FullScreenLoading,
 }
