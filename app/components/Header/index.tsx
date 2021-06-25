@@ -50,9 +50,7 @@ const Header = (props: HeaderProps) => {
                         styles.headerTitle,
                         {color: props.color ?? '#ffffff'},
                     ]}>
-                    {!props.noHeaderTitle
-                        ? props.headerTitle ?? 'Header Title'
-                        : ''}
+                    {props.headerTitle ?? ''}
                 </Text>
             </View>
             {props.rightIconsList
