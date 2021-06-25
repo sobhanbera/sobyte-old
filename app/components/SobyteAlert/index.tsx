@@ -7,7 +7,7 @@ import {
     View,
 } from 'react-native'
 import {useTheme} from '../../context'
-import {FontHelvetica, FontLucida, FontRoboto} from '../../constants'
+import {FontRoboto} from '../../constants'
 import {Scaler} from '../'
 
 export interface SobyteAlertProps {
@@ -53,7 +53,7 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                 paddingBottom: 8,
                                 paddingTop: 3,
                                 color: themeColors.white[0],
-                                fontFamily: FontLucida,
+                                fontFamily: FontRoboto,
                                 borderBottomColor: themeColors.white[0] + '0f',
                                 borderBottomWidth: 1,
                             }}>
@@ -94,7 +94,7 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                 <Text
                                     style={{
                                         fontSize: 16,
-                                        fontFamily: FontHelvetica,
+                                        fontFamily: FontRoboto,
                                         width: '100%',
                                         color: themeColors.white[0],
                                         textAlignVertical: 'center',
@@ -120,7 +120,7 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                 <Text
                                     style={{
                                         fontSize: 16,
-                                        fontFamily: FontHelvetica,
+                                        fontFamily: FontRoboto,
                                         width: '100%',
                                         color: themeColors.white[0],
                                         textAlignVertical: 'center',

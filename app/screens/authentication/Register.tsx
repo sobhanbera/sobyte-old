@@ -47,7 +47,7 @@ interface RegisterProps {
 }
 const Register = (props: RegisterProps) => {
     const {themeColors} = useTheme()
-    const {setShowLoading, setAlertTitle, Alert} = useApp()
+    const {setShowLoading} = useApp()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -55,9 +55,6 @@ const Register = (props: RegisterProps) => {
 
     const RegisterNewUser = () => {
         console.log('USER REGISTRATION STARTED...')
-        Alert(() => {
-            console.log('asdf')
-        }).show()
     }
 
     return (
