@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
-import {createStackNavigator} from '@react-navigation/stack'
+import Player, {usePlayer} from '../context'
+import MusicApi from '../api'
 
 import AuthenticationNavigation from './Authentication'
 import AppNavigation from './AppInside'
@@ -8,7 +9,7 @@ import AppNavigation from './AppInside'
 import {FullScreenLoading} from '../components'
 
 const AppStartingPoint = () => {
-    const [userLoggedIn, setUserLoggedIn] = useState(false)
+    const [userLoggedIn, setUserLoggedIn] = useState(true) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -19,7 +20,15 @@ const AppStartingPoint = () => {
 
     return (
         <>
-            {!userLoggedIn ? <AuthenticationNavigation /> : <AppNavigation />}
+            {!userLoggedIn ? (
+                <AuthenticationNavigation />
+            ) : (
+                <Player>
+                    <MusicApi>
+                        <AppNavigation />
+                    </MusicApi>
+                </Player>
+            )}
 
             <FullScreenLoading visible={loading} />
         </>
