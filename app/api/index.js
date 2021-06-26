@@ -132,7 +132,7 @@ class MusicApi extends React.Component {
                             error: false,
                             loaded: true,
                         })
-                        alert('APP INSIDE AND MUSIC API INITIATED')
+                        // alert('APP INSIDE AND MUSIC API INITIATED')
                     } catch (err) {
                         reject(err)
                         this.setState({
