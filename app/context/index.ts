@@ -2,4 +2,7 @@ import {useMusicApi} from '../api'
 import {useApp} from '../MainApp'
 import {useTheme} from '../themes/ThemeProvider'
 
-export {useTheme, useApp, useMusicApi}
+import Player, {usePlayer} from '../api/player'
+
+export default Player
+export {useTheme, useApp, useMusicApi, usePlayer}
