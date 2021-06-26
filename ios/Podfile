@@ -22,6 +22,8 @@ target 'Sobyte' do
 
   pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
 
+  pod 'react-native-track-player', :path => '../node_modules/react-native-track-player'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing

@@ -19,6 +19,7 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.zoontek.rnlocalize.RNLocalizePackage;
 import com.cmcewen.blurview.BlurViewPackage;
+import com.guichaguri.trackplayer.TrackPlayer;
 
 public class MainApplication extends Application implements ReactApplication {
 

@@ -192,6 +192,8 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     /** All custom added packages starts **/
+    implementation project(':react-native-track-player')
+
     implementation project(':react-native-webview')
     implementation project(':react-native-svg')
     implementation project(':@react-native-community_async-storage')
