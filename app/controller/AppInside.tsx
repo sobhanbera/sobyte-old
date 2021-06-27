@@ -73,11 +73,6 @@ const AuthenticationNavigation = () => {
                 options={{
                     tabBarIcon: ({focused}) => (
                         <Ionicons
-                            style={{
-                                padding: 10,
-                                backgroundColor: themeColors.primary.dark[0],
-                                borderRadius: 100,
-                            }}
                             name={
                                 focused
                                     ? playing
@@ -95,7 +90,7 @@ const AuthenticationNavigation = () => {
                             }
                         />
                     ),
-                    // tabBarBadge: null,
+                    // tabBarBadge: '1',
                     // tabBarButton: props => (
                     //     <FloatingTabBarIcon
                     //         {...props}

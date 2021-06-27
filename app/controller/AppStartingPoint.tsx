@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react'
+import {NavigationContainer} from '@react-navigation/native'
 
-import Player, {usePlayer} from '../context'
+import Player from '../api/PlayerControls'
 import MusicApi from '../api'
+import ThemeProvider from '../themes/ThemeProvider'
 
 import AuthenticationNavigation from './Authentication'
 import AppNavigation from './AppInside'
@@ -15,23 +17,25 @@ const AppStartingPoint = () => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 2000)
+        }, 1000)
     }, [])
 
     return (
-        <>
-            {!userLoggedIn ? (
-                <AuthenticationNavigation />
-            ) : (
-                <Player>
-                    <MusicApi>
-                        <AppNavigation />
-                    </MusicApi>
-                </Player>
-            )}
+        <Player>
+            <MusicApi>
+                <ThemeProvider>
+                    <NavigationContainer>
+                        {!userLoggedIn ? (
+                            <AuthenticationNavigation />
+                        ) : (
+                            <AppNavigation />
+                        )}
 
-            <FullScreenLoading visible={loading} />
-        </>
+                        <FullScreenLoading visible={loading} />
+                    </NavigationContainer>
+                </ThemeProvider>
+            </MusicApi>
+        </Player>
     )
 }
 
