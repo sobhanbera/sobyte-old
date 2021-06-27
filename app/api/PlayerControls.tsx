@@ -135,6 +135,17 @@ const Player: FC<PlayerProps> = props => {
         TrackPlayer.addEventListener('remote-stop', () => {
             resetPlayer()
         })
+
+        TrackPlayer.addEventListener('playback-queue-ended', () => {
+            setCurrentTrack({
+                id: '',
+                url: '',
+                duration: 0,
+                title: '',
+                artist: '',
+                artwork: '',
+            })
+        })
         ;(async () => {
             await TrackPlayer.getVolume().then(res => {
                 setVolume(res)

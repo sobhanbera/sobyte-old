@@ -35,9 +35,9 @@ const MainApp = () => {
     useEffect(() => {
         TrackPlayer.updateOptions({
             stopWithApp: false,
-            icon: () => <Icon name="down" />,
+            icon: require('./assets/images/sobyte_logo_white.png'),
             jumpInterval: 5,
-            color: 1,
+            // color: 1,
             capabilities: [
                 CAPABILITY_PLAY,
                 CAPABILITY_PAUSE,
