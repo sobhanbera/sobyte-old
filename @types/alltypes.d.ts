@@ -1,3 +1,7 @@
 declare module 'styled-components/native'
 declare module 'youtube-music-api'
 declare module 'lodash'
+declare module 'react-native-animated-icons'
+// declare module ''
+// declare module ''
+// declare module ''
