@@ -30,10 +30,12 @@ interface PlayerContextProperty {
 
     current: Track
 
-    play?: Function
-    pause?: Function
-    next?: Function
-    previous?: Function
+    play: Function
+    playonly: Function
+    pause: Function
+    toggleState: Function
+    next: Function
+    previous: Function
 
     seekTo: Function
     seekInterval: Function
@@ -61,7 +63,10 @@ const PlayerContext = createContext<PlayerContextProperty>({
     },
 
     play: () => {},
+    playonly: () => {},
     pause: () => {},
+    toggleState: () => {},
+
     next: () => {},
     previous: () => {},
 
@@ -92,6 +97,34 @@ const Player: FC<PlayerProps> = props => {
     const [rate, setRate] = useState(1)
 
     useEffect(() => {
+        TrackPlayer.addEventListener('remote-play', async () => {
+            await TrackPlayer.play()
+            console.log('A12123SDAD')
+        })
+
+        TrackPlayer.addEventListener('remote-pause', async () => {
+            await TrackPlayer.pause()
+            console.log('ASDAD')
+        })
+
+        // TrackPlayer.addEventListener('remote-stop', () => TrackPlayer.stop())
+
+        TrackPlayer.addEventListener(
+            'remote-jump-forward',
+            async ({interval}) => {
+                const currPos = await TrackPlayer.getPosition()
+                await TrackPlayer.seekTo(currPos + interval)
+            },
+        )
+
+        TrackPlayer.addEventListener(
+            'remote-jump-backward',
+            async ({interval}) => {
+                const currPos = await TrackPlayer.getPosition()
+                await TrackPlayer.seekTo(currPos - interval)
+            },
+        )
+
         const listener = TrackPlayer.addEventListener(
             'playback-state',
             ({state}) => {
@@ -236,6 +269,16 @@ const Player: FC<PlayerProps> = props => {
         await TrackPlayer.pause()
     }
 
+    const playonly = async () => {
+        if (currentTrack.id)
+            if (playerState === STATE_PAUSED) await TrackPlayer.play()
+    }
+
+    const toggleState = async () => {
+        if (playerState === STATE_PLAYING) await TrackPlayer.pause()
+        else if (playerState === STATE_PAUSED) await TrackPlayer.play()
+    }
+
     const seekInterval = async (interval: number = 10) => {
         const currPos = await TrackPlayer.getPosition()
         await TrackPlayer.seekTo(currPos + interval)
@@ -290,7 +333,9 @@ const Player: FC<PlayerProps> = props => {
         current: currentTrack,
 
         play: play,
+        playonly: playonly,
         pause: pause,
+        toggleState: toggleState,
         next: next,
         previous: previous,
 

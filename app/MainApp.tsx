@@ -2,14 +2,14 @@ import React, {createContext, useContext, useEffect, useState} from 'react'
 import {StatusBar} from 'react-native'
 
 import TrackPlayer, {
+    CAPABILITY_PLAY,
+    CAPABILITY_PAUSE,
+    CAPABILITY_STOP,
     CAPABILITY_JUMP_BACKWARD,
     CAPABILITY_JUMP_FORWARD,
-    CAPABILITY_PAUSE,
-    CAPABILITY_PLAY,
     CAPABILITY_SKIP,
     CAPABILITY_SKIP_TO_NEXT,
     CAPABILITY_SKIP_TO_PREVIOUS,
-    CAPABILITY_STOP,
 } from 'react-native-track-player'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -65,11 +65,11 @@ const MainApp = () => {
             ],
         })
 
-        TrackPlayer.registerPlaybackService(() =>
-            require('./api/playerServices'),
-        )
+        TrackPlayer.registerPlaybackService(() => {
+            return require('./api/playerServices')
+        })
 
-        TrackPlayer.setupPlayer({}).then(async res => {})
+        TrackPlayer.setupPlayer({}).then(async () => {})
     }, [])
 
     return (
