@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {Dimensions, StyleSheet, Text, View} from 'react-native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -8,7 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {usePlayer} from '../context'
 
 import Explore from '../screens/main/Explore'
-import Player from '../screens/main/Player'
+import MusicPlayer from '../screens/main/MusicPlayer'
 import Profile from '../screens/main/Profile'
 import {useTheme} from '../context'
 
@@ -20,114 +20,135 @@ const AuthenticationNavigation = () => {
     const {playing} = usePlayer()
 
     return (
-        <BarNavigator.Navigator
-            tabBarOptions={{
-                showLabel: false,
-                style: {
+        <>
+            <BarNavigator.Navigator
+                tabBarOptions={{
+                    showLabel: false,
+                    style: {
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        elevation: 0,
+                        height: 48,
+                        margin: 0,
+                        padding: 0,
+                        backgroundColor: themeColors.primary.dark[0],
+                        borderRadius: 0,
+                        borderTopLeftRadius: 0,
+                        borderTopRightRadius: 0,
+                        borderWidth: 0,
+                        borderColor: themeColors.transparent[0],
+                    },
+                }}
+                initialRouteName="MusicPlayer">
+                <BarNavigator.Screen
+                    name="Explore"
+                    component={Explore}
+                    options={{
+                        tabBarIcon: ({focused}) => (
+                            <SimpleTabBarComponent
+                                icon={
+                                    <Ionicons
+                                        name={
+                                            focused
+                                                ? 'md-search'
+                                                : 'md-search-outline'
+                                        }
+                                        size={30}
+                                        color={
+                                            focused
+                                                ? themeColors.secondary.main[0]
+                                                : themeColors.primary.light[0]
+                                        }
+                                    />
+                                }
+                                title="Explore"
+                                focused={focused}
+                                focusedColor={themeColors.secondary.main[0]}
+                                grey={themeColors.grey[0]}
+                            />
+                        ),
+                    }}
+                />
+
+                {/* PLAYER SCREEN WHERE ALL THE SONGS PLAYING INTERFACE EXISTS */}
+                <BarNavigator.Screen
+                    name="MusicPlayer"
+                    component={MusicPlayer}
+                    options={{
+                        tabBarIcon: ({focused}) => (
+                            <Ionicons
+                                name={
+                                    focused
+                                        ? playing
+                                            ? 'pause'
+                                            : 'play'
+                                        : playing
+                                        ? 'pause-outline'
+                                        : 'play-outline'
+                                }
+                                size={30}
+                                color={
+                                    focused
+                                        ? themeColors.secondary.main[0]
+                                        : themeColors.primary.light[0]
+                                }
+                            />
+                        ),
+                        // tabBarBadge: '1',
+                        // tabBarButton: props => (
+                        //     <FloatingTabBarIcon
+                        //         {...props}
+                        //         backgroundColor={'#efefef'}
+                        //     />
+                        // ),
+                    }}
+                />
+
+                <BarNavigator.Screen
+                    name="Profile"
+                    component={Profile}
+                    options={{
+                        tabBarIcon: ({focused}) => (
+                            <SimpleTabBarComponent
+                                icon={
+                                    <MaterialCommunityIcons
+                                        name={
+                                            focused
+                                                ? 'account'
+                                                : 'account-outline'
+                                        }
+                                        size={30}
+                                        color={
+                                            focused
+                                                ? themeColors.secondary.main[0]
+                                                : themeColors.primary.light[0]
+                                        }
+                                    />
+                                }
+                                title="Profile"
+                                focused={focused}
+                                focusedColor={themeColors.secondary.main[0]}
+                                grey={themeColors.grey[0]}
+                            />
+                        ),
+                    }}
+                />
+            </BarNavigator.Navigator>
+            {/* <View
+                style={{
                     position: 'absolute',
-                    bottom: 0,
+                    backgroundColor: themeColors.primary.dark[0] + 'f6',
+                    width: '100%',
+                    height: 50,
                     left: 0,
                     right: 0,
-                    elevation: 0,
-                    height: 55,
-                    backgroundColor: themeColors.primary.dark[0],
-                    borderRadius: 0,
-                    borderTopLeftRadius: 15,
-                    borderTopRightRadius: 15,
-                },
-            }}>
-            <BarNavigator.Screen
-                name="Explore"
-                component={Explore}
-                options={{
-                    tabBarIcon: ({focused}) => (
-                        <SimpleTabBarComponent
-                            icon={
-                                <Ionicons
-                                    name={
-                                        focused
-                                            ? 'md-search'
-                                            : 'md-search-outline'
-                                    }
-                                    size={30}
-                                    color={
-                                        focused
-                                            ? themeColors.secondary.main[0]
-                                            : themeColors.primary.light[0]
-                                    }
-                                />
-                            }
-                            title="Explore"
-                            focused={focused}
-                            focusedColor={themeColors.secondary.main[0]}
-                            grey={themeColors.grey[0]}
-                        />
-                    ),
-                }}
-            />
-
-            {/* PLAYER SCREEN WHERE ALL THE SONGS PLAYING INTERFACE EXISTS */}
-            <BarNavigator.Screen
-                name="Player"
-                component={Player}
-                options={{
-                    tabBarIcon: ({focused}) => (
-                        <Ionicons
-                            name={
-                                focused
-                                    ? playing
-                                        ? 'pause'
-                                        : 'play'
-                                    : playing
-                                    ? 'pause-outline'
-                                    : 'play-outline'
-                            }
-                            size={30}
-                            color={
-                                focused
-                                    ? themeColors.secondary.main[0]
-                                    : themeColors.primary.light[0]
-                            }
-                        />
-                    ),
-                    // tabBarBadge: '1',
-                    // tabBarButton: props => (
-                    //     <FloatingTabBarIcon
-                    //         {...props}
-                    //         backgroundColor={'#efefef'}
-                    //     />
-                    // ),
-                }}
-            />
-
-            <BarNavigator.Screen
-                name="Profile"
-                component={Profile}
-                options={{
-                    tabBarIcon: ({focused}) => (
-                        <SimpleTabBarComponent
-                            icon={
-                                <MaterialCommunityIcons
-                                    name={
-                                        focused ? 'account' : 'account-outline'
-                                    }
-                                    size={30}
-                                    color={
-                                        focused
-                                            ? themeColors.secondary.main[0]
-                                            : themeColors.primary.light[0]
-                                    }
-                                />
-                            }
-                            title="Profile"
-                            focused={focused}
-                            focusedColor={themeColors.secondary.main[0]}
-                            grey={themeColors.grey[0]}
-                        />
-                    ),
-                }}
-            />
-        </BarNavigator.Navigator>
+                    bottom: 50, // height of the bottom tab bar
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                }}></View> */}
+        </>
     )
 }
 
