@@ -1,5 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {NavigationContainer} from '@react-navigation/native'
+import {
+    NavigationContainer,
+    DarkTheme,
+    DefaultTheme,
+} from '@react-navigation/native'
 
 import Player from '../api/PlayerControls'
 import MusicApi from '../api'
@@ -24,7 +28,7 @@ const AppStartingPoint = () => {
         <Player>
             <MusicApi>
                 <ThemeProvider>
-                    <NavigationContainer>
+                    <NavigationContainer theme={DarkTheme}>
                         {!userLoggedIn ? (
                             <AuthenticationNavigation />
                         ) : (
