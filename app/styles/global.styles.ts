@@ -8,7 +8,9 @@ import {
     FontRoboto,
     FontRobotoBold,
 } from '../constants'
-import {StyleSheet} from 'react-native'
+import {Dimensions, StyleSheet} from 'react-native'
+
+const {width, height} = Dimensions.get('window')
 
 const globalStyles = StyleSheet.create({
     whiteText: {
@@ -54,6 +56,11 @@ const globalStyles = StyleSheet.create({
         borderRadius: 1000,
         height: 48,
         borderWidth: 0.6,
+    },
+
+    fullImageBackground: {
+        width: '100%',
+        height: '100%',
     },
 })
 
