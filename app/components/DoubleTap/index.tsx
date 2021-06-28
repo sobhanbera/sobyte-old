@@ -11,6 +11,9 @@ const DoubleTap: React.FC<DoubleTapProps> = props => {
     const [lastTapTime, setLastTapTime] = useState<number>(1)
 
     function handleDoubleTap() {
+        /** first it will check that the previous time when the user press
+         * the component and if it is less than or equal to the delay of double
+         * tap then it will call callback function for double tap */
         const time = Date.now()
         if (lastTapTime && time - lastTapTime <= DOUBLE_TAP_DELAY)
             props.onDoubleTap()
