@@ -35,3 +35,7 @@ export const TERM_AND_CONDITIONS_LINK = 'https://sobhanbera.vercel.app'
  * @database_host     - localhost
  * @database_password - Tl2.Kb1z1KmCp7wSZcQLW
  */
+
+/** number constants and more */
+export const MUSIC_PLAYER_BLUR = 19 // blurRadius value
+export const DOUBLE_TAP_DELAY = 500 // the delay in milliseconds between two press for double press component
