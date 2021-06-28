@@ -10,6 +10,7 @@ import HeartBeatView from './HeartBeatView'
 import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
 import {AnimatedGradient} from './AnimatedGradient'
 import SobyteAlert from './SobyteAlert'
+import DoubleTap from './DoubleTap'
 
 import FullScreenLoading from './FullScreenLoading'
 
@@ -27,6 +28,7 @@ export {
     T_C_PrivacyPolicy,
     SobyteAlert as SobyteAlertBox,
     FullScreenLoading,
+    DoubleTap,
 }
 
 /** music player components */
