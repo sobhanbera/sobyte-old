@@ -14,12 +14,12 @@
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {
-        "@ptomasroos/react-native-multi-slider": "^2.2.2",
         "@react-native-community/async-storage": "^1.12.1",
         "@react-native-community/blur": "^3.6.0",
         "@react-native-community/masked-view": "^0.1.11",
         "@react-native-community/slider": "^3.0.3",
         "@react-navigation/bottom-tabs": "^5.11.11",
+        "@react-navigation/material-bottom-tabs": "^5.3.15",
         "@react-navigation/native": "^5.9.4",
         "@react-navigation/stack": "^5.14.5",
         "@types/react-native-vector-icons": "^6.4.7",
@@ -37,6 +37,7 @@
         "react-native-locale-detector": "^1.0.1",
         "react-native-localize": "^2.1.1",
         "react-native-lrc": "^1.0.0-beta.1",
+        "react-native-paper": "^4.9.2",
         "react-native-reanimated": "^2.2.0",
         "react-native-safe-area-context": "^3.2.0",
         "react-native-screens": "^3.4.0",
