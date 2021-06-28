@@ -4,6 +4,7 @@ import TrackPlayer, {
     STATE_PLAYING,
     STATE_PAUSED,
     STATE_STOPPED,
+    STATE_BUFFERING,
 } from 'react-native-track-player'
 
 export interface Track {
@@ -25,6 +26,7 @@ interface PlayerContextProperty {
     playing: boolean
     paused: boolean
     stopped: boolean
+    buffering: boolean
 
     current: Track
 
@@ -34,7 +36,7 @@ interface PlayerContextProperty {
     previous?: Function
 
     seekTo: Function
-    seekLevel: Function
+    seekInterval: Function
 
     rate: number
     getRateText: Function
@@ -47,6 +49,7 @@ const PlayerContext = createContext<PlayerContextProperty>({
     playing: false,
     paused: false,
     stopped: false,
+    buffering: false,
 
     current: {
         id: '',
@@ -62,8 +65,8 @@ const PlayerContext = createContext<PlayerContextProperty>({
     next: () => {},
     previous: () => {},
 
-    seekTo: (interval: number) => {},
-    seekLevel: () => {},
+    seekTo: () => {},
+    seekInterval: (interval: number) => {},
 
     rate: 1,
     getRateText: () => {},
@@ -110,6 +113,7 @@ const Player: FC<PlayerProps> = props => {
             },
         )
 
+        // const playbackTrackChanged =
         TrackPlayer.addEventListener('playback-track-changed', async res => {
             if (!res.nextTrack) {
                 return
@@ -132,19 +136,21 @@ const Player: FC<PlayerProps> = props => {
                 .catch(err => {})
         })
 
+        // const remoteStop =
         TrackPlayer.addEventListener('remote-stop', () => {
             resetPlayer()
         })
 
+        // const playbackQueueEnded =
         TrackPlayer.addEventListener('playback-queue-ended', () => {
-            setCurrentTrack({
+            setCurrentTrack(track => ({
                 id: '',
-                url: '',
-                duration: 0,
-                title: '',
-                artist: '',
-                artwork: '',
-            })
+                url: track.url,
+                duration: track.duration,
+                title: track.title,
+                artist: track.artist,
+                artwork: track.artwork,
+            }))
         })
         ;(async () => {
             await TrackPlayer.getVolume().then(res => {
@@ -160,6 +166,10 @@ const Player: FC<PlayerProps> = props => {
             listener.remove()
             playerNext.remove()
             playerPrev.remove()
+
+            // playbackTrackChanged.remove()
+            // remoteStop.remove()
+            // playbackQueueEnded.remove()
         }
     }, [])
 
@@ -226,12 +236,12 @@ const Player: FC<PlayerProps> = props => {
         await TrackPlayer.pause()
     }
 
-    const seekTo = async (interval: number = 10) => {
+    const seekInterval = async (interval: number = 10) => {
         const currPos = await TrackPlayer.getPosition()
         await TrackPlayer.seekTo(currPos + interval)
     }
 
-    const seekLevel = async (level: number) => {
+    const seekTo = async (level: number) => {
         // console.log('SEKE');
         // console.log(level);
         if (!Number.isNaN(level)) {
@@ -275,6 +285,7 @@ const Player: FC<PlayerProps> = props => {
         playing: playerState === STATE_PLAYING,
         paused: playerState === STATE_PAUSED,
         stopped: playerState === STATE_STOPPED,
+        buffering: playerState === STATE_BUFFERING,
 
         current: currentTrack,
 
@@ -284,7 +295,7 @@ const Player: FC<PlayerProps> = props => {
         previous: previous,
 
         seekTo: seekTo,
-        seekLevel: seekLevel,
+        seekInterval: seekInterval,
 
         rate: rate,
         getRateText: getRateText,
