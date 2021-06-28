@@ -6,3 +6,7 @@ import Player, {usePlayer} from '../api/PlayerControls'
 
 export default Player
 export {useTheme, useApp, useMusicApi, usePlayer}
+
+/** external apis */
+import {useTrackPlayerProgress} from 'react-native-track-player'
+export {useTrackPlayerProgress as usePlayerProgress}
