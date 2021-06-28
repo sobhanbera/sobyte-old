@@ -16,13 +16,13 @@ import {FullScreenLoading} from '../components'
 
 const AppStartingPoint = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(true) // initial value must be false... true only for development purpose
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 1000)
-    }, [])
+    // useEffect(() => {
+    // setTimeout(() => {
+    //     setLoading(false)
+    // }, 0)
+    // }, [])
 
     return (
         <Player>
