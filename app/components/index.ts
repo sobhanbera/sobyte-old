@@ -5,7 +5,10 @@ import SobyteTextInput from './SobyteTextInput'
 import PaddingView from './HighPaddingView'
 
 import Loader from './GlobalLoading'
+
 import Header from './Header'
+import HeaderProfile from './HeaderProfile'
+
 import HeartBeatView from './HeartBeatView'
 import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
 import {AnimatedGradient} from './AnimatedGradient'
@@ -29,6 +32,7 @@ export {
     SobyteAlert as SobyteAlertBox,
     FullScreenLoading,
     DoubleTap,
+    HeaderProfile,
 }
 
 /** music player components */
