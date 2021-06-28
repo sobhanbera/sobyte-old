@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {
     NavigationContainer,
     DarkTheme,
@@ -8,6 +8,7 @@ import {
 import Player from '../api/PlayerControls'
 import MusicApi from '../api'
 import ThemeProvider from '../themes/ThemeProvider'
+import MusicFetcher from '../api/MusicFetcher'
 
 import AuthenticationNavigation from './Authentication'
 import AppNavigation from './AppInside'
@@ -18,26 +19,22 @@ const AppStartingPoint = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(true) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState(false)
 
-    // useEffect(() => {
-    // setTimeout(() => {
-    //     setLoading(false)
-    // }, 0)
-    // }, [])
-
     return (
         <Player>
             <MusicApi>
-                <ThemeProvider>
-                    <NavigationContainer theme={DarkTheme}>
-                        {!userLoggedIn ? (
-                            <AuthenticationNavigation />
-                        ) : (
-                            <AppNavigation />
-                        )}
+                <MusicFetcher>
+                    <ThemeProvider>
+                        <NavigationContainer theme={DarkTheme}>
+                            {!userLoggedIn ? (
+                                <AuthenticationNavigation />
+                            ) : (
+                                <AppNavigation />
+                            )}
 
-                        <FullScreenLoading visible={loading} />
-                    </NavigationContainer>
-                </ThemeProvider>
+                            <FullScreenLoading visible={loading} />
+                        </NavigationContainer>
+                    </ThemeProvider>
+                </MusicFetcher>
             </MusicApi>
         </Player>
     )

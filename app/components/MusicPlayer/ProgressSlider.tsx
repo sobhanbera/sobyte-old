@@ -2,11 +2,12 @@ import React, {useEffect} from 'react'
 import {View, Button} from 'react-native'
 import Slider from '@react-native-community/slider'
 
-import {usePlayer, usePlayerProgress} from '../../context'
+import {useFetcher, usePlayer, usePlayerProgress} from '../../context'
 
 const ProgressSlider = () => {
     const {position, duration, bufferedPosition} = usePlayerProgress()
     const {playing, seekTo, play} = usePlayer()
+    const {fetchMusic} = useFetcher()
 
     return (
         <View
@@ -24,7 +25,7 @@ const ProgressSlider = () => {
                         title: 'Name',
                         artist: 'Sobhan Bera',
                         artwork:
-                            'https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg',
+                            'https://lh3.googleusercontent.com/F2He2VHzeB6GgifAdh7jPLOLu6nYr3g7mDaeor7WITgyc4P-HwE2qrB50eYc5Mw6e5IKL6CHnN-c9u1bGQ=w420-h420-l90-rj',
                     })
                 }}
             />
