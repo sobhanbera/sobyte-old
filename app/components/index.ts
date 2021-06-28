@@ -28,3 +28,7 @@ export {
     SobyteAlert as SobyteAlertBox,
     FullScreenLoading,
 }
+
+/** music player components */
+import ProgressSlider from './MusicPlayer/ProgressSlider'
+export {ProgressSlider}
