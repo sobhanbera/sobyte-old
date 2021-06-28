@@ -50,6 +50,7 @@ export default interface ThemeColors extends CommonColors {
     surface?: string[]
     border: string[]
     placeholder: string[]
+    text: string[]
 
     onSuccess: string[]
     onError: string[]

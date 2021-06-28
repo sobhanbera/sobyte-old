@@ -41,6 +41,7 @@ export const DarkTheme: ThemeColors = {
     surface: ['#272727'],
     border: ['#00369F'],
     placeholder: ['#CFCFCF'],
+    text: ['#EFEFEF'],
 
     onSuccess: ['#0496FF'],
     onError: ['#D81159'],
