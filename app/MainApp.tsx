@@ -11,7 +11,6 @@ import TrackPlayer, {
     CAPABILITY_SKIP_TO_NEXT,
     CAPABILITY_SKIP_TO_PREVIOUS,
 } from 'react-native-track-player'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import AppStartingPoint from './controller/AppStartingPoint'
 import {Loader} from './components'
@@ -59,9 +58,11 @@ const MainApp = () => {
                 CAPABILITY_PLAY,
                 CAPABILITY_PAUSE,
                 CAPABILITY_STOP,
-                CAPABILITY_SKIP,
-                CAPABILITY_SKIP_TO_NEXT,
-                CAPABILITY_SKIP_TO_PREVIOUS,
+                // CAPABILITY_SKIP,
+                // CAPABILITY_SKIP_TO_NEXT,
+                // CAPABILITY_SKIP_TO_PREVIOUS,
+                CAPABILITY_JUMP_BACKWARD,
+                CAPABILITY_JUMP_FORWARD,
             ],
         })
 

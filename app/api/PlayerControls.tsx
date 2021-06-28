@@ -97,34 +97,6 @@ const Player: FC<PlayerProps> = props => {
     const [rate, setRate] = useState(1)
 
     useEffect(() => {
-        TrackPlayer.addEventListener('remote-play', async () => {
-            await TrackPlayer.play()
-            console.log('A12123SDAD')
-        })
-
-        TrackPlayer.addEventListener('remote-pause', async () => {
-            await TrackPlayer.pause()
-            console.log('ASDAD')
-        })
-
-        // TrackPlayer.addEventListener('remote-stop', () => TrackPlayer.stop())
-
-        TrackPlayer.addEventListener(
-            'remote-jump-forward',
-            async ({interval}) => {
-                const currPos = await TrackPlayer.getPosition()
-                await TrackPlayer.seekTo(currPos + interval)
-            },
-        )
-
-        TrackPlayer.addEventListener(
-            'remote-jump-backward',
-            async ({interval}) => {
-                const currPos = await TrackPlayer.getPosition()
-                await TrackPlayer.seekTo(currPos - interval)
-            },
-        )
-
         const listener = TrackPlayer.addEventListener(
             'playback-state',
             ({state}) => {
