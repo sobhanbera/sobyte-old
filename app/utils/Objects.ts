@@ -5,3 +5,7 @@ export function returnNullCallback(nullableValue: any, defaultValue: any): any {
         ? defaultValue
         : nullableValue
 }
+
+export function IF(condition: boolean, yes: any, no: any) {
+    return condition ? yes : no
+}
