@@ -10,10 +10,10 @@ import {usePlayer} from '../context'
 
 import Explore from '../screens/main/Explore'
 import MusicPlayer from '../screens/main/MusicPlayer'
-import Profile from '../screens/main/Profile'
 import {useTheme} from '../context'
 
 import {Scaler} from '../components'
+import ProfileStackNavigator from './ProfileStack'
 
 const BarNavigator = createMaterialBottomTabNavigator()
 const AuthenticationNavigation = () => {
@@ -85,7 +85,7 @@ const AuthenticationNavigation = () => {
 
             <BarNavigator.Screen
                 name="Profile"
-                component={Profile}
+                component={ProfileStackNavigator}
                 options={{
                     tabBarAccessibilityLabel: 'Profile Tab',
                     tabBarColor: themeColors.primary.dark[0],
