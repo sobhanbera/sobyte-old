@@ -17,6 +17,8 @@ import DoubleTap from './DoubleTap'
 
 import FullScreenLoading from './FullScreenLoading'
 
+import GradientBackground from './GradientBackground'
+
 export {
     Scaler,
     AuthButton,
@@ -33,6 +35,7 @@ export {
     FullScreenLoading,
     DoubleTap,
     HeaderProfile,
+    GradientBackground,
 }
 
 /** music player components */
