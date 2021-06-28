@@ -24,6 +24,8 @@ target 'Sobyte' do
 
   pod 'react-native-track-player', :path => '../node_modules/react-native-track-player'
 
+  pod 'react-native-slider', :path => '../node_modules/@react-native-community/slider'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing

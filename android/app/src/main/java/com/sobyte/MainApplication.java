@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -20,6 +21,7 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.zoontek.rnlocalize.RNLocalizePackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -44,6 +46,7 @@ public class MainApplication extends Application implements ReactApplication {
               // packages.add(new RNDeviceInfo());
               // packages.add(new RNLocalizePackage());
               // packages.add(new BlurViewPackage());
+              packages.add(new ReactSliderPackage());
               return packages;
           }
 
