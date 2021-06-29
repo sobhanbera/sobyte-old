@@ -8,6 +8,7 @@ import Loader from './GlobalLoading'
 
 import Header from './Header'
 import HeaderProfile from './HeaderProfile'
+import HeaderMain from './HeaderMain'
 
 import HeartBeatView from './HeartBeatView'
 import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
@@ -36,6 +37,7 @@ export {
     DoubleTap,
     HeaderProfile,
     GradientBackground,
+    HeaderMain,
 }
 
 /** music player components */
