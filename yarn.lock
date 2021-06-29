@@ -5753,6 +5753,13 @@ react-native-shimmer@^0.6.0:
   dependencies:
     prop-types "^15.6.0"
 
+react-native-simple-bottom-sheet@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-simple-bottom-sheet/-/react-native-simple-bottom-sheet-1.0.3.tgz#f725511af25464e1cd5df80de3acfcb6a46c74f1"
+  integrity sha512-ulg7NOfVbFxJxvTLwQUbtEOW4HLfyMchgnVjmjDGfoMF/Gr2Kx4YJjDXA394Ub78hN8/R2URStvVxh6Sy5TbAw==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-svg@^12.1.1:
   version "12.1.1"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.1.1.tgz#5f292410b8bcc07bbc52b2da7ceb22caf5bcaaee"
