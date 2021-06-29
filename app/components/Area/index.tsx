@@ -13,26 +13,18 @@ interface Props {
 }
 
 const Area = (props: Props) => {
-    const {
-        background,
-        white,
-        transparent,
-        primary,
-        secondary,
-        surfacegradient,
-    } = useTheme().themeColors
+    const {background, white, transparent} = useTheme().themeColors
 
     return (
         <View
             style={{
                 paddingVertical: 6,
                 paddingHorizontal: props.noBackground ? 0 : 4,
-                marginVertical: 6,
-                marginHorizontal: 5,
-                borderRadius: 6,
+                marginTop: 10,
+                marginHorizontal: 6,
+                borderRadius: 8,
                 backgroundColor: !props.noBackground
-                    ? props.backgroundColor ||
-                      surfacegradient[surfacegradient.length - 1]
+                    ? props.backgroundColor || background[0]
                     : transparent[0],
                 flexDirection: props.column ? 'column' : 'row',
                 justifyContent: props.spacing ? 'space-between' : 'center',

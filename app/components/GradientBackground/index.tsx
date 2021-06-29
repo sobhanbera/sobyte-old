@@ -6,7 +6,7 @@ import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
 
 interface Props {
-    children?: React.ReactChild
+    children?: React.ReactNode
     angle?: number
     angleCenter?: {x: number; y: number}
     dark?: boolean

@@ -22,6 +22,7 @@ import DoubleTap from './DoubleTap'
 import FullScreenLoading from './FullScreenLoading'
 
 import GradientBackground from './GradientBackground'
+import BottomSheet from './BottomSheet'
 
 export {
     Scaler,
@@ -44,6 +45,8 @@ export {
     Area,
     Area as Section,
     Prompt,
+    BottomSheet,
+    BottomSheet as SimpleBottomSheet,
 }
 
 /** music player components */
