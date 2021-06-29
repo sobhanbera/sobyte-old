@@ -34,6 +34,7 @@ const AuthenticationNavigation = () => {
                 bottom: 0,
                 left: 0,
                 right: 0,
+                // height: 54,
                 elevation: 0,
                 margin: 0,
                 padding: 0,

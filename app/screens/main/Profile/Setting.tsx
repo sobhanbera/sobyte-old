@@ -1,7 +1,12 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Text, View} from 'react-native'
 
-import {Area, GradientBackground, HeaderMain} from '../../../components'
+import {
+    Area,
+    BottomSheet,
+    GradientBackground,
+    HeaderMain,
+} from '../../../components'
 import {usePrompt, useTheme} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
 
@@ -10,6 +15,7 @@ interface SettingProps {
 }
 const Setting: React.FC<SettingProps> = props => {
     const {themeColors} = useTheme()
+    const [isVisible, setIsVisible] = useState(true)
 
     return (
         <GradientBackground>
@@ -27,6 +33,37 @@ const Setting: React.FC<SettingProps> = props => {
                     </Text>
                 </Area>
             </View>
+
+            <BottomSheet
+                isVisible={isVisible}
+                setVisible={setIsVisible}
+                buttons={[
+                    {
+                        text: 'Extreme',
+                        onPress: () => {
+                            console.log('e')
+                        },
+                    },
+                    {
+                        text: 'Good',
+                        onPress: () => {
+                            console.log('g')
+                        },
+                    },
+                    {
+                        text: 'Poor',
+                        onPress: () => {
+                            console.log('p')
+                        },
+                    },
+                    {
+                        text: 'Auto',
+                        onPress: () => {
+                            console.log('a')
+                        },
+                    },
+                ]}
+            />
         </GradientBackground>
     )
 }
