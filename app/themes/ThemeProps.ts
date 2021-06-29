@@ -47,6 +47,7 @@ export default interface ThemeColors extends CommonColors {
 
     background: string[]
     surfacegradient: string[]
+    darksurfacegradient: string[]
     backgroundgradient: string[]
     surface?: string[]
     border: string[]
