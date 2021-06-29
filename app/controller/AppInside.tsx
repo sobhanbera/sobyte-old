@@ -22,7 +22,7 @@ const AuthenticationNavigation = () => {
 
     return (
         <BarNavigator.Navigator
-            labeled={false}
+            labeled={true}
             theme={DarkTheme}
             activeColor={themeColors.secondary.main[0]}
             inactiveColor={themeColors.primary.light[0]}
@@ -45,7 +45,7 @@ const AuthenticationNavigation = () => {
                 component={Explore}
                 options={{
                     tabBarAccessibilityLabel: 'Explore Tab',
-                    tabBarColor: themeColors.primary.dark[0],
+                    tabBarColor: themeColors.surface[0],
                     tabBarLabel: 'Explore',
                     tabBarIcon: ({focused, color}) => (
                         <Ionicons
@@ -64,7 +64,7 @@ const AuthenticationNavigation = () => {
                 options={{
                     tabBarAccessibilityLabel: 'Music Player Tab',
                     tabBarColor: themeColors.primary.main[0] + '00',
-                    tabBarLabel: 'MusicPlayer',
+                    tabBarLabel: 'Music',
                     tabBarIcon: ({focused, color}) => (
                         <Ionicons
                             name={
@@ -88,8 +88,8 @@ const AuthenticationNavigation = () => {
                 component={ProfileStackNavigator}
                 options={{
                     tabBarAccessibilityLabel: 'Profile Tab',
-                    tabBarColor: themeColors.primary.dark[0],
-                    tabBarLabel: 'Profile',
+                    tabBarColor: themeColors.surface[0],
+                    tabBarLabel: 'Me',
                     tabBarIcon: ({focused, color}) => (
                         <MaterialCommunityIcons
                             name={focused ? 'account' : 'account-outline'}

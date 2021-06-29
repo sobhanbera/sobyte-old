@@ -1,57 +1,45 @@
 import React from 'react'
-import {View, Text, Easing} from 'react-native'
+import {ImageBackground} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import {easeGradient} from 'react-native-easing-gradient'
 
 import {useTheme} from '../../context'
+import globalStyles from '../../styles/global.styles'
 
 interface Props {
     children?: React.ReactChild
     angle?: number
     angleCenter?: {x: number; y: number}
+    dark?: boolean
 }
 const GradientBackground = (props: Props) => {
     const {themeColors} = useTheme()
-    const {colors, locations} = easeGradient({
-        colorStops: {
-            0: {
-                color: themeColors.surfacegradient[0],
-            },
-            1: {
-                color: themeColors.surfacegradient[1],
-            },
-            2: {
-                color: themeColors.surfacegradient[2],
-            },
-            3: {
-                color: themeColors.surfacegradient[3],
-            },
-            4: {
-                color: themeColors.surfacegradient[4],
-            },
-            // 5: {
-            //     color: themeColors.surfacegradient[5],
-            // },
-            // 6: {
-            //     color: themeColors.surfacegradient[6],
-            // },
-            // 7: {
-            //     color: themeColors.surfacegradient[7],
-            // },
-        },
-
-        easing: Easing.ease,
-    })
 
     return (
         <LinearGradient
-            angle={0}
+            angle={props.dark ? 180 : 145}
             angleCenter={{x: 0.5, y: 0.5}}
             useAngle={true}
             style={{width: '100%', height: '100%'}}
-            colors={themeColors.surfacegradient}
-            locations={[0, 0.3, 0.55, 0.72, 0.81, 1]}>
-            {props.children}
+            colors={
+                props.dark
+                    ? themeColors.darksurfacegradient
+                    : [
+                          themeColors.primary.main[0] + 'D7',
+                          themeColors.secondary.main[0] + 'AF',
+                          themeColors.primary.dark[0] + 'D7',
+                          themeColors.primary.dark[0] + 'D7',
+                          themeColors.primary.dark[0] + 'D7',
+                          themeColors.primary.dark[0] + 'D7',
+                          themeColors.primary.dark[0] + 'D7',
+                          themeColors.primary.dark[0] + 'D7',
+                      ]
+            }>
+            <ImageBackground
+                source={require('../../assets/images/phone_screen.png')}
+                style={globalStyles.fullImageBackground}
+                blurRadius={5}>
+                {props.children}
+            </ImageBackground>
         </LinearGradient>
     )
 }
