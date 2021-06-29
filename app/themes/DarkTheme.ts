@@ -68,10 +68,10 @@ export const DarkTheme: ThemeColors = {
     placeholder: ['#CFCFCF'],
     text: ['#EFEFEF'],
 
-    onSuccess: ['#0496FF'],
-    onError: ['#D81159'],
-    onWarning: ['#FCFC62'],
-    onDanger: ['#EF0000'],
+    onSuccess: ['#28a745'],
+    onError: ['#FF5500'],
+    onWarning: ['#ffc107'],
+    onDanger: ['#dc3545'],
 
     ...RequiredCommonColors,
 }
