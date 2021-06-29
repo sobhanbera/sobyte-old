@@ -1,4 +1,13 @@
 {
-    "home": {"home": "होम"},
-    "common": {}
+    "setting": {
+        "app_language": "App Language",
+        "choose_audio_quality": "Choose Audio Quality"
+    },
+    "common": {
+        "langs": {
+            "default": "Default",
+            "english": "English",
+            "hindi": "हिंदी"
+        }
+    }
 }

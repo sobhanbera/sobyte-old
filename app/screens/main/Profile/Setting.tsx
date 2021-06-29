@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Text, View} from 'react-native'
+import {useTranslation} from 'react-i18next'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 import {
     Area,
@@ -7,15 +9,21 @@ import {
     GradientBackground,
     HeaderMain,
 } from '../../../components'
-import {usePrompt, useTheme} from '../../../context'
+import {usePrompt, useSetting, useTheme} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
+import {LANGUAGE_CODE_STORAGE_KEY} from '../../../constants'
 
 interface SettingProps {
     navigation?: any
 }
 const Setting: React.FC<SettingProps> = props => {
+    const {t} = useTranslation()
     const {themeColors} = useTheme()
-    const [isVisible, setIsVisible] = useState(true)
+    const {setSetting, theme, audioQuality, language} = useSetting()
+
+    const [themeVisible, setThemeVisible] = useState(false)
+    const [audioQualityVisible, setAudioQualityVisible] = useState(false)
+    const [languageVisible, setLanguageVisible] = useState(false)
 
     return (
         <GradientBackground>
@@ -29,35 +37,23 @@ const Setting: React.FC<SettingProps> = props => {
 
                 <Area>
                     <Text style={globalStyles.areaTitle}>
-                        Streaming Quality
+                        {t('setting:choose_audio_quality')}
                     </Text>
+                    <Entypo name="chevron-thin-right" size={20} color="grey" />
                 </Area>
             </View>
 
             <BottomSheet
-                isVisible={isVisible}
-                setVisible={setIsVisible}
+                isVisible={languageVisible}
+                setVisible={setLanguageVisible}
                 buttons={[
                     {
-                        text: 'Extreme',
-                        onPress: () => {
-                            console.log('e')
-                        },
+                        text: t('common:langs:english'),
+                        onPress: () =>
+                            setSetting(LANGUAGE_CODE_STORAGE_KEY, 'en'),
                     },
                     {
-                        text: 'Good',
-                        onPress: () => {
-                            console.log('g')
-                        },
-                    },
-                    {
-                        text: 'Poor',
-                        onPress: () => {
-                            console.log('p')
-                        },
-                    },
-                    {
-                        text: 'Auto',
+                        text: t('common:langs:hindi'),
                         onPress: () => {
                             console.log('a')
                         },
