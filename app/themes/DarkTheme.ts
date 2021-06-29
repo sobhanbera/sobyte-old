@@ -29,7 +29,7 @@ export const DarkTheme: ThemeColors = {
         dark: ['#0F60B6'],
     },
 
-    background: ['#1b181f'],
+    background: ['#1B182B'],
     backgroundgradient: [
         '#0F002D',
         '#0A032B',
