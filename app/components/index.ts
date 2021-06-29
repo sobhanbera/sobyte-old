@@ -10,6 +10,8 @@ import Header from './Header'
 import HeaderProfile from './HeaderProfile'
 import HeaderMain from './HeaderMain'
 
+import Area from './Area'
+
 import HeartBeatView from './HeartBeatView'
 import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
 import {AnimatedGradient} from './AnimatedGradient'
@@ -38,6 +40,8 @@ export {
     HeaderProfile,
     GradientBackground,
     HeaderMain,
+    Area,
+    Area as Section,
 }
 
 /** music player components */
