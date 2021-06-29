@@ -13,7 +13,7 @@ import MusicFetcher from '../api/MusicFetcher'
 import AuthenticationNavigation from './Authentication'
 import AppNavigation from './AppInside'
 
-import {FullScreenLoading} from '../components'
+import {FullScreenLoading, Prompt} from '../components'
 
 const AppStartingPoint = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(true) // initial value must be false... true only for development purpose
@@ -24,15 +24,17 @@ const AppStartingPoint = () => {
             <MusicApi>
                 <MusicFetcher>
                     <ThemeProvider>
-                        <NavigationContainer theme={DarkTheme}>
-                            {!userLoggedIn ? (
-                                <AuthenticationNavigation />
-                            ) : (
-                                <AppNavigation />
-                            )}
+                        <Prompt>
+                            <NavigationContainer theme={DarkTheme}>
+                                {!userLoggedIn ? (
+                                    <AuthenticationNavigation />
+                                ) : (
+                                    <AppNavigation />
+                                )}
 
-                            <FullScreenLoading visible={loading} />
-                        </NavigationContainer>
+                                <FullScreenLoading visible={loading} />
+                            </NavigationContainer>
+                        </Prompt>
                     </ThemeProvider>
                 </MusicFetcher>
             </MusicApi>
