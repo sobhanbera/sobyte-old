@@ -39,3 +39,4 @@ export const TERM_AND_CONDITIONS_LINK = 'https://sobhanbera.vercel.app'
 /** number constants and more */
 export const MUSIC_PLAYER_BLUR = 19 // blurRadius value
 export const DOUBLE_TAP_DELAY = 500 // the delay in milliseconds between two press for double press component
+export const PROMPT_DURATION = 3000 // duration for showing prompt in milliseconds

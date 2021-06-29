@@ -11,6 +11,7 @@ import HeaderProfile from './HeaderProfile'
 import HeaderMain from './HeaderMain'
 
 import Area from './Area'
+import Prompt from './Prompt'
 
 import HeartBeatView from './HeartBeatView'
 import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
@@ -42,6 +43,7 @@ export {
     HeaderMain,
     Area,
     Area as Section,
+    Prompt,
 }
 
 /** music player components */
