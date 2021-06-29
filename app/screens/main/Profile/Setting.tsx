@@ -3,6 +3,7 @@ import {Text, View} from 'react-native'
 
 import {Area, GradientBackground, HeaderMain} from '../../../components'
 import {usePrompt, useTheme} from '../../../context'
+import globalStyles from '../../../styles/global.styles'
 
 interface SettingProps {
     navigation?: any
@@ -19,6 +20,12 @@ const Setting: React.FC<SettingProps> = props => {
                     color={themeColors.white[0]}
                     backgroundColor={themeColors.background[0] + '80'}
                 />
+
+                <Area>
+                    <Text style={globalStyles.areaTitle}>
+                        Streaming Quality
+                    </Text>
+                </Area>
             </View>
         </GradientBackground>
     )

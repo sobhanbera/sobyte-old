@@ -12,7 +12,8 @@ const ProfileStackNavigator = (props: Props) => {
         <ProfileStack.Navigator
             screenOptions={{
                 headerShown: false,
-            }}>
+            }}
+            initialRouteName="profile">
             <ProfileStack.Screen name="profile" component={Profile} />
             <ProfileStack.Screen name="setting" component={Setting} />
         </ProfileStack.Navigator>
