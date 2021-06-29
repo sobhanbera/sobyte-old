@@ -38,6 +38,7 @@
         "react-native-locale-detector": "^1.0.1",
         "react-native-localize": "^2.1.1",
         "react-native-lrc": "^1.0.0-beta.1",
+        "react-native-modal": "^12.0.2",
         "react-native-paper": "^4.9.2",
         "react-native-reanimated": "^2.2.0",
         "react-native-safe-area-context": "^3.2.0",
