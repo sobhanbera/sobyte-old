@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Text, View} from 'react-native'
 
 import {Area, GradientBackground, HeaderMain} from '../../../components'
-import {useTheme} from '../../../context'
+import {usePrompt, useTheme} from '../../../context'
 
 interface SettingProps {
     navigation?: any
