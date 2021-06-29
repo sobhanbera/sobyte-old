@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
 
-import {THEME_STORAGE_KEY} from '../constants'
+import {LANGUAGE_CODE_STORAGE_KEY} from '../constants'
 import {DarkTheme} from './DarkTheme'
 
 /**
@@ -31,9 +31,9 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
     const [theme, setTheme] = useState('d')
 
     const getTheme = useCallback(async () => {
-        const tempTheme = await AsyncStorage.getItem(THEME_STORAGE_KEY)
+        const tempTheme = await AsyncStorage.getItem(LANGUAGE_CODE_STORAGE_KEY)
         if (!tempTheme) {
-            await AsyncStorage.setItem(THEME_STORAGE_KEY, 'd')
+            await AsyncStorage.setItem(LANGUAGE_CODE_STORAGE_KEY, 'd')
             setTheme('d')
         } else if (['d', 'l', 'c'].includes(tempTheme)) {
             setTheme(tempTheme)
@@ -43,9 +43,9 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
     const setAppTheme = async (theme: string) => {
         if (['d', 'l', 'c'].includes(theme)) {
             setTheme(theme)
-            await AsyncStorage.setItem(THEME_STORAGE_KEY, theme)
+            await AsyncStorage.setItem(LANGUAGE_CODE_STORAGE_KEY, theme)
         } else {
-            await AsyncStorage.setItem(THEME_STORAGE_KEY, 'd')
+            await AsyncStorage.setItem(LANGUAGE_CODE_STORAGE_KEY, 'd')
             setTheme('d')
         }
     }

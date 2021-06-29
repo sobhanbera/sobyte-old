@@ -8,7 +8,8 @@ export const AUTHOR_NAME_LOWER = 'sobhanbera'
 
 /** Constants */
 /** Storage key Constants */
-export const STORAGE_KEY = '@APP:languageCode' // Storage key where the app language variable exists, for internationlization purpose
+export const LANGUAGE_CODE_STORAGE_KEY = '@APP:LANGUAGE_CODE' // Storage key where the app language variable exists, for internationlization purpose
+export const AUDIO_QUALITY_STORAGE_KEY = '@APP:AUDIO_QUALITY' // Storage key for audio quality
 export const THEME_STORAGE_KEY = '@APP:theme' // Storage key for the app's theme
 
 /** Fonts Short Name */

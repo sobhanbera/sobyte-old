@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import en from './en.json'
 import hi from './hi.json'
 
-import {STORAGE_KEY} from '../constants'
+import {LANGUAGE_CODE_STORAGE_KEY} from '../constants'
 
 /**
  * locale system language detector
@@ -16,7 +16,9 @@ const languageDetector = {
     type: 'languageDetector',
     async: true, // flags below detection to be async
     detect: async callback => {
-        const savedDataJSON = await AsyncStorage.getItem(STORAGE_KEY)
+        const savedDataJSON = await AsyncStorage.getItem(
+            LANGUAGE_CODE_STORAGE_KEY,
+        )
         const lng = savedDataJSON ? savedDataJSON : null
         const selectLanguage = lng || locale
         console.log('Detected Language:: ', selectLanguage)
