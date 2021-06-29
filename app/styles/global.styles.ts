@@ -62,6 +62,12 @@ const globalStyles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
+
+    areaTitle: {
+        color: 'white',
+        fontSize: 18,
+        fontFamily: FontTahoma,
+    },
 })
 
 export default globalStyles
