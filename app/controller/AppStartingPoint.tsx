@@ -14,31 +14,34 @@ import AuthenticationNavigation from './Authentication'
 import AppNavigation from './AppInside'
 
 import {FullScreenLoading, Prompt} from '../components'
+import SettingsProvider from '../context/Settings'
 
 const AppStartingPoint = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(true) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState(false)
 
     return (
-        <Player>
-            <MusicApi>
-                <MusicFetcher>
-                    <ThemeProvider>
-                        <Prompt>
-                            <NavigationContainer theme={DarkTheme}>
-                                {!userLoggedIn ? (
-                                    <AuthenticationNavigation />
-                                ) : (
-                                    <AppNavigation />
-                                )}
+        <SettingsProvider>
+            <ThemeProvider>
+                <Player>
+                    <MusicApi>
+                        <MusicFetcher>
+                            <Prompt>
+                                <NavigationContainer theme={DarkTheme}>
+                                    {!userLoggedIn ? (
+                                        <AuthenticationNavigation />
+                                    ) : (
+                                        <AppNavigation />
+                                    )}
 
-                                <FullScreenLoading visible={loading} />
-                            </NavigationContainer>
-                        </Prompt>
-                    </ThemeProvider>
-                </MusicFetcher>
-            </MusicApi>
-        </Player>
+                                    <FullScreenLoading visible={loading} />
+                                </NavigationContainer>
+                            </Prompt>
+                        </MusicFetcher>
+                    </MusicApi>
+                </Player>
+            </ThemeProvider>
+        </SettingsProvider>
     )
 }
 
