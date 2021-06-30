@@ -25,9 +25,8 @@ const Profile: React.FC<ProfileProps> = props => {
 
     return (
         <GradientBackground>
-            <HeaderCollapsible headerScrollHeight={headerScrollHeight} />
-
-            <HeaderSearch />
+            <HeaderCollapsible
+                headerScrollHeight={headerScrollHeight}></HeaderCollapsible>
 
             <ScrollView
                 onScroll={Animated.event([
