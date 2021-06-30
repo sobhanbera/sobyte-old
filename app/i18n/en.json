@@ -1,11 +1,17 @@
 {
     "setting": {
+        "settings": "Settings",
         "app_language": "App Language",
-        "choose_audio_quality": "Choose Audio Quality"
+        "default_app_language": "Default App Language",
+        "choose_audio_quality": "Choose Audio Quality",
+        "extreme": "Extreme",
+        "good": "Good",
+        "poor": "Poor",
+        "auto": "Auto"
     },
+    "words": {"cancel": "Cancel"},
     "common": {
         "langs": {
-            "default": "Default",
             "english": "English",
             "hindi": "हिंदी"
         }

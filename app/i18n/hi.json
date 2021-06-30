@@ -1,11 +1,17 @@
 {
     "setting": {
-        "app_language": "App Language",
-        "choose_audio_quality": "Choose Audio Quality"
+        "settings": "सेटिंग्स",
+        "app_language": "भाषा",
+        "default_app_language": "डिफ़ॉल्ट ऐप भाषा",
+        "choose_audio_quality": "ऑडियो गुणवत्ता चुनें",
+        "extreme": "एक्सट्रीम",
+        "good": "गुड",
+        "poor": "ठीक ठाक",
+        "auto": "ऑटो"
     },
+    "words": {"cancel": "रद्द करें"},
     "common": {
         "langs": {
-            "default": "Default",
             "english": "English",
             "hindi": "हिंदी"
         }
