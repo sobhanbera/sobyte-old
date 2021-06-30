@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {useTranslation} from 'react-i18next'
 import AsyncStorage from '@react-native-community/async-storage'
 
 import {
@@ -16,6 +17,8 @@ interface SettingsProviderContextProps {
     audioQuality: AudioQualityType //extreme, good, poor, auto
     language: LanguageType // language code this is available in i18n.js
     setSetting: Function
+
+    changeLanguage: Function
 }
 const SettingsProviderContext =
     React.createContext<SettingsProviderContextProps>({
@@ -23,15 +26,24 @@ const SettingsProviderContext =
         audioQuality: 'a',
         language: 'en',
         setSetting: (key: string, value: string) => {},
+        changeLanguage: (langCode: LanguageType) => {},
     })
 
 interface Props {
     children?: React.ReactChild
 }
 const SettingsProvider = (props: Props) => {
+    const {i18n} = useTranslation()
     const [theme, setTheme] = useState<ThemeType>('d')
     const [audioQuality, setAudioQuality] = useState<AudioQualityType>('g')
     const [language, setLanguage] = useState<LanguageType>('en')
+
+    const changeLanguage = async (languageCode: LanguageType) => {
+        await i18n.changeLanguage(languageCode, async (err, t) => {
+            setLanguage(languageCode)
+            await AsyncStorage.setItem(LANGUAGE_CODE_STORAGE_KEY, languageCode)
+        })
+    }
 
     const setSetting = async (key: string, value: string) => {
         await AsyncStorage.setItem(key, value)
@@ -68,6 +80,8 @@ const SettingsProvider = (props: Props) => {
         audioQuality,
         language,
         setSetting,
+
+        changeLanguage,
     }
     return (
         <SettingsProviderContext.Provider value={settingValues}>
