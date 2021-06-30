@@ -47,13 +47,16 @@ const Prompt = (props: Props) => {
                 animationIn="fadeIn"
                 animationOut="fadeOut"
                 onBackdropPress={() => setTitle('')}
+                onBackButtonPress={() => setTitle('')}
+                useNativeDriverForBackdrop
                 isVisible={title.length > 0}
                 backdropOpacity={0}
                 style={{
                     justifyContent: 'flex-end',
-                    bottom: 35,
+                    // bottom: 35,
                     left: 0,
                     right: 0,
+                    top: 50,
                     position: 'absolute',
                     maxHeight: 80,
                     backgroundColor: 'transparent',
