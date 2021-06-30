@@ -1,6 +1,6 @@
 import React from 'react'
 import {Text, View} from 'react-native'
-import {usePlayer} from '../../context'
+import {usePlayer} from '../../../context'
 
 interface ExploreProps {}
 const Explore: React.FC<ExploreProps> = props => {

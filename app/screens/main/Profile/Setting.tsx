@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import {Text, View} from 'react-native'
+import {ScrollView, Text, View} from 'react-native'
 import {useTranslation} from 'react-i18next'
-import Entypo from 'react-native-vector-icons/Entypo'
 
 import {
     Area,
@@ -11,7 +10,7 @@ import {
 } from '../../../components'
 import {usePrompt, useSetting, useTheme} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
-import {LANGUAGE_CODE_STORAGE_KEY} from '../../../constants'
+import {AUDIO_QUALITY_STORAGE_KEY} from '../../../constants'
 
 interface SettingProps {
     navigation?: any
@@ -19,43 +18,83 @@ interface SettingProps {
 const Setting: React.FC<SettingProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
-    const {setSetting, theme, audioQuality, language} = useSetting()
+    const {setSetting, theme, audioQuality, language, changeLanguage} =
+        useSetting()
 
     const [themeVisible, setThemeVisible] = useState(false)
     const [audioQualityVisible, setAudioQualityVisible] = useState(false)
     const [languageVisible, setLanguageVisible] = useState(false)
 
     return (
-        <GradientBackground>
-            <View>
+        <GradientBackground dark>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <HeaderMain
                     navigation={props.navigation}
-                    title="Settings"
+                    title={t('setting:settings')}
                     color={themeColors.white[0]}
-                    backgroundColor={themeColors.background[0] + '80'}
+                    backgroundColor={themeColors.background[0]}
                 />
 
-                <Area>
+                <Area icon spacing onPress={() => setLanguageVisible(true)}>
+                    <Text style={globalStyles.areaTitle}>
+                        {t('setting:app_language')}
+                    </Text>
+                </Area>
+
+                <Area icon spacing onPress={() => setAudioQualityVisible(true)}>
                     <Text style={globalStyles.areaTitle}>
                         {t('setting:choose_audio_quality')}
                     </Text>
-                    <Entypo name="chevron-thin-right" size={20} color="grey" />
                 </Area>
-            </View>
+            </ScrollView>
 
             <BottomSheet
                 isVisible={languageVisible}
                 setVisible={setLanguageVisible}
                 buttons={[
                     {
+                        text: t('setting:default_app_language'),
+                        onPress: () => changeLanguage('en'),
+                    },
+                    {
                         text: t('common:langs:english'),
-                        onPress: () =>
-                            setSetting(LANGUAGE_CODE_STORAGE_KEY, 'en'),
+                        onPress: () => changeLanguage('en'),
                     },
                     {
                         text: t('common:langs:hindi'),
                         onPress: () => {
-                            console.log('a')
+                            changeLanguage('hi')
+                        },
+                    },
+                ]}
+            />
+
+            <BottomSheet
+                isVisible={audioQualityVisible}
+                setVisible={setAudioQualityVisible}
+                buttons={[
+                    {
+                        text: t('setting:extreme'),
+                        onPress: () => {
+                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'e')
+                        },
+                    },
+                    {
+                        text: t('setting:good'),
+                        onPress: () => {
+                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'g')
+                        },
+                    },
+                    {
+                        text: t('setting:poor'),
+                        onPress: () => {
+                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'p')
+                        },
+                    },
+                    {
+                        text: t('setting:auto'),
+                        onPress: () => {
+                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'a')
                         },
                     },
                 ]}
