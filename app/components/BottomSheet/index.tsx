@@ -2,6 +2,7 @@ import React from 'react'
 import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native'
 import {Text} from 'react-native-paper'
 import Modal from 'react-native-modal'
+import {useTranslation} from 'react-i18next'
 
 import {useTheme} from '../../context'
 import {FontUbuntu} from '../../constants'
@@ -17,6 +18,7 @@ interface Props {
 }
 const BottomSheet = (props: Props) => {
     const {themeColors} = useTheme()
+    const {t} = useTranslation()
 
     return (
         <Modal
@@ -83,7 +85,7 @@ const BottomSheet = (props: Props) => {
                     activeOpacity={0.65}
                     onPress={() => props.setVisible(false)}>
                     <Text style={[styles.textItem, styles.cancelTextItem]}>
-                        {props.cancelText || 'Cancel'}
+                        {props.cancelText || t('words:cancel')}
                     </Text>
                 </TouchableOpacity>
             </View>
