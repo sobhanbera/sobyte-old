@@ -9,6 +9,8 @@ import Loader from './GlobalLoading'
 import Header from './Header'
 import HeaderProfile from './HeaderProfile'
 import HeaderMain from './HeaderMain'
+import HeaderSearch from './HeaderSearch'
+import HeaderCollapsible from './HeaderCollapsible'
 
 import Area from './Area'
 import Prompt from './Prompt'
@@ -32,16 +34,18 @@ export {
     PaddingView,
     SobyteTextInput,
     Header,
+    HeaderProfile,
     HeartBeatView,
+    HeaderMain,
+    HeaderSearch,
     SobyteAlert,
+    HeaderCollapsible,
     AnimatedGradient,
     T_C_PrivacyPolicy,
     SobyteAlert as SobyteAlertBox,
     FullScreenLoading,
     DoubleTap,
-    HeaderProfile,
     GradientBackground,
-    HeaderMain,
     Area,
     Area as Section,
     Prompt,
