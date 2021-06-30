@@ -6,13 +6,11 @@ import {DarkTheme} from '@react-navigation/native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {usePlayer} from '../context'
-
-import Explore from '../screens/main/Explore'
-import MusicPlayer from '../screens/main/MusicPlayer'
-import {useTheme} from '../context'
-
 import {Scaler} from '../components'
+import {usePlayer, useTheme} from '../context'
+
+import ExploreStackNavigator from './ExploreStack'
+import MusicPlayer from '../screens/main/MusicPlayer'
 import ProfileStackNavigator from './ProfileStack'
 
 const BarNavigator = createMaterialBottomTabNavigator()
@@ -43,7 +41,7 @@ const AuthenticationNavigation = () => {
             initialRouteName="MusicPlayer">
             <BarNavigator.Screen
                 name="Explore"
-                component={Explore}
+                component={ExploreStackNavigator}
                 options={{
                     tabBarAccessibilityLabel: 'Explore Tab',
                     tabBarColor: themeColors.surface[0],

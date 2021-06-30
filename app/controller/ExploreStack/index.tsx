@@ -1,8 +1,7 @@
 import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 
-import Profile from '../../screens/main/Profile/Profile'
-import Setting from '../../screens/main/Profile/Setting'
+import Explore from '../../screens/main/Explore/Explore'
 
 const ProfileStack = createStackNavigator()
 interface Props {}
@@ -12,9 +11,8 @@ const ProfileStackNavigator = (props: Props) => {
             screenOptions={{
                 headerShown: false,
             }}
-            initialRouteName="profile">
-            <ProfileStack.Screen name="profile" component={Profile} />
-            <ProfileStack.Screen name="setting" component={Setting} />
+            initialRouteName="explore">
+            <ProfileStack.Screen name="explore" component={Explore} />
         </ProfileStack.Navigator>
     )
 }
