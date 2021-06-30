@@ -67,6 +67,7 @@ const SettingsProvider = (props: Props) => {
                 setTheme(result[0][1] || 'd')
                 setLanguage(result[1][1] || 'en')
                 setAudioQuality(result[2][1] || 'a')
+                console.log(result)
             },
         )
     }
