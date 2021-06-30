@@ -62,7 +62,7 @@ export const DarkTheme: ThemeColors = {
         '#06001c',
         '#05001a',
     ],
-    darksurfacegradient: ['#050505', '#000000'],
+    darksurfacegradient: ['#090909', '#050505'],
     surface: ['#040309'],
     border: ['#00369F'],
     placeholder: ['#CFCFCF'],
