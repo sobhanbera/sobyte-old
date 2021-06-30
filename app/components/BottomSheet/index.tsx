@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, TouchableOpacity, View} from 'react-native'
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native'
 import {Text} from 'react-native-paper'
 import Modal from 'react-native-modal'
 
@@ -20,19 +20,23 @@ const BottomSheet = (props: Props) => {
 
     return (
         <Modal
-            animationInTiming={200}
-            animationOutTiming={200}
+            animationInTiming={400}
+            animationOutTiming={400}
             isVisible={props.isVisible}
             animationIn="slideInUp"
             animationOut="slideOutDown"
             onBackdropPress={() => props.setVisible(false)}
+            onBackButtonPress={() => props.setVisible(false)}
             backdropOpacity={0}
             swipeDirection="down"
             onSwipeComplete={() => props.setVisible(false)}
             style={[
                 styles.modal,
-                {backgroundColor: themeColors.background[0]},
+                // {backgroundColor: themeColors.background[0]},
             ]}>
+            <TouchableOpacity onPress={() => props.setVisible(false)}>
+                <View style={styles.takeTheInvisibleHeight}></View>
+            </TouchableOpacity>
             <View
                 style={[
                     styles.wrapper,
@@ -47,7 +51,12 @@ const BottomSheet = (props: Props) => {
                 </TouchableOpacity>
             </View>
             <View style={[styles.flex, styles.flexEnd]}>
-                <View>
+                <ScrollView
+                    style={{
+                        backgroundColor: themeColors.background[0],
+                    }}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}>
                     {props.buttons.map((button, _) => {
                         return (
                             <TouchableOpacity
@@ -61,9 +70,18 @@ const BottomSheet = (props: Props) => {
                             </TouchableOpacity>
                         )
                     })}
-                </View>
+                </ScrollView>
 
-                <TouchableOpacity onPress={() => props.setVisible(false)}>
+                <TouchableOpacity
+                    style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        width: '100%',
+                    }}
+                    activeOpacity={0.65}
+                    onPress={() => props.setVisible(false)}>
                     <Text style={[styles.textItem, styles.cancelTextItem]}>
                         {props.cancelText || 'Cancel'}
                     </Text>
@@ -85,6 +103,9 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
+    },
+    takeTheInvisibleHeight: {
+        height: '45%',
     },
     wrapper: {
         borderTopLeftRadius: 30,
@@ -129,7 +150,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#303030',
     },
     cancelTextItem: {
-        backgroundColor: '#202020',
+        backgroundColor: '#000000',
         color: '#FF2030',
     },
 })
