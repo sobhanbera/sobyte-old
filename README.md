@@ -88,95 +88,139 @@ yarn global add react-native
 
 ## File Structure (Tree)
 
-.
-├── api
-│ ├── index.js
-│ ├── parsers.js
-│ └── utils.js
-├── assets
-│ ├── animations
-│ │ ├── 2nd.gif
-│ │ └── logo_loading.gif
-│ ├── fonts
-│ │ ├── Elika Gorica.ttf
-│ │ ├── Helvetica.ttf
-│ │ ├── LucidaGrande.ttf
-│ │ ├── Roboto-Bold.ttf
-│ │ ├── Roboto-Regular.ttf
-│ │ ├── Tahoma Regular font.ttf
-│ │ ├── Ubuntu Bold.ttf
-│ │ ├── Ubuntu Light.ttf
-│ │ ├── Ubuntu.ttf
-│ │ └── verdana.ttf
-│ └── images
-│ ├── logo_name.png
-│ └── phone_screen.png
-├── components
-│ ├── AnimatedGradient
-│ │ └── index.js
-│ ├── AuthButton
-│ │ └── index.tsx
-│ ├── FullScreenLoading
-│ │ └── index.tsx
-│ ├── GlobalLoading
-│ │ └── index.tsx
-│ ├── Header
-│ │ └── index.tsx
-│ ├── HeartBeatView
-│ │ └── index.tsx
-│ ├── HighPaddingView
-│ │ └── index.tsx
-│ ├── index.ts
-│ ├── Scaler
-│ │ └── index.tsx
-│ ├── ScalerAuthButton
-│ │ └── index.tsx
-│ ├── SobyteAlert
-│ │ └── index.tsx
-│ ├── SobyteTextInput
-│ │ └── index.tsx
-│ └── T_C_PrivacyPolicy
-│ └── index.tsx
-├── constants
-│ ├── fakemails.ts
-│ └── index.js
-├── context
-│ └── index.ts
-├── controller
-│ ├── AppInside.tsx
-│ ├── AppStartingPoint.tsx
-│ └── Authentication.tsx
-├── i18n
-│ ├── en.json
-│ ├── hi.json
-│ └── index.js
-├── interfaces
-│ └── index.ts
+<details>
+  <summary>Main Project Directory</summary>
+
+```.text
+
+app
 ├── MainApp.tsx
+├── api
+│   ├── MusicFetcher.tsx
+│   ├── PlayerControls.tsx
+│   ├── index.js
+│   ├── parsers.js
+│   ├── playerServices.js
+│   └── utils.js
+├── assets
+│   ├── animations
+│   │   └── logo_loading.gif
+│   ├── fonts
+│   │   ├── Elika Gorica.ttf
+│   │   ├── Helvetica.ttf
+│   │   ├── LucidaGrande.ttf
+│   │   ├── Roboto-Bold.ttf
+│   │   ├── Roboto-Regular.ttf
+│   │   ├── Tahoma Regular font.ttf
+│   │   ├── Ubuntu Bold.ttf
+│   │   ├── Ubuntu Light.ttf
+│   │   ├── Ubuntu.ttf
+│   │   └── verdana.ttf
+│   └── images
+│       ├── icons
+│       │   └── setting.png
+│       ├── logo_name.png
+│       ├── phone_screen.png
+│       └── sobyte_logo_white.png
+├── components
+│   ├── AnimatedGradient
+│   │   └── index.js
+│   ├── Area
+│   │   └── index.tsx
+│   ├── AuthButton
+│   │   └── index.tsx
+│   ├── BottomSheet
+│   │   └── index.tsx
+│   ├── DoubleTap
+│   │   └── index.tsx
+│   ├── FullScreenLoading
+│   │   └── index.tsx
+│   ├── GlobalLoading
+│   │   └── index.tsx
+│   ├── GradientBackground
+│   │   └── index.tsx
+│   ├── Header
+│   │   └── index.tsx
+│   ├── HeaderCollapsible
+│   │   └── index.tsx
+│   ├── HeaderMain
+│   │   └── index.tsx
+│   ├── HeaderProfile
+│   │   └── index.tsx
+│   ├── HeaderSearch
+│   │   └── index.tsx
+│   ├── HeartBeatView
+│   │   └── index.tsx
+│   ├── HighPaddingView
+│   │   └── index.tsx
+│   ├── MusicPlayer
+│   │   └── ProgressSlider.tsx
+│   ├── Prompt
+│   │   └── index.tsx
+│   ├── Scaler
+│   │   └── index.tsx
+│   ├── ScalerAuthButton
+│   │   └── index.tsx
+│   ├── SobyteAlert
+│   │   └── index.tsx
+│   ├── SobyteTextInput
+│   │   └── index.tsx
+│   ├── T_C_PrivacyPolicy
+│   │   └── index.tsx
+│   └── index.ts
+├── constants
+│   ├── fakemails.ts
+│   └── index.js
+├── context
+│   ├── Settings.tsx
+│   └── index.ts
+├── controller
+│   ├── AppInside.tsx
+│   ├── AppStartingPoint.tsx
+│   ├── Authentication.tsx
+│   ├── ExploreStack
+│   │   └── index.tsx
+│   └── ProfileStack
+│       └── index.tsx
+├── i18n
+│   ├── en.json
+│   ├── hi.json
+│   └── index.js
+├── interfaces
+│   └── index.ts
 ├── rules
-│ └── index.ts
+│   └── index.ts
 ├── screens
-│ ├── authentication
-│ │ ├── ForgotPassword.tsx
-│ │ ├── Help.tsx
-│ │ ├── Intro.tsx
-│ │ ├── Login.tsx
-│ │ └── Register.tsx
-│ └── Home.tsx
-├── store
-│ ├── actions
-│ └── reducers
+│   ├── Home.tsx
+│   ├── authentication
+│   │   ├── ForgotPassword.tsx
+│   │   ├── Help.tsx
+│   │   ├── Intro.tsx
+│   │   ├── Login.tsx
+│   │   └── Register.tsx
+│   └── main
+│       ├── Explore
+│       │   └── Explore.tsx
+│       ├── MusicPlayer.tsx
+│       └── Profile
+│           ├── Profile.tsx
+│           └── Setting.tsx
 ├── styles
-│ └── global.styles.ts
+│   └── global.styles.ts
 ├── themes
-│ ├── DarkTheme.ts
-│ ├── ThemeProps.ts
-│ ├── ThemeProvider.tsx
-│ └── Themes.ts
+│   ├── DarkTheme.ts
+│   ├── ThemeProps.ts
+│   ├── ThemeProvider.tsx
+│   └── Themes.ts
 └── utils
-├── Colors.ts
-├── index.ts
-└── Objects.ts
+    ├── Colors.ts
+    ├── Objects.ts
+    ├── index.ts
+    └── storage.ts
+
+  ```
+  
+</details>
 
 ## License
 
