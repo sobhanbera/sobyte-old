@@ -11,26 +11,31 @@ interface Props {
     children?: React.ReactNode
     spacing?: boolean
     column?: boolean
-    onPress?: Function
-    icon?: boolean
+    onPress: Function
+    icon?: React.ReactNode
+    settingIcon?: React.ReactNode
+    settingIconName?: string
     iconName?: string
 }
 
 const Area = (props: Props) => {
-    const {background, white, transparent, grey} = useTheme().themeColors
+    const {white, grey, surfacelight} = useTheme().themeColors
 
     return (
-        <TouchableHighlight onPress={() => props.onPress()}>
+        <TouchableHighlight
+            onPress={() => props.onPress()}
+            style={{
+                marginTop: 12,
+                marginBottom: 3,
+                marginHorizontal: 6,
+                borderRadius: 10,
+                overflow: 'hidden',
+            }}>
             <View
                 style={{
-                    paddingVertical: 8,
+                    paddingVertical: 5,
                     paddingHorizontal: props.noBackground ? 0 : 22,
-                    marginTop: 10,
-                    marginHorizontal: 6,
-                    borderRadius: 10,
-                    backgroundColor: !props.noBackground
-                        ? props.backgroundColor || background[0]
-                        : transparent[0],
+                    backgroundColor: surfacelight[0],
                     flexDirection: props.column ? 'column' : 'row',
                     justifyContent: props.spacing ? 'space-between' : 'center',
                     alignItems: 'center',
@@ -47,11 +52,24 @@ const Area = (props: Props) => {
                     </Text>
                 ) : null}
 
-                {props.children}
+                <View>
+                    {props.settingIcon ? (
+                        <Entypo
+                            name={props.settingIconName || 'chevron-thin-right'}
+                            size={20}
+                            color={grey[0]}
+                            style={{
+                                marginHorizontal: 6,
+                            }}
+                        />
+                    ) : null}
+
+                    {props.children}
+                </View>
 
                 {props.icon ? (
                     <Entypo
-                        name="chevron-thin-right"
+                        name={props.iconName || 'chevron-thin-right'}
                         size={20}
                         color={grey[0]}
                     />

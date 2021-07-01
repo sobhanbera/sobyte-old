@@ -1,12 +1,22 @@
 import React from 'react'
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native'
 
+import {useTheme} from '../../context'
+
 interface Props {
     navigation: any
 }
 const HeaderProfile = (props: Props) => {
+    const {surface} = useTheme().themeColors
+
     return (
-        <View style={styles.header}>
+        <View
+            style={[
+                styles.header,
+                {
+                    backgroundColor: surface[0],
+                },
+            ]}>
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={() => {
@@ -24,7 +34,7 @@ const HeaderProfile = (props: Props) => {
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: 50,
+        height: 55,
         justifyContent: 'center',
         alignItems: 'flex-end',
         paddingHorizontal: 10,

@@ -1,45 +1,25 @@
 import React from 'react'
-import {ImageBackground} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import {useTheme} from '../../context'
-import globalStyles from '../../styles/global.styles'
 
 interface Props {
     children?: React.ReactNode
     angle?: number
     angleCenter?: {x: number; y: number}
-    dark?: boolean
 }
 const GradientBackground = (props: Props) => {
     const {themeColors} = useTheme()
 
     return (
         <LinearGradient
-            angle={props.dark ? 180 : 145}
+            angle={props.angle || 315}
             angleCenter={{x: 0.5, y: 0.5}}
             useAngle={true}
-            style={{width: '100%', height: '100%'}}
-            colors={
-                props.dark
-                    ? themeColors.darksurfacegradient
-                    : [
-                          themeColors.primary.main[0] + 'D7',
-                          themeColors.secondary.main[0] + 'AF',
-                          themeColors.primary.dark[0] + 'D7',
-                          themeColors.primary.dark[0] + 'D7',
-                          themeColors.primary.dark[0] + 'D7',
-                          themeColors.primary.dark[0] + 'D7',
-                          themeColors.primary.dark[0] + 'D7',
-                          themeColors.primary.dark[0] + 'D7',
-                      ]
-            }>
-            <ImageBackground
-                source={require('../../assets/images/phone_screen.png')}
-                style={globalStyles.fullImageBackground}
-                blurRadius={5}>
-                {props.children}
-            </ImageBackground>
+            style={{width: '100%', flex: 1}}
+            colors={themeColors.backgroundgradient}
+            locations={[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]}>
+            {props.children}
         </LinearGradient>
     )
 }

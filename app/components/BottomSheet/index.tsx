@@ -34,7 +34,7 @@ const BottomSheet = (props: Props) => {
             onSwipeComplete={() => props.setVisible(false)}
             style={[
                 styles.modal,
-                // {backgroundColor: themeColors.background[0]},
+                // {backgroundColor: themeColors.black[0] + '50'},
             ]}>
             <TouchableOpacity onPress={() => props.setVisible(false)}>
                 <View style={styles.takeTheInvisibleHeight}></View>
@@ -42,7 +42,9 @@ const BottomSheet = (props: Props) => {
             <View
                 style={[
                     styles.wrapper,
-                    {backgroundColor: themeColors.background[0]},
+                    {
+                        backgroundColor: themeColors.surfacelight[0],
+                    },
                 ]}>
                 <TouchableOpacity
                     onPress={() => props.setVisible(false)}
@@ -55,7 +57,7 @@ const BottomSheet = (props: Props) => {
             <View style={[styles.flex, styles.flexEnd]}>
                 <ScrollView
                     style={{
-                        backgroundColor: themeColors.background[0],
+                        backgroundColor: themeColors.surfacelight[0],
                     }}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}>

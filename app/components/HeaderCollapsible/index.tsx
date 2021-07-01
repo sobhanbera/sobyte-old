@@ -3,6 +3,7 @@ import {StyleSheet, Animated, ImageBackground} from 'react-native'
 
 interface Props {
     headerScrollHeight: any
+    headerScrollColor: any
 }
 const HeaderCollapsible: React.FC<Props> = props => {
     return (
@@ -16,7 +17,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                 width: '100%',
                 overflow: 'hidden',
                 zIndex: 999,
-                backgroundColor: 'blue',
+                backgroundColor: props.headerScrollColor,
             }}>
             <ImageBackground
                 style={{flex: 1}}

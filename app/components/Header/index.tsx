@@ -1,9 +1,7 @@
 import React from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
-import FeatherIcon from 'react-native-vector-icons/Feather'
 
-import {useTheme} from '../../context'
 import {Scaler} from '../'
 
 interface HeaderProps {
@@ -18,18 +16,12 @@ interface HeaderProps {
     rightIconsList?: Array<React.ReactNode>
 }
 const Header = (props: HeaderProps) => {
-    const {ChooseThemeOptions} = useTheme()
-
     return (
         <View
             style={[
                 styles.header,
                 {
-                    backgroundColor: ChooseThemeOptions(
-                        '#000000' + props.transparency ?? '00',
-                        '#efefef' + props.transparency ?? '00',
-                        'pink',
-                    ),
+                    backgroundColor: '#000000' + props.transparency || '00',
                 },
             ]}>
             <View style={styles.innerHeader}>
