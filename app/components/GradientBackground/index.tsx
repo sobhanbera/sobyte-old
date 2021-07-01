@@ -1,9 +1,11 @@
 import React from 'react'
+import {ViewStyle} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import {useTheme} from '../../context'
 
 interface Props {
+    style?: ViewStyle
     children?: React.ReactNode
     angle?: number
     angleCenter?: {x: number; y: number}
@@ -16,7 +18,7 @@ const GradientBackground = (props: Props) => {
             angle={props.angle || 315}
             angleCenter={{x: 0.5, y: 0.5}}
             useAngle={true}
-            style={{width: '100%', flex: 1}}
+            style={[{width: '100%', flex: 1}, props.style]}
             colors={themeColors.backgroundgradient}
             locations={[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]}>
             {props.children}
