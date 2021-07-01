@@ -1,6 +1,6 @@
 const _ = require('lodash')
 
-exports.fv = (input, query, justOne = false) => {
+export const fv = (input, query, justOne = false) => {
     const iterate = (x, y) => {
         var r = []
 
@@ -32,7 +32,7 @@ exports.fv = (input, query, justOne = false) => {
     return v
 }
 
-exports.hms2ms = v => {
+export const hms2ms = v => {
     try {
         let p = v.split(':'),
             s = 0,
@@ -47,7 +47,7 @@ exports.hms2ms = v => {
     }
 }
 
-exports.createApiContext = ytcfg => {
+export const createApiContext = ytcfg => {
     return {
         context: {
             capabilities: {},
@@ -96,7 +96,7 @@ exports.createApiContext = ytcfg => {
     }
 }
 
-exports.getCategoryURI = categoryName => {
+export const getCategoryURI = categoryName => {
     var b64Key = ''
     switch (_.upperCase(categoryName)) {
         case 'SONG':
@@ -123,7 +123,7 @@ exports.getCategoryURI = categoryName => {
     }
 }
 
-exports.buildEndpointContext = (typeName, browseId) => {
+export const buildEndpointContext = (typeName, browseId) => {
     return {
         browseEndpointContextSupportedConfigs: {
             browseEndpointContextMusicConfig: {
