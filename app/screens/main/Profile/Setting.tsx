@@ -26,13 +26,12 @@ const Setting: React.FC<SettingProps> = props => {
     const [languageVisible, setLanguageVisible] = useState(false)
 
     return (
-        <GradientBackground dark>
+        <GradientBackground>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <HeaderMain
                     navigation={props.navigation}
                     title={t('setting:settings')}
                     color={themeColors.white[0]}
-                    backgroundColor={themeColors.background[0]}
                 />
 
                 <Area icon spacing onPress={() => setLanguageVisible(true)}>
