@@ -16,18 +16,19 @@ import AppStartingPoint from './controller/AppStartingPoint'
 import {Loader} from './components'
 
 const AppContext = createContext({
-    showLoading: null,
-    setShowLoading: (value: boolean) => null,
-    toggleLoader: () => null,
+    showLoading: false,
+    setShowLoading: (value: boolean) => {},
+    toggleLoader: () => {},
 })
 const MainApp = () => {
     const [showLoading, setShowLoading] = useState(false)
 
     const toggleLoader = () => setShowLoading(show => !show)
+    const setLoading = (value: boolean) => setShowLoading(value)
 
     const loaderValues = {
-        showLoading,
-        setShowLoading,
+        showLoading: showLoading,
+        setShowLoading: setLoading,
         toggleLoader,
     }
 
