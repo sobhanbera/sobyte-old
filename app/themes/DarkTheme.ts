@@ -14,9 +14,9 @@ export const DarkTheme: ThemeColors = {
      * This is the object for Dark Theme
      */
     primary: {
-        main: ['#0077b6'],
-        light: ['#81E4DA'],
-        dark: ['#0E003E'],
+        main: ['#0F60B6'],
+        light: ['#5a8de9'],
+        dark: ['#003785'],
     },
     secondary: {
         main: ['#EF1559'],
@@ -24,47 +24,26 @@ export const DarkTheme: ThemeColors = {
         dark: ['#EE7674'],
     },
     accent: {
-        main: ['#0F60B6'],
-        light: ['#0F60B6'],
-        dark: ['#0F60B6'],
+        main: ['#0077b6'],
+        light: ['#81E4DA'],
+        dark: ['#0E003E'],
     },
 
-    background: ['#1B182B'],
+    background: ['#101010', '#101010'],
     backgroundgradient: [
+        '#0F002D',
         '#0F002D',
         '#0A032B',
         '#07012B',
-        '#0E003E',
+        '#07012B',
+        '#07012B',
         '#10003E',
         '#10004E',
     ],
-    surfacegradient: [
-        '#10004e',
-        '#0f014c',
-        '#0e0249',
-        '#0d0247',
-        '#0c0245',
-        '#0b0342',
-        '#0b0340',
-        '#0b033d',
-        '#0b033b',
-        '#0b0338',
-        '#0b0336',
-        '#0b0333',
-        '#0c0231',
-        '#0b022e',
-        '#0b022c',
-        '#0b0229',
-        '#0a0127',
-        '#0a0124',
-        '#090122',
-        '#08011f',
-        '#06001c',
-        '#05001a',
-    ],
-    darksurfacegradient: ['#090909', '#050505'],
-    surface: ['#040309'],
-    border: ['#00369F'],
+
+    surface: ['#050505'], // for surface components
+    surfacelight: ['#21242b'], // for cards
+    border: ['#272727'],
     placeholder: ['#CFCFCF'],
     text: ['#EFEFEF'],
 
