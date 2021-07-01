@@ -1,0 +1,372 @@
+## App
+
+```.text
+
+app
+├── MainApp.tsx
+├── api
+│   ├── MusicFetcher.tsx
+│   ├── PlayerControls.tsx
+│   ├── index.js
+│   ├── parsers.js
+│   ├── playerServices.js
+│   └── utils.js
+├── assets
+│   ├── animations
+│   │   └── logo_loading.gif
+│   ├── fonts
+│   │   ├── Elika Gorica.ttf
+│   │   ├── Helvetica.ttf
+│   │   ├── LucidaGrande.ttf
+│   │   ├── Roboto-Bold.ttf
+│   │   ├── Roboto-Regular.ttf
+│   │   ├── Tahoma Regular font.ttf
+│   │   ├── Ubuntu Bold.ttf
+│   │   ├── Ubuntu Light.ttf
+│   │   ├── Ubuntu.ttf
+│   │   └── verdana.ttf
+│   └── images
+│       ├── icons
+│       │   └── setting.png
+│       ├── logo_name.png
+│       ├── phone_screen.png
+│       └── sobyte_logo_white.png
+├── components
+│   ├── AnimatedGradient
+│   │   └── index.js
+│   ├── Area
+│   │   └── index.tsx
+│   ├── AuthButton
+│   │   └── index.tsx
+│   ├── BottomSheet
+│   │   └── index.tsx
+│   ├── DoubleTap
+│   │   └── index.tsx
+│   ├── FullScreenLoading
+│   │   └── index.tsx
+│   ├── GlobalLoading
+│   │   └── index.tsx
+│   ├── GradientBackground
+│   │   └── index.tsx
+│   ├── Header
+│   │   └── index.tsx
+│   ├── HeaderCollapsible
+│   │   └── index.tsx
+│   ├── HeaderMain
+│   │   └── index.tsx
+│   ├── HeaderProfile
+│   │   └── index.tsx
+│   ├── HeaderSearch
+│   │   └── index.tsx
+│   ├── HeartBeatView
+│   │   └── index.tsx
+│   ├── HighPaddingView
+│   │   └── index.tsx
+│   ├── MusicPlayer
+│   │   └── ProgressSlider.tsx
+│   ├── Prompt
+│   │   └── index.tsx
+│   ├── Scaler
+│   │   └── index.tsx
+│   ├── ScalerAuthButton
+│   │   └── index.tsx
+│   ├── SobyteAlert
+│   │   └── index.tsx
+│   ├── SobyteTextInput
+│   │   └── index.tsx
+│   ├── T_C_PrivacyPolicy
+│   │   └── index.tsx
+│   └── index.ts
+├── constants
+│   ├── fakemails.ts
+│   └── index.js
+├── context
+│   ├── Settings.tsx
+│   └── index.ts
+├── controller
+│   ├── AppInside.tsx
+│   ├── AppStartingPoint.tsx
+│   ├── Authentication.tsx
+│   ├── ExploreStack
+│   │   └── index.tsx
+│   └── ProfileStack
+│       └── index.tsx
+├── i18n
+│   ├── en.json
+│   ├── hi.json
+│   └── index.js
+├── interfaces
+│   └── index.ts
+├── rules
+│   └── index.ts
+├── screens
+│   ├── Home.tsx
+│   ├── authentication
+│   │   ├── ForgotPassword.tsx
+│   │   ├── Help.tsx
+│   │   ├── Intro.tsx
+│   │   ├── Login.tsx
+│   │   └── Register.tsx
+│   └── main
+│       ├── Explore
+│       │   └── Explore.tsx
+│       ├── MusicPlayer.tsx
+│       └── Profile
+│           ├── Profile.tsx
+│           └── Setting.tsx
+├── styles
+│   └── global.styles.ts
+├── themes
+│   ├── DarkTheme.ts
+│   ├── ThemeProps.ts
+│   ├── ThemeProvider.tsx
+│   └── Themes.ts
+└── utils
+    ├── Colors.ts
+    ├── Objects.ts
+    ├── index.ts
+    └── storage.ts
+
+```
+
+## Root
+
+```.text
+
+.
+├── @types
+│   └── alltypes.d.ts
+├── App.tsx
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── README.md
+├── __tests__
+│   └── App-test.tsx
+├── android
+│   ├── app
+│   │   ├── _BUCK
+│   │   ├── build.gradle
+│   │   ├── build_defs.bzl
+│   │   ├── debug.keystore
+│   │   ├── proguard-rules.pro
+│   │   └── src
+│   │       ├── debug
+│   │       │   ├── AndroidManifest.xml
+│   │       │   └── java
+│   │       │       └── com
+│   │       │           └── sobyte
+│   │       │               └── ReactNativeFlipper.java
+│   │       └── main
+│   │           ├── AndroidManifest.xml
+│   │           ├── assets
+│   │           │   ├── fonts
+│   │           │   │   ├── AntDesign.ttf
+│   │           │   │   ├── Elika Gorica.ttf
+│   │           │   │   ├── Entypo.ttf
+│   │           │   │   ├── EvilIcons.ttf
+│   │           │   │   ├── Feather.ttf
+│   │           │   │   ├── FontAwesome.ttf
+│   │           │   │   ├── FontAwesome5_Brands.ttf
+│   │           │   │   ├── FontAwesome5_Regular.ttf
+│   │           │   │   ├── FontAwesome5_Solid.ttf
+│   │           │   │   ├── Fontisto.ttf
+│   │           │   │   ├── Foundation.ttf
+│   │           │   │   ├── Helvetica.ttf
+│   │           │   │   ├── Ionicons.ttf
+│   │           │   │   ├── LucidaGrande.ttf
+│   │           │   │   ├── MaterialCommunityIcons.ttf
+│   │           │   │   ├── MaterialIcons.ttf
+│   │           │   │   ├── Octicons.ttf
+│   │           │   │   ├── Roboto-Bold.ttf
+│   │           │   │   ├── Roboto-Regular.ttf
+│   │           │   │   ├── SimpleLineIcons.ttf
+│   │           │   │   ├── Tahoma Regular font.ttf
+│   │           │   │   ├── Ubuntu Bold.ttf
+│   │           │   │   ├── Ubuntu Light.ttf
+│   │           │   │   ├── Ubuntu.ttf
+│   │           │   │   ├── Zocial.ttf
+│   │           │   │   └── verdana.ttf
+│   │           │   └── sobyte_logo_loading.svg
+│   │           ├── java
+│   │           │   └── com
+│   │           │       └── sobyte
+│   │           │           ├── MainActivity.java
+│   │           │           └── MainApplication.java
+│   │           └── res
+│   │               ├── mipmap-hdpi
+│   │               │   └── ic_launcher.png
+│   │               ├── mipmap-mdpi
+│   │               │   └── ic_launcher.png
+│   │               ├── mipmap-xhdpi
+│   │               │   └── ic_launcher.png
+│   │               ├── mipmap-xxhdpi
+│   │               │   └── ic_launcher.png
+│   │               ├── mipmap-xxxhdpi
+│   │               │   └── ic_launcher.png
+│   │               └── values
+│   │                   ├── strings.xml
+│   │                   └── styles.xml
+│   ├── build.gradle
+│   ├── gradle
+│   │   └── wrapper
+│   │       ├── gradle-wrapper.jar
+│   │       └── gradle-wrapper.properties
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   └── settings.gradle
+├── app
+│   ├── MainApp.tsx
+│   ├── api
+│   │   ├── MusicFetcher.tsx
+│   │   ├── PlayerControls.tsx
+│   │   ├── index.js
+│   │   ├── parsers.js
+│   │   ├── playerServices.js
+│   │   └── utils.js
+│   ├── assets
+│   │   ├── animations
+│   │   │   └── logo_loading.gif
+│   │   ├── fonts
+│   │   │   ├── Elika Gorica.ttf
+│   │   │   ├── Helvetica.ttf
+│   │   │   ├── LucidaGrande.ttf
+│   │   │   ├── Roboto-Bold.ttf
+│   │   │   ├── Roboto-Regular.ttf
+│   │   │   ├── Tahoma Regular font.ttf
+│   │   │   ├── Ubuntu Bold.ttf
+│   │   │   ├── Ubuntu Light.ttf
+│   │   │   ├── Ubuntu.ttf
+│   │   │   └── verdana.ttf
+│   │   └── images
+│   │       ├── icons
+│   │       │   └── setting.png
+│   │       ├── logo_name.png
+│   │       ├── phone_screen.png
+│   │       └── sobyte_logo_white.png
+│   ├── components
+│   │   ├── AnimatedGradient
+│   │   │   └── index.js
+│   │   ├── Area
+│   │   │   └── index.tsx
+│   │   ├── AuthButton
+│   │   │   └── index.tsx
+│   │   ├── BottomSheet
+│   │   │   └── index.tsx
+│   │   ├── DoubleTap
+│   │   │   └── index.tsx
+│   │   ├── FullScreenLoading
+│   │   │   └── index.tsx
+│   │   ├── GlobalLoading
+│   │   │   └── index.tsx
+│   │   ├── GradientBackground
+│   │   │   └── index.tsx
+│   │   ├── Header
+│   │   │   └── index.tsx
+│   │   ├── HeaderCollapsible
+│   │   │   └── index.tsx
+│   │   ├── HeaderMain
+│   │   │   └── index.tsx
+│   │   ├── HeaderProfile
+│   │   │   └── index.tsx
+│   │   ├── HeaderSearch
+│   │   │   └── index.tsx
+│   │   ├── HeartBeatView
+│   │   │   └── index.tsx
+│   │   ├── HighPaddingView
+│   │   │   └── index.tsx
+│   │   ├── MusicPlayer
+│   │   │   └── ProgressSlider.tsx
+│   │   ├── Prompt
+│   │   │   └── index.tsx
+│   │   ├── Scaler
+│   │   │   └── index.tsx
+│   │   ├── ScalerAuthButton
+│   │   │   └── index.tsx
+│   │   ├── SobyteAlert
+│   │   │   └── index.tsx
+│   │   ├── SobyteTextInput
+│   │   │   └── index.tsx
+│   │   ├── T_C_PrivacyPolicy
+│   │   │   └── index.tsx
+│   │   └── index.ts
+│   ├── constants
+│   │   ├── fakemails.ts
+│   │   └── index.js
+│   ├── context
+│   │   ├── Settings.tsx
+│   │   └── index.ts
+│   ├── controller
+│   │   ├── AppInside.tsx
+│   │   ├── AppStartingPoint.tsx
+│   │   ├── Authentication.tsx
+│   │   ├── ExploreStack
+│   │   │   └── index.tsx
+│   │   └── ProfileStack
+│   │       └── index.tsx
+│   ├── i18n
+│   │   ├── en.json
+│   │   ├── hi.json
+│   │   └── index.js
+│   ├── interfaces
+│   │   └── index.ts
+│   ├── rules
+│   │   └── index.ts
+│   ├── screens
+│   │   ├── Home.tsx
+│   │   ├── authentication
+│   │   │   ├── ForgotPassword.tsx
+│   │   │   ├── Help.tsx
+│   │   │   ├── Intro.tsx
+│   │   │   ├── Login.tsx
+│   │   │   └── Register.tsx
+│   │   └── main
+│   │       ├── Explore
+│   │       │   └── Explore.tsx
+│   │       ├── MusicPlayer.tsx
+│   │       └── Profile
+│   │           ├── Profile.tsx
+│   │           └── Setting.tsx
+│   ├── styles
+│   │   └── global.styles.ts
+│   ├── themes
+│   │   ├── DarkTheme.ts
+│   │   ├── ThemeProps.ts
+│   │   ├── ThemeProvider.tsx
+│   │   └── Themes.ts
+│   └── utils
+│       ├── Colors.ts
+│       ├── Objects.ts
+│       ├── index.ts
+│       └── storage.ts
+├── app.data.details.ts
+├── app.json
+├── babel.config.js
+├── index.js
+├── ios
+│   ├── Podfile
+│   ├── Sobyte
+│   │   ├── AppDelegate.h
+│   │   ├── AppDelegate.m
+│   │   ├── Images.xcassets
+│   │   │   ├── AppIcon.appiconset
+│   │   │   │   └── Contents.json
+│   │   │   └── Contents.json
+│   │   ├── Info.plist
+│   │   ├── LaunchScreen.storyboard
+│   │   └── main.m
+│   ├── Sobyte.xcodeproj
+│   │   ├── project.pbxproj
+│   │   └── xcshareddata
+│   │       └── xcschemes
+│   │           └── Sobyte.xcscheme
+│   └── SobyteTests
+│       ├── Info.plist
+│       └── SobyteTests.m
+├── metro.config.js
+├── package.json
+├── react-native.config.js
+├── tsconfig.json
+└── yarn.lock
+
+```
