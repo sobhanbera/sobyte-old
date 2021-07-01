@@ -9,7 +9,7 @@
         "poor": "Poor",
         "auto": "Auto"
     },
-    "words": {"cancel": "Cancel"},
+    "words": {"cancel": "Cancel", "hello": "Hello"},
     "common": {
         "langs": {
             "english": "English",
