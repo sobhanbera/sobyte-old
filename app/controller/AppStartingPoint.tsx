@@ -17,8 +17,8 @@ import {FullScreenLoading, Prompt} from '../components'
 import SettingsProvider from '../context/Settings'
 
 const AppStartingPoint = () => {
-    const [userLoggedIn, setUserLoggedIn] = useState(true) // initial value must be false... true only for development purpose
-    const [loading, setLoading] = useState(false)
+    const [userLoggedIn, setUserLoggedIn] = useState<boolean>(true) // initial value must be false... true only for development purpose
+    const [loading, setLoading] = useState<boolean>(false)
 
     return (
         <SettingsProvider>

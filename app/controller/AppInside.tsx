@@ -38,7 +38,7 @@ const AuthenticationNavigation = () => {
                 padding: 0,
                 backgroundColor: 'transparent',
             }}
-            initialRouteName="MusicPlayer">
+            initialRouteName="Explore">
             <BarNavigator.Screen
                 name="Explore"
                 component={ExploreStackNavigator}
