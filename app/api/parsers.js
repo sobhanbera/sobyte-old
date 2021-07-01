@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const utils = require('./utils')
 
-exports.parseSearchResult = context => {
+export const parseSearchResult = context => {
     const result = {
         content: [],
     }
@@ -241,7 +241,7 @@ exports.parseSearchResult = context => {
     return result
 }
 
-exports.parseSongSearchResult = context => {
+export const parseSongSearchResult = context => {
     const result = {
         content: [],
         continuation: utils.fv(context, 'nextContinuationData', true),
@@ -324,7 +324,7 @@ exports.parseSongSearchResult = context => {
     return result
 }
 
-exports.parseVideoSearchResult = context => {
+export const parseVideoSearchResult = context => {
     const result = {
         content: [],
         contination: utils.fv(context, 'nextContinuationData'),
@@ -372,7 +372,7 @@ exports.parseVideoSearchResult = context => {
     return result
 }
 
-exports.parseAlbumSearchResult = context => {
+export const parseAlbumSearchResult = context => {
     const result = {
         content: [],
         contination: utils.fv(context, 'nextContinuationData'),
@@ -424,7 +424,7 @@ exports.parseAlbumSearchResult = context => {
     return result
 }
 
-exports.parseArtistSearchResult = context => {
+export const parseArtistSearchResult = context => {
     const result = {
         content: [],
         contination: utils.fv(context, 'nextContinuationData'),
@@ -464,7 +464,7 @@ exports.parseArtistSearchResult = context => {
     return result
 }
 
-exports.parsePlaylistSearchResult = context => {
+export const parsePlaylistSearchResult = context => {
     const result = {
         content: [],
         contination: utils.fv(context, 'nextContinuationData'),
@@ -508,7 +508,7 @@ exports.parsePlaylistSearchResult = context => {
     return result
 }
 
-exports.parseArtistPage = context => {
+export const parseArtistPage = context => {
     const result = {
         name: '',
         description: '',
@@ -812,7 +812,7 @@ exports.parseArtistPage = context => {
     return result
 }
 
-exports.parsePlaylistPage = context => {
+export const parsePlaylistPage = context => {
     const result = {
         title: '',
         owner: '',
@@ -946,7 +946,7 @@ exports.parsePlaylistPage = context => {
     return result
 }
 
-exports.parseAlbumPage = context => {
+export const parseAlbumPage = context => {
     const result = {
         title: '',
         description: '',
@@ -1019,7 +1019,7 @@ exports.parseAlbumPage = context => {
     return result
 }
 
-exports.parseNextPanel = context => {
+export const parseNextPanel = context => {
     const result = {
         title: '',
         playlistId: '',
