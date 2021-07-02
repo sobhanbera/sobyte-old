@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native'
 
 import Player from '../api/PlayerControls'
-import MusicApi from '../api'
+import MusicApi from '../api/fetcher'
 import ThemeProvider from '../themes/ThemeProvider'
 import MusicFetcher from '../api/MusicFetcher'
 
@@ -21,8 +21,8 @@ const AppStartingPoint = () => {
     const [loading, setLoading] = useState<boolean>(false)
 
     return (
-        <SettingsProvider>
-            <ThemeProvider>
+        <ThemeProvider>
+            <SettingsProvider>
                 <Player>
                     <MusicApi>
                         <MusicFetcher>
@@ -40,8 +40,8 @@ const AppStartingPoint = () => {
                         </MusicFetcher>
                     </MusicApi>
                 </Player>
-            </ThemeProvider>
-        </SettingsProvider>
+            </SettingsProvider>
+        </ThemeProvider>
     )
 }
 
