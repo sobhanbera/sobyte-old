@@ -4,8 +4,8 @@ import axios from 'axios'
 import querystring from 'querystring'
 import _ from 'lodash'
 
-import utils from './utils'
-import parsers from './parsers'
+import * as utils from './utils'
+import * as parsers from './parsers'
 
 const DemoMusicContextReturn = () => new Promise((resolve, reject) => {})
 
@@ -19,7 +19,7 @@ const MusicContext = createContext({
         },
     ) => DemoMusicContextReturn(),
     getSearchSuggestions: (search = '') => DemoMusicContextReturn(),
-    search: (query = '', categoryName = 'song' | 'video', _pageLimit = 1) =>
+    search: (query = '', categoryName = 'song', _pageLimit = 1) =>
         DemoMusicContextReturn(),
     getAlbum: (browseId = '') => DemoMusicContextReturn(),
     getPlaylist: (browseId = '', contentLimit = 100) =>
@@ -48,6 +48,8 @@ class MusicApi extends React.Component {
             },
             withCredentials: true,
         })
+
+        this.initalize = this.initalize.bind(this)
     }
 
     _createApiRequest(endpointName, inputVariables, inputQuery = {}) {
@@ -132,7 +134,8 @@ class MusicApi extends React.Component {
                             error: false,
                             loaded: true,
                         })
-                        // alert('APP INSIDE AND MUSIC API INITIATED')
+                        // console.log(this.state.musicConfig)
+                        alert(this.state.musicConfig)
                     } catch (err) {
                         reject(err)
                         this.setState({
@@ -196,6 +199,7 @@ class MusicApi extends React.Component {
     }
 
     search(query, categoryName, _pageLimit = 1) {
+        console.log('TURn')
         return new Promise((resolve, reject) => {
             var result = {}
             this._createApiRequest('search', {
