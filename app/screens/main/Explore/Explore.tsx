@@ -1,5 +1,5 @@
-import React, {useRef} from 'react'
-import {Animated, Image, ScrollView, Text, View} from 'react-native'
+import React, {useEffect, useRef, useState} from 'react'
+import {Animated, Image, ScrollView, View} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {
@@ -12,7 +12,8 @@ import {
     HEADER_MIN_HEIGHT,
     HEADER_SCROLL_DISTANCE,
 } from '../../../constants'
-import {useTheme} from '../../../context'
+import {useTheme, useMusicApi as mainUserm} from '../../../context'
+import {useMusicApi} from '../../../api/fetcher'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 interface ProfileProps {
@@ -21,6 +22,7 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
+    const {search} = useMusicApi()
     const scrollOffsetY = useRef(new Animated.Value(0)).current
     const headerScrollHeight = scrollOffsetY.interpolate({
         inputRange: [0, HEADER_SCROLL_DISTANCE],
@@ -32,6 +34,27 @@ const Profile: React.FC<ProfileProps> = props => {
         outputRange: [themeColors.transparent[0], themeColors.surface[0]],
         extrapolate: 'clamp',
     })
+
+    // const [topHits, setTopHits] = useState<FetchedSongObject>()
+    // const [topHindi, setTopHindi] = useState<FetchedSongObject>()
+    // const [topEnglish, setTopEnglish] = useState<FetchedSongObject>()
+    // const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>()
+    // const [topTelegu, setTopTelegu] = useState<FetchedSongObject>()
+    // const [topRegional, setTopRegional] = useState<FetchedSongObject>()
+
+    async function func() {
+        await search('hindi songs')
+            .then(res => {
+                console.log('RES', res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    useEffect(() => {
+        func()
+    }, [t])
 
     return (
         <>
@@ -67,37 +90,17 @@ const Profile: React.FC<ProfileProps> = props => {
             </HeaderCollapsible>
 
             <ScrollView
-                onScroll={Animated.event([
-                    {nativeEvent: {contentOffset: {y: scrollOffsetY}}},
-                ])}
+                onScroll={Animated.event(
+                    [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
+                    {useNativeDriver: true},
+                )}
                 scrollEventThrottle={16}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}>
-                <GradientBackground>
-                    <View style={{paddingTop: HEADER_MAX_HEIGHT}}>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                        <Text style={{fontSize: 40}}>AKJSHDKJAD</Text>
-                    </View>
-                </GradientBackground>
+                <GradientBackground
+                    style={{
+                        paddingTop: HEADER_MAX_HEIGHT,
+                    }}></GradientBackground>
             </ScrollView>
         </>
     )
