@@ -19,6 +19,10 @@ const globalStyles = StyleSheet.create({
     blackText: {
         color: 'black',
     },
+
+    extraPaddingView: {
+        paddingVertical: 100,
+    },
     highPaddingView: {
         paddingVertical: 60,
     },
@@ -28,9 +32,16 @@ const globalStyles = StyleSheet.create({
     smallPaddingView: {
         paddingVertical: 20,
     },
-    extraPaddingView: {
-        paddingVertical: 100,
+    verySmallPaddingView: {
+        paddingVertical: 10,
     },
+    tinyPaddingView: {
+        paddingVertical: 5,
+    },
+    veryTinyPaddingView: {
+        paddingVertical: 3,
+    },
+
     textFontElikaGorica: {
         fontFamily: FontElikaGorica,
     },
