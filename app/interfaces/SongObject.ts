@@ -31,3 +31,15 @@ export default interface FetchedSongObject {
         clickTrackingParams: string
     }
 }
+
+export interface ContinuationObject {
+    continuation: string
+    clickTrackingParams: string
+}
+
+export interface ContinuationObjectItself {
+    continuation: {
+        continuation: string
+        clickTrackingParams: string
+    }
+}
