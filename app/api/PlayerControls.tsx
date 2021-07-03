@@ -119,44 +119,50 @@ const Player: FC<PlayerProps> = props => {
         )
 
         // const playbackTrackChanged =
-        TrackPlayer.addEventListener('playback-track-changed', async res => {
-            if (!res.nextTrack) {
-                return
-            }
+        const playbackTrackChanged = TrackPlayer.addEventListener(
+            'playback-track-changed',
+            async res => {
+                if (!res.nextTrack) {
+                    return
+                }
 
-            await TrackPlayer.getTrack(res.nextTrack)
-                .then(async result => {
-                    if (result === null) {
-                        return
-                    }
-                    setCurrentTrack({
-                        id: result.id,
-                        url: result.url,
-                        duration: result.duration,
-                        title: result.title,
-                        artist: result.artist,
-                        artwork: result.artwork,
+                await TrackPlayer.getTrack(res.nextTrack)
+                    .then(async result => {
+                        if (result === null) {
+                            return
+                        }
+                        setCurrentTrack({
+                            id: result.id,
+                            url: result.url,
+                            duration: result.duration || 0,
+                            title: result.title,
+                            artist: result.artist,
+                            artwork: result.artwork,
+                        })
                     })
-                })
-                .catch(err => {})
-        })
+                    .catch(err => {})
+            },
+        )
 
         // const remoteStop =
-        TrackPlayer.addEventListener('remote-stop', () => {
+        const remoteStop = TrackPlayer.addEventListener('remote-stop', () => {
             resetPlayer()
         })
 
         // const playbackQueueEnded =
-        TrackPlayer.addEventListener('playback-queue-ended', () => {
-            setCurrentTrack(track => ({
-                id: '',
-                url: track.url,
-                duration: track.duration,
-                title: track.title,
-                artist: track.artist,
-                artwork: track.artwork,
-            }))
-        })
+        const playbackQueueEnded = TrackPlayer.addEventListener(
+            'playback-queue-ended',
+            () => {
+                setCurrentTrack(track => ({
+                    id: '',
+                    url: track.url,
+                    duration: track.duration,
+                    title: track.title,
+                    artist: track.artist,
+                    artwork: track.artwork,
+                }))
+            },
+        )
         ;(async () => {
             await TrackPlayer.getVolume().then(res => {
                 setVolume(res)
@@ -172,9 +178,9 @@ const Player: FC<PlayerProps> = props => {
             playerNext.remove()
             playerPrev.remove()
 
-            // playbackTrackChanged.remove()
-            // remoteStop.remove()
-            // playbackQueueEnded.remove()
+            playbackTrackChanged.remove()
+            remoteStop.remove()
+            playbackQueueEnded.remove()
         }
     }, [])
 
