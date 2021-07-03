@@ -1,20 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {Animated, Image, ScrollView, View} from 'react-native'
+import {Image, ScrollView, Text, View} from 'react-native'
 import {useTranslation} from 'react-i18next'
+import Animated, {Extrapolate} from 'react-native-reanimated'
 
 import {
     GradientBackground,
+    GridSongList,
     HeaderCollapsible,
     Scaler,
 } from '../../../components'
-import {
-    HEADER_MAX_HEIGHT,
-    HEADER_MIN_HEIGHT,
-    HEADER_SCROLL_DISTANCE,
-} from '../../../constants'
+import {DEFAULT_ICON_SIZE, HEADER_MIN_HEIGHT} from '../../../constants'
 import {FetchedSongObject} from '../../../interfaces'
-import {useTheme, useMusicApi, usePrompt} from '../../../context'
+import {useTheme, useMusicApi} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
+import globalStyles from '../../../styles/global.styles'
 
 interface ExploreTabProps {
     navigation?: any
@@ -23,24 +22,21 @@ const Profile: React.FC<ExploreTabProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
-    const scrollOffsetY = useRef(new Animated.Value(0)).current
-    const headerScrollHeight = scrollOffsetY.interpolate({
-        inputRange: [0, HEADER_SCROLL_DISTANCE],
-        outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-        extrapolate: 'clamp',
-    })
-    const headerScrollColor = scrollOffsetY.interpolate({
-        inputRange: [0, HEADER_SCROLL_DISTANCE],
-        outputRange: [themeColors.transparent[0], themeColors.surface[0]],
-        extrapolate: 'clamp',
+
+    const scrollY = new Animated.Value(0)
+    const diffClampScrollY = Animated.diffClamp(scrollY, 0, HEADER_MIN_HEIGHT)
+    const headerY = Animated.interpolateNode(diffClampScrollY, {
+        inputRange: [0, HEADER_MIN_HEIGHT],
+        outputRange: [0, -HEADER_MIN_HEIGHT],
+        extrapolate: Extrapolate.CLAMP,
     })
 
-    const [topHits, setTopHits] = useState<FetchedSongObject>()
+    // const [topHits, setTopHits] = useState<FetchedSongObject>()
     const [topHindi, setTopHindi] = useState<FetchedSongObject>()
-    const [topEnglish, setTopEnglish] = useState<FetchedSongObject>()
-    const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>()
-    const [topTelegu, setTopTelegu] = useState<FetchedSongObject>()
-    const [topRegional, setTopRegional] = useState<FetchedSongObject>()
+    // const [topEnglish, setTopEnglish] = useState<FetchedSongObject>()
+    // const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>()
+    // const [topTelegu, setTopTelegu] = useState<FetchedSongObject>()
+    // const [topRegional, setTopRegional] = useState<FetchedSongObject>()
 
     /**
      * Function which loads all sutaible data required in this tab (explore tab)
@@ -51,6 +47,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
         await search('Top hindi songs', 'song')
             .then((res: FetchedSongObject) => {
                 setTopHindi(res)
+                // console.log(res)
             })
             .catch(() => {
                 console.trace('Error loading explore tab data...')
@@ -79,11 +76,16 @@ const Profile: React.FC<ExploreTabProps> = props => {
             })
     }, [error])
 
+    useEffect(() => {
+        console.log(headerY)
+    }, [headerY])
+
     return (
-        <>
+        <View style={globalStyles.flex}>
             <HeaderCollapsible
-                headerScrollColor={headerScrollColor}
-                headerScrollHeight={headerScrollHeight}>
+                headerScrollColor={themeColors.black[0]}
+                headerScrollHeight={HEADER_MIN_HEIGHT}
+                headerY={headerY}>
                 <View
                     style={{
                         paddingHorizontal: 12,
@@ -93,39 +95,94 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                     }}>
-                    <Image
-                        style={{
-                            width: 97.75, // real width - 782, multiple - 7
-                            height: 31.94375, // real height - 255.5, multiple - 7
-                            // marginVertical: 22,
-                        }}
-                        source={require('../../../assets/images/logo_name.png')}
-                    />
+                    <Text style={globalStyles.appName}>
+                        {t('common:appName')}
+                    </Text>
                     <Scaler scale={0.95} touchableOpacity={1}>
                         <Icon
                             accessibilityLabel="search songs"
                             name="search-outline"
                             color={themeColors.text[0]}
-                            size={25}
+                            size={DEFAULT_ICON_SIZE}
+                            onPress={() => props.navigation.navigate('search')}
                         />
                     </Scaler>
                 </View>
             </HeaderCollapsible>
 
-            <ScrollView
-                onScroll={Animated.event(
-                    [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
-                    {useNativeDriver: true},
-                )}
+            <Animated.ScrollView
+                onScroll={() =>
+                    Animated.event(
+                        [
+                            {
+                                nativeEvent: {contentOffset: {y: scrollY}},
+                            },
+                        ],
+                        {useNativeDriver: true},
+                    )
+                }
                 scrollEventThrottle={16}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground
-                    style={{
-                        paddingTop: HEADER_MAX_HEIGHT,
-                    }}></GradientBackground>
-            </ScrollView>
-        </>
+                    style={
+                        {
+                            // paddingTop: HEADER_MAX_HEIGHT,
+                        }
+                    }>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>ASDFASIUYTYUG</Text>
+                    <Text>AAAAAAAAAAAAAAAAAAA</Text>
+                    <GridSongList content={topHindi?.content} />
+                </GradientBackground>
+            </Animated.ScrollView>
+        </View>
     )
 }
 
