@@ -11,6 +11,7 @@ import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // ob
 const DemoMusicContextReturn = () => new Promise(() => {})
 const MusicContext = React.createContext({
     initialize: () => DemoMusicContextReturn(),
+    initMusicApi: () => DemoMusicContextReturn(),
     getContinuation: (
         _endpointName: string,
         _continuation: ContinuationObject,
@@ -470,6 +471,7 @@ const MusicApi = (props: MusicApiProps) => {
      */
     const musicApiValues = {
         initialize: initialize,
+        initMusicApi: initialize,
         getContinuation: getContinuation,
         getSearchSuggestions: getSearchSuggestions,
         search: search,
