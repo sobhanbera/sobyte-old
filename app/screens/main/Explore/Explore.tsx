@@ -13,7 +13,7 @@ import {
     HEADER_SCROLL_DISTANCE,
 } from '../../../constants'
 import {FetchedSongObject} from '../../../interfaces'
-import {useTheme, useMusicApi} from '../../../context'
+import {useTheme, useMusicApi, usePrompt} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 interface ExploreTabProps {
@@ -22,7 +22,7 @@ interface ExploreTabProps {
 const Profile: React.FC<ExploreTabProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
-    const {initMusicApi, search, error, loaded} = useMusicApi()
+    const {initMusicApi, search, error} = useMusicApi()
     const scrollOffsetY = useRef(new Animated.Value(0)).current
     const headerScrollHeight = scrollOffsetY.interpolate({
         inputRange: [0, HEADER_SCROLL_DISTANCE],
