@@ -9,7 +9,13 @@
         "poor": "Poor",
         "auto": "Auto"
     },
-    "words": {"cancel": "Cancel", "hello": "Hello"},
+    "words": {
+        "cancel": "Cancel",
+        "hello": "Hello",
+        "profile": "Me",
+        "music": "Music",
+        "explore": "Explore"
+    },
     "common": {
         "langs": {
             "english": "English",
