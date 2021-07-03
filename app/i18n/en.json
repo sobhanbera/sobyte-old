@@ -17,6 +17,7 @@
         "explore": "Explore"
     },
     "common": {
+        "appName": "Sobyte",
         "langs": {
             "english": "English",
             "hindi": "हिंदी"

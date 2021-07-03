@@ -11,6 +11,7 @@
     },
     "words": {"cancel": "रद्द करें"},
     "common": {
+        "appName": "Sobyte",
         "langs": {
             "english": "English",
             "hindi": "हिंदी"
