@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {StyleSheet, View} from 'react-native'
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {DarkTheme} from '@react-navigation/native'
@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import {Scaler} from '../components'
-import {usePlayer, useTheme} from '../context'
+import {usePlayer, useTheme, useMusicApi} from '../context'
 
 import ExploreStackNavigator from './ExploreStack'
 import MusicPlayer from '../screens/main/MusicPlayer'
@@ -17,6 +17,11 @@ const BarNavigator = createMaterialBottomTabNavigator()
 const AuthenticationNavigation = () => {
     const {themeColors} = useTheme()
     const {playing} = usePlayer()
+    const {initialize} = useMusicApi()
+
+    useEffect(() => {
+        initialize()
+    }, [])
 
     return (
         <BarNavigator.Navigator
