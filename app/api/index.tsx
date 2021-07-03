@@ -10,7 +10,7 @@ import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // ob
 
 const DemoMusicContextReturn = () => new Promise(() => {})
 const MusicContext = React.createContext({
-    initalize: () => DemoMusicContextReturn(),
+    initialize: () => DemoMusicContextReturn(),
     getContinuation: (
         _endpointName: string,
         _continuation: ContinuationObject,
@@ -63,7 +63,7 @@ const MusicApi = (props: MusicApiProps) => {
      * function should be called in the root element of the app where the
      * main app starts after using this function context provider
      */
-    const initalize = () => {
+    const initialize = () => {
         return new Promise((resolve, reject) => {
             client
                 .get('/')
@@ -469,7 +469,7 @@ const MusicApi = (props: MusicApiProps) => {
      * music api context values provider
      */
     const musicApiValues = {
-        initalize: initalize,
+        initialize: initialize,
         getContinuation: getContinuation,
         getSearchSuggestions: getSearchSuggestions,
         search: search,
