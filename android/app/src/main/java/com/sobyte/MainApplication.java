@@ -23,6 +23,9 @@ import com.cmcewen.blurview.BlurViewPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
 import com.reactnativecommunity.slider.ReactSliderPackage;
 
+import com.facebook.react.bridge.JSIModulePackage;
+import com.swmansion.reanimated.ReanimatedJSIModulePackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -32,6 +35,13 @@ public class MainApplication extends Application implements ReactApplication {
               return BuildConfig.DEBUG;
           }
 
+          /** this function is added becuase we are using react-native-reanimated library */
+          @Override
+          protected JSIModulePackage getJSIModulePackage() {
+              return new ReanimatedJSIModulePackage(); // <- add
+          }
+
+          /** this function contains all the package list required */
           @Override
           protected List<ReactPackage> getPackages() {
               @SuppressWarnings("UnnecessaryLocalVariable")
