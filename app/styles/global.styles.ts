@@ -7,17 +7,30 @@ import {
     FontVerdana,
     FontRoboto,
     FontRobotoBold,
+    FontUbuntuBold,
 } from '../constants'
 import {Dimensions, StyleSheet} from 'react-native'
 
-const {width, height} = Dimensions.get('window')
+// const {width, height} = Dimensions.get('window')
 
 const globalStyles = StyleSheet.create({
+    appName: {
+        color: 'white',
+        fontSize: 23,
+        fontFamily: FontUbuntuBold,
+        paddingHorizontal: 10,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+    },
     whiteText: {
         color: 'white',
     },
     blackText: {
         color: 'black',
+    },
+
+    flex: {
+        flex: 1,
     },
 
     extraPaddingView: {
