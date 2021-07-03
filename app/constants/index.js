@@ -12,6 +12,8 @@ export const LANGUAGE_CODE_STORAGE_KEY = '@APP:LANGUAGE_CODE' // Storage key whe
 export const AUDIO_QUALITY_STORAGE_KEY = '@APP:AUDIO_QUALITY' // Storage key for audio quality
 export const THEME_STORAGE_KEY = '@APP:theme' // Storage key for the app's theme
 
+export const HEADER_DATA_STORAGE_KEY = '@APP:theme' // Storage key for header fetched by the api everytime...
+
 /** Fonts Short Name */
 export const FontRoboto = 'Roboto-Regular'
 export const FontRobotoBold = 'Roboto-Bold'
