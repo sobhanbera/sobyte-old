@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react' // as usual import
+import React, {useState} from 'react' // as usual import
 import axios from 'axios' // for making api requests
 import RNLocalize from 'react-native-localize' // to pass the location of user in the api call
 import querystring from 'querystring' // string methods
