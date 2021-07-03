@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react'
-import {StyleSheet, View} from 'react-native'
+import {StyleSheet} from 'react-native'
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {DarkTheme} from '@react-navigation/native'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {Scaler} from '../components'
 import {usePlayer, useTheme, useMusicApi} from '../context'
 
 import ExploreStackNavigator from './ExploreStack'
@@ -17,13 +16,13 @@ const BarNavigator = createMaterialBottomTabNavigator()
 const AuthenticationNavigation = () => {
     const {themeColors} = useTheme()
     const {playing} = usePlayer()
-    const {initialize, error, loaded} = useMusicApi()
+    const {initMusicApi} = useMusicApi()
 
     useEffect(() => {
-        if (!loaded || error) {
-            console.log('Music Api Init...')
-            initialize()
-        }
+        // if (!loaded || error) {
+        //     console.log('Music Api Init...')
+        initMusicApi()
+        // }
     }, [])
 
     return (
@@ -110,42 +109,45 @@ const AuthenticationNavigation = () => {
     )
 }
 
-interface FloatingTabBarIconProps {
-    backgroundColor: string
-    children?: React.ReactNode
-    onPress?: Function
-}
-const FloatingTabBarIcon = ({
-    onPress,
-    backgroundColor,
-    children,
-}: FloatingTabBarIconProps) => {
-    return (
-        <View style={styles.floatingIconContainer}>
-            <Scaler touchableOpacity={1} onPress={onPress}>
-                <View
-                    style={[
-                        styles.floatingIconContainerWrapper,
-                        {backgroundColor: backgroundColor},
-                    ]}>
-                    {children}
-                </View>
-            </Scaler>
-        </View>
-    )
-}
+/**
+ * may be useful in future...
+ */
+// interface FloatingTabBarIconProps {
+//     backgroundColor: string
+//     children?: React.ReactNode
+//     onPress?: Function
+// }
+// const FloatingTabBarIcon = ({
+//     onPress,
+//     backgroundColor,
+//     children,
+// }: FloatingTabBarIconProps) => {
+//     return (
+//         <View style={styles.floatingIconContainer}>
+//             <Scaler touchableOpacity={1} onPress={onPress}>
+//                 <View
+//                     style={[
+//                         styles.floatingIconContainerWrapper,
+//                         {backgroundColor: backgroundColor},
+//                     ]}>
+//                     {children}
+//                 </View>
+//             </Scaler>
+//         </View>
+//     )
+// }
 
-interface SimpleTabBarComponentProps {
-    icon: React.ReactNode
-    title: string
-    focused: boolean
-    focusedColor: string
-    grey: string
-    showTitle?: boolean
-}
-const SimpleTabBarComponent = (props: SimpleTabBarComponentProps) => {
-    return <View style={styles.iconContainer}>{props.icon}</View>
-}
+// interface SimpleTabBarComponentProps {
+//     icon: React.ReactNode
+//     title: string
+//     focused: boolean
+//     focusedColor: string
+//     grey: string
+//     showTitle?: boolean
+// }
+// const SimpleTabBarComponent = (props: SimpleTabBarComponentProps) => {
+//     return <View style={styles.iconContainer}>{props.icon}</View>
+// }
 
 const styles = StyleSheet.create({
     floatingIconContainer: {

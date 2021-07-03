@@ -1,9 +1,5 @@
 import React, {useState} from 'react'
-import {
-    NavigationContainer,
-    DarkTheme,
-    DefaultTheme,
-} from '@react-navigation/native'
+import {NavigationContainer, DarkTheme} from '@react-navigation/native'
 
 import Player from '../api/PlayerControls'
 import MusicApi from '../api'

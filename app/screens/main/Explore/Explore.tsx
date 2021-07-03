@@ -12,16 +12,17 @@ import {
     HEADER_MIN_HEIGHT,
     HEADER_SCROLL_DISTANCE,
 } from '../../../constants'
+import {FetchedSongObject} from '../../../interfaces'
 import {useTheme, useMusicApi} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-interface ProfileProps {
+interface ExploreTabProps {
     navigation?: any
 }
-const Profile: React.FC<ProfileProps> = props => {
+const Profile: React.FC<ExploreTabProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
-    const {search} = useMusicApi()
+    const {initMusicApi, search, error, loaded} = useMusicApi()
     const scrollOffsetY = useRef(new Animated.Value(0)).current
     const headerScrollHeight = scrollOffsetY.interpolate({
         inputRange: [0, HEADER_SCROLL_DISTANCE],
@@ -34,26 +35,49 @@ const Profile: React.FC<ProfileProps> = props => {
         extrapolate: 'clamp',
     })
 
-    // const [topHits, setTopHits] = useState<FetchedSongObject>()
-    // const [topHindi, setTopHindi] = useState<FetchedSongObject>()
-    // const [topEnglish, setTopEnglish] = useState<FetchedSongObject>()
-    // const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>()
-    // const [topTelegu, setTopTelegu] = useState<FetchedSongObject>()
-    // const [topRegional, setTopRegional] = useState<FetchedSongObject>()
+    const [topHits, setTopHits] = useState<FetchedSongObject>()
+    const [topHindi, setTopHindi] = useState<FetchedSongObject>()
+    const [topEnglish, setTopEnglish] = useState<FetchedSongObject>()
+    const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>()
+    const [topTelegu, setTopTelegu] = useState<FetchedSongObject>()
+    const [topRegional, setTopRegional] = useState<FetchedSongObject>()
 
-    async function func() {
-        await search('hindi songs')
-            .then(res => {
-                console.log('RES', res)
+    /**
+     * Function which loads all sutaible data required in this tab (explore tab)
+     * like songs list in different languages, preference wise songs list, and many more...
+     */
+    async function loadExploreData() {
+        console.log('Loading Initiated...')
+        await search('Top hindi songs', 'song')
+            .then((res: FetchedSongObject) => {
+                setTopHindi(res)
             })
-            .catch(err => {
-                console.log(err)
+            .catch(() => {
+                console.trace('Error loading explore tab data...')
             })
     }
 
+    /**
+     * we are calling the loadData -(which loads all the data for explore tab) function twice
+     * because it may not be ready or compiled when we call it for the first time so indented calling
+     * also with a fallback variable error whenever it changed again everything will load from beginning
+     */
     useEffect(() => {
-        func()
-    }, [t])
+        initMusicApi()
+            .then(() => {
+                initMusicApi()
+                    .then(() => {
+                        console.log('Music Api Initiated...')
+                        loadExploreData()
+                    })
+                    .catch(() => {
+                        console.error('(Inner) Error Initiating Music Api..')
+                    })
+            })
+            .catch(() => {
+                console.error('(Outer) Error Initiating Music Api..')
+            })
+    }, [error])
 
     return (
         <>
