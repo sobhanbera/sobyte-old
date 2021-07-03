@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native'
 
 import Player from '../api/PlayerControls'
-import MusicApi from '../api/fetcher'
+import MusicApi from '../api'
 import ThemeProvider from '../themes/ThemeProvider'
 import MusicFetcher from '../api/MusicFetcher'
 
@@ -21,10 +21,10 @@ const AppStartingPoint = () => {
     const [loading, setLoading] = useState<boolean>(false)
 
     return (
-        <ThemeProvider>
-            <SettingsProvider>
-                <Player>
-                    <MusicApi>
+        <MusicApi>
+            <ThemeProvider>
+                <SettingsProvider>
+                    <Player>
                         <MusicFetcher>
                             <Prompt>
                                 <NavigationContainer theme={DarkTheme}>
@@ -38,10 +38,10 @@ const AppStartingPoint = () => {
                                 </NavigationContainer>
                             </Prompt>
                         </MusicFetcher>
-                    </MusicApi>
-                </Player>
-            </SettingsProvider>
-        </ThemeProvider>
+                    </Player>
+                </SettingsProvider>
+            </ThemeProvider>
+        </MusicApi>
     )
 }
 
