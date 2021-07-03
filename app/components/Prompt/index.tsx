@@ -13,9 +13,9 @@ import {useTheme} from '../../context'
 import Scaler from '../Scaler'
 
 const PromptContext = React.createContext({
-    setTitle: (title: string) => {},
+    setTitle: (_title: string) => {},
     setDescription: (
-        title: 'primary' | 'success' | 'error' | 'danger' | 'warning',
+        _title: 'primary' | 'success' | 'error' | 'danger' | 'warning',
     ) => {},
 })
 
@@ -28,10 +28,12 @@ const Prompt = (props: Props) => {
     const [description, setDescription] = useState<
         'primary' | 'success' | 'error' | 'danger' | 'warning'
     >('primary')
+    let timeOutObject = setTimeout(() => {}, 0)
 
     const setPromptTitle = (title: string = '') => {
+        clearTimeout(timeOutObject)
         setTitle(title)
-        setTimeout(() => {
+        timeOutObject = setTimeout(() => {
             setTitle('')
         }, PROMPT_DURATION)
     }
@@ -50,8 +52,8 @@ const Prompt = (props: Props) => {
         <PromptContext.Provider value={promptValues}>
             {props.children}
             <Modal
-                animationIn="fadeIn"
-                animationOut="fadeOut"
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
                 onBackdropPress={() => setTitle('')}
                 onBackButtonPress={() => setTitle('')}
                 useNativeDriverForBackdrop
