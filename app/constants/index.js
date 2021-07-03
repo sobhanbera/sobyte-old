@@ -42,7 +42,7 @@ export const TERM_AND_CONDITIONS_LINK = 'https://sobhanbera.vercel.app'
 /** number constants and more */
 export const MUSIC_PLAYER_BLUR = 19 // blurRadius value
 export const DOUBLE_TAP_DELAY = 500 // the delay in milliseconds between two press for double press component
-export const PROMPT_DURATION = 12000000 // duration for showing prompt in milliseconds
+export const PROMPT_DURATION = 3000 // duration for showing prompt in milliseconds
 export const BOTTOM_TAB_BAR_NAVIGATION_HEIGHT = 54 // this is the height of the bottom tab bar navigation in the AppInside.tsx file navigator
 export const HEADER_MAX_HEIGHT = 85 // collapsible header max height
 export const HEADER_MIN_HEIGHT = 55 // collapsible header min height
