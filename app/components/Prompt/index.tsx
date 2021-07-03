@@ -1,13 +1,19 @@
 import React, {useState} from 'react'
-import {Text} from 'react-native'
+import {Text, View} from 'react-native'
 import Modal from 'react-native-modal'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
-import {FontHelvetica, PROMPT_DURATION} from '../../constants'
+import {
+    FontHelvetica,
+    PROMPT_DURATION,
+    DEFAULT_SMALL_ICON_SIZE,
+} from '../../constants'
 import {useTheme} from '../../context'
 import Scaler from '../Scaler'
 
 const PromptContext = React.createContext({
-    setTitle: (title: string = '') => {},
+    setTitle: (title: string) => {},
     setDescription: (
         title: 'primary' | 'success' | 'error' | 'danger' | 'warning',
     ) => {},
@@ -53,57 +59,106 @@ const Prompt = (props: Props) => {
                 backdropOpacity={0}
                 style={{
                     justifyContent: 'flex-end',
-                    // bottom: 35,
+                    alignItems: 'center',
                     left: 0,
                     right: 0,
-                    top: 50,
+                    bottom: 40,
                     position: 'absolute',
                     maxHeight: 80,
+                    width: '90%',
                     backgroundColor: 'transparent',
                     borderRadius: 7,
-                    borderWidth: 0.5,
-                    borderColor: '#7f7f7f',
-                    elevation: 3,
                 }}>
                 <Scaler
                     touchableOpacity={1}
                     scale={1}
                     onPress={() => setTitle('')}
                     containerStyle={{
-                        backgroundColor:
-                            description === 'error'
-                                ? themeColors.onError[0]
-                                : description === 'danger'
-                                ? themeColors.onDanger[0]
-                                : description === 'warning'
-                                ? themeColors.onWarning[0]
-                                : description === 'success'
-                                ? themeColors.onSuccess[0]
-                                : themeColors.primary.dark[0],
+                        backgroundColor: themeColors.surfacelight[0],
+                        width: '100%',
+                        paddingVertical: 1,
+                        paddingHorizontal: 6,
                         borderRadius: 7,
                         overflow: 'hidden',
                     }}>
-                    <Text
+                    <View
                         style={{
-                            textAlign: 'center',
-                            textAlignVertical: 'center',
+                            width: '100%',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
                             paddingVertical: 5,
                             paddingHorizontal: 6,
-                            fontSize: 16,
-                            fontFamily: FontHelvetica,
-                            color:
-                                description === 'error'
-                                    ? themeColors.white[0]
-                                    : description === 'danger'
-                                    ? themeColors.white[0]
-                                    : description === 'warning'
-                                    ? themeColors.black[0]
-                                    : description === 'success'
-                                    ? themeColors.white[0]
-                                    : themeColors.white[0],
                         }}>
-                        {title}
-                    </Text>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: 'flex-start',
+                                paddingVertical: 5,
+                                paddingHorizontal: 6,
+                            }}>
+                            <View
+                                style={{
+                                    paddingRight: 10,
+                                    marginRight: 3,
+                                    borderRightWidth: 0.5,
+                                    borderRightColor: themeColors.grey[0],
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}>
+                                {description === 'error' ? (
+                                    <MaterialIcons
+                                        name="error-outline"
+                                        size={DEFAULT_SMALL_ICON_SIZE}
+                                        color={themeColors.onError[0]}
+                                    />
+                                ) : description === 'danger' ? (
+                                    <MaterialIcons
+                                        name="dangerous"
+                                        size={DEFAULT_SMALL_ICON_SIZE}
+                                        color={themeColors.onDanger[0]}
+                                    />
+                                ) : description === 'warning' ? (
+                                    <AntDesign
+                                        name="warning"
+                                        size={DEFAULT_SMALL_ICON_SIZE}
+                                        color={themeColors.onWarning[0]}
+                                    />
+                                ) : description === 'success' ? (
+                                    <MaterialIcons
+                                        name="thumb-up-alt"
+                                        size={DEFAULT_SMALL_ICON_SIZE}
+                                        color={themeColors.onSuccess[0]}
+                                    />
+                                ) : (
+                                    <AntDesign
+                                        name="check"
+                                        size={DEFAULT_SMALL_ICON_SIZE}
+                                        color={themeColors.primary.dark[0]}
+                                    />
+                                )}
+                            </View>
+                            <Text
+                                style={{
+                                    textAlign: 'left',
+                                    textAlignVertical: 'center',
+                                    // paddingVertical: 5,
+                                    paddingHorizontal: 6,
+                                    fontSize: 16,
+                                    fontFamily: FontHelvetica,
+                                    color: themeColors.white[0],
+                                }}>
+                                {title}
+                            </Text>
+                        </View>
+                        <View>
+                            <MaterialIcons
+                                name="cancel"
+                                size={DEFAULT_SMALL_ICON_SIZE}
+                                color={themeColors.grey[0]}
+                            />
+                        </View>
+                    </View>
                 </Scaler>
             </Modal>
         </PromptContext.Provider>
