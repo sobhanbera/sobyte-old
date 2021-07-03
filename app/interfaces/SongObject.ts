@@ -4,8 +4,8 @@ export interface ArtistObject {
 }
 
 export interface ThumbnailObject {
-    name: string
-    browseId: string
+    height: number
+    url: string
 }
 
 export interface SongObject {
