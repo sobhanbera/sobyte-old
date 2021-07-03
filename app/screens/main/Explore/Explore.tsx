@@ -12,8 +12,7 @@ import {
     HEADER_MIN_HEIGHT,
     HEADER_SCROLL_DISTANCE,
 } from '../../../constants'
-import {useTheme, useMusicApi as mainUserm} from '../../../context'
-import {useMusicApi} from '../../../api/fetcher'
+import {useTheme, useMusicApi} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 interface ProfileProps {

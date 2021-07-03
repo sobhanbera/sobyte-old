@@ -29,7 +29,7 @@ const MusicContext = React.createContext({
     getNext: (_musicId: string, _playlistId: string, _paramString: string) =>
         DemoMusicContextReturn(),
 
-    error: false,
+    error: true,
     loaded: false,
 })
 
@@ -41,7 +41,7 @@ const MusicApi = (props: MusicApiProps) => {
      * state
      */
     const [musicConfig, setMusicConfig] = useState<{[key: string]: string}>({})
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(true)
     const [loaded, setLoaded] = useState(false)
 
     /**
@@ -94,7 +94,7 @@ const MusicApi = (props: MusicApiProps) => {
                         setLoaded(true)
                     } catch (err) {
                         reject(err)
-                        setError(false)
+                        setError(true)
                         setLoaded(false)
                     }
                 })
