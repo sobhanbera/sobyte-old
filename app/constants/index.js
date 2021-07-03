@@ -42,8 +42,11 @@ export const TERM_AND_CONDITIONS_LINK = 'https://sobhanbera.vercel.app'
 /** number constants and more */
 export const MUSIC_PLAYER_BLUR = 19 // blurRadius value
 export const DOUBLE_TAP_DELAY = 500 // the delay in milliseconds between two press for double press component
-export const PROMPT_DURATION = 3000 // duration for showing prompt in milliseconds
+export const PROMPT_DURATION = 12000000 // duration for showing prompt in milliseconds
 export const BOTTOM_TAB_BAR_NAVIGATION_HEIGHT = 54 // this is the height of the bottom tab bar navigation in the AppInside.tsx file navigator
 export const HEADER_MAX_HEIGHT = 85 // collapsible header max height
 export const HEADER_MIN_HEIGHT = 55 // collapsible header min height
 export const HEADER_SCROLL_DISTANCE = 85 - 50 // collapsible header scroll distance which is maxheight - minheight of the header
+export const DEFAULT_SMALL_ICON_SIZE = 22 // this is the default small icon size ad may be changed anytime with a permission of project maintainer
+export const DEFAULT_ICON_SIZE = 24 // this is the default normal icon size ad may be changed anytime with a permission of project maintainer
+export const DEFAULT_LARGE_ICON_SIZE = 26 // this is the default large icon size ad may be changed anytime with a permission of project maintainer
