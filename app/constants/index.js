@@ -50,3 +50,4 @@ export const HEADER_SCROLL_DISTANCE = 85 - 50 // collapsible header scroll dista
 export const DEFAULT_SMALL_ICON_SIZE = 22 // this is the default small icon size ad may be changed anytime with a permission of project maintainer
 export const DEFAULT_ICON_SIZE = 24 // this is the default normal icon size ad may be changed anytime with a permission of project maintainer
 export const DEFAULT_LARGE_ICON_SIZE = 26 // this is the default large icon size ad may be changed anytime with a permission of project maintainer
+export const GRID_COLUMNS = 2 // number of columns per grid component for song list, artists list, playlist list and more...
