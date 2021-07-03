@@ -8,8 +8,23 @@ import * as utils from './utils' // local util path
 import * as parsers from './parsers' // local parser path
 import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // objects required for instances in this files
 
+interface MusicContextProviderHelper {
+    initialize: any
+    initMusicApi: any
+    getContinuation: any
+    getSearchSuggestions: any
+    search: any
+    getAlbum: any
+    getPlaylist: any
+    getArtist: any
+    getNext: any
+
+    musicConfig: object
+    error: boolean
+    loaded: boolean
+}
 const DemoMusicContextReturn = () => new Promise(() => {})
-const MusicContext = React.createContext({
+const MusicContext = React.createContext<MusicContextProviderHelper>({
     initialize: () => DemoMusicContextReturn(),
     initMusicApi: () => DemoMusicContextReturn(),
     getContinuation: (
@@ -29,6 +44,7 @@ const MusicContext = React.createContext({
     getNext: (_musicId: string, _playlistId: string, _paramString: string) =>
         DemoMusicContextReturn(),
 
+    musicConfig: {},
     error: true,
     loaded: false,
 })
@@ -64,7 +80,7 @@ const MusicApi = (props: MusicApiProps) => {
      * function should be called in the root element of the app where the
      * main app starts after using this function context provider
      */
-    const initialize = () => {
+    const initialize = async () => {
         return new Promise((resolve, reject) => {
             client
                 .get('/')
@@ -113,11 +129,15 @@ const MusicApi = (props: MusicApiProps) => {
      * call to the backend it will require to call this function as this would
      * be the wrapper function of all of them...
      */
-    const _createApiRequest = (
+    const _createApiRequest = async (
         endpointName: string,
         inputVariables: Object,
         inputQuery = {},
     ) => {
+        // if (error)
+        //     await initialize()
+        //         .then(res => {})
+        //         .catch(err => {})
         const headers = Object.assign(
             {
                 'x-origin': client.defaults.baseURL,
@@ -480,6 +500,7 @@ const MusicApi = (props: MusicApiProps) => {
         getArtist: getArtist,
         getNext: getNext,
 
+        musicConfig: musicConfig,
         error: error,
         loaded: loaded,
     }
