@@ -10,7 +10,7 @@ export interface ThumbnailObject {
 
 export interface SongObject {
     type: string
-    videoId: string
+    musicId: string
     playlistId: string
     name: string
     artist: Array<ArtistObject> | ArtistObject

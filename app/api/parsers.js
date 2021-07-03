@@ -28,7 +28,7 @@ export const parseSearchResult = context => {
                                 0,
                             ),
                         ),
-                        videoId: utils.fv(
+                        musicId: utils.fv(
                             sectionContext,
                             'playNavigationEndpoint:videoId',
                         ),
@@ -108,7 +108,7 @@ export const parseSearchResult = context => {
                                 0,
                             ),
                         ),
-                        videoId: utils.fv(
+                        musicId: utils.fv(
                             sectionContext,
                             'playNavigationEndpoint:videoId',
                         ),
@@ -260,7 +260,7 @@ export const parseSongSearchResult = context => {
         )
         result.content.push({
             type: 'song',
-            videoId: utils.fv(
+            musicId: utils.fv(
                 sectionContext,
                 'playNavigationEndpoint:videoId',
                 true,
@@ -344,7 +344,7 @@ export const parseVideoSearchResult = context => {
         result.content.push(
             Object.freeze({
                 type: 'video',
-                videoId: utils.fv(
+                musicId: utils.fv(
                     sectionContext,
                     'playNavigationEndpoint:videoId',
                 ),
@@ -695,7 +695,7 @@ export const parseArtistPage = context => {
                         case 'videos':
                             result.products[carouselName].content.push({
                                 type: 'video',
-                                videoId: utils.fv(
+                                musicId: utils.fv(
                                     _.at(itemContext[i], 'title'),
                                     'watchEndpoint:videoId',
                                 ),
@@ -776,7 +776,7 @@ export const parseArtistPage = context => {
                     case 'videos':
                         result.products[carouselName].content.push({
                             type: 'video',
-                            videoId: utils.fv(
+                            musicId: utils.fv(
                                 _.at(itemContext, 'title'),
                                 'watchEndpoint:videoId',
                             ),
@@ -857,7 +857,7 @@ export const parsePlaylistPage = context => {
                 true,
             )
             result.content.push({
-                videoId: utils.fv(
+                musicId: utils.fv(
                     itemContext[i],
                     'playNavigationEndpoint:videoId',
                 ),
@@ -906,7 +906,7 @@ export const parsePlaylistPage = context => {
             true,
         )
         result.content.push({
-            videoId: utils.fv(itemContext, 'playNavigationEndpoint:videoId'),
+            musicId: utils.fv(itemContext, 'playNavigationEndpoint:videoId'),
             name: utils.fv(_.nth(flexColumn, 0), 'runs:text'),
             author: (function () {
                 var a = [],
@@ -998,7 +998,7 @@ export const parseAlbumPage = context => {
         for (let i = 0; i < albumTrack.length; i++) {
             result.tracks.push({
                 name: albumTrack[i].title,
-                videoId: albumTrack[i].videoId,
+                musicId: albumTrack[i].videoId,
                 artistNames: albumTrack[i].artistNames,
                 duration: parseInt(albumTrack[i].lengthMs),
                 thumbnails: utils.fv(
@@ -1010,7 +1010,7 @@ export const parseAlbumPage = context => {
     } else if (albumTrack instanceof Object) {
         result.tracks.push({
             name: albumTrack.title,
-            videoId: albumTrack.videoId,
+            musicId: albumTrack.videoId,
             artistNames: albumTrack.artistNames,
             duration: parseInt(albumTrack.lengthMs),
             thumbnails: utils.fv(albumTrack, 'thumbnailDetails:thumbnails'),
@@ -1042,7 +1042,7 @@ export const parseNextPanel = context => {
                     0,
                 ),
                 selected: _.nth(_.at(itemContext, 'selected'), 0),
-                videoId: _.nth(_.at(itemContext, 'videoId'), 0),
+                musicId: _.nth(_.at(itemContext, 'videoId'), 0),
                 playlistId: _.nth(
                     _.at(
                         itemContext,
