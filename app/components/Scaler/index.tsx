@@ -25,33 +25,38 @@ export default function Scaler(props: ScalerProps) {
         outputRange: [1, props.scale ?? 0.95],
     })
 
-    const onPressIn = () =>
-        Animated.spring(animation, {
-            toValue: 1,
-            useNativeDriver: true,
-        }).start()
-
-    const onPressOut = () =>
-        Animated.spring(animation, {
-            toValue: 0,
-            useNativeDriver: true,
-            mass: 2,
-        }).start()
+    const onPressIn = () => {
+        if (!props.autoAnimate)
+            Animated.spring(animation, {
+                toValue: 1,
+                useNativeDriver: true,
+            }).start()
+    }
+    const onPressOut = () => {
+        if (!props.autoAnimate)
+            Animated.spring(animation, {
+                toValue: 0,
+                useNativeDriver: true,
+                mass: 2,
+            }).start()
+    }
 
     const autoAnimateContinue = () => {
-        Animated.spring(animation, {
-            toValue: 1,
-            useNativeDriver: true,
-            delay: 0,
-        }).start(autoAnimate)
+        if (props.autoAnimate)
+            Animated.spring(animation, {
+                toValue: 1,
+                useNativeDriver: true,
+                delay: 0,
+            }).start(autoAnimate)
     }
 
     const autoAnimate = () => {
-        Animated.spring(animation, {
-            toValue: 0,
-            useNativeDriver: true,
-            delay: 0,
-        }).start(autoAnimateContinue)
+        if (props.autoAnimate)
+            Animated.spring(animation, {
+                toValue: 0,
+                useNativeDriver: true,
+                delay: 0,
+            }).start(autoAnimateContinue)
     }
 
     useEffect(() => {
@@ -72,8 +77,8 @@ export default function Scaler(props: ScalerProps) {
                         props.buttonStyle,
                     ]}
                     activeOpacity={props.touchableOpacity ?? 0.85}
-                    onPressIn={() => (props.autoAnimate ? {} : onPressIn())}
-                    onPressOut={() => (props.autoAnimate ? {} : onPressOut())}
+                    onPressIn={() => onPressIn()}
+                    onPressOut={() => onPressOut()}
                     onPress={() => (props.onPress ? props.onPress() : {})}
                     onLongPress={() =>
                         props.onLongPress ? props.onLongPress() : {}
@@ -87,8 +92,8 @@ export default function Scaler(props: ScalerProps) {
                         props.buttonStyle,
                     ]}
                     activeOpacity={props.touchableOpacity ?? 0.85}
-                    onPressIn={() => (props.autoAnimate ? {} : onPressIn())}
-                    onPressOut={() => (props.autoAnimate ? {} : onPressOut())}
+                    onPressIn={() => onPressIn()}
+                    onPressOut={() => onPressOut()}
                     onPress={() => (props.onPress ? props.onPress() : {})}>
                     {props.children}
                 </TouchableOpacity>
@@ -99,8 +104,8 @@ export default function Scaler(props: ScalerProps) {
                         props.buttonStyle,
                     ]}
                     activeOpacity={props.touchableOpacity ?? 0.85}
-                    onPressIn={() => (props.autoAnimate ? {} : onPressIn())}
-                    onPressOut={() => (props.autoAnimate ? {} : onPressOut())}>
+                    onPressIn={() => onPressIn()}
+                    onPressOut={() => onPressOut()}>
                     {props.children}
                 </TouchableOpacity>
             )}
