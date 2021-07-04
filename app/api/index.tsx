@@ -63,7 +63,7 @@ const MusicContext = React.createContext({
      */
     search: (
         _query: string,
-        _categoryName: string = 'song',
+        _categoryName: 'SONG' | 'ALBUM' | 'ARTIST' | 'PLAYLIST',
         _pageLimit: number = 1,
     ) => DemoMusicContextReturn(),
     /**
