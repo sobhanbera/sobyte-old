@@ -1,7 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {Image, ScrollView, Text, View} from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {Text, View, ScrollView} from 'react-native'
 import {useTranslation} from 'react-i18next'
-import Animated, {Extrapolate} from 'react-native-reanimated'
 
 import {
     GradientBackground,
@@ -23,20 +22,12 @@ const Profile: React.FC<ExploreTabProps> = props => {
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
 
-    const scrollY = new Animated.Value(0)
-    const diffClampScrollY = Animated.diffClamp(scrollY, 0, HEADER_MIN_HEIGHT)
-    const headerY = Animated.interpolateNode(diffClampScrollY, {
-        inputRange: [0, HEADER_MIN_HEIGHT],
-        outputRange: [0, -HEADER_MIN_HEIGHT],
-        extrapolate: Extrapolate.CLAMP,
-    })
-
-    // const [topHits, setTopHits] = useState<FetchedSongObject>()
+    const [topHits, setTopHits] = useState<FetchedSongObject>()
     const [topHindi, setTopHindi] = useState<FetchedSongObject>()
-    // const [topEnglish, setTopEnglish] = useState<FetchedSongObject>()
-    // const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>()
-    // const [topTelegu, setTopTelegu] = useState<FetchedSongObject>()
-    // const [topRegional, setTopRegional] = useState<FetchedSongObject>()
+    const [topEnglish, setTopEnglish] = useState<FetchedSongObject>()
+    const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>()
+    const [topTelegu, setTopTelegu] = useState<FetchedSongObject>()
+    const [topRegional, setTopRegional] = useState<FetchedSongObject>()
 
     /**
      * Function which loads all sutaible data required in this tab (explore tab)
@@ -72,20 +63,16 @@ const Profile: React.FC<ExploreTabProps> = props => {
                     })
             })
             .catch(() => {
+                // this will only be called when the internet connectivity is very slow or not present...
                 console.error('(Outer) Error Initiating Music Api..')
             })
     }, [error])
-
-    useEffect(() => {
-        console.log(headerY)
-    }, [headerY])
 
     return (
         <View style={globalStyles.flex}>
             <HeaderCollapsible
                 headerScrollColor={themeColors.black[0]}
-                headerScrollHeight={HEADER_MIN_HEIGHT}
-                headerY={headerY}>
+                headerScrollHeight={HEADER_MIN_HEIGHT}>
                 <View
                     style={{
                         paddingHorizontal: 12,
@@ -110,18 +97,8 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 </View>
             </HeaderCollapsible>
 
-            <Animated.ScrollView
-                onScroll={() =>
-                    Animated.event(
-                        [
-                            {
-                                nativeEvent: {contentOffset: {y: scrollY}},
-                            },
-                        ],
-                        {useNativeDriver: true},
-                    )
-                }
-                scrollEventThrottle={16}
+            <ScrollView
+                // bounces={true}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground
@@ -130,6 +107,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
                             // paddingTop: HEADER_MAX_HEIGHT,
                         }
                     }>
+                    <Text>AAAAAAAAAAAAAAAAAAA</Text>
                     <Text>ASDFASIUYTYUG</Text>
                     <Text>ASDFASIUYTYUG</Text>
                     <Text>ASDFASIUYTYUG</Text>
@@ -179,9 +157,9 @@ const Profile: React.FC<ExploreTabProps> = props => {
                     <Text>ASDFASIUYTYUG</Text>
                     <Text>ASDFASIUYTYUG</Text>
                     <Text>AAAAAAAAAAAAAAAAAAA</Text>
-                    <GridSongList content={topHindi?.content} />
+                    {/* <GridSongList content={topHindi?.content} /> */}
                 </GradientBackground>
-            </Animated.ScrollView>
+            </ScrollView>
         </View>
     )
 }
