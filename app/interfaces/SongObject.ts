@@ -47,7 +47,7 @@ export interface ContinuationObjectItself {
 export const BareFetchedSongObjectInstance: FetchedSongObject = {
     content: [
         {
-            type: 'song',
+            type: '',
             musicId: '',
             playlistId: '',
             name: '',
