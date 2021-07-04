@@ -10,7 +10,9 @@ export const AUTHOR_NAME_LOWER = 'sobhanbera'
 /** Storage key Constants */
 export const LANGUAGE_CODE_STORAGE_KEY = '@APP:LANGUAGE_CODE' // Storage key where the app language variable exists, for internationlization purpose
 export const AUDIO_QUALITY_STORAGE_KEY = '@APP:AUDIO_QUALITY' // Storage key for audio quality
-export const THEME_STORAGE_KEY = '@APP:theme' // Storage key for the app's theme
+export const THEME_STORAGE_KEY = '@APP:THEME' // Storage key for the app's theme
+export const SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY =
+    '@APP:SONG_IMAGE_DEFAULT_QUALITY' // Storage key for the app's theme
 
 export const HEADER_DATA_STORAGE_KEY = '@APP:theme' // Storage key for header fetched by the api everytime...
 

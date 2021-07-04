@@ -4,10 +4,16 @@
         "app_language": "App Language",
         "default_app_language": "Default App Language",
         "choose_audio_quality": "Choose Audio Quality",
+        "image_optimization": "Image Optimization",
         "extreme": "Extreme",
         "good": "Good",
         "poor": "Poor",
-        "auto": "Auto"
+        "auto": "Auto",
+        "very_high_quality": "Very High",
+        "high_quality": "High",
+        "low_quality": "Low",
+        "clear_quality": "Clear",
+        "blured_quality": "Blured"
     },
     "words": {
         "cancel": "Cancel",

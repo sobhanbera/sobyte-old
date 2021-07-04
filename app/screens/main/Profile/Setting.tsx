@@ -10,7 +10,10 @@ import {
 } from '../../../components'
 import {usePrompt, useSetting, useTheme} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
-import {AUDIO_QUALITY_STORAGE_KEY} from '../../../constants'
+import {
+    AUDIO_QUALITY_STORAGE_KEY,
+    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+} from '../../../constants'
 
 interface SettingProps {
     navigation?: any
@@ -18,20 +21,19 @@ interface SettingProps {
 const Setting: React.FC<SettingProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
-    const {setSetting, theme, audioQuality, language, changeLanguage} =
-        useSetting()
+    const {setSetting, changeLanguage} = useSetting()
 
-    const [themeVisible, setThemeVisible] = useState(false)
-    const [audioQualityVisible, setAudioQualityVisible] = useState(false)
     const [languageVisible, setLanguageVisible] = useState(false)
+    const [audioQualityVisible, setAudioQualityVisible] = useState(false)
+    const [imageQualityVisible, setImageQualityVisible] = useState(false)
 
     return (
-        <GradientBackground>
+        <GradientBackground uniformColor>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <HeaderMain
                     navigation={props.navigation}
                     title={t('setting:settings')}
-                    color={themeColors.white[0]}
+                    color={themeColors.white[0] + 'DD'}
                 />
 
                 <Area icon spacing onPress={() => setLanguageVisible(true)}>
@@ -43,6 +45,12 @@ const Setting: React.FC<SettingProps> = props => {
                 <Area icon spacing onPress={() => setAudioQualityVisible(true)}>
                     <Text style={globalStyles.areaTitle}>
                         {t('setting:choose_audio_quality')}
+                    </Text>
+                </Area>
+
+                <Area icon spacing onPress={() => setImageQualityVisible(true)}>
+                    <Text style={globalStyles.areaTitle}>
+                        {t('setting:image_optimization')}
                     </Text>
                 </Area>
             </ScrollView>
@@ -94,6 +102,58 @@ const Setting: React.FC<SettingProps> = props => {
                         text: t('setting:auto'),
                         onPress: () => {
                             setSetting(AUDIO_QUALITY_STORAGE_KEY, 'a')
+                        },
+                    },
+                ]}
+            />
+
+            <BottomSheet
+                isVisible={imageQualityVisible}
+                setVisible={setImageQualityVisible}
+                buttons={[
+                    {
+                        text: t('setting:very_high_quality') + ' - 420px',
+                        onPress: () => {
+                            setSetting(
+                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                '400',
+                            )
+                        },
+                    },
+                    {
+                        text: t('setting:high_quality') + ' - 300px',
+                        onPress: () => {
+                            setSetting(
+                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                '300',
+                            )
+                        },
+                    },
+                    {
+                        text: t('setting:low_quality') + ' - 200px',
+                        onPress: () => {
+                            setSetting(
+                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                '200',
+                            )
+                        },
+                    },
+                    {
+                        text: t('setting:clear_quality') + ' - 120px',
+                        onPress: () => {
+                            setSetting(
+                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                '120',
+                            )
+                        },
+                    },
+                    {
+                        text: t('setting:blured_quality') + ' - 60px',
+                        onPress: () => {
+                            setSetting(
+                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                '60',
+                            )
                         },
                     },
                 ]}
