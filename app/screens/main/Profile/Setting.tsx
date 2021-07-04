@@ -108,11 +108,13 @@ const Setting: React.FC<SettingProps> = props => {
             />
 
             <BottomSheet
+                startingTextAlign
                 isVisible={imageQualityVisible}
                 setVisible={setImageQualityVisible}
                 buttons={[
                     {
-                        text: t('setting:extreme') + ' - 720px',
+                        text: t('setting:extreme'),
+                        extraText: '720px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
@@ -121,7 +123,8 @@ const Setting: React.FC<SettingProps> = props => {
                         },
                     },
                     {
-                        text: t('setting:very_high_quality') + ' - 512px',
+                        text: t('setting:very_high_quality'),
+                        extraText: '512px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
@@ -130,7 +133,8 @@ const Setting: React.FC<SettingProps> = props => {
                         },
                     },
                     {
-                        text: t('setting:high_quality') + ' - 420px',
+                        text: t('setting:high_quality'),
+                        extraText: '420px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
@@ -139,7 +143,8 @@ const Setting: React.FC<SettingProps> = props => {
                         },
                     },
                     {
-                        text: t('setting:medium_quality') + ' - 300px',
+                        text: t('setting:medium_quality'),
+                        extraText: '300px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
@@ -148,7 +153,8 @@ const Setting: React.FC<SettingProps> = props => {
                         },
                     },
                     {
-                        text: t('setting:low_quality') + ' - 200px',
+                        text: t('setting:low_quality'),
+                        extraText: '200px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
@@ -157,7 +163,8 @@ const Setting: React.FC<SettingProps> = props => {
                         },
                     },
                     {
-                        text: t('setting:clear_quality') + ' - 120px',
+                        text: t('setting:clear_quality'),
+                        extraText: '120px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
@@ -166,7 +173,8 @@ const Setting: React.FC<SettingProps> = props => {
                         },
                     },
                     {
-                        text: t('setting:blured_quality') + ' - 60px',
+                        text: t('setting:blured_quality'),
+                        extraText: '60px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,

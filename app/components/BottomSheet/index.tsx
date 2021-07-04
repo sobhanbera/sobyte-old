@@ -10,9 +10,11 @@ interface Props {
     cancelText?: string
     isVisible: boolean
     setVisible: Function
+    startingTextAlign?: boolean
     buttons: Array<{
         text: string
         onPress: Function
+        extraText?: string
     }>
 }
 const BottomSheet = (props: Props) => {
@@ -67,9 +69,20 @@ const BottomSheet = (props: Props) => {
                                 onPress={() => {
                                     button.onPress()
                                     props.setVisible(false)
-                                }}>
-                                <Text key={_} style={styles.textItem}>
+                                }}
+                                style={styles.button}>
+                                <Text
+                                    style={[
+                                        styles.textItem,
+                                        props.startingTextAlign ||
+                                        button.extraText?.length
+                                            ? styles.startingTextAlign
+                                            : {},
+                                    ]}>
                                     {button.text}
+                                </Text>
+                                <Text style={[styles.textItem]}>
+                                    {button.extraText}
                                 </Text>
                             </TouchableOpacity>
                         )
@@ -126,6 +139,12 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 50,
         borderBottomRightRadius: 50,
     },
+    button: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomWidth: 0.4,
+        borderBottomColor: '#303030',
+    },
     textItem: {
         color: '#FFFFFFFF',
         textAlign: 'center',
@@ -133,10 +152,11 @@ const styles = StyleSheet.create({
         fontSize: 19,
         fontFamily: FontUbuntu,
         paddingVertical: 14,
-        paddingHorizontal: 15,
+        paddingHorizontal: 25,
         // backgroundColor: 'black',
-        borderBottomWidth: 0.4,
-        borderBottomColor: '#303030',
+    },
+    startingTextAlign: {
+        textAlign: 'left',
     },
 })
 
