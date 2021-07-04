@@ -56,10 +56,11 @@ export const getHighQualityImageFromSong = (
  */
 export function formatArtistsListFromArray(artists: Array<ArtistObject>) {
     let str = ''
-    for (let i in artists) {
-        str += `${artists[i].name}, `
+    for (let i = 0; i < artists.length; ++i) {
+        if (i >= 2) break
+        str += firstLetterCap(`${artists[i].name}, `)
     }
-    return str
+    return trimLargeString(str, 25)
 }
 /**
  *
@@ -67,7 +68,7 @@ export function formatArtistsListFromArray(artists: Array<ArtistObject>) {
  * @returns the name of artist
  */
 export function formatArtistSingle(artists: ArtistObject) {
-    return artists.name
+    return firstLetterCap(artists.name)
 }
 /**
  *
@@ -86,8 +87,14 @@ export function formatArtists(artists: Array<ArtistObject> | ArtistObject) {
  * @param text the text which is to be tested and if it is larger than the thresold constant we will add dots after that length
  * @returns the result of the above operation
  */
-export function trimLargeString(text: string) {
-    if (text.length > LARGE_TEXT_LENGTH)
-        return text.substring(0, LARGE_TEXT_LENGTH) + '...'
-    return text
+export function trimLargeString(
+    text: string,
+    length: number = LARGE_TEXT_LENGTH,
+) {
+    if (text.length > length) return text.substring(0, length) + '...'
+    return firstLetterCap(text)
+}
+
+export function firstLetterCap(text: string) {
+    return text.charAt(0).toUpperCase() + text.slice(1)
 }
