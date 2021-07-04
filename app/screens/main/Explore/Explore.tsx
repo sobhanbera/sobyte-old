@@ -52,6 +52,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
             artist: song.artist,
             artwork: song.thumbnails,
         })
+        console.log(song)
     }
 
     /**

@@ -11,15 +11,14 @@ interface PlayerProps {
 }
 const Player: React.FC<PlayerProps> = props => {
     const {current, playonly} = usePlayer()
-    const {setTitle, setDescription} = usePrompt()
 
     useEffect(() => {
         props.navigation.addListener('focus', () => {
             playonly()
         })
-        // setTitle('This is a demo title')
-        // setDescription('error')
     }, [])
+
+    console.log(current.artwork)
 
     return (
         <GradientBackground>
@@ -33,6 +32,7 @@ const Player: React.FC<PlayerProps> = props => {
                             current.artwork ||
                             'https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg',
                     }}
+                    resizeMode="cover"
                     style={globalStyles.fullImageBackground}
                     blurRadius={MUSIC_PLAYER_BLUR}>
                     <ProgressSlider />
