@@ -15,13 +15,22 @@ const GridSongList = (props: Props) => {
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
-                horizontal
+                // horizontal
+                numColumns={GRID_COLUMNS}
                 data={props.content}
                 keyExtractor={(item, _) => item.musicId}
                 renderItem={({item}) => {
+                    // console.log(item.thumbnails[1].url)
+
                     return (
                         <View>
-                            <Image source={{uri: item.thumbnails[0].url}} />
+                            <Image
+                                source={{uri: item.thumbnails[1].url}}
+                                style={{
+                                    width: 100,
+                                    height: 100,
+                                }}
+                            />
                         </View>
                     )
                 }}

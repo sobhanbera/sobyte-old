@@ -38,7 +38,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
         await search('Top hindi songs', 'song')
             .then((res: FetchedSongObject) => {
                 setTopHindi(res)
-                // console.log(res)
+                console.log(res.continuation)
             })
             .catch(() => {
                 console.trace('Error loading explore tab data...')
@@ -74,78 +74,30 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 headerScrollColor={themeColors.black[0]}
                 headerScrollHeight={HEADER_MIN_HEIGHT}
                 right={
-                    <Icon
-                        accessibilityLabel="search songs"
-                        name="search-outline"
-                        color={themeColors.text[0]}
-                        size={DEFAULT_ICON_SIZE}
-                        onPress={() => props.navigation.navigate('search')}
-                    />
+                    <Scaler onPress={() => props.navigation.navigate('search')}>
+                        <Icon
+                            accessibilityLabel="search songs"
+                            name="search-outline"
+                            color={themeColors.text[0]}
+                            size={DEFAULT_ICON_SIZE}
+                        />
+                    </Scaler>
                 }
             />
-            <ScrollView
+
+            {/* <ScrollView
                 // bounces={true}
                 showsHorizontalScrollIndicator={false}
-                showsVerticalScrollIndicator={false}>
-                <GradientBackground
-                    style={
-                        {
-                            // paddingTop: HEADER_MAX_HEIGHT,
-                        }
-                    }>
-                    <Text>AAAAAAAAAAAAAAAAAAA</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>ASDFASIUYTYUG</Text>
-                    <Text>AAAAAAAAAAAAAAAAAAA</Text>
-                    {/* <GridSongList content={topHindi?.content} /> */}
-                </GradientBackground>
-            </ScrollView>
+                showsVerticalScrollIndicator={false}> */}
+            <GradientBackground
+                style={
+                    {
+                        // paddingTop: HEADER_MIN_HEIGHT,
+                    }
+                }>
+                <GridSongList content={topHindi?.content} />
+            </GradientBackground>
+            {/* </ScrollView> */}
         </View>
     )
 }

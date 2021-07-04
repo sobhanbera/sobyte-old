@@ -34,7 +34,7 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                     alignItems: 'center',
                     backgroundColor: '#00000050',
                 }}>
-                <Scaler touchableOpacity={1} scale={0.96}>
+                <Scaler onPress={() => {}} touchableOpacity={1} scale={0.96}>
                     <ImageBackground
                         source={require('../../assets/images/phone_screen.png')}
                         blurRadius={100}

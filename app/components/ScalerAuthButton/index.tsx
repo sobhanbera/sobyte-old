@@ -40,7 +40,9 @@ const ScalerAuthButton: React.FC<ScalerAuthButtonProps> = props => {
                 <AuthButton
                     simpleGradientColor={props.simpleGradientColor}
                     title={props.title}
-                    onPress={props.buttonOnPress}
+                    onPress={() =>
+                        props.buttonOnPress ? props.buttonOnPress() : {}
+                    }
                     gradient={props.gradient}
                     gradientAngle={props.gradientAngle}
                     gradientColor={props.gradientColor}

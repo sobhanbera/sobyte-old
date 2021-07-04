@@ -26,7 +26,7 @@ const FullScreenLoading: React.FC<LoadingProps> = props => {
                         alignItems: 'center',
                         backgroundColor: '#00000026',
                     }}>
-                    <Scaler autoAnimate>
+                    <Scaler onPress={() => {}} autoAnimate>
                         <View
                             style={{
                                 padding: 30,

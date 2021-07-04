@@ -24,7 +24,7 @@ const Intro = (props: IntroProps) => {
             colors={themeColors.backgroundgradient}>
             <View style={styles.wrapper}>
                 <View>
-                    <Scaler scale={1}>
+                    <Scaler onPress={() => {}} scale={1}>
                         <Image
                             style={styles.appLogo}
                             source={require('../../assets/images/logo_name.png')}

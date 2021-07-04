@@ -4,7 +4,6 @@ import {useTranslation} from 'react-i18next'
 
 import {HEADER_MIN_HEIGHT} from '../../constants'
 import globalStyles from '../../styles/global.styles'
-import {Scaler} from '../'
 
 interface Props {
     headerScrollHeight?: any
@@ -31,9 +30,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     justifyContent: 'space-between',
                 }}>
                 <Text style={globalStyles.appName}>{t('common:appName')}</Text>
-                <Scaler scale={0.95} touchableOpacity={1}>
-                    {props.right}
-                </Scaler>
+                {props.right}
             </View>
         </View>
     )
