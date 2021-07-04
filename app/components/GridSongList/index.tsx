@@ -24,6 +24,7 @@ interface Props {
     textColor: string
     subColor: string
     shimmerDirection: 'up' | 'down' | 'left' | 'right'
+    onPress: Function
 }
 const GridSongList = (props: Props) => {
     const {imageQuality} = useSetting()
@@ -113,7 +114,14 @@ const GridSongList = (props: Props) => {
                 const artist = formatArtists(item.artist)
 
                 return (
-                    <Scaler onPress={() => {}}>
+                    <Scaler
+                        onPress={() =>
+                            props.onPress({
+                                ...item,
+                                artist,
+                                thumbnails: songImage,
+                            })
+                        }>
                         <View
                             style={[
                                 styles.contentWrapper,
@@ -123,12 +131,12 @@ const GridSongList = (props: Props) => {
                                     ? styles.lastContent
                                     : {},
                             ]}>
-                            <Scaler onPress={() => {}}>
-                                <Image
-                                    source={{uri: songImage}}
-                                    style={styles.contentImage}
-                                />
-                            </Scaler>
+                            {/* <Scaler onPress={() => {}}> */}
+                            <Image
+                                source={{uri: songImage}}
+                                style={styles.contentImage}
+                            />
+                            {/* </Scaler> */}
                             <Text
                                 style={[
                                     styles.songTitle,

@@ -17,8 +17,9 @@ import {
 import {
     FetchedSongObject,
     BareFetchedSongObjectInstance,
+    SongObject,
 } from '../../../interfaces'
-import {useTheme, useMusicApi} from '../../../context'
+import {useTheme, useMusicApi, useFetcher, usePlayer} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
 
@@ -28,6 +29,8 @@ interface ExploreTabProps {
 const Profile: React.FC<ExploreTabProps> = props => {
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
+    const {fetchMusic} = useFetcher()
+    const {play} = usePlayer()
 
     const [populars, setPopulars] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
@@ -38,6 +41,19 @@ const Profile: React.FC<ExploreTabProps> = props => {
     const [loFi, setLoFi] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
+
+    async function playSong(song: SongObject) {
+        const link = await fetchMusic(song.musicId)
+        play({
+            id: song.musicId,
+            url: link,
+            duration: song.duration,
+            title: song.name,
+            artist: song.artist,
+            artwork: song.thumbnails,
+        })
+    }
+
     /**
      * Function which loads all sutaible data required in this tab (explore tab)
      * like songs list in different languages, preference wise songs list, and many more...
@@ -118,6 +134,8 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         </Block>
 
                         <GridSongList
+                            onPress={playSong}
+                            shimmerDirection="right"
                             textColor={themeColors.text[0] + 'E7'}
                             subColor={themeColors.text[0] + '70'}
                             contentLength={populars.content.length}
@@ -138,6 +156,8 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         </Block>
 
                         <GridSongList
+                            onPress={playSong}
+                            shimmerDirection="left"
                             textColor={themeColors.text[0] + 'E7'}
                             subColor={themeColors.text[0] + '70'}
                             contentLength={topRated.content.length}
@@ -158,6 +178,8 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         </Block>
 
                         <GridSongList
+                            onPress={playSong}
+                            shimmerDirection="right"
                             textColor={themeColors.text[0] + 'E7'}
                             subColor={themeColors.text[0] + '70'}
                             contentLength={loFi.content.length}
