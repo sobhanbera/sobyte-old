@@ -43,3 +43,40 @@ export interface ContinuationObjectItself {
         clickTrackingParams: string
     }
 }
+
+export const BareFetchedSongObjectInstance: FetchedSongObject = {
+    content: [
+        {
+            type: 'song',
+            musicId: '',
+            playlistId: '',
+            name: '',
+            artist: [
+                {
+                    browseId: '',
+                    name: '',
+                },
+            ],
+            album: {
+                name: '',
+                browseId: '',
+            },
+            duration: 0,
+            thumbnails: [
+                {
+                    height: 0,
+                    url: '',
+                },
+                {
+                    height: 0,
+                    url: '',
+                },
+            ],
+            params: 'wAEB',
+        },
+    ],
+    continuation: {
+        clickTrackingParams: '',
+        continuation: '',
+    },
+}
