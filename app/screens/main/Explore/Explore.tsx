@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import {View, ScrollView} from 'react-native'
+import {View, ScrollView, StyleSheet} from 'react-native'
 import {Text as BlockTitle} from 'react-native-paper'
-import {useTranslation} from 'react-i18next'
 
 import {
     GradientBackground,
@@ -10,7 +9,11 @@ import {
     Scaler,
     Block,
 } from '../../../components'
-import {DEFAULT_ICON_SIZE, HEADER_MIN_HEIGHT} from '../../../constants'
+import {
+    DEFAULT_ICON_SIZE,
+    HEADER_MIN_HEIGHT,
+    PaddingBottomView,
+} from '../../../constants'
 import {
     FetchedSongObject,
     BareFetchedSongObjectInstance,
@@ -23,38 +26,40 @@ interface ExploreTabProps {
     navigation?: any
 }
 const Profile: React.FC<ExploreTabProps> = props => {
-    const {t} = useTranslation()
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
 
-    const [topHits, setTopHits] = useState<FetchedSongObject>(
+    const [populars, setPopulars] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
-    const [topHindi, setTopHindi] = useState<FetchedSongObject>(
+    const [topRated, setTopRated] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
-    const [topEnglish, setTopEnglish] = useState<FetchedSongObject>(
+    const [loFi, setLoFi] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
-    const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>(
-        BareFetchedSongObjectInstance,
-    )
-    const [topTelegu, setTopTelegu] = useState<FetchedSongObject>(
-        BareFetchedSongObjectInstance,
-    )
-
     /**
      * Function which loads all sutaible data required in this tab (explore tab)
      * like songs list in different languages, preference wise songs list, and many more...
      */
     async function loadExploreData() {
-        await search('Top hindi songs', 'song')
+        await search('popular songs', 'SONG')
             .then((res: FetchedSongObject) => {
-                setTopHindi(res)
+                setPopulars(res)
             })
-            .catch(() => {
-                console.trace('Error loading explore tab data...')
+            .catch(() => {})
+
+        await search('most rated songs', 'SONG')
+            .then((res: FetchedSongObject) => {
+                setTopRated(res)
             })
+            .catch(() => {})
+
+        await search('Chill beats', 'SONG')
+            .then((res: FetchedSongObject) => {
+                setLoFi(res)
+            })
+            .catch(() => {})
     }
 
     /**
@@ -67,12 +72,9 @@ const Profile: React.FC<ExploreTabProps> = props => {
             .then(() => {
                 initMusicApi()
                     .then(() => {
-                        console.log('Music Api Initiated...')
                         loadExploreData()
                     })
-                    .catch(() => {
-                        console.error('(Inner) Error Initiating Music Api..')
-                    })
+                    .catch(() => {})
             })
             .catch(() => {
                 // this will only be called when the internet connectivity is very slow or not present...
@@ -103,12 +105,9 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground>
-                    <Block
-                        style={{
-                            marginHorizontal: 10,
-                            marginVertical: 10,
-                        }}>
-                        <Block>
+                    {/* popular songs */}
+                    <Block style={styles.outerBlock}>
+                        <Block style={styles.innerBlock}>
                             <BlockTitle
                                 style={[
                                     globalStyles.topicTitle,
@@ -121,14 +120,70 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         <GridSongList
                             textColor={themeColors.text[0] + 'E7'}
                             subColor={themeColors.text[0] + '70'}
-                            contentLength={topHindi.content.length}
-                            content={topHindi.content}
+                            contentLength={populars.content.length}
+                            content={populars.content}
                         />
                     </Block>
+
+                    {/* top songs */}
+                    <Block style={styles.outerBlock}>
+                        <Block style={styles.innerBlock}>
+                            <BlockTitle
+                                style={[
+                                    globalStyles.topicTitle,
+                                    {color: themeColors.text[0]},
+                                ]}>
+                                Top Musics
+                            </BlockTitle>
+                        </Block>
+
+                        <GridSongList
+                            textColor={themeColors.text[0] + 'E7'}
+                            subColor={themeColors.text[0] + '70'}
+                            contentLength={topRated.content.length}
+                            content={topRated.content}
+                        />
+                    </Block>
+
+                    {/* lo-fi songs at the end */}
+                    <Block style={styles.outerBlock}>
+                        <Block style={styles.innerBlock}>
+                            <BlockTitle
+                                style={[
+                                    globalStyles.topicTitle,
+                                    {color: themeColors.text[0]},
+                                ]}>
+                                Chill Time
+                            </BlockTitle>
+                        </Block>
+
+                        <GridSongList
+                            textColor={themeColors.text[0] + 'E7'}
+                            subColor={themeColors.text[0] + '70'}
+                            contentLength={loFi.content.length}
+                            content={loFi.content}
+                        />
+                    </Block>
+
+                    {/* end of the scrollview */}
+
+                    <PaddingBottomView />
                 </GradientBackground>
             </ScrollView>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    outerBlock: {
+        marginHorizontal: 10,
+        marginVertical: 10,
+    },
+    innerBlock: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%',
+    },
+})
 
 export default Profile
