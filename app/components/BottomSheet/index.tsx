@@ -64,6 +64,7 @@ const BottomSheet = (props: Props) => {
                     {props.buttons.map((button, _) => {
                         return (
                             <TouchableOpacity
+                                key={_}
                                 onPress={() => {
                                     button.onPress()
                                     props.setVisible(false)
