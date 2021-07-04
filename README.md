@@ -9,10 +9,10 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">App Features</a>
+      <a href="#app-features">App Features</a>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#get-started">Get Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#environment-setup">Dev Environment Setup</a></li>
@@ -218,8 +218,8 @@ app
     ├── index.ts
     └── storage.ts
 
-  ```
-  
+```
+
 </details>
 
 ## License
