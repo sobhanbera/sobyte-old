@@ -93,7 +93,7 @@ const globalStyles = StyleSheet.create({
     },
 
     areaTitle: {
-        color: '#FFFFFFFF',
+        color: '#FFFFFFE0',
         fontSize: 18,
         fontFamily: FontTahoma,
         paddingVertical: 10,
