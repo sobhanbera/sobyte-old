@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, FlatList, Image, StyleSheet} from 'react-native'
-import {ActivityIndicator, Text} from 'react-native-paper'
+import {Text} from 'react-native-paper'
+import Shimmer from 'react-native-shimmer'
 
 import {SongObject} from '../../interfaces'
 import {
@@ -13,9 +14,6 @@ import {
     IMAGE_SIZE_TO_SHOW,
     IMAGE_MARGIN_TO_SHOW,
     IMAGE_PADDING_TO_SHOW,
-    DEFAULT_ICON_SIZE,
-    DEFAULT_LARGE_ICON_SIZE,
-    DEFAULT_SMALL_ICON_SIZE,
 } from '../../constants'
 import {Scaler} from '../'
 
@@ -25,16 +23,80 @@ interface Props {
     scrollDirection?: 'horizontal' | 'vertical'
     textColor: string
     subColor: string
+    shimmerDirection: 'up' | 'down' | 'left' | 'right'
 }
 const GridSongList = (props: Props) => {
     const {imageQuality} = useSetting()
 
-    return props.content[0].musicId.length <= 0 ? null : (
+    return props.content[0].musicId.length <= 0 ? (
         <FlatList
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             horizontal
-            // numColumns={GRID_COLUMNS}
+            snapToInterval={
+                IMAGE_SIZE_TO_SHOW +
+                IMAGE_MARGIN_TO_SHOW +
+                IMAGE_PADDING_TO_SHOW +
+                IMAGE_PADDING_TO_SHOW * 2
+            }
+            data={Array(15).fill(0)}
+            keyExtractor={(item, _) => item.musicId}
+            renderItem={({item, index}) => {
+                return (
+                    <Shimmer
+                        key={index}
+                        opacity={1}
+                        animating
+                        direction={props.shimmerDirection}
+                        animationOpacity={0.7}
+                        tilt={
+                            props.shimmerDirection === 'right' ||
+                            props.shimmerDirection === 'down'
+                                ? 10
+                                : -10
+                        }>
+                        <Scaler onPress={() => {}}>
+                            <View
+                                style={[
+                                    styles.contentWrapper,
+                                    index === 0
+                                        ? styles.firstContent
+                                        : index === props.contentLength - 1
+                                        ? styles.lastContent
+                                        : {},
+                                ]}>
+                                <Scaler onPress={() => {}}>
+                                    <View
+                                        style={[
+                                            styles.contentImage,
+                                            styles.dummyBackground,
+                                        ]}
+                                    />
+                                </Scaler>
+
+                                <View
+                                    style={[
+                                        styles.dummyText,
+                                        styles.dummyBackground,
+                                    ]}
+                                />
+                                <View
+                                    style={[
+                                        styles.dummyText,
+                                        styles.dummyBackground,
+                                    ]}
+                                />
+                            </View>
+                        </Scaler>
+                    </Shimmer>
+                )
+            }}
+        />
+    ) : (
+        <FlatList
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            horizontal
             snapToInterval={
                 IMAGE_SIZE_TO_SHOW +
                 IMAGE_MARGIN_TO_SHOW +
@@ -128,6 +190,19 @@ const styles = StyleSheet.create({
         fontSize: 14,
         paddingTop: 3,
         paddingBottom: 2,
+    },
+
+    dummyText: {
+        width: IMAGE_SIZE_TO_SHOW,
+        height: 10,
+        borderRadius: 5,
+        marginVertical: 10,
+        overflow: 'hidden',
+    },
+
+    dummyBackground: {
+        backgroundColor: '#00000025',
+        borderRadius: 6,
     },
 })
 
