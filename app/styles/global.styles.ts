@@ -9,9 +9,7 @@ import {
     FontRobotoBold,
     FontUbuntuBold,
 } from '../constants'
-import {Dimensions, StyleSheet} from 'react-native'
-
-// const {width, height} = Dimensions.get('window')
+import {StyleSheet} from 'react-native'
 
 const globalStyles = StyleSheet.create({
     appName: {
@@ -27,6 +25,13 @@ const globalStyles = StyleSheet.create({
     },
     blackText: {
         color: 'black',
+    },
+
+    topicTitle: {
+        fontSize: 20,
+        fontFamily: FontRobotoBold,
+        letterSpacing: 0.6,
+        paddingHorizontal: 8,
     },
 
     flex: {
