@@ -23,12 +23,13 @@ interface MusicContextProviderHelper {
     error: boolean
     loaded: boolean
 }
-const DemoMusicContextReturn = () => new Promise(() => {})
-const MusicContext = React.createContext<MusicContextProviderHelper>({
+// const DemoMusicContextReturn = () => axios.request<any>({})
+const DemoMusicContextReturn = () => new Promise<any>(() => {})
+const MusicContext = React.createContext({
     initialize: () => DemoMusicContextReturn(),
     initMusicApi: () => DemoMusicContextReturn(),
     getContinuation: (
-        _endpointName: string,
+        _endpointName: string | 'search' | '',
         _continuation: ContinuationObject,
     ) => DemoMusicContextReturn(),
     getSearchSuggestions: (_search: string) => DemoMusicContextReturn(),
@@ -196,7 +197,7 @@ const MusicApi = (props: MusicApiProps) => {
      * @returns return the same type of object for which the continuation is provided
      */
     const getContinuation = (
-        endpointName: string,
+        endpointName: string = 'search',
         continuation: ContinuationObject,
     ) => {
         if (
