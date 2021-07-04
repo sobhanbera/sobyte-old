@@ -11,7 +11,7 @@ interface Props {
     children?: React.ReactNode
     spacing?: boolean
     column?: boolean
-    onPress: Function
+    onPress?: Function
     icon?: React.ReactNode
     settingIcon?: React.ReactNode
     settingIconName?: string
@@ -23,7 +23,7 @@ const Area = (props: Props) => {
 
     return (
         <TouchableHighlight
-            onPress={() => props.onPress()}
+            onPress={() => (props.onPress ? props.onPress() : {})}
             style={{
                 marginTop: 12,
                 marginBottom: 3,
