@@ -1,4 +1,5 @@
-import {SongObject, ThumbnailObject} from '../interfaces'
+import {ArtistObject, SongObject, ThumbnailObject} from '../interfaces'
+import {LARGE_TEXT_LENGTH} from '../constants'
 
 export function returnNullCallback(nullableValue: any, defaultValue: any): any {
     return !nullableValue ||
@@ -47,3 +48,46 @@ export const getHighQualityImageFromSong = (
         `w${song.thumbnails[0].height}-h${song.thumbnails[0].height}-l90-rj`,
         `w${height}-h${height}-l90-rj`,
     )
+
+/**
+ *
+ * @param artists array of artists with multiple values
+ * @returns the string of list of names of artist in the arguments of function
+ */
+export function formatArtistsListFromArray(artists: Array<ArtistObject>) {
+    let str = ''
+    for (let i in artists) {
+        str += `${artists[i].name}, `
+    }
+    return str
+}
+/**
+ *
+ * @param artists only takes a single artist object with name and browserId
+ * @returns the name of artist
+ */
+export function formatArtistSingle(artists: ArtistObject) {
+    return artists.name
+}
+/**
+ *
+ * @param artists accepts both artistObject and array of it and provide the artist or the artist list string according to the input parameter
+ * @returns the name or string of list of names of artists
+ */
+export function formatArtists(artists: Array<ArtistObject> | ArtistObject) {
+    if (Array.isArray(artists)) {
+        return formatArtistsListFromArray(artists)
+    } else {
+        return formatArtistSingle(artists)
+    }
+}
+
+/**
+ * @param text the text which is to be tested and if it is larger than the thresold constant we will add dots after that length
+ * @returns the result of the above operation
+ */
+export function trimLargeString(text: string) {
+    if (text.length > LARGE_TEXT_LENGTH)
+        return text.substring(0, LARGE_TEXT_LENGTH) + '...'
+    return text
+}
