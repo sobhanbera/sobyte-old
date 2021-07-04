@@ -13,6 +13,7 @@ import HeaderSearch from './HeaderSearch'
 import HeaderCollapsible from './HeaderCollapsible'
 
 import Area from './Area'
+import Block from './Block'
 import Prompt from './Prompt'
 
 import HeartBeatView from './HeartBeatView'
@@ -47,6 +48,7 @@ export {
     DoubleTap,
     GradientBackground,
     Area,
+    Block,
     Area as Section,
     Prompt,
     BottomSheet,
