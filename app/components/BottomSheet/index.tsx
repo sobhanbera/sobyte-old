@@ -154,8 +154,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#303030',
     },
     cancelTextItem: {
-        backgroundColor: '#000000',
-        color: '#FF2030',
+        backgroundColor: '#00000015',
+        color: '#FF1020FF',
     },
 })
 
