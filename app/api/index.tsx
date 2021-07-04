@@ -26,25 +26,71 @@ interface MusicContextProviderHelper {
 // const DemoMusicContextReturn = () => axios.request<any>({})
 const DemoMusicContextReturn = () => new Promise<any>(() => {})
 const MusicContext = React.createContext({
+    /**
+     * @returns a promise after initializing the music api fetcher this
+     * function should be called in the root element of the app where the
+     * main app starts after using this function context provider
+     */
     initialize: () => DemoMusicContextReturn(),
+    /**
+     * @returns a promise after initializing the music api fetcher this
+     * function should be called in the root element of the app where the
+     * main app starts after using this function context provider
+     */
     initMusicApi: () => DemoMusicContextReturn(),
+    /**
+     * @param endpointName this is the endpoint name like "search" or anything else
+     * @param continuation this is the continuation object which is provided in the fetched data after making any request to get more data of the same type...
+     * @returns return the same type of object for which the continuation is provided
+     */
     getContinuation: (
         _endpointName: string | 'search' | '',
         _continuation: ContinuationObject,
     ) => DemoMusicContextReturn(),
+    /**
+     * @param query the query string for getting suggestions
+     * @returns object with array of strings containing the search suggestion...
+     */
     getSearchSuggestions: (_search: string) => DemoMusicContextReturn(),
+    /**
+     * @param query the query string
+     * @param categoryName what type of data is needed like "song" | "album" | "playlist"
+     * @param _pageLimit number of data page wise
+     * @returns the search result after making api request
+     */
     search: (
         _query: string,
         _categoryName: string = 'song',
         _pageLimit: number = 1,
     ) => DemoMusicContextReturn(),
+    /**
+     * @param browseId id of the album
+     * @returns the object with album data
+     */
     getAlbum: (_browseId: string) => DemoMusicContextReturn(),
+    /**
+     * @param browseId id of the playlist
+     * @param contentLimit limiting the data
+     * @returns the object with playlist data
+     */
     getPlaylist: (_browseId: string, _contentLimit = 100) =>
         DemoMusicContextReturn(),
+    /**
+     * @param browseId id of the artist
+     * @returns the object with artist data
+     */
     getArtist: (_browseId: string) => DemoMusicContextReturn(),
+    /**
+     * @param musicId id of the music
+     * @param playlistId id of the playlist
+     * @param paramString id of the param string if any
+     * @returns the object with songs list in that particular playlist
+     */
     getNext: (_musicId: string, _playlistId: string, _paramString: string) =>
         DemoMusicContextReturn(),
-
+    /**
+     * state of main api component
+     */
     musicConfig: {},
     error: true,
     loaded: false,
@@ -76,7 +122,6 @@ const MusicApi = (props: MusicApiProps) => {
     })
 
     /**
-     *
      * @returns a promise after initializing the music api fetcher this
      * function should be called in the root element of the app where the
      * main app starts after using this function context provider
@@ -122,7 +167,6 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
-     *
      * @param endpointName the name of api endpoint where the call is to be made
      * @param inputVariables all data which should be POST to the endpoint
      * @param inputQuery extra data to provide while calling api endpoint
@@ -191,7 +235,6 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
-     *
      * @param endpointName this is the endpoint name like "search" or anything else
      * @param continuation this is the continuation object which is provided in the fetched data after making any request to get more data of the same type...
      * @returns return the same type of object for which the continuation is provided
@@ -229,7 +272,6 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
-     *
      * @param query the query string for getting suggestions
      * @returns object with array of strings containing the search suggestion...
      */
@@ -255,7 +297,6 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
-     *
      * @param query the query string
      * @param categoryName what type of data is needed like "song" | "album" | "playlist"
      * @param _pageLimit number of data page wise
@@ -308,7 +349,6 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
-     *
      * @param browseId id of the album
      * @returns the object with album data
      */
@@ -337,7 +377,6 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
-     *
      * @param browseId id of the playlist
      * @param contentLimit limiting the data
      * @returns the object with playlist data
@@ -424,7 +463,6 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
-     *
      * @param browseId id of the artist
      * @returns the object with artist data
      */
@@ -453,7 +491,6 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
-     *
      * @param musicId id of the music
      * @param playlistId id of the playlist
      * @param paramString id of the param string if any
