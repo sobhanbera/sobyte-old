@@ -2,7 +2,6 @@ import React from 'react'
 import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native'
 import {Text} from 'react-native-paper'
 import Modal from 'react-native-modal'
-import {useTranslation} from 'react-i18next'
 
 import {useTheme} from '../../context'
 import {FontUbuntu} from '../../constants'
@@ -18,7 +17,6 @@ interface Props {
 }
 const BottomSheet = (props: Props) => {
     const {themeColors} = useTheme()
-    const {t} = useTranslation()
 
     return (
         <Modal
@@ -58,6 +56,7 @@ const BottomSheet = (props: Props) => {
                 <ScrollView
                     style={{
                         backgroundColor: themeColors.surfacelight[0],
+                        flex: 1,
                     }}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}>
@@ -76,21 +75,6 @@ const BottomSheet = (props: Props) => {
                         )
                     })}
                 </ScrollView>
-
-                <TouchableOpacity
-                    style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        width: '100%',
-                    }}
-                    activeOpacity={0.65}
-                    onPress={() => props.setVisible(false)}>
-                    <Text style={[styles.textItem, styles.cancelTextItem]}>
-                        {props.cancelText || t('words:cancel')}
-                    </Text>
-                </TouchableOpacity>
             </View>
         </Modal>
     )
@@ -153,10 +137,6 @@ const styles = StyleSheet.create({
         // backgroundColor: 'black',
         borderBottomWidth: 0.4,
         borderBottomColor: '#303030',
-    },
-    cancelTextItem: {
-        backgroundColor: '#00000015',
-        color: '#FF1020FF',
     },
 })
 
