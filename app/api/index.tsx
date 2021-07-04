@@ -8,7 +8,10 @@ import * as utils from './utils' // local util path
 import * as parsers from './parsers' // local parser path
 import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // objects required for instances in this files
 
-interface MusicContextProviderHelper {
+/**
+ * @deprecated for now at least
+ */
+export interface MusicContextProviderHelper {
     initialize: any
     initMusicApi: any
     getContinuation: any
@@ -249,7 +252,7 @@ const MusicApi = (props: MusicApiProps) => {
             continuation.continuation &&
             continuation.clickTrackingParams
         ) {
-            return new Promise((resolve, reject) => {
+            return new Promise(resolve => {
                 _createApiRequest(
                     endpointName,
                     {},
