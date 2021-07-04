@@ -72,31 +72,17 @@ const Profile: React.FC<ExploreTabProps> = props => {
         <View style={globalStyles.flex}>
             <HeaderCollapsible
                 headerScrollColor={themeColors.black[0]}
-                headerScrollHeight={HEADER_MIN_HEIGHT}>
-                <View
-                    style={{
-                        paddingHorizontal: 12,
-                        paddingVertical: 10,
-                        flex: 1,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                    }}>
-                    <Text style={globalStyles.appName}>
-                        {t('common:appName')}
-                    </Text>
-                    <Scaler scale={0.95} touchableOpacity={1}>
-                        <Icon
-                            accessibilityLabel="search songs"
-                            name="search-outline"
-                            color={themeColors.text[0]}
-                            size={DEFAULT_ICON_SIZE}
-                            onPress={() => props.navigation.navigate('search')}
-                        />
-                    </Scaler>
-                </View>
-            </HeaderCollapsible>
-
+                headerScrollHeight={HEADER_MIN_HEIGHT}
+                right={
+                    <Icon
+                        accessibilityLabel="search songs"
+                        name="search-outline"
+                        color={themeColors.text[0]}
+                        size={DEFAULT_ICON_SIZE}
+                        onPress={() => props.navigation.navigate('search')}
+                    />
+                }
+            />
             <ScrollView
                 // bounces={true}
                 showsHorizontalScrollIndicator={false}
