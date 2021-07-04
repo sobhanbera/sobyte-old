@@ -1,3 +1,6 @@
+import React from 'react'
+import {View} from 'react-native'
+
 /** App details */
 export const APP_NAME = 'Sobyte'
 export const APP_DESCRIPTION = 'Free Music streamer and download.'
@@ -60,3 +63,5 @@ export const IMAGE_MARGIN_TO_SHOW = 4 // margin of the image which should be sho
 export const IMAGE_PADDING_TO_SHOW = 4 // padding of the image which should be shown in the UI
 export const IMAGE_PADDING_H_TO_SHOW = 4 // padding horizontal of the image which should be shown in the UI
 export const IMAGE_PADDING_V_TO_SHOW = 4 // padding vertical of the image which should be shown in the UI
+
+export const PaddingBottomView = () => <View style={{paddingBottom: 100}} />
