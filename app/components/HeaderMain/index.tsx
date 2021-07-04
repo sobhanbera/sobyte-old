@@ -16,14 +16,14 @@ interface Props {
     onPress?: Function
 }
 const HeaderMain = (props: Props) => {
-    const {surface, border} = useTheme().themeColors
+    const {border, surfacelight} = useTheme().themeColors
 
     return (
         <View
             style={[
                 styles.header,
                 {
-                    backgroundColor: props.backgroundColor || surface[0],
+                    backgroundColor: props.backgroundColor || surfacelight[0],
                     borderBottomColor: border[0],
                     borderBottomWidth: 0.5,
                 },
@@ -53,7 +53,7 @@ const HeaderMain = (props: Props) => {
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: 55,
+        height: 50,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
