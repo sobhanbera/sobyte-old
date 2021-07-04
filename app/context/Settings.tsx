@@ -6,16 +6,20 @@ import {
     THEME_STORAGE_KEY,
     AUDIO_QUALITY_STORAGE_KEY,
     LANGUAGE_CODE_STORAGE_KEY,
+    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
 } from '../constants'
 
 type ThemeType = 'd' | 'l' | 'c'
 type AudioQualityType = 'e' | 'g' | 'p' | 'a'
+type ImageQualityType = '420' | '300' | '200' | '120' | '60'
+
 type LanguageType = 'en' | 'hi'
 
 interface SettingsProviderContextProps {
     theme: ThemeType
     audioQuality: AudioQualityType //extreme, good, poor, auto
     language: LanguageType // language code this is available in i18n.js
+    imageQuality: ImageQualityType
     setSetting: Function
 
     changeLanguage: Function
@@ -25,8 +29,9 @@ const SettingsProviderContext =
         theme: 'd',
         audioQuality: 'a',
         language: 'en',
-        setSetting: (key: string, value: string) => {},
-        changeLanguage: (langCode: LanguageType) => {},
+        imageQuality: '200',
+        setSetting: (_key: string, _value: string) => {},
+        changeLanguage: (_langCode: LanguageType) => {},
     })
 
 interface Props {
@@ -37,9 +42,10 @@ const SettingsProvider = (props: Props) => {
     const [theme, setTheme] = useState<ThemeType>('d')
     const [audioQuality, setAudioQuality] = useState<AudioQualityType>('g')
     const [language, setLanguage] = useState<LanguageType>('en')
+    const [imageQuality, setImageQuality] = useState<ImageQualityType>('200')
 
     const changeLanguage = async (languageCode: LanguageType) => {
-        await i18n.changeLanguage(languageCode, async (err, t) => {
+        await i18n.changeLanguage(languageCode, async (_err, _t) => {
             setLanguage(languageCode)
             await AsyncStorage.setItem(LANGUAGE_CODE_STORAGE_KEY, languageCode)
         })
@@ -55,19 +61,14 @@ const SettingsProvider = (props: Props) => {
                 THEME_STORAGE_KEY,
                 LANGUAGE_CODE_STORAGE_KEY,
                 AUDIO_QUALITY_STORAGE_KEY,
+                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
             ],
-            (
-                error,
-                result: [
-                    [string, ThemeType],
-                    [string, LanguageType],
-                    [string, AudioQualityType],
-                ],
-            ) => {
-                setTheme(result[0][1] || 'd')
-                setLanguage(result[1][1] || 'en')
-                setAudioQuality(result[2][1] || 'a')
-                console.log(result)
+            (_err, response: any) => {
+                setTheme(response[0][1] || 'd')
+                setLanguage(response[1][1] || 'en')
+                setAudioQuality(response[2][1] || 'a')
+                setImageQuality(response[3][1] || '200')
+                console.log(response)
             },
         )
     }
@@ -80,6 +81,7 @@ const SettingsProvider = (props: Props) => {
         theme,
         audioQuality,
         language,
+        imageQuality,
         setSetting,
 
         changeLanguage,
