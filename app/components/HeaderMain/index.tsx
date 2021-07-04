@@ -13,7 +13,7 @@ interface Props {
     goBack?: boolean
     color: string
     backgroundColor?: string
-    onPress: Function
+    onPress?: Function
 }
 const HeaderMain = (props: Props) => {
     const {surface, border} = useTheme().themeColors
@@ -46,15 +46,6 @@ const HeaderMain = (props: Props) => {
             </Text>
             {/* this below is a temporary component for making the parent center the title text component */}
             <Text></Text>
-            {/* <Scaler onPress={() => props.onPress()}>
-                <Text
-                    style={[
-                        styles.title,
-                        {
-                            color: props.color,
-                        },
-                    ]}>{}</Text>
-            </Scaler> */}
         </View>
     )
 }
