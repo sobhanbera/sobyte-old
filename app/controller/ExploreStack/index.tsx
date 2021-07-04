@@ -11,6 +11,12 @@ const ProfileStackNavigator = (props: Props) => {
         <ProfileStack.Navigator
             screenOptions={{
                 headerShown: false,
+                animationEnabled: true,
+                gestureEnabled: true,
+                gestureDirection: 'horizontal',
+                cardStyle: {
+                    paddingBottom: 50,
+                },
             }}
             initialRouteName="explore">
             <ProfileStack.Screen name="explore" component={Explore} />
