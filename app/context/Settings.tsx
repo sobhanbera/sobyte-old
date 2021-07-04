@@ -11,7 +11,7 @@ import {
 
 type ThemeType = 'd' | 'l' | 'c'
 type AudioQualityType = 'e' | 'g' | 'p' | 'a'
-type ImageQualityType = '420' | '300' | '200' | '120' | '60'
+type ImageQualityType = '720' | '512' | '420' | '300' | '200' | '120' | '60'
 
 type LanguageType = 'en' | 'hi'
 
@@ -53,6 +53,7 @@ const SettingsProvider = (props: Props) => {
 
     const setSetting = async (key: string, value: string) => {
         await AsyncStorage.setItem(key, value)
+        getAllSettings()
     }
 
     const getAllSettings = async () => {

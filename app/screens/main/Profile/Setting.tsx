@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {ScrollView, Text, View} from 'react-native'
+import React, {useState} from 'react'
+import {ScrollView, Text} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {
@@ -8,7 +8,7 @@ import {
     GradientBackground,
     HeaderMain,
 } from '../../../components'
-import {usePrompt, useSetting, useTheme} from '../../../context'
+import {useSetting, useTheme} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
 import {
     AUDIO_QUALITY_STORAGE_KEY,
@@ -112,16 +112,34 @@ const Setting: React.FC<SettingProps> = props => {
                 setVisible={setImageQualityVisible}
                 buttons={[
                     {
-                        text: t('setting:very_high_quality') + ' - 420px',
+                        text: t('setting:extreme') + ' - 720px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                '400',
+                                '720',
                             )
                         },
                     },
                     {
-                        text: t('setting:high_quality') + ' - 300px',
+                        text: t('setting:very_high_quality') + ' - 512px',
+                        onPress: () => {
+                            setSetting(
+                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                '512',
+                            )
+                        },
+                    },
+                    {
+                        text: t('setting:high_quality') + ' - 420px',
+                        onPress: () => {
+                            setSetting(
+                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                '420',
+                            )
+                        },
+                    },
+                    {
+                        text: t('setting:medium_quality') + ' - 300px',
                         onPress: () => {
                             setSetting(
                                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
