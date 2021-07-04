@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import {Text, View, ScrollView} from 'react-native'
+import {View, ScrollView} from 'react-native'
+import {Text as BlockTitle} from 'react-native-paper'
 import {useTranslation} from 'react-i18next'
 
 import {
@@ -7,9 +8,13 @@ import {
     GridSongList,
     HeaderCollapsible,
     Scaler,
+    Block,
 } from '../../../components'
 import {DEFAULT_ICON_SIZE, HEADER_MIN_HEIGHT} from '../../../constants'
-import {FetchedSongObject} from '../../../interfaces'
+import {
+    FetchedSongObject,
+    BareFetchedSongObjectInstance,
+} from '../../../interfaces'
 import {useTheme, useMusicApi} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
@@ -22,23 +27,30 @@ const Profile: React.FC<ExploreTabProps> = props => {
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
 
-    const [topHits, setTopHits] = useState<FetchedSongObject>()
-    const [topHindi, setTopHindi] = useState<FetchedSongObject>()
-    const [topEnglish, setTopEnglish] = useState<FetchedSongObject>()
-    const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>()
-    const [topTelegu, setTopTelegu] = useState<FetchedSongObject>()
-    const [topRegional, setTopRegional] = useState<FetchedSongObject>()
+    const [topHits, setTopHits] = useState<FetchedSongObject>(
+        BareFetchedSongObjectInstance,
+    )
+    const [topHindi, setTopHindi] = useState<FetchedSongObject>(
+        BareFetchedSongObjectInstance,
+    )
+    const [topEnglish, setTopEnglish] = useState<FetchedSongObject>(
+        BareFetchedSongObjectInstance,
+    )
+    const [topPunjabi, setTopPunjabi] = useState<FetchedSongObject>(
+        BareFetchedSongObjectInstance,
+    )
+    const [topTelegu, setTopTelegu] = useState<FetchedSongObject>(
+        BareFetchedSongObjectInstance,
+    )
 
     /**
      * Function which loads all sutaible data required in this tab (explore tab)
      * like songs list in different languages, preference wise songs list, and many more...
      */
     async function loadExploreData() {
-        console.log('Loading Initiated...')
         await search('Top hindi songs', 'song')
             .then((res: FetchedSongObject) => {
                 setTopHindi(res)
-                console.log(res.continuation)
             })
             .catch(() => {
                 console.trace('Error loading explore tab data...')
@@ -64,7 +76,9 @@ const Profile: React.FC<ExploreTabProps> = props => {
             })
             .catch(() => {
                 // this will only be called when the internet connectivity is very slow or not present...
-                console.error('(Outer) Error Initiating Music Api..')
+                console.error(
+                    '(Outer) Error Initiating Music Api... no internet connection found',
+                )
             })
     }, [error])
 
@@ -85,19 +99,34 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 }
             />
 
-            {/* <ScrollView
-                // bounces={true}
+            <ScrollView
                 showsHorizontalScrollIndicator={false}
-                showsVerticalScrollIndicator={false}> */}
-            <GradientBackground
-                style={
-                    {
-                        // paddingTop: HEADER_MIN_HEIGHT,
-                    }
-                }>
-                <GridSongList content={topHindi?.content} />
-            </GradientBackground>
-            {/* </ScrollView> */}
+                showsVerticalScrollIndicator={false}>
+                <GradientBackground>
+                    <Block
+                        style={{
+                            marginHorizontal: 10,
+                            marginVertical: 10,
+                        }}>
+                        <Block>
+                            <BlockTitle
+                                style={[
+                                    globalStyles.topicTitle,
+                                    {color: themeColors.text[0]},
+                                ]}>
+                                Popular Hits
+                            </BlockTitle>
+                        </Block>
+
+                        <GridSongList
+                            textColor={themeColors.text[0] + 'E7'}
+                            subColor={themeColors.text[0] + '70'}
+                            contentLength={topHindi.content.length}
+                            content={topHindi.content}
+                        />
+                    </Block>
+                </GradientBackground>
+            </ScrollView>
         </View>
     )
 }
