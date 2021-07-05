@@ -7,10 +7,11 @@ interface Props {
     children?: React.ReactNode
     style?: ViewStyle
     padding?: boolean
+    noBackground?: boolean
 }
 
 const Block = (props: Props) => {
-    const {surfacelight} = useTheme().themeColors
+    const {surfacelight, transparent} = useTheme().themeColors
 
     return (
         <View
@@ -23,7 +24,9 @@ const Block = (props: Props) => {
                     marginHorizontal: 8,
                     borderRadius: 10,
                     overflow: 'hidden',
-                    backgroundColor: surfacelight[0],
+                    backgroundColor: props.noBackground
+                        ? transparent[0]
+                        : surfacelight[0],
                 },
                 props.style,
             ]}>
