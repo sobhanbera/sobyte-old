@@ -23,7 +23,7 @@ const GradientBackground = (props: Props) => {
             // colors uniform color will be changed in future according to light or dark theme
             colors={
                 props.uniformColor
-                    ? ['#000000', '#000000']
+                    ? [themeColors.surfacelight[0], themeColors.surfacelight[0]]
                     : themeColors.backgroundgradient
             }
             locations={
