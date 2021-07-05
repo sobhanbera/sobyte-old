@@ -23,6 +23,7 @@ import {
 import {useTheme, useMusicApi, useFetcher, usePlayer} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
+import {Track} from '../../../api/PlayerControls'
 
 interface ExploreTabProps {
     navigation?: any
@@ -45,18 +46,19 @@ const Profile: React.FC<ExploreTabProps> = props => {
         BareFetchedSongObjectInstance,
     )
 
-    function playSong(song: SongObject) {
-        const link = fetchMusic(song.musicId)
-            .then(res => {})
+    function playSong(song: Track) {
+        fetchMusic(song.id)
+            .then((res: any) => {
+                play({
+                    id: song.id,
+                    url: res,
+                    duration: song.duration,
+                    title: song.title,
+                    artist: song.artist,
+                    artwork: song.artwork,
+                })
+            })
             .catch(err => console.log('ERROR PLAYING SONG...', err))
-        // play({
-        //     id: song.musicId,
-        //     url: link,
-        //     duration: song.duration,
-        //     title: song.name,
-        //     artist: song.artist,
-        //     artwork: song.thumbnails,
-        // })
     }
 
     /**
