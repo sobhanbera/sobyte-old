@@ -45,17 +45,18 @@ const Profile: React.FC<ExploreTabProps> = props => {
         BareFetchedSongObjectInstance,
     )
 
-    async function playSong(song: SongObject) {
-        const link = await fetchMusic(song.musicId)
-        play({
-            id: song.musicId,
-            url: link,
-            duration: song.duration,
-            title: song.name,
-            artist: song.artist,
-            artwork: song.thumbnails,
-        })
-        console.log(song)
+    function playSong(song: SongObject) {
+        const link = fetchMusic(song.musicId)
+            .then(res => {})
+            .catch(err => console.log('ERROR PLAYING SONG...', err))
+        // play({
+        //     id: song.musicId,
+        //     url: link,
+        //     duration: song.duration,
+        //     title: song.name,
+        //     artist: song.artist,
+        //     artwork: song.thumbnails,
+        // })
     }
 
     /**
