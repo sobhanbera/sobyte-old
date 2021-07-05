@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import {StyleSheet} from 'react-native'
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {DarkTheme} from '@react-navigation/native'
 
@@ -150,24 +149,24 @@ const AuthenticationNavigation = () => {
 //     return <View style={styles.iconContainer}>{props.icon}</View>
 // }
 
-const styles = StyleSheet.create({
-    floatingIconContainer: {
-        top: -25,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    floatingIconContainerWrapper: {
-        width: 70,
-        height: 70,
-        borderRadius: 1000,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    iconContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-})
+// const styles = StyleSheet.create({
+//     floatingIconContainer: {
+//         top: -25,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//     },
+//     floatingIconContainerWrapper: {
+//         width: 70,
+//         height: 70,
+//         borderRadius: 1000,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//     },
+//     iconContainer: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//     },
+// })
 
 export default AuthenticationNavigation
