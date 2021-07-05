@@ -1,5 +1,5 @@
 import React, {useState} from 'react' // as usual import
-import axios from 'axios' // for making api requests
+import axios, {CancelToken} from 'axios' // for making api requests
 import RNLocalize from 'react-native-localize' // to pass the location of user in the api call
 import querystring from 'querystring' // string methods
 import _ from 'lodash' // util methods
@@ -181,6 +181,7 @@ const MusicApi = (props: MusicApiProps) => {
         endpointName: string,
         inputVariables: Object,
         inputQuery = {},
+        cancelToken: any = '',
     ) => {
         // if (error)
         //     await initialize()
@@ -223,7 +224,7 @@ const MusicApi = (props: MusicApiProps) => {
                     ),
                     {
                         responseType: 'json',
-                        headers: headers,
+                        headers: {...headers, cancelToken},
                     },
                 )
                 .then(res => {
@@ -278,11 +279,24 @@ const MusicApi = (props: MusicApiProps) => {
      * @param query the query string for getting suggestions
      * @returns object with array of strings containing the search suggestion...
      */
+    let getSearchSuggestionsCancelToken: any
     const getSearchSuggestions = (query: string) => {
+        if (typeof getSearchSuggestionsCancelToken != typeof undefined)
+            getSearchSuggestionsCancelToken.cancel(
+                'Cancelling the previous token for new request.',
+            )
+
+        getSearchSuggestionsCancelToken = axios.CancelToken.source()
+
         return new Promise((resolve, reject) => {
-            _createApiRequest('music/get_search_suggestions', {
-                input: query,
-            })
+            _createApiRequest(
+                'music/get_search_suggestions',
+                {
+                    input: query,
+                },
+                {},
+                getSearchSuggestionsCancelToken,
+            )
                 .then(content => {
                     try {
                         resolve(
