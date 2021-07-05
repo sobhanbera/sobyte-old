@@ -19,7 +19,13 @@ import {
     FetchedSongObject,
     BareFetchedSongObjectInstance,
 } from '../../../interfaces'
-import {useTheme, useMusicApi, useFetcher, usePlayer} from '../../../context'
+import {
+    useTheme,
+    useMusicApi,
+    useFetcher,
+    usePlayer,
+    useApp,
+} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
 import {Track} from '../../../api/PlayerControls'
@@ -32,6 +38,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
     const {initMusicApi, search, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
     const {play} = usePlayer()
+    const {setShowLoading} = useApp()
 
     const scrollViewReference = useRef<ScrollView>(null)
 
@@ -90,10 +97,12 @@ const Profile: React.FC<ExploreTabProps> = props => {
      * also with a fallback variable error whenever it changed again everything will load from beginning
      */
     useEffect(() => {
+        setShowLoading(true)
         initMusicApi()
             .then(() => {
                 initMusicApi()
                     .then(() => {
+                        setShowLoading(false)
                         loadExploreData()
                     })
                     .catch(() => {})
@@ -112,14 +121,14 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 headerScrollColor={themeColors.black[0]}
                 headerScrollHeight={HEADER_MIN_HEIGHT}
                 right={
-                    <Scaler onPress={() => props.navigation.navigate('search')}>
-                        <Icon
-                            accessibilityLabel="search songs"
-                            name="search-outline"
-                            color={themeColors.text[0]}
-                            size={DEFAULT_ICON_SIZE}
-                        />
-                    </Scaler>
+                    // <Scaler onPress={() => props.navigation.navigate('search')}>
+                    <Icon
+                        accessibilityLabel="search songs"
+                        name="search-outline"
+                        color={themeColors.text[0]}
+                        size={DEFAULT_ICON_SIZE}
+                    />
+                    // </Scaler>
                 }
             />
 
