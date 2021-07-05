@@ -10,6 +10,7 @@ interface Props {
     text: string
     onChangeText: Function
     onSubmit: Function
+    goBack: Function
 }
 const HeaderSearch: React.FC<Props> = props => {
     const {white, black, surfacelight, border, text, primary, placeholder} =
@@ -26,6 +27,7 @@ const HeaderSearch: React.FC<Props> = props => {
                 },
             ]}>
             <Entypo
+                onPress={() => props.goBack()}
                 name="chevron-thin-left"
                 color={white[0] + 'DD'}
                 size={DEFAULT_SMALL_ICON_SIZE}
