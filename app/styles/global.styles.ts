@@ -32,7 +32,10 @@ const globalStyles = StyleSheet.create({
         fontSize: 20,
         fontFamily: FontRobotoBold,
         letterSpacing: 0.6,
-        paddingHorizontal: 12,
+        paddingHorizontal: 13,
+        paddingVertical: 8,
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
 
     flex: {
