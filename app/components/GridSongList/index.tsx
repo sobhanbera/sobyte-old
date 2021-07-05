@@ -27,7 +27,6 @@ interface Props {
     onPress: Function
     id: string
 }
-let tempIndexing = 0
 const GridSongList = (props: Props) => {
     const {imageQuality} = useSetting()
 
@@ -134,7 +133,13 @@ const GridSongList = (props: Props) => {
                             ]}>
                             <Image
                                 source={{uri: songImage}}
-                                style={styles.contentImage}
+                                style={[
+                                    styles.contentImage,
+                                    {
+                                        borderWidth: 0.2,
+                                        borderColor: props.subColor,
+                                    },
+                                ]}
                             />
                             <Text
                                 style={[

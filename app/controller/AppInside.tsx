@@ -4,13 +4,14 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import {DarkTheme} from '@react-navigation/native'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import {usePlayer, useTheme, useMusicApi} from '../context'
 
 import ExploreStackNavigator from './ExploreStack'
 import MusicPlayer from '../screens/main/MusicPlayer'
 import ProfileStackNavigator from './ProfileStack'
+import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 
 const BarNavigator = createMaterialBottomTabNavigator()
 const AuthenticationNavigation = () => {
@@ -56,7 +57,7 @@ const AuthenticationNavigation = () => {
                     tabBarIcon: ({focused, color}) => (
                         <Ionicons
                             name={focused ? 'md-search' : 'md-search-outline'}
-                            size={26}
+                            size={DEFAULT_ICON_SIZE}
                             color={color}
                         />
                     ),
@@ -82,7 +83,7 @@ const AuthenticationNavigation = () => {
                                     ? 'pause-outline'
                                     : 'play-outline'
                             }
-                            size={26}
+                            size={DEFAULT_ICON_SIZE}
                             color={color}
                         />
                     ),
@@ -97,9 +98,9 @@ const AuthenticationNavigation = () => {
                     tabBarColor: themeColors.surface[0],
                     tabBarLabel: 'Me',
                     tabBarIcon: ({focused, color}) => (
-                        <MaterialCommunityIcons
-                            name={focused ? 'account' : 'account-outline'}
-                            size={26}
+                        <AntDesign
+                            name={focused ? 'star' : 'staro'}
+                            size={DEFAULT_SMALL_ICON_SIZE}
                             color={color}
                         />
                     ),
@@ -110,7 +111,7 @@ const AuthenticationNavigation = () => {
 }
 
 /**
- * may be useful in future...
+ * @important @note may be useful in future...
  */
 // interface FloatingTabBarIconProps {
 //     backgroundColor: string
