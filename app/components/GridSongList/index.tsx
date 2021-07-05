@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, FlatList, Image, StyleSheet} from 'react-native'
+import {View, FlatList, Image, StyleSheet, TouchableOpacity} from 'react-native'
 import {Text} from 'react-native-paper'
 import Shimmer from 'react-native-shimmer'
 
@@ -15,7 +15,6 @@ import {
     IMAGE_MARGIN_TO_SHOW,
     IMAGE_PADDING_TO_SHOW,
 } from '../../constants'
-import {Scaler} from '../'
 
 interface Props {
     content: Array<SongObject>
@@ -57,7 +56,9 @@ const GridSongList = (props: Props) => {
                                 ? 10
                                 : -10
                         }>
-                        <Scaler onPress={() => {}}>
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() => {}}>
                             <View
                                 style={[
                                     styles.contentWrapper,
@@ -87,7 +88,7 @@ const GridSongList = (props: Props) => {
                                     ]}
                                 />
                             </View>
-                        </Scaler>
+                        </TouchableOpacity>
                     </Shimmer>
                 )
             }}
@@ -114,14 +115,15 @@ const GridSongList = (props: Props) => {
                 const artist = formatArtists(item.artist)
 
                 return (
-                    <Scaler
+                    <TouchableOpacity
                         onPress={() =>
                             props.onPress({
                                 ...item,
                                 artist,
                                 thumbnails: songImage,
                             })
-                        }>
+                        }
+                        activeOpacity={0.8}>
                         <View
                             style={[
                                 styles.contentWrapper,
@@ -160,7 +162,7 @@ const GridSongList = (props: Props) => {
                                 {artist}
                             </Text>
                         </View>
-                    </Scaler>
+                    </TouchableOpacity>
                 )
             }}
         />
