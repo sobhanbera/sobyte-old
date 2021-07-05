@@ -28,6 +28,8 @@ import FullScreenLoading from './FullScreenLoading'
 import GradientBackground from './GradientBackground'
 import BottomSheet from './BottomSheet'
 
+import SongCard from './SongCard'
+
 export {
     Scaler,
     AuthButton,
@@ -55,6 +57,7 @@ export {
     Prompt,
     BottomSheet,
     BottomSheet as SimpleBottomSheet,
+    SongCard,
 }
 
 /** music player components */
