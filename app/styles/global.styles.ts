@@ -8,6 +8,7 @@ import {
     FontRoboto,
     FontRobotoBold,
     FontUbuntuBold,
+    HEADER_MIN_HEIGHT,
 } from '../constants'
 import {StyleSheet} from 'react-native'
 
@@ -36,6 +37,19 @@ const globalStyles = StyleSheet.create({
 
     flex: {
         flex: 1,
+    },
+    coverFullArea: {
+        width: '100%',
+        height: '100%',
+    },
+
+    header: {
+        width: '100%',
+        height: HEADER_MIN_HEIGHT,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 15,
     },
 
     extraPaddingView: {
@@ -98,6 +112,13 @@ const globalStyles = StyleSheet.create({
         fontFamily: FontTahoma,
         paddingVertical: 10,
         includeFontPadding: true,
+    },
+
+    searchTabTopic: {
+        fontSize: 18,
+        textAlign: 'center',
+        width: '100%',
+        textAlignVertical: 'center',
     },
 })
 
