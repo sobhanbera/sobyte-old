@@ -31,7 +31,7 @@ const globalStyles = StyleSheet.create({
         fontSize: 20,
         fontFamily: FontRobotoBold,
         letterSpacing: 0.6,
-        paddingHorizontal: 8,
+        paddingHorizontal: 12,
     },
 
     flex: {
