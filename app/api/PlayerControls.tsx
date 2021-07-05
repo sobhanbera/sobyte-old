@@ -7,9 +7,6 @@ import TrackPlayer, {
     STATE_BUFFERING,
 } from 'react-native-track-player'
 
-// const DemoMusicContextReturn = () => axios.request<any>({})
-const DemoMusicContextReturn = () => new Promise<any>(() => {})
-
 export interface Track {
     id: string
     url: string
@@ -25,34 +22,31 @@ export interface Track {
     // rating?: number | boolean
     // [key: string]: any
 }
-interface PlayerContextProperty {
-    playing: boolean
-    paused: boolean
-    stopped: boolean
-    buffering: boolean
+// interface PlayerContextProperty {
+//     playing: boolean
+//     paused: boolean
+//     stopped: boolean
+//     buffering: boolean
 
-    current: Track
+//     current: Track
 
-    /**
-     * @param _track the Track object to play the song
-     */
-    play: Function
-    playonly: Function
-    pause: Function
-    toggleState: Function
-    next: Function
-    previous: Function
+//     play: Function
+//     playonly: Function
+//     pause: Function
+//     toggleState: Function
+//     next: Function
+//     previous: Function
 
-    seekTo: Function
-    seekInterval: Function
+//     seekTo: Function
+//     seekInterval: Function
 
-    rate: number
-    getRateText: Function
-    setRate: Function
+//     rate: number
+//     getRateText: Function
+//     setRate: Function
 
-    volume: number
-    setVolume: Function
-}
+//     volume: number
+//     setVolume: Function
+// }
 const PlayerContext = createContext({
     playing: false,
     paused: false,
@@ -77,14 +71,14 @@ const PlayerContext = createContext({
     previous: () => {},
 
     seekTo: (_level: number) => {},
-    seekInterval: (interval: number) => {},
+    seekInterval: (_interval: number) => {},
 
     rate: 1,
     getRateText: () => {},
-    setRate: (level: number) => {},
+    setRate: (_level: number) => {},
 
     volume: 1,
-    setVolume: (level: number) => {},
+    setVolume: (_level: number) => {},
 })
 interface PlayerProps {
     children: any
@@ -146,7 +140,7 @@ const Player: FC<PlayerProps> = props => {
                             artwork: result.artwork,
                         })
                     })
-                    .catch(err => {})
+                    .catch(_err => {})
             },
         )
 
@@ -191,7 +185,7 @@ const Player: FC<PlayerProps> = props => {
     }, [])
 
     const resetPlayer = async () => {
-        await TrackPlayer.reset().then(res => {
+        await TrackPlayer.reset().then(_res => {
             setCurrentTrack({
                 id: '',
                 url: '',
@@ -219,16 +213,16 @@ const Player: FC<PlayerProps> = props => {
         await TrackPlayer.add([track])
         setCurrentTrack(track)
         await TrackPlayer.skip(track.id)
-            .then(res => {})
-            .catch(async err => {
+            .then(_res => {})
+            .catch(async _err => {
                 // console.log('SSSSSS', err);
                 // const qu = await TrackPlayer.getQueue()
                 // console.log('QUQUQU', qu);
             })
 
         await TrackPlayer.play()
-            .then(res => {})
-            .catch(err => {})
+            .then(_res => {})
+            .catch(_err => {})
 
         /**
          * @deprecated the below code becuase it was a much junk then this usual one
@@ -311,16 +305,16 @@ const Player: FC<PlayerProps> = props => {
 
     const previous = async () => {
         TrackPlayer.skipToPrevious()
-            .then(res => {})
-            .catch(err => {
+            .then(_res => {})
+            .catch(_err => {
                 // console.log('ERRO WHILE PREVIOUS', err.code);
             })
     }
 
     const next = async () => {
         TrackPlayer.skipToNext()
-            .then(res => {})
-            .catch(err => {
+            .then(_res => {})
+            .catch(_err => {
                 // console.log('ERRO WHILE NEXT', err.code);
             })
     }

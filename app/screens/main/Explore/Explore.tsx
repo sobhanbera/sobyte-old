@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native'
-import {Text as BlockTitle, Text} from 'react-native-paper'
+import {View, ScrollView, StyleSheet} from 'react-native'
+import {Text as BlockTitle} from 'react-native-paper'
 
 import {
     GradientBackground,
@@ -18,7 +18,6 @@ import {
 import {
     FetchedSongObject,
     BareFetchedSongObjectInstance,
-    SongObject,
 } from '../../../interfaces'
 import {useTheme, useMusicApi, useFetcher, usePlayer} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
