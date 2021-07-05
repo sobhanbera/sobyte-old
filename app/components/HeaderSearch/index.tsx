@@ -1,15 +1,53 @@
 import React from 'react'
-import {StyleSheet, View, Platform} from 'react-native'
-import {Text} from 'react-native-paper'
+import {StyleSheet, View, TextInput} from 'react-native'
+import Entypo from 'react-native-vector-icons/Entypo'
 
-const NAVBAR_HEIGHT = 50
-const STATUS_BAR_HEIGHT = Platform.select({ios: 20, android: 24})
+import {useTheme} from '../../context'
+import globalStyles from '../../styles/global.styles'
+import {DEFAULT_SMALL_ICON_SIZE} from '../../constants'
 
-interface Props {}
-const HeaderSearch: React.FC<Props> = props => {
-    return <View></View>
+interface Props {
+    text: string
+    onChangeText: Function
 }
+const HeaderSearch: React.FC<Props> = props => {
+    const {white, black, surfacelight, border, text, primary, placeholder} =
+        useTheme().themeColors
 
-const styles = StyleSheet.create({})
+    return (
+        <View
+            style={[
+                globalStyles.header,
+                {
+                    backgroundColor: surfacelight[0],
+                    borderBottomColor: border[0],
+                    borderBottomWidth: 0.5,
+                },
+            ]}>
+            <Entypo
+                name="chevron-thin-left"
+                color={white[0] + 'DD'}
+                size={DEFAULT_SMALL_ICON_SIZE}
+            />
+            <TextInput
+                placeholder={'Search for songs, artists...'}
+                value={props.text}
+                onChangeText={e => props.onChangeText(e)}
+                selectionColor={primary.dark[0]}
+                keyboardType="numeric"
+                placeholderTextColor={placeholder[0]}
+                style={{
+                    flex: 1,
+                    color: text[0],
+                    fontSize: 18,
+                    marginLeft: 10,
+                    backgroundColor: black[0] + '40',
+                    paddingHorizontal: 15,
+                    borderRadius: 100,
+                }}
+            />
+        </View>
+    )
+}
 
 export default HeaderSearch
