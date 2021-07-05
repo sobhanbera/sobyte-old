@@ -21,6 +21,7 @@ import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
 import {AnimatedGradient} from './AnimatedGradient'
 import SobyteAlert from './SobyteAlert'
 import DoubleTap from './DoubleTap'
+import CenterButtonView from './CenterButtonView'
 
 import FullScreenLoading from './FullScreenLoading'
 
@@ -30,6 +31,7 @@ import BottomSheet from './BottomSheet'
 export {
     Scaler,
     AuthButton,
+    CenterButtonView,
     ScalerAuthButton,
     Loader,
     PaddingView,
