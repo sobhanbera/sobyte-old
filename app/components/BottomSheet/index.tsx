@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
-import {Text, TouchableRipple} from 'react-native-paper'
+import {Text} from 'react-native-paper'
 import Modal from 'react-native-modal'
 
 import {useTheme} from '../../context'
@@ -34,15 +34,8 @@ interface Props {
     }>
 }
 const BottomSheet = (props: Props) => {
-    const {
-        surfacelight,
-        text,
-        placeholder,
-        primary,
-        onWarning,
-        onError,
-        onDanger,
-    } = useTheme().themeColors
+    const {surfacelight, text, placeholder, primary, onWarning} =
+        useTheme().themeColors
 
     return (
         <Modal
@@ -86,8 +79,8 @@ const BottomSheet = (props: Props) => {
                     {props.buttons.map((button, _) => {
                         if (button.type === 'input') {
                             return (
-                                <>
-                                    <View key={_} style={styles.inputHolder}>
+                                <View key={_}>
+                                    <View style={styles.inputHolder}>
                                         <TextInput
                                             placeholder={button.placeholder}
                                             value={button.text}
@@ -135,7 +128,7 @@ const BottomSheet = (props: Props) => {
                                                 : ''}
                                         </Text>
                                     </View>
-                                </>
+                                </View>
                             )
                         }
                         return (

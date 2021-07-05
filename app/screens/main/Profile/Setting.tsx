@@ -21,7 +21,7 @@ interface SettingProps {
 const Setting: React.FC<SettingProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
-    const {setSetting, changeLanguage, imageQuality} = useSetting()
+    const {setSetting, changeLanguage} = useSetting()
 
     const [languageVisible, setLanguageVisible] = useState(false)
     const [audioQualityVisible, setAudioQualityVisible] = useState(false)
