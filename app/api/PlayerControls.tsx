@@ -7,6 +7,9 @@ import TrackPlayer, {
     STATE_BUFFERING,
 } from 'react-native-track-player'
 
+// const DemoMusicContextReturn = () => axios.request<any>({})
+const DemoMusicContextReturn = () => new Promise<any>(() => {})
+
 export interface Track {
     id: string
     url: string
@@ -30,6 +33,9 @@ interface PlayerContextProperty {
 
     current: Track
 
+    /**
+     * @param _track the Track object to play the song
+     */
     play: Function
     playonly: Function
     pause: Function
@@ -47,7 +53,7 @@ interface PlayerContextProperty {
     volume: number
     setVolume: Function
 }
-const PlayerContext = createContext<PlayerContextProperty>({
+const PlayerContext = createContext({
     playing: false,
     paused: false,
     stopped: false,
@@ -62,7 +68,7 @@ const PlayerContext = createContext<PlayerContextProperty>({
         artwork: '',
     },
 
-    play: () => {},
+    play: (_track: Track) => {},
     playonly: () => {},
     pause: () => {},
     toggleState: () => {},
@@ -70,7 +76,7 @@ const PlayerContext = createContext<PlayerContextProperty>({
     next: () => {},
     previous: () => {},
 
-    seekTo: () => {},
+    seekTo: (_level: number) => {},
     seekInterval: (interval: number) => {},
 
     rate: 1,
@@ -198,7 +204,7 @@ const Player: FC<PlayerProps> = props => {
     }
 
     const play = async (track: Track) => {
-        await pause()
+        // await pause()
 
         if (!track) {
             if (currentTrack) await TrackPlayer.play()
@@ -210,37 +216,54 @@ const Player: FC<PlayerProps> = props => {
             return
         }
 
-        // setLoading(true); here
-        try {
-            //we are checking that the track exists or not...
-            await TrackPlayer.getTrack(track.id)
-                .then(async res => {
-                    if (!res || res === null) {
-                        await TrackPlayer.add([track])
-                    }
-                })
-                .catch(async err => {
-                    await TrackPlayer.add([track])
-                })
-        } catch (err) {
-            //track not found than add it...
-            await TrackPlayer.add([track])
-        } finally {
-            //and finally set currentTrack to track and
-            //play after skiping to the track with id [track.id]
-            setCurrentTrack(track)
-            // setLoading(false);here
-            await TrackPlayer.skip(track.id)
+        await TrackPlayer.add([track])
+        setCurrentTrack(track)
+        await TrackPlayer.skip(track.id)
+            .then(res => {})
+            .catch(async err => {
+                // console.log('SSSSSS', err);
+                // const qu = await TrackPlayer.getQueue()
+                // console.log('QUQUQU', qu);
+            })
+
+        await TrackPlayer.play()
+            .then(res => {})
+            .catch(err => {})
+
+        /**
+         * @deprecated the below code becuase it was a much junk then this usual one
+         * it was causing many performance issues because of many checks, async tasks...
+         */
+        // try {
+        //we are checking that the track exists or not...
+        // await TrackPlayer.getTrack(track.id)
+        //     .then(async res => {
+        //         if (!res || res === null) {
+        //             await TrackPlayer.add([track])
+        //         }
+        //     })
+        //     .catch(async err => {
+        //         await TrackPlayer.add([track])
+        //     })
+        // } catch (err) {
+        //track not found than add it...
+        // await TrackPlayer.add([track])
+        // } finally {
+        //and finally set currentTrack to track and
+        //play after skiping to the track with id [track.id]
+        // setCurrentTrack(track)
+        // setLoading(false);here
+        /* await TrackPlayer.skip(track.id)
                 .then(res => {})
                 .catch(async err => {
                     // console.log('SSSSSS', err);
                     // const qu = await TrackPlayer.getQueue()
                     // console.log('QUQUQU', qu);
-                })
-            await TrackPlayer.play()
+                }) */
+        /* await TrackPlayer.play()
                 .then(res => {})
-                .catch(err => {})
-        }
+                .catch(err => {}) */
+        // }
     }
 
     const pause = async () => {
