@@ -123,6 +123,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 right={
                     // <Scaler onPress={() => props.navigation.navigate('search')}>
                     <Icon
+                        onPress={() => props.navigation.navigate('search')}
                         accessibilityLabel="search songs"
                         name="search-outline"
                         color={themeColors.text[0]}
