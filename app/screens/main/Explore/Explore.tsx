@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import {View, ScrollView, StyleSheet} from 'react-native'
-import {Text as BlockTitle} from 'react-native-paper'
+import React, {useEffect, useRef, useState} from 'react'
+import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native'
+import {Text as BlockTitle, Text} from 'react-native-paper'
 
 import {
     GradientBackground,
@@ -8,6 +8,7 @@ import {
     HeaderCollapsible,
     Scaler,
     Block,
+    CenterButtonView,
 } from '../../../components'
 import {
     DEFAULT_ICON_SIZE,
@@ -31,6 +32,8 @@ const Profile: React.FC<ExploreTabProps> = props => {
     const {initMusicApi, search, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
     const {play} = usePlayer()
+
+    const scrollViewReference = useRef<ScrollView>(null)
 
     const [populars, setPopulars] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
@@ -118,7 +121,9 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 }
             />
 
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView
+                ref={scrollViewReference}
+                showsVerticalScrollIndicator={false}>
                 <GradientBackground>
                     {/* popular songs */}
                     <Block style={styles.outerBlock}>
@@ -189,8 +194,18 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         />
                     </Block>
 
-                    {/* end of the scrollview */}
+                    <CenterButtonView
+                        title="Go To Top"
+                        onPress={() =>
+                            scrollViewReference.current?.scrollTo({
+                                x: 0,
+                                y: 0,
+                                animated: true,
+                            })
+                        }
+                    />
 
+                    {/* end of the scrollview */}
                     <PaddingBottomView />
                 </GradientBackground>
             </ScrollView>
