@@ -3,7 +3,7 @@ import {View, FlatList, Image, StyleSheet} from 'react-native'
 import {Text} from 'react-native-paper'
 import Shimmer from 'react-native-shimmer'
 
-import {SongObject} from '../../interfaces'
+import {SongObject, CasualDemoList} from '../../interfaces'
 import {
     getHighQualityImageFromSongImage,
     formatArtists,
@@ -25,12 +25,15 @@ interface Props {
     subColor: string
     shimmerDirection: 'up' | 'down' | 'left' | 'right'
     onPress: Function
+    id: string
 }
+let tempIndexing = 0
 const GridSongList = (props: Props) => {
     const {imageQuality} = useSetting()
 
     return props.content[0].musicId.length <= 0 ? (
         <FlatList
+            key={props.id}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             horizontal
@@ -40,12 +43,11 @@ const GridSongList = (props: Props) => {
                 IMAGE_PADDING_TO_SHOW +
                 IMAGE_PADDING_TO_SHOW * 2
             }
-            data={Array(15).fill(0)}
-            keyExtractor={(item, _) => item.musicId}
-            renderItem={({item, index}) => {
+            data={CasualDemoList}
+            keyExtractor={item => item.id}
+            renderItem={({index}) => {
                 return (
                     <Shimmer
-                        key={index}
                         opacity={1}
                         animating
                         direction={props.shimmerDirection}
@@ -66,14 +68,12 @@ const GridSongList = (props: Props) => {
                                         ? styles.lastContent
                                         : {},
                                 ]}>
-                                <Scaler onPress={() => {}}>
-                                    <View
-                                        style={[
-                                            styles.contentImage,
-                                            styles.dummyBackground,
-                                        ]}
-                                    />
-                                </Scaler>
+                                <View
+                                    style={[
+                                        styles.contentImage,
+                                        styles.dummyBackground,
+                                    ]}
+                                />
 
                                 <View
                                     style={[
@@ -95,6 +95,7 @@ const GridSongList = (props: Props) => {
         />
     ) : (
         <FlatList
+            key={props.id}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             horizontal
@@ -131,12 +132,10 @@ const GridSongList = (props: Props) => {
                                     ? styles.lastContent
                                     : {},
                             ]}>
-                            {/* <Scaler onPress={() => {}}> */}
                             <Image
                                 source={{uri: songImage}}
                                 style={styles.contentImage}
                             />
-                            {/* </Scaler> */}
                             <Text
                                 style={[
                                     styles.songTitle,
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
         width: IMAGE_SIZE_TO_SHOW,
         height: 10,
         borderRadius: 5,
-        marginVertical: 10,
+        marginVertical: 5,
         overflow: 'hidden',
     },
 

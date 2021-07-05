@@ -59,20 +59,20 @@ const Profile: React.FC<ExploreTabProps> = props => {
      * Function which loads all sutaible data required in this tab (explore tab)
      * like songs list in different languages, preference wise songs list, and many more...
      */
-    async function loadExploreData() {
-        await search('popular songs', 'SONG')
+    function loadExploreData() {
+        search('popular songs', 'SONG')
             .then((res: FetchedSongObject) => {
                 setPopulars(res)
             })
             .catch(() => {})
 
-        await search('most rated songs', 'SONG')
+        search('most rated songs', 'SONG')
             .then((res: FetchedSongObject) => {
                 setTopRated(res)
             })
             .catch(() => {})
 
-        await search('Chill beats', 'SONG')
+        search('Chill beats', 'SONG')
             .then((res: FetchedSongObject) => {
                 setLoFi(res)
             })
@@ -118,9 +118,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 }
             />
 
-            <ScrollView
-                showsHorizontalScrollIndicator={false}
-                showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <GradientBackground>
                     {/* popular songs */}
                     <Block style={styles.outerBlock}>
@@ -135,6 +133,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         </Block>
 
                         <GridSongList
+                            id="populars"
                             onPress={playSong}
                             shimmerDirection="right"
                             textColor={themeColors.text[0] + 'E7'}
@@ -157,6 +156,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         </Block>
 
                         <GridSongList
+                            id="topRated"
                             onPress={playSong}
                             shimmerDirection="left"
                             textColor={themeColors.text[0] + 'E7'}
@@ -179,6 +179,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
                         </Block>
 
                         <GridSongList
+                            id="loFi"
                             onPress={playSong}
                             shimmerDirection="right"
                             textColor={themeColors.text[0] + 'E7'}
@@ -201,11 +202,17 @@ const styles = StyleSheet.create({
     outerBlock: {
         marginHorizontal: 10,
         marginVertical: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 30,
     },
     innerBlock: {
         flexDirection: 'row',
         justifyContent: 'center',
         width: '100%',
+
+        borderBottomWidth: 1,
+        borderBottomColor: '#7f7f7f16',
     },
 })
 
