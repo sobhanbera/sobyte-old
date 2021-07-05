@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ScrollView, Text} from 'react-native'
+import {ScrollView, Text, ToastAndroid} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {
@@ -21,11 +21,13 @@ interface SettingProps {
 const Setting: React.FC<SettingProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
-    const {setSetting, changeLanguage} = useSetting()
+    const {setSetting, changeLanguage, imageQuality} = useSetting()
 
     const [languageVisible, setLanguageVisible] = useState(false)
     const [audioQualityVisible, setAudioQualityVisible] = useState(false)
     const [imageQualityVisible, setImageQualityVisible] = useState(false)
+
+    const [customImageQuality, setCustomImageQuality] = useState('')
 
     return (
         <GradientBackground uniformColor>
@@ -181,6 +183,36 @@ const Setting: React.FC<SettingProps> = props => {
                                 '60',
                             )
                         },
+                    },
+                    {
+                        text: customImageQuality,
+                        onPress: () => {
+                            if (
+                                Number(customImageQuality) >= 60 &&
+                                Number(customImageQuality) <= 720
+                            ) {
+                                setSetting(
+                                    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                    customImageQuality,
+                                )
+                                setImageQualityVisible(false)
+                            } else
+                                ToastAndroid.show(
+                                    t(
+                                        'sentences:valid_number_above_60_below_720',
+                                    ),
+                                    ToastAndroid.SHORT,
+                                )
+                        },
+                        type: 'input',
+                        placeholder: 'Enter Custom Image Quality',
+                        setText: setCustomImageQuality,
+                        inputProps: {},
+                        extraText: '90px',
+                        errorText:
+                            Number(customImageQuality) >= 512
+                                ? t('sentences:increase_image_quality_warning')
+                                : '',
                     },
                 ]}
             />
