@@ -31,7 +31,7 @@ let tempIndexing = 0
 const GridSongList = (props: Props) => {
     const {imageQuality} = useSetting()
 
-    return props.content[0].musicId.length >= 0 ? (
+    return props.content[0].musicId.length <= 0 ? (
         <FlatList
             key={props.id}
             showsHorizontalScrollIndicator={false}
