@@ -18,6 +18,6 @@ export type {
 /**
  * object's instance of the variables for demo purpose or initial values
  */
-import {BareFetchedSongObjectInstance} from './SongObject'
+import {BareFetchedSongObjectInstance, CasualDemoList} from './SongObject'
 
-export {BareFetchedSongObjectInstance}
+export {BareFetchedSongObjectInstance, CasualDemoList}
