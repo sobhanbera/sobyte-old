@@ -112,15 +112,21 @@ const GridSongList = (props: Props) => {
                     item.thumbnails[0],
                     imageQuality || '200',
                 )
+                const highQualityImage = getHighQualityImageFromSongImage(
+                    item.thumbnails[0],
+                    '450',
+                )
                 const artist = formatArtists(item.artist)
 
                 return (
                     <TouchableOpacity
                         onPress={() =>
                             props.onPress({
-                                ...item,
-                                artist,
-                                thumbnails: songImage,
+                                id: item.musicId,
+                                duration: item.duration,
+                                title: item.name,
+                                artist: artist,
+                                artwork: highQualityImage,
                             })
                         }
                         activeOpacity={0.8}>
