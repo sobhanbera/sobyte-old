@@ -23,6 +23,10 @@
         "music": "Music",
         "explore": "Explore"
     },
+    "sentences": {
+        "valid_number_above_60_below_720": "Please enter a valid number above 60 and below 720.",
+        "increase_image_quality_warning": "Increasing image quality will consume more data. \nNote: This may effect user experience"
+    },
     "common": {
         "appName": "Sobyte",
         "langs": {
