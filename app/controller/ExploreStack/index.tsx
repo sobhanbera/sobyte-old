@@ -14,13 +14,18 @@ const ProfileStackNavigator = (props: Props) => {
                 animationEnabled: true,
                 gestureEnabled: true,
                 gestureDirection: 'horizontal',
-                cardStyle: {
-                    paddingBottom: 50,
-                },
             }}
             initialRouteName="explore">
             <ProfileStack.Screen name="explore" component={Explore} />
-            <ProfileStack.Screen name="search" component={SearchResult} />
+            <ProfileStack.Screen
+                name="search"
+                options={
+                    {
+                        // headerShown: true,
+                    }
+                }
+                component={SearchResult}
+            />
         </ProfileStack.Navigator>
     )
 }

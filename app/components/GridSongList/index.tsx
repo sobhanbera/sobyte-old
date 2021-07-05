@@ -31,7 +31,7 @@ let tempIndexing = 0
 const GridSongList = (props: Props) => {
     const {imageQuality} = useSetting()
 
-    return props.content[0].musicId.length <= 0 ? (
+    return props.content[0].musicId.length >= 0 ? (
         <FlatList
             key={props.id}
             showsHorizontalScrollIndicator={false}
@@ -51,7 +51,7 @@ const GridSongList = (props: Props) => {
                         opacity={1}
                         animating
                         direction={props.shimmerDirection}
-                        animationOpacity={0.7}
+                        animationOpacity={0.1}
                         tilt={
                             props.shimmerDirection === 'right' ||
                             props.shimmerDirection === 'down'
@@ -77,14 +77,14 @@ const GridSongList = (props: Props) => {
 
                                 <View
                                     style={[
-                                        styles.dummyText,
                                         styles.dummyBackground,
+                                        styles.dummyText,
                                     ]}
                                 />
                                 <View
                                     style={[
-                                        styles.dummyText,
                                         styles.dummyBackground,
+                                        styles.dummyText,
                                     ]}
                                 />
                             </View>
@@ -199,17 +199,16 @@ const styles = StyleSheet.create({
         paddingBottom: 2,
     },
 
-    dummyText: {
-        width: IMAGE_SIZE_TO_SHOW,
-        height: 10,
-        borderRadius: 5,
-        marginVertical: 5,
-        overflow: 'hidden',
-    },
-
     dummyBackground: {
         backgroundColor: '#00000025',
         borderRadius: 6,
+    },
+    dummyText: {
+        width: IMAGE_SIZE_TO_SHOW,
+        height: 10,
+        borderRadius: 2,
+        marginVertical: 5,
+        overflow: 'hidden',
     },
 })
 
