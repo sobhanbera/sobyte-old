@@ -1,10 +1,20 @@
 import React from 'react'
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native'
-import {Text} from 'react-native-paper'
+import {
+    ScrollView,
+    StyleProp,
+    StyleSheet,
+    TextInput,
+    TextInputProps,
+    TextStyle,
+    TouchableOpacity,
+    View,
+} from 'react-native'
+import {Text, TouchableRipple} from 'react-native-paper'
 import Modal from 'react-native-modal'
 
 import {useTheme} from '../../context'
-import {FontUbuntu} from '../../constants'
+import {DEFAULT_ICON_SIZE, FontUbuntu} from '../../constants'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 interface Props {
     cancelText?: string
@@ -15,10 +25,24 @@ interface Props {
         text: string
         onPress: Function
         extraText?: string
+        type?: 'input' | ''
+        placeholder?: string
+        setText?: Function
+        inputProps?: TextInputProps
+        inputStyle?: StyleProp<TextStyle>
+        errorText?: string | ''
     }>
 }
 const BottomSheet = (props: Props) => {
-    const {themeColors} = useTheme()
+    const {
+        surfacelight,
+        text,
+        placeholder,
+        primary,
+        onWarning,
+        onError,
+        onDanger,
+    } = useTheme().themeColors
 
     return (
         <Modal
@@ -32,10 +56,7 @@ const BottomSheet = (props: Props) => {
             backdropOpacity={0}
             swipeDirection="down"
             onSwipeComplete={() => props.setVisible(false)}
-            style={[
-                styles.modal,
-                // {backgroundColor: themeColors.black[0] + '50'},
-            ]}>
+            style={[styles.modal]}>
             <TouchableOpacity onPress={() => props.setVisible(false)}>
                 <View style={styles.takeTheInvisibleHeight}></View>
             </TouchableOpacity>
@@ -43,7 +64,7 @@ const BottomSheet = (props: Props) => {
                 style={[
                     styles.wrapper,
                     {
-                        backgroundColor: themeColors.surfacelight[0],
+                        backgroundColor: surfacelight[0],
                     },
                 ]}>
                 <TouchableOpacity
@@ -57,12 +78,66 @@ const BottomSheet = (props: Props) => {
             <View style={[styles.flex, styles.flexEnd]}>
                 <ScrollView
                     style={{
-                        backgroundColor: themeColors.surfacelight[0],
+                        backgroundColor: surfacelight[0],
                         flex: 1,
                     }}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}>
                     {props.buttons.map((button, _) => {
+                        if (button.type === 'input') {
+                            return (
+                                <>
+                                    <View key={_} style={styles.inputHolder}>
+                                        <TextInput
+                                            placeholder={button.placeholder}
+                                            value={button.text}
+                                            onChangeText={e =>
+                                                button.setText
+                                                    ? button.setText(e)
+                                                    : {}
+                                            }
+                                            selectionColor={primary.dark[0]}
+                                            keyboardType="numeric"
+                                            placeholderTextColor={
+                                                placeholder[0]
+                                            }
+                                            {...button.inputProps}
+                                            style={{
+                                                flex: 1,
+                                                // width: '90%',
+                                                color: text[0],
+                                                fontSize: 18,
+                                            }}
+                                        />
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                button.onPress()
+                                            }}
+                                            style={{padding: 15}}>
+                                            <MaterialIcon
+                                                name="done"
+                                                size={DEFAULT_ICON_SIZE}
+                                                color={text[0]}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View>
+                                        <Text
+                                            style={[
+                                                styles.textItem,
+                                                {
+                                                    fontSize: 14,
+                                                    color: onWarning[0],
+                                                },
+                                            ]}>
+                                            {button.errorText
+                                                ? button.errorText
+                                                : ''}
+                                        </Text>
+                                    </View>
+                                </>
+                            )
+                        }
                         return (
                             <TouchableOpacity
                                 key={_}
@@ -130,8 +205,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#353535',
     },
     line: {
-        width: 50,
-        height: 5,
+        width: 45,
+        height: 4,
         backgroundColor: '#BFBFBF',
         overflow: 'hidden',
         borderTopLeftRadius: 50,
@@ -149,7 +224,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFFFF',
         textAlign: 'center',
         textAlignVertical: 'center',
-        fontSize: 19,
+        fontSize: 18,
         fontFamily: FontUbuntu,
         paddingVertical: 14,
         paddingHorizontal: 25,
@@ -157,6 +232,13 @@ const styles = StyleSheet.create({
     },
     startingTextAlign: {
         textAlign: 'left',
+    },
+    inputHolder: {
+        paddingHorizontal: 25,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 })
 
