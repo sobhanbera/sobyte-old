@@ -23,8 +23,8 @@ import com.cmcewen.blurview.BlurViewPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
 import com.reactnativecommunity.slider.ReactSliderPackage;
 
-import com.facebook.react.bridge.JSIModulePackage;
-import com.swmansion.reanimated.ReanimatedJSIModulePackage;
+//import com.facebook.react.bridge.JSIModulePackage;
+//import com.swmansion.reanimated.ReanimatedJSIModulePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -36,10 +36,10 @@ public class MainApplication extends Application implements ReactApplication {
           }
 
           /** this function is added becuase we are using react-native-reanimated library */
-          @Override
-          protected JSIModulePackage getJSIModulePackage() {
-              return new ReanimatedJSIModulePackage(); // <- add
-          }
+//          @Override
+//          protected JSIModulePackage getJSIModulePackage() {
+//              return new ReanimatedJSIModulePackage(); // <- add
+//          }
 
           /** this function contains all the package list required */
           @Override
