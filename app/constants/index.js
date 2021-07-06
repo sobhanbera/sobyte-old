@@ -58,7 +58,7 @@ export const DEFAULT_LARGE_ICON_SIZE = 26 // this is the default large icon size
 export const GRID_COLUMNS = 2 // number of columns per grid component for song list, artists list, playlist list and more...
 
 export const LARGE_TEXT_LENGTH = 15 // length of the text after which "..." will be shown
-export const IMAGE_SMALL_SIZE_TO_SHOW = 70 // width and height of the image which should be shown in the UI
+export const IMAGE_SMALL_SIZE_TO_SHOW = 60 // width and height of the image which should be shown in the UI
 export const IMAGE_SIZE_TO_SHOW = 130 // width and height of the image which should be shown in the UI
 export const IMAGE_MARGIN_TO_SHOW = 4 // margin of the image which should be shown in the UI
 export const IMAGE_PADDING_TO_SHOW = 4 // padding of the image which should be shown in the UI
