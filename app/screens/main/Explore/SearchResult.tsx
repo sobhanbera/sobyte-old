@@ -192,6 +192,7 @@ const SearchResult: React.FC<Props> = props => {
                                 <Text
                                     style={[
                                         globalStyles.topicTitle,
+                                        globalStyles.lightBottomBorder,
                                         {color: text[0]},
                                     ]}>
                                     Songs
@@ -212,6 +213,7 @@ const SearchResult: React.FC<Props> = props => {
                                 <Text
                                     style={[
                                         globalStyles.topicTitle,
+                                        globalStyles.lightBottomBorder,
                                         {color: text[0]},
                                     ]}>
                                     Artists

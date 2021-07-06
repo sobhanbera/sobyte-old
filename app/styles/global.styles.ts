@@ -37,6 +37,8 @@ const globalStyles = StyleSheet.create({
         marginHorizontal: 20,
         textAlign: 'center',
         textAlignVertical: 'center',
+    },
+    lightBottomBorder: {
         borderBottomWidth: 0.85,
         borderBottomColor: '#7f7f7f16',
     },
