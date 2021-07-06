@@ -6,9 +6,9 @@ import {
     GradientBackground,
     GridSongList,
     HeaderCollapsible,
-    Scaler,
     Block,
     CenterButtonView,
+    GridCategory,
 } from '../../../components'
 import {
     DEFAULT_ICON_SIZE,
@@ -18,6 +18,7 @@ import {
 import {
     FetchedSongObject,
     BareFetchedSongObjectInstance,
+    Categories,
 } from '../../../interfaces'
 import {
     useTheme,
@@ -137,6 +138,21 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 ref={scrollViewReference}
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground>
+                    {/* as per mood topics */}
+                    <Block style={styles.outerBlock}>
+                        <Block style={styles.innerBlock}>
+                            <BlockTitle
+                                style={[
+                                    globalStyles.topicTitle,
+                                    {color: themeColors.text[0]},
+                                ]}>
+                                As Per Mood
+                            </BlockTitle>
+                        </Block>
+
+                        <GridCategory categories={Categories} />
+                    </Block>
+
                     {/* popular songs */}
                     <Block style={styles.outerBlock}>
                         <Block style={styles.innerBlock}>
