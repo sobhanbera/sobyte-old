@@ -11,24 +11,28 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import {
-    Block,
     GradientBackground,
     HeaderSearch,
-    SongCard,
+    CardSong,
+    CardArtist,
 } from '../../../components'
 import {useMusicApi, usePrompt, useTheme} from '../../../context'
 import {
-    DEFAULT_ICON_SIZE,
     DEFAULT_SMALL_ICON_SIZE,
     HEADER_MIN_HEIGHT,
+    PaddingBottomView,
 } from '../../../constants'
 import {
     FetchedSongObject,
     BareFetchedSongObjectInstance,
+    FetchedArtistObject,
+    BareFetchedArtistObjectInstance,
 } from '../../../interfaces'
 import globalStyles from '../../../styles/global.styles'
 
-interface Props {}
+interface Props {
+    navigation?: any
+}
 const SearchResult: React.FC<Props> = props => {
     const {surfacelight, text} = useTheme().themeColors
     const {getSearchSuggestions, search} = useMusicApi()
@@ -38,29 +42,38 @@ const SearchResult: React.FC<Props> = props => {
     const [songs, setSongs] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
+    const [artists, setArtists] = useState<FetchedArtistObject>(
+        BareFetchedArtistObjectInstance,
+    )
     const [loading, setLoading] = useState<boolean>(false)
     const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
     const [showSearchSuggestions, setShowSearchSuggestions] =
         useState<boolean>(false)
 
+    const getSearchSuggestionsList = () => {
+        if (searchText.length > 0)
+            getSearchSuggestions(searchText)
+                .then((res: string[]) => {
+                    if (!showSearchSuggestions)
+                        setShowSearchSuggestions(searchText.length > 0)
+                    setSearchSuggestions(res)
+                })
+                .catch(err => {
+                    console.log('ERROR ON GETTING SEARCH SUGGESTION', err)
+                })
+    }
+
     useEffect(() => {
-        getSearchSuggestions(searchText)
-            .then((res: string[]) => {
-                setShowSearchSuggestions(true)
-                setSearchSuggestions(res)
-            })
-            .catch(err => {
-                console.log('ERROR ON GETTING SEARCH SUGGESTION', err)
-            })
+        getSearchSuggestionsList()
     }, [searchText])
+
+    const hideSuggestions = () => {
+        setShowSearchSuggestions(false)
+        Keyboard.dismiss()
+    }
 
     const searchResults = (query: string = searchText) => {
         if (query.length <= 0) return null
-
-        Keyboard.dismiss()
-        setShowSearchSuggestions(false)
-        setLoading(true)
-        console.log(showSearchSuggestions)
 
         search(query, 'SONG')
             .then((res: FetchedSongObject) => {
@@ -74,8 +87,31 @@ const SearchResult: React.FC<Props> = props => {
             })
     }
 
-    const startSearch = () => {
-        searchResults()
+    const searchArtists = (query: string = searchText) => {
+        if (query.length <= 0) return null
+
+        Keyboard.dismiss()
+        setShowSearchSuggestions(false)
+
+        search(query, 'ARTIST')
+            .then((res: FetchedArtistObject) => {
+                setArtists(res)
+            })
+            .catch(_err => {
+                setTitle('Sorry! Cannot load data currently.')
+                setDescription('error')
+                setLoading(false)
+            })
+    }
+
+    const startSearch = (query: string = searchText) => {
+        Keyboard.dismiss()
+
+        setShowSearchSuggestions(false)
+        setLoading(true)
+
+        searchResults(query)
+        searchArtists(query)
     }
 
     return (
@@ -96,7 +132,8 @@ const SearchResult: React.FC<Props> = props => {
                     {searchSuggestions.map(suggestion => {
                         return (
                             <TouchableOpacity
-                                onPress={() => searchResults(suggestion)}
+                                key={suggestion}
+                                onPress={() => startSearch(suggestion)}
                                 style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
@@ -129,48 +166,70 @@ const SearchResult: React.FC<Props> = props => {
 
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <View style={globalStyles.coverFullArea}>
-                    <HeaderSearch
-                        onSubmit={searchResults}
-                        text={searchText}
-                        onChangeText={setSearchText}
-                    />
+                    <GradientBackground uniformColor>
+                        <HeaderSearch
+                            onSubmit={startSearch}
+                            text={searchText}
+                            onChangeText={setSearchText}
+                            goBack={() =>
+                                showSearchSuggestions
+                                    ? hideSuggestions()
+                                    : props.navigation.goBack()
+                            }
+                        />
 
-                    <ScrollView
-                        refreshControl={
-                            <RefreshControl
-                                refreshing={loading}
-                                onRefresh={startSearch}
-                            />
-                        }
-                        showsVerticalScrollIndicator={false}
-                        showsHorizontalScrollIndicator={false}>
-                        <GradientBackground uniformColor>
-                            <Block
-                                noBackground
-                                style={globalStyles.searchTabTopic}>
+                        <ScrollView
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={loading}
+                                    onRefresh={startSearch}
+                                />
+                            }
+                            showsVerticalScrollIndicator={false}
+                            showsHorizontalScrollIndicator={false}>
+                            {/* all the songs which are loaded are shown here */}
+                            {songs.content[0].musicId.length > 0 || loading ? (
                                 <Text
                                     style={[
                                         globalStyles.topicTitle,
                                         {color: text[0]},
                                     ]}>
-                                    Popular Hits
+                                    Songs
                                 </Text>
-                            </Block>
+                            ) : null}
+                            <CardSong
+                                onPress={() => {}}
+                                shimmerDirection="right"
+                                songs={songs.content}
+                                textColor={text[0] + 'E7'}
+                                subColor={text[0] + '70'}
+                                loading={loading}
+                            />
 
-                            {songs.content.map(song => {
-                                return (
-                                    <SongCard
-                                        onPress={() => {}}
-                                        shimmerDirection="right"
-                                        song={song}
-                                        textColor={text[0] + 'E7'}
-                                        subColor={text[0] + '70'}
-                                        key={song.musicId}
-                                    />
-                                )
-                            })}
-                        </GradientBackground>
-                    </ScrollView>
+                            {/* moreover artists are displayed here after songs card list */}
+                            {artists.content[0].browseId.length > 0 ||
+                            loading ? (
+                                <Text
+                                    style={[
+                                        globalStyles.topicTitle,
+                                        {color: text[0]},
+                                    ]}>
+                                    Artists
+                                </Text>
+                            ) : null}
+                            <CardArtist
+                                onPress={() => {}}
+                                shimmerDirection="right"
+                                artists={artists.content}
+                                textColor={text[0] + 'E7'}
+                                subColor={text[0] + '70'}
+                                loading={loading}
+                            />
+
+                            {/* below padding for more spacing... */}
+                            <PaddingBottomView />
+                        </ScrollView>
+                    </GradientBackground>
                 </View>
             </TouchableWithoutFeedback>
         </>
