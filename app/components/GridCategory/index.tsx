@@ -32,11 +32,7 @@ const GridCategory = (props: Props) => {
                             colors={category.color}
                             style={styles.linearGradient}>
                             <TouchableOpacity
-                                onPress={() =>
-                                    props.onPress({
-                                        category,
-                                    })
-                                }
+                                onPress={() => props.onPress(category)}
                                 activeOpacity={0.8}>
                                 <ImageBackground
                                     fadeDuration={500}

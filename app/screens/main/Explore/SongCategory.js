@@ -25,7 +25,7 @@ import {useTheme} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
 
 const SongCategory = props => {
-    const {category} = props.route.params
+    const {category, headerTitle} = props.route.params
     const {themeColors} = useTheme()
     const headerTitleReference = React.useRef(null)
 
@@ -98,7 +98,7 @@ const SongCategory = props => {
                                 fontSize: 20,
                             },
                         ]}>
-                        {category.name}
+                        {headerTitle}
                     </Text>
                 </Animatable.View>
             )}>

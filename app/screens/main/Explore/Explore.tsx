@@ -120,7 +120,10 @@ const Profile: React.FC<ExploreTabProps> = props => {
     }, [error])
 
     const launchSongCategoryScreen = (category: SongCategory) => {
-        props.navigation.navigate('songcategory', category)
+        props.navigation.navigate('songcategory', {
+            category: category,
+            headerTitle: `"${category.name}"`,
+        })
     }
 
     return (
