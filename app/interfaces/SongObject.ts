@@ -1,4 +1,4 @@
-export interface ArtistObject {
+export interface SongArtistObject {
     name: string
     browseId: string
 }
@@ -13,7 +13,7 @@ export interface SongObject {
     musicId: string
     playlistId: string
     name: string
-    artist: Array<ArtistObject> | ArtistObject
+    artist: Array<SongArtistObject> | SongArtistObject
     album: {
         name: string
         browseId: string
