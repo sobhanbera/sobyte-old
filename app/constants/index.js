@@ -61,6 +61,7 @@ export const GRID_COLUMNS = 2 // number of columns per grid component for song l
 export const LARGE_TEXT_LENGTH = 15 // length of the text after which "..." will be shown
 export const IMAGE_TINY_SIZE_TO_SHOW = 40 // width and height of the tiny sized image which should be shown in the UI
 export const IMAGE_SMALL_SIZE_TO_SHOW = 60 // width and height of the small sized image which should be shown in the UI
+export const IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW = 90 // width and height of the small sized image which should be shown in the UI
 export const IMAGE_SIZE_TO_SHOW = 130 // width and height of the normal sized image which should be shown in the UI
 export const IMAGE_MARGIN_TO_SHOW = 4 // margin of the large sized image which should be shown in the UI
 export const IMAGE_PADDING_TO_SHOW = 4 // padding of the image which should be shown in the UI
