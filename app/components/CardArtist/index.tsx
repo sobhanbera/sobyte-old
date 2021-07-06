@@ -6,82 +6,120 @@ import {
     getHighQualityImageFromSongImage,
     firstLetterCap,
 } from '../../utils/Objects'
-import {
-    DEFAULT_ICON_SIZE,
-    DEFAULT_SMALL_ICON_SIZE,
-    IMAGE_MARGIN_TO_SHOW,
-    IMAGE_PADDING_TO_SHOW,
-    IMAGE_SIZE_TO_SHOW,
-    IMAGE_SMALL_SIZE_TO_SHOW,
-} from '../../constants'
-import {ArtistObject} from '../../interfaces'
+import {IMAGE_TINY_SIZE_TO_SHOW} from '../../constants'
+import {ArtistObject, CasualDemoList} from '../../interfaces'
+import Shimmer from 'react-native-shimmer'
 
 interface Props {
     textColor: string
     subColor: string
     shimmerDirection: 'up' | 'down' | 'left' | 'right'
     onPress: Function
-    artist: ArtistObject
+    artists: Array<ArtistObject>
+    loading: boolean
 }
 
 const CardSong = ({
-    artist,
+    artists,
     onPress,
     textColor,
     subColor,
     shimmerDirection,
+    loading,
 }: Props) => {
     const {imageQuality} = useSetting()
 
-    const songImage = getHighQualityImageFromSongImage(
-        artist.thumbnails[0],
-        imageQuality || '120',
-    )
-    const highQualityImage = getHighQualityImageFromSongImage(
-        artist.thumbnails[0],
-        '450',
-    )
-
-    if (artist.browseId.length <= 0) return null
-
     return (
-        <TouchableOpacity
-            onPress={() =>
-                onPress({
-                    ...artist,
-                    image: highQualityImage,
-                })
-            }
-            activeOpacity={0.75}>
-            <View style={styles.card}>
-                <View style={styles.cardMain}>
-                    <Image
-                        source={{uri: songImage}}
-                        style={{
-                            width: IMAGE_SMALL_SIZE_TO_SHOW,
-                            height: IMAGE_SMALL_SIZE_TO_SHOW,
-                            borderRadius: 5,
+        <View>
+            {loading
+                ? CasualDemoList.map(demo => {
+                      return (
+                          <Shimmer
+                              key={demo.id}
+                              opacity={1}
+                              animating
+                              direction={shimmerDirection}
+                              animationOpacity={0.1}>
+                              <TouchableOpacity>
+                                  <View
+                                      style={{
+                                          marginHorizontal: 25,
+                                          marginVertical: 10,
+                                          flexDirection: 'row',
+                                          justifyContent: 'flex-start',
+                                          alignItems: 'center',
+                                      }}>
+                                      <View
+                                          style={[
+                                              styles.imageDummy,
+                                              styles.contentWrapper,
+                                          ]}
+                                      />
+                                      <View
+                                          style={[
+                                              styles.textDummy,
+                                              styles.contentWrapper,
+                                          ]}
+                                      />
+                                  </View>
+                              </TouchableOpacity>
+                          </Shimmer>
+                      )
+                  })
+                : artists[0].browseId.length > 0
+                ? artists.map(artist => {
+                      const songImage = getHighQualityImageFromSongImage(
+                          artist.thumbnails[0],
+                          imageQuality || '120',
+                      )
+                      const highQualityImage = getHighQualityImageFromSongImage(
+                          artist.thumbnails[0],
+                          '450',
+                      )
 
-                            borderWidth: 0.2,
-                            borderColor: subColor,
-                        }}
-                    />
+                      if (artist.browseId.length <= 0) return null
 
-                    <View style={styles.songDetails}>
-                        <Text
-                            numberOfLines={1}
-                            style={[
-                                styles.songName,
-                                {
-                                    color: textColor,
-                                },
-                            ]}>
-                            {firstLetterCap(artist.name)}
-                        </Text>
-                    </View>
-                </View>
-            </View>
-        </TouchableOpacity>
+                      return (
+                          <TouchableOpacity
+                              key={artist.browseId}
+                              onPress={() =>
+                                  onPress({
+                                      ...artist,
+                                      image: highQualityImage,
+                                  })
+                              }
+                              activeOpacity={0.75}>
+                              <View style={styles.card}>
+                                  <View style={styles.cardMain}>
+                                      <Image
+                                          source={{uri: songImage}}
+                                          style={{
+                                              width: IMAGE_TINY_SIZE_TO_SHOW,
+                                              height: IMAGE_TINY_SIZE_TO_SHOW,
+                                              borderRadius: 100,
+
+                                              borderWidth: 0.2,
+                                              borderColor: subColor,
+                                          }}
+                                      />
+
+                                      <Text
+                                          numberOfLines={1}
+                                          style={[
+                                              styles.artistName,
+                                              {
+                                                  color: textColor,
+                                              },
+                                          ]}>
+                                          {firstLetterCap(artist.name)}
+                                      </Text>
+                                  </View>
+                              </View>
+                          </TouchableOpacity>
+                      )
+                  })
+                : null}
+        </View>
     )
 }
 
@@ -98,21 +136,28 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    songDetails: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        paddingHorizontal: 10,
-    },
-    songName: {
+    artistName: {
         fontSize: 17,
         maxWidth: 225,
         marginVertical: 2,
+        paddingHorizontal: 15,
     },
-    songDetailsText: {
-        fontSize: 15,
-        maxWidth: 225,
-        width: 225,
+
+    contentWrapper: {
+        backgroundColor: '#0000007f',
+    },
+    imageDummy: {
+        width: IMAGE_TINY_SIZE_TO_SHOW,
+        height: IMAGE_TINY_SIZE_TO_SHOW,
+        borderRadius: 100,
+    },
+    textDummy: {
+        width: 200,
+        height: 7,
+        borderRadius: 2,
+        marginTop: 5,
+        marginBottom: 6,
+        marginHorizontal: 15,
     },
 })
 
