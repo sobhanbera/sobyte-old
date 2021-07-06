@@ -30,5 +30,5 @@ export {BareFetchedArtistObjectInstance}
 import {BareFetchedSongObjectInstance, CasualDemoList} from './SongObject'
 export {BareFetchedSongObjectInstance, CasualDemoList}
 
-import {Categories} from './Data'
-export {Categories}
+import {MoodCategories, GenresCategories} from './Data'
+export {MoodCategories, GenresCategories}
