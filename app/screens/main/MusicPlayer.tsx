@@ -18,8 +18,6 @@ const Player: React.FC<PlayerProps> = props => {
         })
     }, [])
 
-    console.log(current.artwork)
-
     return (
         <GradientBackground>
             <DoubleTap
@@ -34,7 +32,7 @@ const Player: React.FC<PlayerProps> = props => {
                     }}
                     resizeMode="cover"
                     style={globalStyles.fullImageBackground}
-                    blurRadius={MUSIC_PLAYER_BLUR}>
+                    blurRadius={MUSIC_PLAYER_BLUR + 30}>
                     <ProgressSlider />
                 </ImageBackground>
             </DoubleTap>
