@@ -1,4 +1,4 @@
-import {ArtistObject, SongObject, ThumbnailObject} from '../interfaces'
+import {SongArtistObject, SongObject, ThumbnailObject} from '../interfaces'
 import {LARGE_TEXT_LENGTH} from '../constants'
 
 export function returnNullCallback(nullableValue: any, defaultValue: any): any {
@@ -54,7 +54,7 @@ export const getHighQualityImageFromSong = (
  * @param artists array of artists with multiple values
  * @returns the string of list of names of artist in the arguments of function
  */
-export function formatArtistsListFromArray(artists: Array<ArtistObject>) {
+export function formatArtistsListFromArray(artists: Array<SongArtistObject>) {
     let str = ''
     for (let i = 0; i < artists.length; ++i) {
         if (i >= 2) break
@@ -67,7 +67,7 @@ export function formatArtistsListFromArray(artists: Array<ArtistObject>) {
  * @param artists only takes a single artist object with name and browserId
  * @returns the name of artist
  */
-export function formatArtistSingle(artists: ArtistObject) {
+export function formatArtistSingle(artists: SongArtistObject) {
     return firstLetterCap(artists.name)
 }
 /**
@@ -75,7 +75,9 @@ export function formatArtistSingle(artists: ArtistObject) {
  * @param artists accepts both artistObject and array of it and provide the artist or the artist list string according to the input parameter
  * @returns the name or string of list of names of artists
  */
-export function formatArtists(artists: Array<ArtistObject> | ArtistObject) {
+export function formatArtists(
+    artists: Array<SongArtistObject> | SongArtistObject,
+) {
     if (Array.isArray(artists)) {
         return formatArtistsListFromArray(artists)
     } else {
