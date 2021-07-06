@@ -28,6 +28,7 @@ import FullScreenLoading from './FullScreenLoading'
 import GradientBackground from './GradientBackground'
 import BottomSheet from './BottomSheet'
 
+import GridCategory from './GridCategory'
 import CardSong from './CardSong'
 import CardArtist from './CardArtist'
 
@@ -58,6 +59,7 @@ export {
     Prompt,
     BottomSheet,
     BottomSheet as SimpleBottomSheet,
+    GridCategory,
     CardSong,
     CardArtist,
 }
