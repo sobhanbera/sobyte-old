@@ -34,8 +34,11 @@ const globalStyles = StyleSheet.create({
         letterSpacing: 0.6,
         paddingHorizontal: 13,
         paddingVertical: 8,
+        marginHorizontal: 20,
         textAlign: 'center',
         textAlignVertical: 'center',
+        borderBottomWidth: 0.85,
+        borderBottomColor: '#7f7f7f16',
     },
 
     flex: {
