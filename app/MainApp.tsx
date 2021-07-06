@@ -17,7 +17,7 @@ import {Loader} from './components'
 
 const AppContext = createContext({
     showLoading: false,
-    setShowLoading: (value: boolean) => {},
+    setShowLoading: (_value: boolean) => {},
     toggleLoader: () => {},
 })
 const MainApp = () => {
