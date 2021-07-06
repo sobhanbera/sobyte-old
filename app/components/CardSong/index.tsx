@@ -26,7 +26,7 @@ interface Props {
     song: SongObject
 }
 
-const SongCard = ({
+const CardSong = ({
     song,
     onPress,
     textColor,
@@ -138,4 +138,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default SongCard
+export default CardSong
