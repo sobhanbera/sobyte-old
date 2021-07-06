@@ -24,19 +24,20 @@ const GridCategory = (props: Props) => {
             <View style={styles.mainGridContainer}>
                 {props.categories.map(category => {
                     return (
-                        <TouchableOpacity
+                        <LinearGradient
                             key={category.id}
-                            onPress={() =>
-                                props.onPress({
-                                    category,
-                                })
-                            }>
-                            <LinearGradient
-                                angle={165}
-                                useAngle
-                                angleCenter={{x: 0.5, y: 0.5}}
-                                colors={category.color}
-                                style={styles.linearGradient}>
+                            angle={165}
+                            useAngle
+                            angleCenter={{x: 0.5, y: 0.5}}
+                            colors={category.color}
+                            style={styles.linearGradient}>
+                            <TouchableOpacity
+                                onPress={() =>
+                                    props.onPress({
+                                        category,
+                                    })
+                                }
+                                activeOpacity={0.8}>
                                 <ImageBackground
                                     fadeDuration={500}
                                     source={{uri: category.image}}
@@ -49,8 +50,8 @@ const GridCategory = (props: Props) => {
                                         </Text>
                                     </View>
                                 </ImageBackground>
-                            </LinearGradient>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     )
                 })}
             </View>
