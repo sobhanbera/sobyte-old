@@ -13,12 +13,15 @@ import {
 import {
     DEFAULT_ICON_SIZE,
     HEADER_MIN_HEIGHT,
+    IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
     PaddingBottomView,
 } from '../../../constants'
 import {
     FetchedSongObject,
     BareFetchedSongObjectInstance,
-    Categories,
+    MoodCategories,
+    GenresCategories,
+    SongCategory,
 } from '../../../interfaces'
 import {
     useTheme,
@@ -116,6 +119,10 @@ const Profile: React.FC<ExploreTabProps> = props => {
             })
     }, [error])
 
+    const launchSongCategoryScreen = (category: SongCategory) => {
+        props.navigation.navigate('songcategory', category)
+    }
+
     return (
         <View style={globalStyles.flex}>
             <HeaderCollapsible
@@ -139,18 +146,46 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground>
                     {/* as per mood topics */}
-                    <Block style={styles.outerBlock}>
+                    <Block
+                        style={{
+                            marginHorizontal: 10,
+                            marginVertical: 10,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            elevation: 30,
+                            // this is the static height of block or else it will be all horizontal scroll with one row
+                            height:
+                                IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW * 3 + // the image size of gridCategory component
+                                3 * 5 + // top padding of image
+                                3 * 5 +
+                                125, // bottom padding of image
+                        }}>
                         <Block style={styles.innerBlock}>
                             <BlockTitle
                                 style={[
                                     globalStyles.topicTitle,
                                     {color: themeColors.text[0]},
                                 ]}>
-                                As Per Mood
+                                Moods & Genres
                             </BlockTitle>
                         </Block>
 
-                        <GridCategory categories={Categories} />
+                        <ScrollView
+                            horizontal
+                            showsHorizontalScrollIndicator={false}>
+                            <GridCategory
+                                categories={MoodCategories}
+                                onPress={(category: SongCategory) =>
+                                    launchSongCategoryScreen(category)
+                                }
+                            />
+                            <GridCategory
+                                categories={GenresCategories}
+                                onPress={(category: SongCategory) =>
+                                    launchSongCategoryScreen(category)
+                                }
+                            />
+                        </ScrollView>
                     </Block>
 
                     {/* popular songs */}
