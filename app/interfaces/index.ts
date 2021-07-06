@@ -1,3 +1,9 @@
+import SongCategory from './SongCategory'
+export type {SongCategory}
+
+import FetchedArtistObject, {ArtistObject} from './ArtistObject'
+export type {FetchedArtistObject, ArtistObject}
+
 import FetchedSongObject, {
     SongArtistObject,
     SongObject,
@@ -14,13 +20,15 @@ export type {
     ContinuationObjectItself,
 }
 
-import FetchedArtistObject, {ArtistObject} from './ArtistObject'
-export type {FetchedArtistObject, ArtistObject}
 /**
  * object's instance of the variables for demo purpose or initial values
  */
-import {BareFetchedSongObjectInstance, CasualDemoList} from './SongObject'
-export {BareFetchedSongObjectInstance, CasualDemoList}
 
 import {BareFetchedArtistObjectInstance} from './ArtistObject'
 export {BareFetchedArtistObjectInstance}
+
+import {BareFetchedSongObjectInstance, CasualDemoList} from './SongObject'
+export {BareFetchedSongObjectInstance, CasualDemoList}
+
+import {Categories} from './Data'
+export {Categories}
