@@ -29,6 +29,7 @@ import GradientBackground from './GradientBackground'
 import BottomSheet from './BottomSheet'
 
 import CardSong from './CardSong'
+import CardArtist from './CardArtist'
 
 export {
     Scaler,
@@ -58,6 +59,7 @@ export {
     BottomSheet,
     BottomSheet as SimpleBottomSheet,
     CardSong,
+    CardArtist,
 }
 
 /** music player components */
