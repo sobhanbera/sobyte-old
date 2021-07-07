@@ -1,5 +1,5 @@
 import React, {useState} from 'react' // as usual import
-import axios, {CancelToken} from 'axios' // for making api requests
+import axios from 'axios' // for making api requests
 import RNLocalize from 'react-native-localize' // to pass the location of user in the api call
 import querystring from 'querystring' // string methods
 import _ from 'lodash' // util methods
@@ -241,7 +241,7 @@ const MusicApi = (props: MusicApiProps) => {
                             })
                     }
                 })
-                .catch(err => {
+                .catch(_err => {
                     /**
                      *
                      * @returns this context return the same which was the initialize function was doing instead first a check
