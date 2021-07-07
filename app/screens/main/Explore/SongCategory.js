@@ -33,7 +33,9 @@ const SongCategory = props => {
         <ImageHeaderScrollView
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            bounces
+            bounces={false}
+            scrollViewBackgroundColor={themeColors.surfacelight[0]}
+            overlayColor={themeColors.surfacelight[0]}
             maxOverlayOpacity={1}
             minOverlayOpacity={0.4}
             maxHeight={350}
