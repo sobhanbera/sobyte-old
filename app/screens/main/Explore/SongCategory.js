@@ -2,11 +2,11 @@ import React from 'react'
 import {
     View,
     Text,
-    TouchableOpacity,
     Image,
     StyleSheet,
     Platform,
     Dimensions,
+    Pressable,
 } from 'react-native'
 import ImageHeaderScrollView, {
     TriggeringView,
@@ -70,13 +70,11 @@ const SongCategory = props => {
                                 height: '100%',
                             },
                         ]}>
-                        <TouchableOpacity
-                            activeOpacity={0.95}
-                            onPress={() => {}}>
+                        <Pressable onPress={() => {}}>
                             <Text style={styles.headerTitle}>
                                 {category.name}
                             </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                     </View>
                 )
             }}
@@ -106,10 +104,14 @@ const SongCategory = props => {
                 style={{
                     backgroundColor: themeColors.surfacelight[0],
                 }}
+                onBeginHidden={() =>
+                    headerTitleReference.current.slideInDown(500)
+                }
                 onHide={() => headerTitleReference.current.slideInDown(500)}
                 onBeginDisplayed={() =>
                     headerTitleReference.current.slideOutUp(500)
-                }>
+                }
+                onDisplay={() => headerTitleReference.current.slideOutUp(500)}>
                 <Text
                     style={{
                         fontSize: 100,
