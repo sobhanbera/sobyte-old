@@ -17,7 +17,7 @@ export const THEME_STORAGE_KEY = '@APP:THEME' // Storage key for the app's theme
 export const SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY =
     '@APP:SONG_IMAGE_DEFAULT_QUALITY' // Storage key for the app's theme
 
-export const HEADER_DATA_STORAGE_KEY = '@APP:theme' // Storage key for header fetched by the api everytime...
+export const API_CONFIG_DATA_STORAGE_KEY = '@APP:API_CONFIG_DATA' // Storage key for header fetched by the api everytime...
 
 /** Fonts Short Name */
 export const FontRoboto = 'Roboto-Regular'
