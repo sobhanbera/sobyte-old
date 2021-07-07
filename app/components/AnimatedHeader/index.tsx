@@ -17,6 +17,7 @@ import globalStyles from '../../styles/global.styles'
 interface Props {
     category: SongCategory
     headerTitle: string
+    children?: React.ReactNode
 }
 const AnimatedHeader = (props: Props) => {
     const {themeColors} = useTheme()
@@ -107,55 +108,7 @@ const AnimatedHeader = (props: Props) => {
                 onHide={showHeaderTitle}
                 onBeginDisplayed={hideHeaderTitle}
                 onDisplay={hideHeaderTitle}>
-                <Text
-                    style={{
-                        fontSize: 100,
-                        color: 'white',
-                    }}>
-                    Scroll Me!
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 100,
-                        color: 'white',
-                    }}>
-                    Scroll Me!
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 100,
-                        color: 'white',
-                    }}>
-                    Scroll Me!
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 100,
-                        color: 'white',
-                    }}>
-                    Scroll Me!
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 100,
-                        color: 'white',
-                    }}>
-                    Scroll Me!
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 100,
-                        color: 'white',
-                    }}>
-                    Scroll Me!
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 100,
-                        color: 'white',
-                    }}>
-                    Scroll Me!
-                </Text>
+                {props.children}
 
                 <PaddingBottomView />
             </TriggeringView>
