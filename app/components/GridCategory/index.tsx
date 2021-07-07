@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-    View,
-    Text,
-    StyleSheet,
-    ImageBackground,
-    TouchableOpacity,
-} from 'react-native'
+import {View, Text, StyleSheet, ImageBackground, Pressable} from 'react-native'
 
 import {SongCategory} from '../../interfaces'
 import {
@@ -31,9 +25,7 @@ const GridCategory = (props: Props) => {
                             angleCenter={{x: 0.5, y: 0.5}}
                             colors={category.color}
                             style={styles.linearGradient}>
-                            <TouchableOpacity
-                                onPress={() => props.onPress(category)}
-                                activeOpacity={0.8}>
+                            <Pressable onPress={() => props.onPress(category)}>
                                 <ImageBackground
                                     fadeDuration={500}
                                     source={{uri: category.image}}
@@ -46,7 +38,7 @@ const GridCategory = (props: Props) => {
                                         </Text>
                                     </View>
                                 </ImageBackground>
-                            </TouchableOpacity>
+                            </Pressable>
                         </LinearGradient>
                     )
                 })}
