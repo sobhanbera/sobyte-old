@@ -6110,6 +6110,11 @@ rimraf@~2.6.2:
   dependencies:
     glob "^7.1.3"
 
+rn-dominant-color@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/rn-dominant-color/-/rn-dominant-color-1.7.2.tgz#b04b0c17c1dfc7269869f530b33548e3eb0e0d9f"
+  integrity sha512-M9brxZvxZ4G5aPGagy1Tq++Dq1BaI98tqQ3ZPlqCa2SHIBgo3EQrtuHt4uHNv0/OWZXw535BGOC0eWZRT6eI/w==
+
 rsvp@^4.8.4:
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
