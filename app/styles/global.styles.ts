@@ -39,7 +39,7 @@ const globalStyles = StyleSheet.create({
         textAlignVertical: 'center',
     },
     lightBottomBorder: {
-        borderBottomWidth: 0.85,
+        borderBottomWidth: 1,
         borderBottomColor: '#7f7f7f16',
     },
 
