@@ -128,6 +128,32 @@ const globalStyles = StyleSheet.create({
         width: '100%',
         textAlignVertical: 'center',
     },
+
+    /**
+     * animated header designs start
+     */
+
+    animatedHeaderImage: {
+        width: '100%',
+        height: 350,
+    },
+    animatedHeaderTitleContainer: {
+        height: HEADER_MIN_HEIGHT,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 5,
+        width: '100%',
+    },
+    animatedHeaderTitle: {
+        color: 'white',
+        fontSize: 40,
+        backgroundColor: 'transparent',
+        fontFamily: FontRobotoBold,
+    },
+
+    /**
+     * animated header style design ends
+     */
 })
 
 export default globalStyles
