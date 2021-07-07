@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, FlatList, Image, StyleSheet, TouchableOpacity} from 'react-native'
+import {View, FlatList, Image, StyleSheet, Pressable} from 'react-native'
 import {Text} from 'react-native-paper'
 import Shimmer from 'react-native-shimmer'
 
@@ -56,9 +56,7 @@ const GridSongList = (props: Props) => {
                                 ? 10
                                 : -10
                         }>
-                        <TouchableOpacity
-                            activeOpacity={0.8}
-                            onPress={() => {}}>
+                        <Pressable onPress={() => {}}>
                             <View
                                 style={[
                                     styles.contentWrapper,
@@ -88,7 +86,7 @@ const GridSongList = (props: Props) => {
                                     ]}
                                 />
                             </View>
-                        </TouchableOpacity>
+                        </Pressable>
                     </Shimmer>
                 )
             }}
@@ -119,7 +117,7 @@ const GridSongList = (props: Props) => {
                 const artist = formatArtists(item.artist)
 
                 return (
-                    <TouchableOpacity
+                    <Pressable
                         onPress={() =>
                             props.onPress({
                                 id: item.musicId,
@@ -128,8 +126,7 @@ const GridSongList = (props: Props) => {
                                 artist: artist,
                                 artwork: highQualityImage,
                             })
-                        }
-                        activeOpacity={0.8}>
+                        }>
                         <View
                             style={[
                                 styles.contentWrapper,
@@ -168,7 +165,7 @@ const GridSongList = (props: Props) => {
                                 {artist}
                             </Text>
                         </View>
-                    </TouchableOpacity>
+                    </Pressable>
                 )
             }}
         />
