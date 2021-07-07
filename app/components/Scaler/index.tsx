@@ -19,7 +19,7 @@ interface ScalerProps {
     autoAnimate?: boolean
 }
 export default function Scaler(props: ScalerProps) {
-    const animation = new Animated.Value(0)
+    const animation = React.useRef(new Animated.Value(0)).current
     const scale = animation.interpolate({
         inputRange: [0, 1],
         outputRange: [1, props.scale ?? 0.95],
