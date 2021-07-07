@@ -32,6 +32,8 @@ import GridCategory from './GridCategory'
 import CardSong from './CardSong'
 import CardArtist from './CardArtist'
 
+import AnimatedHeader from './AnimatedHeader'
+
 export {
     Scaler,
     AuthButton,
@@ -62,6 +64,8 @@ export {
     GridCategory,
     CardSong,
     CardArtist,
+    AnimatedHeader,
+    AnimatedHeader as AnimatedHeaderView,
 }
 
 /** music player components */
