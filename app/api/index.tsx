@@ -3,10 +3,12 @@ import axios, {CancelToken} from 'axios' // for making api requests
 import RNLocalize from 'react-native-localize' // to pass the location of user in the api call
 import querystring from 'querystring' // string methods
 import _ from 'lodash' // util methods
+import AsyncStorage from '@react-native-community/async-storage'
 
 import * as utils from './utils' // local util path
 import * as parsers from './parsers' // local parser path
 import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // objects required for instances in this files
+import {API_CONFIG_DATA_STORAGE_KEY} from '../constants'
 
 /**
  * @deprecated for now at least
@@ -106,7 +108,7 @@ const MusicApi = (props: MusicApiProps) => {
     /**
      * state
      */
-    const [musicConfig, setMusicConfig] = useState<{[key: string]: string}>({})
+    const [musicConfig, setMusicConfig] = useState<{[key: string]: any}>({})
     const [error, setError] = useState(true)
     const [loaded, setLoaded] = useState(false)
 
@@ -130,41 +132,173 @@ const MusicApi = (props: MusicApiProps) => {
      * main app starts after using this function context provider
      */
     const initialize = async () => {
-        return new Promise((resolve, reject) => {
-            client
-                .get('/')
-                .then(res => {
-                    try {
-                        res.data
-                            .split('ytcfg.set(')
-                            .map((v: string) => {
-                                try {
-                                    return JSON.parse(v.split(');')[0])
-                                } catch (_) {}
-                            })
-                            .filter(Boolean)
-                            .forEach(
-                                (cfg: any) =>
-                                    (fetchConfig = Object.assign(
-                                        cfg,
-                                        fetchConfig,
-                                    )),
-                            )
-                        resolve({
-                            locale: fetchConfig.LOCALE,
-                            logged_in: fetchConfig.LOGGED_IN,
-                        })
-                        setMusicConfig(fetchConfig)
+        return new Promise(async (resolve, reject) => {
+            // await AsyncStorage.setItem(API_CONFIG_DATA_STORAGE_KEY, '')
+            await AsyncStorage.getItem(API_CONFIG_DATA_STORAGE_KEY)
+                .then((res: any) => {
+                    /** this is the locally saved api fetching and helping
+                     *  data which would help a faster loader when the app
+                     *  is launched */
+                    const apiConfigs = JSON.parse(res)
+                    /**
+                     * @LAST_UPDATED_DATE - this is the timestamp when the last api was last updated which is done every day once automatically...
+                     */
+                    const LAST_DATE = new Date(
+                        Number(apiConfigs.LAST_UPDATED_DATE),
+                    ).getDate()
+                    // current date to compare the above date with...
+                    const CURR_DATE = new Date().getDate()
+                    /**
+                     * here we are checking that the current date and the last update
+                     * date difference is <= 1 only then we can continue to provide the
+                     * saved data else provide the updated data as fetch config
+                     * means if the user was only yesterday, today or tommowrow
+                     * than we will provide the saved data else the updated one
+                     * the check is : `Math.abs(CURR_DATE-LAST_DATE) <= 1`
+                     * check outputs :
+                     * Yesterday = 1
+                     * Today = 0
+                     * Tommorow = 1  */
+                    if (
+                        Math.abs(CURR_DATE - LAST_DATE) <= 1 &&
+                        apiConfigs.LAST_UPDATED_DATE &&
+                        apiConfigs.VISITOR_DATA &&
+                        apiConfigs.INNERTUBE_CONTEXT_CLIENT_NAME &&
+                        apiConfigs.INNERTUBE_CLIENT_VERSION &&
+                        apiConfigs.DEVICE &&
+                        apiConfigs.PAGE_CL &&
+                        apiConfigs.PAGE_BUILD_LABEL &&
+                        apiConfigs.INNERTUBE_API_VERSION &&
+                        apiConfigs.INNERTUBE_API_KEY
+                    ) {
+                        setMusicConfig(apiConfigs)
                         setError(false)
                         setLoaded(true)
-                    } catch (err) {
-                        reject(err)
-                        setError(true)
-                        setLoaded(false)
+                        resolve({
+                            locale: apiConfigs.LOCALE,
+                            logged_in: apiConfigs.LOGGED_IN,
+                        })
+                    } else {
+                        /**
+                         *
+                         * @returns this context return the same which was the initialize function was doing instead first a check
+                         * will be done that the api data is available if not then this function will be called and this would be more faster and
+                         * efficient than the usual code...
+                         */
+                        console.log(
+                            'STARTED INIT API CODE 1: under else condition...',
+                        )
+                        client
+                            .get('/')
+                            .then(async res => {
+                                try {
+                                    res.data
+                                        .split('ytcfg.set(')
+                                        .map((v: string) => {
+                                            try {
+                                                return JSON.parse(
+                                                    v.split(');')[0],
+                                                )
+                                            } catch (_) {}
+                                        })
+                                        .filter(Boolean)
+                                        .forEach(
+                                            (cfg: any) =>
+                                                (fetchConfig = Object.assign(
+                                                    cfg,
+                                                    fetchConfig,
+                                                )),
+                                        )
+                                    resolve({
+                                        locale: fetchConfig.LOCALE,
+                                        logged_in: fetchConfig.LOGGED_IN,
+                                    })
+                                    setMusicConfig(fetchConfig)
+                                    setError(false)
+                                    setLoaded(true)
+                                    /**
+                                     * this is the timestamp when the last api was last updated which is done every day once automatically...
+                                     */
+                                    const LAST_UPDATED_DATE = new Date()
+                                        .getTime()
+                                        .toString()
+                                    await AsyncStorage.setItem(
+                                        API_CONFIG_DATA_STORAGE_KEY,
+                                        JSON.stringify({
+                                            ...fetchConfig,
+                                            LAST_UPDATED_DATE:
+                                                LAST_UPDATED_DATE,
+                                        }),
+                                    )
+                                } catch (err) {
+                                    reject(err)
+                                    setError(true)
+                                    setLoaded(false)
+                                }
+                            })
+                            .catch(err => {
+                                reject(err)
+                            })
                     }
                 })
                 .catch(err => {
-                    reject(err)
+                    /**
+                     *
+                     * @returns this context return the same which was the initialize function was doing instead first a check
+                     * will be done that the api data is available if not then this function will be called and this would be more faster and
+                     * efficient than the usual code...
+                     */
+                    console.log(
+                        'STARTED INIT API CODE 2: under catch statement...',
+                    )
+                    client
+                        .get('/')
+                        .then(async res => {
+                            try {
+                                res.data
+                                    .split('ytcfg.set(')
+                                    .map((v: string) => {
+                                        try {
+                                            return JSON.parse(v.split(');')[0])
+                                        } catch (_) {}
+                                    })
+                                    .filter(Boolean)
+                                    .forEach(
+                                        (cfg: any) =>
+                                            (fetchConfig = Object.assign(
+                                                cfg,
+                                                fetchConfig,
+                                            )),
+                                    )
+                                resolve({
+                                    locale: fetchConfig.LOCALE,
+                                    logged_in: fetchConfig.LOGGED_IN,
+                                })
+                                setMusicConfig(fetchConfig)
+                                setError(false)
+                                setLoaded(true)
+                                /**
+                                 * this is the timestamp when the last api was last updated which is done every day once automatically...
+                                 */
+                                const LAST_UPDATED_DATE = new Date()
+                                    .getTime()
+                                    .toString()
+                                await AsyncStorage.setItem(
+                                    API_CONFIG_DATA_STORAGE_KEY,
+                                    JSON.stringify({
+                                        ...fetchConfig,
+                                        LAST_UPDATED_DATE: LAST_UPDATED_DATE,
+                                    }),
+                                )
+                            } catch (err) {
+                                reject(err)
+                                setError(true)
+                                setLoaded(false)
+                            }
+                        })
+                        .catch(err => {
+                            reject(err)
+                        })
                 })
         })
     }
