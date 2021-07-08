@@ -1,3 +1,6 @@
+import {DominatingColors} from './Modals'
+export type {DominatingColors}
+
 import SongCategory from './SongCategory'
 export type {SongCategory}
 
