@@ -22,7 +22,7 @@ import com.zoontek.rnlocalize.RNLocalizePackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
 import com.reactnativecommunity.slider.ReactSliderPackage;
-import cl.hasaezs.rndominantcolor.RNDominantColorPackage;
+import com.reactnativeimagecolors.ImageColorsPackage;
 
 //import com.facebook.react.bridge.JSIModulePackage;
 //import com.swmansion.reanimated.ReanimatedJSIModulePackage;

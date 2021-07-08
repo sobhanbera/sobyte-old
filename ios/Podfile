@@ -28,6 +28,8 @@ target 'Sobyte' do
 
   pod 'RNDominantColor', :path => '../node_modules/rn-dominant-color'
 
+  pod 'RNImageColors', :path => '../node_modules/react-native-image-colors'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing

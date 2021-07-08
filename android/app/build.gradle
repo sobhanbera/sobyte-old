@@ -204,7 +204,7 @@ dependencies {
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-device-info')
     implementation project(':react-native-localize')
-    implementation project(':rn-dominant-color')
+    implementation project(':react-native-image-colors')
 
     implementation 'com.facebook.fresco:fresco:2.2.0'
     // For animated GIF support
