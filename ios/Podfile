@@ -26,6 +26,8 @@ target 'Sobyte' do
 
   pod 'react-native-slider', :path => '../node_modules/@react-native-community/slider'
 
+  pod 'RNDominantColor', :path => '../node_modules/rn-dominant-color'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing

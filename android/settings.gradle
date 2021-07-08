@@ -1,5 +1,9 @@
 rootProject.name = 'Sobyte'
 
+/** library to get or extract the colors (vibrant, main, common, etc...) from an image */
+include ':rn-dominant-color'
+project(':rn-dominant-color').projectDir = new File(rootProject.projectDir, '../node_modules/rn-dominant-color/android')
+
 /** this library will provide the slider component which would be used as the music player slider */
 include ':@react-native-community_slider'
 project(':@react-native-community_slider').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/slider/android')
