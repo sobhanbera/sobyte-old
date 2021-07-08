@@ -17,12 +17,12 @@ const AppStartingPoint = () => {
     const [loading, setLoading] = useState<boolean>(false)
 
     return (
-        <MusicApi>
-            <ThemeProvider>
-                <SettingsProvider>
-                    <Player>
-                        <MusicFetcher>
-                            <Prompt>
+        <ThemeProvider>
+            <SettingsProvider>
+                <MusicApi>
+                    <MusicFetcher>
+                        <Prompt>
+                            <Player>
                                 <NavigationContainer theme={DarkTheme}>
                                     {!userLoggedIn ? (
                                         <AuthenticationNavigation />
@@ -32,12 +32,12 @@ const AppStartingPoint = () => {
 
                                     <FullScreenLoading visible={loading} />
                                 </NavigationContainer>
-                            </Prompt>
-                        </MusicFetcher>
-                    </Player>
-                </SettingsProvider>
-            </ThemeProvider>
-        </MusicApi>
+                            </Player>
+                        </Prompt>
+                    </MusicFetcher>
+                </MusicApi>
+            </SettingsProvider>
+        </ThemeProvider>
     )
 }
 
