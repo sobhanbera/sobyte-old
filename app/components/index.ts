@@ -68,6 +68,7 @@ export {
     CardArtist,
     AnimatedHeader,
     AnimatedHeader as AnimatedHeaderView,
+    Shimmer,
 }
 
 /** music player components */
