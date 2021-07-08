@@ -1,6 +1,11 @@
 export interface DominatingColors {
-    background: string
-    detail: string
-    primary: string
-    secondary: string
+    average: string
+    darkMuted: string
+    darkVibrant: string
+    dominant: string
+    lightMuted: string
+    lightVibrant: string
+    muted: string
+    platform: 'android'
+    vibrant: string
 }
