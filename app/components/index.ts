@@ -34,6 +34,8 @@ import CardArtist from './CardArtist'
 
 import AnimatedHeader from './AnimatedHeader'
 
+import Shimmer from './Shimmer'
+
 export {
     Scaler,
     AuthButton,
