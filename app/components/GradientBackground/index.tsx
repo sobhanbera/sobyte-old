@@ -10,8 +10,10 @@ interface Props {
     angle?: number
     angleCenter?: {x: number; y: number}
     uniformColor?: boolean
+    colors?: string[]
+    location?: number[]
 }
-const GradientBackground = (props: Props) => {
+const GradientBackground = React.memo((props: Props) => {
     const {themeColors} = useTheme()
 
     return (
@@ -22,18 +24,22 @@ const GradientBackground = (props: Props) => {
             style={[{width: '100%', flex: 1}, props.style]}
             // colors uniform color will be changed in future according to light or dark theme
             colors={
-                props.uniformColor
+                props.colors
+                    ? props.colors
+                    : props.uniformColor
                     ? [themeColors.surfacelight[0], themeColors.surfacelight[0]]
                     : themeColors.backgroundgradient
             }
             locations={
-                props.uniformColor
+                props.colors && props.location
+                    ? props.location
+                    : props.uniformColor
                     ? [0, 0.5]
                     : [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
             }>
             {props.children}
         </LinearGradient>
     )
-}
+})
 
 export default GradientBackground
