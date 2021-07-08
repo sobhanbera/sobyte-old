@@ -34,8 +34,6 @@ import CardArtist from './CardArtist'
 
 import AnimatedHeader from './AnimatedHeader'
 
-import Shimmer from './Shimmer'
-
 export {
     Scaler,
     AuthButton,
@@ -68,7 +66,6 @@ export {
     CardArtist,
     AnimatedHeader,
     AnimatedHeader as AnimatedHeaderView,
-    Shimmer,
 }
 
 /** music player components */
