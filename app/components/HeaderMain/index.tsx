@@ -25,7 +25,7 @@ const HeaderMain = (props: Props) => {
                 {
                     backgroundColor: props.backgroundColor || surfacelight[0],
                     borderBottomColor: border[0],
-                    borderBottomWidth: 0.5,
+                    borderBottomWidth: 1,
                 },
             ]}>
             <Scaler onPress={() => props.navigation.goBack()}>

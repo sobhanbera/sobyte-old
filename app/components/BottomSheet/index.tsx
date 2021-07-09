@@ -34,13 +34,13 @@ interface Props {
     }>
 }
 const BottomSheet = (props: Props) => {
-    const {surfacelight, text, placeholder, primary, onWarning} =
+    const {border, surfacelight, text, placeholder, primary, onWarning} =
         useTheme().themeColors
 
     return (
         <Modal
-            animationInTiming={400}
-            animationOutTiming={400}
+            // animationInTiming={400}
+            // animationOutTiming={400}
             isVisible={props.isVisible}
             animationIn="slideInUp"
             animationOut="slideOutDown"
@@ -58,6 +58,10 @@ const BottomSheet = (props: Props) => {
                     styles.wrapper,
                     {
                         backgroundColor: surfacelight[0],
+                        borderColor: '#303030',
+                        borderWidth: 1,
+                        borderBottomWidth: 0,
+                        elevation: 2,
                     },
                 ]}>
                 <TouchableOpacity
