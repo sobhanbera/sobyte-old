@@ -178,42 +178,32 @@ const Player: FC<PlayerProps> = props => {
     }
 
     const play = async (track: Track) => {
-        setShowLoading(true)
-
         if (!track) {
             if (currentTrack) await TrackPlayer.play()
-            setShowLoading(false)
             return
-        }
-
-        if (currentTrack && track.id === currentTrack.id) {
+        } else if (currentTrack && track.id === currentTrack.id) {
             await TrackPlayer.play()
-            setShowLoading(false)
             return
+        } else {
+            setShowLoading(true)
+            fetchMusic(track.id)
+                .then(async (__res: any) => {
+                    const trackGot = {
+                        ...track,
+                        url: __res,
+                    }
+                    await TrackPlayer.add([trackGot])
+                    await TrackPlayer.skip(trackGot.id)
+
+                    setCurrentTrack(trackGot)
+                    setShowLoading(false)
+
+                    await TrackPlayer.play()
+                        .then(_res => {})
+                        .catch(_err => {})
+                })
+                .catch(err => console.log('ERROR PLAYING SONG...', err))
         }
-
-        fetchMusic(track.id)
-            .then(async (__res: any) => {
-                const trackGot = {
-                    id: track.id,
-                    url: __res,
-                    duration: track.duration,
-                    title: track.title,
-                    artist: track.artist,
-                    artwork: track.artwork,
-                }
-                await TrackPlayer.add([trackGot])
-                await TrackPlayer.skip(trackGot.id)
-                    .then(_res => {})
-                    .catch(async _err => {})
-
-                setCurrentTrack(trackGot)
-                await TrackPlayer.play()
-                    .then(_res => {})
-                    .catch(_err => {})
-                setShowLoading(false)
-            })
-            .catch(err => console.log('ERROR PLAYING SONG...', err))
 
         /**
          * @deprecated the below code becuase it was a much junk then this usual one

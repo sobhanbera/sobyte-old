@@ -48,7 +48,7 @@ const GridSongList = (props: Props) => {
             renderItem={({item, index}) => {
                 const songImage = getHighQualityImageFromSongImage(
                     item.thumbnails[0],
-                    imageQuality || '200',
+                    imageQuality || '120',
                 )
                 const highQualityImage = getHighQualityImageFromSongImage(
                     item.thumbnails[0],
