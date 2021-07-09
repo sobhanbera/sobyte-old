@@ -1,5 +1,5 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React, {useEffect} from 'react'
+import {View, Text, Animated} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {HEADER_MIN_HEIGHT} from '../../constants'
@@ -12,6 +12,40 @@ interface Props {
 }
 const HeaderCollapsible: React.FC<Props> = props => {
     const {t} = useTranslation()
+
+    const colorAnimator = React.useRef(new Animated.Value(0)).current
+    const color = colorAnimator.interpolate({
+        inputRange: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        outputRange: [
+            '#ff0900',
+            '#ff6200',
+            '#ffb300',
+            '#fffb00',
+            '#5aff01',
+            '#04ffee',
+            '#1d04ff',
+            '#cc01ff',
+            '#ff008c',
+        ],
+    })
+
+    const handleAnimation = () => {
+        Animated.timing(colorAnimator, {
+            toValue: 8,
+            duration: 3000,
+            useNativeDriver: false,
+        }).start(() => {
+            Animated.timing(colorAnimator, {
+                toValue: 0,
+                duration: 3000,
+                useNativeDriver: false,
+            }).start(handleAnimation)
+        })
+    }
+
+    useEffect(() => {
+        handleAnimation()
+    }, [])
 
     return (
         <View
@@ -29,11 +63,19 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                 }}>
-                <Text style={globalStyles.appName}>{t('common:appName')}</Text>
+                <Animated.Text
+                    style={[
+                        globalStyles.appName,
+                        {
+                            color: color,
+                        },
+                    ]}>
+                    {t('common:appName')}
+                </Animated.Text>
                 {props.right}
             </View>
         </View>
     )
 }
 
-export default HeaderCollapsible
+export default React.memo(HeaderCollapsible)
