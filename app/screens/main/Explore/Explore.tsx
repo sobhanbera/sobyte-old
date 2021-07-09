@@ -47,6 +47,13 @@ const Profile: React.FC<ExploreTabProps> = props => {
     const [loading, setLoading] = useState<boolean>(false)
     const scrollViewReference = useRef<ScrollView>(null)
 
+    /**
+     * different categories of music without search at all
+     * popular, top rated, lo-fi,
+     * bollywood essentials, top new songs,
+     * artist list, language list,
+     * last played song item
+     */
     const [populars, setPopulars] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
@@ -172,8 +179,8 @@ const Profile: React.FC<ExploreTabProps> = props => {
                             height:
                                 IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW * 3 + // the image size of gridCategory component
                                 3 * 5 + // top padding of image
-                                3 * 5 +
-                                125, // bottom padding of image
+                                3 * 5 + // bottom padding of image
+                                0, // a random height to fit the items
                         }}>
                         <Block style={styles.innerBlock}>
                             <BlockTitle
@@ -189,13 +196,9 @@ const Profile: React.FC<ExploreTabProps> = props => {
                             horizontal
                             showsHorizontalScrollIndicator={false}>
                             <GridCategory
-                                categories={MoodCategories}
-                                onPress={(category: SongCategory) =>
-                                    launchSongCategoryScreen(category)
-                                }
-                            />
-                            <GridCategory
-                                categories={GenresCategories}
+                                categories={MoodCategories.concat(
+                                    GenresCategories,
+                                )}
                                 onPress={(category: SongCategory) =>
                                     launchSongCategoryScreen(category)
                                 }
