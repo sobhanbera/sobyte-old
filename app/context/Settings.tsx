@@ -24,7 +24,7 @@ interface SettingsProviderContextProps {
 
     changeLanguage: Function
 }
-const SettingsProviderContext =
+export const SettingsProviderContext =
     React.createContext<SettingsProviderContextProps>({
         theme: 'd',
         audioQuality: 'a',
