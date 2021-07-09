@@ -76,12 +76,7 @@ const MainApp = () => {
 
     return (
         <AppContext.Provider value={loaderValues}>
-            <StatusBar
-                animated={true}
-                backgroundColor={'#0E003E'}
-                barStyle="light-content"
-                translucent={true}
-            />
+            <StatusBar backgroundColor={'#0E003E'} barStyle="light-content" />
             <LoaderRendererHelper />
 
             <AppStartingPoint />
