@@ -178,32 +178,38 @@ const Player: FC<PlayerProps> = props => {
     }
 
     const play = async (track: Track) => {
+        console.log(1)
         if (!track) {
+            console.log(2)
             if (currentTrack) await TrackPlayer.play()
             return
-        } else if (currentTrack && track.id === currentTrack.id) {
+        }
+        if (currentTrack && track.id === currentTrack.id) {
+            console.log(3)
             await TrackPlayer.play()
             return
-        } else {
-            setShowLoading(true)
-            fetchMusic(track.id)
-                .then(async (__res: any) => {
-                    const trackGot = {
-                        ...track,
-                        url: __res,
-                    }
-                    await TrackPlayer.add([trackGot])
-                    await TrackPlayer.skip(trackGot.id)
-
-                    setCurrentTrack(trackGot)
-                    setShowLoading(false)
-
-                    await TrackPlayer.play()
-                        .then(_res => {})
-                        .catch(_err => {})
-                })
-                .catch(err => console.log('ERROR PLAYING SONG...', err))
         }
+        console.log(4)
+        setShowLoading(true)
+        fetchMusic(track.id)
+            .then(async (__res: any) => {
+                console.log(5)
+                const trackGot = {
+                    ...track,
+                    url: __res,
+                }
+                await TrackPlayer.add([trackGot])
+                await TrackPlayer.skip(trackGot.id)
+
+                setCurrentTrack(trackGot)
+                setShowLoading(false)
+
+                await TrackPlayer.play()
+                    .then(_res => {})
+                    .catch(_err => {})
+            })
+            .catch(err => console.log('ERROR PLAYING SONG...', err))
+        console.log(6)
 
         /**
          * @deprecated the below code becuase it was a much junk then this usual one
