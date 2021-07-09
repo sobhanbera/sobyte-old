@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         overflow: 'hidden',
         margin: 6,
-        elevation: 7,
+        elevation: 4,
         borderWidth: 0.5,
         borderColor: '#efefef',
     },
