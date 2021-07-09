@@ -7,6 +7,8 @@ import TrackPlayer, {
     STATE_BUFFERING,
 } from 'react-native-track-player'
 
+import {useApp, useFetcher} from '../context'
+
 export interface Track {
     id: string
     url: string
@@ -22,31 +24,6 @@ export interface Track {
     // rating?: number | boolean
     // [key: string]: any
 }
-// interface PlayerContextProperty {
-//     playing: boolean
-//     paused: boolean
-//     stopped: boolean
-//     buffering: boolean
-
-//     current: Track
-
-//     play: Function
-//     playonly: Function
-//     pause: Function
-//     toggleState: Function
-//     next: Function
-//     previous: Function
-
-//     seekTo: Function
-//     seekInterval: Function
-
-//     rate: number
-//     getRateText: Function
-//     setRate: Function
-
-//     volume: number
-//     setVolume: Function
-// }
 const PlayerContext = createContext({
     playing: false,
     paused: false,
@@ -62,7 +39,7 @@ const PlayerContext = createContext({
         artwork: '',
     },
 
-    play: (_track: Track) => {},
+    play: (_track: Track, _id: string) => {},
     playonly: () => {},
     pause: () => {},
     toggleState: () => {},
@@ -84,6 +61,9 @@ interface PlayerProps {
     children: any
 }
 const Player: FC<PlayerProps> = props => {
+    const {setShowLoading} = useApp()
+    const {fetchMusic} = useFetcher()
+
     const [playerState, setPlayerState] = useState()
     const [currentTrack, setCurrentTrack] = useState<Track>({
         id: '',
@@ -197,32 +177,43 @@ const Player: FC<PlayerProps> = props => {
         })
     }
 
-    const play = async (track: Track) => {
-        // await pause()
+    const play = async (track: Track, songId: string) => {
+        setShowLoading(true)
 
         if (!track) {
             if (currentTrack) await TrackPlayer.play()
+            setShowLoading(false)
             return
         }
 
         if (currentTrack && track.id === currentTrack.id) {
             await TrackPlayer.play()
+            setShowLoading(false)
             return
         }
 
-        await TrackPlayer.add([track])
-        setCurrentTrack(track)
-        await TrackPlayer.skip(track.id)
-            .then(_res => {})
-            .catch(async _err => {
-                // console.log('SSSSSS', err);
-                // const qu = await TrackPlayer.getQueue()
-                // console.log('QUQUQU', qu);
-            })
+        fetchMusic(songId)
+            .then(async (__res: any) => {
+                const trackGot = {
+                    id: songId,
+                    url: __res,
+                    duration: track.duration,
+                    title: track.title,
+                    artist: track.artist,
+                    artwork: track.artwork,
+                }
+                await TrackPlayer.add([trackGot])
+                await TrackPlayer.skip(trackGot.id)
+                    .then(_res => {})
+                    .catch(async _err => {})
 
-        await TrackPlayer.play()
-            .then(_res => {})
-            .catch(_err => {})
+                setCurrentTrack(trackGot)
+                await TrackPlayer.play()
+                    .then(_res => {})
+                    .catch(_err => {})
+                setShowLoading(false)
+            })
+            .catch(err => console.log('ERROR PLAYING SONG...', err))
 
         /**
          * @deprecated the below code becuase it was a much junk then this usual one
