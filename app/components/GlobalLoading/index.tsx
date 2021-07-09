@@ -1,11 +1,7 @@
 import React from 'react'
 import {ActivityIndicator, Modal, View} from 'react-native'
 import {useTheme} from '../../context'
-import {
-    DEFAULT_ICON_SIZE,
-    DEFAULT_SMALL_ICON_SIZE,
-    DEFAULT_TINY_ICON_SIZE,
-} from '../../constants'
+import {DEFAULT_ICON_SIZE} from '../../constants'
 
 const Loader = () => {
     const {themeColors} = useTheme()
@@ -23,7 +19,7 @@ const Loader = () => {
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: '#00000050',
+                    backgroundColor: '#00000033',
                 }}>
                 <View
                     style={{
