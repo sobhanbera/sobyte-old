@@ -39,7 +39,7 @@ const PlayerContext = createContext({
         artwork: '',
     },
 
-    play: (_track: Track, _id: string) => {},
+    play: (_track: Track) => {},
     playonly: () => {},
     pause: () => {},
     toggleState: () => {},
@@ -177,7 +177,7 @@ const Player: FC<PlayerProps> = props => {
         })
     }
 
-    const play = async (track: Track, songId: string) => {
+    const play = async (track: Track) => {
         setShowLoading(true)
 
         if (!track) {
@@ -192,10 +192,10 @@ const Player: FC<PlayerProps> = props => {
             return
         }
 
-        fetchMusic(songId)
+        fetchMusic(track.id)
             .then(async (__res: any) => {
                 const trackGot = {
-                    id: songId,
+                    id: track.id,
                     url: __res,
                     duration: track.duration,
                     title: track.title,
