@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {View, ScrollView, StyleSheet} from 'react-native'
+import {View, ScrollView, StyleSheet, RefreshControl} from 'react-native'
 import {Text as BlockTitle} from 'react-native-paper'
 
 import {
@@ -44,6 +44,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
     const {play} = usePlayer()
     const {setShowLoading} = useApp()
 
+    const [loading, setLoading] = useState<boolean>(false)
     const scrollViewReference = useRef<ScrollView>(null)
 
     const [populars, setPopulars] = useState<FetchedSongObject>(
@@ -101,21 +102,26 @@ const Profile: React.FC<ExploreTabProps> = props => {
      * also with a fallback variable error whenever it changed again everything will load from beginning
      */
     useEffect(() => {
+        setLoading(true)
         setShowLoading(true)
         initMusicApi()
             .then(() => {
                 initMusicApi()
                     .then(() => {
+                        setLoading(false)
                         setShowLoading(false)
                         loadExploreData()
                     })
-                    .catch(() => {})
+                    .catch(() => {
+                        setLoading(false)
+                    })
             })
             .catch(() => {
                 // this will only be called when the internet connectivity is very slow or not present...
                 console.error(
                     '(Outer) Error Initiating Music Api... no internet connection found',
                 )
+                setLoading(false)
             })
     }, [error])
 
@@ -145,6 +151,12 @@ const Profile: React.FC<ExploreTabProps> = props => {
             />
 
             <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={loading}
+                        onRefresh={loadExploreData}
+                    />
+                }
                 ref={scrollViewReference}
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground>
