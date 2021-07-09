@@ -23,13 +23,7 @@ import {
     GenresCategories,
     SongCategory,
 } from '../../../interfaces'
-import {
-    useTheme,
-    useMusicApi,
-    useFetcher,
-    usePlayer,
-    useApp,
-} from '../../../context'
+import {useTheme, useMusicApi, usePlayer, useApp} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
 import {Track} from '../../../api/PlayerControls'
@@ -40,7 +34,6 @@ interface ExploreTabProps {
 const Profile: React.FC<ExploreTabProps> = props => {
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
-    const {fetchMusic} = useFetcher()
     const {play} = usePlayer()
     const {setShowLoading} = useApp()
 
