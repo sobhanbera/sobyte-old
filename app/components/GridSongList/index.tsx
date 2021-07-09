@@ -1,9 +1,8 @@
 import React from 'react'
 import {View, FlatList, Image, StyleSheet, Pressable} from 'react-native'
 import {Text} from 'react-native-paper'
-import Shimmer from 'react-native-shimmer'
 
-import {SongObject, CasualDemoList} from '../../interfaces'
+import {SongObject} from '../../interfaces'
 import {
     getHighQualityImageFromSongImage,
     formatArtists,
@@ -15,6 +14,7 @@ import {
     IMAGE_MARGIN_TO_SHOW,
     IMAGE_PADDING_TO_SHOW,
 } from '../../constants'
+import GridSongList_SelfShimmer from './SelfShimmer'
 
 interface Props {
     content: Array<SongObject>
@@ -30,67 +30,7 @@ const GridSongList = (props: Props) => {
     const {imageQuality} = useSetting()
 
     return props.content[0].musicId.length <= 0 ? (
-        <FlatList
-            key={props.id}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            horizontal
-            snapToInterval={
-                IMAGE_SIZE_TO_SHOW +
-                IMAGE_MARGIN_TO_SHOW +
-                IMAGE_PADDING_TO_SHOW +
-                IMAGE_PADDING_TO_SHOW * 2
-            }
-            data={CasualDemoList}
-            keyExtractor={item => item.id}
-            renderItem={({index}) => {
-                return (
-                    <Shimmer
-                        opacity={1}
-                        animating
-                        direction={props.shimmerDirection}
-                        animationOpacity={0.1}
-                        tilt={
-                            props.shimmerDirection === 'right' ||
-                            props.shimmerDirection === 'down'
-                                ? 10
-                                : -10
-                        }>
-                        <Pressable onPress={() => {}}>
-                            <View
-                                style={[
-                                    styles.contentWrapper,
-                                    index === 0
-                                        ? styles.firstContent
-                                        : index === props.contentLength - 1
-                                        ? styles.lastContent
-                                        : {},
-                                ]}>
-                                <View
-                                    style={[
-                                        styles.contentImage,
-                                        styles.dummyBackground,
-                                    ]}
-                                />
-
-                                <View
-                                    style={[
-                                        styles.dummyBackground,
-                                        styles.dummyText,
-                                    ]}
-                                />
-                                <View
-                                    style={[
-                                        styles.dummyBackground,
-                                        styles.dummyText,
-                                    ]}
-                                />
-                            </View>
-                        </Pressable>
-                    </Shimmer>
-                )
-            }}
-        />
+        <GridSongList_SelfShimmer shimmerDirection={props.shimmerDirection} />
     ) : (
         <FlatList
             key={props.id}
@@ -172,7 +112,7 @@ const GridSongList = (props: Props) => {
     )
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     contentWrapper: {
         // backgroundColor: '#0000007f',
         paddingTop: 10,
