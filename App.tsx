@@ -1,12 +1,7 @@
 import React from 'react'
 import MainApp from './app/MainApp'
-import {SafeAreaProvider} from 'react-native-safe-area-context'
 
-const App = () => (
-    <SafeAreaProvider>
-        <MainApp />
-    </SafeAreaProvider>
-)
+const App = () => <MainApp />
 
 export default App
 
