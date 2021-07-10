@@ -21,6 +21,7 @@ export interface CommonColors {
     darkBlue: string[]
     cadetBlue: string[]
     transparent: string[]
+    rgbstreakgradient: string[]
 }
 
 /**
@@ -83,6 +84,17 @@ export const RequiredCommonColors: CommonColors = {
     darkBlue: ['#3D5A80'],
     cadetBlue: ['#293241'],
     transparent: ['#00000000'],
+    rgbstreakgradient: [
+        '#ff0900',
+        '#ff6200',
+        '#ffb300',
+        '#fffb00',
+        '#5aff01',
+        '#04ffee',
+        '#1d04ff',
+        '#cc01ff',
+        '#ff008c',
+    ],
 }
 
 /**
