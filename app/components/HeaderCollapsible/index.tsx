@@ -1,45 +1,37 @@
 import React, {useEffect} from 'react'
-import {View, Text, Animated, Image, Pressable} from 'react-native'
+import {View, Animated, Pressable} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {HEADER_MIN_HEIGHT} from '../../constants'
 import globalStyles from '../../styles/global.styles'
+import {useTheme} from '../../context'
 
 interface Props {
     headerScrollHeight?: any
     headerScrollColor: any
     right?: React.ReactNode
+    onPress: Function
 }
 const HeaderCollapsible: React.FC<Props> = props => {
     const {t} = useTranslation()
-
+    const {rgbstreakgradient} = useTheme().themeColors
     /**
      * text color changing animation variables and functions
      */
     const colorAnimator = React.useRef(new Animated.Value(0)).current
     const color = colorAnimator.interpolate({
         inputRange: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-        outputRange: [
-            '#ff0900',
-            '#ff6200',
-            '#ffb300',
-            '#fffb00',
-            '#5aff01',
-            '#04ffee',
-            '#1d04ff',
-            '#cc01ff',
-            '#ff008c',
-        ],
+        outputRange: rgbstreakgradient,
     })
     const handleColorAnimation = () => {
         Animated.timing(colorAnimator, {
             toValue: 8,
-            duration: 4500,
+            duration: 6000,
             useNativeDriver: false,
         }).start(() => {
             Animated.timing(colorAnimator, {
                 toValue: 0,
-                duration: 4500,
+                duration: 6000,
                 useNativeDriver: false,
             }).start(handleColorAnimation)
         })
@@ -86,7 +78,11 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                 }}>
-                <Pressable onPress={handleLogoRotateAnimation}>
+                <Pressable
+                    onPress={() => {
+                        handleLogoRotateAnimation()
+                        props.onPress()
+                    }}>
                     <Animated.Image
                         source={require('../../assets/images/sobyte_logo_white.png')}
                         style={{

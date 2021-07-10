@@ -23,7 +23,7 @@ import {
     GenresCategories,
     SongCategory,
 } from '../../../interfaces'
-import {useTheme, useMusicApi, useApp} from '../../../context'
+import {useTheme, useMusicApi} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
 
@@ -33,7 +33,6 @@ interface ExploreTabProps {
 const Profile: React.FC<ExploreTabProps> = props => {
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
-    const {setShowLoading} = useApp()
 
     const [loading, setLoading] = useState<boolean>(false)
     const scrollViewReference = useRef<ScrollView>(null)
@@ -77,14 +76,12 @@ const Profile: React.FC<ExploreTabProps> = props => {
      */
     useEffect(() => {
         setLoading(true)
-        setShowLoading(true)
         initMusicApi()
             .then(() => {
                 initMusicApi()
                     .then(() => {
                         setLoading(false)
-                        setShowLoading(false)
-                        loadExploreData()
+                        // loadExploreData()
                     })
                     .catch(() => {
                         setLoading(false)
@@ -109,6 +106,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
     return (
         <View style={globalStyles.flex}>
             <HeaderCollapsible
+                onPress={loadExploreData}
                 headerScrollColor={themeColors.black[0]}
                 headerScrollHeight={HEADER_MIN_HEIGHT}
                 right={
@@ -129,6 +127,8 @@ const Profile: React.FC<ExploreTabProps> = props => {
                     <RefreshControl
                         refreshing={loading}
                         onRefresh={loadExploreData}
+                        progressBackgroundColor={themeColors.white[0]}
+                        colors={themeColors.rgbstreakgradient}
                     />
                 }
                 ref={scrollViewReference}
