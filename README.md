@@ -32,6 +32,11 @@
 -   Offline Capability
 -   Many things are Customizable
 
+## TODO:
+
+-   Work on App's performance issue.
+-   Many parts of the app is laging due to state update and re-renderings. This need to be fixed.
+
 ## Get Started:
 
 ### Prerequisites
