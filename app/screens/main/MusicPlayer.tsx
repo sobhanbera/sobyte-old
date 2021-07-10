@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native'
 
 import {DoubleTap, GradientBackground, ProgressSlider} from '../../components'
-import {usePlayer, usePrompt, useTheme} from '../../context'
-import globalStyles from '../../styles/global.styles'
-import {MUSIC_PLAYER_BLUR} from '../../constants'
-import {DominatingColors} from '../../interfaces'
+import {usePlayer, useTheme} from '../../context'
 import ImageColors from 'react-native-image-colors'
 
 interface PlayerProps {
