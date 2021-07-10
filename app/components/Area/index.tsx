@@ -19,7 +19,7 @@ interface Props {
 }
 
 const Area = (props: Props) => {
-    const {white, grey, surfacelight} = useTheme().themeColors
+    const {white, grey, surfacelight, surface} = useTheme().themeColors
 
     return (
         <TouchableHighlight
@@ -35,7 +35,7 @@ const Area = (props: Props) => {
                 style={{
                     paddingVertical: 5,
                     paddingHorizontal: props.noBackground ? 0 : 22,
-                    backgroundColor: surfacelight[0],
+                    backgroundColor: surface[0] + '33',
                     flexDirection: props.column ? 'column' : 'row',
                     justifyContent: props.spacing ? 'space-between' : 'center',
                     alignItems: 'center',
