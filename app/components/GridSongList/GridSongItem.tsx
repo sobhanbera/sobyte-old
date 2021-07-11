@@ -9,6 +9,7 @@ import {
     trimLargeString,
 } from '../../utils/Objects'
 import {styles} from './'
+import {DEFAULT_IMAGE_QUALITY} from '../../constants'
 
 interface Props {
     item: SongObject
@@ -23,7 +24,7 @@ const GridSongItem = (props: Props) => {
     const {id, item, index, imageQuality, onPress, subColor, textColor} = props
     const songImage = getHighQualityImageFromSongImage(
         item.thumbnails[0],
-        imageQuality || '200',
+        imageQuality || DEFAULT_IMAGE_QUALITY,
     )
     const highQualityImage = getHighQualityImageFromSongImage(
         item.thumbnails[0],

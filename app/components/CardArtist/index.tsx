@@ -6,7 +6,7 @@ import {
     getHighQualityImageFromSongImage,
     firstLetterCap,
 } from '../../utils/Objects'
-import {IMAGE_TINY_SIZE_TO_SHOW} from '../../constants'
+import {DEFAULT_IMAGE_QUALITY, IMAGE_TINY_SIZE_TO_SHOW} from '../../constants'
 import {ArtistObject, CasualDemoList} from '../../interfaces'
 import Shimmer from 'react-native-shimmer'
 
@@ -70,7 +70,7 @@ const CardSong = ({
                 ? artists.map(artist => {
                       const songImage = getHighQualityImageFromSongImage(
                           artist.thumbnails[0],
-                          imageQuality || '200',
+                          imageQuality || DEFAULT_IMAGE_QUALITY,
                       )
                       const highQualityImage = getHighQualityImageFromSongImage(
                           artist.thumbnails[0],

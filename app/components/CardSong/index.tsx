@@ -8,7 +8,11 @@ import {
     formatArtists,
     trimLargeString,
 } from '../../utils/Objects'
-import {DEFAULT_TINY_ICON_SIZE, IMAGE_SMALL_SIZE_TO_SHOW} from '../../constants'
+import {
+    DEFAULT_IMAGE_QUALITY,
+    DEFAULT_TINY_ICON_SIZE,
+    IMAGE_SMALL_SIZE_TO_SHOW,
+} from '../../constants'
 import {CasualDemoList, SongObject} from '../../interfaces'
 import Shimmer from 'react-native-shimmer'
 
@@ -88,7 +92,7 @@ const CardSong = ({
                 ? songs.map(song => {
                       const songImage = getHighQualityImageFromSongImage(
                           song.thumbnails[0],
-                          imageQuality || '200',
+                          imageQuality || DEFAULT_IMAGE_QUALITY,
                       )
                       const highQualityImage = getHighQualityImageFromSongImage(
                           song.thumbnails[0],
