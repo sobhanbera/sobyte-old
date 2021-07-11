@@ -20,7 +20,7 @@ const Player: React.FC<PlayerProps> = props => {
             playonly()
         })
 
-        console.log(current.artwork)
+        console.log(current.artwork, 'CURRENT')
 
         if (current.artwork)
             ImageColors.getColors(current.artwork, {
@@ -29,7 +29,7 @@ const Player: React.FC<PlayerProps> = props => {
                 key: 'sobyte_music_player_color',
             })
                 .then(res => {
-                    console.log(res)
+                    console.trace('res', res)
                 })
                 .catch(err => {
                     setBackgroundColors(themeColors.backgroundgradient)
