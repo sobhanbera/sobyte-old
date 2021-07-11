@@ -66,13 +66,15 @@ const Player: FC<PlayerProps> = props => {
 
     const [playerState, setPlayerState] = useState()
     const [currentTrack, setCurrentTrack] = useState<Track>({
-        id: '',
-        url: '',
-        duration: 0,
-        title: '',
-        artist: '',
-        artwork: '',
+        artist: 'Shawn Mendes, Camila Cabe... Test',
+        artwork:
+            'https://lh3.googleusercontent.com/TK-09E9wZOUk84ktqwb-zNBXfnY3Z927d3fpJ3ObwwOyREKzjAQMMYx0pGSjVAAV2zpRJDpDAavlAPSz=w450-h450-l90-rj',
+        duration: 191000,
+        id: 'VKC_hzJ3jzg',
+        title: 'Señorita',
+        url: 'https://r3---sn-ci5gup-g2ge.googlevideo.com/videoplayback?expire=1626132827&ei=-3zsYLzrGeTRz7sPwvKO8Ac&ip=27.62.144.73&id=o-AP85Mm67nnZO6pXPuEJ1j3_lZS7tNfpzd7wnkugh2E4x&itag=251&source=youtube&requiressl=yes&mh=-y&mm=31%2C29&mn=sn-ci5gup-g2ge%2Csn-ci5gup-cvhs&ms=au%2Crdu&mv=m&mvi=3&pcm2cms=yes&pl=22&gcr=in&initcwndbps=172500&vprv=1&mime=audio%2Fwebm&ns=pqp4XjvkbF_lYPYdnuAFx78G&gir=yes&clen=3265170&dur=190.981&lmt=1583247022679728&mt=1626110945&fvip=3&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=H4ZPxKXMRO44NKcien&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cgcr%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRAIgZbFL9puxPwHrFrbYQXjdReJt1FYlGePqEnHHmCL2qYQCIGWj8vksLauAajQ-RNyDbftzKZnf43GHYQUdOo51_EtB&ratebypass=yes&sig=AOq0QJ8wRQIhANKBY-k7Kvufyth6UM8wgfwy_pF0nYAlxHq3ipOu6h-KAiAn1Zwz62XNZc074-p9RHIJKtvVp55xRyeTvXMoSE0eBQ%3D%3D',
     })
+
     const [volume, setVolume] = useState(1)
     const [rate, setRate] = useState(1)
 
