@@ -17,27 +17,47 @@ const AppStartingPoint = () => {
     const [loading, setLoading] = useState<boolean>(false)
 
     return (
-        <ThemeProvider>
-            <SettingsProvider>
-                <MusicApi>
-                    <MusicFetcher>
-                        <Prompt>
-                            <Player>
+        // <ThemeProvider>
+        //     <SettingsProvider>
+        //         <MusicApi>
+        //             <MusicFetcher>
+        //                 <Prompt>
+        //                     <Player>
+        //                         <NavigationContainer theme={DarkTheme}>
+        //                             {!userLoggedIn ? (
+        //                                 <AuthenticationNavigation />
+        //                             ) : (
+        //                                 <AppNavigation />
+        //                             )}
+
+        //                             <FullScreenLoading visible={loading} />
+        //                         </NavigationContainer>
+        //                     </Player>
+        //                 </Prompt>
+        //             </MusicFetcher>
+        //         </MusicApi>
+        //     </SettingsProvider>
+        // </ThemeProvider>
+        <MusicApi>
+            <MusicFetcher>
+                <ThemeProvider>
+                    <SettingsProvider>
+                        <Player>
+                            <Prompt>
                                 <NavigationContainer theme={DarkTheme}>
                                     {!userLoggedIn ? (
                                         <AuthenticationNavigation />
                                     ) : (
                                         <AppNavigation />
                                     )}
-
                                     <FullScreenLoading visible={loading} />
                                 </NavigationContainer>
-                            </Player>
-                        </Prompt>
-                    </MusicFetcher>
-                </MusicApi>
-            </SettingsProvider>
-        </ThemeProvider>
+                            </Prompt>
+                        </Player>
+                    </SettingsProvider>
+                </ThemeProvider>
+            </MusicFetcher>
+        </MusicApi>
     )
 }
 
