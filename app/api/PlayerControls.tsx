@@ -68,7 +68,7 @@ const Player: FC<PlayerProps> = props => {
     const [currentTrack, setCurrentTrack] = useState<Track>({
         artist: 'Shawn Mendes, Camila Cabe... Test',
         artwork:
-            'https://lh3.googleusercontent.com/TK-09E9wZOUk84ktqwb-zNBXfnY3Z927d3fpJ3ObwwOyREKzjAQMMYx0pGSjVAAV2zpRJDpDAavlAPSz=w450-h450-l90-rj',
+            'https://lh3.googleusercontent.com/TK-09E9wZOUk84ktqwb-zNBXfnY3Z927d3fpJ3ObwwOyREKzjAQMMYx0pGSjVAAV2zpRJDpDAavlAPSz=w512-h512-l90-rj',
         duration: 191000,
         id: 'VKC_hzJ3jzg',
         title: 'Señorita',
