@@ -70,7 +70,7 @@ const CardSong = ({
                 ? artists.map(artist => {
                       const songImage = getHighQualityImageFromSongImage(
                           artist.thumbnails[0],
-                          imageQuality || '120',
+                          imageQuality || '200',
                       )
                       const highQualityImage = getHighQualityImageFromSongImage(
                           artist.thumbnails[0],

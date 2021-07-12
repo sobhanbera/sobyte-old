@@ -23,7 +23,7 @@ const GridSongItem = (props: Props) => {
     const {id, item, index, imageQuality, onPress, subColor, textColor} = props
     const songImage = getHighQualityImageFromSongImage(
         item.thumbnails[0],
-        imageQuality || '120',
+        imageQuality || '200',
     )
     const highQualityImage = getHighQualityImageFromSongImage(
         item.thumbnails[0],
