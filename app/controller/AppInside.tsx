@@ -16,6 +16,14 @@ const BarNavigator = createMaterialBottomTabNavigator()
 const AuthenticationNavigation = () => {
     const {themeColors} = useTheme()
     const {playing} = usePlayer()
+    const {initMusicApi} = useMusicApi()
+
+    useEffect(() => {
+        // if (!loaded || error) {
+        //     console.log('Music Api Init...')
+        initMusicApi()
+        // }
+    }, [])
 
     return (
         <BarNavigator.Navigator
