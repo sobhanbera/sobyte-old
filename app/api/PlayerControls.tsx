@@ -203,6 +203,7 @@ const Player: FC<PlayerProps> = props => {
 
                 setCurrentTrack(trackGot)
                 setShowLoading(false)
+                console.log(trackGot)
 
                 await TrackPlayer.play()
                     .then(_res => {})
