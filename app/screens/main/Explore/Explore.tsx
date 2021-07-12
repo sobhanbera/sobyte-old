@@ -81,7 +81,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
                 initMusicApi()
                     .then(() => {
                         setLoading(false)
-                        // loadExploreData()
+                        loadExploreData()
                     })
                     .catch(() => {
                         setLoading(false)
