@@ -32,8 +32,6 @@ const GridSongItem = (props: Props) => {
     )
     const artist = formatArtists(item.artist)
 
-    console.log(`${id} - ${index}`)
-
     return (
         <Pressable
             onPress={() =>
