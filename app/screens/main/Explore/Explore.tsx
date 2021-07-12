@@ -65,6 +65,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
         ])
             .then((res: FetchedSongObject[]) => {
                 setMusicData(res)
+                console.log('SETTING SONGS')
             })
             .catch(() => {})
     }, [error])
