@@ -182,12 +182,13 @@ const Player: FC<PlayerProps> = props => {
     const play = async (track: Track) => {
         if (!track) {
             console.log('First Condition')
-            if (currentTrack) await TrackPlayer.play()
+            if (currentTrack)
+                if (playerState === STATE_PAUSED) await TrackPlayer.play()
             return
         }
         if (currentTrack && track.id === currentTrack.id) {
             console.log('Second Condition')
-            await TrackPlayer.play()
+            if (playerState === STATE_PAUSED) await TrackPlayer.play()
             return
         }
         setShowLoading(true)
