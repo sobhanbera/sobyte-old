@@ -20,10 +20,21 @@ export function colorBrightness(color: any = '') {
     return brightness
 }
 
-export function sortColorsBasedOnBrightness(colors: Array<any>) {
-    return colors.sort((a, b) => {
-        return colorBrightness(a) - colorBrightness(b)
-    })
+export type ColorsSortingDirection = 'light-first' | 'dark-first' | 'default'
+export function sortColorsBasedOnBrightness(
+    colors: Array<any>,
+    direction: ColorsSortingDirection = 'default',
+) {
+    if (direction === 'light-first')
+        return colors.sort((a, b) => {
+            return colorBrightness(a) - colorBrightness(b)
+        })
+    else
+        return colors
+            .sort((a, b) => {
+                return colorBrightness(a) - colorBrightness(b)
+            })
+            .reverse()
 }
 
 export function isColorLight(color: any = '') {
