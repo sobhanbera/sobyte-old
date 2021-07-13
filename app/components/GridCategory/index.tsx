@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PureComponent} from 'react'
 import {View, Text, StyleSheet, ImageBackground, Pressable} from 'react-native'
 
 import {SongCategory} from '../../interfaces'
@@ -12,39 +12,48 @@ interface Props {
     categories: Array<SongCategory>
     onPress: Function
 }
-const GridCategory = (props: Props) => {
-    return (
-        <View>
-            <View style={styles.mainGridContainer}>
-                {props.categories.map(category => {
-                    return (
-                        <LinearGradient
-                            key={category.id}
-                            angle={165}
-                            useAngle
-                            angleCenter={{x: 0.5, y: 0.5}}
-                            colors={category.color}
-                            style={styles.linearGradient}>
-                            <Pressable onPress={() => props.onPress(category)}>
-                                <ImageBackground
-                                    fadeDuration={500}
-                                    source={{uri: category.image}}
-                                    style={[styles.image]}>
-                                    <View style={styles.background}>
-                                        <Text
-                                            style={styles.text}
-                                            numberOfLines={10}>
-                                            {category.name}
-                                        </Text>
-                                    </View>
-                                </ImageBackground>
-                            </Pressable>
-                        </LinearGradient>
-                    )
-                })}
+class GridCategory extends PureComponent<Props> {
+    constructor(props: Props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <View>
+                <View style={styles.mainGridContainer}>
+                    {this.props.categories.map(category => {
+                        return (
+                            <LinearGradient
+                                key={category.id}
+                                angle={165}
+                                useAngle
+                                angleCenter={{x: 0.5, y: 0.5}}
+                                colors={category.color}
+                                style={styles.linearGradient}>
+                                <Pressable
+                                    onPress={() =>
+                                        this.props.onPress(category)
+                                    }>
+                                    <ImageBackground
+                                        fadeDuration={500}
+                                        source={{uri: category.image}}
+                                        style={[styles.image]}>
+                                        <View style={styles.background}>
+                                            <Text
+                                                style={styles.text}
+                                                numberOfLines={10}>
+                                                {category.name}
+                                            </Text>
+                                        </View>
+                                    </ImageBackground>
+                                </Pressable>
+                            </LinearGradient>
+                        )
+                    })}
+                </View>
             </View>
-        </View>
-    )
+        )
+    }
 }
 
 const styles = StyleSheet.create({
