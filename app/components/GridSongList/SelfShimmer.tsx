@@ -6,136 +6,160 @@ import {styles} from './'
 interface Props {
     shimmerDirection: 'up' | 'down' | 'left' | 'right'
 }
-const GridSongList_SelfShimmer = (props: Props) => {
-    return (
-        <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            // snapToInterval={
-            // IMAGE_SIZE_TO_SHOW +
-            // IMAGE_MARGIN_TO_SHOW +
-            // IMAGE_PADDING_TO_SHOW +
-            // IMAGE_PADDING_TO_SHOW * 2
-            // }
-        >
-            <Shimmer
-                opacity={1}
-                animating
-                direction={props.shimmerDirection}
-                animationOpacity={0.1}
-                tilt={
-                    props.shimmerDirection === 'right' ||
-                    props.shimmerDirection === 'down'
-                        ? 10
-                        : -10
-                }>
-                <Pressable onPress={() => {}}>
-                    <View
-                        style={[
-                            styles.contentWrapper,
-                            // index === 0
-                            // ?
-                            styles.firstContent,
-                            // : index === props.contentLength - 1
-                            // ? styles.lastContent
-                            // : {},
-                        ]}>
+class GridSongList_SelfShimmer extends React.PureComponent<Props> {
+    constructor(props: Props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                // snapToInterval={
+                // IMAGE_SIZE_TO_SHOW +
+                // IMAGE_MARGIN_TO_SHOW +
+                // IMAGE_PADDING_TO_SHOW +
+                // IMAGE_PADDING_TO_SHOW * 2
+                // }
+            >
+                <Shimmer
+                    opacity={1}
+                    animating
+                    direction={this.props.shimmerDirection}
+                    animationOpacity={0.1}
+                    tilt={
+                        this.props.shimmerDirection === 'right' ||
+                        this.props.shimmerDirection === 'down'
+                            ? 10
+                            : -10
+                    }>
+                    <Pressable onPress={() => {}}>
                         <View
                             style={[
-                                styles.contentImage,
-                                styles.dummyBackground,
-                            ]}
-                        />
+                                styles.contentWrapper,
+                                // index === 0
+                                // ?
+                                styles.firstContent,
+                                // : index === this.props.contentLength - 1
+                                // ? styles.lastContent
+                                // : {},
+                            ]}>
+                            <View
+                                style={[
+                                    styles.contentImage,
+                                    styles.dummyBackground,
+                                ]}
+                            />
 
-                        <View
-                            style={[styles.dummyBackground, styles.dummyText]}
-                        />
-                        <View
-                            style={[styles.dummyBackground, styles.dummyText]}
-                        />
-                    </View>
-                </Pressable>
-            </Shimmer>
+                            <View
+                                style={[
+                                    styles.dummyBackground,
+                                    styles.dummyText,
+                                ]}
+                            />
+                            <View
+                                style={[
+                                    styles.dummyBackground,
+                                    styles.dummyText,
+                                ]}
+                            />
+                        </View>
+                    </Pressable>
+                </Shimmer>
 
-            <Shimmer
-                opacity={1}
-                animating
-                direction={props.shimmerDirection}
-                animationOpacity={0.1}
-                tilt={
-                    props.shimmerDirection === 'right' ||
-                    props.shimmerDirection === 'down'
-                        ? 10
-                        : -10
-                }>
-                <Pressable onPress={() => {}}>
-                    <View
-                        style={[
-                            styles.contentWrapper,
-                            // index === 0
-                            //     ? styles.firstContent
-                            //     : index === props.contentLength - 1
-                            //     ? styles.lastContent
-                            //     : {},
-                        ]}>
+                <Shimmer
+                    opacity={1}
+                    animating
+                    direction={this.props.shimmerDirection}
+                    animationOpacity={0.1}
+                    tilt={
+                        this.props.shimmerDirection === 'right' ||
+                        this.props.shimmerDirection === 'down'
+                            ? 10
+                            : -10
+                    }>
+                    <Pressable onPress={() => {}}>
                         <View
                             style={[
-                                styles.contentImage,
-                                styles.dummyBackground,
-                            ]}
-                        />
+                                styles.contentWrapper,
+                                // index === 0
+                                //     ? styles.firstContent
+                                //     : index === this.props.contentLength - 1
+                                //     ? styles.lastContent
+                                //     : {},
+                            ]}>
+                            <View
+                                style={[
+                                    styles.contentImage,
+                                    styles.dummyBackground,
+                                ]}
+                            />
 
-                        <View
-                            style={[styles.dummyBackground, styles.dummyText]}
-                        />
-                        <View
-                            style={[styles.dummyBackground, styles.dummyText]}
-                        />
-                    </View>
-                </Pressable>
-            </Shimmer>
+                            <View
+                                style={[
+                                    styles.dummyBackground,
+                                    styles.dummyText,
+                                ]}
+                            />
+                            <View
+                                style={[
+                                    styles.dummyBackground,
+                                    styles.dummyText,
+                                ]}
+                            />
+                        </View>
+                    </Pressable>
+                </Shimmer>
 
-            <Shimmer
-                opacity={1}
-                animating
-                direction={props.shimmerDirection}
-                animationOpacity={0.1}
-                tilt={
-                    props.shimmerDirection === 'right' ||
-                    props.shimmerDirection === 'down'
-                        ? 10
-                        : -10
-                }>
-                <Pressable onPress={() => {}}>
-                    <View
-                        style={[
-                            styles.contentWrapper,
-                            // index === 0
-                            //     ? styles.firstContent
-                            //     : index === props.contentLength - 1
-                            // ?
-                            styles.lastContent,
-                            // : {},
-                        ]}>
+                <Shimmer
+                    opacity={1}
+                    animating
+                    direction={this.props.shimmerDirection}
+                    animationOpacity={0.1}
+                    tilt={
+                        this.props.shimmerDirection === 'right' ||
+                        this.props.shimmerDirection === 'down'
+                            ? 10
+                            : -10
+                    }>
+                    <Pressable onPress={() => {}}>
                         <View
                             style={[
-                                styles.contentImage,
-                                styles.dummyBackground,
-                            ]}
-                        />
+                                styles.contentWrapper,
+                                // index === 0
+                                //     ? styles.firstContent
+                                //     : index === this.props.contentLength - 1
+                                // ?
+                                styles.lastContent,
+                                // : {},
+                            ]}>
+                            <View
+                                style={[
+                                    styles.contentImage,
+                                    styles.dummyBackground,
+                                ]}
+                            />
 
-                        <View
-                            style={[styles.dummyBackground, styles.dummyText]}
-                        />
-                        <View
-                            style={[styles.dummyBackground, styles.dummyText]}
-                        />
-                    </View>
-                </Pressable>
-            </Shimmer>
-        </ScrollView>
-    )
+                            <View
+                                style={[
+                                    styles.dummyBackground,
+                                    styles.dummyText,
+                                ]}
+                            />
+                            <View
+                                style={[
+                                    styles.dummyBackground,
+                                    styles.dummyText,
+                                ]}
+                            />
+                        </View>
+                    </Pressable>
+                </Shimmer>
+            </ScrollView>
+        )
+    }
 }
 
 export default GridSongList_SelfShimmer
