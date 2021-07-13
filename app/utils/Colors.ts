@@ -20,6 +20,12 @@ export function colorBrightness(color: any = '') {
     return brightness
 }
 
+export function sortColorsBasedOnBrightness(colors: Array<any>) {
+    return colors.sort((a, b) => {
+        return colorBrightness(a) - colorBrightness(b)
+    })
+}
+
 export function isColorLight(color: any = '') {
     return colorBrightness(color) > 127.5
 }
