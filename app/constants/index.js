@@ -71,3 +71,10 @@ export const IMAGE_PADDING_H_TO_SHOW = 4 // padding horizontal of the image whic
 export const IMAGE_PADDING_V_TO_SHOW = 4 // padding vertical of the image which should be shown in the UI
 
 export const PaddingBottomView = () => <View style={{paddingBottom: 100}} />
+
+/** equal partition arrays for linear gradient locations */
+export const LINEAR_GRADIENT_LOCATIONS_2 = [0, 0.5]
+export const LINEAR_GRADIENT_LOCATIONS_3 = [0, 0.33, 0.66]
+export const LINEAR_GRADIENT_LOCATIONS_4 = [0, 0.25, 0.5, 0.75]
+export const LINEAR_GRADIENT_LOCATIONS_5 = [0, 0.2, 0.4, 0.6, 0.8]
+export const LINEAR_GRADIENT_LOCATIONS_6 = [0, 0.16, 0.32, 0.48, 0.64, 0.8]
