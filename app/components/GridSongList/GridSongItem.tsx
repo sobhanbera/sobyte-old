@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {View, Image, Pressable} from 'react-native'
 import {Text} from 'react-native-paper'
 
@@ -10,39 +10,40 @@ import {
 } from '../../utils/Objects'
 import {styles} from './'
 import {DEFAULT_IMAGE_QUALITY} from '../../constants'
+import {usePlayer} from '../../context'
 
 interface Props {
     item: SongObject
     imageQuality: string
-    onPress: Function
     index: number
     subColor: string
     textColor: string
     id?: string
+    play: Function
 }
-class GridSongItem extends React.PureComponent<Props> {
-    constructor(props: Props) {
-        super(props)
-    }
 
-    render() {
-        const {id, item, index, imageQuality, onPress, subColor, textColor} =
-            this.props
+const GridSongItem = React.memo(
+    ({item, imageQuality, index, subColor, textColor, id, play}: Props) => {
+        const songImage = useMemo(
+            () =>
+                getHighQualityImageFromSongImage(
+                    item.thumbnails[0],
+                    imageQuality || DEFAULT_IMAGE_QUALITY,
+                ),
+            [],
+        )
+        const highQualityImage = useMemo(
+            () => getHighQualityImageFromSongImage(item.thumbnails[0], '450'),
+            [],
+        )
+        const artist = useMemo(() => formatArtists(item.artist), [])
 
-        const songImage = getHighQualityImageFromSongImage(
-            item.thumbnails[0],
-            imageQuality || DEFAULT_IMAGE_QUALITY,
-        )
-        const highQualityImage = getHighQualityImageFromSongImage(
-            item.thumbnails[0],
-            '450',
-        )
-        const artist = formatArtists(item.artist)
+        console.log(`${id} - ${index}`)
 
         return (
             <Pressable
                 onPress={() =>
-                    onPress({
+                    play({
                         id: item.musicId,
                         duration: item.duration,
                         title: item.name,
@@ -90,7 +91,20 @@ class GridSongItem extends React.PureComponent<Props> {
                 </View>
             </Pressable>
         )
+    },
+)
+
+function select() {
+    const {play} = usePlayer()
+    return {
+        play: play,
+    }
+}
+function connect(WrappedComponent: React.ElementType, select: Function) {
+    return function (props: any) {
+        const selectors = select()
+        return <WrappedComponent {...selectors} {...props} />
     }
 }
 
-export default GridSongItem
+export default connect(GridSongItem, select)
