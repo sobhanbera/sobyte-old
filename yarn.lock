@@ -5719,6 +5719,11 @@ react-native-lrc@^1.0.0-beta.1:
   resolved "https://registry.yarnpkg.com/react-native-lrc/-/react-native-lrc-1.0.0-beta.1.tgz#22bfd2bd833fb25c5bfd790027766f8c4eba3c63"
   integrity sha512-KRF5i0PPE6S+Af5FaBlQn43riCRGHhKsraqx2da60FyQQG90MII/woAwrAwQm1GZbatFCQj/ca6EFACo4S37ng==
 
+react-native-marquee@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/react-native-marquee/-/react-native-marquee-0.3.2.tgz#e86fcfe9ea2036637b079d4af0d19f92195aeef2"
+  integrity sha512-GfN97aOapOhrFc4La4N/SoXAjrgZwbB6Im9yJKhNLHx/SsY4Wqoh3OvYrLzznL2GASEDoO3zZXdufStg6NG8TA==
+
 react-native-modal@^12.0.2:
   version "12.0.2"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-12.0.2.tgz#c7d737330600916d1ff9527e1000629bde2f63c6"
