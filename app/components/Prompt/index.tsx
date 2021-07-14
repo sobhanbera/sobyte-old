@@ -12,11 +12,14 @@ import {
 import {useTheme} from '../../context'
 import Scaler from '../Scaler'
 
+type PropmptDescriptionType =
+    | 'primary'
+    | 'success'
+    | 'error'
+    | 'danger'
+    | 'warning'
 const PromptContext = React.createContext({
-    setTitle: (_title: string) => {},
-    setDescription: (
-        _title: 'primary' | 'success' | 'error' | 'danger' | 'warning',
-    ) => {},
+    prompt: (_title: string, _description: PropmptDescriptionType) => {},
 })
 
 interface Props {
@@ -25,27 +28,24 @@ interface Props {
 const Prompt = (props: Props) => {
     const {themeColors} = useTheme()
     const [title, setTitle] = useState('')
-    const [description, setDescription] = useState<
-        'primary' | 'success' | 'error' | 'danger' | 'warning'
-    >('primary')
+    const [description, setDescription] =
+        useState<PropmptDescriptionType>('primary')
     let timeOutObject = setTimeout(() => {}, 0)
 
-    const setPromptTitle = (title: string = '') => {
+    const prompt = (
+        title: string = '',
+        description: PropmptDescriptionType,
+    ) => {
         clearTimeout(timeOutObject)
         setTitle(title)
+        setDescription(description)
         timeOutObject = setTimeout(() => {
             setTitle('')
+            setDescription('primary')
         }, PROMPT_DURATION)
     }
-    const setPromptDescription = (
-        description: 'primary' | 'success' | 'error' | 'danger' | 'warning',
-    ) => {
-        setDescription(description)
-    }
-
     const promptValues = {
-        setTitle: setPromptTitle,
-        setDescription: setPromptDescription,
+        prompt: prompt,
     }
 
     return (
