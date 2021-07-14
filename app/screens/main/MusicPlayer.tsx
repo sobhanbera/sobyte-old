@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View} from 'react-native'
+import {View, Alert} from 'react-native'
 
 import ImageColors from 'react-native-image-colors'
 import {Image} from 'react-native'
@@ -15,7 +15,7 @@ import {
     MUSIC_PLAYER_BLUR,
 } from '../../constants'
 import {DoubleTap, GradientBackground, ProgressSlider} from '../../components'
-import {usePlayer, useTheme} from '../../context'
+import {usePlayer, usePrompt, useTheme} from '../../context'
 import {DominatingColors} from '../../interfaces'
 import {sortColorsBasedOnBrightness} from '../../utils'
 
@@ -24,6 +24,7 @@ interface PlayerProps {
 }
 const Player: React.FC<PlayerProps> = props => {
     const {current, playonly} = usePlayer()
+    const {prompt} = usePrompt()
     const {themeColors} = useTheme()
     const [colors, setColors] = useState<string[]>([
         themeColors.rgbstreakgradient[1],
@@ -47,10 +48,11 @@ const Player: React.FC<PlayerProps> = props => {
                         res.darkMuted,
                     ])
                     setColors(sortedGradientColors)
-                    // console.log(current.title, res, sortedGradientColors)
+                    prompt('Please check your internet connection.', 'warning')
                 })
                 .catch(err => {
-                    console.log('RE')
+                    if (String(err).includes('Connection closed')) {
+                    }
                     setColors([
                         themeColors.rgbstreakgradient[1],
                         themeColors.rgbstreakgradient[2],
