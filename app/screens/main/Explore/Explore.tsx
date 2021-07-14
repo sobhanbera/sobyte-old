@@ -30,7 +30,7 @@ import globalStyles from '../../../styles/global.styles'
 interface ExploreTabProps {
     navigation?: any
 }
-const Profile: React.FC<ExploreTabProps> = props => {
+const Explore: React.FC<ExploreTabProps> = props => {
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
 
@@ -65,7 +65,7 @@ const Profile: React.FC<ExploreTabProps> = props => {
         ])
             .then((res: FetchedSongObject[]) => {
                 setMusicData(res)
-                console.log('SETTING SONGS')
+                console.log('SETTING SONGS IN EXPLORE...')
             })
             .catch(() => {})
     }, [error])
@@ -277,4 +277,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Profile
+export default Explore
