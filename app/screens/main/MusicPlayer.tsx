@@ -3,17 +3,9 @@ import {View, Alert} from 'react-native'
 
 import ImageColors from 'react-native-image-colors'
 import {Image} from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
 import {StyleSheet} from 'react-native'
-import {ImageBackground} from 'react-native'
 import globalStyles from '../../styles/global.styles'
-import {
-    LINEAR_GRADIENT_LOCATIONS_3,
-    LINEAR_GRADIENT_LOCATIONS_4,
-    LINEAR_GRADIENT_LOCATIONS_5,
-    LINEAR_GRADIENT_LOCATIONS_6,
-    MUSIC_PLAYER_BLUR,
-} from '../../constants'
+import {LINEAR_GRADIENT_LOCATIONS_4} from '../../constants'
 import {DoubleTap, GradientBackground, ProgressSlider} from '../../components'
 import {usePlayer, usePrompt, useTheme} from '../../context'
 import {DominatingColors} from '../../interfaces'
@@ -23,7 +15,7 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: React.FC<PlayerProps> = props => {
-    const {current, playonly} = usePlayer()
+    const {current} = usePlayer()
     const {prompt} = usePrompt()
     const {themeColors} = useTheme()
     const [colors, setColors] = useState<string[]>([
@@ -48,11 +40,15 @@ const Player: React.FC<PlayerProps> = props => {
                         res.darkMuted,
                     ])
                     setColors(sortedGradientColors)
-                    prompt('Please check your internet connection.', 'warning')
                 })
                 .catch(err => {
                     if (String(err).includes('Connection closed')) {
+                        prompt(
+                            'Please check your internet connection.',
+                            'warning',
+                        )
                     }
+                    console.log('ERROR in music player', err)
                     setColors([
                         themeColors.rgbstreakgradient[1],
                         themeColors.rgbstreakgradient[2],
