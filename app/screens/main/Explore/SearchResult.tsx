@@ -36,7 +36,7 @@ interface Props {
 const SearchResult: React.FC<Props> = props => {
     const {surfacelight, text} = useTheme().themeColors
     const {getSearchSuggestions, search} = useMusicApi()
-    const {setTitle, setDescription} = usePrompt()
+    const {prompt} = usePrompt()
 
     const [searchText, setSearchText] = useState<string>('')
     const [songs, setSongs] = useState<FetchedSongObject>(
@@ -81,8 +81,7 @@ const SearchResult: React.FC<Props> = props => {
                 setLoading(false)
             })
             .catch(_err => {
-                setTitle('Sorry! Cannot load data currently.')
-                setDescription('error')
+                prompt('Sorry! Cannot load data currently.', 'error')
                 setLoading(false)
             })
     }
@@ -98,8 +97,7 @@ const SearchResult: React.FC<Props> = props => {
                 setArtists(res)
             })
             .catch(_err => {
-                setTitle('Sorry! Cannot load data currently.')
-                setDescription('error')
+                prompt('Sorry! Cannot load data currently.', 'error')
                 setLoading(false)
             })
     }
