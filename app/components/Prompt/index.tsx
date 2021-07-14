@@ -3,6 +3,7 @@ import {Text, View} from 'react-native'
 import Modal from 'react-native-modal'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import MarqueeText from 'react-native-marquee'
 
 import {
     FontHelvetica,
@@ -52,6 +53,8 @@ const Prompt = (props: Props) => {
         <PromptContext.Provider value={promptValues}>
             {props.children}
             <Modal
+                animationInTiming={1000}
+                animationOutTiming={1000}
                 animationIn="slideInUp"
                 animationOut="slideOutDown"
                 onBackdropPress={() => setTitle('')}
@@ -98,6 +101,7 @@ const Prompt = (props: Props) => {
                                 justifyContent: 'flex-start',
                                 paddingVertical: 5,
                                 paddingHorizontal: 6,
+                                width: '90%',
                             }}>
                             <View
                                 style={{
@@ -140,7 +144,8 @@ const Prompt = (props: Props) => {
                                     />
                                 )}
                             </View>
-                            <Text
+
+                            <MarqueeText
                                 style={{
                                     textAlign: 'left',
                                     textAlignVertical: 'center',
@@ -149,9 +154,14 @@ const Prompt = (props: Props) => {
                                     fontSize: 16,
                                     fontFamily: FontHelvetica,
                                     color: themeColors.white[0],
-                                }}>
+                                }}
+                                duration={PROMPT_DURATION}
+                                marqueeOnStart
+                                loop
+                                marqueeDelay={1000}
+                                marqueeResetDelay={1000}>
                                 {title}
-                            </Text>
+                            </MarqueeText>
                         </View>
                         <View>
                             <MaterialIcons
