@@ -44,6 +44,29 @@ export interface ContinuationObjectItself {
     }
 }
 
+export const BareSongObjectInstance: SongObject = {
+    album: {
+        browseId: '',
+        name: '',
+    },
+    artist: {
+        browseId: '',
+        name: '',
+    },
+    duration: 0,
+    musicId: '',
+    name: '',
+    params: 'wAEB',
+    playlistId: '',
+    thumbnails: [
+        {
+            height: 0,
+            url: '',
+        },
+    ],
+    type: '',
+}
+
 export const BareFetchedSongObjectInstance: FetchedSongObject = {
     content: [
         {

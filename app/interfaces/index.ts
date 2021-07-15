@@ -8,6 +8,7 @@ import FetchedArtistObject, {ArtistObject} from './ArtistObject'
 export type {FetchedArtistObject, ArtistObject}
 
 import FetchedSongObject, {
+    BareSongObjectInstance,
     SongArtistObject,
     SongObject,
     ThumbnailObject,
@@ -31,7 +32,7 @@ import {BareFetchedArtistObjectInstance} from './ArtistObject'
 export {BareFetchedArtistObjectInstance}
 
 import {BareFetchedSongObjectInstance, CasualDemoList} from './SongObject'
-export {BareFetchedSongObjectInstance, CasualDemoList}
+export {BareFetchedSongObjectInstance, BareSongObjectInstance, CasualDemoList}
 
 import {MoodCategories, GenresCategories} from './Data'
 export {MoodCategories, GenresCategories}
