@@ -116,6 +116,7 @@ const Player: FC<PlayerProps> = props => {
                         if (result === null) {
                             return
                         }
+                        console.log('HELODER E R')
                         setCurrentTrack({
                             id: result.id,
                             url: result.url,
@@ -203,11 +204,11 @@ const Player: FC<PlayerProps> = props => {
                 const trackGot = {
                     ...track,
                     url: __res,
+                    album: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
                 await TrackPlayer.add([trackGot])
                 await TrackPlayer.skip(trackGot.id)
 
-                setCurrentTrack(trackGot)
                 setShowLoading(false)
 
                 await TrackPlayer.play()
