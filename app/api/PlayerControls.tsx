@@ -234,6 +234,8 @@ const Player: FC<PlayerProps> = props => {
         setShowLoading(true)
         fetchMusic(track.id)
             .then(async (__res: any) => {
+                setShowLoading(false)
+
                 const trackGot = {
                     ...track,
                     url: __res,
@@ -241,8 +243,6 @@ const Player: FC<PlayerProps> = props => {
                 }
                 await TrackPlayer.add([trackGot])
                 await TrackPlayer.skip(trackGot.id)
-
-                setShowLoading(false)
 
                 await TrackPlayer.play()
                     .then(_res => {})
@@ -310,7 +310,10 @@ const Player: FC<PlayerProps> = props => {
                         console.error('GETTING NEXT LIST', err)
                     })
             })
-            .catch(err => console.error('ERROR PLAYING SONG...', err))
+            .catch(err => {
+                setShowLoading(false)
+                console.error('ERROR PLAYING SONG...', err)
+            })
 
         /**
          * @deprecated the below code becuase it was a much junk then this usual one
