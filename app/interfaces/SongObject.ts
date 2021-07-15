@@ -24,6 +24,22 @@ export interface SongObject {
     [key: string]: any
 }
 
+export interface SongObjectWithArtistAsString {
+    type: string
+    musicId: string
+    playlistId: string
+    name: string
+    artist: string
+    album: {
+        name: string
+        browseId: string
+    }
+    duration: number
+    thumbnails: Array<ThumbnailObject>
+    params: 'wAEB'
+    [key: string]: any
+}
+
 export default interface FetchedSongObject {
     content: Array<SongObject>
     continuation: {
