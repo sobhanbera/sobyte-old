@@ -33,7 +33,7 @@ const GridSongItem = React.memo(
             [],
         )
         const highQualityImage = useMemo(
-            () => getHighQualityImageFromSongImage(item.thumbnails[0], '450'),
+            () => getHighQualityImageFromSongImage(item.thumbnails[0], '720'),
             [],
         )
         const artist = useMemo(() => formatArtists(item.artist), [])
@@ -47,6 +47,7 @@ const GridSongItem = React.memo(
                         title: item.name,
                         artist: artist,
                         artwork: highQualityImage,
+                        playlistId: item.playlistId,
                     })
                 }>
                 <View
