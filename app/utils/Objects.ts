@@ -52,7 +52,7 @@ export const getHighQualityImageFromSong = (
     )
 export const getHightQualityImageFromLink = (
     imageLink: string,
-    height: number,
+    height: number | string,
 ) =>
     imageLink.replace(
         IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
