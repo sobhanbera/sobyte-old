@@ -21,7 +21,6 @@ const languageDetector = {
         )
         const lng = savedDataJSON ? savedDataJSON : null
         const selectLanguage = lng || locale
-        console.log('Detected Language:: ', selectLanguage)
         callback(selectLanguage)
     },
     cacheUserLanguage: () => {},
