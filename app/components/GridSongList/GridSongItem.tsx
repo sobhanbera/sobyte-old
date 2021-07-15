@@ -23,7 +23,7 @@ interface Props {
 }
 
 const GridSongItem = React.memo(
-    ({item, imageQuality, index, subColor, textColor, id, play}: Props) => {
+    ({item, imageQuality, index, subColor, textColor, play}: Props) => {
         const songImage = useMemo(
             () =>
                 getHighQualityImageFromSongImage(
@@ -53,11 +53,11 @@ const GridSongItem = React.memo(
                 <View
                     style={[
                         styles.contentWrapper,
-                        // index === 0
-                        //     ? styles.firstContent
-                        //     : index === contentLength - 1
-                        //     ? styles.lastContent
-                        //     : {},
+                        index === 0
+                            ? styles.firstContent
+                            : //     : index === contentLength - 1
+                              //     ? styles.lastContent
+                              {},
                     ]}>
                     <Image
                         source={{uri: songImage}}
