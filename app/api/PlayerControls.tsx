@@ -8,8 +8,8 @@ import TrackPlayer, {
 } from 'react-native-track-player'
 
 import {useApp, useFetcher, useMusicApi} from '../context'
-import {SongObject} from '../interfaces'
-import {formatArtists, getHighQualityImageFromSongImage} from '../utils'
+import {SongObjectWithArtistAsString} from '../interfaces'
+import {getHighQualityImageFromSongImage} from '../utils'
 
 export interface Track {
     id: string
@@ -254,32 +254,32 @@ const Player: FC<PlayerProps> = props => {
                                 res.content[i].playlistId,
                                 '',
                             )
-                                .then((result: SongObject) => {
-                                    if (
-                                        !checkSongAlreadyInNextSongsList(
-                                            result.musicId,
-                                        )
-                                    ) {
-                                        const highQualityImage =
-                                            getHighQualityImageFromSongImage(
-                                                result.thumbnails[0],
-                                                '720',
+                                .then(
+                                    (result: SongObjectWithArtistAsString) => {
+                                        if (
+                                            !checkSongAlreadyInNextSongsList(
+                                                result.musicId,
                                             )
-                                        const artist = formatArtists(
-                                            result.artist,
-                                        )
+                                        ) {
+                                            const highQualityImage =
+                                                getHighQualityImageFromSongImage(
+                                                    result.thumbnails[0],
+                                                    '720',
+                                                )
+                                            const artist = result.artist
 
-                                        nextSongsData.push({
-                                            id: result.musicId,
-                                            artist: artist,
-                                            artwork: highQualityImage,
-                                            duration: result.duration,
-                                            playlistId: result.playlistId,
-                                            title: result.name,
-                                            url: '',
-                                        })
-                                    }
-                                })
+                                            nextSongsData.push({
+                                                id: result.musicId,
+                                                artist: artist,
+                                                artwork: highQualityImage,
+                                                duration: result.duration,
+                                                playlistId: result.playlistId,
+                                                title: result.name,
+                                                url: '',
+                                            })
+                                        }
+                                    },
+                                )
                                 .catch(err => {
                                     console.error('GETTING PLAYER ERROR', err)
                                 })
