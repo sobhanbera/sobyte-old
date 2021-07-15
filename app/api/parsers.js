@@ -1061,3 +1061,30 @@ export const parseNextPanel = context => {
         })
     return result
 }
+
+export const parseSongDetailsPlayer = (data, musicId = '', playlistId = '') => {
+    const {videoDetails} = data
+    return {
+        type: 'song',
+        musicId: videoDetails.videoId,
+        playlistId: playlistId,
+        name: videoDetails.title,
+        artist: videoDetails.author,
+        album: {
+            name: '',
+            browseId: '',
+        },
+        duration: String(videoDetails.lengthSeconds),
+        thumbnails: [
+            {
+                height: 60,
+                url: videoDetails.thumbnail.thumbnails[0].url,
+            },
+            {
+                height: 120,
+                url: videoDetails.thumbnail.thumbnails[1].url,
+            },
+        ],
+        params: 'wAEB',
+    }
+}
