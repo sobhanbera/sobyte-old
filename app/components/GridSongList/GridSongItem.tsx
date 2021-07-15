@@ -38,8 +38,6 @@ const GridSongItem = React.memo(
         )
         const artist = useMemo(() => formatArtists(item.artist), [])
 
-        console.log(`${id} - ${index}`)
-
         return (
             <Pressable
                 onPress={() =>
