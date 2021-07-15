@@ -231,9 +231,13 @@ const Player: FC<PlayerProps> = props => {
                     .then(_res => {})
                     .catch(_err => {})
 
+                /**
+                 * after playing or starting playing the song loading of song which
+                 * occurs next will start
+                 */
                 getNext(track.id, track.playlistId, '')
                     .then(res => {
-                        const nextSongsData = []
+                        const nextSongsData: Array<SongObject> = []
 
                         for (let i in res.content) {
                             getPlayer(
@@ -247,20 +251,20 @@ const Player: FC<PlayerProps> = props => {
                                             result.musicId,
                                         )
                                     ) {
-                                        console.log(result.name, result)
-                                        // nextSongsData.push(result)
+                                        nextSongsData.push(result)
                                     }
                                 })
                                 .catch(err => {
-                                    console.log('ERRERE', err)
+                                    console.error('GETTING PLAYER ERROR', err)
                                 })
                         }
+                        setNextSongsList(nextSongsData)
                     })
                     .catch(err => {
-                        console.log('ERRERE', err)
+                        console.error('GETTING NEXT LIST', err)
                     })
             })
-            .catch(err => console.log('ERROR PLAYING SONG...', err))
+            .catch(err => console.error('ERROR PLAYING SONG...', err))
 
         /**
          * @deprecated the below code becuase it was a much junk then this usual one
