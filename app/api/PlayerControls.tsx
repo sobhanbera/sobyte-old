@@ -8,7 +8,8 @@ import TrackPlayer, {
 } from 'react-native-track-player'
 
 import {useApp, useFetcher, useMusicApi} from '../context'
-import {SongObject, BareSongObjectInstance} from '../interfaces'
+import {SongObject} from '../interfaces'
+import {formatArtists, getHighQualityImageFromSongImage} from '../utils'
 
 export interface Track {
     id: string
@@ -31,7 +32,17 @@ const PlayerContext = createContext({
     paused: false,
     stopped: false,
     buffering: false,
-    nextSongsList: [BareSongObjectInstance],
+    nextSongsList: [
+        {
+            id: '',
+            url: '',
+            duration: 0,
+            title: '',
+            artist: '',
+            artwork: '',
+            playlistId: '',
+        },
+    ],
 
     current: {
         id: '',
@@ -71,9 +82,7 @@ const Player: FC<PlayerProps> = props => {
     const {fetchMusic} = useFetcher()
     const {getNext, getPlayer} = useMusicApi()
 
-    const [nextSongsList, setNextSongsList] = useState<Array<SongObject>>([
-        BareSongObjectInstance,
-    ])
+    const [nextSongsList, setNextSongsList] = useState<Array<Track>>([])
     const [playerState, setPlayerState] = useState()
     const [currentTrack, setCurrentTrack] = useState<Track>({
         artist: 'Shawn Mendes, Camila Cabe... Test',
@@ -198,7 +207,7 @@ const Player: FC<PlayerProps> = props => {
         if (currentTrack.id === musicId) return true
 
         for (let i in nextSongsList)
-            if (nextSongsList[i].musicId === musicId) return true
+            if (nextSongsList[i].id === musicId) return true
         return false
     }
 
@@ -237,7 +246,7 @@ const Player: FC<PlayerProps> = props => {
                  */
                 getNext(track.id, track.playlistId, '')
                     .then(res => {
-                        const nextSongsData: Array<SongObject> = []
+                        const nextSongsData: Array<Track> = []
 
                         for (let i in res.content) {
                             getPlayer(
@@ -251,7 +260,24 @@ const Player: FC<PlayerProps> = props => {
                                             result.musicId,
                                         )
                                     ) {
-                                        nextSongsData.push(result)
+                                        const highQualityImage =
+                                            getHighQualityImageFromSongImage(
+                                                result.thumbnails[0],
+                                                '720',
+                                            )
+                                        const artist = formatArtists(
+                                            result.artist,
+                                        )
+
+                                        nextSongsData.push({
+                                            id: result.musicId,
+                                            artist: artist,
+                                            artwork: highQualityImage,
+                                            duration: result.duration,
+                                            playlistId: result.playlistId,
+                                            title: result.name,
+                                            url: '',
+                                        })
                                     }
                                 })
                                 .catch(err => {
