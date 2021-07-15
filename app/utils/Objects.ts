@@ -13,6 +13,8 @@ export function IF(condition: boolean, yes: any, no: any) {
     return condition ? yes : no
 }
 
+export const IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX =
+    /w[0-9]{2,4}-h[0-9]{2,4}-l[0-9]{2,3}-rj/
 export function getHighQualityImage(
     imageLink: string,
     height: number,
@@ -29,7 +31,7 @@ export const getHighQualityImageFromSongImage = (
     height: number | string,
 ) =>
     image.url.replace(
-        `w${image.height}-h${image.height}-l90-rj`,
+        IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
         `w${height}-h${height}-l90-rj`,
     )
 export const getHighQualityImageFromSongImageArray = (
@@ -37,16 +39,24 @@ export const getHighQualityImageFromSongImageArray = (
     height: number | string,
 ) =>
     image[0].url.replace(
-        `w${image[0].height}-h${image[0].height}-l90-rj`,
-        `w${height}-h${height}-l90-rj`,
+        IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
+        `w${height}-h${height}-l100-rj`,
     )
 export const getHighQualityImageFromSong = (
     song: SongObject,
     height: number | string,
 ) =>
     song.thumbnails[0].url.replace(
-        `w${song.thumbnails[0].height}-h${song.thumbnails[0].height}-l90-rj`,
-        `w${height}-h${height}-l90-rj`,
+        IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
+        `w${height}-h${height}-l100-rj`,
+    )
+export const getHightQualityImageFromLink = (
+    imageLink: string,
+    height: number,
+) =>
+    imageLink.replace(
+        IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
+        `w${height}-h${height}-l100-rj`,
     )
 
 /**
