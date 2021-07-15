@@ -116,7 +116,6 @@ const Player: FC<PlayerProps> = props => {
                         if (result === null) {
                             return
                         }
-                        console.log('HELODER E R')
                         setCurrentTrack({
                             id: result.id,
                             url: result.url,
