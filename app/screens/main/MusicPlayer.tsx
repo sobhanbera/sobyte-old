@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, Alert} from 'react-native'
+import {View, Alert, Dimensions} from 'react-native'
 
 import ImageColors from 'react-native-image-colors'
 import {Image} from 'react-native'
@@ -7,9 +7,19 @@ import {StyleSheet} from 'react-native'
 import globalStyles from '../../styles/global.styles'
 import {LINEAR_GRADIENT_LOCATIONS_4} from '../../constants'
 import {DoubleTap, GradientBackground, ProgressSlider} from '../../components'
-import {usePlayer, usePrompt, useTheme} from '../../context'
+import {useMusicApi, usePlayer, usePrompt, useTheme} from '../../context'
 import {DominatingColors} from '../../interfaces'
-import {sortColorsBasedOnBrightness} from '../../utils'
+import {
+    sortColorsBasedOnBrightness,
+    getHightQualityImageFromLink,
+} from '../../utils'
+import {ImageBackground} from 'react-native'
+import {parseNextPanel, parseSongSearchResult} from '../../api/parsers'
+
+// const {width, height} = Dimensions.get('window')
+const IMAGE_WIDTH = 210
+const IMAGE_HEIGHT = IMAGE_WIDTH // same as the WIDTH of image
+const IMAGE_BORDER_RADIUS = 12
 
 interface PlayerProps {
     navigation?: any
@@ -18,6 +28,7 @@ const Player: React.FC<PlayerProps> = props => {
     const {current} = usePlayer()
     const {prompt} = usePrompt()
     const {themeColors} = useTheme()
+
     const [colors, setColors] = useState<string[]>([
         themeColors.rgbstreakgradient[1],
         themeColors.rgbstreakgradient[2],
@@ -27,11 +38,14 @@ const Player: React.FC<PlayerProps> = props => {
 
     useEffect(() => {
         if (current.artwork)
-            ImageColors.getColors(current.artwork, {
-                fallback: themeColors.rgbstreakgradient[0],
-                cache: false,
-                key: 'sobyte_music_player_color',
-            })
+            ImageColors.getColors(
+                getHightQualityImageFromLink(current.artwork, '450'),
+                {
+                    fallback: themeColors.rgbstreakgradient[0],
+                    cache: false,
+                    key: 'sobyte_music_player_color',
+                },
+            )
                 .then((res: DominatingColors | any) => {
                     const sortedGradientColors = sortColorsBasedOnBrightness([
                         res.dominant,
@@ -69,57 +83,20 @@ const Player: React.FC<PlayerProps> = props => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-            {/* background image with blur */}
-            <Image
+            <ImageBackground
                 source={{
-                    uri:
-                        current.artwork ||
-                        'https://lh3.googleusercontent.com/fx6kz_AXXbWVglzvmChcvFRTwV_nFmSAjuyYUO2XTqO_Es9hv4Fe6scz1pTfNWw6hSWob6gtpsft3vZm=w400-h400-l90-rj',
+                    uri: current.artwork,
                 }}
-                style={[
-                    // StyleSheet.absoluteFillObject,
-                    {
-                        height: 200,
-                        width: 200,
-                        borderRadius: 6,
-                        overflow: 'hidden',
-                    },
-                ]}
-                blurRadius={0}
-            />
-
-            {/* <LinearGradient
-                useAngle
-                angle={180}
-                angleCenter={{x: 0.5, y: 0}}
+                resizeMode="cover"
                 style={{
-                    flex: 1,
+                    width: '100%',
+                    height: '75%',
+                    // opacity: 0.5,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    elevation: 0,
                 }}
-                colors={colors}
-                locations={LINEAR_GRADIENT_LOCATIONS_4}>
-                
-            </LinearGradient> */}
-
-            {/* <DoubleTap
-                onDoubleTap={() => {
-                    console.log('TAPPED')
-                }}> */}
-            {/* <ProgressSlider /> */}
-
-            {/* <ImageBackground
-                    source={{
-                        uri:
-                            current.artwork ||
-                            'https://lh3.googleusercontent.com/fx6kz_AXXbWVglzvmChcvFRTwV_nFmSAjuyYUO2XTqO_Es9hv4Fe6scz1pTfNWw6hSWob6gtpsft3vZm=w400-h400-l90-rj',
-                    }}
-                    resizeMode="cover"
-                    style={globalStyles.fullImageBackground}
-                    blurRadius={MUSIC_PLAYER_BLUR + 30}>
-                    <View></View>
-                </ImageBackground> */}
-            {/* </DoubleTap> */}
+                blurRadius={0}></ImageBackground>
         </GradientBackground>
     )
 }
