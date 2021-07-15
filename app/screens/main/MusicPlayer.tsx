@@ -42,7 +42,9 @@ const Player: React.FC<PlayerProps> = props => {
         themeColors.rgbstreakgradient[5],
     ])
 
-    // useEffect(() => {}, [nextSongsList[0].id])
+    // useEffect(() => {
+    //     console.log(scrollX)
+    // }, [scrollX])
 
     useEffect(() => {
         if (current.artwork)
@@ -129,7 +131,18 @@ const Player: React.FC<PlayerProps> = props => {
                 showsHorizontalScrollIndicator={false}
                 data={nextSongsList}
                 keyExtractor={(item, _) => `${item.id}-${_}`}
-                renderItem={({item}) => {
+                renderItem={({item, index}) => {
+                    const inputRange = [
+                        (index - 1) * width,
+                        index * width,
+                        (index + 1) * width,
+                    ]
+                    const translateRange = index % 2 === 0 ? 100 : -100
+                    const translateY = scrollX.interpolate({
+                        inputRange: inputRange,
+                        outputRange: [translateRange, 0, translateRange],
+                    })
+
                     return (
                         <View
                             style={{
@@ -137,13 +150,14 @@ const Player: React.FC<PlayerProps> = props => {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}>
-                            <View
+                            <Animated.View
                                 style={{
                                     width: IMAGE_WIDTH,
                                     height: IMAGE_HEIGHT,
                                     borderRadius: IMAGE_BORDER_RADIUS,
                                     overflow: 'hidden',
                                     elevation: 10,
+                                    transform: [{translateY: translateY}],
                                 }}>
                                 <Image
                                     fadeDuration={1000}
@@ -156,7 +170,7 @@ const Player: React.FC<PlayerProps> = props => {
                                         resizeMode: 'cover',
                                     }}
                                 />
-                            </View>
+                            </Animated.View>
                         </View>
                     )
                 }}
