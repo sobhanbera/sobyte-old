@@ -91,8 +91,23 @@ const MusicContext = React.createContext({
      * @param paramString id of the param string if any
      * @returns the object with songs list in that particular playlist
      */
-    getNext: (_musicId: string, _playlistId: string, _paramString: string) =>
-        DemoMusicContextReturn(),
+    getNext: (
+        _musicId: string,
+        _playlistId: string,
+        _paramString: string = '',
+    ) => DemoMusicContextReturn(),
+    /**
+     * @param musicId id of the music
+     * @param playlistId id of the playlist
+     * @param paramString id of the param string if any
+     * @returns the object with songs data
+     */
+    getPlayer: (
+        _musicId: string,
+        _playlistId: string,
+        _paramString: string = '',
+    ) => DemoMusicContextReturn(),
+
     /**
      * state of main api component
      */
@@ -650,7 +665,7 @@ const MusicApi = (props: MusicApiProps) => {
     const getNext = (
         musicId: string,
         playlistId: string,
-        paramString: string,
+        paramString: string = '',
     ) => {
         return new Promise((resolve, reject) => {
             _createApiRequest('next', {
@@ -676,6 +691,43 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
+     * @param musicId id of the music
+     * @param playlistId id of the playlist
+     * @param paramString id of the param string if any
+     * @returns the object with songs data
+     */
+    const getPlayer = (
+        musicId: string,
+        playlistId: string,
+        paramString: string = '',
+    ) => {
+        return new Promise((resolve, reject) => {
+            _createApiRequest('player', {
+                captionParams: {},
+                // cpn: '8aVi-t8xotY1HKuU',
+                playlistId: playlistId,
+                videoId: musicId,
+                param: paramString,
+            })
+                .then(context => {
+                    try {
+                        const result = parsers.parseSongDetailsPlayer(
+                            context,
+                            musicId,
+                            playlistId,
+                        )
+                        resolve(result)
+                    } catch (error) {
+                        resolve({
+                            error: error.message,
+                        })
+                    }
+                })
+                .catch(error => reject(error))
+        })
+    }
+
+    /**
      * music api context values provider
      */
     const musicApiValues = {
@@ -688,6 +740,7 @@ const MusicApi = (props: MusicApiProps) => {
         getPlaylist: getPlaylist,
         getArtist: getArtist,
         getNext: getNext,
+        getPlayer: getPlayer,
 
         musicConfig: musicConfig,
         error: error,
