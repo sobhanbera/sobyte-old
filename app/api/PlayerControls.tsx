@@ -7,7 +7,8 @@ import TrackPlayer, {
     STATE_BUFFERING,
 } from 'react-native-track-player'
 
-import {useApp, useFetcher} from '../context'
+import {useApp, useFetcher, useMusicApi} from '../context'
+import {SongObject, BareSongObjectInstance} from '../interfaces'
 
 export interface Track {
     id: string
@@ -30,6 +31,7 @@ const PlayerContext = createContext({
     paused: false,
     stopped: false,
     buffering: false,
+    nextSongsList: [BareSongObjectInstance],
 
     current: {
         id: '',
@@ -52,6 +54,8 @@ const PlayerContext = createContext({
     seekTo: (_level: number) => {},
     seekInterval: (_interval: number) => {},
 
+    checkSongAlreadyInNextSongsList: (_musicId: string) => {},
+
     rate: 1,
     getRateText: () => {},
     setRate: (_level: number) => {},
@@ -65,7 +69,11 @@ interface PlayerProps {
 const Player: FC<PlayerProps> = props => {
     const {setShowLoading} = useApp()
     const {fetchMusic} = useFetcher()
+    const {getNext, getPlayer} = useMusicApi()
 
+    const [nextSongsList, setNextSongsList] = useState<Array<SongObject>>([
+        BareSongObjectInstance,
+    ])
     const [playerState, setPlayerState] = useState()
     const [currentTrack, setCurrentTrack] = useState<Track>({
         artist: 'Shawn Mendes, Camila Cabe... Test',
@@ -125,6 +133,7 @@ const Player: FC<PlayerProps> = props => {
                             artwork: result.artwork,
                             playlistId: result.album || '',
                         })
+                        console.log('SETTING PLAYLIST', result.album)
                     })
                     .catch(_err => {})
             },
@@ -185,6 +194,14 @@ const Player: FC<PlayerProps> = props => {
         })
     }
 
+    const checkSongAlreadyInNextSongsList = (musicId: string) => {
+        if (currentTrack.id === musicId) return true
+
+        for (let i in nextSongsList)
+            if (nextSongsList[i].musicId === musicId) return true
+        return false
+    }
+
     const play = async (track: Track) => {
         if (!track) {
             console.log('First Condition')
@@ -213,6 +230,35 @@ const Player: FC<PlayerProps> = props => {
                 await TrackPlayer.play()
                     .then(_res => {})
                     .catch(_err => {})
+
+                getNext(track.id, track.playlistId, '')
+                    .then(res => {
+                        const nextSongsData = []
+
+                        for (let i in res.content) {
+                            getPlayer(
+                                res.content[i].musicId,
+                                res.content[i].playlistId,
+                                '',
+                            )
+                                .then((result: SongObject) => {
+                                    if (
+                                        !checkSongAlreadyInNextSongsList(
+                                            result.musicId,
+                                        )
+                                    ) {
+                                        console.log(result.name, result)
+                                        // nextSongsData.push(result)
+                                    }
+                                })
+                                .catch(err => {
+                                    console.log('ERRERE', err)
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        console.log('ERRERE', err)
+                    })
             })
             .catch(err => console.log('ERROR PLAYING SONG...', err))
 
@@ -318,6 +364,7 @@ const Player: FC<PlayerProps> = props => {
         buffering: playerState === STATE_BUFFERING,
 
         current: currentTrack,
+        nextSongsList: nextSongsList,
 
         play: play,
         playonly: playonly,
@@ -325,6 +372,8 @@ const Player: FC<PlayerProps> = props => {
         toggleState: toggleState,
         next: next,
         previous: previous,
+
+        checkSongAlreadyInNextSongsList: checkSongAlreadyInNextSongsList,
 
         seekTo: seekTo,
         seekInterval: seekInterval,
