@@ -173,9 +173,10 @@ const MusicApi = (props: MusicApiProps) => {
                      * check outputs :
                      * Yesterday = 1
                      * Today = 0
-                     * Tommorow = 1  */
+                     * Tommorow = 1
+                     * now it will update daily (updated) */
                     if (
-                        Math.abs(CURR_DATE - LAST_DATE) <= 1 &&
+                        Math.abs(CURR_DATE - LAST_DATE) === 0 &&
                         apiConfigs.LAST_UPDATED_DATE &&
                         apiConfigs.VISITOR_DATA &&
                         apiConfigs.INNERTUBE_CONTEXT_CLIENT_NAME &&
