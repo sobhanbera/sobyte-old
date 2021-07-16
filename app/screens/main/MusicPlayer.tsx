@@ -63,6 +63,10 @@ const Player: React.FC<PlayerProps> = props => {
         }
     }, [current.artwork])
 
+    /**
+     * whenever the scroll position changes this code will be executed and change the song
+     * according to the index or the position of scroll
+     */
     const scrollChangedHandler = (event: any) => {
         const scrollPostion = event.nativeEvent.contentOffset.x
         const screenWidth = width
@@ -72,10 +76,17 @@ const Player: React.FC<PlayerProps> = props => {
             /**
              * if the song which we are gonna playing is not the currently playing song
              */
-            if (currentSongIndex !== -1 && songIndex !== currentSongIndex) {
+            console.log(currentSongIndex, songIndex)
+            if (songIndex !== currentSongIndex) {
                 playSongAtIndex(songIndex)
             }
         }
+
+        /**
+         * TODO: when the user scroll this scroll reference to the last second song player control
+         * will load more song and push them to the nextSongsList variable so that the next songs list never ends
+         * and continues for much time
+         */
     }
 
     return (
