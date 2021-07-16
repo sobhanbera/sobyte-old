@@ -162,7 +162,7 @@ const Player: React.FC<PlayerProps> = props => {
                 }}
             />
 
-            {/* <Image
+            <Image
                 source={{uri: current.artwork}}
                 style={[
                     StyleSheet.absoluteFillObject,
@@ -170,7 +170,7 @@ const Player: React.FC<PlayerProps> = props => {
                         opacity: 0,
                     },
                 ]}
-            /> */}
+            />
         </GradientBackground>
     )
 }
