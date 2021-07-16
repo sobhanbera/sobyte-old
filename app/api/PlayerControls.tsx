@@ -11,6 +11,9 @@ import {useApp, useFetcher, useMusicApi} from '../context'
 import {SongObjectWithArtistAsString} from '../interfaces'
 import {getHighQualityImageFromSongImage} from '../utils'
 
+/**
+ * the data type or the object type for each Tracks of the song
+ */
 export interface Track {
     id: string
     url: string
@@ -28,10 +31,15 @@ export interface Track {
     // [key: string]: any
 }
 const PlayerContext = createContext({
-    playing: false,
-    paused: false,
-    stopped: false,
-    buffering: false,
+    playing: false, // player state is playing or not...
+    paused: false, // player state is paused or not...
+    stopped: false, // player state is stopped or not...
+    buffering: false, // player state is buffering or not...
+
+    /**
+     * list of songs which are next to the current song
+     * this is generated when a new song is played or the last song reached
+     */
     nextSongsList: [
         {
             id: '',
@@ -44,6 +52,9 @@ const PlayerContext = createContext({
         },
     ],
 
+    /**
+     * the current track which is playing...
+     */
     current: {
         id: '',
         url: '',
@@ -161,8 +172,19 @@ const Player: FC<PlayerProps> = props => {
     const {fetchMusic} = useFetcher()
     const {getNext, getPlayer} = useMusicApi()
 
+    /**
+     * list of songs which are next to the current song
+     * this is generated when a new song is played or the last song reached
+     */
     const [nextSongsList, setNextSongsList] = useState<Array<Track>>([])
+    /**
+     * playerstate provide the info about the track player that the song is
+     * playing, paused, stopped, buffering, etc...
+     */
     const [playerState, setPlayerState] = useState()
+    /**
+     * the current track which is playing...
+     */
     const [currentTrack, setCurrentTrack] = useState<Track>({
         artist: '',
         artwork: '',
