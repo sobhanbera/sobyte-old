@@ -211,6 +211,14 @@ const Player: FC<PlayerProps> = props => {
         return false
     }
 
+    const checkSongAlreadyInTemporaryNextSongsList = (
+        musicId: string,
+        list: Array<Track>,
+    ) => {
+        for (let i in list) if (list[i].id === musicId) return true
+        return false
+    }
+
     const play = async (track: Track) => {
         if (!track) {
             console.log('First Condition')
@@ -244,10 +252,18 @@ const Player: FC<PlayerProps> = props => {
                  * after playing or starting playing the song loading of song which
                  * occurs next will start
                  */
+                const nextSongsData: Array<Track> = []
+                nextSongsData.push({
+                    id: trackGot.id,
+                    artist: trackGot.artist,
+                    artwork: trackGot.artwork,
+                    duration: trackGot.duration,
+                    playlistId: trackGot.playlistId,
+                    title: trackGot.title,
+                    url: '',
+                })
                 getNext(track.id, track.playlistId, '')
                     .then(res => {
-                        const nextSongsData: Array<Track> = []
-
                         for (let i in res.content) {
                             getPlayer(
                                 res.content[i].musicId,
@@ -259,6 +275,10 @@ const Player: FC<PlayerProps> = props => {
                                         if (
                                             !checkSongAlreadyInNextSongsList(
                                                 result.musicId,
+                                            ) &&
+                                            !checkSongAlreadyInTemporaryNextSongsList(
+                                                result.musicId,
+                                                nextSongsData,
                                             )
                                         ) {
                                             const highQualityImage =
