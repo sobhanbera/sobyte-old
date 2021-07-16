@@ -54,27 +54,103 @@ const PlayerContext = createContext({
         playlistId: '',
     },
 
+    /**
+     * the common and normal play function which had many checks and then plays the song
+     * also generate next songs list and there url...
+     *
+     * first this function will check that the track which is passed is the current playing track
+     * and also if the track is a valid track
+     * else it will play the current track and returns from the function....
+     */
     play: (_track: Track) => {},
-    playonly: () => {},
+    /**
+     * function to pause the track player
+     */
     pause: () => {},
+    /**
+     * function to continue playing the track player
+     */
+    playonly: () => {},
+
+    /**
+     * function to toggle the player state
+     * if paused then start playing and vice versa
+     */
     toggleState: () => {},
 
+    /**
+     * @param musicId is the id of the any track
+     * @returns that the track with id is in the next songs list
+     */
     checkSongAlreadyInNextSongsList: (_musicId: string) => {},
+    /**
+     * @param index a number which should be an index for the nextSongList
+     * this function is exactly a helper function of the @function addSongAndPlay which checks that the index is among
+     * the nextsong list index and plays it then directly
+     */
     playSongAtIndex: (_index: number) => {},
+    /**
+     * @returns the index of the current playing song from next songs list data
+     * returns -1 if no data is found
+     */
     getTheIndexOfCurrentSong: () => {},
+    /**
+     * @param track is the track which is provided to play directly
+     * this function resets the player and add the track which is passed and plays it directly but the track must be valid
+     * since this function doesn't has any checks for the url of the music or the image or any other property
+     */
     addSongAndPlay: (_track: Track) => {},
 
-    next: () => {},
+    /**
+     * skips to previous song
+     * not is use in this application
+     * @deprecated
+     */
     previous: () => {},
+    /**
+     * skips to next song
+     * not is use in this application
+     * @deprecated
+     */
+    next: () => {},
 
+    /**
+     * @param level of the track player position
+     * skip to some interger interval
+     */
     seekTo: (_level: number) => {},
+    /**
+     * @param interval the interval to skip
+     * skip to some number of interval in any direction
+     * negative will make backward skip to the interval and +ve will forward skip to the interval
+     */
     seekInterval: (_interval: number) => {},
 
+    /**
+     * rate of the track player
+     */
     rate: 1,
-    getRateText: () => {},
-    setRate: (_level: number) => {},
-
+    /**
+     * volume of the track player and
+     * rate of the track player
+     */
     volume: 1,
+    /**
+     * @param rate the level of volume
+     * this function returns the rate text
+     * for Ex:
+     * 1X, 2X, 5X, 0.5X, 0.25X, 0.75X etc...
+     */
+    getRateText: () => {},
+    /**
+     * @param level the level of rate
+     * sets rate level of the track player
+     */
+    setRate: (_level: number) => {},
+    /**
+     * @param level the level of volume
+     * sets volume level of the track player
+     */
     setVolume: (_level: number) => {},
 })
 interface PlayerProps {
