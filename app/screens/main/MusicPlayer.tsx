@@ -91,6 +91,55 @@ const Player: React.FC<PlayerProps> = props => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
+            {/* these are the temporary data and are not reqired that much as the main UI component itself... */}
+            <>
+                <Image
+                    source={{uri: current.artwork || APP_LOGO_LINK}}
+                    style={[
+                        StyleSheet.absoluteFillObject,
+                        {
+                            opacity: 0,
+                        },
+                    ]}
+                />
+                {!current.id && nextSongsList.length <= 0 ? (
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: '100%',
+                            height: '100%',
+                            ...StyleSheet.absoluteFillObject,
+                        }}>
+                        <Image
+                            source={{uri: APP_LOGO_LINK}}
+                            style={[
+                                {
+                                    opacity: 1,
+                                    width: 218 / 2,
+                                    height: 276 / 2,
+                                },
+                            ]}
+                            // blurRadius={IMAGE_BLUR_RADIUS / 5000}
+                        />
+                    </View>
+                ) : null}
+                {nextSongsList.length > 3 ? (
+                    <Image
+                        source={{
+                            uri: nextSongsList[2].artwork || APP_LOGO_LINK,
+                        }}
+                        style={[
+                            StyleSheet.absoluteFillObject,
+                            {
+                                opacity: 0,
+                            },
+                        ]}
+                    />
+                ) : null}
+            </>
+
             {nextSongsList.length > 0 ? (
                 <View style={StyleSheet.absoluteFillObject}>
                     {nextSongsList.map((song, _) => {
@@ -121,8 +170,8 @@ const Player: React.FC<PlayerProps> = props => {
             ) : null}
 
             <Animated.FlatList
-                // scrollToOverflowEnabled
-                // overScrollMode={'never'}
+                scrollToOverflowEnabled
+                overScrollMode={'never'}
                 ref={scrollReference}
                 onScroll={Animated.event(
                     [{nativeEvent: {contentOffset: {x: scrollX}}}],
@@ -182,33 +231,14 @@ const Player: React.FC<PlayerProps> = props => {
                                 />
                             </Animated.View>
 
-                            <TrackPlayerProgressSlider />
+                            <TrackPlayerProgressSlider
+                                index={index}
+                                duration={item.duration / 1000}
+                            />
                         </View>
                     )
                 }}
             />
-
-            <Image
-                source={{uri: current.artwork || APP_LOGO_LINK}}
-                style={[
-                    StyleSheet.absoluteFillObject,
-                    {
-                        opacity: 0,
-                    },
-                ]}
-            />
-
-            {nextSongsList.length > 3 ? (
-                <Image
-                    source={{uri: nextSongsList[2].artwork || APP_LOGO_LINK}}
-                    style={[
-                        StyleSheet.absoluteFillObject,
-                        {
-                            opacity: 0,
-                        },
-                    ]}
-                />
-            ) : null}
         </View>
     )
 }
