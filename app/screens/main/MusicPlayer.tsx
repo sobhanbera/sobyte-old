@@ -1,11 +1,18 @@
 import React, {useEffect} from 'react'
 import {View, Image, Dimensions, StyleSheet, Animated} from 'react-native'
+import ImageColors from 'react-native-image-colors'
 
-import {usePlayer} from '../../context'
+import {usePlayer, useSetting, useTheme} from '../../context'
 import {TrackPlayerProgressSlider} from '../../components'
-import {APP_LOGO_LINK} from '../../constants'
+import {APP_LOGO_LINK, BOTTOM_TAB_BAR_NAVIGATION_HEIGHT} from '../../constants'
+import {
+    getHightQualityImageFromLink,
+    isColorDark,
+    sortColorsBasedOnBrightness,
+} from '../../utils'
+import {DominatingColors} from '../../interfaces'
 
-const {width} = Dimensions.get('screen')
+const {width, height} = Dimensions.get('screen')
 const IMAGE_WIDTH = width * 0.65
 const IMAGE_HEIGHT = IMAGE_WIDTH * 1.071 // same as the WIDTH of image
 const IMAGE_BORDER_RADIUS = 10
@@ -17,45 +24,61 @@ interface PlayerProps {
 const Player: React.FC<PlayerProps> = props => {
     const {current, nextSongsList, playSongAtIndex, getTheIndexOfCurrentSong} =
         usePlayer()
+    const {themeColors} = useTheme()
+    const {imageQuality} = useSetting()
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = React.useRef<Animated.FlatList>(null)
-    // const [dominatingColors, setDominatingColors] = React.useState<string>('')
+    const [dominatingColors, setDominatingColors] =
+        React.useState<string>('#FFFFFFFF')
+    const [dominatingColorsStyle, setDominatingColorsStyle] = React.useState<
+        'light' | 'dark'
+    >('light')
 
     useEffect(() => {
         if (current.url) {
-            // ImageColors.getColors(
-            //     getHightQualityImageFromLink(current.artwork, '450'),
-            //     {
-            //         fallback: themeColors.rgbstreakgradient[0],
-            //         cache: false,
-            //         key: 'sobyte_music_player_color',
-            //     },
-            // )
-            //     .then((res: DominatingColors | any) => {
-            /*
-             * available colors which should be used->
-             * res.dominant,
-             * res.vibrant,
-             * res.darkVibrant,
-             * res.darkMuted
-             * */
-            //         setDominatingColors('#000000')
-            //     })
-            //     .catch(err => {
-            //         if (String(err).includes('Connection closed')) {
-            //             prompt(
-            //                 'Please check your internet connection.',
-            //                 'warning',
-            //             )
-            //         }
-            //         setDominatingColors('#000000')
-            //     })
+            ImageColors.getColors(
+                getHightQualityImageFromLink(current.artwork, '100'),
+                {
+                    fallback: themeColors.rgbstreakgradient[0],
+                    cache: false,
+                    key: 'sobyte_music_player_color',
+                },
+            )
+                .then((res: DominatingColors | any) => {
+                    /* available colors which should be used ->
+                     * res.dominant,
+                     * res.vibrant,
+                     * res.darkVibrant,
+                     * res.darkMuted
+                     * */
+                    const lightColorAmongAll = sortColorsBasedOnBrightness([
+                        res.dominant,
+                        res.vibrant,
+                        res.darkVibrant,
+                    ])[0]
+                    setDominatingColors(lightColorAmongAll || '#FFFFFFFF')
+                    setDominatingColorsStyle(
+                        isColorDark(lightColorAmongAll || '#FFFFFFFF')
+                            ? 'dark'
+                            : 'light',
+                    )
+                })
+                .catch(err => {
+                    if (String(err).includes('Connection closed')) {
+                        // prompt(
+                        //     'Please check your internet connection.',
+                        //     'warning',
+                        // )
+                    }
+                    setDominatingColors('#FFFFFFFF')
+                    setDominatingColorsStyle('light')
+                })
 
-            const currentSongIndex: any = getTheIndexOfCurrentSong()
-            if (currentSongIndex !== -1) {
-                // console.log(scrollReference.current)
-            }
+            // const currentSongIndex: any = getTheIndexOfCurrentSong()
+            // if (currentSongIndex !== -1) {
+            // console.log(scrollReference.current)
+            // }
         }
     }, [current.artwork])
 
@@ -169,76 +192,100 @@ const Player: React.FC<PlayerProps> = props => {
                 </View>
             ) : null}
 
-            <Animated.FlatList
-                scrollToOverflowEnabled
-                overScrollMode={'never'}
-                ref={scrollReference}
-                onScroll={Animated.event(
-                    [{nativeEvent: {contentOffset: {x: scrollX}}}],
-                    {
-                        useNativeDriver: true,
-                        listener: event => {
-                            scrollChangedHandler(event)
+            <View
+                style={{
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '100%',
+                    flex: 1,
+                }}>
+                <Animated.FlatList
+                    scrollToOverflowEnabled
+                    overScrollMode={'never'}
+                    ref={scrollReference}
+                    onScroll={Animated.event(
+                        [{nativeEvent: {contentOffset: {x: scrollX}}}],
+                        {
+                            useNativeDriver: true,
+                            listener: event => {
+                                scrollChangedHandler(event)
+                            },
                         },
-                    },
-                )}
-                horizontal
-                pagingEnabled
-                bounces={true}
-                showsHorizontalScrollIndicator={false}
-                data={nextSongsList}
-                keyExtractor={(item, _) => `${item.id}-${_}`}
-                renderItem={({item, index}) => {
-                    const inputRange = [
-                        (index - 1) * width,
-                        index * width,
-                        (index + 1) * width,
-                    ]
-                    // const translateRange = index % 2 === 0 ? -100 : -100
-                    const translateY = scrollX.interpolate({
-                        inputRange: inputRange,
-                        outputRange: [-100, 0, -100],
-                    })
+                    )}
+                    pagingEnabled
+                    bounces={true}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                    data={nextSongsList}
+                    keyExtractor={(item, _) => `${item.id}-${_}`}
+                    renderItem={({item, index}) => {
+                        const inputRange = [
+                            (index - 1) * width,
+                            index * width,
+                            (index + 1) * width,
+                        ]
+                        // const translateRange = index % 2 === 0 ? -100 : -100
+                        const translateY = scrollX.interpolate({
+                            inputRange: inputRange,
+                            outputRange: [-100, 0, -100],
+                        })
 
-                    return (
-                        <View
-                            style={{
-                                width: width,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}>
-                            <Animated.View
+                        return (
+                            <View
                                 style={{
-                                    width: IMAGE_WIDTH,
-                                    height: IMAGE_HEIGHT,
-                                    borderRadius: IMAGE_BORDER_RADIUS,
-                                    overflow: 'hidden',
-                                    elevation: 10,
-                                    transform: [{translateY: translateY}],
+                                    width: width,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    // backgroundColor: 'red',
                                 }}>
-                                <Image
-                                    fadeDuration={1000}
-                                    source={{
-                                        uri: item.artwork || APP_LOGO_LINK,
-                                    }}
+                                <Animated.View
                                     style={{
                                         width: IMAGE_WIDTH,
                                         height: IMAGE_HEIGHT,
                                         borderRadius: IMAGE_BORDER_RADIUS,
                                         overflow: 'hidden',
-                                        resizeMode: 'cover',
-                                    }}
-                                />
-                            </Animated.View>
+                                        elevation: 10,
+                                        transform: [{translateY: translateY}],
+                                    }}>
+                                    <Image
+                                        fadeDuration={1000}
+                                        source={{
+                                            uri: item.artwork || APP_LOGO_LINK,
+                                        }}
+                                        style={{
+                                            width: IMAGE_WIDTH,
+                                            height: IMAGE_HEIGHT,
+                                            borderRadius: IMAGE_BORDER_RADIUS,
+                                            overflow: 'hidden',
+                                            resizeMode: 'cover',
+                                        }}
+                                    />
+                                </Animated.View>
+                            </View>
+                        )
+                    }}
+                />
 
-                            <TrackPlayerProgressSlider
-                                index={index}
-                                duration={item.duration / 1000}
-                            />
-                        </View>
-                    )
-                }}
-            />
+                <View
+                    style={{
+                        // height: 100,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                        backgroundColor:
+                            dominatingColorsStyle === 'light'
+                                ? '#FFFFFF25'
+                                : '#00000025',
+                        paddingTop: 20,
+                        paddingBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
+                        borderTopRightRadius: 25,
+                        borderTopLeftRadius: 25,
+                    }}>
+                    <TrackPlayerProgressSlider color={dominatingColors} />
+                </View>
+            </View>
         </View>
     )
 }
