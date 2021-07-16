@@ -29,8 +29,8 @@ const AuthenticationNavigation = () => {
         <BarNavigator.Navigator
             labeled={true}
             theme={DarkTheme}
-            activeColor={themeColors.secondary.main[0]}
-            inactiveColor={themeColors.primary.light[0]}
+            activeColor={themeColors.white[0]}
+            inactiveColor={themeColors.grey[0]}
             sceneAnimationEnabled
             backBehavior="history"
             shifting
