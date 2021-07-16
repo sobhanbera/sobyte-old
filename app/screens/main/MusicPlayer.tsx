@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {View, Image, Dimensions, StyleSheet, Animated} from 'react-native'
 
 import {usePlayer} from '../../context'
+import {TrackPlayerProgressSlider} from '../../components'
 
 const {width} = Dimensions.get('screen')
 const IMAGE_WIDTH = width * 0.65
@@ -18,12 +19,10 @@ const Player: React.FC<PlayerProps> = props => {
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = React.useRef<Animated.FlatList>(null)
+    // const [dominatingColors, setDominatingColors] = React.useState<string>('')
 
     useEffect(() => {
         if (current.url) {
-            /**
-             * now onwards we are not using this type of background
-             */
             // ImageColors.getColors(
             //     getHightQualityImageFromLink(current.artwork, '450'),
             //     {
@@ -33,13 +32,14 @@ const Player: React.FC<PlayerProps> = props => {
             //     },
             // )
             //     .then((res: DominatingColors | any) => {
-            //         const sortedGradientColors = sortColorsBasedOnBrightness([
-            //             res.dominant,
-            //             res.vibrant,
-            //             res.darkVibrant,
-            //             res.darkMuted,
-            //         ])
-            //         setColors(sortedGradientColors)
+            /*
+             * available colors which should be used->
+             * res.dominant,
+             * res.vibrant,
+             * res.darkVibrant,
+             * res.darkMuted
+             * */
+            //         setDominatingColors('#000000')
             //     })
             //     .catch(err => {
             //         if (String(err).includes('Connection closed')) {
@@ -48,12 +48,7 @@ const Player: React.FC<PlayerProps> = props => {
             //                 'warning',
             //             )
             //         }
-            //         setColors([
-            //             themeColors.rgbstreakgradient[1],
-            //             themeColors.rgbstreakgradient[2],
-            //             themeColors.rgbstreakgradient[3],
-            //             themeColors.rgbstreakgradient[5],
-            //         ])
+            //         setDominatingColors('#000000')
             //     })
 
             const currentSongIndex: any = getTheIndexOfCurrentSong()
@@ -76,7 +71,6 @@ const Player: React.FC<PlayerProps> = props => {
             /**
              * if the song which we are gonna playing is not the currently playing song
              */
-            console.log(currentSongIndex, songIndex)
             if (songIndex !== currentSongIndex) {
                 playSongAtIndex(songIndex)
             }
@@ -184,6 +178,8 @@ const Player: React.FC<PlayerProps> = props => {
                                     }}
                                 />
                             </Animated.View>
+
+                            <TrackPlayerProgressSlider />
                         </View>
                     )
                 }}
