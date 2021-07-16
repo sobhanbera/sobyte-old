@@ -34,6 +34,8 @@ export const FontUbuntuBold = 'Ubuntu Bold'
 /** links and website redirects */
 export const PRIVACY_POLICY_LINK = 'https://sobhanbera.vercel.app'
 export const TERM_AND_CONDITIONS_LINK = 'https://sobhanbera.vercel.app'
+export const APP_LOGO_LINK =
+    'https://raw.githubusercontent.com/sobhanbera/sobyte/master/app/assets/images/sobyte_logo_white.png?token=AL7WGWAQBBGY7A53625TI43A7LSNU'
 
 /**
  * 000@webhosting .com
