@@ -577,8 +577,7 @@ const Player: FC<PlayerProps> = props => {
      * function to continue playing the track player
      */
     const playonly = async () => {
-        if (currentTrack.id)
-            if (playerState === STATE_PAUSED) await TrackPlayer.play()
+        await TrackPlayer.play()
     }
 
     /**
