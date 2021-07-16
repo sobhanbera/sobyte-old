@@ -242,9 +242,8 @@ const Player: FC<PlayerProps> = props => {
                             title: result.title,
                             artist: result.artist,
                             artwork: result.artwork,
-                            playlistId: result.album || '',
+                            playlistId: result.description || '',
                         })
-                        console.log('SETTING PLAYLIST', result.album)
                     })
                     .catch(_err => {})
             },
@@ -352,7 +351,7 @@ const Player: FC<PlayerProps> = props => {
         resetPlayer()
         const trackGot = {
             ...track,
-            album: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
+            albdescriptionum: track.playlistId, // since we are setting the current track in playback-track-changed event listener above in the useEffect function
         }
         await TrackPlayer.add([trackGot])
         await TrackPlayer.skip(trackGot.id)
@@ -418,7 +417,7 @@ const Player: FC<PlayerProps> = props => {
                 const trackGot = {
                     ...track,
                     url: __res,
-                    album: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
+                    description: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
                 await TrackPlayer.add([trackGot])
                 await TrackPlayer.skip(trackGot.id)
