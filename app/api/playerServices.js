@@ -11,8 +11,6 @@ module.exports = async function () {
         // console.log('paused')
     })
 
-    TrackPlayer.addEventListener('remote-stop', () => TrackPlayer.stop())
-
     TrackPlayer.addEventListener('remote-jump-forward', async ({interval}) => {
         const currPos = await TrackPlayer.getPosition()
         await TrackPlayer.seekTo(currPos + interval)
