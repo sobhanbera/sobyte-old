@@ -5,13 +5,20 @@ import Slider from '@react-native-community/slider'
 import {usePlayer, usePlayerProgress} from '../../context'
 
 interface Props {
-    duration: number
-    index?: number
+    color: string
 }
 const TrackPlayerProgressSlider = (props: Props) => {
     const {position, duration, bufferedPosition} = usePlayerProgress()
-    const {playing, paused, buffering, seekTo, seekInterval, playonly, pause} =
-        usePlayer()
+    const {
+        playing,
+        paused,
+        buffering,
+        seekTo,
+        seekInterval,
+        playonly,
+        pause,
+        current,
+    } = usePlayer()
 
     return (
         <View
@@ -24,20 +31,23 @@ const TrackPlayerProgressSlider = (props: Props) => {
                 style={{
                     width: '90%',
                     maxWidth: 330,
+                    // backgroundColor: 'white',
                 }}>
                 <Slider
                     value={position} // position is in seconds
                     minimumValue={0}
-                    maximumValue={props.duration || duration / 1000} // duration is in milliseconds, but props.duration must be in seconds
-                    maximumTrackTintColor="black"
-                    thumbTintColor="black"
-                    minimumTrackTintColor="blue"
+                    maximumValue={duration / 1000} // duration is in milliseconds, but props.duration must be in seconds
+                    maximumTrackTintColor={props.color + '7F'} // half brightness of the given color prop
+                    thumbTintColor={props.color}
+                    minimumTrackTintColor={props.color}
                     onSlidingComplete={e => {
-                        seekTo(e / 1000) // the e is in milliseconds
-                        // console.log(e)
+                        seekTo(e) // the e is in seconds
                     }}
+                    step={0.5}
                     style={{
                         width: '100%',
+                        padding: 0,
+                        margin: 0,
                     }}
                 />
             </View>
