@@ -1,23 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {
-    View,
-    Image,
-    Dimensions,
-    FlatList,
-    StyleSheet,
-    StatusBar,
-    Animated,
-} from 'react-native'
-import ImageColors from 'react-native-image-colors'
+import React, {useEffect} from 'react'
+import {View, Image, Dimensions, StyleSheet, Animated} from 'react-native'
 
-import {LINEAR_GRADIENT_LOCATIONS_4} from '../../constants'
-import {DoubleTap, GradientBackground, ProgressSlider} from '../../components'
-import {usePlayer, usePrompt, useTheme} from '../../context'
-import {DominatingColors} from '../../interfaces'
-import {
-    sortColorsBasedOnBrightness,
-    getHightQualityImageFromLink,
-} from '../../utils'
+import {usePlayer} from '../../context'
 
 const {width} = Dimensions.get('screen')
 const IMAGE_WIDTH = width * 0.65
@@ -31,25 +15,12 @@ interface PlayerProps {
 const Player: React.FC<PlayerProps> = props => {
     const {current, nextSongsList, playSongAtIndex, getTheIndexOfCurrentSong} =
         usePlayer()
-    const {prompt} = usePrompt()
-    const {themeColors} = useTheme()
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = React.useRef<Animated.FlatList>(null)
 
-    const [colors, setColors] = useState<string[]>([
-        themeColors.rgbstreakgradient[1],
-        themeColors.rgbstreakgradient[2],
-        themeColors.rgbstreakgradient[3],
-        themeColors.rgbstreakgradient[5],
-    ])
-
-    // useEffect(() => {
-    //     console.log(scrollX)
-    // }, [scrollX])
-
     useEffect(() => {
-        if (current.artwork && current.id) {
+        if (current.url) {
             /**
              * now onwards we are not using this type of background
              */
@@ -90,27 +61,25 @@ const Player: React.FC<PlayerProps> = props => {
                 // console.log(scrollReference.current)
             }
         }
-    }, [current.artwork, nextSongsList.length])
+    }, [current.artwork])
 
     const scrollChangedHandler = (event: any) => {
         const scrollPostion = event.nativeEvent.contentOffset.x
         const screenWidth = width
         if (scrollPostion % screenWidth === 0) {
             const songIndex = scrollPostion / screenWidth
-            playSongAtIndex(songIndex)
-            // console.log(
-            //     nextSongsList[songIndex].title,
-            //     nextSongsList[songIndex].url,
-            // )
+            const currentSongIndex: any = getTheIndexOfCurrentSong()
+            /**
+             * if the song which we are gonna playing is not the currently playing song
+             */
+            if (currentSongIndex !== -1 && songIndex !== currentSongIndex) {
+                playSongAtIndex(songIndex)
+            }
         }
     }
 
     return (
-        <GradientBackground
-            colors={colors}
-            angle={180}
-            location={LINEAR_GRADIENT_LOCATIONS_4}
-            angleCenter={{x: 0, y: 0}}
+        <View
             style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -230,7 +199,7 @@ const Player: React.FC<PlayerProps> = props => {
                     ]}
                 />
             ) : null}
-        </GradientBackground>
+        </View>
     )
 }
 
