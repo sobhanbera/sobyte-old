@@ -69,8 +69,8 @@ export {
 }
 
 /** music player components */
-import ProgressSlider from './MusicPlayer/ProgressSlider'
-export {ProgressSlider}
+import TrackPlayerProgressSlider from './MusicPlayer/TrackPlayerProgressSlider'
+export {TrackPlayerProgressSlider}
 
 /** many others */
 import GridSongList from './GridSongList'
