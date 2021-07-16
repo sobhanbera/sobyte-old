@@ -50,44 +50,47 @@ const Player: React.FC<PlayerProps> = props => {
 
     useEffect(() => {
         if (current.artwork && current.id) {
-            ImageColors.getColors(
-                getHightQualityImageFromLink(current.artwork, '450'),
-                {
-                    fallback: themeColors.rgbstreakgradient[0],
-                    cache: false,
-                    key: 'sobyte_music_player_color',
-                },
-            )
-                .then((res: DominatingColors | any) => {
-                    const sortedGradientColors = sortColorsBasedOnBrightness([
-                        res.dominant,
-                        res.vibrant,
-                        res.darkVibrant,
-                        res.darkMuted,
-                    ])
-                    setColors(sortedGradientColors)
-                })
-                .catch(err => {
-                    if (String(err).includes('Connection closed')) {
-                        prompt(
-                            'Please check your internet connection.',
-                            'warning',
-                        )
-                    }
-                    setColors([
-                        themeColors.rgbstreakgradient[1],
-                        themeColors.rgbstreakgradient[2],
-                        themeColors.rgbstreakgradient[3],
-                        themeColors.rgbstreakgradient[5],
-                    ])
-                })
+            /**
+             * now onwards we are not using this type of background
+             */
+            // ImageColors.getColors(
+            //     getHightQualityImageFromLink(current.artwork, '450'),
+            //     {
+            //         fallback: themeColors.rgbstreakgradient[0],
+            //         cache: false,
+            //         key: 'sobyte_music_player_color',
+            //     },
+            // )
+            //     .then((res: DominatingColors | any) => {
+            //         const sortedGradientColors = sortColorsBasedOnBrightness([
+            //             res.dominant,
+            //             res.vibrant,
+            //             res.darkVibrant,
+            //             res.darkMuted,
+            //         ])
+            //         setColors(sortedGradientColors)
+            //     })
+            //     .catch(err => {
+            //         if (String(err).includes('Connection closed')) {
+            //             prompt(
+            //                 'Please check your internet connection.',
+            //                 'warning',
+            //             )
+            //         }
+            //         setColors([
+            //             themeColors.rgbstreakgradient[1],
+            //             themeColors.rgbstreakgradient[2],
+            //             themeColors.rgbstreakgradient[3],
+            //             themeColors.rgbstreakgradient[5],
+            //         ])
+            //     })
 
             const currentSongIndex: any = getTheIndexOfCurrentSong()
             if (currentSongIndex !== -1) {
                 // console.log(scrollReference.current)
             }
         }
-    }, [current.artwork])
+    }, [current.artwork, nextSongsList.length])
 
     const scrollChangedHandler = (event: any) => {
         const scrollPostion = event.nativeEvent.contentOffset.x
