@@ -20,8 +20,8 @@ import {
 } from '../../utils'
 
 const {width} = Dimensions.get('screen')
-const IMAGE_WIDTH = width * 0.7
-const IMAGE_HEIGHT = IMAGE_WIDTH * 1.2 // same as the WIDTH of image
+const IMAGE_WIDTH = width * 0.65
+const IMAGE_HEIGHT = IMAGE_WIDTH * 1.071 // same as the WIDTH of image
 const IMAGE_BORDER_RADIUS = 10
 const IMAGE_BLUR_RADIUS = 50
 
@@ -29,11 +29,13 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: React.FC<PlayerProps> = props => {
-    const {current, nextSongsList} = usePlayer()
+    const {current, nextSongsList, playSongAtIndex, getTheIndexOfCurrentSong} =
+        usePlayer()
     const {prompt} = usePrompt()
     const {themeColors} = useTheme()
 
     const scrollX = React.useRef(new Animated.Value(0)).current
+    const scrollReference = React.useRef<Animated.FlatList>(null)
 
     const [colors, setColors] = useState<string[]>([
         themeColors.rgbstreakgradient[1],
@@ -47,7 +49,7 @@ const Player: React.FC<PlayerProps> = props => {
     // }, [scrollX])
 
     useEffect(() => {
-        if (current.artwork)
+        if (current.artwork && current.id) {
             ImageColors.getColors(
                 getHightQualityImageFromLink(current.artwork, '450'),
                 {
@@ -72,7 +74,6 @@ const Player: React.FC<PlayerProps> = props => {
                             'warning',
                         )
                     }
-                    console.log('ERROR in music player', err)
                     setColors([
                         themeColors.rgbstreakgradient[1],
                         themeColors.rgbstreakgradient[2],
@@ -80,7 +81,26 @@ const Player: React.FC<PlayerProps> = props => {
                         themeColors.rgbstreakgradient[5],
                     ])
                 })
+
+            const currentSongIndex: any = getTheIndexOfCurrentSong()
+            if (currentSongIndex !== -1) {
+                // console.log(scrollReference.current)
+            }
+        }
     }, [current.artwork])
+
+    const scrollChangedHandler = (event: any) => {
+        const scrollPostion = event.nativeEvent.contentOffset.x
+        const screenWidth = width
+        if (scrollPostion % screenWidth === 0) {
+            const songIndex = scrollPostion / screenWidth
+            playSongAtIndex(songIndex)
+            // console.log(
+            //     nextSongsList[songIndex].title,
+            //     nextSongsList[songIndex].url,
+            // )
+        }
+    }
 
     return (
         <GradientBackground
@@ -93,37 +113,47 @@ const Player: React.FC<PlayerProps> = props => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-            <View style={StyleSheet.absoluteFillObject}>
-                {nextSongsList.map((song, _) => {
-                    const inputRange = [
-                        (_ - 1) * width,
-                        _ * width,
-                        (_ + 1) * width,
-                    ]
-                    const opacity = scrollX.interpolate({
-                        inputRange: inputRange,
-                        outputRange: [0, 1, 0],
-                    })
-                    return (
-                        <Animated.Image
-                            key={`${song.id}-${_}`}
-                            style={[
-                                StyleSheet.absoluteFillObject,
-                                {
-                                    opacity: opacity,
-                                },
-                            ]}
-                            source={{uri: song.artwork}}
-                            blurRadius={IMAGE_BLUR_RADIUS}
-                        />
-                    )
-                })}
-            </View>
+            {nextSongsList.length > 0 ? (
+                <View style={StyleSheet.absoluteFillObject}>
+                    {nextSongsList.map((song, _) => {
+                        const inputRange = [
+                            (_ - 1) * width,
+                            _ * width,
+                            (_ + 1) * width,
+                        ]
+                        const opacity = scrollX.interpolate({
+                            inputRange: inputRange,
+                            outputRange: [0, 1, 0],
+                        })
+                        return (
+                            <Animated.Image
+                                key={`${song.id}-${_}`}
+                                style={[
+                                    StyleSheet.absoluteFillObject,
+                                    {
+                                        opacity: opacity,
+                                    },
+                                ]}
+                                source={{uri: song.artwork}}
+                                blurRadius={IMAGE_BLUR_RADIUS}
+                            />
+                        )
+                    })}
+                </View>
+            ) : null}
 
             <Animated.FlatList
+                // scrollToOverflowEnabled
+                // overScrollMode={'never'}
+                ref={scrollReference}
                 onScroll={Animated.event(
                     [{nativeEvent: {contentOffset: {x: scrollX}}}],
-                    {useNativeDriver: true},
+                    {
+                        useNativeDriver: true,
+                        listener: event => {
+                            scrollChangedHandler(event)
+                        },
+                    },
                 )}
                 horizontal
                 pagingEnabled
@@ -137,10 +167,10 @@ const Player: React.FC<PlayerProps> = props => {
                         index * width,
                         (index + 1) * width,
                     ]
-                    const translateRange = index % 2 === 0 ? 100 : -100
+                    // const translateRange = index % 2 === 0 ? -100 : -100
                     const translateY = scrollX.interpolate({
                         inputRange: inputRange,
-                        outputRange: [translateRange, 0, translateRange],
+                        outputRange: [-100, 0, -100],
                     })
 
                     return (
@@ -185,6 +215,18 @@ const Player: React.FC<PlayerProps> = props => {
                     },
                 ]}
             />
+
+            {nextSongsList.length > 3 ? (
+                <Image
+                    source={{uri: nextSongsList[2].artwork}}
+                    style={[
+                        StyleSheet.absoluteFillObject,
+                        {
+                            opacity: 0,
+                        },
+                    ]}
+                />
+            ) : null}
         </GradientBackground>
     )
 }
