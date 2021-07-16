@@ -234,16 +234,14 @@ const Player: FC<PlayerProps> = props => {
             return
         }
 
+        resetPlayer()
         const trackGot = {
             ...track,
             album: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
         }
         await TrackPlayer.add([trackGot])
         await TrackPlayer.skip(trackGot.id)
-
         await TrackPlayer.play()
-            .then(_res => {})
-            .catch(_err => {})
     }
 
     const playSongAtIndex = (index: number) => {
@@ -295,10 +293,7 @@ const Player: FC<PlayerProps> = props => {
                 }
                 await TrackPlayer.add([trackGot])
                 await TrackPlayer.skip(trackGot.id)
-
                 await TrackPlayer.play()
-                    .then(_res => {})
-                    .catch(_err => {})
 
                 /**
                  * after playing or starting playing the song loading of song which
