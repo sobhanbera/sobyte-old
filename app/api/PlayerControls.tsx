@@ -59,13 +59,16 @@ const PlayerContext = createContext({
     pause: () => {},
     toggleState: () => {},
 
+    checkSongAlreadyInNextSongsList: (_musicId: string) => {},
+    playSongAtIndex: (_index: number) => {},
+    getTheIndexOfCurrentSong: () => {},
+    addSongAndPlay: (_track: Track) => {},
+
     next: () => {},
     previous: () => {},
 
     seekTo: (_level: number) => {},
     seekInterval: (_interval: number) => {},
-
-    checkSongAlreadyInNextSongsList: (_musicId: string) => {},
 
     rate: 1,
     getRateText: () => {},
@@ -85,13 +88,12 @@ const Player: FC<PlayerProps> = props => {
     const [nextSongsList, setNextSongsList] = useState<Array<Track>>([])
     const [playerState, setPlayerState] = useState()
     const [currentTrack, setCurrentTrack] = useState<Track>({
-        artist: 'Shawn Mendes, Camila Cabe... Test',
-        artwork:
-            'https://lh3.googleusercontent.com/TK-09E9wZOUk84ktqwb-zNBXfnY3Z927d3fpJ3ObwwOyREKzjAQMMYx0pGSjVAAV2zpRJDpDAavlAPSz=w720-h720-l90-rj',
-        duration: 191000,
-        id: 'VKC_hzJ3jzg',
-        title: 'Señorita',
-        url: 'https://r3---sn-ci5gup-g2ge.googlevideo.com/videoplayback?expire=1626132827&ei=-3zsYLzrGeTRz7sPwvKO8Ac&ip=27.62.144.73&id=o-AP85Mm67nnZO6pXPuEJ1j3_lZS7tNfpzd7wnkugh2E4x&itag=251&source=youtube&requiressl=yes&mh=-y&mm=31%2C29&mn=sn-ci5gup-g2ge%2Csn-ci5gup-cvhs&ms=au%2Crdu&mv=m&mvi=3&pcm2cms=yes&pl=22&gcr=in&initcwndbps=172500&vprv=1&mime=audio%2Fwebm&ns=pqp4XjvkbF_lYPYdnuAFx78G&gir=yes&clen=3265170&dur=190.981&lmt=1583247022679728&mt=1626110945&fvip=3&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=H4ZPxKXMRO44NKcien&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cgcr%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRAIgZbFL9puxPwHrFrbYQXjdReJt1FYlGePqEnHHmCL2qYQCIGWj8vksLauAajQ-RNyDbftzKZnf43GHYQUdOo51_EtB&ratebypass=yes&sig=AOq0QJ8wRQIhANKBY-k7Kvufyth6UM8wgfwy_pF0nYAlxHq3ipOu6h-KAiAn1Zwz62XNZc074-p9RHIJKtvVp55xRyeTvXMoSE0eBQ%3D%3D',
+        artist: '',
+        artwork: '',
+        duration: 0,
+        id: '',
+        title: '',
+        url: '',
         playlistId: '',
     })
 
@@ -197,7 +199,7 @@ const Player: FC<PlayerProps> = props => {
                 duration: 0,
                 title: '',
                 artist: '',
-                artwork: '',
+                artwork: 'noimage',
                 playlistId: '',
             })
         })
@@ -219,6 +221,54 @@ const Player: FC<PlayerProps> = props => {
         return false
     }
 
+    const addSongAndPlay = async (track: Track) => {
+        if (!track) {
+            console.log('First Condition IN DIRECT PLAY')
+            if (currentTrack)
+                if (playerState === STATE_PAUSED) await TrackPlayer.play()
+            return
+        }
+        if (currentTrack && track.id === currentTrack.id) {
+            console.log('Second Condition IN DIRECT PLAY')
+            if (playerState === STATE_PAUSED) await TrackPlayer.play()
+            return
+        }
+
+        const trackGot = {
+            ...track,
+            album: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
+        }
+        await TrackPlayer.add([trackGot])
+        await TrackPlayer.skip(trackGot.id)
+
+        await TrackPlayer.play()
+            .then(_res => {})
+            .catch(_err => {})
+    }
+
+    const playSongAtIndex = (index: number) => {
+        if (nextSongsList.length > index) {
+            addSongAndPlay(nextSongsList[index])
+        }
+    }
+
+    /**
+     * @returns the index of the current playing song from next songs list data
+     * returns -1 if no data is found
+     */
+    const getTheIndexOfCurrentSong = () => {
+        const currentSongID = currentTrack.id
+        for (let i in nextSongsList) {
+            if (nextSongsList[i].id === currentSongID) {
+                return i
+            }
+        }
+        /**
+         * returns -1 if no data is found
+         */
+        return -1
+    }
+
     const play = async (track: Track) => {
         if (!track) {
             console.log('First Condition')
@@ -231,9 +281,11 @@ const Player: FC<PlayerProps> = props => {
             if (playerState === STATE_PAUSED) await TrackPlayer.play()
             return
         }
+
         setShowLoading(true)
         fetchMusic(track.id)
             .then(async (__res: any) => {
+                resetPlayer()
                 setShowLoading(false)
 
                 const trackGot = {
@@ -260,10 +312,22 @@ const Player: FC<PlayerProps> = props => {
                     duration: trackGot.duration,
                     playlistId: trackGot.playlistId,
                     title: trackGot.title,
-                    url: '',
+                    url: __res,
                 })
+                /**
+                 * generating the next song list to show in the music player tab UI
+                 */
                 getNext(track.id, track.playlistId, '')
                     .then(res => {
+                        /**
+                         * since result of next contains an array which contains Objects
+                         * these Object are of type {
+                         *      id: string
+                         *      playlistId: string
+                         * }
+                         * this is a demo type to resemble the object blueprint
+                         * here we are itterating over the result and getting its full song data with title, artist, thumbnail, duration etc
+                         */
                         for (let i in res.content) {
                             getPlayer(
                                 res.content[i].musicId,
@@ -272,31 +336,51 @@ const Player: FC<PlayerProps> = props => {
                             )
                                 .then(
                                     (result: SongObjectWithArtistAsString) => {
+                                        /**
+                                         * if the song already exists in the next song list we will continue to the next itteration
+                                         */
                                         if (
-                                            !checkSongAlreadyInNextSongsList(
-                                                result.musicId,
-                                            ) &&
                                             !checkSongAlreadyInTemporaryNextSongsList(
                                                 result.musicId,
                                                 nextSongsData,
                                             )
                                         ) {
-                                            const highQualityImage =
-                                                getHighQualityImageFromSongImage(
-                                                    result.thumbnails[0],
-                                                    '720',
-                                                )
-                                            const artist = result.artist
+                                            /**
+                                             * if the song does not exists in the next sont list which is temporary in this case
+                                             * then this code will fetch the song url using the fetchMusic function provided by the Fetcher Context API
+                                             */
+                                            fetchMusic(result.musicId)
+                                                .then(async (_res: any) => {
+                                                    /**
+                                                     * after getting the data will are also generating the high quality image link
+                                                     * of the song and the artist name with
+                                                     * finally pushing the whole data to nextSongList to get it in the music player UI
+                                                     */
+                                                    const highQualityImage =
+                                                        getHighQualityImageFromSongImage(
+                                                            result
+                                                                .thumbnails[0],
+                                                            '720',
+                                                        )
+                                                    const artist = result.artist
 
-                                            nextSongsData.push({
-                                                id: result.musicId,
-                                                artist: artist,
-                                                artwork: highQualityImage,
-                                                duration: result.duration,
-                                                playlistId: result.playlistId,
-                                                title: result.name,
-                                                url: '',
-                                            })
+                                                    /**
+                                                     * final push to nextSongList
+                                                     */
+                                                    nextSongsData.push({
+                                                        id: result.musicId,
+                                                        artist: artist,
+                                                        artwork:
+                                                            highQualityImage,
+                                                        duration:
+                                                            result.duration,
+                                                        playlistId:
+                                                            result.playlistId,
+                                                        title: result.name,
+                                                        url: _res,
+                                                    })
+                                                })
+                                                .catch(err => {})
                                         }
                                     },
                                 )
@@ -304,6 +388,9 @@ const Player: FC<PlayerProps> = props => {
                                     console.error('GETTING PLAYER ERROR', err)
                                 })
                         }
+                        /**
+                         * setting the next song list from next song list temporary data...
+                         */
                         setNextSongsList(nextSongsData)
                     })
                     .catch(err => {
@@ -423,10 +510,14 @@ const Player: FC<PlayerProps> = props => {
         playonly: playonly,
         pause: pause,
         toggleState: toggleState,
-        next: next,
-        previous: previous,
 
         checkSongAlreadyInNextSongsList: checkSongAlreadyInNextSongsList,
+        playSongAtIndex: playSongAtIndex,
+        getTheIndexOfCurrentSong: getTheIndexOfCurrentSong,
+        addSongAndPlay: addSongAndPlay,
+
+        next: next,
+        previous: previous,
 
         seekTo: seekTo,
         seekInterval: seekInterval,
