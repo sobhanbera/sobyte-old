@@ -3,6 +3,7 @@ import {View, Image, Dimensions, StyleSheet, Animated} from 'react-native'
 
 import {usePlayer} from '../../context'
 import {TrackPlayerProgressSlider} from '../../components'
+import {APP_LOGO_LINK} from '../../constants'
 
 const {width} = Dimensions.get('screen')
 const IMAGE_WIDTH = width * 0.65
@@ -111,7 +112,7 @@ const Player: React.FC<PlayerProps> = props => {
                                         opacity: opacity,
                                     },
                                 ]}
-                                source={{uri: song.artwork}}
+                                source={{uri: song.artwork || APP_LOGO_LINK}}
                                 blurRadius={IMAGE_BLUR_RADIUS}
                             />
                         )
@@ -168,7 +169,9 @@ const Player: React.FC<PlayerProps> = props => {
                                 }}>
                                 <Image
                                     fadeDuration={1000}
-                                    source={{uri: item.artwork}}
+                                    source={{
+                                        uri: item.artwork || APP_LOGO_LINK,
+                                    }}
                                     style={{
                                         width: IMAGE_WIDTH,
                                         height: IMAGE_HEIGHT,
@@ -186,7 +189,7 @@ const Player: React.FC<PlayerProps> = props => {
             />
 
             <Image
-                source={{uri: current.artwork}}
+                source={{uri: current.artwork || APP_LOGO_LINK}}
                 style={[
                     StyleSheet.absoluteFillObject,
                     {
@@ -197,7 +200,7 @@ const Player: React.FC<PlayerProps> = props => {
 
             {nextSongsList.length > 3 ? (
                 <Image
-                    source={{uri: nextSongsList[2].artwork}}
+                    source={{uri: nextSongsList[2].artwork || APP_LOGO_LINK}}
                     style={[
                         StyleSheet.absoluteFillObject,
                         {
