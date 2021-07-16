@@ -97,6 +97,10 @@ const Player: FC<PlayerProps> = props => {
         playlistId: '',
     })
 
+    /**
+     * volume of the track player and
+     * rate of the track player
+     */
     const [volume, setVolume] = useState(1)
     const [rate, setRate] = useState(1)
 
@@ -191,6 +195,9 @@ const Player: FC<PlayerProps> = props => {
         }
     }, [])
 
+    /**
+     * this function reset the track player by clearing the queue...
+     */
     const resetPlayer = async () => {
         await TrackPlayer.reset().then(_res => {
             setCurrentTrack({
@@ -205,6 +212,10 @@ const Player: FC<PlayerProps> = props => {
         })
     }
 
+    /**
+     * @param musicId is the id of the any track
+     * @returns that the track with id is in the next songs list
+     */
     const checkSongAlreadyInNextSongsList = (musicId: string) => {
         if (currentTrack.id === musicId) return true
 
@@ -213,6 +224,11 @@ const Player: FC<PlayerProps> = props => {
         return false
     }
 
+    /**
+     * @param musicId is the id of the any track
+     * @param list the list where to check the id is present
+     * @returns that the track with id is in the the list passed...
+     */
     const checkSongAlreadyInTemporaryNextSongsList = (
         musicId: string,
         list: Array<Track>,
@@ -221,6 +237,11 @@ const Player: FC<PlayerProps> = props => {
         return false
     }
 
+    /**
+     * @param track is the track which is provided to play directly
+     * this function resets the player and add the track which is passed and plays it directly but the track must be valid
+     * since this function doesn't has any checks for the url of the music or the image or any other property
+     */
     const addSongAndPlay = async (track: Track) => {
         if (!track) {
             console.log('First Condition IN DIRECT PLAY')
@@ -244,6 +265,11 @@ const Player: FC<PlayerProps> = props => {
         await TrackPlayer.play()
     }
 
+    /**
+     * @param index a number which should be an index for the nextSongList
+     * this function is exactly a helper function of the @function addSongAndPlay which checks that the index is among
+     * the nextsong list index and plays it then directly
+     */
     const playSongAtIndex = (index: number) => {
         if (nextSongsList.length > index) {
             addSongAndPlay(nextSongsList[index])
@@ -267,7 +293,16 @@ const Player: FC<PlayerProps> = props => {
         return -1
     }
 
+    /**
+     * the common and normal play function which had many checks and then plays the song
+     * also generate next songs list and there url...
+     */
     const play = async (track: Track) => {
+        /**
+         * first this function will check that the track which is passed is the current playing track
+         * and also if the track is a valid track
+         * else it will play the current track and returns from the function....
+         */
         if (!track) {
             console.log('First Condition')
             if (currentTrack)
@@ -375,7 +410,7 @@ const Player: FC<PlayerProps> = props => {
                                                         url: _res,
                                                     })
                                                 })
-                                                .catch(err => {})
+                                                .catch(_err => {})
                                         }
                                     },
                                 )
@@ -433,25 +468,44 @@ const Player: FC<PlayerProps> = props => {
         // }
     }
 
+    /**
+     * function to pause the track player
+     */
     const pause = async () => {
         await TrackPlayer.pause()
     }
 
+    /**
+     * function to continue playing the track player
+     */
     const playonly = async () => {
         if (currentTrack.id)
             if (playerState === STATE_PAUSED) await TrackPlayer.play()
     }
 
+    /**
+     * function to toggle the player state
+     * if paused then start playing and vice versa
+     */
     const toggleState = async () => {
         if (playerState === STATE_PLAYING) await TrackPlayer.pause()
         else if (playerState === STATE_PAUSED) await TrackPlayer.play()
     }
 
+    /**
+     * @param interval the interval to skip
+     * skip to some number of interval in any direction
+     * negative will make backward skip to the interval and +ve will forward skip to the interval
+     */
     const seekInterval = async (interval: number = 10) => {
         const currPos = await TrackPlayer.getPosition()
         await TrackPlayer.seekTo(currPos + interval)
     }
 
+    /**
+     * @param level of the track player position
+     * skip to some interger interval
+     */
     const seekTo = async (level: number) => {
         // console.log('SEKE');
         // console.log(level);
@@ -460,6 +514,10 @@ const Player: FC<PlayerProps> = props => {
         }
     }
 
+    /**
+     * @param level the level of volume
+     * sets volume level of the track player
+     */
     const setVolumeLevel = (level: number) => {
         TrackPlayer.setVolume(level).then(async () => {
             await TrackPlayer.getVolume().then(res => {
@@ -468,14 +526,29 @@ const Player: FC<PlayerProps> = props => {
         })
     }
 
+    /**
+     * @param rate the level of volume
+     * this function returns the rate text
+     * for Ex:
+     * 1X, 2X, 5X, 0.5X, 0.25X, 0.75X etc...
+     */
     const getRateText = () => {}
 
+    /**
+     * @param level the level of rate
+     * sets rate level of the track player
+     */
     const setRateLevel = (level: number) => {
         TrackPlayer.setRate(level).then(async () => {
             setRate(level)
         })
     }
 
+    /**
+     * skips to previous song
+     * not is use in this application
+     * @deprecated
+     */
     const previous = async () => {
         TrackPlayer.skipToPrevious()
             .then(_res => {})
@@ -484,6 +557,11 @@ const Player: FC<PlayerProps> = props => {
             })
     }
 
+    /**
+     * skips to next song
+     * not is use in this application
+     * @deprecated
+     */
     const next = async () => {
         TrackPlayer.skipToNext()
             .then(_res => {})
@@ -492,6 +570,10 @@ const Player: FC<PlayerProps> = props => {
             })
     }
 
+    /**
+     * all the values of the Context API for all the
+     * children components...
+     */
     const playerValues = {
         playing: playerState === STATE_PLAYING,
         paused: playerState === STATE_PAUSED,
