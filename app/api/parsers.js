@@ -1071,10 +1071,10 @@ export const parseSongDetailsPlayer = (data, musicId = '', playlistId = '') => {
         name: videoDetails.title,
         artist: videoDetails.author,
         album: {
-            name: '',
-            browseId: '',
+            name: '', // not album is provided
+            browseId: '', // this two properties must be handled by the player controller and music player UI
         },
-        duration: String(videoDetails.lengthSeconds),
+        duration: Number(videoDetails.lengthSeconds) * 1000, // converting the duration from seconds to milliseconds
         thumbnails: [
             {
                 height: 60,
