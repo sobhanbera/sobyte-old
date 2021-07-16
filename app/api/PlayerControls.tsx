@@ -216,7 +216,6 @@ const Player: FC<PlayerProps> = props => {
         //         next()
         //     },
         // )
-
         // const playerPrev = TrackPlayer.addEventListener(
         //     'remote-next',
         //     async () => {
@@ -224,7 +223,6 @@ const Player: FC<PlayerProps> = props => {
         //     },
         // )
 
-        // const playbackTrackChanged =
         const playbackTrackChanged = TrackPlayer.addEventListener(
             'playback-track-changed',
             async res => {
@@ -252,13 +250,10 @@ const Player: FC<PlayerProps> = props => {
             },
         )
 
-        // const remoteStop =
         const remoteStop = TrackPlayer.addEventListener('remote-stop', () => {
             resetPlayer()
-            TrackPlayer.stop()
         })
 
-        // const playbackQueueEnded =
         const playbackQueueEnded = TrackPlayer.addEventListener(
             'playback-queue-ended',
             () => {
