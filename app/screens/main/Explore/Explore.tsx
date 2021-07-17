@@ -94,6 +94,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
      * we are calling the loadData -(which loads all the data for explore tab) function twice
      * because it may not be ready or compiled when we call it for the first time so indented calling
      * also with a fallback variable error whenever it changed again everything will load from beginning
+     * this function is also used in music player UI
      */
     useEffect(() => {
         setLoading(true)
