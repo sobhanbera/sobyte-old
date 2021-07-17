@@ -1,8 +1,16 @@
 import React, {useEffect} from 'react'
-import {View, Image, Dimensions, StyleSheet, Animated} from 'react-native'
+import {
+    View,
+    Image,
+    Dimensions,
+    StyleSheet,
+    Animated,
+    FlatList,
+} from 'react-native'
+import TrackPlayer from 'react-native-track-player'
 import ImageColors from 'react-native-image-colors'
 
-import {usePlayer, useSetting, useTheme} from '../../context'
+import {usePlayer, useTheme} from '../../context'
 import {TrackPlayerProgressSlider} from '../../components'
 import {APP_LOGO_LINK, BOTTOM_TAB_BAR_NAVIGATION_HEIGHT} from '../../constants'
 import {
@@ -25,10 +33,9 @@ const Player: React.FC<PlayerProps> = props => {
     const {current, nextSongsList, playSongAtIndex, getTheIndexOfCurrentSong} =
         usePlayer()
     const {themeColors} = useTheme()
-    const {imageQuality} = useSetting()
 
     const scrollX = React.useRef(new Animated.Value(0)).current
-    const scrollReference = React.useRef<Animated.FlatList>(null)
+    const scrollReference = React.useRef<any>(null)
     const [dominatingColors, setDominatingColors] =
         React.useState<string>('#FFFFFFFF')
     const [dominatingColorsStyle, setDominatingColorsStyle] = React.useState<
@@ -82,6 +89,38 @@ const Player: React.FC<PlayerProps> = props => {
         }
     }, [current.artwork])
 
+    useEffect(() => {
+        console.log('CURRENT INDEX', getTheIndexOfCurrentSong())
+        const playbackQueueEnded = TrackPlayer.addEventListener(
+            'playback-queue-ended',
+            () => {
+                // console.log(scrollReference.current)
+                const currentIndexOfScroll: any = getTheIndexOfCurrentSong()
+                if (currentIndexOfScroll < nextSongsList.length - 1) {
+                    scrollReference.current.scrollToIndex({
+                        animated: true,
+                        index: currentIndexOfScroll + 1,
+                    })
+                    console.log(
+                        'SCROLLED: ',
+                        currentIndexOfScroll,
+                        nextSongsList.length,
+                    )
+                } else {
+                    console.log(
+                        'NOT SCROLLED: ',
+                        currentIndexOfScroll,
+                        nextSongsList.length,
+                    )
+                }
+            },
+        )
+
+        return () => {
+            playbackQueueEnded.remove()
+        }
+    }, [])
+
     /**
      * whenever the scroll position changes this code will be executed and change the song
      * according to the index or the position of scroll
@@ -107,6 +146,12 @@ const Player: React.FC<PlayerProps> = props => {
          */
     }
 
+    const getItemLayout = (data: any, index: number) => ({
+        length: width,
+        offset: width * index,
+        index,
+    })
+
     return (
         <View
             style={{
@@ -115,55 +160,17 @@ const Player: React.FC<PlayerProps> = props => {
                 alignItems: 'center',
             }}>
             {/* these are the temporary data and are not reqired that much as the main UI component itself... */}
-            <>
-                <Image
-                    source={{uri: current.artwork || APP_LOGO_LINK}}
-                    style={[
-                        StyleSheet.absoluteFillObject,
-                        {
-                            opacity: 0,
-                        },
-                    ]}
-                />
-                {!current.id && nextSongsList.length <= 0 ? (
-                    <View
-                        style={{
-                            flex: 1,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            width: '100%',
-                            height: '100%',
-                            ...StyleSheet.absoluteFillObject,
-                        }}>
-                        <Image
-                            source={{uri: APP_LOGO_LINK}}
-                            style={[
-                                {
-                                    opacity: 1,
-                                    width: 218 / 2,
-                                    height: 276 / 2,
-                                },
-                            ]}
-                            // blurRadius={IMAGE_BLUR_RADIUS / 5000}
-                        />
-                    </View>
-                ) : null}
-                {nextSongsList.length > 3 ? (
-                    <Image
-                        source={{
-                            uri: nextSongsList[2].artwork || APP_LOGO_LINK,
-                        }}
-                        style={[
-                            StyleSheet.absoluteFillObject,
-                            {
-                                opacity: 0,
-                            },
-                        ]}
-                    />
-                ) : null}
-            </>
-
-            {nextSongsList.length > 0 ? (
+            <Image
+                source={{uri: current.artwork || APP_LOGO_LINK}}
+                style={[
+                    StyleSheet.absoluteFillObject,
+                    {
+                        opacity: 0,
+                    },
+                ]}
+            />
+            {/* main content of this particular tab */}
+            {nextSongsList.length > 0 && current.id.length > 0 ? (
                 <View style={StyleSheet.absoluteFillObject}>
                     {nextSongsList.map((song, _) => {
                         const inputRange = [
@@ -200,73 +207,103 @@ const Player: React.FC<PlayerProps> = props => {
                     width: '100%',
                     flex: 1,
                 }}>
-                <Animated.FlatList
-                    scrollToOverflowEnabled
-                    overScrollMode={'never'}
-                    ref={scrollReference}
-                    onScroll={Animated.event(
-                        [{nativeEvent: {contentOffset: {x: scrollX}}}],
-                        {
-                            useNativeDriver: true,
-                            listener: event => {
-                                scrollChangedHandler(event)
+                {nextSongsList.length && nextSongsList[0].artwork.length > 0 ? (
+                    <Animated.FlatList
+                        scrollToOverflowEnabled
+                        overScrollMode={'never'}
+                        ref={scrollReference}
+                        scrollEventThrottle={16}
+                        onScroll={Animated.event(
+                            [{nativeEvent: {contentOffset: {x: scrollX}}}],
+                            {
+                                useNativeDriver: true,
+                                listener: event => {
+                                    scrollChangedHandler(event)
+                                },
                             },
-                        },
-                    )}
-                    pagingEnabled
-                    bounces={true}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    showsVerticalScrollIndicator={false}
-                    data={nextSongsList}
-                    keyExtractor={(item, _) => `${item.id}-${_}`}
-                    renderItem={({item, index}) => {
-                        const inputRange = [
-                            (index - 1) * width,
-                            index * width,
-                            (index + 1) * width,
-                        ]
-                        // const translateRange = index % 2 === 0 ? -100 : -100
-                        const translateY = scrollX.interpolate({
-                            inputRange: inputRange,
-                            outputRange: [-100, 0, -100],
-                        })
+                        )}
+                        pagingEnabled
+                        bounces={true}
+                        getItemLayout={getItemLayout}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false}
+                        data={nextSongsList}
+                        keyExtractor={(item, _) => `${item.id}-${_}`}
+                        renderItem={({item, index}) => {
+                            const inputRange = [
+                                (index - 1) * width,
+                                index * width,
+                                (index + 1) * width,
+                            ]
+                            // const translateRange = index % 2 === 0 ? -100 : -100
+                            const translateY = scrollX.interpolate({
+                                inputRange: inputRange,
+                                outputRange: [-100, 0, -100],
+                            })
 
-                        return (
-                            <View
-                                style={{
-                                    width: width,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    // backgroundColor: 'red',
-                                }}>
-                                <Animated.View
+                            return (
+                                <View
                                     style={{
-                                        width: IMAGE_WIDTH,
-                                        height: IMAGE_HEIGHT,
-                                        borderRadius: IMAGE_BORDER_RADIUS,
-                                        overflow: 'hidden',
-                                        elevation: 10,
-                                        transform: [{translateY: translateY}],
+                                        width: width,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        // backgroundColor: 'red',
                                     }}>
-                                    <Image
-                                        fadeDuration={1000}
-                                        source={{
-                                            uri: item.artwork || APP_LOGO_LINK,
-                                        }}
+                                    <Animated.View
                                         style={{
                                             width: IMAGE_WIDTH,
                                             height: IMAGE_HEIGHT,
                                             borderRadius: IMAGE_BORDER_RADIUS,
                                             overflow: 'hidden',
-                                            resizeMode: 'cover',
-                                        }}
-                                    />
-                                </Animated.View>
-                            </View>
-                        )
-                    }}
-                />
+                                            elevation: 10,
+                                            transform: [
+                                                {translateY: translateY},
+                                            ],
+                                        }}>
+                                        <Image
+                                            fadeDuration={1000}
+                                            source={{
+                                                uri:
+                                                    item.artwork ||
+                                                    APP_LOGO_LINK,
+                                            }}
+                                            style={{
+                                                width: IMAGE_WIDTH,
+                                                height: IMAGE_HEIGHT,
+                                                borderRadius:
+                                                    IMAGE_BORDER_RADIUS,
+                                                overflow: 'hidden',
+                                                resizeMode: 'cover',
+                                            }}
+                                        />
+                                    </Animated.View>
+                                </View>
+                            )
+                        }}
+                    />
+                ) : (
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: '100%',
+                            height: '100%',
+                        }}>
+                        <Image
+                            source={{uri: APP_LOGO_LINK}}
+                            style={[
+                                {
+                                    opacity: 1,
+                                    width: 218 / 2,
+                                    height: 276 / 2,
+                                },
+                            ]}
+                            // blurRadius={IMAGE_BLUR_RADIUS / 5000}
+                        />
+                    </View>
+                )}
 
                 <View
                     style={{
@@ -276,8 +313,8 @@ const Player: React.FC<PlayerProps> = props => {
                         width: '100%',
                         backgroundColor:
                             dominatingColorsStyle === 'light'
-                                ? '#FFFFFF25'
-                                : '#00000025',
+                                ? '#FFFFFF10'
+                                : '#00000010',
                         paddingTop: 20,
                         paddingBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
                         borderTopRightRadius: 25,
