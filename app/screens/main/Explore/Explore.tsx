@@ -26,6 +26,8 @@ import {
 import {useTheme, useMusicApi} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
+import {StyleSheet} from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 
 interface ExploreTabProps {
     navigation?: any
@@ -48,10 +50,10 @@ const Explore: React.FC<ExploreTabProps> = props => {
      * "main" @state of the list for all the types of music list data...
      */
     const [musicData, setMusicData] = useState<FetchedSongObject[]>([
-        BareFetchedSongObjectInstance, // 0 - hot songs...
+        BareFetchedSongObjectInstance, // 0 - trendings...
         BareFetchedSongObjectInstance, // 1 - bollywood hits...
-        BareFetchedSongObjectInstance, // 2 - trendings...
-        BareFetchedSongObjectInstance, // 3 - romantic...
+        BareFetchedSongObjectInstance, // 2 - romantic...
+        BareFetchedSongObjectInstance, // 3 - hot songs...
         BareFetchedSongObjectInstance, // 4 - popular songs list...
         BareFetchedSongObjectInstance, // 5 - most rated songs...
         BareFetchedSongObjectInstance, // 6 - pops...
@@ -66,20 +68,26 @@ const Explore: React.FC<ExploreTabProps> = props => {
      */
     const loadExploreData = React.useCallback(() => {
         Promise.all([
-            search('hot songs', 'SONG'), // 1st type of song data list
-            search('bollywood hits', 'SONG'), // 2nd type of song data list
-            search('trendings', 'SONG'), // 3rd type of song data list
-            search('top romantic songs', 'SONG'), // 4th type of song data list
-            search('popular songs', 'SONG'), // 5th type of song data list
-            search('most rated songs', 'SONG'), // 5th type of song data list
-            search('pop', 'SONG'), // 6th type of song data list
-            search('Chill beats', 'SONG'), // 6th type of song data list
-            search('sorrow', 'SONG'), // 7th type of song data list
+            search('bollywood new hits', 'SONG'), // 0th type of song data list
+            search('trending songs', 'SONG'), // 1st type of song data list
+            search('top romantic songs', 'SONG'), // 2nd type of song data list
+            search('most popular songs', 'SONG'), // 3rd type of song data list
+            search('popular songs', 'SONG'), // 4th type of song data list
+            search('top new most listened songs', 'SONG'), // 5th type of song data list
+            search('pop beats', 'SONG'), // 6th type of song data list
+            search('Chill beats', 'SONG'), // 7th type of song data list
+            search('sad songs', 'SONG'), // 8th type of song data list
         ])
             .then((res: FetchedSongObject[]) => {
                 setMusicData(res)
             })
-            .catch(() => {})
+            .catch(_err => {})
+
+        search('top artists', 'ARTIST')
+            .then(res => {
+                console.log(JSON.parse(JSON.stringify(res)))
+            })
+            .catch(_err => {})
     }, [error])
 
     /**
@@ -193,9 +201,9 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         all kinds of music data or card blocks
                         or card which hold songs list, music list, etc */}
 
-                    {/* hot songs */}
+                    {/* trendings */}
                     <BlockCardSongsList
-                        cardTitle={'Hot Tracks'}
+                        cardTitle={'Trendings'}
                         musicData={musicData[0]}
                     />
 
@@ -205,15 +213,15 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         musicData={musicData[1]}
                     />
 
-                    {/* trendings */}
-                    <BlockCardSongsList
-                        cardTitle={'Trendings'}
-                        musicData={musicData[2]}
-                    />
-
                     {/* romantic */}
                     <BlockCardSongsList
                         cardTitle={'Romantic Songs'}
+                        musicData={musicData[2]}
+                    />
+
+                    {/* hot songs */}
+                    <BlockCardSongsList
+                        cardTitle={'Hot Tracks'}
                         musicData={musicData[3]}
                     />
 
@@ -224,28 +232,28 @@ const Explore: React.FC<ExploreTabProps> = props => {
                     />
 
                     {/* most rated */}
-                    <BlockCardSongsList
+                    {/* <BlockCardSongsList
                         cardTitle={'Top Songs'}
                         musicData={musicData[5]}
-                    />
+                    /> */}
 
                     {/* pop */}
-                    <BlockCardSongsList
+                    {/* <BlockCardSongsList
                         cardTitle={'Pop'}
                         musicData={musicData[6]}
-                    />
+                    /> */}
 
                     {/* lo-fi songs */}
-                    <BlockCardSongsList
+                    {/* <BlockCardSongsList
                         cardTitle={'Chill Time'}
                         musicData={musicData[7]}
-                    />
+                    /> */}
 
                     {/* are you sorrow */}
-                    <BlockCardSongsList
+                    {/* <BlockCardSongsList
                         cardTitle={'Are You Sad'}
                         musicData={musicData[8]}
-                    />
+                    /> */}
 
                     {/* button to go to the top of the scoll view */}
                     <CenterButtonView
