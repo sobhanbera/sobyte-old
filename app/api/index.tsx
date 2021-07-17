@@ -66,6 +66,7 @@ const MusicContext = React.createContext({
     search: (
         _query: string,
         _categoryName: 'SONG' | 'ALBUM' | 'ARTIST' | 'PLAYLIST',
+        _getARandomSong: boolean = false,
         _pageLimit: number = 1,
     ) => DemoMusicContextReturn(),
     /**
@@ -472,10 +473,11 @@ const MusicApi = (props: MusicApiProps) => {
     const search = (
         query: string,
         categoryName: string = 'song',
+        getARandomSong: boolean = false,
         _pageLimit: number = 1,
     ) => {
         return new Promise((resolve, reject) => {
-            var result = {}
+            var result: any = {}
             _createApiRequest('search', {
                 query: query,
                 params: utils.getCategoryURI(categoryName),
@@ -485,6 +487,15 @@ const MusicApi = (props: MusicApiProps) => {
                         switch (_.upperCase(categoryName)) {
                             case 'SONG':
                                 result = parsers.parseSongSearchResult(context)
+                                if (getARandomSong) {
+                                    result =
+                                        result.content[
+                                            Math.floor(
+                                                Math.random() *
+                                                    result.content.length,
+                                            )
+                                        ]
+                                }
                                 break
                             case 'VIDEO':
                                 result = parsers.parseVideoSearchResult(context)
