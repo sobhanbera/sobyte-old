@@ -21,7 +21,7 @@ const IMAGE_BLUR_RADIUS = 50
 interface PlayerProps {
     navigation?: any
 }
-const Player: React.FC<PlayerProps> = props => {
+const Player: React.FC<PlayerProps> = _props => {
     const {
         current,
         nextSongsList,
@@ -199,7 +199,7 @@ const Player: React.FC<PlayerProps> = props => {
          */
     }
 
-    const getItemLayout = (data: any, index: number) => ({
+    const getItemLayout = (_data: any, index: number) => ({
         length: width,
         offset: width * index,
         index,
