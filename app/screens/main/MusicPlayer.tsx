@@ -1,38 +1,36 @@
 import React, {useEffect} from 'react'
-import {
-    View,
-    Image,
-    Dimensions,
-    StyleSheet,
-    Animated,
-    FlatList,
-} from 'react-native'
+import {View, Image, Dimensions, StyleSheet, Animated} from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 import ImageColors from 'react-native-image-colors'
 
-import {usePlayer, useTheme} from '../../context'
+import {useMusicApi, usePlayer, useTheme} from '../../context'
 import {TrackPlayerProgressSlider} from '../../components'
 import {APP_LOGO_LINK, BOTTOM_TAB_BAR_NAVIGATION_HEIGHT} from '../../constants'
 import {
+    formatArtists,
     getHightQualityImageFromLink,
     isColorDark,
     sortColorsBasedOnBrightness,
 } from '../../utils'
-import {DominatingColors} from '../../interfaces'
+import {DominatingColors, SongObject} from '../../interfaces'
+import MusicPlayerSongCardView from '../../components/MusicPlayerSongCardView'
 
-const {width, height} = Dimensions.get('screen')
-const IMAGE_WIDTH = width * 0.65
-const IMAGE_HEIGHT = IMAGE_WIDTH * 1.071 // same as the WIDTH of image
-const IMAGE_BORDER_RADIUS = 10
+const {width} = Dimensions.get('screen')
 const IMAGE_BLUR_RADIUS = 50
 
 interface PlayerProps {
     navigation?: any
 }
 const Player: React.FC<PlayerProps> = props => {
-    const {current, nextSongsList, playSongAtIndex, getTheIndexOfCurrentSong} =
-        usePlayer()
+    const {
+        current,
+        nextSongsList,
+        play,
+        playSongAtIndex,
+        getTheIndexOfCurrentSong,
+    } = usePlayer()
     const {themeColors} = useTheme()
+    const {initMusicApi, search, error} = useMusicApi()
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = React.useRef<any>(null)
@@ -42,58 +40,113 @@ const Player: React.FC<PlayerProps> = props => {
         'light' | 'dark'
     >('light')
 
-    useEffect(() => {
-        if (current.url) {
-            ImageColors.getColors(
-                getHightQualityImageFromLink(current.artwork, '100'),
-                {
-                    fallback: themeColors.rgbstreakgradient[0],
-                    cache: false,
-                    key: 'sobyte_music_player_color',
-                },
-            )
-                .then((res: DominatingColors | any) => {
-                    /* available colors which should be used ->
-                     * res.dominant,
-                     * res.vibrant,
-                     * res.darkVibrant,
-                     * res.darkMuted
-                     * */
-                    const lightColorAmongAll = sortColorsBasedOnBrightness([
-                        res.dominant,
-                        res.vibrant,
-                        res.darkVibrant,
-                    ])[0]
-                    setDominatingColors(lightColorAmongAll || '#FFFFFFFF')
-                    setDominatingColorsStyle(
-                        isColorDark(lightColorAmongAll || '#FFFFFFFF')
-                            ? 'dark'
-                            : 'light',
-                    )
-                })
-                .catch(err => {
-                    if (String(err).includes('Connection closed')) {
-                        // prompt(
-                        //     'Please check your internet connection.',
-                        //     'warning',
-                        // )
-                    }
-                    setDominatingColors('#FFFFFFFF')
-                    setDominatingColorsStyle('light')
-                })
+    let timer: any = null
 
-            // const currentSongIndex: any = getTheIndexOfCurrentSong()
-            // if (currentSongIndex !== -1) {
-            // console.log(scrollReference.current)
-            // }
-        }
+    const loadInitialMusicPlayerData = () => {
+        search('bollywood trending songs', 'SONG', true)
+            .then((res: SongObject) => {
+                const artist = formatArtists(res.artist)
+                const artwork = getHightQualityImageFromLink(
+                    res.thumbnails[0].url,
+                    '720',
+                )
+                play({
+                    artist: artist,
+                    artwork: artwork,
+                    duration: res.duration,
+                    id: res.musicId,
+                    playlistId: res.playlistId,
+                    title: res.name,
+                    url: '',
+                })
+                if (scrollReference !== null)
+                    scrollReference.current.scrollToIndex({
+                        animated: true,
+                        x: 0,
+                        y: 0,
+                    })
+            })
+            .catch(_err => {})
+    }
+
+    /**
+     * we are calling the loadData -(which loads all the data for explore tab) function twice
+     * because it may not be ready or compiled when we call it for the first time so indented calling
+     * also with a fallback variable error whenever it changed again everything will load from beginning
+     * this function is also used in explore tab UI
+     */
+    useEffect(() => {
+        initMusicApi()
+            .then(() => {
+                initMusicApi()
+                    .then(() => {
+                        loadInitialMusicPlayerData()
+                    })
+                    .catch(() => {})
+            })
+            .catch(() => {
+                // this will only be called when the internet connectivity is very slow or not present...
+                console.error(
+                    '(Outer) Error Initiating Music Api... no internet connection found',
+                )
+            })
+    }, [error])
+
+    /**
+     * this useEffect changes the primary color or any colors that is related to the song
+     * and pass them to children components
+     */
+    useEffect(() => {
+        if (current.url)
+            timer = setTimeout(() => {
+                clearTimeout(timer)
+
+                ImageColors.getColors(
+                    getHightQualityImageFromLink(current.artwork, '100'),
+                    {
+                        fallback: themeColors.rgbstreakgradient[0],
+                        cache: false,
+                        key: 'sobyte_music_player_color',
+                    },
+                )
+                    .then((res: DominatingColors | any) => {
+                        /* available colors which should be used ->
+                         * res.dominant,
+                         * res.vibrant,
+                         * res.darkVibrant,
+                         * res.darkMuted
+                         * */
+                        const lightColorAmongAll = sortColorsBasedOnBrightness([
+                            res.dominant,
+                            res.vibrant,
+                            res.darkVibrant,
+                        ])[0]
+                        setDominatingColors(lightColorAmongAll || '#FFFFFFFF')
+                        setDominatingColorsStyle(
+                            isColorDark(lightColorAmongAll || '#FFFFFFFF')
+                                ? 'dark'
+                                : 'light',
+                        )
+                    })
+                    .catch(err => {
+                        if (String(err).includes('Connection closed')) {
+                            // prompt(
+                            //     'Please check your internet connection.',
+                            //     'warning',
+                            // )
+                        }
+                        setDominatingColors('#FFFFFFFF')
+                        setDominatingColorsStyle('light')
+                    })
+            }, 1500)
     }, [current.artwork])
 
     useEffect(() => {
-        console.log('CURRENT INDEX', getTheIndexOfCurrentSong())
+        console.log('CURRENT INDEX 1', getTheIndexOfCurrentSong())
         const playbackQueueEnded = TrackPlayer.addEventListener(
-            'playback-queue-ended',
+            'playback-track-changed',
             () => {
+                console.log('CURRENT INDEX 2', getTheIndexOfCurrentSong())
                 // console.log(scrollReference.current)
                 const currentIndexOfScroll: any = getTheIndexOfCurrentSong()
                 if (currentIndexOfScroll < nextSongsList.length - 1) {
@@ -230,57 +283,13 @@ const Player: React.FC<PlayerProps> = props => {
                         showsVerticalScrollIndicator={false}
                         data={nextSongsList}
                         keyExtractor={(item, _) => `${item.id}-${_}`}
-                        renderItem={({item, index}) => {
-                            const inputRange = [
-                                (index - 1) * width,
-                                index * width,
-                                (index + 1) * width,
-                            ]
-                            // const translateRange = index % 2 === 0 ? -100 : -100
-                            const translateY = scrollX.interpolate({
-                                inputRange: inputRange,
-                                outputRange: [-100, 0, -100],
-                            })
-
-                            return (
-                                <View
-                                    style={{
-                                        width: width,
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        // backgroundColor: 'red',
-                                    }}>
-                                    <Animated.View
-                                        style={{
-                                            width: IMAGE_WIDTH,
-                                            height: IMAGE_HEIGHT,
-                                            borderRadius: IMAGE_BORDER_RADIUS,
-                                            overflow: 'hidden',
-                                            elevation: 10,
-                                            transform: [
-                                                {translateY: translateY},
-                                            ],
-                                        }}>
-                                        <Image
-                                            fadeDuration={1000}
-                                            source={{
-                                                uri:
-                                                    item.artwork ||
-                                                    APP_LOGO_LINK,
-                                            }}
-                                            style={{
-                                                width: IMAGE_WIDTH,
-                                                height: IMAGE_HEIGHT,
-                                                borderRadius:
-                                                    IMAGE_BORDER_RADIUS,
-                                                overflow: 'hidden',
-                                                resizeMode: 'cover',
-                                            }}
-                                        />
-                                    </Animated.View>
-                                </View>
-                            )
-                        }}
+                        renderItem={({item, index}) => (
+                            <MusicPlayerSongCardView
+                                item={item}
+                                index={index}
+                                scrollX={scrollX}
+                            />
+                        )}
                     />
                 ) : (
                     <View
@@ -313,8 +322,8 @@ const Player: React.FC<PlayerProps> = props => {
                         width: '100%',
                         backgroundColor:
                             dominatingColorsStyle === 'light'
-                                ? '#FFFFFF10'
-                                : '#00000010',
+                                ? '#FFFFFF33'
+                                : '#00000033',
                         paddingTop: 20,
                         paddingBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
                         borderTopRightRadius: 25,
