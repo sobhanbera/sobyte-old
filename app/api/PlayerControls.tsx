@@ -250,14 +250,14 @@ const Player: FC<PlayerProps> = props => {
         )
 
         const remoteStop = TrackPlayer.addEventListener('remote-stop', () => {
-            resetPlayer()
+            //     resetPlayer()
         })
 
         const playbackQueueEnded = TrackPlayer.addEventListener(
             'playback-queue-ended',
             () => {
                 setCurrentTrack(track => ({
-                    id: '',
+                    id: track.id,
                     url: track.url,
                     duration: track.duration,
                     title: track.title,
