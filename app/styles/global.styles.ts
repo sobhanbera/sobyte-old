@@ -152,6 +152,25 @@ const globalStyles = StyleSheet.create({
     },
 
     /**
+     * explore tab all cards designs
+     */
+    blockOrCardOuterBlock: {
+        marginHorizontal: 10,
+        marginVertical: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 30,
+    },
+    blockOrCardinnerBlock: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%',
+
+        borderBottomWidth: 1,
+        borderBottomColor: '#7f7f7f16',
+    },
+
+    /**
      * animated header style design ends
      */
 })
