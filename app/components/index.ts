@@ -31,6 +31,7 @@ import BottomSheet from './BottomSheet'
 import GridCategory from './GridCategory'
 import CardSong from './CardSong'
 import CardArtist from './CardArtist'
+import SingleBlockSongs from './SingleBlockSongs'
 
 import AnimatedHeader from './AnimatedHeader'
 
@@ -66,6 +67,8 @@ export {
     CardArtist,
     AnimatedHeader,
     AnimatedHeader as AnimatedHeaderView,
+    SingleBlockSongs,
+    SingleBlockSongs as BlockCardSongsList,
 }
 
 /** music player components */
