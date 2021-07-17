@@ -1,10 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {View, ScrollView, StyleSheet, RefreshControl} from 'react-native'
+import {View, ScrollView, RefreshControl} from 'react-native'
 import {Text as BlockTitle} from 'react-native-paper'
 
 import {
     GradientBackground,
-    GridSongList,
     HeaderCollapsible,
     Block,
     CenterButtonView,
@@ -110,6 +109,9 @@ const Explore: React.FC<ExploreTabProps> = props => {
             })
     }, [error])
 
+    /**
+     * code that opens the song category tab
+     */
     const launchSongCategoryScreen = (category: SongCategory) => {
         props.navigation.navigate('songcategory', {
             category: category,
@@ -163,7 +165,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                                 3 * 5 + // bottom padding of image
                                 0, // a random height to fit the items
                         }}>
-                        <Block style={styles.innerBlock}>
+                        <Block style={globalStyles.blockOrCardinnerBlock}>
                             <BlockTitle
                                 style={[
                                     globalStyles.topicTitle,
@@ -186,6 +188,10 @@ const Explore: React.FC<ExploreTabProps> = props => {
                             />
                         </ScrollView>
                     </Block>
+
+                    {/* these are the seperated component for 
+                        all kinds of music data or card blocks
+                        or card which hold songs list, music list, etc */}
 
                     {/* hot songs */}
                     <BlockCardSongsList
@@ -241,6 +247,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         musicData={musicData[8]}
                     />
 
+                    {/* button to go to the top of the scoll view */}
                     <CenterButtonView
                         title="Go To Top"
                         onPress={() =>
@@ -252,30 +259,12 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         }
                     />
 
-                    {/* end of the scrollview */}
+                    {/* end of the scrollview we are providing some spacing to look nice */}
                     <PaddingBottomView />
                 </GradientBackground>
             </ScrollView>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    outerBlock: {
-        marginHorizontal: 10,
-        marginVertical: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        elevation: 30,
-    },
-    innerBlock: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        width: '100%',
-
-        borderBottomWidth: 1,
-        borderBottomColor: '#7f7f7f16',
-    },
-})
 
 export default Explore
