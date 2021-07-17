@@ -26,8 +26,6 @@ import {
 import {useTheme, useMusicApi} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
-import {StyleSheet} from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
 
 interface ExploreTabProps {
     navigation?: any
