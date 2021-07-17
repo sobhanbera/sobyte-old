@@ -9,6 +9,7 @@ import {
     Block,
     CenterButtonView,
     GridCategory,
+    BlockCardSongsList,
 } from '../../../components'
 import {
     DEFAULT_ICON_SIZE,
@@ -48,10 +49,17 @@ const Explore: React.FC<ExploreTabProps> = props => {
      * "main" @state of the list for all the types of music list data...
      */
     const [musicData, setMusicData] = useState<FetchedSongObject[]>([
-        BareFetchedSongObjectInstance, // popular songs list...
-        BareFetchedSongObjectInstance, // most rated songs...
-        BareFetchedSongObjectInstance, // lo-fi songs...
+        BareFetchedSongObjectInstance, // 0 - hot songs...
+        BareFetchedSongObjectInstance, // 1 - bollywood hits...
+        BareFetchedSongObjectInstance, // 2 - trendings...
+        BareFetchedSongObjectInstance, // 3 - romantic...
+        BareFetchedSongObjectInstance, // 4 - popular songs list...
+        BareFetchedSongObjectInstance, // 5 - most rated songs...
+        BareFetchedSongObjectInstance, // 6 - pops...
+        BareFetchedSongObjectInstance, // 7 - lo-fi songs...
+        BareFetchedSongObjectInstance, // 8 - sorrow...
     ])
+    // const [artistsData, setArtistsData] = useState<>([])
 
     /**
      * Function which loads all sutaible data required in this tab (explore tab)
@@ -59,13 +67,18 @@ const Explore: React.FC<ExploreTabProps> = props => {
      */
     const loadExploreData = React.useCallback(() => {
         Promise.all([
-            search('popular songs', 'SONG'), // 1st type of song data list
-            search('most rated songs', 'SONG'), // 2nd type of song data list
-            search('Chill beats', 'SONG'), // 3rd type of song data list
+            search('hot songs', 'SONG'), // 1st type of song data list
+            search('bollywood hits', 'SONG'), // 2nd type of song data list
+            search('trendings', 'SONG'), // 3rd type of song data list
+            search('top romantic songs', 'SONG'), // 4th type of song data list
+            search('popular songs', 'SONG'), // 5th type of song data list
+            search('most rated songs', 'SONG'), // 5th type of song data list
+            search('pop', 'SONG'), // 6th type of song data list
+            search('Chill beats', 'SONG'), // 6th type of song data list
+            search('sorrow', 'SONG'), // 7th type of song data list
         ])
             .then((res: FetchedSongObject[]) => {
                 setMusicData(res)
-                console.log('SETTING SONGS IN EXPLORE...')
             })
             .catch(() => {})
     }, [error])
@@ -174,71 +187,59 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         </ScrollView>
                     </Block>
 
+                    {/* hot songs */}
+                    <BlockCardSongsList
+                        cardTitle={'Hot Tracks'}
+                        musicData={musicData[0]}
+                    />
+
+                    {/* bollywood hits */}
+                    <BlockCardSongsList
+                        cardTitle={'Bollywood Hits'}
+                        musicData={musicData[1]}
+                    />
+
+                    {/* trendings */}
+                    <BlockCardSongsList
+                        cardTitle={'Trendings'}
+                        musicData={musicData[2]}
+                    />
+
+                    {/* romantic */}
+                    <BlockCardSongsList
+                        cardTitle={'Romantic Songs'}
+                        musicData={musicData[3]}
+                    />
+
                     {/* popular songs */}
-                    <Block style={styles.outerBlock}>
-                        <Block style={styles.innerBlock}>
-                            <BlockTitle
-                                style={[
-                                    globalStyles.topicTitle,
-                                    {color: themeColors.text[0]},
-                                ]}>
-                                Popular Hits
-                            </BlockTitle>
-                        </Block>
+                    <BlockCardSongsList
+                        cardTitle={'Popular Mix'}
+                        musicData={musicData[4]}
+                    />
 
-                        <GridSongList
-                            id="populars"
-                            shimmerDirection="right"
-                            textColor={themeColors.text[0] + 'E7'}
-                            subColor={themeColors.text[0] + '70'}
-                            contentLength={musicData[0].content.length}
-                            content={musicData[0].content}
-                        />
-                    </Block>
+                    {/* most rated */}
+                    <BlockCardSongsList
+                        cardTitle={'Top Songs'}
+                        musicData={musicData[5]}
+                    />
 
-                    {/* top songs */}
-                    <Block style={styles.outerBlock}>
-                        <Block style={styles.innerBlock}>
-                            <BlockTitle
-                                style={[
-                                    globalStyles.topicTitle,
-                                    {color: themeColors.text[0]},
-                                ]}>
-                                Top Musics
-                            </BlockTitle>
-                        </Block>
+                    {/* pop */}
+                    <BlockCardSongsList
+                        cardTitle={'Pop'}
+                        musicData={musicData[6]}
+                    />
 
-                        <GridSongList
-                            id="topRated"
-                            shimmerDirection="left"
-                            textColor={themeColors.text[0] + 'E7'}
-                            subColor={themeColors.text[0] + '70'}
-                            contentLength={musicData[1].content.length}
-                            content={musicData[1].content}
-                        />
-                    </Block>
+                    {/* lo-fi songs */}
+                    <BlockCardSongsList
+                        cardTitle={'Chill Time'}
+                        musicData={musicData[7]}
+                    />
 
-                    {/* lo-fi songs at the end */}
-                    <Block style={styles.outerBlock}>
-                        <Block style={styles.innerBlock}>
-                            <BlockTitle
-                                style={[
-                                    globalStyles.topicTitle,
-                                    {color: themeColors.text[0]},
-                                ]}>
-                                Chill Time
-                            </BlockTitle>
-                        </Block>
-
-                        <GridSongList
-                            id="loFi"
-                            shimmerDirection="right"
-                            textColor={themeColors.text[0] + 'E7'}
-                            subColor={themeColors.text[0] + '70'}
-                            contentLength={musicData[2].content.length}
-                            content={musicData[2].content}
-                        />
-                    </Block>
+                    {/* are you sorrow */}
+                    <BlockCardSongsList
+                        cardTitle={'Are You Sad'}
+                        musicData={musicData[8]}
+                    />
 
                     <CenterButtonView
                         title="Go To Top"
