@@ -37,9 +37,9 @@ const TrackPlayerProgressSlider = (props: Props) => {
                     value={position} // position is in seconds
                     minimumValue={0}
                     maximumValue={duration / 1000} // duration is in milliseconds, but props.duration must be in seconds
-                    maximumTrackTintColor={props.color + '7F'} // half brightness of the given color prop
-                    thumbTintColor={props.color}
-                    minimumTrackTintColor={props.color}
+                    maximumTrackTintColor={(props.color || '#000000') + '7F'} // half brightness of the given color prop
+                    thumbTintColor={props.color || '#000000'}
+                    minimumTrackTintColor={props.color || '#000000'}
                     onSlidingComplete={e => {
                         seekTo(e) // the e is in seconds
                     }}
