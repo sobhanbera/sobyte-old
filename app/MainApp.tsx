@@ -66,12 +66,12 @@ const MainApp = () => {
         })
 
         TrackPlayer.setupPlayer({
-            minBuffer: 60 * 1, // 1 minutes buffer time will be the minimum buffer at once
-            maxBuffer: 60 * 4, // 4 minutes buffer time will be the maximum buffer at once
-            backBuffer: 60 * 4, // 4 minutes buffer time from the current position of track
-            playBuffer: 1, // 1 second is the buffer duration or loaded track duration after which the track will be played
-            maxCacheSize: 1024 * 1, // 1 MB max cache size
-            waitForBuffer: false,
+            minBuffer: 60 * 3, // 3 minutes buffer time will be the minimum buffer at once
+            maxBuffer: 60 * 5, // 5 minutes buffer time will be the maximum buffer at once
+            backBuffer: 60 * 5, // 5 minutes buffer time from the current position of track
+            playBuffer: 0.1, // 0.1 second is the buffer duration or loaded track duration after which the track will be played
+            maxCacheSize: 1024 * 2, // 1 MB max cache size
+            waitForBuffer: false, // should the player wait to load the buffer and then play
         }).then(async () => {})
     }, [])
 
