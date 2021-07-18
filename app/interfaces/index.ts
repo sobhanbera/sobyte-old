@@ -1,5 +1,17 @@
-import {DominatingColors} from './Modals'
-export type {DominatingColors}
+import {
+    DominatingColors,
+    AudioQualityType,
+    ImageQualityType,
+    LanguageType,
+    ThemeType,
+} from './Modals'
+export type {
+    DominatingColors,
+    AudioQualityType,
+    ImageQualityType,
+    LanguageType,
+    ThemeType,
+}
 
 import SongCategory from './SongCategory'
 export type {SongCategory}

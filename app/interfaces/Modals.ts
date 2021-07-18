@@ -9,3 +9,15 @@ export interface DominatingColors {
     platform: 'android' | 'ios'
     vibrant: string | ''
 }
+
+export type ThemeType = 'd' | 'l' | 'c'
+export type AudioQualityType = 'e' | 'g' | 'p' | 'a'
+export type ImageQualityType =
+    | '720'
+    | '512'
+    | '420'
+    | '300'
+    | '200'
+    | '120'
+    | '60'
+export type LanguageType = 'en' | 'hi'
