@@ -200,6 +200,9 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         all kinds of music data or card blocks
                         or card which hold songs list, music list, etc */}
 
+                    {/* gradient background could only hold 5 child componets of BlockCardSongsList
+                        or else it produces a black background and then what is the need of gradient then */}
+
                     {/* trendings */}
                     <BlockCardSongsList
                         cardTitle={'Trendings'}
@@ -229,30 +232,34 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Popular Mix'}
                         musicData={musicData[4]}
                     />
+                </GradientBackground>
 
+                {/* separate same component because inside single it produces a black
+                    gradient which is not needed */}
+                <GradientBackground angle={135}>
                     {/* most rated */}
-                    {/* <BlockCardSongsList
+                    <BlockCardSongsList
                         cardTitle={'Top Songs'}
                         musicData={musicData[5]}
-                    /> */}
+                    />
 
                     {/* pop */}
-                    {/* <BlockCardSongsList
+                    <BlockCardSongsList
                         cardTitle={'Pop'}
                         musicData={musicData[6]}
-                    /> */}
+                    />
 
                     {/* lo-fi songs */}
-                    {/* <BlockCardSongsList
+                    <BlockCardSongsList
                         cardTitle={'Chill Time'}
                         musicData={musicData[7]}
-                    /> */}
+                    />
 
                     {/* are you sorrow */}
-                    {/* <BlockCardSongsList
+                    <BlockCardSongsList
                         cardTitle={'Are You Sad'}
                         musicData={musicData[8]}
-                    /> */}
+                    />
 
                     {/* button to go to the top of the scoll view */}
                     <CenterButtonView
@@ -265,7 +272,6 @@ const Explore: React.FC<ExploreTabProps> = props => {
                             })
                         }
                     />
-
                     {/* end of the scrollview we are providing some spacing to look nice */}
                     <PaddingBottomView />
                 </GradientBackground>
