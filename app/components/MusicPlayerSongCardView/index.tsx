@@ -1,7 +1,7 @@
 import React from 'react'
-import {Animated, View, Image, Dimensions} from 'react-native'
+import {Animated, View, Image, Dimensions, Text} from 'react-native'
 
-import {APP_LOGO_LINK} from '../../constants'
+import {APP_LOGO_LINK, FontRoboto, FontRobotoBold} from '../../constants'
 import {Track} from '../../api/PlayerControls'
 
 const {width} = Dimensions.get('screen')
@@ -54,6 +54,15 @@ const MusicPlayerSongCardView = (props: Props) => {
                     }}
                 />
             </Animated.View>
+
+            <Text
+                style={{
+                    paddingVertical: 10,
+                    fontSize: 18,
+                    fontFamily: FontRobotoBold,
+                }}>
+                {item.title}
+            </Text>
         </View>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {View, StyleSheet} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
@@ -12,6 +12,8 @@ interface Props {
 }
 const MainControls = (props: Props) => {
     const {playing, paused, seekInterval, playonly, pause} = usePlayer()
+
+    const [localPlaying, setLocalPlaying] = useState(playing)
 
     return (
         <View style={styles.wrapper}>
