@@ -66,8 +66,8 @@ const Explore: React.FC<ExploreTabProps> = props => {
      */
     const loadExploreData = React.useCallback(() => {
         Promise.all([
-            search('bollywood new hits', 'SONG'), // 0th type of song data list
-            search('trending songs', 'SONG'), // 1st type of song data list
+            search('trending songs', 'SONG'), // 0th type of song data list
+            search('bollywood new hits', 'SONG'), // 1st type of song data list
             search('top romantic songs', 'SONG'), // 2nd type of song data list
             search('most popular songs', 'SONG'), // 3rd type of song data list
             search('popular songs', 'SONG'), // 4th type of song data list
