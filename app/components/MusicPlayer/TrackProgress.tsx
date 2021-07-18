@@ -39,28 +39,12 @@ const TrackProgress = (props: Props) => {
     }
 
     return (
-        <View>
-            <View
-                style={{
-                    justifyContent: 'center',
-                    alignItems: 'flex-end',
-                    marginVertical: 5,
-                }}>
-                <Scaler onPress={() => setShowCurrentDuration(show => !show)}>
-                    <Text
-                        style={{
-                            color: props.color,
-                            width: '100%',
-                            textAlign: 'right',
-                        }}>
-                        {`${
-                            showCurrentDuration
-                                ? getCurrentDuration()
-                                : getRemainingDuration()
-                        } / ${getDuration()}`}
-                    </Text>
-                </Scaler>
-            </View>
+        <View
+            style={{
+                width: '90%',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
             <View
                 style={{
                     width: '100%',
@@ -87,6 +71,28 @@ const TrackProgress = (props: Props) => {
                         zIndex: 2,
                     }}
                 />
+            </View>
+
+            <View
+                style={{
+                    justifyContent: 'center',
+                    alignItems: 'flex-end',
+                    marginVertical: 5,
+                }}>
+                <Scaler onPress={() => setShowCurrentDuration(show => !show)}>
+                    <Text
+                        style={{
+                            color: props.color,
+                            width: '100%',
+                            textAlign: 'right',
+                        }}>
+                        {`${
+                            showCurrentDuration
+                                ? getCurrentDuration()
+                                : getRemainingDuration()
+                        } / ${getDuration()}`}
+                    </Text>
+                </Scaler>
             </View>
         </View>
     )
