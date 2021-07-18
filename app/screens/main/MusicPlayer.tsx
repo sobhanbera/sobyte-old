@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react'
-import {View, Image, Dimensions, StyleSheet, Animated} from 'react-native'
-import TrackPlayer from 'react-native-track-player'
+import {View, Image, Dimensions, StyleSheet, Animated, Text} from 'react-native'
 import ImageColors from 'react-native-image-colors'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
-import {TrackPlayerProgressSlider} from '../../components'
+import {TrackPlayerController} from '../../components'
 import {APP_LOGO_LINK, BOTTOM_TAB_BAR_NAVIGATION_HEIGHT} from '../../constants'
 import {
     formatArtists,
@@ -14,9 +13,9 @@ import {
 } from '../../utils'
 import {DominatingColors, SongObject} from '../../interfaces'
 import MusicPlayerSongCardView from '../../components/MusicPlayerSongCardView'
+import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
 
 const {width} = Dimensions.get('screen')
-const IMAGE_BLUR_RADIUS = 50
 
 interface PlayerProps {
     navigation?: any
@@ -225,26 +224,12 @@ const Player: React.FC<PlayerProps> = _props => {
             {nextSongsList.length > 0 && nextSongsList[0].artwork.length ? (
                 <View style={StyleSheet.absoluteFillObject}>
                     {nextSongsList.map((song, _) => {
-                        const inputRange = [
-                            (_ - 1) * width,
-                            _ * width,
-                            (_ + 1) * width,
-                        ]
-                        const opacity = scrollX.interpolate({
-                            inputRange: inputRange,
-                            outputRange: [0, 1, 0],
-                        })
                         return (
-                            <Animated.Image
+                            <BackgroundBluredImage
                                 key={`${song.id}-${_}`}
-                                style={[
-                                    StyleSheet.absoluteFillObject,
-                                    {
-                                        opacity: opacity,
-                                    },
-                                ]}
-                                source={{uri: song.artwork || APP_LOGO_LINK}}
-                                blurRadius={IMAGE_BLUR_RADIUS}
+                                song={song}
+                                index={_}
+                                scrollX={scrollX}
                             />
                         )
                     })}
@@ -321,14 +306,17 @@ const Player: React.FC<PlayerProps> = _props => {
                         width: '100%',
                         backgroundColor:
                             dominatingColorsStyle === 'light'
-                                ? '#FFFFFF33'
-                                : '#00000033',
+                                ? '#00000050'
+                                : '#FFFFFF50',
                         paddingTop: 20,
                         paddingBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
                         borderTopRightRadius: 25,
                         borderTopLeftRadius: 25,
                     }}>
-                    <TrackPlayerProgressSlider color={dominatingColors} />
+                    <TrackPlayerController
+                        theme={dominatingColorsStyle}
+                        color={dominatingColors}
+                    />
                 </View>
             </View>
         </View>
