@@ -9,12 +9,12 @@ import {
     SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
     DEFAULT_IMAGE_QUALITY,
 } from '../constants'
-
-type ThemeType = 'd' | 'l' | 'c'
-type AudioQualityType = 'e' | 'g' | 'p' | 'a'
-type ImageQualityType = '720' | '512' | '420' | '300' | '200' | '120' | '60'
-
-type LanguageType = 'en' | 'hi'
+import {
+    ImageQualityType,
+    ThemeType,
+    AudioQualityType,
+    LanguageType,
+} from '../interfaces'
 
 interface SettingsProviderContextProps {
     theme: ThemeType
