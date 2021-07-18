@@ -43,7 +43,7 @@ const Player: React.FC<PlayerProps> = _props => {
     let timer: any = null
 
     const loadInitialMusicPlayerData = () => {
-        search('bollywood trending songs', 'SONG', true)
+        search('bollywood new hits', 'SONG', true)
             .then((res: SongObject) => {
                 const artist = formatArtists(res.artist)
                 const artwork = getHightQualityImageFromLink(
@@ -59,12 +59,12 @@ const Player: React.FC<PlayerProps> = _props => {
                     title: res.name,
                     url: '',
                 })
-                if (scrollReference !== null)
-                    scrollReference.current.scrollToIndex({
-                        animated: true,
-                        x: 0,
-                        y: 0,
-                    })
+                // if (scrollReference !== null)
+                //     scrollReference.current.scrollTo({
+                //         animated: true,
+                //         x: 0,
+                //         y: 0,
+                //     })
             })
             .catch(_err => {})
     }
@@ -142,36 +142,35 @@ const Player: React.FC<PlayerProps> = _props => {
     }, [current.artwork])
 
     useEffect(() => {
-        console.log('CURRENT INDEX 1', getTheIndexOfCurrentSong())
-        const playbackQueueEnded = TrackPlayer.addEventListener(
-            'playback-track-changed',
-            () => {
-                console.log('CURRENT INDEX 2', getTheIndexOfCurrentSong())
-                // console.log(scrollReference.current)
-                const currentIndexOfScroll: any = getTheIndexOfCurrentSong()
-                if (currentIndexOfScroll < nextSongsList.length - 1) {
-                    scrollReference.current.scrollToIndex({
-                        animated: true,
-                        index: currentIndexOfScroll + 1,
-                    })
-                    console.log(
-                        'SCROLLED: ',
-                        currentIndexOfScroll,
-                        nextSongsList.length,
-                    )
-                } else {
-                    console.log(
-                        'NOT SCROLLED: ',
-                        currentIndexOfScroll,
-                        nextSongsList.length,
-                    )
-                }
-            },
-        )
-
-        return () => {
-            playbackQueueEnded.remove()
-        }
+        // console.log('CURRENT INDEX 1', getTheIndexOfCurrentSong())
+        // const playbackQueueEnded = TrackPlayer.addEventListener(
+        //     'playback-track-changed',
+        //     () => {
+        //         console.log('CURRENT INDEX 2', getTheIndexOfCurrentSong())
+        //         // console.log(scrollReference.current)
+        //         const currentIndexOfScroll: any = getTheIndexOfCurrentSong()
+        //         if (currentIndexOfScroll < nextSongsList.length - 1) {
+        //             scrollReference.current.scrollToIndex({
+        //                 animated: true,
+        //                 index: currentIndexOfScroll + 1,
+        //             })
+        //             console.log(
+        //                 'SCROLLED: ',
+        //                 currentIndexOfScroll,
+        //                 nextSongsList.length,
+        //             )
+        //         } else {
+        //             console.log(
+        //                 'NOT SCROLLED: ',
+        //                 currentIndexOfScroll,
+        //                 nextSongsList.length,
+        //             )
+        //         }
+        //     },
+        // )
+        // return () => {
+        //     playbackQueueEnded.remove()
+        // }
     }, [])
 
     /**
@@ -223,7 +222,7 @@ const Player: React.FC<PlayerProps> = _props => {
                 ]}
             />
             {/* main content of this particular tab */}
-            {nextSongsList.length > 0 && current.id.length > 0 ? (
+            {nextSongsList.length > 0 && nextSongsList[0].artwork.length ? (
                 <View style={StyleSheet.absoluteFillObject}>
                     {nextSongsList.map((song, _) => {
                         const inputRange = [
