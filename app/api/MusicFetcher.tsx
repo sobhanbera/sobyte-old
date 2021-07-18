@@ -27,7 +27,6 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                 if (res === null || res === 'a' || res === 'e') {
                     AsyncStorage.setItem(AUDIO_QUALITY_STORAGE_KEY, 'e')
                         .then(res => {
-                            console.log(res)
                             if (res === null) {
                             }
                         })
