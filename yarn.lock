@@ -5771,6 +5771,11 @@ react-native-screens@^3.4.0:
   dependencies:
     warn-once "^0.1.0"
 
+react-native-scrubber@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-native-scrubber/-/react-native-scrubber-1.1.5.tgz#21c41c607f2d8decd6befb238933d456f7a168f3"
+  integrity sha512-7kceYBVrFQ8drt4gop5FK/zWIr0y5GdsuDupOyFP/zp28E/uX4qk8SuO6QRUw13gelqVxlSUS6NBYQyk/DNhwQ==
+
 react-native-shimmer@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-native-shimmer/-/react-native-shimmer-0.6.0.tgz#9529c4c85665827c582ebb74a285a67a450f5f2b"
