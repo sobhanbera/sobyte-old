@@ -1,14 +1,22 @@
 import React, {useEffect} from 'react'
-import {View, Button} from 'react-native'
+import {View, Button, Dimensions, Text} from 'react-native'
 import Slider from '@react-native-community/slider'
 
-import {usePlayer, usePlayerProgress} from '../../context'
+import BufferSlider from 'react-native-scrubber'
 
+import {useFetcher, usePlayer, usePlayerProgress} from '../../context'
+import {StyleSheet} from 'react-native'
+
+const PLACEHOLDER_DISPLAY_VALUE = '--:--'
 interface Props {
     color: string
 }
 const TrackPlayerProgressSlider = (props: Props) => {
-    const {position, duration, bufferedPosition} = usePlayerProgress()
+    const {
+        position, // unit - second
+        duration, // unit - millisecond
+        bufferedPosition, // unit - second
+    } = usePlayerProgress()
     const {
         playing,
         paused,
@@ -19,6 +27,21 @@ const TrackPlayerProgressSlider = (props: Props) => {
         pause,
         current,
     } = usePlayer()
+    const {fetchMusic} = useFetcher()
+
+    const convertMillisecondsToMinuteSecondFormat = (millis: number) => {
+        var minutes = Math.floor(millis / 60000)
+        var seconds = ((millis % 60000) / 1000).toFixed(0)
+        return `${minutes}:${Number(seconds) < 10 ? '0' : ''}${seconds}`
+    }
+
+    useEffect(() => {
+        fetchMusic('DUwlGduupRI')
+            .then(res => {
+                console.log(res)
+            })
+            .catch(_err => {})
+    }, [])
 
     return (
         <View
@@ -42,6 +65,7 @@ const TrackPlayerProgressSlider = (props: Props) => {
                     minimumTrackTintColor={props.color || '#000000'}
                     onSlidingComplete={e => {
                         seekTo(e) // the e is in seconds
+                        console.log(e)
                     }}
                     step={0.5}
                     style={{
@@ -50,9 +74,26 @@ const TrackPlayerProgressSlider = (props: Props) => {
                         margin: 0,
                     }}
                 />
+                <BufferSlider
+                    value={position}
+                    totalDuration={duration / 1000}
+                    bufferedValue={bufferedPosition}
+                    onSlidingComplete={e => {
+                        console.log(e)
+                        seekTo(e)
+                    }}
+                    tapNavigation={false}
+                    trackBackgroundColor={(props.color || '#000000') + '50'}
+                    bufferedTrackColor={(props.color || '#000000') + '80'}
+                    scrubbedColor={'black'}
+                    trackColor={props.color || '#000000'}
+                    displayValues={false}
+                />
             </View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({})
 
 export default TrackPlayerProgressSlider
