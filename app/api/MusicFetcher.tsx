@@ -1,9 +1,17 @@
 import React, {useContext} from 'react'
 import musicFetch from 'react-native-ytdl'
 
+type AudioType =
+    | 'highest'
+    | 'lowest'
+    | 'highestaudio'
+    | 'lowestaudio'
+    | 'highestvideo'
+    | 'lowestvideo'
 const MusicFetcherContext = React.createContext({
-    fetchMusic: (id: string) => new Promise((resolve, reject) => {}),
-    getURL: (id: string) => {},
+    fetchMusic: (_id: string, _quality: AudioType = 'highestaudio') =>
+        new Promise((_resolve, _reject) => {}),
+    getURL: (_id: string) => {},
 })
 interface MusicFetcherProps {}
 const MusicFetcher: React.FC<MusicFetcherProps> = props => {
@@ -12,10 +20,13 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
         return origin + id
     }
 
-    async function fetchMusic(id: string) {
-        return new Promise(async (resolve, reject) => {
+    async function fetchMusic(
+        id: string,
+        _quality: AudioType = 'highestaudio',
+    ) {
+        return new Promise(async (resolve, _reject) => {
             const URL = getURL(id)
-            const result = await musicFetch(URL, {quality: 'highestaudio'})
+            const result = await musicFetch(URL, {quality: _quality})
 
             /** since the result will provide a object like this:-
              * result = [{
