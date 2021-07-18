@@ -502,6 +502,9 @@ const Player: FC<PlayerProps> = props => {
                                                         title: result.name,
                                                         url: _res,
                                                     })
+                                                    setNextSongsList(
+                                                        nextSongsData,
+                                                    )
                                                 })
                                                 .catch(_err => {})
                                         }
@@ -514,7 +517,7 @@ const Player: FC<PlayerProps> = props => {
                         /**
                          * setting the next song list from next song list temporary data...
                          */
-                        setNextSongsList(nextSongsData)
+                        // setNextSongsList(nextSongsData)
                     })
                     .catch(err => {
                         console.error('GETTING NEXT LIST', err)
