@@ -51,7 +51,7 @@ const AuthenticationNavigation = () => {
                 component={ExploreStackNavigator}
                 options={{
                     tabBarAccessibilityLabel: 'Explore Tab',
-                    tabBarColor: themeColors.surface[0],
+                    tabBarColor: themeColors.surface[0] + 'F7',
                     tabBarLabel: 'Explore',
                     tabBarIcon: ({focused, color}) => (
                         <Ionicons
@@ -94,7 +94,7 @@ const AuthenticationNavigation = () => {
                 component={ProfileStackNavigator}
                 options={{
                     tabBarAccessibilityLabel: 'Profile Tab',
-                    tabBarColor: themeColors.surface[0],
+                    tabBarColor: themeColors.surface[0] + 'F7',
                     tabBarLabel: 'Me',
                     tabBarIcon: ({focused, color}) => (
                         <AntDesign
@@ -110,7 +110,7 @@ const AuthenticationNavigation = () => {
 }
 
 /**
- * @important @note may be useful in future...
+ * @important_note may be useful in future...
  */
 // interface FloatingTabBarIconProps {
 //     backgroundColor: string
