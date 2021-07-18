@@ -8,8 +8,6 @@ import TrackPlayer, {
     CAPABILITY_JUMP_BACKWARD,
     CAPABILITY_JUMP_FORWARD,
     CAPABILITY_SKIP,
-    CAPABILITY_SKIP_TO_NEXT,
-    CAPABILITY_SKIP_TO_PREVIOUS,
 } from 'react-native-track-player'
 
 import AppStartingPoint from './controller/AppStartingPoint'
@@ -37,14 +35,12 @@ const MainApp = () => {
             stopWithApp: false,
             icon: require('./assets/images/sobyte_logo_white.png'),
             jumpInterval: 5,
-            // color: 1,
+            color: 50,
             capabilities: [
                 CAPABILITY_PLAY,
                 CAPABILITY_PAUSE,
                 CAPABILITY_STOP,
                 CAPABILITY_SKIP,
-                CAPABILITY_SKIP_TO_NEXT,
-                CAPABILITY_SKIP_TO_PREVIOUS,
                 CAPABILITY_JUMP_BACKWARD,
                 CAPABILITY_JUMP_FORWARD,
             ],
@@ -59,19 +55,24 @@ const MainApp = () => {
                 CAPABILITY_PLAY,
                 CAPABILITY_PAUSE,
                 CAPABILITY_STOP,
-                // CAPABILITY_SKIP,
-                // CAPABILITY_SKIP_TO_NEXT,
-                // CAPABILITY_SKIP_TO_PREVIOUS,
                 CAPABILITY_JUMP_BACKWARD,
                 CAPABILITY_JUMP_FORWARD,
             ],
+            alwaysPauseOnInterruption: true,
         })
 
         TrackPlayer.registerPlaybackService(() => {
             return require('./api/playerServices')
         })
 
-        TrackPlayer.setupPlayer({}).then(async () => {})
+        TrackPlayer.setupPlayer({
+            minBuffer: 60 * 1, // 1 minutes buffer time will be the minimum buffer at once
+            maxBuffer: 60 * 4, // 4 minutes buffer time will be the maximum buffer at once
+            backBuffer: 60 * 4, // 4 minutes buffer time from the current position of track
+            playBuffer: 1, // 1 second is the buffer duration or loaded track duration after which the track will be played
+            maxCacheSize: 1024 * 1, // 1 MB max cache size
+            waitForBuffer: false,
+        }).then(async () => {})
     }, [])
 
     return (
