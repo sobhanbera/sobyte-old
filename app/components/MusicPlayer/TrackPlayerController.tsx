@@ -1,23 +1,15 @@
 import React from 'react'
-import {View, Dimensions, Text, Animated} from 'react-native'
-import Slider from '@react-native-community/slider'
+import {View} from 'react-native'
 
-import {usePlayer, usePlayerProgress} from '../../context'
-import {StyleSheet} from 'react-native'
-import {useState} from 'react'
-import {Scaler} from '../'
-import {colorBrightness} from '../../utils'
+import {usePlayer} from '../../context'
 import TrackProgress from './TrackProgress'
+import MainControls from './MainControls'
 
-const PLACEHOLDER_DISPLAY_VALUE = '--:--'
 interface Props {
     color: string
     theme: 'light' | 'dark'
 }
 const TrackPlayerController = (props: Props) => {
-    const {playing, paused, buffering, seekInterval, playonly, pause, current} =
-        usePlayer()
-
     return (
         <View
             style={{
@@ -26,6 +18,8 @@ const TrackPlayerController = (props: Props) => {
                 justifyContent: 'center',
             }}>
             <TrackProgress color={props.color} />
+
+            <MainControls theme={props.theme} color={props.color} />
         </View>
     )
 }
