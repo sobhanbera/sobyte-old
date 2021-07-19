@@ -42,8 +42,8 @@ export type {
  * object's instance of the variables for demo purpose or initial values
  */
 
-import {BareFetchedArtistObjectInstance} from './ArtistObject'
-export {BareFetchedArtistObjectInstance}
+import {BareFetchedArtistObjectInstance, BareArtistObject} from './ArtistObject'
+export {BareFetchedArtistObjectInstance, BareArtistObject}
 
 import {BareFetchedSongObjectInstance, CasualDemoList} from './SongObject'
 export {BareFetchedSongObjectInstance, BareSongObjectInstance, CasualDemoList}

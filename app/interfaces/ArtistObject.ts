@@ -9,6 +9,19 @@ export interface ArtistObject {
     }>
 }
 
+export const BareArtistObject: ArtistObject = {
+    name: '',
+    browseId: '',
+    thumbnails: [
+        {
+            height: 0,
+            url: '',
+            width: 0,
+        },
+    ],
+    type: '',
+}
+
 export default interface FetchedArtistObject {
     content: Array<ArtistObject>
     continuation: {
