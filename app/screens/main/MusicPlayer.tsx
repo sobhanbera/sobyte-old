@@ -1,17 +1,11 @@
 import React, {useEffect} from 'react'
-import {View, Image, Dimensions, StyleSheet, Animated, Text} from 'react-native'
-import ImageColors from 'react-native-image-colors'
+import {View, Image, Dimensions, StyleSheet, Animated} from 'react-native'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
 import {TrackPlayerController} from '../../components'
 import {APP_LOGO_LINK, BOTTOM_TAB_BAR_NAVIGATION_HEIGHT} from '../../constants'
-import {
-    formatArtists,
-    getHightQualityImageFromLink,
-    isColorDark,
-    sortColorsBasedOnBrightness,
-} from '../../utils'
-import {DominatingColors, SongObject} from '../../interfaces'
+import {formatArtists, getHightQualityImageFromLink} from '../../utils'
+import {SongObject} from '../../interfaces'
 import MusicPlayerSongCardView from '../../components/MusicPlayerSongCardView'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
 
@@ -33,13 +27,6 @@ const Player: React.FC<PlayerProps> = _props => {
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = React.useRef<any>(null)
-    const [dominatingColors, setDominatingColors] =
-        React.useState<string>('#FFFFFFFF')
-    const [dominatingColorsStyle, setDominatingColorsStyle] = React.useState<
-        'light' | 'dark'
-    >('light')
-
-    let timer: any = null
 
     const loadInitialMusicPlayerData = () => {
         search('bollywood new hits', 'SONG', true)
@@ -90,55 +77,6 @@ const Player: React.FC<PlayerProps> = _props => {
                 )
             })
     }, [error])
-
-    /**
-     * this useEffect changes the primary color or any colors that is related to the song
-     * and pass them to children components
-     */
-    useEffect(() => {
-        if (current.url)
-            timer = setTimeout(() => {
-                clearTimeout(timer)
-
-                ImageColors.getColors(
-                    getHightQualityImageFromLink(current.artwork, '100'),
-                    {
-                        fallback: themeColors.rgbstreakgradient[0],
-                        cache: false,
-                        key: 'sobyte_music_player_color',
-                    },
-                )
-                    .then((res: DominatingColors | any) => {
-                        /* available colors which should be used ->
-                         * res.dominant,
-                         * res.vibrant,
-                         * res.darkVibrant,
-                         * res.darkMuted
-                         * */
-                        const lightColorAmongAll = sortColorsBasedOnBrightness([
-                            res.dominant,
-                            res.vibrant,
-                            res.darkVibrant,
-                        ])[0]
-                        setDominatingColors(lightColorAmongAll || '#FFFFFFFF')
-                        setDominatingColorsStyle(
-                            isColorDark(lightColorAmongAll || '#FFFFFFFF')
-                                ? 'dark'
-                                : 'light',
-                        )
-                    })
-                    .catch(err => {
-                        if (String(err).includes('Connection closed')) {
-                            // prompt(
-                            //     'Please check your internet connection.',
-                            //     'warning',
-                            // )
-                        }
-                        setDominatingColors('#FFFFFFFF')
-                        setDominatingColorsStyle('light')
-                    })
-            }, 1500)
-    }, [current.artwork])
 
     useEffect(() => {
         // console.log('CURRENT INDEX 1', getTheIndexOfCurrentSong())
@@ -304,18 +242,14 @@ const Player: React.FC<PlayerProps> = _props => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         width: '100%',
-                        backgroundColor:
-                            dominatingColorsStyle === 'light'
-                                ? '#00000050'
-                                : '#FFFFFF50',
+                        backgroundColor: themeColors.themecolor[0] + '50',
                         paddingTop: 20,
                         paddingBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
                         borderTopRightRadius: 25,
                         borderTopLeftRadius: 25,
                     }}>
                     <TrackPlayerController
-                        theme={dominatingColorsStyle}
-                        color={dominatingColors}
+                        color={themeColors.themecolorrevert[0]}
                     />
                 </View>
             </View>
