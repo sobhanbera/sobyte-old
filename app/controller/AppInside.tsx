@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {DarkTheme} from '@react-navigation/native'
 
@@ -16,6 +16,7 @@ const BarNavigator = createMaterialBottomTabNavigator()
 const AuthenticationNavigation = () => {
     const {themeColors} = useTheme()
     const {initMusicApi} = useMusicApi()
+    const [playMusicAtInitial, setPlayMusicAtInit] = useState(false)
 
     useEffect(() => {
         // if (!loaded || error) {
@@ -44,7 +45,7 @@ const AuthenticationNavigation = () => {
                 padding: 0,
                 backgroundColor: 'transparent',
             }}
-            initialRouteName="MusicPlayer">
+            initialRouteName={playMusicAtInitial ? 'MusicPlayer' : 'Explore'}>
             <BarNavigator.Screen
                 name="Explore"
                 component={ExploreStackNavigator}
