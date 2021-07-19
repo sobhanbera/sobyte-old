@@ -1,11 +1,9 @@
-import React, {useState} from 'react'
-import {View, Text} from 'react-native'
+import React from 'react'
+import {View} from 'react-native'
 import Slider from '@react-native-community/slider'
 
 import {usePlayer, usePlayerProgress} from '../../context'
-import {Scaler} from '../'
 
-const PLACEHOLDER_DISPLAY_VALUE = '--:--'
 interface Props {
     color: string
 }
@@ -15,28 +13,6 @@ const TrackProgress = (props: Props) => {
         duration, // unit - millisecond
     } = usePlayerProgress()
     const {seekTo} = usePlayer()
-
-    const [showCurrentDuration, setShowCurrentDuration] = useState(true) // true - show current duration after formatting, false - show remaining duration after formatting
-
-    const convertMillisecondsToMinuteSecondFormat = (millis: number) => {
-        if (position > 0) {
-            var minutes = Math.floor(millis / 60000)
-            var seconds = ((millis % 60000) / 1000).toFixed(0)
-            return `${minutes}:${Number(seconds) < 10 ? '0' : ''}${seconds}`
-        }
-        return PLACEHOLDER_DISPLAY_VALUE
-    }
-    const getCurrentDuration = () => {
-        return convertMillisecondsToMinuteSecondFormat(position * 1000)
-    }
-    const getRemainingDuration = () => {
-        return `-${convertMillisecondsToMinuteSecondFormat(
-            duration - position * 1000,
-        )}`
-    }
-    const getDuration = () => {
-        return convertMillisecondsToMinuteSecondFormat(duration)
-    }
 
     return (
         <View
@@ -71,28 +47,6 @@ const TrackProgress = (props: Props) => {
                         zIndex: 2,
                     }}
                 />
-            </View>
-
-            <View
-                style={{
-                    justifyContent: 'center',
-                    alignItems: 'flex-end',
-                    marginVertical: 5,
-                }}>
-                <Scaler onPress={() => setShowCurrentDuration(show => !show)}>
-                    <Text
-                        style={{
-                            color: props.color,
-                            width: '100%',
-                            textAlign: 'right',
-                        }}>
-                        {`${
-                            showCurrentDuration
-                                ? getCurrentDuration()
-                                : getRemainingDuration()
-                        } / ${getDuration()}`}
-                    </Text>
-                </Scaler>
             </View>
         </View>
     )
