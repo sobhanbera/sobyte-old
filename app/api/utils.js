@@ -117,7 +117,8 @@ export const getCategoryURI = categoryName => {
     }
 
     if (b64Key.length > 0) {
-        return `Eg-KAQwIA${b64Key}MABqChAEEAMQCRAFEAo%3D`
+        return `Eg-KAQwIA${b64Key}MABqChAEEAMQCRAFEAo` // new b64 key for the fetching mechanism
+        // return `Eg-KAQwIA${b64Key}MABqChAEEAMQCRAFEAo%3D` previously
     } else {
         return null
     }
