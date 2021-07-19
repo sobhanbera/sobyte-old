@@ -40,6 +40,8 @@ export const DarkTheme: ThemeColors = {
         '#10003E',
         '#10004E',
     ],
+    themecolor: ['#000000'],
+    themecolorrevert: ['#FFFFFF'],
 
     surface: ['#050505'], // for surface components
     surfacelight: ['#21242b'], // for cards

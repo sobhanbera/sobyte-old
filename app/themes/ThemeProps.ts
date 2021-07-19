@@ -46,6 +46,15 @@ export default interface ThemeColors extends CommonColors {
         dark: string[]
     }
 
+    /**
+     * #000000 for dark or else #FFFFFF
+     */
+    themecolor: string[]
+    /**
+     * vice versa
+     */
+    themecolorrevert: string[]
+
     background: string[]
     backgroundgradient: string[]
     surface: string[]
