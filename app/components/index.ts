@@ -32,6 +32,7 @@ import GridCategory from './GridCategory'
 import CardSong from './CardSong'
 import CardArtist from './CardArtist'
 import SingleBlockSongs from './SingleBlockSongs'
+import SingleBlockArtists from './SingleBlockArtists'
 
 import AnimatedHeader from './AnimatedHeader'
 
@@ -69,6 +70,8 @@ export {
     AnimatedHeader as AnimatedHeaderView,
     SingleBlockSongs,
     SingleBlockSongs as BlockCardSongsList,
+    SingleBlockArtists,
+    SingleBlockArtists as BlockCardArtistList,
 }
 
 /** music player components */
@@ -78,3 +81,6 @@ export {TrackPlayerController}
 /** many others */
 import GridSongList from './GridSongList'
 export {GridSongList}
+
+import GridArtistList from './GridArtistList'
+export {GridArtistList}
