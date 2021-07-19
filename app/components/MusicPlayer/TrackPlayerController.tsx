@@ -1,13 +1,11 @@
 import React from 'react'
 import {View} from 'react-native'
 
-import {usePlayer} from '../../context'
 import TrackProgress from './TrackProgress'
 import MainControls from './MainControls'
 
 interface Props {
     color: string
-    theme: 'light' | 'dark'
 }
 const TrackPlayerController = (props: Props) => {
     return (
@@ -19,7 +17,7 @@ const TrackPlayerController = (props: Props) => {
             }}>
             <TrackProgress color={props.color} />
 
-            <MainControls theme={props.theme} color={props.color} />
+            <MainControls color={props.color} />
         </View>
     )
 }
