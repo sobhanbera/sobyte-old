@@ -4,9 +4,9 @@ import {Text} from 'react-native-paper'
 
 import {SongObject} from '../../interfaces'
 import {
-    getHighQualityImageFromSongImage,
     formatArtists,
     trimLargeString,
+    getHightQualityImageFromLinkWithHeight,
 } from '../../utils/Objects'
 import {styles} from './'
 import {DEFAULT_IMAGE_QUALITY} from '../../constants'
@@ -26,14 +26,22 @@ const GridSongItem = React.memo(
     ({item, imageQuality, index, subColor, textColor, play}: Props) => {
         const songImage = useMemo(
             () =>
-                getHighQualityImageFromSongImage(
-                    item.thumbnails[0],
+                getHightQualityImageFromLinkWithHeight(
+                    item.thumbnails[0].url,
+                    item.thumbnails[0].height,
                     imageQuality || DEFAULT_IMAGE_QUALITY,
+                    100,
                 ),
             [],
         )
         const highQualityImage = useMemo(
-            () => getHighQualityImageFromSongImage(item.thumbnails[0], '720'),
+            () =>
+                getHightQualityImageFromLinkWithHeight(
+                    item.thumbnails[0].url,
+                    item.thumbnails[0].height,
+                    720,
+                    100,
+                ),
             [],
         )
         const artist = useMemo(() => formatArtists(item.artist), [])
