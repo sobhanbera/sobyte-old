@@ -183,7 +183,7 @@ const Player: React.FC<PlayerProps> = _props => {
                     flex: 1,
                 }}>
                 {nextSongsList.length && nextSongsList[0].artwork.length > 0 ? (
-                    <Animated.FlatList
+                    <Animated.ScrollView
                         scrollToOverflowEnabled
                         overScrollMode={'never'}
                         ref={scrollReference}
@@ -199,20 +199,20 @@ const Player: React.FC<PlayerProps> = _props => {
                         )}
                         pagingEnabled
                         bounces={true}
-                        getItemLayout={getItemLayout}
                         horizontal
                         showsHorizontalScrollIndicator={false}
-                        showsVerticalScrollIndicator={false}
-                        data={nextSongsList}
-                        keyExtractor={(item, _) => `${item.id}-${_}`}
-                        renderItem={({item, index}) => (
-                            <MusicPlayerSongCardView
-                                item={item}
-                                index={index}
-                                scrollX={scrollX}
-                            />
-                        )}
-                    />
+                        showsVerticalScrollIndicator={false}>
+                        {nextSongsList.map((song, index) => {
+                            return (
+                                <MusicPlayerSongCardView
+                                    key={`${song.id}-${index}`}
+                                    item={song}
+                                    index={index}
+                                    scrollX={scrollX}
+                                />
+                            )
+                        })}
+                    </Animated.ScrollView>
                 ) : (
                     <View
                         style={{
