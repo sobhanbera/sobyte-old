@@ -451,7 +451,24 @@ const Player: FC<PlayerProps> = props => {
                          * this is a demo type to resemble the object blueprint
                          * here we are itterating over the result and getting its full song data with title, artist, thumbnail, duration etc
                          */
+
+                        /**
+                         * we are getting the length of the content and according to that we are setting the @var nextSongsList only for 5 times.
+                         * one time is done as for the above code
+                         * one at the starting of below check
+                         * other 2 updates will be done below
+                         * and a final update will be done when everything is loaded
+                         */
+                        const numberOfContents = res.content.length
+                        /**
+                         * number of updates according the number of Content's...
+                         */
+                        const updatedDependent = Math.floor(
+                            numberOfContents / 3,
+                        ) // since the maximum next data we could get is 24
+                        // so we are dividing by 3 to get exactly 2 updates except the last one
                         for (let i in res.content) {
+                            console.log('INDEX -> ', i)
                             getPlayer(
                                 res.content[i].musicId,
                                 res.content[i].playlistId,
@@ -502,9 +519,27 @@ const Player: FC<PlayerProps> = props => {
                                                         title: result.name,
                                                         url: _res,
                                                     })
-                                                    setNextSongsList(
-                                                        nextSongsData,
-                                                    )
+                                                    const currentIndex =
+                                                        Number(i)
+                                                    if (
+                                                        currentIndex === 1 ||
+                                                        currentIndex %
+                                                            updatedDependent ===
+                                                            0 ||
+                                                        currentIndex ===
+                                                            res.content.length -
+                                                                1
+                                                    ) {
+                                                        console.log(
+                                                            'SETTING',
+                                                            i,
+                                                            res.content.length,
+                                                            updatedDependent,
+                                                        )
+                                                        setNextSongsList(
+                                                            nextSongsData,
+                                                        )
+                                                    }
                                                 })
                                                 .catch(_err => {})
                                         }
