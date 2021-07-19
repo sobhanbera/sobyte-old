@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {View, StyleSheet} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import TrackPlayer from 'react-native-track-player'
+import TrackPlayer, {STATE_PLAYING} from 'react-native-track-player'
 
 import {usePlayer} from '../../context'
 import {Scaler} from '../'
@@ -11,7 +11,7 @@ interface Props {
     color: string
 }
 const MainControls = (props: Props) => {
-    const {playing, paused, seekInterval, playonly, pause} = usePlayer()
+    const {playing, seekInterval, playonly, pause} = usePlayer()
 
     const [localPlaying, setLocalPlaying] = useState<boolean>(playing)
 
@@ -27,8 +27,12 @@ const MainControls = (props: Props) => {
         })
         const stateChangeEvent = TrackPlayer.addEventListener(
             'playback-state',
-            state => {
-                console.log(state)
+            (state: {state: number}) => {
+                if (state.state == STATE_PLAYING) {
+                    setLocalPlaying(true)
+                } else {
+                    setLocalPlaying(false)
+                }
             },
         )
         return () => {
