@@ -1,19 +1,43 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {View, StyleSheet} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import TrackPlayer from 'react-native-track-player'
 
 import {usePlayer} from '../../context'
 import {Scaler} from '../'
 
 interface Props {
-    theme: string
     color: string
 }
 const MainControls = (props: Props) => {
     const {playing, paused, seekInterval, playonly, pause} = usePlayer()
 
-    const [localPlaying, setLocalPlaying] = useState(playing)
+    const [localPlaying, setLocalPlaying] = useState<boolean>(playing)
+
+    useEffect(() => {
+        const playEvent = TrackPlayer.addEventListener('remote-play', () => {
+            setLocalPlaying(true)
+        })
+        const pauseEvent = TrackPlayer.addEventListener('remote-pause', () => {
+            setLocalPlaying(false)
+        })
+        const stopEvent = TrackPlayer.addEventListener('remote-stop', () => {
+            setLocalPlaying(false)
+        })
+        const stateChangeEvent = TrackPlayer.addEventListener(
+            'playback-state',
+            state => {
+                console.log(state)
+            },
+        )
+        return () => {
+            playEvent.remove()
+            pauseEvent.remove()
+            stopEvent.remove()
+            stateChangeEvent.remove()
+        }
+    }, [])
 
     return (
         <View style={styles.wrapper}>
@@ -27,8 +51,13 @@ const MainControls = (props: Props) => {
             </View>
 
             <View style={styles.iconWrapper}>
-                {playing ? (
-                    <Scaler onPress={pause} touchableOpacity={0.2}>
+                {localPlaying ? (
+                    <Scaler
+                        onPress={() => {
+                            setLocalPlaying(false)
+                            pause()
+                        }}
+                        touchableOpacity={0.2}>
                         <Ionicons
                             size={32}
                             color={props.color}
@@ -36,7 +65,12 @@ const MainControls = (props: Props) => {
                         />
                     </Scaler>
                 ) : (
-                    <Scaler onPress={playonly} touchableOpacity={0.2}>
+                    <Scaler
+                        onPress={() => {
+                            setLocalPlaying(true)
+                            playonly()
+                        }}
+                        touchableOpacity={0.2}>
                         <Ionicons size={32} color={props.color} name={'play'} />
                     </Scaler>
                 )}
