@@ -22,6 +22,9 @@ import {
     MoodCategories,
     GenresCategories,
     SongCategory,
+    FetchedArtistObject,
+    ArtistObject,
+    BareArtistObject,
 } from '../../../interfaces'
 import {useTheme, useMusicApi} from '../../../context'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -56,7 +59,9 @@ const Explore: React.FC<ExploreTabProps> = props => {
         BareFetchedSongObjectInstance, // 5 - most rated songs...
         BareFetchedSongObjectInstance, // 6 - pops...
     ])
-    // const [artistsData, setArtistsData] = useState<>([])
+    const [artistsData, setArtistsData] = useState<ArtistObject[]>([
+        BareArtistObject,
+    ])
 
     /**
      * Function which loads all sutaible data required in this tab (explore tab)
@@ -77,9 +82,37 @@ const Explore: React.FC<ExploreTabProps> = props => {
             })
             .catch(_err => {})
 
-        search('top artists', 'ARTIST')
-            .then(res => {
-                console.log(JSON.parse(JSON.stringify(res)))
+        Promise.all([
+            search('bollywood new hits', 'ARTIST'),
+            search('bollywood trending hits', 'ARTIST'),
+        ])
+            .then((res: FetchedArtistObject[]) => {
+                // this is the list which would be assigned to the main UI component or the state of this component
+                const FirstTypeOFArtistsList: ArtistObject[] = []
+                for (let i in res) {
+                    // if the list contains more than 10 artists that's enough to show
+                    // In the UI
+                    if (FirstTypeOFArtistsList.length >= 10) break
+                    for (let j in res[i].content) {
+                        if (FirstTypeOFArtistsList.length >= 10) break
+                        // check weather the artist already exists in the list if not
+                        // then extend the list with the new artists...
+                        const ArtistAlreadyExistsInList =
+                            FirstTypeOFArtistsList.filter(
+                                artist =>
+                                    artist.browseId ===
+                                    res[i].content[j].browseId,
+                            )
+                        /**
+                         * if @variable ArtistAlreadyExistsInList length is more than 0 than the artist is already present in the list no
+                         * need to add it again...
+                         */
+                        if (ArtistAlreadyExistsInList.length <= 0) {
+                            FirstTypeOFArtistsList.push(res[i].content[j])
+                        }
+                    }
+                }
+                setArtistsData(FirstTypeOFArtistsList)
             })
             .catch(_err => {})
     }, [error])
