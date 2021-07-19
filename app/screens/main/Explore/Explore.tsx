@@ -55,8 +55,6 @@ const Explore: React.FC<ExploreTabProps> = props => {
         BareFetchedSongObjectInstance, // 4 - popular songs list...
         BareFetchedSongObjectInstance, // 5 - most rated songs...
         BareFetchedSongObjectInstance, // 6 - pops...
-        BareFetchedSongObjectInstance, // 7 - lo-fi songs...
-        BareFetchedSongObjectInstance, // 8 - sorrow...
     ])
     // const [artistsData, setArtistsData] = useState<>([])
 
@@ -69,12 +67,10 @@ const Explore: React.FC<ExploreTabProps> = props => {
             search('trending songs', 'SONG'), // 0th type of song data list
             search('bollywood new hits', 'SONG'), // 1st type of song data list
             search('top romantic songs', 'SONG'), // 2nd type of song data list
-            search('most popular songs', 'SONG'), // 3rd type of song data list
-            search('popular songs', 'SONG'), // 4th type of song data list
-            search('top new most listened songs', 'SONG'), // 5th type of song data list
-            search('pop beats', 'SONG'), // 6th type of song data list
-            search('Chill beats', 'SONG'), // 7th type of song data list
-            search('sad songs', 'SONG'), // 8th type of song data list
+            search('popular songs', 'SONG'), // 3rd type of song data list
+            search('pop beats', 'SONG'), // 4th type of song data list
+            search('Chill beats', 'SONG'), // 5th type of song data list
+            search('sad songs', 'SONG'), // 6th type of song data list
         ])
             .then((res: FetchedSongObject[]) => {
                 setMusicData(res)
@@ -98,20 +94,10 @@ const Explore: React.FC<ExploreTabProps> = props => {
         setLoading(true)
         initMusicApi()
             .then(() => {
-                initMusicApi()
-                    .then(() => {
-                        setLoading(false)
-                        loadExploreData()
-                    })
-                    .catch(() => {
-                        setLoading(false)
-                    })
+                setLoading(false)
+                loadExploreData()
             })
             .catch(() => {
-                // this will only be called when the internet connectivity is very slow or not present...
-                console.error(
-                    '(Outer) Error Initiating Music Api... no internet connection found',
-                )
                 setLoading(false)
             })
     }, [error])
@@ -221,44 +207,32 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         musicData={musicData[2]}
                     />
 
-                    {/* hot songs */}
-                    <BlockCardSongsList
-                        cardTitle={'Hot Tracks'}
-                        musicData={musicData[3]}
-                    />
-
                     {/* popular songs */}
                     <BlockCardSongsList
                         cardTitle={'Popular Mix'}
-                        musicData={musicData[4]}
+                        musicData={musicData[3]}
                     />
                 </GradientBackground>
 
                 {/* separate same component because inside single it produces a black
                     gradient which is not needed */}
                 <GradientBackground angle={135}>
-                    {/* most rated */}
-                    <BlockCardSongsList
-                        cardTitle={'Top Songs'}
-                        musicData={musicData[5]}
-                    />
-
                     {/* pop */}
                     <BlockCardSongsList
                         cardTitle={'Pop'}
-                        musicData={musicData[6]}
+                        musicData={musicData[4]}
                     />
 
                     {/* lo-fi songs */}
                     <BlockCardSongsList
                         cardTitle={'Chill Time'}
-                        musicData={musicData[7]}
+                        musicData={musicData[5]}
                     />
 
                     {/* are you sorrow */}
                     <BlockCardSongsList
                         cardTitle={'Are You Sad'}
-                        musicData={musicData[8]}
+                        musicData={musicData[6]}
                     />
 
                     {/* button to go to the top of the scoll view */}
