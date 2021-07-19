@@ -5,7 +5,7 @@ import {DarkTheme} from '@react-navigation/native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-import {usePlayer, useTheme, useMusicApi} from '../context'
+import {useTheme, useMusicApi} from '../context'
 
 import ExploreStackNavigator from './ExploreStack'
 import MusicPlayer from '../screens/main/MusicPlayer'
@@ -15,7 +15,6 @@ import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 const BarNavigator = createMaterialBottomTabNavigator()
 const AuthenticationNavigation = () => {
     const {themeColors} = useTheme()
-    const {playing} = usePlayer()
     const {initMusicApi} = useMusicApi()
 
     useEffect(() => {
@@ -70,17 +69,13 @@ const AuthenticationNavigation = () => {
                 options={{
                     tabBarAccessibilityLabel: 'Music Player Tab',
                     tabBarColor: themeColors.primary.main[0] + '00',
-                    tabBarLabel: 'Music',
+                    tabBarLabel: 'Sobyte',
                     tabBarIcon: ({focused, color}) => (
                         <Ionicons
                             name={
                                 focused
-                                    ? playing
-                                        ? 'pause'
-                                        : 'play'
-                                    : playing
-                                    ? 'pause-outline'
-                                    : 'play-outline'
+                                    ? 'musical-note'
+                                    : 'musical-note-outline'
                             }
                             size={DEFAULT_ICON_SIZE}
                             color={color}
