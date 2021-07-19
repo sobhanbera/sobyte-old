@@ -327,7 +327,7 @@ export const parseSongSearchResult = context => {
 export const parseVideoSearchResult = context => {
     const result = {
         content: [],
-        contination: utils.fv(context, 'nextContinuationData'),
+        continuation: utils.fv(context, 'nextContinuationData'),
     }
 
     var sectionList = utils.fv(context, 'musicResponsiveListItemRenderer')
@@ -375,7 +375,7 @@ export const parseVideoSearchResult = context => {
 export const parseAlbumSearchResult = context => {
     const result = {
         content: [],
-        contination: utils.fv(context, 'nextContinuationData'),
+        continuation: utils.fv(context, 'nextContinuationData'),
     }
 
     var sectionList = utils.fv(context, 'musicResponsiveListItemRenderer')
@@ -427,7 +427,7 @@ export const parseAlbumSearchResult = context => {
 export const parseArtistSearchResult = context => {
     const result = {
         content: [],
-        contination: utils.fv(context, 'nextContinuationData'),
+        continuation: utils.fv(context, 'nextContinuationData'),
     }
 
     var sectionList = utils.fv(
@@ -467,7 +467,7 @@ export const parseArtistSearchResult = context => {
 export const parsePlaylistSearchResult = context => {
     const result = {
         content: [],
-        contination: utils.fv(context, 'nextContinuationData'),
+        continuation: utils.fv(context, 'nextContinuationData'),
     }
 
     var sectionList = utils.fv(context, 'musicResponsiveListItemRenderer')
@@ -1025,7 +1025,7 @@ export const parseNextPanel = context => {
         playlistId: '',
         content: [],
         currentIndex: 0,
-        contination: utils.fv(context, 'nextContinuationData'),
+        continuation: utils.fv(context, 'nextContinuationData'),
     }
 
     const panelContext = utils.fv(context, 'playlistPanelRenderer')
