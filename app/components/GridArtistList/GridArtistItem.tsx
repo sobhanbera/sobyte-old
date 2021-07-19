@@ -4,36 +4,29 @@ import {Text} from 'react-native-paper'
 
 import {ArtistObject} from '../../interfaces'
 import {
-    getHighQualityImageFromSongImage,
-    formatArtists,
+    getHightQualityImageFromLinkWithHeight,
     trimLargeString,
 } from '../../utils/Objects'
 import {styles} from './'
-import {DEFAULT_IMAGE_QUALITY} from '../../constants'
-import {usePlayer} from '../../context'
 
 interface Props {
     item: ArtistObject
-    imageQuality: string
     index: number
     subColor: string
     textColor: string
     id?: string
-    play: Function
 }
 
-const GridSongItem = React.memo(
-    ({item, imageQuality, index, subColor, textColor, play}: Props) => {
-        const songImage = useMemo(
-            () =>
-                getHighQualityImageFromSongImage(
-                    item.thumbnails[0],
-                    imageQuality || DEFAULT_IMAGE_QUALITY,
-                ),
-            [],
-        )
+const GridArtistItem = React.memo(
+    ({item, index, subColor, textColor}: Props) => {
         const highQualityImage = useMemo(
-            () => getHighQualityImageFromSongImage(item.thumbnails[0], '720'),
+            () =>
+                getHightQualityImageFromLinkWithHeight(
+                    item.thumbnails[0].url,
+                    item.thumbnails[0].height,
+                    720,
+                    100,
+                ),
             [],
         )
 
@@ -49,7 +42,7 @@ const GridSongItem = React.memo(
                               {},
                     ]}>
                     <Image
-                        source={{uri: songImage}}
+                        source={{uri: highQualityImage}}
                         style={[
                             styles.contentImage,
                             {
@@ -60,7 +53,7 @@ const GridSongItem = React.memo(
                     />
                     <Text
                         style={[
-                            styles.songTitle,
+                            styles.artistTitle,
                             {
                                 color: textColor,
                             },
@@ -73,17 +66,4 @@ const GridSongItem = React.memo(
     },
 )
 
-function select() {
-    const {play} = usePlayer()
-    return {
-        play: play,
-    }
-}
-function connect(WrappedComponent: React.ElementType, select: Function) {
-    return function (props: any) {
-        const selectors = select()
-        return <WrappedComponent {...selectors} {...props} />
-    }
-}
-
-export default connect(GridSongItem, select)
+export default GridArtistItem

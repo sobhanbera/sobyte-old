@@ -9,6 +9,7 @@ import {
     CenterButtonView,
     GridCategory,
     BlockCardSongsList,
+    BlockCardArtistList,
 } from '../../../components'
 import {
     DEFAULT_ICON_SIZE,
@@ -234,22 +235,28 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         musicData={musicData[1]}
                     />
 
+                    {/* artists list */}
+                    <BlockCardArtistList
+                        cardTitle={'Artists You May Like'}
+                        artistsData={artistsData}
+                    />
+
                     {/* romantic */}
                     <BlockCardSongsList
                         cardTitle={'Romantic Songs'}
                         musicData={musicData[2]}
-                    />
-
-                    {/* popular songs */}
-                    <BlockCardSongsList
-                        cardTitle={'Popular Mix'}
-                        musicData={musicData[3]}
                     />
                 </GradientBackground>
 
                 {/* separate same component because inside single it produces a black
                     gradient which is not needed */}
                 <GradientBackground angle={135}>
+                    {/* popular songs */}
+                    <BlockCardSongsList
+                        cardTitle={'Popular Mix'}
+                        musicData={musicData[3]}
+                    />
+
                     {/* pop */}
                     <BlockCardSongsList
                         cardTitle={'Pop'}

@@ -21,7 +21,7 @@ interface Props {
     id: string
     imageQuality?: string
 }
-const GridSongList = React.memo(
+const GridArtistList = React.memo(
     ({
         subColor,
         textColor,
@@ -52,7 +52,6 @@ const GridSongList = React.memo(
                             id={id}
                             item={item}
                             index={index}
-                            imageQuality={imageQuality}
                             subColor={subColor}
                             textColor={textColor}
                         />
@@ -94,17 +93,20 @@ export const styles = StyleSheet.create({
         marginRight: IMAGE_MARGIN_TO_SHOW * 2,
     },
     contentImage: {
-        borderRadius: 6,
+        borderRadius: 180,
         maxWidth: IMAGE_SIZE_TO_SHOW,
         maxHeight: IMAGE_SIZE_TO_SHOW,
         width: IMAGE_SIZE_TO_SHOW,
         height: IMAGE_SIZE_TO_SHOW,
+        overflow: 'hidden',
     },
-    songTitle: {
+    artistTitle: {
         width: IMAGE_SIZE_TO_SHOW,
         fontSize: 16,
         paddingTop: 5,
-        paddingBottom: 2,
+        paddingBottom: 5,
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
     artist: {
         width: IMAGE_SIZE_TO_SHOW,
@@ -126,4 +128,4 @@ export const styles = StyleSheet.create({
     },
 })
 
-export default connect(GridSongList, select)
+export default connect(GridArtistList, select)

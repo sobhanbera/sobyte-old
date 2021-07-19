@@ -6,7 +6,7 @@ import {styles} from './'
 interface Props {
     shimmerDirection: 'up' | 'down' | 'left' | 'right'
 }
-class GridSongList_SelfShimmer extends React.PureComponent<Props> {
+class GridArtistList_SelfShimmer extends React.PureComponent<Props> {
     constructor(props: Props) {
         super(props)
     }
@@ -48,17 +48,11 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                             ]}>
                             <View
                                 style={[
-                                    styles.contentImage,
                                     styles.dummyBackground,
+                                    styles.contentImage,
                                 ]}
                             />
 
-                            <View
-                                style={[
-                                    styles.dummyBackground,
-                                    styles.dummyText,
-                                ]}
-                            />
                             <View
                                 style={[
                                     styles.dummyBackground,
@@ -85,24 +79,19 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                             style={[
                                 styles.contentWrapper,
                                 // index === 0
-                                //     ? styles.firstContent
-                                //     : index === this.props.contentLength - 1
-                                //     ? styles.lastContent
-                                //     : {},
+                                // ?
+                                // styles.firstContent,
+                                // : index === this.props.contentLength - 1
+                                // ? styles.lastContent
+                                // : {},
                             ]}>
                             <View
                                 style={[
-                                    styles.contentImage,
                                     styles.dummyBackground,
+                                    styles.contentImage,
                                 ]}
                             />
 
-                            <View
-                                style={[
-                                    styles.dummyBackground,
-                                    styles.dummyText,
-                                ]}
-                            />
                             <View
                                 style={[
                                     styles.dummyBackground,
@@ -129,25 +118,19 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                             style={[
                                 styles.contentWrapper,
                                 // index === 0
-                                //     ? styles.firstContent
-                                //     : index === this.props.contentLength - 1
                                 // ?
+                                // styles.firstContent,
+                                // : index === this.props.contentLength - 1
                                 styles.lastContent,
                                 // : {},
                             ]}>
                             <View
                                 style={[
-                                    styles.contentImage,
                                     styles.dummyBackground,
+                                    styles.contentImage,
                                 ]}
                             />
 
-                            <View
-                                style={[
-                                    styles.dummyBackground,
-                                    styles.dummyText,
-                                ]}
-                            />
                             <View
                                 style={[
                                     styles.dummyBackground,
@@ -162,4 +145,4 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
     }
 }
 
-export default GridSongList_SelfShimmer
+export default GridArtistList_SelfShimmer

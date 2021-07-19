@@ -8,7 +8,7 @@ import globalStyles from '../../styles/global.styles'
 import {ArtistObject} from '../../interfaces'
 
 interface Props {
-    musicData: ArtistObject[]
+    artistsData: ArtistObject[]
     cardTitle: string
 }
 const SingleBlockSongs = (props: Props) => {
@@ -27,12 +27,12 @@ const SingleBlockSongs = (props: Props) => {
             </Block>
 
             <GridArtistList
-                id="topRated"
+                id="artistsList1"
                 shimmerDirection="left"
                 textColor={themeColors.text[0] + 'E7'}
                 subColor={themeColors.text[0] + '70'}
-                contentLength={props.musicData.length}
-                content={props.musicData}
+                contentLength={props.artistsData.length}
+                content={props.artistsData}
             />
         </Block>
     )
