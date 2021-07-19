@@ -15,6 +15,8 @@ export function IF(condition: boolean, yes: any, no: any) {
 
 export const IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX =
     /w[0-9]{2,4}-h[0-9]{2,4}-l[0-9]{2,3}-rj/
+export const IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX =
+    /w[0-9]{2,4}-h[0-9]{2,4}-l[0-9]{2,3}-rj/
 export function getHighQualityImage(
     imageLink: string,
     height: number,
@@ -58,6 +60,18 @@ export const getHightQualityImageFromLink = (
         IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
         `w${height}-h${height}-l100-rj`,
     )
+export const getHightQualityImageFromLinkWithHeight = (
+    imageLink: string,
+    initialHeight: number | string,
+    height: number | string = 244,
+    imageQuality: number | string = 90,
+) =>
+    imageLink
+        .replace(
+            `=w${initialHeight}-h${initialHeight}`,
+            `=w${height}-h${height}`,
+        )
+        .replace(`-l90-rj`, `-l${imageQuality}-rj`)
 
 /**
  *

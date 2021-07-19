@@ -19,6 +19,7 @@ import {
     getHighQualityImageFromSongImage,
     getHighQualityImageFromSongImageArray,
     getHightQualityImageFromLink,
+    getHightQualityImageFromLinkWithHeight,
     trimLargeString,
 } from './Objects'
 export {
@@ -34,5 +35,6 @@ export {
     getHighQualityImageFromSongImage,
     getHighQualityImageFromSongImageArray,
     getHightQualityImageFromLink,
+    getHightQualityImageFromLinkWithHeight,
     trimLargeString,
 }
