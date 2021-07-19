@@ -135,12 +135,6 @@ const Player: React.FC<PlayerProps> = _props => {
          */
     }
 
-    const getItemLayout = (_data: any, index: number) => ({
-        length: width,
-        offset: width * index,
-        index,
-    })
-
     return (
         <View
             style={{
