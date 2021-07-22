@@ -29,30 +29,35 @@ const Player: React.FC<PlayerProps> = _props => {
     const scrollReference = React.useRef<any>(null)
 
     const loadInitialMusicPlayerData = () => {
-        search('bollywood new hits', 'SONG', true)
-            .then((res: SongObject) => {
-                const artist = formatArtists(res.artist)
-                const artwork = getHightQualityImageFromLink(
-                    res.thumbnails[0].url,
-                    '720',
-                )
-                play({
-                    artist: artist,
-                    artwork: artwork,
-                    duration: res.duration,
-                    id: res.musicId,
-                    playlistId: res.playlistId,
-                    title: res.name,
-                    url: '',
+        if (current.id.length <= 0) {
+            console.log('Playing...')
+            search('bollywood new hits', 'SONG', true)
+                .then((res: SongObject) => {
+                    const artist = formatArtists(res.artist)
+                    const artwork = getHightQualityImageFromLink(
+                        res.thumbnails[0].url,
+                        '720',
+                    )
+                    play({
+                        artist: artist,
+                        artwork: artwork,
+                        duration: res.duration,
+                        id: res.musicId,
+                        playlistId: res.playlistId,
+                        title: res.name,
+                        url: '',
+                    })
+                    // if (scrollReference !== null)
+                    //     scrollReference.current.scrollTo({
+                    //         animated: true,
+                    //         x: 0,
+                    //         y: 0,
+                    //     })
                 })
-                // if (scrollReference !== null)
-                //     scrollReference.current.scrollTo({
-                //         animated: true,
-                //         x: 0,
-                //         y: 0,
-                //     })
-            })
-            .catch(_err => {})
+                .catch(_err => {})
+        } else {
+            console.log('Not Playing...')
+        }
     }
 
     /**
