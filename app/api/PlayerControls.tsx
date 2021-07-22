@@ -404,7 +404,6 @@ const Player: FC<PlayerProps> = props => {
         }
         if (currentTrack && track.id === currentTrack.id) {
             console.log('Second Condition')
-
             if (playerState === STATE_PAUSED) await TrackPlayer.play()
             return
         }
