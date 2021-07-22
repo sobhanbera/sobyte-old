@@ -468,7 +468,6 @@ const Player: FC<PlayerProps> = props => {
                         ) // since the maximum next data we could get is 24
                         // so we are dividing by 3 to get exactly 2 updates except the last one
                         for (let i in res.content) {
-                            console.log('INDEX -> ', i)
                             getPlayer(
                                 res.content[i].musicId,
                                 res.content[i].playlistId,
@@ -530,12 +529,6 @@ const Player: FC<PlayerProps> = props => {
                                                             res.content.length -
                                                                 1
                                                     ) {
-                                                        console.log(
-                                                            'SETTING',
-                                                            i,
-                                                            res.content.length,
-                                                            updatedDependent,
-                                                        )
                                                         setNextSongsList(
                                                             nextSongsData,
                                                         )
