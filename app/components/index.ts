@@ -36,6 +36,9 @@ import SingleBlockArtists from './SingleBlockArtists'
 
 import AnimatedHeader from './AnimatedHeader'
 
+import CommonSongsList from './CommonSongList'
+import CommonSongItem from './CommonSongItem'
+
 export {
     Scaler,
     AuthButton,
@@ -73,6 +76,8 @@ export {
     SingleBlockArtists,
     SingleBlockArtists as BlockCardArtistList,
 }
+
+export {CommonSongsList, CommonSongItem}
 
 /** music player components */
 import TrackPlayerController from './MusicPlayer/TrackPlayerController'
