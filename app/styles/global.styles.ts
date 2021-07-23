@@ -175,4 +175,36 @@ const globalStyles = StyleSheet.create({
      */
 })
 
+export const songComponentsStyles = StyleSheet.create({
+    commonCard: {
+        paddingHorizontal: 20,
+        marginVertical: 8,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    commonCardMain: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    commonSongDetails: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        paddingHorizontal: 10,
+    },
+    commonSongName: {
+        fontSize: 17,
+        maxWidth: 225,
+        width: 225,
+        marginVertical: 2,
+    },
+    commonSongDetailsText: {
+        fontSize: 15,
+        maxWidth: 225,
+        width: 225,
+    },
+})
+
 export default globalStyles
