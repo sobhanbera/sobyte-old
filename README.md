@@ -262,8 +262,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <div align="center">
   <img alt="Sobyte Logo" src="https://github.com/sobhanbera/sobyte/blob/master/.github_src/logo_name.png" width="400px" />
-
-**Listen And Download Any Music Anytime, Anywhere. Let's Feel The Music.**
-
 </div>
 
