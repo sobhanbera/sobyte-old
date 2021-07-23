@@ -27,7 +27,7 @@ const SingleBlockSongs = (props: Props) => {
             </Block>
 
             <GridSongList
-                id="topRated"
+                id={props.cardTitle}
                 shimmerDirection="left"
                 textColor={themeColors.text[0] + 'E7'}
                 subColor={themeColors.text[0] + '70'}
