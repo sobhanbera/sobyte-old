@@ -1,4 +1,5 @@
 import React from 'react'
+import {View} from 'react-native'
 
 import {SongObject} from '../../interfaces'
 import CommonSongItem from '../CommonSongItem'
@@ -17,7 +18,7 @@ const CommonSongList = ({songs}: Props) => {
     }
 
     return (
-        <>
+        <View>
             {songs[0].musicId.length <= 0 ? (
                 <SelfShimmer shimmerDirection="right" />
             ) : (
@@ -33,7 +34,7 @@ const CommonSongList = ({songs}: Props) => {
                     )
                 })
             )}
-        </>
+        </View>
     )
 }
 
