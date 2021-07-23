@@ -6,7 +6,6 @@ import ImageHeaderScrollView, {
 import {useTheme} from '../../context'
 import * as Animatable from 'react-native-animatable'
 
-import {SongCategory} from '../../interfaces'
 import {
     HEADER_MAX_HEIGHT,
     HEADER_MIN_HEIGHT,
@@ -15,8 +14,9 @@ import {
 import globalStyles from '../../styles/global.styles'
 
 interface Props {
-    category: SongCategory
+    headerImage: string
     headerTitle: string
+    headerNameTitle: string
     children?: React.ReactNode
 }
 const AnimatedHeader = (props: Props) => {
@@ -42,7 +42,7 @@ const AnimatedHeader = (props: Props) => {
             maxHeight={350}
             minHeight={HEADER_MIN_HEIGHT}
             headerImage={{
-                uri: props.category.highimage,
+                uri: props.headerImage,
             }}
             renderHeader={() => (
                 <View
@@ -53,7 +53,7 @@ const AnimatedHeader = (props: Props) => {
                         globalStyles.lightBottomBorder,
                     ]}>
                     <Image
-                        source={{uri: props.category.highimage}}
+                        source={{uri: props.headerImage}}
                         style={{
                             height: HEADER_MAX_HEIGHT,
                             width: Dimensions.get('window').width,
@@ -75,7 +75,7 @@ const AnimatedHeader = (props: Props) => {
                         ]}>
                         <Pressable onPress={() => {}}>
                             <Text style={globalStyles.animatedHeaderTitle}>
-                                {props.category.name}
+                                {props.headerNameTitle}
                             </Text>
                         </Pressable>
                     </View>
