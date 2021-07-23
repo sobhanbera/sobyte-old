@@ -23,14 +23,14 @@ interface Props {
 }
 
 const GridSongItem = React.memo(
-    ({item, imageQuality, index, subColor, textColor, play}: Props) => {
+    ({item, imageQuality, index, subColor, textColor, play, id}: Props) => {
         const songImage = useMemo(
             () =>
                 getHightQualityImageFromLinkWithHeight(
                     item.thumbnails[0].url,
                     item.thumbnails[0].height,
                     imageQuality || DEFAULT_IMAGE_QUALITY,
-                    100,
+                    90,
                 ),
             [],
         )

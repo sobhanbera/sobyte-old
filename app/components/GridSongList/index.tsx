@@ -1,5 +1,5 @@
 import React from 'react'
-import {FlatList, StyleSheet} from 'react-native'
+import {FlatList, StyleSheet, Text, View} from 'react-native'
 
 import {SongObject} from '../../interfaces'
 import {useSetting} from '../../context'
@@ -30,6 +30,24 @@ const GridSongList = React.memo(
         shimmerDirection,
         imageQuality,
     }: Props) => {
+        // const renderItem = React.useCallback(({item, index}) => {
+        //     return (
+        //         <GridSongItem
+        //             id={id}
+        //             item={item}
+        //             index={index}
+        //             imageQuality={imageQuality}
+        //             subColor={subColor}
+        //             textColor={textColor}
+        //         />
+        //     )
+        // }, [])
+
+        const keyExtractor = React.useCallback(
+            (item: SongObject, _: number) => item.musicId,
+            [],
+        )
+
         return content[0].musicId.length <= 0 ? (
             <GridSongList_SelfShimmer shimmerDirection={shimmerDirection} />
         ) : (
@@ -45,7 +63,7 @@ const GridSongList = React.memo(
                     IMAGE_PADDING_TO_SHOW * 2
                 }
                 data={content}
-                keyExtractor={(item, _) => item.musicId}
+                keyExtractor={keyExtractor}
                 renderItem={({item, index}) => {
                     return (
                         <GridSongItem
