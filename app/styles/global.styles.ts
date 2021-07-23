@@ -9,6 +9,8 @@ import {
     FontRobotoBold,
     FontUbuntuBold,
     HEADER_MIN_HEIGHT,
+    IMAGE_SMALL_SIZE_TO_SHOW,
+    DEFAULT_TINY_ICON_SIZE,
 } from '../constants'
 import {StyleSheet} from 'react-native'
 
@@ -204,6 +206,30 @@ export const songComponentsStyles = StyleSheet.create({
         fontSize: 15,
         maxWidth: 225,
         width: 225,
+    },
+
+    contentWrapper: {
+        backgroundColor: '#0000007f',
+    },
+    imageDummy: {
+        width: IMAGE_SMALL_SIZE_TO_SHOW,
+        height: IMAGE_SMALL_SIZE_TO_SHOW,
+    },
+    textDummy: {
+        width: 200,
+        height: 7,
+        borderRadius: 2,
+        marginTop: 5,
+        marginBottom: 6,
+    },
+    largeTextDummy: {
+        height: 12,
+        borderRadius: 3,
+    },
+    commonSongDummyIcon: {
+        width: DEFAULT_TINY_ICON_SIZE,
+        height: DEFAULT_TINY_ICON_SIZE,
+        paddingVertical: 12,
     },
 })
 
