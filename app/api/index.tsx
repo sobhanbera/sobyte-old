@@ -413,6 +413,8 @@ const MusicApi = (props: MusicApiProps) => {
                         continuation: continuation.continuation,
                         itct: continuation.clickTrackingParams,
                         type: 'next',
+                        key: 'AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30',
+                        alt: 'json',
                     },
                 ).then(context => {
                     // let parse:Date = new Date()
