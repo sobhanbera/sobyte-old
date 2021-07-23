@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native'
 import Entypo from 'react-native-vector-icons/Entypo'
+import Shimmer from 'react-native-shimmer'
 
 import {useSetting} from '../../context'
 import {
@@ -14,7 +15,6 @@ import {
     IMAGE_SMALL_SIZE_TO_SHOW,
 } from '../../constants'
 import {CasualDemoList, SongObject} from '../../interfaces'
-import Shimmer from 'react-native-shimmer'
 
 interface Props {
     textColor: string
