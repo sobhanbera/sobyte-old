@@ -244,7 +244,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
     <img style="border-radius:25px" src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>&nbsp;&nbsp;
   <a href="https://www.instagram.com/sobhanbera_">
-    <img  style="border-radius:25px"src="https://img.shields.io/badge/instagram-%23E4405F.svg?&style=for-the-badge&logo=instagram&logoColor=white" />        
+    <img  style="border-radius:25px"src="https://img.shields.io/badge/instagram-%23E4405F.svg?&style=for-the-badge&logo=instagram&logoColor=white" />
   </a>&nbsp;&nbsp;
 </p>
 
@@ -253,9 +253,17 @@ Distributed under the MIT License. See `LICENSE` for more information.
     <img style="border-radius:25px" src="https://img.shields.io/badge/sobhanbera-%233b5998.svg?&style=for-the-badge&logo=facebook&logoColor=white" />
   </a>&nbsp;&nbsp;
   <a href="https://twitter.com/BeraSobhan">
-    <img style="border-radius:25px" src="https://img.shields.io/badge/twitter-%2300acee.svg?&style=for-the-badge&logo=twitter&logoColor=white" />        
+    <img style="border-radius:25px" src="https://img.shields.io/badge/twitter-%2300acee.svg?&style=for-the-badge&logo=twitter&logoColor=white" />
   </a>&nbsp;&nbsp;
   <a href="mailto:sobhanbera258@gmail.com">
     <img style="border-radius:25px" src="https://img.shields.io/badge/-sobhanbera258-c14438?style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:sobhanbera258@gmail.com" />
   </a>&nbsp;&nbsp;
 </p>
+
+<div align="center">
+  <img alt="Sobyte Logo" src="https://github.com/sobhanbera/sobyte/blob/master/.github_src/logo_name.png" width="400px" />
+
+**Listen And Download Any Music Anytime, Anywhere. Let's Feel The Music.**
+
+</div>
+
