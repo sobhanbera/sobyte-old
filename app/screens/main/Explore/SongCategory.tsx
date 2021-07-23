@@ -1,5 +1,4 @@
 import React from 'react'
-import {Text, StyleSheet} from 'react-native'
 
 import {AnimatedHeader} from '../../../components'
 import {SongCategory} from '../../../interfaces'
@@ -18,8 +17,9 @@ const SongCategoryScreen = (props: Props) => {
 
     return (
         <AnimatedHeader
-            category={category}
-            headerTitle={headerTitle}></AnimatedHeader>
+            headerImage={category.highimage}
+            headerNameTitle={category.name}
+            headerTitle={headerTitle || category.name}></AnimatedHeader>
     )
 }
 
