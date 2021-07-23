@@ -13,11 +13,28 @@ import {
 } from '../../constants'
 import globalStyles from '../../styles/global.styles'
 
+// const BOTTOM_PADDING = 100
+interface OnScrollProps {
+    layoutMeasurement: {
+        height: number
+        width: number
+    }
+    contentOffset: {
+        x: number
+        y: number
+    }
+    contentSize: {
+        height: number
+        width: number
+    }
+}
 interface Props {
     headerImage: string
     headerTitle: string
     headerNameTitle: string
     children?: React.ReactNode
+    infiniteScrollOffset: number // a number or height above from the last of the scrollview from where the onReachedEnd function will trigger
+    onReachedEnd: Function // this function will be triggred when the scrollview will reach end - the offset provide in props
 }
 const AnimatedHeader = (props: Props) => {
     const {themeColors} = useTheme()
@@ -30,8 +47,22 @@ const AnimatedHeader = (props: Props) => {
         headerTitleReference.current?.slideOutUp(500)
     }
 
+    const checkEndReached = ({
+        layoutMeasurement,
+        contentOffset,
+        contentSize,
+    }: OnScrollProps) => {
+        if (
+            layoutMeasurement.height + contentOffset.y >=
+            contentSize.height - props.infiniteScrollOffset
+        )
+            props.onReachedEnd()
+    }
+
     return (
         <ImageHeaderScrollView
+            onScroll={({nativeEvent}) => checkEndReached(nativeEvent)}
+            scrollEventThrottle={400}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             bounces={false}
