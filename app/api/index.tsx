@@ -28,6 +28,13 @@ export interface MusicContextProviderHelper {
     error: boolean
     loaded: boolean
 }
+
+/**
+ * this is the all types of data which could be fetched
+ * from the backend api
+ */
+type TypeOFDatas = 'SONG' | 'ALBUM' | 'ARTIST' | 'PLAYLIST' | 'VIDEO'
+
 // const DemoMusicContextReturn = () => axios.request<any>({})
 const DemoMusicContextReturn = () => new Promise<any>(() => {})
 const MusicContext = React.createContext({
@@ -51,6 +58,7 @@ const MusicContext = React.createContext({
     getContinuation: (
         _endpointName: string | 'search' | '',
         _continuation: ContinuationObject,
+        _dataType: TypeOFDatas,
     ) => DemoMusicContextReturn(),
     /**
      * @param query the query string for getting suggestions
@@ -65,7 +73,7 @@ const MusicContext = React.createContext({
      */
     search: (
         _query: string,
-        _categoryName: 'SONG' | 'ALBUM' | 'ARTIST' | 'PLAYLIST',
+        _dataType: TypeOFDatas,
         _getARandomSong: boolean = false,
         _pageLimit: number = 1,
     ) => DemoMusicContextReturn(),
@@ -397,6 +405,7 @@ const MusicApi = (props: MusicApiProps) => {
     const getContinuation = (
         endpointName: string = 'search',
         continuation: ContinuationObject,
+        dataType: TypeOFDatas,
     ) => {
         if (
             // continuation != [] &&
@@ -418,9 +427,40 @@ const MusicApi = (props: MusicApiProps) => {
                     },
                 ).then(context => {
                     // let parse:Date = new Date()
-                    let r = parsers.parseSongSearchResult(context)
+                    let parsedData: any = {}
+                    try {
+                        switch (_.upperCase(dataType)) {
+                            case 'SONG':
+                                parsedData =
+                                    parsers.parseSongSearchResult(context)
+                                break
+                            case 'VIDEO':
+                                parsedData =
+                                    parsers.parseVideoSearchResult(context)
+                                break
+                            case 'ALBUM':
+                                parsedData =
+                                    parsers.parseAlbumSearchResult(context)
+                                break
+                            case 'ARTIST':
+                                parsedData =
+                                    parsers.parseArtistSearchResult(context)
+                                break
+                            case 'PLAYLIST':
+                                parsedData =
+                                    parsers.parsePlaylistSearchResult(context)
+                                break
+                            default:
+                                parsedData = parsers.parseSearchResult(context)
+                                break
+                        }
+                        resolve(parsedData)
+                    } catch (error) {
+                        return resolve({
+                            error: error.message,
+                        })
+                    }
                     // let o:number = new Date() - parse
-                    resolve(r)
                 })
             })
         } else {
