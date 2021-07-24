@@ -84,8 +84,9 @@ const Explore: React.FC<ExploreTabProps> = props => {
             .catch(_err => {})
 
         Promise.all([
-            search('bollywood new hits', 'ARTIST'),
-            search('bollywood trending hits', 'ARTIST'),
+            search('new bollywood songs', 'ARTIST'),
+            search('trending bollywood songs', 'ARTIST'),
+            search('new english songs', 'ARTIST'),
         ])
             .then((res: FetchedArtistObject[]) => {
                 // this is the list which would be assigned to the main UI component or the state of this component
