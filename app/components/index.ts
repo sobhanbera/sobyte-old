@@ -16,6 +16,8 @@ import Area from './Area'
 import Block from './Block'
 import Prompt from './Prompt'
 
+import TopicTitle from './TopicTitle'
+
 import HeartBeatView from './HeartBeatView'
 import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
 import {AnimatedGradient} from './AnimatedGradient'
@@ -78,6 +80,7 @@ export {
     SingleBlockSongs as BlockCardSongsList,
     SingleBlockArtists,
     SingleBlockArtists as BlockCardArtistList,
+    TopicTitle,
 }
 
 export {CommonSongList, CommonSongItem, CommonArtistList, CommonArtistItem}
