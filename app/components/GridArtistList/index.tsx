@@ -128,4 +128,5 @@ export const styles = StyleSheet.create({
     },
 })
 
-export default connect(GridArtistList, select)
+// export default connect(GridArtistList, select)
+export default GridArtistList
