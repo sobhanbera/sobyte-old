@@ -5,12 +5,13 @@ import {
     ActivityIndicator,
     View,
     Text,
-    StyleSheet,
 } from 'react-native'
 
 import {AnimatedHeader} from '../../../components'
 import {
+    BareFetchedArtistObjectInstance,
     BareFetchedSongObjectInstance,
+    FetchedArtistObject,
     FetchedSongObject,
     SongCategory,
 } from '../../../interfaces'
@@ -81,6 +82,9 @@ const SongCategoryScreen = (props: Props) => {
     const [songs, setSongs] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
+    const [artists, setArtists] = useState<FetchedArtistObject>(
+        BareFetchedArtistObjectInstance,
+    )
 
     // scrollview reference variable to perform button pressed and auto scroll animation
     // and many more...
@@ -96,9 +100,9 @@ const SongCategoryScreen = (props: Props) => {
             songs.continuation.clickTrackingParams &&
             songs.continuation.continuation
         ) {
-            // console.log('REACHED', i++)
+            console.log('LOADING MORE SONGS')
             setLoading(true)
-            getContinuation('search', songs.continuation)
+            getContinuation('search', songs.continuation, 'SONG')
                 .then((res: FetchedSongObject) => {
                     const data = songs.content.concat(res.content)
                     setSongs({
@@ -109,6 +113,7 @@ const SongCategoryScreen = (props: Props) => {
                 })
                 .catch(_err => {
                     setLoading(false)
+                    console.log('ERR CONTINUE FETCH SONGS')
                 })
         }
     }
@@ -120,7 +125,24 @@ const SongCategoryScreen = (props: Props) => {
             .then((res: FetchedSongObject) => {
                 setSongs(res)
             })
-            .catch(_err => {})
+            .catch(_err => {
+                console.log('ERR FETCH SONGS')
+            })
+
+        search(category.name, 'ARTIST')
+            .then((res: FetchedArtistObject) => {
+                setArtists(res)
+            })
+            .catch(_err => {
+                console.log('ERR FETCH ARTISTS')
+            })
+
+        return () => {
+            setSongs(BareFetchedSongObjectInstance)
+            setArtists(BareFetchedArtistObjectInstance)
+            setLoading(false)
+            setSelected(DataList[0].selected)
+        }
     }, [category.id])
 
     const onScroll = (scrollProps: OnScrollProps) => {
