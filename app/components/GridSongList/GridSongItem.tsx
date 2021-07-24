@@ -30,7 +30,7 @@ const GridSongItem = React.memo(
                     item.thumbnails[0].url,
                     item.thumbnails[0].height,
                     imageQuality || DEFAULT_IMAGE_QUALITY,
-                    90,
+                    100,
                 ),
             [],
         )
