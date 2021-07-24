@@ -59,7 +59,6 @@ const SongCategoryScreen = (props: Props) => {
             songs.continuation.clickTrackingParams &&
             songs.continuation.continuation
         ) {
-            console.log('LOADING MORE SONGS')
             setLoading(true)
             getContinuation('search', songs.continuation, 'SONG')
                 .then((res: FetchedSongObject) => {
@@ -72,7 +71,6 @@ const SongCategoryScreen = (props: Props) => {
                 })
                 .catch(_err => {
                     setLoading(false)
-                    console.log('ERR CONTINUE FETCH SONGS')
                 })
         }
     }
@@ -83,18 +81,27 @@ const SongCategoryScreen = (props: Props) => {
         search(category.name, 'SONG')
             .then((res: FetchedSongObject) => {
                 setSongs(res)
+                setLoading(true)
+                getContinuation('search', songs.continuation, 'SONG')
+                    .then((res: FetchedSongObject) => {
+                        const data = songs.content.concat(res.content)
+                        setSongs({
+                            content: data,
+                            continuation: res.continuation,
+                        })
+                        setLoading(false)
+                    })
+                    .catch(_err => {
+                        setLoading(false)
+                    })
             })
-            .catch(_err => {
-                console.log('ERR FETCH SONGS')
-            })
+            .catch(_err => {})
 
         search(category.name, 'ARTIST')
             .then((res: FetchedArtistObject) => {
                 setArtists(res)
             })
-            .catch(_err => {
-                console.log('ERR FETCH ARTISTS')
-            })
+            .catch(_err => {})
 
         return () => {
             setSongs(BareFetchedSongObjectInstance)
