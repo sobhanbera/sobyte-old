@@ -30,7 +30,7 @@ export const SettingsProviderContext =
         theme: 'd',
         audioQuality: 'a',
         language: 'en',
-        imageQuality: '120',
+        imageQuality: '200',
         setSetting: (_key: string, _value: string) => {},
         changeLanguage: (_langCode: LanguageType) => {},
     })
@@ -43,7 +43,7 @@ const SettingsProvider = (props: Props) => {
     const [theme, setTheme] = useState<ThemeType>('d')
     const [audioQuality, setAudioQuality] = useState<AudioQualityType>('g')
     const [language, setLanguage] = useState<LanguageType>('en')
-    const [imageQuality, setImageQuality] = useState<ImageQualityType>('120')
+    const [imageQuality, setImageQuality] = useState<ImageQualityType>('200')
 
     const changeLanguage = async (languageCode: LanguageType) => {
         await i18n.changeLanguage(languageCode, async (_err, _t) => {
