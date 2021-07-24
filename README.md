@@ -236,6 +236,9 @@ app
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
+## Author
+sobhanbera (https://github.com/sobhanbera)
+
 ## Contact
 
 </br>
