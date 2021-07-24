@@ -16,8 +16,7 @@ import {
     SongCategory,
 } from '../../../interfaces'
 import {useMusicApi} from '../../../api'
-import CommonSongList from '../../../components/CommonSongList'
-import CommonArtistList from '../../../components/CommonArtistList'
+import {CommonSongList, CommonArtistList} from '../../../components'
 import {useTheme} from '../../../context'
 import {songComponentsStyles} from '../../../styles/global.styles'
 

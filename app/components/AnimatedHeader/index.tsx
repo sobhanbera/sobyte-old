@@ -81,7 +81,7 @@ const AnimatedHeader = (props: Props) => {
                         {
                             backgroundColor: 'black',
                         },
-                        globalStyles.lightBottomBorder,
+                        // globalStyles.lightBottomBorder,
                     ]}>
                     <Image
                         source={{uri: props.headerImage}}
@@ -99,7 +99,7 @@ const AnimatedHeader = (props: Props) => {
                     <View
                         style={[
                             globalStyles.animatedHeaderTitleContainer,
-                            globalStyles.lightBottomBorder,
+                            // globalStyles.lightBottomBorder,
                             {
                                 height: '100%',
                             },
