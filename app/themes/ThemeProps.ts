@@ -94,12 +94,7 @@ export const RequiredCommonColors: CommonColors = {
     cadetBlue: ['#293241'],
     transparent: ['#00000000'],
     rgbstreakgradient: [
-        '#FD8046',
-        '#D36C50',
-        '#AA585B',
-        '#804565',
-        '#573170',
-        '#2D1D7A',
+        '#f79533','#f37055','#ef4e7b','#a166ab','#5073b8','#1098ad','#07b39b','#6fba82'
     ],
 }
 
