@@ -231,6 +231,31 @@ export const songComponentsStyles = StyleSheet.create({
         height: DEFAULT_TINY_ICON_SIZE,
         paddingVertical: 12,
     },
+
+    containerTopicTextHolderSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        // flexWrap: 'wrap',
+    },
+    containerTopicText: {
+        fontSize: 16,
+        borderRadius: 1000,
+        color: 'black',
+        backgroundColor: 'white',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        paddingHorizontal: 14,
+        paddingVertical: 6,
+        marginHorizontal: 8,
+        marginVertical: 5,
+    },
+    containerTopicTextSelected: {
+        color: 'white',
+        backgroundColor: 'black',
+    },
 })
 
 export default globalStyles
