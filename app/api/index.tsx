@@ -514,7 +514,7 @@ const MusicApi = (props: MusicApiProps) => {
      */
     const search = (
         query: string,
-        categoryName: string = 'song',
+        categoryName: TypeOFDatas = 'SONG',
         getARandomSong: boolean = false,
         _pageLimit: number = 1,
     ) => {
