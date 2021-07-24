@@ -1,10 +1,12 @@
 import React from 'react'
-import {View} from 'react-native'
+import {View, Dimensions} from 'react-native'
 
 import {SongObject} from '../../interfaces'
 import CommonSongItem from '../CommonSongItem'
 import SelfShimmer from './SelfShimmer'
 import {useSetting, useTheme} from '../../context'
+
+const {width} = Dimensions.get('window')
 
 interface Props {
     songs: Array<SongObject>
@@ -18,13 +20,14 @@ const CommonSongList = ({songs}: Props) => {
     }
 
     return (
-        <View>
+        <View style={{width}}>
             {songs[0].musicId.length <= 0 ? (
                 <SelfShimmer shimmerDirection="right" />
             ) : (
-                songs.map(song => {
+                songs.map((song, index) => {
                     return (
                         <CommonSongItem
+                            key={`${song.musicId}-${song.playlistId}-${index}`}
                             song={song}
                             onPress={onPressSong}
                             imageQuality={imageQuality}
