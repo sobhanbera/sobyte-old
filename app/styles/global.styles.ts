@@ -11,6 +11,7 @@ import {
     HEADER_MIN_HEIGHT,
     IMAGE_SMALL_SIZE_TO_SHOW,
     DEFAULT_TINY_ICON_SIZE,
+    IMAGE_TINY_SIZE_TO_SHOW,
 } from '../constants'
 import {StyleSheet} from 'react-native'
 
@@ -221,12 +222,25 @@ export const songComponentsStyles = StyleSheet.create({
         width: IMAGE_SMALL_SIZE_TO_SHOW,
         height: IMAGE_SMALL_SIZE_TO_SHOW,
     },
+    imageTinyDummy: {
+        width: IMAGE_TINY_SIZE_TO_SHOW,
+        height: IMAGE_TINY_SIZE_TO_SHOW,
+        borderRadius: 100,
+    },
     textDummy: {
         width: 200,
         height: 7,
         borderRadius: 2,
         marginTop: 5,
         marginBottom: 6,
+    },
+    textTinyDummy: {
+        width: 200,
+        height: 7,
+        borderRadius: 2,
+        marginTop: 5,
+        marginBottom: 6,
+        marginHorizontal: 15,
     },
     largeTextDummy: {
         height: 12,
