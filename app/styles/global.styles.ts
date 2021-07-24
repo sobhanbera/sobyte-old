@@ -207,6 +207,12 @@ export const songComponentsStyles = StyleSheet.create({
         maxWidth: 225,
         width: 225,
     },
+    commonArtistName: {
+        fontSize: 17,
+        maxWidth: 225,
+        marginVertical: 2,
+        paddingHorizontal: 15,
+    },
 
     contentWrapper: {
         backgroundColor: '#0000007f',
