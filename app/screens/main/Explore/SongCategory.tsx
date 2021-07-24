@@ -62,21 +62,35 @@ interface Props {
     }
 }
 const SongCategoryScreen = (props: Props) => {
+    // the routes which are passed by the one level up navigation system manager
     const {category, headerTitle} = props.route.params
 
+    // context api from top level parent components
     const {search, getContinuation} = useMusicApi()
     const {themeColors} = useTheme()
 
+    // this variable will control the flow of loading data
     const [loading, setLoading] = useState<boolean>(false)
+    // and this constant will control what type of data to show in the particular UI
     const [selected, setSelected] = useState<any>(DataList[0].selected)
 
+    /**
+     * songs list, artists list, playlists data, albums,
+     * and many more...
+     */
     const [songs, setSongs] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
 
+    // scrollview reference variable to perform button pressed and auto scroll animation
+    // and many more...
     const contentScroll = React.useRef<ScrollView>(null)
 
     const continueLoadingData = () => {
+        // this function will be called each time when the user is getting closed to the
+        // end of the scrollview
+        // after which this function will load futhure more data and show in
+        // the UI...
         if (
             loading === false &&
             songs.continuation.clickTrackingParams &&
@@ -100,6 +114,8 @@ const SongCategoryScreen = (props: Props) => {
     }
 
     useEffect(() => {
+        // initial render will make a api request and fetch all the neccessary data require
+        // to show in the UI for ex songs list, playlists data, artists data, etc
         search(category.name, 'SONG')
             .then((res: FetchedSongObject) => {
                 setSongs(res)
@@ -108,10 +124,13 @@ const SongCategoryScreen = (props: Props) => {
     }, [category.id])
 
     const onScroll = (scrollProps: OnScrollProps) => {
+        // this is the current position of the scroll view on the UI
         const currentRoughEstimatedScrollPosition = Math.floor(
             scrollProps.contentOffset.x,
         )
-
+        // we are checking if the scroll view is around any offset of any type of content
+        // in this way we are not setting state many time
+        // if the difference is around 5px we will set the state
         if (currentRoughEstimatedScrollPosition % Math.floor(width) <= 5) {
             const currSelected = Math.floor(
                 currentRoughEstimatedScrollPosition / Math.floor(width),
@@ -121,6 +140,12 @@ const SongCategoryScreen = (props: Props) => {
     }
 
     const changeData = (selector: any) => {
+        // when the user clicks on any data type button
+        // scrollview will scroll to that position
+        // for ex: for songs it will move to `width*0 = 0` position
+        // and for artists it will move to `width*1 = width` position
+        // and playlist it will move to `width*2` position
+        // and so on.
         setSelected(selector)
         contentScroll.current?.scrollTo({
             animated: true,
