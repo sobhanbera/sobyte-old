@@ -17,6 +17,7 @@ import {
 } from '../../../interfaces'
 import {useMusicApi} from '../../../api'
 import CommonSongList from '../../../components/CommonSongList'
+import CommonArtistList from '../../../components/CommonArtistList'
 import {useTheme} from '../../../context'
 import {songComponentsStyles} from '../../../styles/global.styles'
 
@@ -32,11 +33,6 @@ const DataList = [
         name: 'Artists',
         id: 'artists',
         selected: 1,
-    },
-    {
-        name: 'Playlists',
-        id: 'playlists',
-        selected: 2,
     },
 ]
 interface OnScrollProps {
@@ -226,10 +222,7 @@ const SongCategoryScreen = (props: Props) => {
                 <CommonSongList songs={songs.content} />
 
                 {/* artists list */}
-                <CommonSongList songs={songs.content} />
-
-                {/* playlists list */}
-                <CommonSongList songs={songs.content} />
+                <CommonArtistList artists={artists.content} />
             </ScrollView>
 
             {loading ? (
