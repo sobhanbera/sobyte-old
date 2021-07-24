@@ -20,7 +20,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
      */
     const colorAnimator = React.useRef(new Animated.Value(0)).current
     const color = colorAnimator.interpolate({
-        inputRange: [0, 1, 2, 3, 4, 5],
+        inputRange: [0, 1, 2, 3, 4, 5, 6, 7],
         outputRange: rgbstreakgradient,
     })
     const handleColorAnimation = () => {
