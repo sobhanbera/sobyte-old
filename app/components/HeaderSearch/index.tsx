@@ -65,7 +65,7 @@ const HeaderSearch: React.FC<Props> = props => {
                         height: '100%',
                         textAlignVertical: 'center',
                     }}>
-                    Cancel
+                    {t('words:cancel')}
                 </Text>
             </TouchableOpacity>
         </View>
