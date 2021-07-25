@@ -3,8 +3,10 @@ import {
     isColorLight,
     colorBrightness,
     sortColorsBasedOnBrightness,
+    hexToHSB,
+    sortColors
 } from './Colors'
-export {isColorLight, isColorDark, colorBrightness, sortColorsBasedOnBrightness}
+export {isColorLight, isColorDark, colorBrightness, sortColorsBasedOnBrightness, hexToHSB, sortColors}
 
 import {
     returnNullCallback,
