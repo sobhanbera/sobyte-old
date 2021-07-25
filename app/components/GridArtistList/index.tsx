@@ -7,6 +7,7 @@ import {
     IMAGE_SIZE_TO_SHOW,
     IMAGE_MARGIN_TO_SHOW,
     IMAGE_PADDING_TO_SHOW,
+    ARTIST_DETAILS_SCREEN,
 } from '../../constants'
 import GridArtistItem_SelfShimmer from './SelfShimmer'
 import GridArtistItem from './GridArtistItem'
@@ -20,6 +21,7 @@ interface Props {
     shimmerDirection: 'up' | 'down' | 'left' | 'right'
     id: string
     imageQuality?: string
+    navigation: any
 }
 const GridArtistList = React.memo(
     ({
@@ -29,7 +31,20 @@ const GridArtistList = React.memo(
         id,
         shimmerDirection,
         imageQuality,
+        navigation,
     }: Props) => {
+
+        /**
+         * launch the artist's details screen after the user presses the artist
+         * card on the UI...
+         * this required a navigation prop from all over the top level parent after the navigation (the screen itself)
+        */
+        const launchArtistsDetailsScreen = (artist: ArtistObject) => {
+            navigation.navigate(ARTIST_DETAILS_SCREEN, {
+                artist
+            })
+        }
+
         return content[0].browseId.length <= 0 ? (
             <GridArtistItem_SelfShimmer shimmerDirection={shimmerDirection} />
         ) : (
@@ -49,6 +64,7 @@ const GridArtistList = React.memo(
                 renderItem={({item, index}) => {
                     return (
                         <GridArtistItem
+                            onPress={() => launchArtistsDetailsScreen(item)}
                             id={id}
                             item={item}
                             index={index}
