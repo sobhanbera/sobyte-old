@@ -10,6 +10,7 @@ import {ArtistObject} from '../../interfaces'
 interface Props {
     artistsData: ArtistObject[]
     cardTitle: string
+    navigation: any
 }
 const SingleBlockSongs = (props: Props) => {
     const {themeColors} = useTheme()
@@ -27,6 +28,7 @@ const SingleBlockSongs = (props: Props) => {
             </Block>
 
             <GridArtistList
+                navigation={props.navigation}
                 id="artistsList1"
                 shimmerDirection="left"
                 textColor={themeColors.text[0] + 'E7'}
