@@ -82,7 +82,7 @@ const SongCategoryScreen = (props: Props) => {
             .then((res: FetchedSongObject) => {
                 setSongs(res)
                 setLoading(true)
-                getContinuation('search', songs.continuation, 'SONG')
+                getContinuation('search', res.continuation, 'SONG')
                     .then((res: FetchedSongObject) => {
                         const data = songs.content.concat(res.content)
                         setSongs({
