@@ -12,6 +12,7 @@ import {
     PaddingBottomView,
 } from '../../constants'
 import globalStyles from '../../styles/global.styles'
+import LinearGradient from 'react-native-linear-gradient'
 
 // const BOTTOM_PADDING = 100
 interface OnScrollProps {
@@ -29,6 +30,7 @@ interface OnScrollProps {
     }
 }
 interface Props {
+    backgroundGradientColor: string[]
     headerImage: string
     headerTitle: string
     headerNameTitle: string
@@ -59,6 +61,10 @@ const AnimatedHeader = (props: Props) => {
             props.onReachedEnd()
     }
 
+    if(!props.backgroundGradientColor || props.backgroundGradientColor.length < 2) {
+        throw new Error("Gradient colors must be an array consisting of at least 4 string colors.\n For Ex: ['#000000', ''#FFFFFF', '#FFFFFF', '#000000']")
+    }
+
     return (
         <ImageHeaderScrollView
             onScroll={({nativeEvent}) => checkEndReached(nativeEvent)}
@@ -66,7 +72,7 @@ const AnimatedHeader = (props: Props) => {
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             bounces={false}
-            scrollViewBackgroundColor={themeColors.surfacelight[0]}
+            scrollViewBackgroundColor={props.backgroundGradientColor[0]}
             overlayColor={themeColors.surfacelight[0]}
             maxOverlayOpacity={1}
             minOverlayOpacity={0.4}
@@ -139,9 +145,12 @@ const AnimatedHeader = (props: Props) => {
                 onHide={showHeaderTitle}
                 onBeginDisplayed={hideHeaderTitle}
                 onDisplay={hideHeaderTitle}>
-                {props.children}
+                <View style={{backgroundColor: themeColors.themecolor[0]}}>
+                    <LinearGradient colors={props.backgroundGradientColor}>
+                    {props.children}</LinearGradient>
 
-                <PaddingBottomView />
+                    <PaddingBottomView backgroundColor={props.backgroundGradientColor[props.backgroundGradientColor.length-1]} />
+                </View>
             </TriggeringView>
         </ImageHeaderScrollView>
     )
