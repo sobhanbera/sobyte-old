@@ -21,37 +21,37 @@ export function colorBrightness(color: any = '') {
 }
 
 /**
- * function which converts Hex value of color to 
+ * function which converts Hex value of color to
  * HSB (hue, saturation, and brightness) format...
-*/
+ */
 export function hexToHSB(hex: string = ''): number[] {
-    hex = hex.replace(/^#/, '');
-    hex = hex.length === 3 ? hex.replace(/(.)/g, '$1$1') : hex;
+    hex = hex.replace(/^#/, '')
+    hex = hex.length === 3 ? hex.replace(/(.)/g, '$1$1') : hex
 
     var red = parseInt(hex.substr(0, 2), 16) / 255,
-      green = parseInt(hex.substr(2, 2), 16) / 255,
-      blue = parseInt(hex.substr(4, 2), 16) / 255;
+        green = parseInt(hex.substr(2, 2), 16) / 255,
+        blue = parseInt(hex.substr(4, 2), 16) / 255
 
     var cMax = Math.max(red, green, blue),
-      cMin = Math.min(red, green, blue),
-      delta = cMax - cMin,
-      saturation = cMax ? (delta / cMax) : 0;
+        cMin = Math.min(red, green, blue),
+        delta = cMax - cMin,
+        saturation = cMax ? delta / cMax : 0
 
     switch (cMax) {
         case 0:
-            return [0, 0, 0];
+            return [0, 0, 0]
         case cMin:
-            return [0, 0, cMax];
+            return [0, 0, cMax]
         case red:
-            return [60 * (((green - blue) / delta) % 6) || 0, saturation, cMax];
+            return [60 * (((green - blue) / delta) % 6) || 0, saturation, cMax]
         case green:
-            return [60 * (((blue - red) / delta) + 2) || 0, saturation, cMax];
+            return [60 * ((blue - red) / delta + 2) || 0, saturation, cMax]
         case blue:
-            return [60 * (((red - green) / delta) + 4) || 0, saturation, cMax];
+            return [60 * ((red - green) / delta + 4) || 0, saturation, cMax]
         default:
-            return [0, 0, 0,]
+            return [0, 0, 0]
     }
-  }
+}
 
 export type ColorsSortingDirection = 'light-first' | 'dark-first' | 'default'
 export function sortColorsBasedOnBrightness(
