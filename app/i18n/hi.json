@@ -4,12 +4,29 @@
         "app_language": "भाषा",
         "default_app_language": "डिफ़ॉल्ट ऐप भाषा",
         "choose_audio_quality": "ऑडियो गुणवत्ता चुनें",
+        "image_optimization": "छवि अनुकूलन",
         "extreme": "एक्सट्रीम",
         "good": "गुड",
         "poor": "ठीक ठाक",
-        "auto": "ऑटो"
+        "auto": "ऑटो",
+        "very_high_quality": "बहुत अधिक",
+        "high_quality": "उच्च",
+        "medium_quality": "मध्यम",
+        "low_quality": "कम",
+        "clear_quality": "स्पष्ट",
+        "blured_quality": "धुंधला"
     },
-    "words": {"cancel": "रद्द करें"},
+    "words": {
+        "cancel": "रद्द करें",
+        "hello": "नमस्ते",
+        "profile": "प्रोफ़ाइल",
+        "music": "संगीत",
+        "explore": "एक्सप्लोर"
+    },
+    "sentences": {
+        "valid_number_above_60_below_720": "कृपया ६० से ऊपर और ७२० से नीचे एक मान्य संख्या दर्ज करें।",
+        "increase_image_quality_warning": "छवि गुणवत्ता बढ़ाने से अधिक डेटा की खपत होगी। \nनोट: यह उपयोगकर्ता के अनुभव को प्रभावित कर सकता है"
+    },
     "common": {
         "appName": "Sobyte",
         "langs": {
