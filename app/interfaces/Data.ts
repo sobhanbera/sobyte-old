@@ -137,7 +137,7 @@ export const GenresCategories: Array<SongCategory> = [
         name: 'Classical',
         image: 'https://images.unsplash.com/photo-1519683109079-d5f539e1542f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xhc3NpY2FsJTIwbXVzaWN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=175&q=60',
         highimage:
-            'https://images.unsplash.com/photo-1519683109079-d5f539e1542f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xhc3NpY2FsJTIwbXVzaWN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=175&q=60',
+            'https://images.unsplash.com/photo-1519683109079-d5f539e1542f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xhc3NpY2FsJTIwbXVzaWN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=100',
         color: ['#504838', '#201000', '#201000', '#000000'],
     },
     {
