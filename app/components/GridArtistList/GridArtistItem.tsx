@@ -31,15 +31,7 @@ const GridArtistItem = React.memo(
                 )
 
         return (
-            <Pressable onPress={() => onPress({
-                ...item,
-                // extra param which would be passed to the artists details screen through its props
-                // providing the required data to render the artists details screen
-                thumbnail: [{
-                    url: highQualityImage,
-                    height: 720
-                }]
-            })}>
+            <Pressable onPress={() => onPress()}>
                 <View
                     style={[
                         styles.contentWrapper,

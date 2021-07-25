@@ -40,9 +40,10 @@ const GridArtistList = React.memo(
          * this required a navigation prop from all over the top level parent after the navigation (the screen itself)
         */
         const launchArtistsDetailsScreen = (artist: ArtistObject) => {
-            navigation.navigate(ARTIST_DETAILS_SCREEN, {
-                artist
-            })
+            console.log(artist.thumbnails[0].height)
+            // navigation.navigate(ARTIST_DETAILS_SCREEN, {
+            //     artist
+            // })
         }
 
         return content[0].browseId.length <= 0 ? (
@@ -67,7 +68,7 @@ const GridArtistList = React.memo(
                 
                     return (
                         <GridArtistItem
-                            onPress={(artistData: ArtistObject) => launchArtistsDetailsScreen(artistData)}
+                            onPress={() => launchArtistsDetailsScreen(item)}
                             id={id}
                             item={item}
                             index={index}
