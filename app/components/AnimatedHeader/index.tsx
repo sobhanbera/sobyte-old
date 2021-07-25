@@ -17,7 +17,7 @@ import {
 } from '../../constants'
 import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
-import {sortColorsBasedOnBrightness} from '../../utils'
+import {sortColors} from '../../utils'
 
 // const BOTTOM_PADDING = 100
 interface OnScrollProps {
@@ -114,7 +114,7 @@ const AnimatedHeader = (props: Props) => {
             props.backgroundGradientColors.length > 2
         ) {
             setImageColors(
-                sortColorsBasedOnBrightness(props.backgroundGradientColors),
+                sortColors(props.backgroundGradientColors),
             )
         } else {
             /**
@@ -129,7 +129,7 @@ const AnimatedHeader = (props: Props) => {
                 .then((_res: any) => {
                     // storing the colors from light to dark brightness or strength
                     setImageColors(
-                        sortColorsBasedOnBrightness([
+                        sortColors([
                             _res.vibrant + '7F',
                             _res.dominant + '7F',
                             _res.darkVibrant + '7F',
