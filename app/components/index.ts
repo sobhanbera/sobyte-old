@@ -17,6 +17,7 @@ import Block from './Block'
 import Prompt from './Prompt'
 
 import TopicTitle from './TopicTitle'
+import Caption from './Caption'
 
 import HeartBeatView from './HeartBeatView'
 import T_C_PrivacyPolicy from './T_C_PrivacyPolicy'
@@ -81,6 +82,7 @@ export {
     SingleBlockArtists,
     SingleBlockArtists as BlockCardArtistList,
     TopicTitle,
+    Caption
 }
 
 export {CommonSongList, CommonSongItem, CommonArtistList, CommonArtistItem}
