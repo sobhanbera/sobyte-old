@@ -15,6 +15,9 @@ import {
     HeaderSearch,
     CardSong,
     CardArtist,
+    TopicTitle,
+    GridArtistList,
+    CommonSongList,
 } from '../../../components'
 import {useMusicApi, usePrompt, useTheme} from '../../../context'
 import {
@@ -187,45 +190,26 @@ const SearchResult: React.FC<Props> = props => {
                             showsVerticalScrollIndicator={false}
                             showsHorizontalScrollIndicator={false}>
                             {/* all the songs which are loaded are shown here */}
-                            {songs.content[0].musicId.length > 0 || loading ? (
-                                <Text
-                                    style={[
-                                        globalStyles.topicTitle,
-                                        globalStyles.lightBottomBorder,
-                                        {color: text[0]},
-                                    ]}>
-                                    Songs
-                                </Text>
-                            ) : null}
-                            <CardSong
-                                onPress={() => {}}
-                                shimmerDirection="right"
-                                songs={songs.content}
-                                textColor={text[0] + 'E7'}
-                                subColor={text[0] + '70'}
-                                loading={loading}
-                            />
-
-                            {/* moreover artists are displayed here after songs card list */}
+                            {/* main content here */}
                             {artists.content[0].browseId.length > 0 ||
                             loading ? (
-                                <Text
-                                    style={[
-                                        globalStyles.topicTitle,
-                                        globalStyles.lightBottomBorder,
-                                        {color: text[0]},
-                                    ]}>
-                                    Artists
-                                </Text>
+                            <TopicTitle title={'Artists'} />
                             ) : null}
-                            <CardArtist
-                                onPress={() => {}}
-                                shimmerDirection="right"
-                                artists={artists.content}
-                                textColor={text[0] + 'E7'}
+                            <GridArtistList
+                                navigation={props.navigation}
+                                content={artists.content}
+                                contentLength={artists.content.length}
                                 subColor={text[0] + '70'}
-                                loading={loading}
+                                textColor={text[0] + 'E7'}
+                                shimmerDirection={'right'}
+                                scrollDirection="horizontal"
+                                id={'demo'}
                             />
+
+                            {songs.content[0].musicId.length > 0 || loading ? (
+                                <TopicTitle title={'Songs'} />
+                            ) : null}
+                            <CommonSongList songs={songs.content} />
 
                             {/* below padding for more spacing... */}
                             <PaddingBottomView />
