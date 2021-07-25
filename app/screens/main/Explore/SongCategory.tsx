@@ -121,6 +121,7 @@ const SongCategoryScreen = (props: Props) => {
             {/* main content here */}
             <TopicTitle title={'Artists'} />
             <GridArtistList
+                navigation={props.navigation}
                 content={artists.content}
                 contentLength={artists.content.length}
                 subColor={themeColors.text[0] + '70'}

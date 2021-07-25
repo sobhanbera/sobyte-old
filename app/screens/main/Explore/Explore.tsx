@@ -238,6 +238,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
 
                     {/* artists list */}
                     <BlockCardArtistList
+                        navigation={props.navigation}
                         cardTitle={'Artists You May Like'}
                         artistsData={artistsData}
                     />
