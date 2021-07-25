@@ -91,11 +91,11 @@ export const LINEAR_GRADIENT_LOCATIONS_4 = [0, 0.25, 0.5, 0.75]
 export const LINEAR_GRADIENT_LOCATIONS_5 = [0, 0.2, 0.4, 0.6, 0.8]
 export const LINEAR_GRADIENT_LOCATIONS_6 = [0, 0.16, 0.32, 0.48, 0.64, 0.8]
 
-/** 
+/**
  * @important constants for the name of screens
  * these are the constant which will be constant all over the app
  * and there will be no need of going to the navigation component and see what is the name of the screen
- * 
+ *
  * this names will be used in children components therefore these should be same all over the app
-*/
-export const ARTIST_DETAILS_SCREEN = "ARTIST_DETAILS_SCREEN" // props - (ArtistObject from the interface)
+ */
+export const ARTIST_DETAILS_SCREEN = 'ARTIST_DETAILS_SCREEN' // props - (ArtistObject from the interface)
