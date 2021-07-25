@@ -10,6 +10,7 @@ import ImageColors from 'react-native-image-colors'
 import { useEffect } from 'react'
 
 import {
+    DEFAULT_OVERLAY_OPACITY_MIN,
     HEADER_MAX_HEIGHT,
     HEADER_MIN_HEIGHT,
     PaddingBottomView,
@@ -53,14 +54,14 @@ const AnimatedHeader = (props: Props) => {
      * of the screen and show the image not the animated fixed header
     */
     const showHeaderTitle = () => {
-        headerTitleReference.current?.slideInDown(500)
+        headerTitleReference.current?.slideInDown(300)
     }
     /**
      * hide the image header and progressively show the fixed animated header
      * this function will be called when the user scroll down
     */
     const hideHeaderTitle = () => {
-        headerTitleReference.current?.slideOutUp(500)
+        headerTitleReference.current?.slideOutUp(600)
     }
 
     /**
@@ -136,8 +137,8 @@ const AnimatedHeader = (props: Props) => {
             bounces={false}
             scrollViewBackgroundColor={imageColors[0]}
             overlayColor={themeColors.surfacelight[0]}
-            maxOverlayOpacity={1}
-            minOverlayOpacity={0.4}
+            maxOverlayOpacity={DEFAULT_OVERLAY_OPACITY_MIN}
+            minOverlayOpacity={DEFAULT_OVERLAY_OPACITY_MIN}
             maxHeight={350}
             minHeight={HEADER_MIN_HEIGHT}
             headerImage={{
@@ -184,10 +185,10 @@ const AnimatedHeader = (props: Props) => {
                 <Animatable.View
                     style={[
                         globalStyles.animatedHeaderTitleContainer,
-                        globalStyles.lightBottomBorder,
+                        // globalStyles.lightBottomBorder,
                         {
-                            backgroundColor: themeColors.surfacelight[0],
-                            borderBottomWidth: 1,
+                            backgroundColor: themeColors.transparent[0]//themeColors.surfacelight[0],
+                            // borderBottomWidth: 1,
                         },
                     ]}
                     ref={headerTitleReference}>
