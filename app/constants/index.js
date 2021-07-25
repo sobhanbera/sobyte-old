@@ -72,7 +72,7 @@ export const IMAGE_PADDING_TO_SHOW = 4 // padding of the image which should be s
 export const IMAGE_PADDING_H_TO_SHOW = 4 // padding horizontal of the image which should be shown in the UI
 export const IMAGE_PADDING_V_TO_SHOW = 4 // padding vertical of the image which should be shown in the UI
 
-export const PaddingBottomView = () => <View style={{paddingBottom: 100}} />
+export const PaddingBottomView = (props) => <View style={{paddingBottom: 100, backgroundColor: props.backgroundColor || 'transparent'}} />
 
 /** equal partition arrays for linear gradient locations */
 export const LINEAR_GRADIENT_LOCATIONS_2 = [0, 0.5]
