@@ -193,7 +193,7 @@ const SearchResult: React.FC<Props> = props => {
                             {/* main content here */}
                             {artists.content[0].browseId.length > 0 ||
                             loading ? (
-                            <TopicTitle title={'Artists'} />
+                                <TopicTitle title={'Artists'} />
                             ) : null}
                             <GridArtistList
                                 navigation={props.navigation}
