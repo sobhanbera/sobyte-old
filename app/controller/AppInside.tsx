@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {DarkTheme} from '@react-navigation/native'
+import {useTranslation} from 'react-i18next'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -14,6 +15,8 @@ import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 
 const BarNavigator = createMaterialBottomTabNavigator()
 const AuthenticationNavigation = () => {
+    const {t} = useTranslation()
+
     const {themeColors} = useTheme()
     const {initMusicApi} = useMusicApi()
     const [playMusicAtInitial, setPlayMusicAtInit] = useState(false)
@@ -52,7 +55,7 @@ const AuthenticationNavigation = () => {
                 options={{
                     tabBarAccessibilityLabel: 'Explore Tab',
                     tabBarColor: themeColors.surface[0] + 'F7',
-                    tabBarLabel: 'Explore',
+                    tabBarLabel: t('words:explore'),
                     tabBarIcon: ({focused, color}) => (
                         <Ionicons
                             name={focused ? 'md-search' : 'md-search-outline'}
@@ -70,7 +73,7 @@ const AuthenticationNavigation = () => {
                 options={{
                     tabBarAccessibilityLabel: 'Music Player Tab',
                     tabBarColor: themeColors.primary.main[0] + '00',
-                    tabBarLabel: 'Sobyte',
+                    tabBarLabel: t('common:appName'),
                     tabBarIcon: ({focused, color}) => (
                         <Ionicons
                             name={
@@ -91,7 +94,7 @@ const AuthenticationNavigation = () => {
                 options={{
                     tabBarAccessibilityLabel: 'Profile Tab',
                     tabBarColor: themeColors.surface[0] + 'F7',
-                    tabBarLabel: 'Me',
+                    tabBarLabel: t('words:profile'),
                     tabBarIcon: ({focused, color}) => (
                         <AntDesign
                             name={focused ? 'star' : 'staro'}

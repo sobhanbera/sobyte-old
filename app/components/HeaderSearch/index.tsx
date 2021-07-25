@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, TextInput, Text, TouchableOpacity} from 'react-native'
+import {useTranslation} from 'react-i18next'
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import {useTheme} from '../../context'
@@ -14,6 +15,8 @@ interface Props {
     onCancel: Function
 }
 const HeaderSearch: React.FC<Props> = props => {
+    const {t} = useTranslation()
+
     const {white, black, surfacelight, text, primary, placeholder} =
         useTheme().themeColors
 
@@ -35,7 +38,7 @@ const HeaderSearch: React.FC<Props> = props => {
             />
             <TextInput
                 autoFocus
-                placeholder={'Search for songs, artists...'}
+                placeholder={t('sentences:search_for_songs_artists')}
                 value={props.text}
                 onChangeText={e => props.onChangeText(e)}
                 selectionColor={primary.dark[0]}
