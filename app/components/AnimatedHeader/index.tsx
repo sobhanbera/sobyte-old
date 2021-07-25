@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {View, Text, Image, Dimensions, Pressable} from 'react-native'
 import ImageHeaderScrollView, {
     TriggeringView,
 } from 'react-native-image-header-scroll-view'
-import {useTheme} from '../../context'
 import * as Animatable from 'react-native-animatable'
+
+import LinearGradient from 'react-native-linear-gradient'
+import ImageColors from 'react-native-image-colors'
+import { useEffect } from 'react'
 
 import {
     HEADER_MAX_HEIGHT,
     HEADER_MIN_HEIGHT,
     PaddingBottomView,
 } from '../../constants'
+import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
-import LinearGradient from 'react-native-linear-gradient'
+import { sortColorsBasedOnBrightness } from '../../utils'
 
 // const BOTTOM_PADDING = 100
 interface OnScrollProps {
@@ -30,7 +34,6 @@ interface OnScrollProps {
     }
 }
 interface Props {
-    backgroundGradientColor: string[]
     headerImage: string
     headerTitle: string
     headerNameTitle: string
@@ -41,6 +44,7 @@ interface Props {
 const AnimatedHeader = (props: Props) => {
     const {themeColors} = useTheme()
     const headerTitleReference = React.useRef<any>(null)
+    const [imageColors, setImageColors] = useState<string[]>([themeColors.surfacelight[0], themeColors.surfacelight[0]])
 
     const showHeaderTitle = () => {
         headerTitleReference.current?.slideInDown(500)
@@ -61,9 +65,22 @@ const AnimatedHeader = (props: Props) => {
             props.onReachedEnd()
     }
 
-    if(!props.backgroundGradientColor || props.backgroundGradientColor.length < 2) {
-        throw new Error("Gradient colors must be an array consisting of at least 4 string colors.\n For Ex: ['#000000', ''#FFFFFF', '#FFFFFF', '#000000']")
-    }
+    useEffect(() => {
+        ImageColors.getColors(props.headerImage, {
+            fallback: themeColors.surfacelight[0],
+                    cache: false,
+                    key: 'sobyte_song_category_color'
+        }).then((_res: any) => {
+            setImageColors(sortColorsBasedOnBrightness([
+                _res.vibrant + '7F',
+                _res.dominant + '7F',
+                _res.darkVibrant+ '7F',
+                _res.darkMuted+ '7F',
+            ]))
+        }).catch(_err => {
+            setImageColors([themeColors.surfacelight[0], themeColors.surfacelight[0]])
+        })
+    }, [props.headerImage])
 
     return (
         <ImageHeaderScrollView
@@ -72,7 +89,7 @@ const AnimatedHeader = (props: Props) => {
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             bounces={false}
-            scrollViewBackgroundColor={props.backgroundGradientColor[0]}
+            scrollViewBackgroundColor={imageColors[0]}
             overlayColor={themeColors.surfacelight[0]}
             maxOverlayOpacity={1}
             minOverlayOpacity={0.4}
@@ -146,10 +163,10 @@ const AnimatedHeader = (props: Props) => {
                 onBeginDisplayed={hideHeaderTitle}
                 onDisplay={hideHeaderTitle}>
                 <View style={{backgroundColor: themeColors.themecolor[0]}}>
-                    <LinearGradient colors={props.backgroundGradientColor}>
+                    <LinearGradient colors={imageColors}>
                     {props.children}</LinearGradient>
 
-                    <PaddingBottomView backgroundColor={props.backgroundGradientColor[props.backgroundGradientColor.length-1]} />
+                    <PaddingBottomView backgroundColor={imageColors[imageColors.length-1]} />
                 </View>
             </TriggeringView>
         </ImageHeaderScrollView>
