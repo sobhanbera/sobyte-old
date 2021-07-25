@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Text} from 'react-native-paper'
 import {
+    ActivityIndicator,
     ScrollView,
     TouchableOpacity,
     View,
@@ -51,7 +52,7 @@ interface Props {
     navigation?: any
 }
 const SearchResult: React.FC<Props> = props => {
-    const {surfacelight, text} = useTheme().themeColors
+    const {surfacelight, text, white} = useTheme().themeColors
     const {getSearchSuggestions, search, getContinuation} = useMusicApi()
     const {prompt} = usePrompt()
 
@@ -62,7 +63,10 @@ const SearchResult: React.FC<Props> = props => {
     const [artists, setArtists] = useState<FetchedArtistObject>(
         BareFetchedArtistObjectInstance,
     )
+    // boolean state - this will provide that the data is loading or not
     const [loading, setLoading] = useState<boolean>(false)
+    // this variable will provide than continous data is loading or not
+    const [continuing, setCotinuing] = useState<boolean>(false)
     const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
     const [showSearchSuggestions, setShowSearchSuggestions] =
         useState<boolean>(false)
@@ -71,7 +75,8 @@ const SearchResult: React.FC<Props> = props => {
         if (searchText.length > 0)
             getSearchSuggestions(searchText)
                 .then((res: string[]) => {
-                    if (!showSearchSuggestions)
+                    // if any data is not loading then only we will show suggestions
+                    if (!showSearchSuggestions && !loading && !continuing)
                         setShowSearchSuggestions(searchText.length > 0)
                     setSearchSuggestions(res)
                 })
@@ -84,10 +89,9 @@ const SearchResult: React.FC<Props> = props => {
         getSearchSuggestionsList()
     }, [searchText])
 
-    const hideSuggestions = () => {
-        setShowSearchSuggestions(false)
-        Keyboard.dismiss()
-    }
+    useEffect(() => {
+        console.log(showSearchSuggestions)
+    }, [showSearchSuggestions])
 
     const searchResults = (query: string = searchText) => {
         if (query.length <= 0) return null
@@ -119,10 +123,14 @@ const SearchResult: React.FC<Props> = props => {
             })
     }
 
-    const startSearch = (query: string = searchText) => {
+    const hideSuggestions = () => {
         Keyboard.dismiss()
-
         setShowSearchSuggestions(false)
+    }
+
+    const startSearch = (query: string = searchText) => {
+        hideSuggestions()
+
         setLoading(true)
 
         searchResults(query)
@@ -139,7 +147,7 @@ const SearchResult: React.FC<Props> = props => {
             songs.continuation.clickTrackingParams &&
             songs.continuation.continuation
         ) {
-            setLoading(true)
+            setCotinuing(true)
             getContinuation('search', songs.continuation, 'SONG')
                 .then((res: FetchedSongObject) => {
                     const data = songs.content.concat(res.content)
@@ -147,10 +155,10 @@ const SearchResult: React.FC<Props> = props => {
                         content: data,
                         continuation: res.continuation,
                     })
-                    setLoading(false)
+                    setCotinuing(false)
                 })
                 .catch(_err => {
-                    setLoading(false)
+                    setCotinuing(false)
                 })
         }
     }
@@ -169,9 +177,13 @@ const SearchResult: React.FC<Props> = props => {
             continueLoadingData()
     }
 
+    /** 
+     * since sometime search suggestion is one only in that case we have to know that array is
+     * available or not - if available then only show the lists of suggestions...
+     */
     return (
         <>
-            {showSearchSuggestions === true ? (
+            {showSearchSuggestions && Array.isArray(searchSuggestions) ? (
                 <View
                     style={{
                         position: 'absolute',
@@ -185,6 +197,9 @@ const SearchResult: React.FC<Props> = props => {
                         zIndex: 1000,
                     }}>
                     {searchSuggestions.map(suggestion => {
+                        /** we are ignoring those suggestions which includes video on it since only songs, musics could be shown */
+                        if(suggestion.includes('video')) return null
+
                         return (
                             <TouchableOpacity
                                 key={suggestion}
@@ -273,6 +288,14 @@ const SearchResult: React.FC<Props> = props => {
                             {songs.content[0].musicId.length > 0 && (
                                 <CommonSongList songs={songs.content} />
                             )}
+
+                            {continuing ? (
+                                <ActivityIndicator
+                                    color={white[0]}
+                                    size={'small'}
+                                />
+                            ) : null}
+
                             {/* below padding for more spacing... */}
                             <PaddingBottomView />
                         </ScrollView>
