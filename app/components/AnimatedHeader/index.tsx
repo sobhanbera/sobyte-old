@@ -48,11 +48,28 @@ const AnimatedHeader = (props: Props) => {
     const headerTitleReference = React.useRef<any>(null)
     const [imageColors, setImageColors] = useState<string[]>([themeColors.surfacelight[0], themeColors.surfacelight[0]])
 
+    /**
+     * show the header when the user scrolls back to the top
+     * of the screen and show the image not the animated fixed header
+    */
     const showHeaderTitle = () => {
         headerTitleReference.current?.slideInDown(500)
     }
+    /**
+     * hide the image header and progressively show the fixed animated header
+     * this function will be called when the user scroll down
+    */
     const hideHeaderTitle = () => {
         headerTitleReference.current?.slideOutUp(500)
+    }
+
+    /**
+     * this function will only be called once at the first render of this component
+     * this function will hide the fixed animated header at one instance (instantly in 10ms)
+     * since no user experience should be affected
+    */
+    const hideHeaderTitleAtInitialRender = () => {
+        headerTitleReference.current?.slideOutUp(10)
     }
 
     const checkEndReached = ({
@@ -68,16 +85,36 @@ const AnimatedHeader = (props: Props) => {
     }
 
     useEffect(() => {
+        /**
+         * hide the animated down comming header at initial render
+         * some bugs are happening - that this header is not hiding from intial render
+         * else only when the user scrolls some part of the scroll-view
+        */
+         hideHeaderTitleAtInitialRender()
+    }, [])
+
+    useEffect(() => {
+        /**
+         * if the sorted background gradient colors array is provided than save it to the state and render
+         * else
+         * check if at least any background gradient colors arrray is provided than save it too
+         * else fetch it manually from ImageColors module for now at least and render them
+        */
         if(props.sortedBackgroundGradientColors && props.sortedBackgroundGradientColors.length > 2) {
             setImageColors(props.sortedBackgroundGradientColors)
         } else if(props.backgroundGradientColors && props.backgroundGradientColors.length > 2) {
             setImageColors(sortColorsBasedOnBrightness(props.backgroundGradientColors))
         } else {
+            /**
+             * fallback condition when the prop of background gradient colors array is not provided by the
+             * parent component itself
+            */
             ImageColors.getColors(props.headerImage, {
                 fallback: themeColors.surfacelight[0],
                         cache: false,
                         key: 'sobyte_song_category_color'
             }).then((_res: any) => {
+                // storing the colors from light to dark brightness or strength
                 setImageColors(sortColorsBasedOnBrightness([
                     _res.vibrant + '7F',
                     _res.dominant + '7F',
