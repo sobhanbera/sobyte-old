@@ -15,10 +15,11 @@ interface Props {
     subColor: string
     textColor: string
     id?: string
+    onPress: Function
 }
 
 const GridArtistItem = React.memo(
-    ({item, index, subColor, textColor}: Props) => {
+    ({item, index, subColor, textColor, onPress}: Props) => {
         if(!item.thumbnails[0].url) {
             console.log("THUMBNAIL NOT FOUND GRID ARTIST ITEM", item)
         }
@@ -30,7 +31,7 @@ const GridArtistItem = React.memo(
                 )
 
         return (
-            <Pressable onPress={() => {}}>
+            <Pressable onPress={() => onPress()}>
                 <View
                     style={[
                         styles.contentWrapper,
