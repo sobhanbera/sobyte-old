@@ -20,15 +20,15 @@ interface Props {
 
 const GridArtistItem = React.memo(
     ({item, index, subColor, textColor, onPress}: Props) => {
-        if(!item.thumbnails[0].url) {
-            console.log("THUMBNAIL NOT FOUND GRID ARTIST ITEM", item)
+        if (!item.thumbnails[0].url) {
+            console.log('THUMBNAIL NOT FOUND GRID ARTIST ITEM', item)
         }
         const highQualityImage = getHightQualityImageFromLinkWithHeight(
-                    item.thumbnails[0].url,
-                    item.thumbnails[0].height,
-                    720,
-                    100,
-                )
+            item.thumbnails[0].url,
+            item.thumbnails[0].height,
+            720,
+            100,
+        )
 
         return (
             <Pressable onPress={() => onPress()}>

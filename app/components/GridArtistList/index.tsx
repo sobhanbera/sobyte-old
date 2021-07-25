@@ -33,15 +33,14 @@ const GridArtistList = React.memo(
         imageQuality,
         navigation,
     }: Props) => {
-
         /**
          * launch the artist's details screen after the user presses the artist
          * card on the UI...
          * this required a navigation prop from all over the top level parent after the navigation (the screen itself)
-        */
+         */
         const launchArtistsDetailsScreen = (artist: ArtistObject) => {
             navigation.navigate(ARTIST_DETAILS_SCREEN, {
-                artist
+                artist,
             })
         }
 
@@ -64,7 +63,7 @@ const GridArtistList = React.memo(
                 renderItem={({item, index}) => {
                     // grid list item will provide an artist data when calling this function from it's own component
                     // this data then will be passed to the launching artists details screen function....
-                
+
                     return (
                         <GridArtistItem
                             onPress={() => launchArtistsDetailsScreen(item)}
