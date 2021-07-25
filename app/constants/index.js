@@ -60,6 +60,9 @@ export const DEFAULT_ICON_SIZE = 24 // this is the default normal icon size ad m
 export const DEFAULT_LARGE_ICON_SIZE = 26 // this is the default large icon size ad may be changed anytime with a permission of project maintainer
 export const GRID_COLUMNS = 2 // number of columns per grid component for song list, artists list, playlist list and more...
 
+export const DEFAULT_OVERLAY_OPACITY_MAX = 0.73128946 // maximum opacity overlay over any view, component, image, etc
+export const DEFAULT_OVERLAY_OPACITY = 0.55 // threshold default opacity overlay over any view, component, image, etc
+export const DEFAULT_OVERLAY_OPACITY_MIN = 0.375692 // minimum opacity overlay over any view, component, image, etc
 export const DEFAULT_IMAGE_QUALITY = '200' // default image width and height in string...
 
 export const LARGE_TEXT_LENGTH = 15 // length of the text after which "..." will be shown
