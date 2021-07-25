@@ -10,6 +10,8 @@ interface Props {
     align?: TextAlignment
     style?: StyleProp<TextStyle>
     color?: string
+    leftIcon?: React.ReactNode
+    rightIcon?: React.ReactNode
 }
 const Caption = (props: Props) => {
     const {text} = useTheme().themeColors
@@ -26,7 +28,11 @@ const Caption = (props: Props) => {
                 },
                 props.style,
             ]}>
+            {props.leftIcon}
+
             {props.title}
+            
+            {props.rightIcon}
         </Text>
     )
 }
