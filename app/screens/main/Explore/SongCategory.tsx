@@ -116,6 +116,7 @@ const SongCategoryScreen = (props: Props) => {
             onReachedEnd={continueLoadingData}
             headerImage={category.highimage}
             headerNameTitle={category.name}
+            sortedBackgroundGradientColors={category.color}
             headerTitle={headerTitle || category.name}>
             {/* main content here */}
             <TopicTitle title={'Artists'} />
