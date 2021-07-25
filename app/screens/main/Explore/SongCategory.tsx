@@ -104,8 +104,8 @@ const SongCategoryScreen = (props: Props) => {
             .catch(_err => {})
 
         return () => {
-            setSongs(BareFetchedSongObjectInstance)
-            setArtists(BareFetchedArtistObjectInstance)
+            // setSongs(BareFetchedSongObjectInstance)
+            // setArtists(BareFetchedArtistObjectInstance)
             setLoading(false)
         }
     }, [category.id])
@@ -124,7 +124,7 @@ const SongCategoryScreen = (props: Props) => {
                 contentLength={artists.content.length}
                 subColor={themeColors.text[0] + '70'}
                 textColor={themeColors.text[0] + 'E7'}
-                shimmerDirection={'up'}
+                shimmerDirection={'right'}
                 scrollDirection="horizontal"
                 id={'demo'}
             />
