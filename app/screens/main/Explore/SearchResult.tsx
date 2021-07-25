@@ -89,10 +89,6 @@ const SearchResult: React.FC<Props> = props => {
         getSearchSuggestionsList()
     }, [searchText])
 
-    useEffect(() => {
-        console.log(showSearchSuggestions)
-    }, [showSearchSuggestions])
-
     const searchResults = (query: string = searchText) => {
         if (query.length <= 0) return null
 
