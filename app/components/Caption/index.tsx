@@ -15,16 +15,17 @@ interface Props {
 }
 /**
  * default text color - themeColors.text[0] + 'AF'
-*/
+ */
 const Caption = (props: Props) => {
     const {text} = useTheme().themeColors
 
     return (
-        <View style={{
-            justifyContent:'center',
-            alignItems:'center',
-            flexDirection: 'row'
-        }}>
+        <View
+            style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'row',
+            }}>
             {props.leftIcon}
 
             <Text
@@ -34,7 +35,7 @@ const Caption = (props: Props) => {
                         color: props.color || text[0] + 'AF',
                         fontSize: 15,
                         paddingVertical: 10,
-                        textAlign: props.align || 'center'
+                        textAlign: props.align || 'center',
                     },
                     props.style,
                 ]}>

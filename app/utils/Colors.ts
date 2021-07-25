@@ -59,14 +59,15 @@ export function sortColorsBasedOnBrightness(
     direction: ColorsSortingDirection = 'default',
 ) {
     if (direction === 'dark-first')
-        return colors.sort((a, b) => {
-            return colorBrightness(a) - colorBrightness(b)
-        }).reverse()
-    else
         return colors
             .sort((a, b) => {
                 return colorBrightness(a) - colorBrightness(b)
             })
+            .reverse()
+    else
+        return colors.sort((a, b) => {
+            return colorBrightness(a) - colorBrightness(b)
+        })
 }
 
 export function sortColors(
@@ -74,17 +75,17 @@ export function sortColors(
     direction: ColorsSortingDirection = 'default',
 ) {
     if (direction === 'dark-first')
-        return colors.sort((a, b) => {
-            const color1 = hexToHSB(a)[0]
-            const color2 = hexToHSB(b)[0]
-            return color1 - color2
-        }).reverse()
-    else
         return colors
             .sort((a, b) => {
-                return hexToHSB(a)[0] - hexToHSB(b)[0]
+                const color1 = hexToHSB(a)[0]
+                const color2 = hexToHSB(b)[0]
+                return color1 - color2
             })
-            
+            .reverse()
+    else
+        return colors.sort((a, b) => {
+            return hexToHSB(a)[0] - hexToHSB(b)[0]
+        })
 }
 
 export function isColorLight(color: any = '') {

@@ -80,7 +80,7 @@ const SongCategoryScreen = (props: Props) => {
         // to show in the UI for ex songs list, playlists data, artists data, etc
         search(category.name, 'SONG')
             .then((res: FetchedSongObject) => {
-                setSongs(res)                
+                setSongs(res)
             })
             .catch(_err => {})
 

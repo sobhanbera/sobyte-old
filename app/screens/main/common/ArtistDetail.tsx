@@ -3,7 +3,12 @@ import {useEffect} from 'react'
 import {ActivityIndicator} from 'react-native'
 import Entypo from 'react-native-vector-icons/Entypo'
 
-import {AnimatedHeader, Caption, CommonSongList, TopicTitle} from '../../../components'
+import {
+    AnimatedHeader,
+    Caption,
+    CommonSongList,
+    TopicTitle,
+} from '../../../components'
 import {
     ArtistObject,
     BareFetchedSongObjectInstance,
@@ -12,7 +17,7 @@ import {
 import {getHightQualityImageFromLinkWithHeight} from '../../../utils'
 import {useMusicApi} from '../../../api'
 import {useTheme} from '../../../context'
-import { EXTRA_SONGS_SCREEN } from '../../../constants'
+import {EXTRA_SONGS_SCREEN} from '../../../constants'
 
 interface Props {
     navigation?: any
@@ -56,14 +61,12 @@ const ArtistDetail = (props: Props) => {
     }, [])
 
     const launchExtraSongsScreen = () => {
-        props.navigation.navigate(EXTRA_SONGS_SCREEN, 
-            {  
-                data: {
-                    title: artist.name,
-                    image: highQualityArtistImage
-                }
-            }
-        )
+        props.navigation.navigate(EXTRA_SONGS_SCREEN, {
+            data: {
+                title: artist.name,
+                image: highQualityArtistImage,
+            },
+        })
     }
 
     return (
@@ -76,7 +79,17 @@ const ArtistDetail = (props: Props) => {
             <TopicTitle title="Hits By Artist" />
             <CommonSongList songs={songsByArtist.content} />
 
-            <Caption title={"Load More"} onPress={launchExtraSongsScreen} rightIcon={<Entypo size={18} name='chevron-small-right' color={themeColors.text[0] + 'AF'} />} />
+            <Caption
+                title={'Load More'}
+                onPress={launchExtraSongsScreen}
+                rightIcon={
+                    <Entypo
+                        size={18}
+                        name="chevron-small-right"
+                        color={themeColors.text[0] + 'AF'}
+                    />
+                }
+            />
         </AnimatedHeader>
     )
 }

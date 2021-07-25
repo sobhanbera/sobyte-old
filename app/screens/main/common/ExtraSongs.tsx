@@ -10,7 +10,7 @@ import {
 import {useMusicApi} from '../../../api'
 import {useTheme} from '../../../context'
 
-// this interface is the data type which should be passed from the parent when 
+// this interface is the data type which should be passed from the parent when
 // launching this screen
 export interface ExtraSongsScreenRouteDataProps {
     image: string

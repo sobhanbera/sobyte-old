@@ -4,9 +4,16 @@ import {
     colorBrightness,
     sortColorsBasedOnBrightness,
     hexToHSB,
-    sortColors
+    sortColors,
 } from './Colors'
-export {isColorLight, isColorDark, colorBrightness, sortColorsBasedOnBrightness, hexToHSB, sortColors}
+export {
+    isColorLight,
+    isColorDark,
+    colorBrightness,
+    sortColorsBasedOnBrightness,
+    hexToHSB,
+    sortColors,
+}
 
 import {
     returnNullCallback,
