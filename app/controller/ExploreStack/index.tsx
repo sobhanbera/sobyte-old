@@ -11,7 +11,6 @@ import ArtistDetail from '../../screens/main/common/ArtistDetail'
 const ProfileStack = createStackNavigator()
 interface Props {}
 const ProfileStackNavigator = (props: Props) => {
-    console.log("TEST", props)
     return (
         <ProfileStack.Navigator
             screenOptions={{
@@ -41,7 +40,19 @@ const ProfileStackNavigator = (props: Props) => {
                 }}
             />
             {/* this screen must be the same constant or many parts of the app may break when launching this screen */}
-            <ProfileStack.Screen name={ARTIST_DETAILS_SCREEN} component={ArtistDetail} />
+            <ProfileStack.Screen name={ARTIST_DETAILS_SCREEN} component={ArtistDetail} options={{
+                    headerShown: true,
+                    headerTitle: '',
+                    headerTransparent: true,
+                    headerTintColor: '#FFFFFF',
+                    headerBackImage: () => (
+                        <Entypo
+                            name="chevron-thin-left"
+                            color={'white'}
+                            size={20}
+                        />
+                    ),
+                }} />
         </ProfileStack.Navigator>
     )
 }
