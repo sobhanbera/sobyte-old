@@ -11,8 +11,8 @@
         "start": "react-native start",
         "reset": "yarn start --reset-cache",
         "test": "jest",
-        "prettier-check": "yarn prettier -c app/**/*.js",
-        "prettier-format": "yarn prettier --write app/**/*.js",
+        "prettier-check": "yarn prettier -c app",
+        "prettier-format": "yarn prettier --write app",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {
