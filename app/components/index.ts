@@ -82,7 +82,7 @@ export {
     SingleBlockArtists,
     SingleBlockArtists as BlockCardArtistList,
     TopicTitle,
-    Caption
+    Caption,
 }
 
 export {CommonSongList, CommonSongItem, CommonArtistList, CommonArtistItem}
