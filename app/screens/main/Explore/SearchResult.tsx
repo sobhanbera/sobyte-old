@@ -6,15 +6,13 @@ import {
     View,
     Keyboard,
     TouchableWithoutFeedback,
-    RefreshControl,
+    RefreshControl
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import {
     GradientBackground,
     HeaderSearch,
-    CardSong,
-    CardArtist,
     TopicTitle,
     GridArtistList,
     CommonSongList,
@@ -23,6 +21,7 @@ import {useMusicApi, usePrompt, useTheme} from '../../../context'
 import {
     DEFAULT_SMALL_ICON_SIZE,
     HEADER_MIN_HEIGHT,
+    INFINITE_SCROLL_OFFSET,
     PaddingBottomView,
 } from '../../../constants'
 import {
@@ -33,12 +32,27 @@ import {
 } from '../../../interfaces'
 import globalStyles from '../../../styles/global.styles'
 
+// const BOTTOM_PADDING = 100
+interface OnScrollProps {
+    layoutMeasurement: {
+        height: number
+        width: number
+    }
+    contentOffset: {
+        x: number
+        y: number
+    }
+    contentSize: {
+        height: number
+        width: number
+    }
+}
 interface Props {
     navigation?: any
 }
 const SearchResult: React.FC<Props> = props => {
     const {surfacelight, text} = useTheme().themeColors
-    const {getSearchSuggestions, search} = useMusicApi()
+    const {getSearchSuggestions, search, getContinuation} = useMusicApi()
     const {prompt} = usePrompt()
 
     const [searchText, setSearchText] = useState<string>('')
@@ -115,6 +129,46 @@ const SearchResult: React.FC<Props> = props => {
         searchArtists(query)
     }
 
+    const continueLoadingData = () => {
+        // this function will be called each time when the user is getting closed to the
+        // end of the scrollview
+        // after which this function will load futhure more data and show in
+        // the UI...
+        if (
+            loading === false &&
+            songs.continuation.clickTrackingParams &&
+            songs.continuation.continuation
+        ) {
+            setLoading(true)
+            getContinuation('search', songs.continuation, 'SONG')
+                .then((res: FetchedSongObject) => {
+                    const data = songs.content.concat(res.content)
+                    setSongs({
+                        content: data,
+                        continuation: res.continuation,
+                    })
+                    setLoading(false)
+                })
+                .catch(_err => {
+                    setLoading(false)
+                })
+        }
+    }
+
+    const checkEndReached = ({
+        layoutMeasurement,
+        contentOffset,
+        contentSize,
+    }: OnScrollProps) => {
+        // if the scroll position reach some offset position where the data needs to be loaded
+        // this function will call the continue loading data function
+        if (
+            layoutMeasurement.height + contentOffset.y >=
+            contentSize.height - INFINITE_SCROLL_OFFSET
+        )
+            continueLoadingData()
+    }
+
     return (
         <>
             {showSearchSuggestions === true ? (
@@ -180,7 +234,9 @@ const SearchResult: React.FC<Props> = props => {
                             }
                         />
 
+                        {/* tracking when the scroll reaches end */}
                         <ScrollView
+                            onScroll={({nativeEvent}) => checkEndReached(nativeEvent)}
                             refreshControl={
                                 <RefreshControl
                                     refreshing={loading}
@@ -195,6 +251,7 @@ const SearchResult: React.FC<Props> = props => {
                             loading ? (
                                 <TopicTitle title={'Artists'} />
                             ) : null}
+                            {artists.content[0].browseId.length > 0 &&
                             <GridArtistList
                                 navigation={props.navigation}
                                 content={artists.content}
@@ -204,13 +261,15 @@ const SearchResult: React.FC<Props> = props => {
                                 shimmerDirection={'right'}
                                 scrollDirection="horizontal"
                                 id={'demo'}
-                            />
+                            />}
 
                             {songs.content[0].musicId.length > 0 || loading ? (
                                 <TopicTitle title={'Songs'} />
                             ) : null}
-                            <CommonSongList songs={songs.content} />
-
+                            
+                            {songs.content[0].musicId.length > 0 &&
+                                <CommonSongList songs={songs.content} />
+                            }
                             {/* below padding for more spacing... */}
                             <PaddingBottomView />
                         </ScrollView>
