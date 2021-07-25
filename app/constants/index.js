@@ -65,6 +65,8 @@ export const DEFAULT_OVERLAY_OPACITY = 0.55 // threshold default opacity overlay
 export const DEFAULT_OVERLAY_OPACITY_MIN = 0.375692 // minimum opacity overlay over any view, component, image, etc
 export const DEFAULT_IMAGE_QUALITY = '200' // default image width and height in string...
 
+export const INFINITE_SCROLL_OFFSET = 1000 // default image width and height in string...
+
 export const LARGE_TEXT_LENGTH = 15 // length of the text after which "..." will be shown
 export const IMAGE_TINY_SIZE_TO_SHOW = 40 // width and height of the tiny sized image which should be shown in the UI
 export const IMAGE_SMALL_SIZE_TO_SHOW = 60 // width and height of the small sized image which should be shown in the UI
