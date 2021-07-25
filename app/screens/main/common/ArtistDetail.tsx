@@ -26,7 +26,7 @@ const ArtistDetail = (props: Props) => {
     const {artist} = props.route.params
 
     // context api from top level parent components
-    const {search, getContinuation} = useMusicApi()
+    const {search} = useMusicApi()
     const {themeColors} = useTheme()
 
     /**
@@ -35,16 +35,6 @@ const ArtistDetail = (props: Props) => {
     const [songsByArtist, setSongsByArtist] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
-
-    // this variable will control the flow of loading data
-    const [loading, setLoading] = useState<boolean>(false)
-    // and this constant will control what type of data to show in the particular UI
-
-    /**
-     * whenever the user seem to be scrolling towards the end of the scrollview this function will be called and more
-     * songs data will be loaded and rendered
-     */
-    const continueLoadingData = () => {}
 
     /**
      * high quality image of the artist
@@ -82,18 +72,11 @@ const ArtistDetail = (props: Props) => {
             headerNameTitle={artist.name}
             headerTitle={artist.name}
             infiniteScrollOffset={100}
-            onReachedEnd={continueLoadingData}>
+            onReachedEnd={() => {}}>
             <TopicTitle title="Hits By Artist" />
             <CommonSongList songs={songsByArtist.content} />
 
             <Caption title={"Load More"} onPress={launchExtraSongsScreen} rightIcon={<Entypo size={18} name='chevron-small-right' color={themeColors.text[0] + 'AF'} />} />
-
-            {loading ? (
-                <ActivityIndicator
-                    color={themeColors.white[0]}
-                    size={'small'}
-                />
-            ) : null}
         </AnimatedHeader>
     )
 }
