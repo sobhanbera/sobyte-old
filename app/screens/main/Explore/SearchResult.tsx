@@ -6,7 +6,7 @@ import {
     View,
     Keyboard,
     TouchableWithoutFeedback,
-    RefreshControl
+    RefreshControl,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -236,7 +236,9 @@ const SearchResult: React.FC<Props> = props => {
 
                         {/* tracking when the scroll reaches end */}
                         <ScrollView
-                            onScroll={({nativeEvent}) => checkEndReached(nativeEvent)}
+                            onScroll={({nativeEvent}) =>
+                                checkEndReached(nativeEvent)
+                            }
                             refreshControl={
                                 <RefreshControl
                                     refreshing={loading}
@@ -251,25 +253,26 @@ const SearchResult: React.FC<Props> = props => {
                             loading ? (
                                 <TopicTitle title={'Artists'} />
                             ) : null}
-                            {artists.content[0].browseId.length > 0 &&
-                            <GridArtistList
-                                navigation={props.navigation}
-                                content={artists.content}
-                                contentLength={artists.content.length}
-                                subColor={text[0] + '70'}
-                                textColor={text[0] + 'E7'}
-                                shimmerDirection={'right'}
-                                scrollDirection="horizontal"
-                                id={'demo'}
-                            />}
+                            {artists.content[0].browseId.length > 0 && (
+                                <GridArtistList
+                                    navigation={props.navigation}
+                                    content={artists.content}
+                                    contentLength={artists.content.length}
+                                    subColor={text[0] + '70'}
+                                    textColor={text[0] + 'E7'}
+                                    shimmerDirection={'right'}
+                                    scrollDirection="horizontal"
+                                    id={'demo'}
+                                />
+                            )}
 
                             {songs.content[0].musicId.length > 0 || loading ? (
                                 <TopicTitle title={'Songs'} />
                             ) : null}
-                            
-                            {songs.content[0].musicId.length > 0 &&
+
+                            {songs.content[0].musicId.length > 0 && (
                                 <CommonSongList songs={songs.content} />
-                            }
+                            )}
                             {/* below padding for more spacing... */}
                             <PaddingBottomView />
                         </ScrollView>

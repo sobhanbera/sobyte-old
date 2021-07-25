@@ -52,20 +52,18 @@ const HeaderSearch: React.FC<Props> = props => {
                 }}
                 onSubmitEditing={() => props.onSubmit()}
             />
-            <TouchableOpacity
-                onPress={() => props.onCancel()}
-                >
-                    <Text
-                        style={{
-                            color: text[0],
-                            fontSize: 18,
-                            paddingLeft: 8,
-                            textAlign: 'center',
-                            height: '100%',
-                            textAlignVertical: 'center',
-                        }}>
-                        Cancel
-                    </Text>
+            <TouchableOpacity onPress={() => props.onCancel()}>
+                <Text
+                    style={{
+                        color: text[0],
+                        fontSize: 18,
+                        paddingLeft: 8,
+                        textAlign: 'center',
+                        height: '100%',
+                        textAlignVertical: 'center',
+                    }}>
+                    Cancel
+                </Text>
             </TouchableOpacity>
         </View>
     )
