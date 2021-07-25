@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, View, TextInput, Text} from 'react-native'
+import {View, TextInput, Text, TouchableOpacity} from 'react-native'
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import {useTheme} from '../../context'
@@ -14,7 +14,7 @@ interface Props {
     onCancel: Function
 }
 const HeaderSearch: React.FC<Props> = props => {
-    const {white, black, surfacelight, border, text, primary, placeholder} =
+    const {white, black, surfacelight, text, primary, placeholder} =
         useTheme().themeColors
 
     return (
@@ -34,6 +34,7 @@ const HeaderSearch: React.FC<Props> = props => {
                 size={DEFAULT_SMALL_ICON_SIZE}
             />
             <TextInput
+                autoFocus
                 placeholder={'Search for songs, artists...'}
                 value={props.text}
                 onChangeText={e => props.onChangeText(e)}
@@ -51,18 +52,21 @@ const HeaderSearch: React.FC<Props> = props => {
                 }}
                 onSubmitEditing={() => props.onSubmit()}
             />
-            <Text
+            <TouchableOpacity
                 onPress={() => props.onCancel()}
-                style={{
-                    color: text[0],
-                    fontSize: 18,
-                    paddingLeft: 8,
-                    textAlign: 'center',
-                    height: '100%',
-                    textAlignVertical: 'center',
-                }}>
-                Cancel
-            </Text>
+                >
+                    <Text
+                        style={{
+                            color: text[0],
+                            fontSize: 18,
+                            paddingLeft: 8,
+                            textAlign: 'center',
+                            height: '100%',
+                            textAlignVertical: 'center',
+                        }}>
+                        Cancel
+                    </Text>
+            </TouchableOpacity>
         </View>
     )
 }
