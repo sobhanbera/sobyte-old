@@ -80,20 +80,7 @@ const SongCategoryScreen = (props: Props) => {
         // to show in the UI for ex songs list, playlists data, artists data, etc
         search(category.name, 'SONG')
             .then((res: FetchedSongObject) => {
-                setSongs(res)
-                setLoading(true)
-                getContinuation('search', res.continuation, 'SONG')
-                    .then((res: FetchedSongObject) => {
-                        const data = songs.content.concat(res.content)
-                        setSongs({
-                            content: data,
-                            continuation: res.continuation,
-                        })
-                        setLoading(false)
-                    })
-                    .catch(_err => {
-                        setLoading(false)
-                    })
+                setSongs(res)                
             })
             .catch(_err => {})
 
