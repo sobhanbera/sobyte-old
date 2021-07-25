@@ -113,9 +113,7 @@ const AnimatedHeader = (props: Props) => {
             props.backgroundGradientColors &&
             props.backgroundGradientColors.length > 2
         ) {
-            setImageColors(
-                sortColors(props.backgroundGradientColors),
-            )
+            setImageColors(sortColors(props.backgroundGradientColors))
         } else {
             /**
              * fallback condition when the prop of background gradient colors array is not provided by the
