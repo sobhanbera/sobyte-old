@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, View, TextInput} from 'react-native'
+import {StyleSheet, View, TextInput, Text} from 'react-native'
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import {useTheme} from '../../context'
@@ -11,6 +11,7 @@ interface Props {
     onChangeText: Function
     onSubmit: Function
     goBack: Function
+    onCancel: Function
 }
 const HeaderSearch: React.FC<Props> = props => {
     const {white, black, surfacelight, border, text, primary, placeholder} =
@@ -50,6 +51,18 @@ const HeaderSearch: React.FC<Props> = props => {
                 }}
                 onSubmitEditing={() => props.onSubmit()}
             />
+            <Text
+                onPress={() => props.onCancel()}
+                style={{
+                    color: text[0],
+                    fontSize: 18,
+                    paddingLeft: 8,
+                    textAlign: 'center',
+                    height: '100%',
+                    textAlignVertical: 'center',
+                }}>
+                Cancel
+            </Text>
         </View>
     )
 }

@@ -167,6 +167,7 @@ const SearchResult: React.FC<Props> = props => {
                     <GradientBackground uniformColor>
                         <HeaderSearch
                             onSubmit={startSearch}
+                            onCancel={hideSuggestions}
                             text={searchText}
                             onChangeText={setSearchText}
                             goBack={() =>
