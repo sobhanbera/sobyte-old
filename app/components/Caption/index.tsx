@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, StyleProp, TextStyle} from 'react-native'
+import {Text, StyleProp, TextStyle, View} from 'react-native'
 
 import {useTheme} from '../../context'
 
@@ -13,27 +13,36 @@ interface Props {
     leftIcon?: React.ReactNode
     rightIcon?: React.ReactNode
 }
+/**
+ * default text color - themeColors.text[0] + 'AF'
+*/
 const Caption = (props: Props) => {
     const {text} = useTheme().themeColors
 
     return (
-        <Text
-            onPress={() => props.onPress()}
-            style={[
-                {
-                    color: props.color || text[0] + 'AF',
-                    fontSize: 15,
-                    paddingVertical: 10,
-                    textAlign: props.align || 'center'
-                },
-                props.style,
-            ]}>
+        <View style={{
+            justifyContent:'center',
+            alignItems:'center',
+            flexDirection: 'row'
+        }}>
             {props.leftIcon}
 
-            {props.title}
-            
+            <Text
+                onPress={() => props.onPress()}
+                style={[
+                    {
+                        color: props.color || text[0] + 'AF',
+                        fontSize: 15,
+                        paddingVertical: 10,
+                        textAlign: props.align || 'center'
+                    },
+                    props.style,
+                ]}>
+                {props.title}
+            </Text>
+
             {props.rightIcon}
-        </Text>
+        </View>
     )
 }
 
