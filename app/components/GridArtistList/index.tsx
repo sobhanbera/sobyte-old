@@ -62,9 +62,12 @@ const GridArtistList = React.memo(
                 data={content}
                 keyExtractor={(item, _) => item.browseId}
                 renderItem={({item, index}) => {
+                    // grid list item will provide an artist data when calling this function from it's own component
+                    // this data then will be passed to the launching artists details screen function....
+                
                     return (
                         <GridArtistItem
-                            onPress={() => launchArtistsDetailsScreen(item)}
+                            onPress={(artistData: ArtistObject) => launchArtistsDetailsScreen(artistData)}
                             id={id}
                             item={item}
                             index={index}
