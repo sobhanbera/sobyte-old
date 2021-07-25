@@ -34,6 +34,7 @@ interface OnScrollProps {
     }
 }
 interface Props {
+    backgroundGradientColors?: string[]
     headerImage: string
     headerTitle: string
     headerNameTitle: string
@@ -66,20 +67,24 @@ const AnimatedHeader = (props: Props) => {
     }
 
     useEffect(() => {
-        ImageColors.getColors(props.headerImage, {
-            fallback: themeColors.surfacelight[0],
-                    cache: false,
-                    key: 'sobyte_song_category_color'
-        }).then((_res: any) => {
-            setImageColors(sortColorsBasedOnBrightness([
-                _res.vibrant + '7F',
-                _res.dominant + '7F',
-                _res.darkVibrant+ '7F',
-                _res.darkMuted+ '7F',
-            ]))
-        }).catch(_err => {
-            setImageColors([themeColors.surfacelight[0], themeColors.surfacelight[0]])
-        })
+        if(props.backgroundGradientColors && props.backgroundGradientColors.length > 2) {
+            setImageColors(sortColorsBasedOnBrightness(props.backgroundGradientColors))
+        } else {
+            ImageColors.getColors(props.headerImage, {
+                fallback: themeColors.surfacelight[0],
+                        cache: false,
+                        key: 'sobyte_song_category_color'
+            }).then((_res: any) => {
+                setImageColors(sortColorsBasedOnBrightness([
+                    _res.vibrant + '7F',
+                    _res.dominant + '7F',
+                    _res.darkVibrant+ '7F',
+                    _res.darkMuted+ '7F',
+                ]))
+            }).catch(_err => {
+                setImageColors([themeColors.surfacelight[0], themeColors.surfacelight[0]])
+            })
+        }
     }, [props.headerImage])
 
     return (
