@@ -35,6 +35,7 @@ interface OnScrollProps {
 }
 interface Props {
     backgroundGradientColors?: string[]
+    sortedBackgroundGradientColors?: string[]
     headerImage: string
     headerTitle: string
     headerNameTitle: string
@@ -67,7 +68,9 @@ const AnimatedHeader = (props: Props) => {
     }
 
     useEffect(() => {
-        if(props.backgroundGradientColors && props.backgroundGradientColors.length > 2) {
+        if(props.sortedBackgroundGradientColors && props.sortedBackgroundGradientColors.length > 2) {
+            setImageColors(props.sortedBackgroundGradientColors)
+        } else if(props.backgroundGradientColors && props.backgroundGradientColors.length > 2) {
             setImageColors(sortColorsBasedOnBrightness(props.backgroundGradientColors))
         } else {
             ImageColors.getColors(props.headerImage, {
