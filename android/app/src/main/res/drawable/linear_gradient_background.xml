@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+<!--    '#f79533',-->
+<!--    '#f37055',-->
+<!--    '#ef4e7b',-->
+<!--    '#a166ab',-->
+<!--    '#5073b8',-->
+<!--    '#1098ad',-->
+<!--    '#07b39b',-->
+<!--    '#6fba82',-->
 
-</selector>
+    <gradient
+        android:startColor="#EF1559"
+        android:centerColor="@color/splash_screen_background_color"
+        android:endColor="#EF1559"
+        android:angle="270" />
+</shape>
