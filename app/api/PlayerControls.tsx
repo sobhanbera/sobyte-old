@@ -440,116 +440,128 @@ const Player: FC<PlayerProps> = props => {
                 /**
                  * generating the next song list to show in the music player tab UI
                  */
-                getNext(track.id, track.playlistId, '')
-                    .then(res => {
-                        /**
-                         * since result of next contains an array which contains Objects
-                         * these Object are of type {
-                         *      id: string
-                         *      playlistId: string
-                         * }
-                         * this is a demo type to resemble the object blueprint
-                         * here we are itterating over the result and getting its full song data with title, artist, thumbnail, duration etc
-                         */
+                const ShouldLoadMoreData = false
+                // condition true- to load more data, false- to load no more data...
+                if (ShouldLoadMoreData)
+                    // this check is given bcz I need we any developer is only working on the first song then no need to render all the songs list in music player UI and wait sometime
+                    getNext(track.id, track.playlistId, '')
+                        .then(res => {
+                            /**
+                             * since result of next contains an array which contains Objects
+                             * these Object are of type {
+                             *      id: string
+                             *      playlistId: string
+                             * }
+                             * this is a demo type to resemble the object blueprint
+                             * here we are itterating over the result and getting its full song data with title, artist, thumbnail, duration etc
+                             */
 
-                        /**
-                         * we are getting the length of the content and according to that we are setting the @var nextSongsList only for 5 times.
-                         * one time is done as for the above code
-                         * one at the starting of below check
-                         * other 2 updates will be done below
-                         * and a final update will be done when everything is loaded
-                         */
-                        const numberOfContents = res.content.length
-                        /**
-                         * number of updates according the number of Content's...
-                         */
-                        const updatedDependent = Math.floor(
-                            numberOfContents / 3,
-                        ) // since the maximum next data we could get is 24
-                        // so we are dividing by 3 to get exactly 2 updates except the last one
-                        for (let i in res.content) {
-                            getPlayer(
-                                res.content[i].musicId,
-                                res.content[i].playlistId,
-                                '',
-                            )
-                                .then(
-                                    (result: SongObjectWithArtistAsString) => {
-                                        /**
-                                         * if the song already exists in the next song list we will continue to the next itteration
-                                         */
-                                        if (
-                                            !checkSongAlreadyInTemporaryNextSongsList(
-                                                result.musicId,
-                                                nextSongsData,
-                                            )
-                                        ) {
-                                            /**
-                                             * if the song does not exists in the next sont list which is temporary in this case
-                                             * then this code will fetch the song url using the fetchMusic function provided by the Fetcher Context API
-                                             */
-                                            fetchMusic(result.musicId)
-                                                .then(async (_res: any) => {
-                                                    /**
-                                                     * after getting the data will are also generating the high quality image link
-                                                     * of the song and the artist name with
-                                                     * finally pushing the whole data to nextSongList to get it in the music player UI
-                                                     */
-                                                    const highQualityImage =
-                                                        getHighQualityImageFromSongImage(
-                                                            result
-                                                                .thumbnails[0],
-                                                            '720',
-                                                        )
-                                                    const artist = result.artist
-
-                                                    /**
-                                                     * final push to nextSongList
-                                                     */
-                                                    nextSongsData.push({
-                                                        id: result.musicId,
-                                                        artist: artist,
-                                                        artwork:
-                                                            highQualityImage,
-                                                        duration:
-                                                            result.duration,
-                                                        playlistId:
-                                                            result.playlistId,
-                                                        title: result.name,
-                                                        url: _res,
-                                                    })
-                                                    const currentIndex =
-                                                        Number(i)
-                                                    if (
-                                                        currentIndex === 1 ||
-                                                        currentIndex %
-                                                            updatedDependent ===
-                                                            0 ||
-                                                        currentIndex ===
-                                                            res.content.length -
-                                                                1
-                                                    ) {
-                                                        setNextSongsList(
-                                                            nextSongsData,
-                                                        )
-                                                    }
-                                                })
-                                                .catch(_err => {})
-                                        }
-                                    },
+                            /**
+                             * we are getting the length of the content and according to that we are setting the @var nextSongsList only for 5 times.
+                             * one time is done as for the above code
+                             * one at the starting of below check
+                             * other 2 updates will be done below
+                             * and a final update will be done when everything is loaded
+                             */
+                            const numberOfContents = res.content.length
+                            /**
+                             * number of updates according the number of Content's...
+                             */
+                            const updatedDependent = Math.floor(
+                                numberOfContents / 3,
+                            ) // since the maximum next data we could get is 24
+                            // so we are dividing by 3 to get exactly 2 updates except the last one
+                            for (let i in res.content) {
+                                getPlayer(
+                                    res.content[i].musicId,
+                                    res.content[i].playlistId,
+                                    '',
                                 )
-                                .catch(err => {
-                                    console.error('GETTING PLAYER ERROR', err)
-                                })
-                        }
-                        /**
-                         * setting the next song list from next song list temporary data...
-                         */
-                        // setNextSongsList(nextSongsData)
-                    })
-                    .catch(err => {
-                        console.error('GETTING NEXT LIST', err)
-                    })
+                                    .then(
+                                        (
+                                            result: SongObjectWithArtistAsString,
+                                        ) => {
+                                            /**
+                                             * if the song already exists in the next song list we will continue to the next itteration
+                                             */
+                                            if (
+                                                !checkSongAlreadyInTemporaryNextSongsList(
+                                                    result.musicId,
+                                                    nextSongsData,
+                                                )
+                                            ) {
+                                                /**
+                                                 * if the song does not exists in the next sont list which is temporary in this case
+                                                 * then this code will fetch the song url using the fetchMusic function provided by the Fetcher Context API
+                                                 */
+                                                fetchMusic(result.musicId)
+                                                    .then(async (_res: any) => {
+                                                        /**
+                                                         * after getting the data will are also generating the high quality image link
+                                                         * of the song and the artist name with
+                                                         * finally pushing the whole data to nextSongList to get it in the music player UI
+                                                         */
+                                                        const highQualityImage =
+                                                            getHighQualityImageFromSongImage(
+                                                                result
+                                                                    .thumbnails[0],
+                                                                '720',
+                                                            )
+                                                        const artist =
+                                                            result.artist
+
+                                                        /**
+                                                         * final push to nextSongList
+                                                         */
+                                                        nextSongsData.push({
+                                                            id: result.musicId,
+                                                            artist: artist,
+                                                            artwork:
+                                                                highQualityImage,
+                                                            duration:
+                                                                result.duration,
+                                                            playlistId:
+                                                                result.playlistId,
+                                                            title: result.name,
+                                                            url: _res,
+                                                        })
+                                                        const currentIndex =
+                                                            Number(i)
+                                                        if (
+                                                            currentIndex ===
+                                                                1 ||
+                                                            currentIndex %
+                                                                updatedDependent ===
+                                                                0 ||
+                                                            currentIndex ===
+                                                                res.content
+                                                                    .length -
+                                                                    1
+                                                        ) {
+                                                            setNextSongsList(
+                                                                nextSongsData,
+                                                            )
+                                                        }
+                                                    })
+                                                    .catch(_err => {})
+                                            }
+                                        },
+                                    )
+                                    .catch(err => {
+                                        console.error(
+                                            'GETTING PLAYER ERROR',
+                                            err,
+                                        )
+                                    })
+                            }
+                            /**
+                             * setting the next song list from next song list temporary data...
+                             */
+                            // setNextSongsList(nextSongsData)
+                        })
+                        .catch(err => {
+                            console.error('GETTING NEXT LIST', err)
+                        })
             })
             .catch(err => {
                 setShowLoading(false)
