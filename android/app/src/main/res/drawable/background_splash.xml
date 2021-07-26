@@ -4,10 +4,15 @@
     <item
         android:drawable="@color/splash_screen_background_color"/>
 
+    <!-- actual image dimensions are width - 1109px, height - 1408px -->
+    <!-- 10th multiple of actual width & height -->
     <item
-        android:width="200dp"
-        android:height="200dp"
-        android:drawable="@mipmap/ic_launcher"
-        android:gravity="center" />
-
+        android:width="110.9dp"
+        android:height="140.8dp"
+        android:drawable="@mipmap/ic_launcher_dark_logo"
+        android:gravity="center"
+        android:bottom="400dp"
+        android:top="400dp"
+        android:left="200dp"
+        android:right="200dp" />
 </layer-list>
