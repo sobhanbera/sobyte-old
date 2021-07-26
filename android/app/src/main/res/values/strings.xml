@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sobyte</string>
+    <string name="app_name_lower">sobyte</string>
+    <string name="splash_screen_image">splash screen image</string>
 </resources>
