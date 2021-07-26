@@ -1,5 +1,9 @@
 rootProject.name = 'Sobyte'
 
+/** react native splash screen provider package */
+include ':react-native-splash-screen'
+project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
+
 /** library to get or extract the colors (vibrant, main, common, etc...) from an image */
 include ':react-native-image-colors'
 project(':react-native-image-colors').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-colors/android')

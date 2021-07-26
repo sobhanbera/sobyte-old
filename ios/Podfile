@@ -30,6 +30,8 @@ target 'Sobyte' do
 
   pod 'RNImageColors', :path => '../node_modules/react-native-image-colors'
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing
