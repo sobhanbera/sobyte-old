@@ -68,6 +68,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                 height: props.headerScrollHeight || HEADER_MIN_HEIGHT,
                 width: '100%',
                 backgroundColor: props.headerScrollColor,
+                paddingHorizontal: 12,
             }}>
             <View
                 style={{
