@@ -30,50 +30,25 @@ const TrackProgress = (props: Props) => {
                     alignItems: 'center',
                 }}>
                 <Slider
-                    step={0.001}
+                    // step={0.001}
                     value={actualPosition}
                     minimumValue={0}
                     maximumValue={actualDuration}
+                    thumbTintColor={props.color || '#DFDFDF'}
                     minimumTrackTintColor={props.color || '#DFDFDF'}
                     maximumTrackTintColor={(props.color || '#DFDFDF') + '7F'} // half brightness of the given color prop
-                    thumbTintColor={props.color || '#DFDFDF'}
                     onSlidingComplete={(value: number) => {
                         seekTo(Math.floor(value)) // the e is in seconds
-                        console.log("LOAOAO", value, position, duration/1000)
+                        console.log('LOAOAO', value, position, duration / 1000)
                     }}
+                    thumbImage={require('../../assets/images/icons/thumb.png')}
                     style={{
                         width: '100%',
+                        height: 20,
+                        marginVertical: 10,
+                        borderRadius: 10,
                     }}
                 />
-                <ElementSlider
-                    step={0.001}
-                    value={actualPosition}
-                    minimumValue={0}
-                    maximumValue={actualDuration}
-                    minimumTrackTintColor={props.color || '#DFDFDF'}
-                    maximumTrackTintColor={(props.color || '#DFDFDF') + '7F'} // half brightness of the given color prop
-                    thumbTintColor={props.color || '#DFDFDF'}
-                    thumbTouchSize={{width: 20, height: 20}}
-                    thumbStyle={{
-                        width: 9,
-                        height: 9
-                    }}
-                    trackStyle={{
-                        width: '100%',
-                        height: 2
-                    }}
-                    allowTouchTrack
-                    style={{
-                        width: '100%',
-                    }}
-                    onSlidingComplete={(e) => {
-                        console.log(e)
-                    }}
-                    animateTransitions
-                    animationType='timing'
-                />
-
-                
             </View>
         </View>
     )
