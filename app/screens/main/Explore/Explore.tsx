@@ -245,6 +245,8 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         navigation={props.navigation}
                         cardTitle={'Artists You May Like'}
                         artistsData={artistsData}
+                        noBackground={true}
+                        appearanceType='not-card'
                     />
 
                     {/* romantic */}
