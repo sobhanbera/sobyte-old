@@ -4,6 +4,7 @@ import ImageHeaderScrollView, {
     TriggeringView,
 } from 'react-native-image-header-scroll-view'
 import * as Animatable from 'react-native-animatable'
+import FastImage from 'react-native-fast-image'
 
 import LinearGradient from 'react-native-linear-gradient'
 import ImageColors from 'react-native-image-colors'
@@ -168,14 +169,17 @@ const AnimatedHeader = (props: Props) => {
                         },
                         // globalStyles.lightBottomBorder,
                     ]}>
-                    <Image
-                        source={{uri: props.headerImage}}
+                    <FastImage
+                        source={{
+                            uri: props.headerImage,
+                            priority: FastImage.priority.high,
+                        }}
                         style={{
                             height: HEADER_MAX_HEIGHT,
                             width: Dimensions.get('window').width,
                             alignSelf: 'stretch',
-                            resizeMode: 'cover',
                         }}
+                        resizeMode={FastImage.resizeMode.cover}
                     />
                 </View>
             )}
