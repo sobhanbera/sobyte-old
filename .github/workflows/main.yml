@@ -28,11 +28,7 @@ jobs:
       # - name: multiline command
         # run: |
           # echo Hello, world!
-      - name: App Directory Tree
-        run: tree app
-      - name: Full Project File Structure
-        run: tree
       - name: Prettier Format Check
-        run: yarn run prettier -c app/
+        run: yarn run prettier -c app
 
 # this are the new seperated workflows...
