@@ -42,6 +42,8 @@ const TrackProgress = (props: Props) => {
                         console.log('LOAOAO', value, position, duration / 1000)
                     }}
                     thumbImage={require('../../assets/images/icons/thumb.png')}
+                    minimumTrackImage={require('../../assets/images/icons/track.png')}
+                    maximumTrackImage={require('../../assets/images/icons/track.png')}
                     style={{
                         width: '100%',
                         height: 20,
