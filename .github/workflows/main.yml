@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Prettier Format Check
-        run: yarn run prettier -c app
+        run: yarn install && yarn run prettier -c app
 
   # This workflow will output some neccessary things like file structure and so on...
   outputs:
