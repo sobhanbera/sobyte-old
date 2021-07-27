@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react'
 import {View, Image, Pressable} from 'react-native'
 import {Text} from 'react-native-paper'
+import FastImage from 'react-native-fast-image'
 
 import {ArtistObject} from '../../interfaces'
 import {
@@ -41,8 +42,11 @@ const GridArtistItem = React.memo(
                               //     ? styles.lastContent
                               {},
                     ]}>
-                    <Image
-                        source={{uri: highQualityImage}}
+                    <FastImage
+                        source={{
+                            uri: highQualityImage,
+                            priority: FastImage.priority.normal
+                        }}
                         style={[
                             styles.contentImage,
                             {
