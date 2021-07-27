@@ -173,7 +173,7 @@ const SearchResult: React.FC<Props> = props => {
             continueLoadingData()
     }
 
-    /** 
+    /**
      * since sometime search suggestion is one only in that case we have to know that array is
      * available or not - if available then only show the lists of suggestions...
      */
@@ -194,7 +194,7 @@ const SearchResult: React.FC<Props> = props => {
                     }}>
                     {searchSuggestions.map(suggestion => {
                         /** we are ignoring those suggestions which includes video on it since only songs, musics could be shown */
-                        if(suggestion.includes('video')) return null
+                        if (suggestion.includes('video')) return null
 
                         return (
                             <TouchableOpacity
