@@ -1,11 +1,12 @@
 import React from 'react'
+import { StyleProp } from 'react-native'
 import {View, Text, ViewStyle} from 'react-native'
 
 import {useTheme} from '../../context'
 
 interface Props {
     children?: React.ReactNode
-    style?: ViewStyle
+    style?: StyleProp<ViewStyle>
     padding?: boolean
     noBackground?: boolean
 }
