@@ -32,6 +32,8 @@ target 'Sobyte' do
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
+  pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing
