@@ -440,11 +440,11 @@ const Player: FC<PlayerProps> = props => {
                 /**
                  * generating the next song list to show in the music player tab UI
                  */
-                const ShouldLoadMoreData = false
+                const ShouldLoadMoreData = true
                 const ShouldShowDataInUI = true // if this variable is true the above varialble should be true
                 // then the below code will load one more track data so that it updates the UI and show it in the music player UI...
                 // condition true- to load more data, false- to load no more data...
-                if (ShouldLoadMoreData)
+                if (ShouldLoadMoreData && ShouldShowDataInUI)
                     // this check is given bcz I need we any developer is only working on the first song then no need to render all the songs list in music player UI and wait sometime
                     getNext(track.id, track.playlistId, '')
                         .then(res => {
