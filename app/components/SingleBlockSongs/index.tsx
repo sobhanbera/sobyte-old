@@ -10,13 +10,24 @@ import {FetchedSongObject} from '../../interfaces'
 interface Props {
     musicData: FetchedSongObject
     cardTitle: string
+    appearanceType?: 'card' | 'not-card'
+    noBackground?: boolean
 }
 const SingleBlockSongs = (props: Props) => {
     const {themeColors} = useTheme()
 
     return (
-        <Block style={globalStyles.blockOrCardOuterBlock}>
-            <Block style={globalStyles.blockOrCardinnerBlock}>
+        <Block
+            style={[
+                globalStyles.blockOrCardOuterBlock,
+                props.appearanceType === 'card'
+                    ? {}
+                    : {
+                          marginHorizontal: 0,
+                          elevation: props.noBackground ? 0 : 30,
+                      },
+            ]} noBackground={props.noBackground}>
+            <Block style={globalStyles.blockOrCardinnerBlock} noBackground={props.noBackground}>
                 <BlockTitle
                     style={[
                         globalStyles.topicTitle,
