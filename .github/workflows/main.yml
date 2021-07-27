@@ -32,3 +32,5 @@ jobs:
         run: tree app
       - name: Full Project File Structure
         run: tree
+      - name: Prettier Format Check
+        run: yarn prettier -c app/
