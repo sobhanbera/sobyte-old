@@ -192,8 +192,11 @@ const Explore: React.FC<ExploreTabProps> = props => {
                                 3 * 5 + // top padding of image
                                 3 * 5 + // bottom padding of image
                                 0, // a random height to fit the items
-                        }} noBackground={true}>
-                        <Block style={globalStyles.blockOrCardinnerBlock} noBackground={true}>
+                        }}
+                        noBackground={true}>
+                        <Block
+                            style={globalStyles.blockOrCardinnerBlock}
+                            noBackground={true}>
                             <BlockTitle
                                 style={[
                                     globalStyles.topicTitle,
@@ -229,7 +232,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Trendings'}
                         musicData={musicData[0]}
                         noBackground={true}
-                        appearanceType='not-card'
+                        appearanceType="not-card"
                     />
 
                     {/* bollywood hits */}
@@ -237,7 +240,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Bollywood Hits'}
                         musicData={musicData[1]}
                         noBackground={true}
-                        appearanceType='not-card'
+                        appearanceType="not-card"
                     />
 
                     {/* artists list */}
@@ -246,7 +249,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Artists You May Like'}
                         artistsData={artistsData}
                         noBackground={true}
-                        appearanceType='not-card'
+                        appearanceType="not-card"
                     />
 
                     {/* romantic */}
@@ -254,7 +257,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Romantic Songs'}
                         musicData={musicData[2]}
                         noBackground={true}
-                        appearanceType='not-card'
+                        appearanceType="not-card"
                     />
                 </GradientBackground>
 
@@ -266,7 +269,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Popular Mix'}
                         musicData={musicData[3]}
                         noBackground={true}
-                        appearanceType='not-card'
+                        appearanceType="not-card"
                     />
 
                     {/* pop */}
@@ -274,7 +277,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Pop'}
                         musicData={musicData[4]}
                         noBackground={true}
-                        appearanceType='not-card'
+                        appearanceType="not-card"
                     />
 
                     {/* lo-fi songs */}
@@ -282,7 +285,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Chill Time'}
                         musicData={musicData[5]}
                         noBackground={true}
-                        appearanceType='not-card'
+                        appearanceType="not-card"
                     />
 
                     {/* are you sorrow */}
@@ -290,7 +293,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         cardTitle={'Are You Sad'}
                         musicData={musicData[6]}
                         noBackground={true}
-                        appearanceType='not-card'
+                        appearanceType="not-card"
                     />
 
                     {/* button to go to the top of the scoll view */}

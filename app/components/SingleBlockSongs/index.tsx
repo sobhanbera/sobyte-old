@@ -26,10 +26,19 @@ const SingleBlockSongs = (props: Props) => {
                           marginHorizontal: 0,
                           elevation: props.noBackground ? 0 : 30,
                       },
-            ]} noBackground={props.noBackground}>
-            <Block style={[globalStyles.blockOrCardinnerBlock, {
-                borderBottomColor: props.appearanceType === 'card' ? '#7f7f7f16' : themeColors.themecolorrevert[0] + '16'
-            }]} noBackground={props.noBackground}>
+            ]}
+            noBackground={props.noBackground}>
+            <Block
+                style={[
+                    globalStyles.blockOrCardinnerBlock,
+                    {
+                        borderBottomColor:
+                            props.appearanceType === 'card'
+                                ? '#7f7f7f16'
+                                : themeColors.themecolorrevert[0] + '16',
+                    },
+                ]}
+                noBackground={props.noBackground}>
                 <BlockTitle
                     style={[
                         globalStyles.topicTitle,

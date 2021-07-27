@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleProp } from 'react-native'
+import {StyleProp} from 'react-native'
 import {View, Text, ViewStyle} from 'react-native'
 
 import {useTheme} from '../../context'
