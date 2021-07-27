@@ -228,12 +228,16 @@ const Explore: React.FC<ExploreTabProps> = props => {
                     <BlockCardSongsList
                         cardTitle={'Trendings'}
                         musicData={musicData[0]}
+                        noBackground={true}
+                        appearanceType='not-card'
                     />
 
                     {/* bollywood hits */}
                     <BlockCardSongsList
                         cardTitle={'Bollywood Hits'}
                         musicData={musicData[1]}
+                        noBackground={true}
+                        appearanceType='not-card'
                     />
 
                     {/* artists list */}
@@ -247,6 +251,8 @@ const Explore: React.FC<ExploreTabProps> = props => {
                     <BlockCardSongsList
                         cardTitle={'Romantic Songs'}
                         musicData={musicData[2]}
+                        noBackground={true}
+                        appearanceType='not-card'
                     />
                 </GradientBackground>
 
@@ -257,24 +263,32 @@ const Explore: React.FC<ExploreTabProps> = props => {
                     <BlockCardSongsList
                         cardTitle={'Popular Mix'}
                         musicData={musicData[3]}
+                        noBackground={true}
+                        appearanceType='not-card'
                     />
 
                     {/* pop */}
                     <BlockCardSongsList
                         cardTitle={'Pop'}
                         musicData={musicData[4]}
+                        noBackground={true}
+                        appearanceType='not-card'
                     />
 
                     {/* lo-fi songs */}
                     <BlockCardSongsList
                         cardTitle={'Chill Time'}
                         musicData={musicData[5]}
+                        noBackground={true}
+                        appearanceType='not-card'
                     />
 
                     {/* are you sorrow */}
                     <BlockCardSongsList
                         cardTitle={'Are You Sad'}
                         musicData={musicData[6]}
+                        noBackground={true}
+                        appearanceType='not-card'
                     />
 
                     {/* button to go to the top of the scoll view */}
