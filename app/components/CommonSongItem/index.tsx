@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, Image} from 'react-native'
 import Entypo from 'react-native-vector-icons/Entypo'
+import FastImage from 'react-native-fast-image'
 
 import {SongObject} from '../../interfaces'
 import {
@@ -58,8 +59,11 @@ const CommonSongItem = ({
             activeOpacity={0.75}>
             <View style={songComponentsStyles.commonCard}>
                 <View style={songComponentsStyles.commonCardMain}>
-                    <Image
-                        source={{uri: songImage}}
+                    <FastImage
+                        source={{
+                            uri: songImage,
+                            priority: FastImage.priority.normal,
+                        }}
                         style={{
                             width: IMAGE_SMALL_SIZE_TO_SHOW,
                             height: IMAGE_SMALL_SIZE_TO_SHOW,
