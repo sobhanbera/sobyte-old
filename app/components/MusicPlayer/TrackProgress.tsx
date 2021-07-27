@@ -1,6 +1,7 @@
 import React from 'react'
 import {View} from 'react-native'
 import Slider from '@react-native-community/slider'
+import {Slider as ElementSlider} from 'react-native-elements'
 
 import {usePlayer, usePlayerProgress} from '../../context'
 
@@ -12,6 +13,8 @@ const TrackProgress = (props: Props) => {
         position, // unit - second
         duration, // unit - millisecond
     } = usePlayerProgress()
+    const actualPosition = Math.floor(position)
+    const actualDuration = Math.floor(duration / 1000)
     const {seekTo} = usePlayer()
 
     return (
@@ -24,29 +27,53 @@ const TrackProgress = (props: Props) => {
             <View
                 style={{
                     width: '100%',
-                    // maxWidth: 330,
                     alignItems: 'center',
-                    // backgroundColor: 'white',
                 }}>
                 <Slider
-                    value={position} // position is in seconds
+                    step={0.001}
+                    value={actualPosition}
                     minimumValue={0}
-                    maximumValue={duration / 1000} // duration is in milliseconds, but props.duration must be in seconds
-                    maximumTrackTintColor={(props.color || '#000000') + '7F'} // half brightness of the given color prop
-                    thumbTintColor={props.color || '#000000'}
-                    minimumTrackTintColor={props.color || '#000000'}
-                    onSlidingComplete={e => {
-                        seekTo(e) // the e is in seconds
+                    maximumValue={actualDuration}
+                    minimumTrackTintColor={props.color || '#DFDFDF'}
+                    maximumTrackTintColor={(props.color || '#DFDFDF') + '7F'} // half brightness of the given color prop
+                    thumbTintColor={props.color || '#DFDFDF'}
+                    onSlidingComplete={(value: number) => {
+                        seekTo(Math.floor(value)) // the e is in seconds
+                        console.log("LOAOAO", value, position, duration/1000)
                     }}
-                    step={1}
                     style={{
                         width: '100%',
-                        padding: 0,
-                        margin: 0,
-                        alignItems: 'center',
-                        zIndex: 2,
                     }}
                 />
+                <ElementSlider
+                    step={0.001}
+                    value={actualPosition}
+                    minimumValue={0}
+                    maximumValue={actualDuration}
+                    minimumTrackTintColor={props.color || '#DFDFDF'}
+                    maximumTrackTintColor={(props.color || '#DFDFDF') + '7F'} // half brightness of the given color prop
+                    thumbTintColor={props.color || '#DFDFDF'}
+                    thumbTouchSize={{width: 20, height: 20}}
+                    thumbStyle={{
+                        width: 9,
+                        height: 9
+                    }}
+                    trackStyle={{
+                        width: '100%',
+                        height: 2
+                    }}
+                    allowTouchTrack
+                    style={{
+                        width: '100%',
+                    }}
+                    onSlidingComplete={(e) => {
+                        console.log(e)
+                    }}
+                    animateTransitions
+                    animationType='timing'
+                />
+
+                
             </View>
         </View>
     )
