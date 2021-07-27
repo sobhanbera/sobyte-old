@@ -71,7 +71,7 @@ const GridSongItem = React.memo(
                     <FastImage
                         source={{
                             uri: songImage,
-                            priority: FastImage.priority.normal
+                            priority: FastImage.priority.normal,
                         }}
                         style={[
                             styles.contentImage,

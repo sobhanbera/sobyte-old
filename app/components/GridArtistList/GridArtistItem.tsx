@@ -45,7 +45,7 @@ const GridArtistItem = React.memo(
                     <FastImage
                         source={{
                             uri: highQualityImage,
-                            priority: FastImage.priority.normal
+                            priority: FastImage.priority.normal,
                         }}
                         style={[
                             styles.contentImage,
