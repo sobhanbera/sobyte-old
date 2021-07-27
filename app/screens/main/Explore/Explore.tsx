@@ -181,19 +181,19 @@ const Explore: React.FC<ExploreTabProps> = props => {
                     {/* as per mood topics */}
                     <Block
                         style={{
-                            marginHorizontal: 10,
+                            marginHorizontal: 0,
                             marginVertical: 10,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            elevation: 30,
+                            // elevation: 30,
                             // this is the static height of block or else it will be all horizontal scroll with one row
                             height:
                                 IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW * 3 + // the image size of gridCategory component
                                 3 * 5 + // top padding of image
                                 3 * 5 + // bottom padding of image
                                 0, // a random height to fit the items
-                        }}>
-                        <Block style={globalStyles.blockOrCardinnerBlock}>
+                        }} noBackground={true}>
+                        <Block style={globalStyles.blockOrCardinnerBlock} noBackground={true}>
                             <BlockTitle
                                 style={[
                                     globalStyles.topicTitle,
