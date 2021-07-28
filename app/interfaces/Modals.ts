@@ -10,6 +10,8 @@ export interface DominatingColors {
     vibrant: string | ''
 }
 
+export type ColorGradientCodeName = '' | 'bisman' | 'flamingo' | 'phoenix' | 'emerald' | 'canary' | 'celeste' | 'graphite' | 'disco'
+
 export type ThemeType = 'd' | 'l' | 'c'
 export type AudioQualityType = 'e' | 'g' | 'p' | 'a'
 export type ImageQualityType =
@@ -21,3 +23,4 @@ export type ImageQualityType =
     | '120'
     | '60'
 export type LanguageType = 'en' | 'hi'
+
