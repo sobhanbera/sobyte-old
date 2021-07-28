@@ -104,3 +104,10 @@ export const LINEAR_GRADIENT_LOCATIONS_6 = [0, 0.16, 0.32, 0.48, 0.64, 0.8]
  */
 export const ARTIST_DETAILS_SCREEN = 'ARTIST_DETAILS_SCREEN' // props - (ArtistObject from the interface)
 export const EXTRA_SONGS_SCREEN = 'EXTRA_SONGS_SCREEN' // props - (ArtistObject from the interface)
+
+/**
+ * app animations constants
+ * may be imports, files, lotties, etc
+*/
+const AppLogoAnimationConstant = require('../assets/animations/animation.json')
+export {AppLogoAnimationConstant}
