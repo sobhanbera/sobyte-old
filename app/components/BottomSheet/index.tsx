@@ -32,10 +32,13 @@ interface Props {
         inputStyle?: StyleProp<TextStyle>
         errorText?: string | ''
     }>
+    extraFunction?: Function
 }
 const BottomSheet = (props: Props) => {
-    const {border, surfacelight, text, placeholder, primary, onWarning} =
+    const {surfacelight, text, placeholder, primary, onWarning} =
         useTheme().themeColors
+
+    const executeExtraFunctionHelper = () => props.extraFunction ? props.extraFunction() : {}
 
     return (
         <Modal
@@ -140,6 +143,7 @@ const BottomSheet = (props: Props) => {
                                 key={_}
                                 onPress={() => {
                                     button.onPress()
+                                    executeExtraFunctionHelper()
                                     props.setVisible(false)
                                 }}
                                 style={styles.button}>

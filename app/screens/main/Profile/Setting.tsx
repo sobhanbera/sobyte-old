@@ -34,6 +34,11 @@ const Setting: React.FC<SettingProps> = props => {
 
     const [customImageQuality, setCustomImageQuality] = useState<string>('')
 
+    // function which toasts a message that some settings could only work on next app launch...
+    function willWorkOnNextLaunch() {
+        ToastAndroid.show("Setting saved but will work on next launch.", ToastAndroid.LONG)
+    }
+
     return (
         <GradientBackground uniformColor>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -234,6 +239,7 @@ const Setting: React.FC<SettingProps> = props => {
             <BottomSheet
                 isVisible={backgroundThemeVisible}
                 setVisible={setBackgroundThemeVisible}
+                extraFunction={willWorkOnNextLaunch}
                 buttons={[
                     {
                         text: t('setting:random'),
