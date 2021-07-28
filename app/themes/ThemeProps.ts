@@ -74,7 +74,9 @@ export default interface ThemeColors extends CommonColors {
     redGradient: string[] // red gradient colors
     greenGradient: string[] // green gradient colors
     yellowGradient: string[] // yellow gradient colors
+    cyanGradient: string[] // cyan gradient colors
     greyGradient: string[] // grey gradient colors
+    mixGradient: string[] // mix gradient colors
 }
 
 /**
