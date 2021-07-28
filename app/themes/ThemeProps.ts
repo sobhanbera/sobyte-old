@@ -69,14 +69,14 @@ export default interface ThemeColors extends CommonColors {
     onDanger: string[]
 
     // these gradient colors arrays must be of length 8 not >8 not <8 exactly =8
-    blueGradient: string[] // blue gradient colors
-    pinkGradient: string[] // pink gradient colors
-    redGradient: string[] // red gradient colors
-    greenGradient: string[] // green gradient colors
-    yellowGradient: string[] // yellow gradient colors
-    cyanGradient: string[] // cyan gradient colors
-    greyGradient: string[] // grey gradient colors
-    mixGradient: string[] // mix gradient colors
+    blueGradient: string[] // blue gradient colors, application_code_name - bisman
+    pinkGradient: string[] // pink gradient colors, application_code_name - flamingo
+    redGradient: string[] // red gradient colors, application_code_name - Phoenix
+    greenGradient: string[] // green gradient colors, application_code_name - Emerald
+    yellowGradient: string[] // yellow gradient colors, application_code_name - canary
+    cyanGradient: string[] // cyan gradient colors, application_code_name - celeste
+    greyGradient: string[] // grey gradient colors, application_code_name - graphite
+    mixGradient: string[] // mix gradient colors, application_code_name - disco
 }
 
 /**
