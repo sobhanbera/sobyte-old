@@ -25,12 +25,15 @@ const Setting: React.FC<SettingProps> = props => {
     const {setSetting, changeLanguage} = useSetting()
 
     const [languageVisible, setLanguageVisible] = useState<boolean>(false)
-    const [audioQualityVisible, setAudioQualityVisible] = useState<boolean>(false)
-    const [imageQualityVisible, setImageQualityVisible] = useState<boolean>(false)
-    const [backgroundThemeVisible, setBackgroundThemeVisible] = useState<boolean>(false)
+    const [audioQualityVisible, setAudioQualityVisible] =
+        useState<boolean>(false)
+    const [imageQualityVisible, setImageQualityVisible] =
+        useState<boolean>(false)
+    const [backgroundThemeVisible, setBackgroundThemeVisible] =
+        useState<boolean>(false)
 
     const [customImageQuality, setCustomImageQuality] = useState<string>('')
-    
+
     return (
         <GradientBackground uniformColor>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -58,7 +61,10 @@ const Setting: React.FC<SettingProps> = props => {
                     </Text>
                 </Area>
 
-                <Area icon spacing onPress={() => setBackgroundThemeVisible(true)}>
+                <Area
+                    icon
+                    spacing
+                    onPress={() => setBackgroundThemeVisible(true)}>
                     <Text style={globalStyles.areaTitle}>
                         {t('setting:customize_background_theme')}
                     </Text>
@@ -231,39 +237,75 @@ const Setting: React.FC<SettingProps> = props => {
                 buttons={[
                     {
                         text: t('setting:random'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, ''),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                '',
+                            ),
                     },
                     {
                         text: t('setting:bisman'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'bisman'),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                'bisman',
+                            ),
                     },
                     {
                         text: t('setting:flamingo'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'flamingo'),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                'flamingo',
+                            ),
                     },
                     {
                         text: t('setting:phoenix'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'phoenix'),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                'phoenix',
+                            ),
                     },
                     {
                         text: t('setting:emerald'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'emerald'),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                'emerald',
+                            ),
                     },
                     {
                         text: t('setting:canary'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'canary'),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                'canary',
+                            ),
                     },
                     {
                         text: t('setting:celeste'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'celeste'),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                'celeste',
+                            ),
                     },
                     {
                         text: t('setting:graphite'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'graphite'),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                'graphite',
+                            ),
                     },
                     {
                         text: t('setting:disco'),
-                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'disco'),
+                        onPress: () =>
+                            setSetting(
+                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                'disco',
+                            ),
                     },
                 ]}
             />
@@ -275,7 +317,7 @@ export default Setting
 
 /**
  * // these gradient colors arrays must be of length 8 not >8 not <8 exactly =8
- * blueGradient: string[] // blue gradient colors, application_code_name - bisman 
+ * blueGradient: string[] // blue gradient colors, application_code_name - bisman
  * pinkGradient: string[] // pink gradient colors, application_code_name - flamingo
  * redGradient: string[] // red gradient colors, application_code_name - phoenix
  * greenGradient: string[] // green gradient colors, application_code_name - emerald

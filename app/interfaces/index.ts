@@ -3,14 +3,16 @@ import {
     AudioQualityType,
     ImageQualityType,
     LanguageType,
-    ThemeType,ColorGradientCodeName
+    ThemeType,
+    ColorGradientCodeName,
 } from './Modals'
 export type {
     DominatingColors,
     AudioQualityType,
     ImageQualityType,
     LanguageType,
-    ThemeType,ColorGradientCodeName
+    ThemeType,
+    ColorGradientCodeName,
 }
 
 import SongCategory from './SongCategory'

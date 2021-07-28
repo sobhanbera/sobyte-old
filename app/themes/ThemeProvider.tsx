@@ -7,9 +7,12 @@ import React, {
 } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
 
-import {BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, THEME_STORAGE_KEY} from '../constants'
+import {
+    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+    THEME_STORAGE_KEY,
+} from '../constants'
 import {DarkTheme} from './DarkTheme'
-import { ColorGradientCodeName } from 'app/interfaces'
+import {ColorGradientCodeName} from 'app/interfaces'
 
 /**
  * @d - dark theme
@@ -43,7 +46,9 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
     ]
 
     const [theme, setTheme] = useState<string>('d')
-    const [randomGradient, setRandomGradient] = useState<string[]>(colorsArray[random])
+    const [randomGradient, setRandomGradient] = useState<string[]>(
+        colorsArray[random],
+    )
 
     const getTheme = useCallback(async () => {
         const tempTheme = await AsyncStorage.getItem(THEME_STORAGE_KEY)
@@ -59,8 +64,9 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
     }, [])
 
     const getBackgroundTheme = useCallback(async () => {
-        const backgroundTheme: ColorGradientCodeName | string | null = await AsyncStorage.getItem(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY)
-        switch(backgroundTheme) {
+        const backgroundTheme: ColorGradientCodeName | string | null =
+            await AsyncStorage.getItem(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY)
+        switch (backgroundTheme) {
             case 'bisman':
                 setRandomGradient(colorsArray[0])
                 break
