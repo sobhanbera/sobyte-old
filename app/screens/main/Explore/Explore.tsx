@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {View, ScrollView, RefreshControl} from 'react-native'
 import {Text as BlockTitle} from 'react-native-paper'
+import LottieView from 'lottie-react-native'
 
 import {
     GradientBackground,
@@ -27,6 +28,8 @@ import {
 } from '../../../interfaces'
 import {useTheme, useMusicApi} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
+
+const AppLogoAnimation = require('../../../assets/animations/animation.json')
 
 interface ExploreTabProps {
     navigation?: any
@@ -169,6 +172,17 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         onPress={loadExploreData}
                         headerScrollColor={themeColors.transparent[0]}
                         onInputFocus={launchSearchScreen}
+                    />
+
+                    <LottieView
+                        loop
+                        autoPlay
+                        source={AppLogoAnimation}
+                        style={{
+                            height: 50,
+                            alignSelf: 'center',
+                            position: 'relative',
+                        }}
                     />
 
                     {/* as per mood topics */}
