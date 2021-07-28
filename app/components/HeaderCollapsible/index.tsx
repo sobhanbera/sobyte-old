@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {View, Animated, Pressable} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
@@ -16,31 +16,7 @@ interface Props {
 }
 const HeaderCollapsible: React.FC<Props> = props => {
     const {t} = useTranslation()
-    const {rgbstreakgradient, placeholder} = useTheme().themeColors
-    /**
-     * text color changing animation variables and functions
-     */
-    const colorAnimator = React.useRef(new Animated.Value(0)).current
-    const color = colorAnimator.interpolate({
-        inputRange: [0, 1, 2, 3, 4, 5, 6, 7],
-        outputRange: rgbstreakgradient,
-    })
-    const handleColorAnimation = () => {
-        Animated.timing(colorAnimator, {
-            toValue: 8,
-            duration: 6000,
-            useNativeDriver: false,
-        }).start(() => {
-            Animated.timing(colorAnimator, {
-                toValue: 0,
-                duration: 6000,
-                useNativeDriver: false,
-            }).start(handleColorAnimation)
-        })
-    }
-    useEffect(() => {
-        handleColorAnimation()
-    }, [])
+    const {placeholder, white} = useTheme().themeColors
 
     /**
      * logo animation rotate property variables and functions
@@ -53,12 +29,12 @@ const HeaderCollapsible: React.FC<Props> = props => {
     const handleLogoRotateAnimation = () => {
         Animated.timing(rotateAnimator, {
             toValue: 1,
-            duration: 1000,
+            duration: 1500,
             useNativeDriver: true,
         }).start(() => {
             Animated.timing(rotateAnimator, {
                 toValue: 0,
-                duration: 1000,
+                duration: 1500,
                 useNativeDriver: true,
             }).start()
         })
@@ -100,8 +76,8 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     style={[
                         globalStyles.appName,
                         {
-                            color: color,
-                            fontSize: 25,
+                            color: white[0],
+                            fontSize: 27,
                         },
                     ]}>
                     {t('common:appName')}
