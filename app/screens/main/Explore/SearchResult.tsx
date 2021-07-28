@@ -25,6 +25,7 @@ import {
     INFINITE_SCROLL_OFFSET,
     PaddingBottomView,
     AppLogoAnimationConstant,
+    PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY,
 } from '../../../constants'
 import {
     FetchedSongObject,
@@ -33,7 +34,7 @@ import {
     BareFetchedArtistObjectInstance,
 } from '../../../interfaces'
 import globalStyles from '../../../styles/global.styles'
-import {useRef} from 'react'
+import AsyncStorage from '@react-native-community/async-storage'
 
 // const BOTTOM_PADDING = 100
 interface OnScrollProps {
@@ -54,7 +55,7 @@ interface Props {
     navigation?: any
 }
 const SearchResult: React.FC<Props> = props => {
-    const {surfacelight, text} = useTheme().themeColors
+    const {surfacelight, text, themecolorrevert} = useTheme().themeColors
     const {getSearchSuggestions, search, getContinuation} = useMusicApi()
     const {prompt} = usePrompt()
 
@@ -72,6 +73,56 @@ const SearchResult: React.FC<Props> = props => {
     const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
     const [showSearchSuggestions, setShowSearchSuggestions] =
         useState<boolean>(false)
+
+    /**
+     * we are saving a query to local storage whenever the user search any query
+     * this is the variable which will contain all those queries
+     * and show in the UI differently...
+     */
+    const [previouslySearchedQueries, setPreviouslySearchedQueries] = useState<
+        string[]
+    >([])
+
+    async function _addNewSearchQuery(query: string = '') {
+        if (query.length <= 0) return
+        // since we are not saving more than 10 queries locally.
+        // because it is not neccessary to show all the queries only 5 to 10 are sufficient...
+        let whatToSave: string[] = []
+        if (previouslySearchedQueries.length > 9)
+            whatToSave = previouslySearchedQueries.slice(0, 10)
+        else whatToSave = previouslySearchedQueries
+        whatToSave.push(query)
+        // finally saving all the queries...
+        await AsyncStorage.setItem(
+            PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY,
+            JSON.stringify(whatToSave),
+        )
+    }
+    async function _getPreviouslySearchedQueries() {
+        await AsyncStorage.getItem(
+            PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY,
+        )
+            .then((res: any) => {
+                // if any such search query is saved then update state
+                // after re-checking its and array or not and also 
+                // we will not show duplicate search queries,
+                // if not then don't update any of the state since this is optional....
+                const result = JSON.parse(res)
+                const finalResult: string[] = []
+                for(let i in result)
+                    finalResult.push(result[i])
+                const theMostFinalState = Array.from(new Set(finalResult))
+                setPreviouslySearchedQueries(theMostFinalState || [])
+            })
+            .catch(_err => {
+                console.log("ASD")
+            })
+    }
+
+    useEffect(() => {
+        console.log("SSS")
+        _getPreviouslySearchedQueries()
+    }, [])
 
     const getSearchSuggestionsList = () => {
         if (searchText.length > 0)
@@ -126,14 +177,16 @@ const SearchResult: React.FC<Props> = props => {
         setShowSearchSuggestions(false)
     }
 
-    const startSearch = (query: string = searchText) => {
-        if (query.length) {
+    const startSearch = (_query: string = searchText) => {
+        if (_query.length) {
             hideSuggestions()
 
             setLoading(true)
 
-            searchResults(query)
-            searchArtists(query)
+            searchResults(_query)
+            searchArtists(_query)
+
+            _addNewSearchQuery(_query)
         }
     }
 
@@ -262,6 +315,45 @@ const SearchResult: React.FC<Props> = props => {
                             }
                             showsVerticalScrollIndicator={false}
                             showsHorizontalScrollIndicator={false}>
+                            {/* render the previously seached queries */}
+                            {previouslySearchedQueries.length > 0 &&
+                                !loading &&
+                                !continuing &&
+                                artists.content[0].browseId.length <= 0 &&
+                                songs.content[0].musicId.length <= 0 ?
+                                <View>
+                                    <TopicTitle title="Search History" textAlign={'left'} />
+                                    <View style={{
+                                        alignItems: 'flex-start',
+                                        flexWrap: 'wrap',
+                                        flexDirection: 'row',
+                                        justifyContent: 'flex-start',
+                                        marginVertical: 10,
+                                        marginHorizontal: 20
+                                    }}>
+                                        {previouslySearchedQueries.map(searchQuery => {
+                                            return (
+                                                <Text onPress={() => setSearchText(searchQuery)}
+                                                    style={{
+                                                        color: text[0],
+                                                        fontSize: 16,
+                                                        paddingHorizontal: 10,
+                                                        paddingVertical: 6,
+                                                        borderRadius: 100,
+                                                        borderColor: themecolorrevert[0] + "7F",
+                                                        borderWidth: 1,
+                                                        marginHorizontal: 4,
+                                                        marginVertical: 5
+                                                    }}
+                                                >
+                                                    {searchQuery}
+                                                </Text>
+                                            )
+                                        })}
+                                    </View>
+                                </View>
+                            : null}
+
                             {/* all the songs which are loaded are shown here */}
                             {/* main content here */}
                             {artists.content[0].browseId.length > 0 &&
