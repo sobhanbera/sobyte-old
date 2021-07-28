@@ -6,6 +6,7 @@ import globalStyles from '../../styles/global.styles'
 
 interface Props {
     title: string
+    textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify'
 }
 
 const TopicTitle = (props: Props) => {
@@ -17,7 +18,7 @@ const TopicTitle = (props: Props) => {
                 globalStyles.topicTitle,
                 globalStyles.verySmallPaddingView,
                 globalStyles.lightBottomBorder,
-                {color: text[0]},
+                {color: text[0],textAlign: props.textAlign || 'center'},
             ]}>
             {props.title}
         </Text>
