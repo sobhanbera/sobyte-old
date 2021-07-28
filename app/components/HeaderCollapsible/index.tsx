@@ -88,7 +88,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     style={{
                         backgroundColor: props.headerScrollColor,
                         marginHorizontal: 20,
-                        paddingHorizontal: 10,
+                        paddingHorizontal: 20,
                         paddingVertical: 8,
                         borderWidth: 0.5,
                         borderColor: placeholder[0],
@@ -96,7 +96,10 @@ const HeaderCollapsible: React.FC<Props> = props => {
                         fontSize: 16,
                     }}
                     value=""
-                    placeholder="Search Songs, Artists...."
+                    focusable
+                    clearTextOnFocus
+                    onChangeText={(text) => {}}
+                    placeholder={t('sentences:search_for_songs_artists')}
                     placeholderTextColor={placeholder[0]}
                     onFocus={() => props.onInputFocus()}
                 />
