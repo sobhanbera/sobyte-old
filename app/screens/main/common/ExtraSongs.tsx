@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
-import {useEffect} from 'react'
-import {ActivityIndicator} from 'react-native'
+import React, {useState, useEffect} from 'react'
+import LottieView from 'lottie-react-native'
 
 import {AnimatedHeader, CommonSongList, TopicTitle} from '../../../components'
 import {
@@ -8,7 +7,7 @@ import {
     FetchedSongObject,
 } from '../../../interfaces'
 import {useMusicApi} from '../../../api'
-import {useTheme} from '../../../context'
+import { AppLogoAnimationConstant } from '../../../constants'
 
 // this interface is the data type which should be passed from the parent when
 // launching this screen
@@ -29,7 +28,6 @@ const ExtraSongs = (props: Props) => {
 
     // context api from top level parent components
     const {search, getContinuation} = useMusicApi()
-    const {themeColors} = useTheme()
 
     /**
      * songs data related to the artist
@@ -91,9 +89,15 @@ const ExtraSongs = (props: Props) => {
             <CommonSongList songs={songs.content} />
 
             {loading ? (
-                <ActivityIndicator
-                    color={themeColors.white[0]}
-                    size={'small'}
+                <LottieView
+                    loop
+                    autoPlay
+                    source={AppLogoAnimationConstant}
+                    style={{
+                        height: 35,
+                        alignSelf: 'center',
+                        position: 'relative',
+                    }}
                 />
             ) : null}
         </AnimatedHeader>
