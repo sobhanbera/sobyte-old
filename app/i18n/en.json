@@ -5,16 +5,29 @@
         "default_app_language": "Default App Language",
         "choose_audio_quality": "Choose Audio Quality",
         "image_optimization": "Image Optimization",
+        "customize_background_theme": "Cusomize Background Theme",
+        
         "extreme": "Extreme",
         "good": "Good",
         "poor": "Poor",
         "auto": "Auto",
+        
         "very_high_quality": "Very High",
         "high_quality": "High",
         "medium_quality": "Medium",
         "low_quality": "Low",
         "clear_quality": "Clear",
-        "blured_quality": "Blured"
+        "blured_quality": "Blured",
+
+        "random": "Random",
+        "bisman": "Bisman",
+        "flamingo": "Flamingo",
+        "phoenix": "Phoenix",
+        "emerald": "Emerald",
+        "canary": "Canary",
+        "celeste": "Celeste",
+        "graphite": "Graphite",
+        "disco": "Disco"
     },
     "words": {
         "cancel": "Cancel",

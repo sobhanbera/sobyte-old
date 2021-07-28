@@ -5,16 +5,29 @@
         "default_app_language": "डिफ़ॉल्ट ऐप भाषा",
         "choose_audio_quality": "ऑडियो गुणवत्ता चुनें",
         "image_optimization": "छवि अनुकूलन",
+        "customize_background_theme": "बैकग्राउंड थीम चुनें",
+        
         "extreme": "एक्सट्रीम",
         "good": "गुड",
         "poor": "ठीक ठाक",
         "auto": "ऑटो",
+        
         "very_high_quality": "बहुत अधिक",
         "high_quality": "उच्च",
         "medium_quality": "मध्यम",
         "low_quality": "कम",
         "clear_quality": "स्पष्ट",
-        "blured_quality": "धुंधला"
+        "blured_quality": "धुंधला",
+
+        "random": "यादृच्छिक रूप से",
+        "bisman": "बिस्मान",
+        "flamingo": "फ्लेमिंगो",
+        "phoenix": "फीनिक्स",
+        "emerald": "एमराल्ड",
+        "canary": "केनारी",
+        "celeste": "सेलेस्टे",
+        "graphite": "ग्रेफाइट",
+        "disco": "डिस्को"
     },
     "words": {
         "cancel": "रद्द करें",
