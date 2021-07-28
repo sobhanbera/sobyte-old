@@ -159,7 +159,7 @@ const globalStyles = StyleSheet.create({
      */
     blockOrCardOuterBlock: {
         marginHorizontal: 10,
-        marginVertical: 10,
+        marginVertical: 5,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 30,

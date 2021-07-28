@@ -182,7 +182,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                     <Block
                         style={{
                             marginHorizontal: 0,
-                            marginVertical: 10,
+                            marginVertical: 5,
                             justifyContent: 'center',
                             alignItems: 'center',
                             // elevation: 30,
