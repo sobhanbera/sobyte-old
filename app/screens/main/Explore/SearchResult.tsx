@@ -264,7 +264,7 @@ const SearchResult: React.FC<Props> = props => {
                             showsHorizontalScrollIndicator={false}>
                             {/* all the songs which are loaded are shown here */}
                             {/* main content here */}
-                            {artists.content[0].browseId.length > 0 ||
+                            {artists.content[0].browseId.length > 0 &&
                             loading ? (
                                 <TopicTitle title={'Artists'} />
                             ) : null}
@@ -281,7 +281,7 @@ const SearchResult: React.FC<Props> = props => {
                                 />
                             )}
 
-                            {songs.content[0].musicId.length > 0 || loading ? (
+                            {songs.content[0].musicId.length > 0 && loading ? (
                                 <TopicTitle title={'Songs'} />
                             ) : null}
 
@@ -289,7 +289,7 @@ const SearchResult: React.FC<Props> = props => {
                                 <CommonSongList songs={songs.content} />
                             )}
 
-                            {continuing ? (
+                            {loading || continuing ? (
                                 <LottieView
                                     loop
                                     autoPlay
