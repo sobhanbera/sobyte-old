@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next'
 import {HEADER_MIN_HEIGHT} from '../../constants'
 import globalStyles from '../../styles/global.styles'
 import {useTheme} from '../../context'
-import { TextInput } from 'react-native'
+import {TextInput} from 'react-native'
 
 interface Props {
     headerScrollHeight?: any
@@ -65,21 +65,23 @@ const HeaderCollapsible: React.FC<Props> = props => {
     }
 
     return (
-        <View style={{
-            flexDirection: 'column',
-            paddingVertical: 10,
-            backgroundColor: props.headerScrollColor,
-        }}>
-            <View style={{
-                height: props.headerScrollHeight || HEADER_MIN_HEIGHT,
-                width: '100%',
+        <View
+            style={{
+                flexDirection: 'column',
+                paddingVertical: 10,
                 backgroundColor: props.headerScrollColor,
-                justifyContent: 'flex-start',
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginHorizontal: 20,
-                paddingHorizontal: 10,
             }}>
+            <View
+                style={{
+                    height: props.headerScrollHeight || HEADER_MIN_HEIGHT,
+                    width: '100%',
+                    backgroundColor: props.headerScrollColor,
+                    justifyContent: 'flex-start',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginHorizontal: 20,
+                    paddingHorizontal: 10,
+                }}>
                 <Pressable
                     onPress={() => {
                         handleLogoRotateAnimation()
@@ -106,22 +108,22 @@ const HeaderCollapsible: React.FC<Props> = props => {
                 </Animated.Text>
             </View>
             <View>
-            <TextInput 
-                style={{
-                    backgroundColor: props.headerScrollColor,
-                    marginHorizontal: 20,
-                    paddingHorizontal: 10,
-                    paddingVertical: 8,
-                    borderWidth: 0.5,
-                    borderColor: placeholder[0],
-                    borderRadius: 100,
-                    fontSize: 16
-                }} 
-                value=""
-                placeholder="Search Songs, Artists...."
-                placeholderTextColor={placeholder[0]}
-                onFocus={() => props.onInputFocus()}
-            />
+                <TextInput
+                    style={{
+                        backgroundColor: props.headerScrollColor,
+                        marginHorizontal: 20,
+                        paddingHorizontal: 10,
+                        paddingVertical: 8,
+                        borderWidth: 0.5,
+                        borderColor: placeholder[0],
+                        borderRadius: 100,
+                        fontSize: 16,
+                    }}
+                    value=""
+                    placeholder="Search Songs, Artists...."
+                    placeholderTextColor={placeholder[0]}
+                    onFocus={() => props.onInputFocus()}
+                />
             </View>
         </View>
         // <View style={{
@@ -171,7 +173,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
         //             {props.right}
         //         </View>
         //     </View>
-        //     <TextInput 
+        //     <TextInput
         //         style={{
         //             backgroundColor: props.headerScrollColor,
         //             paddingHorizontal: 10,
@@ -181,7 +183,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
         //             borderColor: placeholder[0],
         //             borderRadius: 100,
         //             fontSize: 16
-        //         }} 
+        //         }}
         //         value=""
         //         placeholder="Search Songs, Artists...."
         //         placeholderTextColor={placeholder[0]}

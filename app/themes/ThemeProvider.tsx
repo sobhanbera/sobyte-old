@@ -30,7 +30,14 @@ const ThemeContext = createContext({
 })
 const ThemeProvider = (props: {children: React.ReactChild}) => {
     const random = Math.floor(Math.random() * 6)
-    const colorsArray = [DarkTheme.blueGradient, DarkTheme.pinkGradient, DarkTheme.redGradient, DarkTheme.greenGradient, DarkTheme.yellowGradient, DarkTheme.greyGradient]
+    const colorsArray = [
+        DarkTheme.blueGradient,
+        DarkTheme.pinkGradient,
+        DarkTheme.redGradient,
+        DarkTheme.greenGradient,
+        DarkTheme.yellowGradient,
+        DarkTheme.greyGradient,
+    ]
 
     const [theme, setTheme] = useState<string>('d')
     const [randomGradient] = useState<string[]>(colorsArray[random])

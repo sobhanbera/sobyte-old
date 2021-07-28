@@ -149,7 +149,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
 
     /**
      * function to launch the search songs, artists screen
-    */
+     */
     const launchSearchScreen = () => {
         props.navigation.navigate('search')
     }
@@ -210,7 +210,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                                     globalStyles.topicTitle,
                                     {color: themeColors.text[0]},
                                 ]}>
-                                {"Moods & Genres"}
+                                {'Moods & Genres'}
                             </BlockTitle>
                         </Block>
 
