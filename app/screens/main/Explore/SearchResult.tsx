@@ -77,10 +77,10 @@ const SearchResult: React.FC<Props> = props => {
         if (searchText.length > 0)
             getSearchSuggestions(searchText)
                 .then((res: string[]) => {
-                        // if any data is not loading then only we will show suggestions
-                        if (!showSearchSuggestions && !loading && !continuing)
-                            setShowSearchSuggestions(searchText.length > 0)
-                        setSearchSuggestions(res)
+                    // if any data is not loading then only we will show suggestions
+                    if (!showSearchSuggestions && !loading && !continuing)
+                        setShowSearchSuggestions(searchText.length > 0)
+                    setSearchSuggestions(res)
                 })
                 .catch(err => {
                     console.log('ERROR ON GETTING SEARCH SUGGESTION', err)
@@ -96,12 +96,12 @@ const SearchResult: React.FC<Props> = props => {
 
         search(query, 'SONG')
             .then((res: FetchedSongObject) => {
-                    setSongs(res)
-                    setLoading(false)
+                setSongs(res)
+                setLoading(false)
             })
             .catch(_err => {
                 prompt('Sorry! Cannot load data currently.', 'error')
-                    setLoading(false)
+                setLoading(false)
             })
     }
 
@@ -113,11 +113,11 @@ const SearchResult: React.FC<Props> = props => {
 
         search(query, 'ARTIST')
             .then((res: FetchedArtistObject) => {
-                    setArtists(res)
+                setArtists(res)
             })
             .catch(_err => {
                 prompt('Sorry! Cannot load data currently.', 'error')
-                    setLoading(false)
+                setLoading(false)
             })
     }
 
@@ -151,14 +151,14 @@ const SearchResult: React.FC<Props> = props => {
             getContinuation('search', songs.continuation, 'SONG')
                 .then((res: FetchedSongObject) => {
                     const data = songs.content.concat(res.content)
-                        setSongs({
-                            content: data,
-                            continuation: res.continuation,
-                        })
-                        setCotinuing(false)
+                    setSongs({
+                        content: data,
+                        continuation: res.continuation,
+                    })
+                    setCotinuing(false)
                 })
                 .catch(_err => {
-                        setCotinuing(false)
+                    setCotinuing(false)
                 })
         }
     }
