@@ -102,6 +102,9 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     placeholder={t('sentences:search_for_songs_artists')}
                     placeholderTextColor={placeholder[0]}
                     onFocus={() => props.onInputFocus()}
+                    showSoftInputOnFocus={false}
+                    // keyboard will not be shown when this input will be pressed since its a trigger to open an another screen
+                    // and this component is a demo or dummy or virual button not text input any more
                 />
             </View>
         </View>
