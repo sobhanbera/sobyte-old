@@ -65,7 +65,7 @@ const SettingsProvider = (props: Props) => {
                 LANGUAGE_CODE_STORAGE_KEY,
                 AUDIO_QUALITY_STORAGE_KEY,
                 SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY
+                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
             ],
             (_err, response: any) => {
                 setTheme(response[0][1] || 'd')
