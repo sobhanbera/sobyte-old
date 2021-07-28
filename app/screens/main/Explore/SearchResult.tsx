@@ -87,6 +87,15 @@ const SearchResult: React.FC<Props> = props => {
 
     useEffect(() => {
         getSearchSuggestionsList()
+
+        return () => {
+            setSearchSuggestions([])
+            setSongs(BareFetchedSongObjectInstance)
+            setArtists(BareFetchedArtistObjectInstance)
+            setLoading(false)
+            setCotinuing(false)
+            setShowSearchSuggestions(false)
+        }
     }, [searchText])
 
     const searchResults = (query: string = searchText) => {
