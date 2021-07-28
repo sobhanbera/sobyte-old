@@ -18,6 +18,8 @@ export const SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY =
     '@APP:SONG_IMAGE_DEFAULT_QUALITY' // Storage key for the app's theme
 export const BACKGROUND_COLOR_OR_THEME_STORAGE_KEY =
     '@APP:BACKGROUND_COLOR_OR_THEME' // Storage key where the app's background colors choice will be saved (this is among the gradient colors in ThemeProps.tsx like the blueGradient, pinkGradient and so on)
+export const PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY =
+    '@APP:PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY' // Storage key where some or all the previously searched queries will be saved...
 
 export const API_CONFIG_DATA_STORAGE_KEY = '@APP:API_CONFIG_DATA' // Storage key for header fetched by the api everytime...
 
