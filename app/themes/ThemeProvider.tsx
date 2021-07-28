@@ -20,35 +20,43 @@ const ThemeContext = createContext({
     themeColors: {
         ...DarkTheme,
     },
-    setTheme: (theme = 'd') => null,
+    randomGradient: DarkTheme.backgroundgradient,
+    // setTheme: (_theme = 'd') => null,
     ChooseThemeOptions: (
-        darkOption: any,
-        lightOption: any,
-        customOption: any,
+        _darkOption: any,
+        _lightOption: any,
+        _customOption: any,
     ) => null,
 })
 const ThemeProvider = (props: {children: React.ReactChild}) => {
-    const [theme, setTheme] = useState('d')
+    const random = Math.floor(Math.random() * 6)
+    const colorsArray = [DarkTheme.blueGradient, DarkTheme.pinkGradient, DarkTheme.redGradient, DarkTheme.greenGradient, DarkTheme.yellowGradient, DarkTheme.greyGradient]
+
+    const [theme, setTheme] = useState<string>('d')
+    const [randomGradient] = useState<string[]>(colorsArray[random])
 
     const getTheme = useCallback(async () => {
         const tempTheme = await AsyncStorage.getItem(THEME_STORAGE_KEY)
+
         if (!tempTheme) {
             await AsyncStorage.setItem(THEME_STORAGE_KEY, 'd')
             setTheme('d')
         } else if (['d', 'l', 'c'].includes(tempTheme)) {
             setTheme(tempTheme)
-        } else setTheme('d')
-    }, [])
-
-    const setAppTheme = async (theme: string) => {
-        if (['d', 'l', 'c'].includes(theme)) {
-            setTheme(theme)
-            await AsyncStorage.setItem(THEME_STORAGE_KEY, theme)
         } else {
-            await AsyncStorage.setItem(THEME_STORAGE_KEY, 'd')
             setTheme('d')
         }
-    }
+    }, [])
+
+    // const setAppTheme = async (theme: string) => {
+    //     if (['d', 'l', 'c'].includes(theme)) {
+    //         setTheme(theme)
+    //         await AsyncStorage.setItem(THEME_STORAGE_KEY, theme)
+    //     } else {
+    //         await AsyncStorage.setItem(THEME_STORAGE_KEY, 'd')
+    //         setTheme('d')
+    //     }
+    // }
 
     function ChooseThemeOptions(
         darkOption: any,
@@ -69,7 +77,8 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
     const themeValue = {
         theme,
         themeColors: ChooseThemeOptions(DarkTheme, DarkTheme, DarkTheme),
-        setTheme: setAppTheme,
+        randomGradient: randomGradient,
+        // setTheme: setAppTheme,
         ChooseThemeOptions,
     }
 
