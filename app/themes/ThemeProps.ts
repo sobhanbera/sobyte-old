@@ -67,6 +67,14 @@ export default interface ThemeColors extends CommonColors {
     onError: string[]
     onWarning: string[]
     onDanger: string[]
+
+    // these gradient colors arrays must be of length 8 not >8 not <8 exactly =8
+    blueGradient: string[] // blue gradient colors
+    pinkGradient: string[] // pink gradient colors
+    redGradient: string[] // red gradient colors
+    greenGradient: string[] // green gradient colors
+    yellowGradient: string[] // yellow gradient colors
+    greyGradient: string[] // grey gradient colors
 }
 
 /**
