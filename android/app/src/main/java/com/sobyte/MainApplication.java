@@ -25,6 +25,7 @@ import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.reactnativeimagecolors.ImageColorsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
+import com.airbnb.android.react.lottie.LottiePackage;
 
 //import com.facebook.react.bridge.JSIModulePackage;
 //import com.swmansion.reanimated.ReanimatedJSIModulePackage;
