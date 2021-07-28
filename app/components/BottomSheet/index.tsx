@@ -38,7 +38,8 @@ const BottomSheet = (props: Props) => {
     const {surfacelight, text, placeholder, primary, onWarning} =
         useTheme().themeColors
 
-    const executeExtraFunctionHelper = () => props.extraFunction ? props.extraFunction() : {}
+    const executeExtraFunctionHelper = () =>
+        props.extraFunction ? props.extraFunction() : {}
 
     return (
         <Modal
