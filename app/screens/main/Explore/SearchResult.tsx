@@ -32,7 +32,7 @@ import {
     BareFetchedArtistObjectInstance,
 } from '../../../interfaces'
 import globalStyles from '../../../styles/global.styles'
-import { useRef } from 'react'
+import {useRef} from 'react'
 
 // const BOTTOM_PADDING = 100
 interface OnScrollProps {
@@ -56,7 +56,7 @@ const SearchResult: React.FC<Props> = props => {
     const {surfacelight, text, white} = useTheme().themeColors
     const {getSearchSuggestions, search, getContinuation} = useMusicApi()
     const {prompt} = usePrompt()
-    
+
     const mounted = useRef(true)
 
     const [searchText, setSearchText] = useState<string>('')
@@ -79,7 +79,7 @@ const SearchResult: React.FC<Props> = props => {
             getSearchSuggestions(searchText)
                 .then((res: string[]) => {
                     // only if the component is mounted this code will run
-                    if(mounted.current) {
+                    if (mounted.current) {
                         // if any data is not loading then only we will show suggestions
                         if (!showSearchSuggestions && !loading && !continuing)
                             setShowSearchSuggestions(searchText.length > 0)
@@ -104,14 +104,14 @@ const SearchResult: React.FC<Props> = props => {
 
         search(query, 'SONG')
             .then((res: FetchedSongObject) => {
-                if(mounted.current) {
+                if (mounted.current) {
                     setSongs(res)
                     setLoading(false)
                 }
             })
             .catch(_err => {
                 prompt('Sorry! Cannot load data currently.', 'error')
-                if(mounted.current) {
+                if (mounted.current) {
                     setLoading(false)
                 }
             })
@@ -125,13 +125,13 @@ const SearchResult: React.FC<Props> = props => {
 
         search(query, 'ARTIST')
             .then((res: FetchedArtistObject) => {
-                if(mounted.current) {
+                if (mounted.current) {
                     setArtists(res)
                 }
             })
             .catch(_err => {
                 prompt('Sorry! Cannot load data currently.', 'error')
-                if(mounted.current) {
+                if (mounted.current) {
                     setLoading(false)
                 }
             })
@@ -143,7 +143,7 @@ const SearchResult: React.FC<Props> = props => {
     }
 
     const startSearch = (query: string = searchText) => {
-        if(query.length) {
+        if (query.length) {
             hideSuggestions()
 
             setLoading(true)
@@ -167,7 +167,7 @@ const SearchResult: React.FC<Props> = props => {
             getContinuation('search', songs.continuation, 'SONG')
                 .then((res: FetchedSongObject) => {
                     const data = songs.content.concat(res.content)
-                    if(mounted.current) {
+                    if (mounted.current) {
                         setSongs({
                             content: data,
                             continuation: res.continuation,
@@ -176,7 +176,7 @@ const SearchResult: React.FC<Props> = props => {
                     }
                 })
                 .catch(_err => {
-                    if(mounted.current) {
+                    if (mounted.current) {
                         setCotinuing(false)
                     }
                 })
