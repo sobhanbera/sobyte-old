@@ -98,7 +98,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     value=""
                     focusable
                     clearTextOnFocus
-                    onChangeText={(text) => {}}
+                    onChangeText={text => {}}
                     placeholder={t('sentences:search_for_songs_artists')}
                     placeholderTextColor={placeholder[0]}
                     onFocus={() => props.onInputFocus()}
