@@ -12,6 +12,7 @@ import {useSetting, useTheme} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
 import {
     AUDIO_QUALITY_STORAGE_KEY,
+    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
     SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
 } from '../../../constants'
 
@@ -23,12 +24,13 @@ const Setting: React.FC<SettingProps> = props => {
     const {themeColors} = useTheme()
     const {setSetting, changeLanguage} = useSetting()
 
-    const [languageVisible, setLanguageVisible] = useState(false)
-    const [audioQualityVisible, setAudioQualityVisible] = useState(false)
-    const [imageQualityVisible, setImageQualityVisible] = useState(false)
+    const [languageVisible, setLanguageVisible] = useState<boolean>(false)
+    const [audioQualityVisible, setAudioQualityVisible] = useState<boolean>(false)
+    const [imageQualityVisible, setImageQualityVisible] = useState<boolean>(false)
+    const [backgroundThemeVisible, setBackgroundThemeVisible] = useState<boolean>(false)
 
-    const [customImageQuality, setCustomImageQuality] = useState('')
-
+    const [customImageQuality, setCustomImageQuality] = useState<string>('')
+    
     return (
         <GradientBackground uniformColor>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -53,6 +55,12 @@ const Setting: React.FC<SettingProps> = props => {
                 <Area icon spacing onPress={() => setImageQualityVisible(true)}>
                     <Text style={globalStyles.areaTitle}>
                         {t('setting:image_optimization')}
+                    </Text>
+                </Area>
+
+                <Area icon spacing onPress={() => setBackgroundThemeVisible(true)}>
+                    <Text style={globalStyles.areaTitle}>
+                        {t('setting:customize_background_theme')}
                     </Text>
                 </Area>
             </ScrollView>
@@ -216,8 +224,63 @@ const Setting: React.FC<SettingProps> = props => {
                     },
                 ]}
             />
+
+            <BottomSheet
+                isVisible={backgroundThemeVisible}
+                setVisible={setBackgroundThemeVisible}
+                buttons={[
+                    {
+                        text: t('setting:random'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, ''),
+                    },
+                    {
+                        text: t('setting:bisman'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'bisman'),
+                    },
+                    {
+                        text: t('setting:flamingo'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'flamingo'),
+                    },
+                    {
+                        text: t('setting:phoenix'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'phoenix'),
+                    },
+                    {
+                        text: t('setting:emerald'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'emerald'),
+                    },
+                    {
+                        text: t('setting:canary'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'canary'),
+                    },
+                    {
+                        text: t('setting:celeste'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'celeste'),
+                    },
+                    {
+                        text: t('setting:graphite'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'graphite'),
+                    },
+                    {
+                        text: t('setting:disco'),
+                        onPress: () => setSetting(BACKGROUND_COLOR_OR_THEME_STORAGE_KEY, 'disco'),
+                    },
+                ]}
+            />
         </GradientBackground>
     )
 }
 
 export default Setting
+
+/**
+ * // these gradient colors arrays must be of length 8 not >8 not <8 exactly =8
+ * blueGradient: string[] // blue gradient colors, application_code_name - bisman 
+ * pinkGradient: string[] // pink gradient colors, application_code_name - flamingo
+ * redGradient: string[] // red gradient colors, application_code_name - phoenix
+ * greenGradient: string[] // green gradient colors, application_code_name - emerald
+ * yellowGradient: string[] // yellow gradient colors, application_code_name - canary
+ * cyanGradient: string[] // cyan gradient colors, application_code_name - celeste
+ * greyGradient: string[] // grey gradient colors, application_code_name - graphite
+ * mixGradient: string[] // mix gradient colors, application_code_name - disco
+ */
