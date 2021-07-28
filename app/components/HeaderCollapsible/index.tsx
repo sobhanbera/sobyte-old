@@ -1,11 +1,10 @@
 import React from 'react'
-import {View, Animated, Pressable} from 'react-native'
+import {View, Animated, Pressable, TextInput} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {HEADER_MIN_HEIGHT} from '../../constants'
 import globalStyles from '../../styles/global.styles'
 import {useTheme} from '../../context'
-import {TextInput} from 'react-native'
 
 interface Props {
     headerScrollHeight?: any
