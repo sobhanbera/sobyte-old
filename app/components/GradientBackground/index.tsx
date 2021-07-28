@@ -14,8 +14,9 @@ interface Props {
     location?: number[]
 }
 const GradientBackground = React.memo((props: Props) => {
-    const {themeColors} = useTheme()
+    const {themeColors, randomGradient} = useTheme()
 
+    // render a random gradient background...
     return (
         <LinearGradient
             angle={props.angle || 315}
@@ -28,7 +29,7 @@ const GradientBackground = React.memo((props: Props) => {
                     ? props.colors
                     : props.uniformColor
                     ? [themeColors.surfacelight[0], themeColors.surfacelight[0]]
-                    : themeColors.backgroundgradient
+                    : randomGradient
             }
             locations={
                 props.colors && props.location
