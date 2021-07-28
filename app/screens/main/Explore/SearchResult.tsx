@@ -55,6 +55,8 @@ const SearchResult: React.FC<Props> = props => {
     const {surfacelight, text, white} = useTheme().themeColors
     const {getSearchSuggestions, search, getContinuation} = useMusicApi()
     const {prompt} = usePrompt()
+    
+    let mounted = true
 
     const [searchText, setSearchText] = useState<string>('')
     const [songs, setSongs] = useState<FetchedSongObject>(
@@ -75,10 +77,13 @@ const SearchResult: React.FC<Props> = props => {
         if (searchText.length > 0)
             getSearchSuggestions(searchText)
                 .then((res: string[]) => {
-                    // if any data is not loading then only we will show suggestions
-                    if (!showSearchSuggestions && !loading && !continuing)
-                        setShowSearchSuggestions(searchText.length > 0)
-                    setSearchSuggestions(res)
+                    // only if the component is mounted this code will run
+                    if(mounted) {
+                        // if any data is not loading then only we will show suggestions
+                        if (!showSearchSuggestions && !loading && !continuing)
+                            setShowSearchSuggestions(searchText.length > 0)
+                        setSearchSuggestions(res)
+                    }
                 })
                 .catch(err => {
                     console.log('ERROR ON GETTING SEARCH SUGGESTION', err)
@@ -89,12 +94,7 @@ const SearchResult: React.FC<Props> = props => {
         getSearchSuggestionsList()
 
         return () => {
-            setSearchSuggestions([])
-            setSongs(BareFetchedSongObjectInstance)
-            setArtists(BareFetchedArtistObjectInstance)
-            setLoading(false)
-            setCotinuing(false)
-            setShowSearchSuggestions(false)
+            mounted = false
         }
     }, [searchText])
 
