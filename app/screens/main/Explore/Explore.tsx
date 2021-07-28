@@ -12,7 +12,6 @@ import {
     BlockCardArtistList,
 } from '../../../components'
 import {
-    DEFAULT_ICON_SIZE,
     IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
     PaddingBottomView,
 } from '../../../constants'
@@ -27,7 +26,6 @@ import {
     BareArtistObject,
 } from '../../../interfaces'
 import {useTheme, useMusicApi} from '../../../context'
-import Icon from 'react-native-vector-icons/Ionicons'
 import globalStyles from '../../../styles/global.styles'
 
 interface ExploreTabProps {
@@ -171,18 +169,6 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         onPress={loadExploreData}
                         headerScrollColor={themeColors.transparent[0]}
                         onInputFocus={launchSearchScreen}
-                        // headerScrollHeight={HEADER_MIN_HEIGHT}
-                        right={
-                            // <Scaler onPress={() => props.navigation.navigate('search')}>
-                            <Icon
-                                onPress={launchSearchScreen}
-                                accessibilityLabel="search songs"
-                                name="search-outline"
-                                color={themeColors.text[0]}
-                                size={DEFAULT_ICON_SIZE}
-                            />
-                            // </Scaler>
-                        }
                     />
 
                     {/* as per mood topics */}

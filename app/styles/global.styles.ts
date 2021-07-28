@@ -1,10 +1,6 @@
 import {
     FontElikaGorica,
-    FontHelvetica,
-    FontLucida,
     FontTahoma,
-    FontUbuntu,
-    FontVerdana,
     FontRoboto,
     FontRobotoBold,
     FontUbuntuBold,
