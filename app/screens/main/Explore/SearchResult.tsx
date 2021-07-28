@@ -143,12 +143,14 @@ const SearchResult: React.FC<Props> = props => {
     }
 
     const startSearch = (query: string = searchText) => {
-        hideSuggestions()
+        if(query.length) {
+            hideSuggestions()
 
-        setLoading(true)
+            setLoading(true)
 
-        searchResults(query)
-        searchArtists(query)
+            searchResults(query)
+            searchArtists(query)
+        }
     }
 
     const continueLoadingData = () => {
