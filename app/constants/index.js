@@ -108,6 +108,6 @@ export const EXTRA_SONGS_SCREEN = 'EXTRA_SONGS_SCREEN' // props - (ArtistObject 
 /**
  * app animations constants
  * may be imports, files, lotties, etc
-*/
+ */
 const AppLogoAnimationConstant = require('../assets/animations/animation.json')
 export {AppLogoAnimationConstant}

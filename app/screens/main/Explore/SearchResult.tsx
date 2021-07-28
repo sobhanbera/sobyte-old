@@ -24,7 +24,7 @@ import {
     HEADER_MIN_HEIGHT,
     INFINITE_SCROLL_OFFSET,
     PaddingBottomView,
-    AppLogoAnimationConstant
+    AppLogoAnimationConstant,
 } from '../../../constants'
 import {
     FetchedSongObject,

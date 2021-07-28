@@ -28,7 +28,6 @@ import {
 import {useTheme, useMusicApi} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
 
-
 interface ExploreTabProps {
     navigation?: any
 }

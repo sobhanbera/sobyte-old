@@ -7,7 +7,7 @@ import {
     FetchedSongObject,
 } from '../../../interfaces'
 import {useMusicApi} from '../../../api'
-import { AppLogoAnimationConstant } from '../../../constants'
+import {AppLogoAnimationConstant} from '../../../constants'
 
 // this interface is the data type which should be passed from the parent when
 // launching this screen
