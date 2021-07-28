@@ -13,7 +13,6 @@ import {
 } from '../../../components'
 import {
     DEFAULT_ICON_SIZE,
-    HEADER_MIN_HEIGHT,
     IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
     PaddingBottomView,
 } from '../../../constants'

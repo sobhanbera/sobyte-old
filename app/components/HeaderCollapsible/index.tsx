@@ -98,77 +98,13 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     value=""
                     focusable
                     clearTextOnFocus
-                    onChangeText={text => {}}
+                    onChangeText={_text => {}}
                     placeholder={t('sentences:search_for_songs_artists')}
                     placeholderTextColor={placeholder[0]}
                     onFocus={() => props.onInputFocus()}
                 />
             </View>
         </View>
-        // <View style={{
-        //         backgroundColor: props.headerScrollColor,
-        //     }}
-        // >
-        //     <View
-        //         style={{
-        //             height: props.headerScrollHeight || HEADER_MIN_HEIGHT,
-        //             width: '100%',
-        //             backgroundColor: props.headerScrollColor,
-        //             paddingHorizontal: 12,
-        //         }}>
-        //         <View
-        //             style={{
-        //                 paddingHorizontal: 12,
-        //                 paddingVertical: 10,
-        //                 flex: 1,
-        //                 flexDirection: 'row',
-        //                 alignItems: 'center',
-        //                 justifyContent: 'space-between',
-        //             }}>
-        //             <Pressable
-        //                 onPress={() => {
-        //                     handleLogoRotateAnimation()
-        //                     props.onPress()
-        //                 }}>
-        //                 <Animated.Image
-        //                     source={require('../../assets/images/sobyte_logo_white.png')}
-        //                     style={{
-        //                         height: 27.6,
-        //                         width: 21.8,
-        //                         transform: [{rotateZ: rotate}],
-        //                     }}
-        //                 />
-        //             </Pressable>
-        //             <Animated.Text
-        //                 style={[
-        //                     globalStyles.appName,
-        //                     {
-        //                         color: color,
-        //                         fontSize: 25,
-        //                     },
-        //                 ]}>
-        //                 {t('common:appName')}
-        //             </Animated.Text>
-        //             {props.right}
-        //         </View>
-        //     </View>
-        //     <TextInput
-        //         style={{
-        //             backgroundColor: props.headerScrollColor,
-        //             paddingHorizontal: 10,
-        //             paddingVertical: 8,
-        //             marginHorizontal: 20,
-        //             borderWidth: 0.5,
-        //             borderColor: placeholder[0],
-        //             borderRadius: 100,
-        //             fontSize: 16
-        //         }}
-        //         value=""
-        //         placeholder="Search Songs, Artists...."
-        //         placeholderTextColor={placeholder[0]}
-        //         onFocus={() => props.onInputFocus()}
-        //     />
-        // </View>
     )
 }
 
