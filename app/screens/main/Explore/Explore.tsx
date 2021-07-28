@@ -147,25 +147,15 @@ const Explore: React.FC<ExploreTabProps> = props => {
         })
     }
 
+    /**
+     * function to launch the search songs, artists screen
+    */
+    const launchSearchScreen = () => {
+        props.navigation.navigate('search')
+    }
+
     return (
         <View style={globalStyles.flex}>
-            <HeaderCollapsible
-                onPress={loadExploreData}
-                headerScrollColor={themeColors.black[0]}
-                headerScrollHeight={HEADER_MIN_HEIGHT}
-                right={
-                    // <Scaler onPress={() => props.navigation.navigate('search')}>
-                    <Icon
-                        onPress={() => props.navigation.navigate('search')}
-                        accessibilityLabel="search songs"
-                        name="search-outline"
-                        color={themeColors.text[0]}
-                        size={DEFAULT_ICON_SIZE}
-                    />
-                    // </Scaler>
-                }
-            />
-
             <ScrollView
                 refreshControl={
                     <RefreshControl
@@ -178,11 +168,29 @@ const Explore: React.FC<ExploreTabProps> = props => {
                 ref={scrollViewReference}
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground>
+                    <HeaderCollapsible
+                        onPress={loadExploreData}
+                        headerScrollColor={themeColors.transparent[0]}
+                        onInputFocus={launchSearchScreen}
+                        // headerScrollHeight={HEADER_MIN_HEIGHT}
+                        right={
+                            // <Scaler onPress={() => props.navigation.navigate('search')}>
+                            <Icon
+                                onPress={launchSearchScreen}
+                                accessibilityLabel="search songs"
+                                name="search-outline"
+                                color={themeColors.text[0]}
+                                size={DEFAULT_ICON_SIZE}
+                            />
+                            // </Scaler>
+                        }
+                    />
+
                     {/* as per mood topics */}
                     <Block
                         style={{
                             marginHorizontal: 0,
-                            marginVertical: 5,
+                            marginVertical: 0,
                             justifyContent: 'center',
                             alignItems: 'center',
                             // elevation: 30,
@@ -202,7 +210,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                                     globalStyles.topicTitle,
                                     {color: themeColors.text[0]},
                                 ]}>
-                                Moods & Genres
+                                {"Moods & Genres"}
                             </BlockTitle>
                         </Block>
 
