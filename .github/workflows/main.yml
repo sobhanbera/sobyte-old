@@ -11,10 +11,11 @@ on:
 jobs:
   # This workflow will check the formatting of code and other things
   checks:
+    name: "Checks"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Install Dependencies
         run: yarn install
 
@@ -23,11 +24,12 @@ jobs:
 
   # This workflow will output some neccessary things like file structure and so on...
   outputs:
+    name: "Outputs"
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: App Directory Tree
         run: tree app
 
