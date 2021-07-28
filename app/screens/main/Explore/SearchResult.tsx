@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Text} from 'react-native-paper'
 import {
-    ActivityIndicator,
     ScrollView,
     TouchableOpacity,
     View,
@@ -10,6 +9,7 @@ import {
     RefreshControl,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import LottieView from 'lottie-react-native'
 
 import {
     GradientBackground,
@@ -24,6 +24,7 @@ import {
     HEADER_MIN_HEIGHT,
     INFINITE_SCROLL_OFFSET,
     PaddingBottomView,
+    AppLogoAnimationConstant
 } from '../../../constants'
 import {
     FetchedSongObject,
@@ -53,7 +54,7 @@ interface Props {
     navigation?: any
 }
 const SearchResult: React.FC<Props> = props => {
-    const {surfacelight, text, white} = useTheme().themeColors
+    const {surfacelight, text} = useTheme().themeColors
     const {getSearchSuggestions, search, getContinuation} = useMusicApi()
     const {prompt} = usePrompt()
 
@@ -310,9 +311,15 @@ const SearchResult: React.FC<Props> = props => {
                             )}
 
                             {continuing ? (
-                                <ActivityIndicator
-                                    color={white[0]}
-                                    size={'small'}
+                                <LottieView
+                                    loop
+                                    autoPlay
+                                    source={AppLogoAnimationConstant}
+                                    style={{
+                                        height: 35,
+                                        alignSelf: 'center',
+                                        position: 'relative',
+                                    }}
                                 />
                             ) : null}
 
