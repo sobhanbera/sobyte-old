@@ -4,14 +4,15 @@
             "mysqlOptions": {
                 "authProtocol": "default"
             },
-            "previewLimit": 25,
+            "previewLimit": 50,
             "server": "localhost",
             "port": 3306,
             "driver": "MariaDB",
-            "name": "test",
-            "group": "test group",
-            "database": "testdatabase",
-            "username": "root",
+            "name": "sobyte",
+            "group": "Sobyte",
+            "database": "sobyte",
+            "username": "sobhan",
+            "connectionTimeout": 10,
             "password": "sobhan"
         }
     ]
