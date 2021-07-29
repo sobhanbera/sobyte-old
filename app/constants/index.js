@@ -1,6 +1,9 @@
 import React from 'react'
 import {View} from 'react-native'
 
+import * as Limits from './limits'
+export {Limits}
+
 /** App details */
 export const APP_NAME = 'Sobyte'
 export const APP_DESCRIPTION = 'Free Music streamer and download.'
