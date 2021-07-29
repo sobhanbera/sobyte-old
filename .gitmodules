@@ -1,0 +1,3 @@
+[submodule "music-backend"]
+	path = music-backend
+	url = git@github.com:sobhanbera/music-backend.git
