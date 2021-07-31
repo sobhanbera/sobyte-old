@@ -1,9 +1,15 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import axios, {AxiosRequestConfig} from 'axios'
+import {getIpAddress, getIpAddressSync} from 'react-native-device-info'
 
-import MAIN_API_ENDPOINT from '../../app/constants/endPoints'
-import {APP_BACKEND_API_KEY} from '../../app/constants'
+import MAIN_API_ENDPOINT from '../constants/endPoints'
+import {APP_BACKEND_API_KEY} from '../constants'
+import {AllApiPostBodyArttributes} from '../interfaces/Modals'
 
+interface DefaultApiPostBody {
+    key: string
+    ip: string
+}
 type ApiRequestType =
     | 'all'
     | 'get'
@@ -14,17 +20,33 @@ type ApiRequestType =
     | 'options'
     | 'head'
 const AppMainBackendApiContext = React.createContext({
+    /**
+     * all kinds of post api request to the main app backend will be done by this function
+     * this function takes some arguments those are:
+     * @param endpoint the endpoint after the baseurl in which the request must be made like /auth/login, /logout, /login, etc...
+     * @param dataToPost this is the payload or exactly the json data which should be posted during posting the api request
+     * @param _apiConfigs this is the object which is of type as given (AxiosRequestConfig) this helps the request to be more clear...
+     * @returns a promise with the response data from the request made...
+     */
     makeApiRequestPOST: (
         _endpoint: string,
         _dataToPost: any,
         _apiConfigs: AxiosRequestConfig,
     ) => {},
+    /**
+     * function which reloads the IP address of the device
+     * get the device local IP address and update the state...
+     */
+    reloadIP: () => {},
+
+    ipAddress: '',
 })
 interface Props {
     children: React.ReactNode
 }
 const AppMainBackendApi = (props: Props) => {
-    const defaultApiBody = {
+    const [IP, setIP] = useState<string>('')
+    const defaultApiBody: DefaultApiPostBody = {
         key: APP_BACKEND_API_KEY,
         ip: '',
     }
@@ -36,22 +58,68 @@ const AppMainBackendApi = (props: Props) => {
         withCredentials: true,
     })
 
+    /**
+     * function which reloads the IP address of the device
+     * get the device local IP address and update the state...
+     */
+    function updateIpAddress() {
+        // getting the device IP address
+        const deviceIPSynced = getIpAddressSync()
+        // setting the device IP address...
+        setIP(deviceIPSynced)
+    }
+    /**
+     * at the starting of this component or while initiating
+     * this component we are loading the device ip address and saving it to the state for
+     * later use
+     */
+    useEffect(() => {
+        // this is the function to load device ip address
+        updateIpAddress()
+    }, [])
+
+    /**
+     * all kinds of post api request to the main app backend will be done by this function
+     * this function takes some arguments those are:
+     * @param endpoint the endpoint after the baseurl in which the request must be made like /auth/login, /logout, /login, etc...
+     * @param dataToPost this is the payload or exactly the json data which should be posted during posting the api request
+     * @param _apiConfigs this is the object which is of type as given (AxiosRequestConfig) this helps the request to be more clear...
+     * @returns a promise with the response data from the request made...
+     */
     function makeApiRequestPOST(
         endpoint: string,
-        dataToPost: any,
+        dataToPost: AllApiPostBodyArttributes,
         _apiConfigs: AxiosRequestConfig,
     ) {
-        backendApiClient.post(
-            endpoint,
-            {
-                ...dataToPost,
-            },
-            _apiConfigs,
-        )
+        // the promise to return ...
+        return new Promise((resolve, reject) => {
+            // making the api request to the backend...
+            backendApiClient
+                .post(
+                    endpoint,
+                    {
+                        ...defaultApiBody,
+                        ...dataToPost,
+                    },
+                    _apiConfigs,
+                )
+                .then(response => {
+                    // if the response from the backend is with good status then resolve this promise...
+                    resolve(response)
+                })
+                .catch(error => {
+                    // if the api request responded with any error
+                    // reject this promise with that error..
+                    reject(error)
+                })
+        })
     }
 
     const appMainBackendApiContextValues = {
         makeApiRequestPOST: makeApiRequestPOST,
+        reloadIP: updateIpAddress,
+
+        ipAddress: IP,
     }
     return (
         <AppMainBackendApiContext.Provider
