@@ -1,0 +1,44 @@
+### MAIN HOME ROUTE...
+GET http://localhost:8000
+content-type: application/json
+
+{
+    "email": "sobhanbera258@gmail.com",
+    "password": "sobhanbera",
+    "key": "16e65baf9179f923b9019281b795b1c49ebbce2a3fbef51df5d13eb646a7a598"
+}
+
+
+### REGISTER ROUTE...
+POST http://localhost:8000/authentication/signup
+content-type: application/json
+
+{
+    "email": "sobhanbera258@google.com",
+    "password": "sobhanbera",
+    "ip": "192.168.29.184",
+    "key": "16e65baf9179f923b9019281b795b1c49ebbce2a3fbef51df5d13eb646a7a598"
+}
+
+
+### LOGIN ROUTE...
+POST http://localhost:8000/authentication/signin
+content-type: application/json
+
+{
+    "user": "sobhanbera258@gmail.com",
+    "password": "sobhanbera",
+    "ip": "192.168.29.184",
+    "key": "16e65baf9179f923b9019281b795b1c49ebbce2a3fbef51df5d13eb646a7a598"
+}
+
+
+### UPDATE LAST LOGIN TIME ROUTE...
+POST http://localhost:8000/authentication/updatelastlogin
+content-type: application/json
+
+{
+    "uid": 10,
+    "ip": "192.168.29.184",
+    "key": "16e65baf9179f923b9019281b795b1c49ebbce2a3fbef51df5d13eb646a7a598"
+}
