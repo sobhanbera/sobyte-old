@@ -32,3 +32,30 @@ export type ImageQualityType =
     | '120'
     | '60'
 export type LanguageType = 'en' | 'hi'
+
+/**
+ * interface which is a type of object among all the arttributes
+ * in short this is the sum of all the input fields of the api
+ * for example::
+ * - login route takes {user: string, email_type, username_type password: string}
+ * - register route takes {email: string, password: string}
+ * - updatelastlogin route takes {uid: number}
+ * - ...
+ * so this api interface would contain the following arttributes...
+ * - {
+ *      uid?: string
+ *      email?: string
+ *      username?: string
+ *      password?: string
+ *      user: string,
+ *      ...
+ * }...
+ */
+export interface AllApiPostBodyArttributes {
+    key?: string
+    id?: string
+    uid?: string
+    email?: string
+    username?: string
+    password?: string
+}
