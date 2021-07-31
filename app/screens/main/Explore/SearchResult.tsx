@@ -104,23 +104,22 @@ const SearchResult: React.FC<Props> = props => {
         )
             .then((res: any) => {
                 // if any such search query is saved then update state
-                // after re-checking its and array or not and also 
+                // after re-checking its and array or not and also
                 // we will not show duplicate search queries,
                 // if not then don't update any of the state since this is optional....
                 const result = JSON.parse(res)
                 const finalResult: string[] = []
-                for(let i in result)
-                    finalResult.push(result[i])
+                for (let i in result) finalResult.push(result[i])
                 const theMostFinalState = Array.from(new Set(finalResult))
                 setPreviouslySearchedQueries(theMostFinalState || [])
             })
             .catch(_err => {
-                console.log("ASD")
+                console.log('ASD')
             })
     }
 
     useEffect(() => {
-        console.log("SSS")
+        console.log('SSS')
         _getPreviouslySearchedQueries()
     }, [])
 
@@ -296,9 +295,9 @@ const SearchResult: React.FC<Props> = props => {
                             text={searchText}
                             onChangeText={setSearchText}
                             goBack={() =>
-                                showSearchSuggestions
-                                    ? hideSuggestions()
-                                    : props.navigation.goBack()
+                                // showSearchSuggestions
+                                //     ? hideSuggestions() :
+                                props.navigation.goBack()
                             }
                         />
 
@@ -317,42 +316,54 @@ const SearchResult: React.FC<Props> = props => {
                             showsHorizontalScrollIndicator={false}>
                             {/* render the previously seached queries */}
                             {previouslySearchedQueries.length > 0 &&
-                                !loading &&
-                                !continuing &&
-                                artists.content[0].browseId.length <= 0 &&
-                                songs.content[0].musicId.length <= 0 ?
+                            !loading &&
+                            !continuing &&
+                            artists.content[0].browseId.length <= 0 &&
+                            songs.content[0].musicId.length <= 0 ? (
                                 <View>
-                                    <TopicTitle title="Search History" textAlign={'left'} />
-                                    <View style={{
-                                        alignItems: 'flex-start',
-                                        flexWrap: 'wrap',
-                                        flexDirection: 'row',
-                                        justifyContent: 'flex-start',
-                                        marginVertical: 10,
-                                        marginHorizontal: 20
-                                    }}>
-                                        {previouslySearchedQueries.map(searchQuery => {
-                                            return (
-                                                <Text onPress={() => setSearchText(searchQuery)}
-                                                    style={{
-                                                        color: text[0],
-                                                        fontSize: 16,
-                                                        paddingHorizontal: 10,
-                                                        paddingVertical: 6,
-                                                        borderRadius: 100,
-                                                        borderColor: themecolorrevert[0] + "7F",
-                                                        borderWidth: 1,
-                                                        marginHorizontal: 4,
-                                                        marginVertical: 5
-                                                    }}
-                                                >
-                                                    {searchQuery}
-                                                </Text>
-                                            )
-                                        })}
+                                    <TopicTitle
+                                        title="Search History"
+                                        textAlign={'left'}
+                                    />
+                                    <View
+                                        style={{
+                                            alignItems: 'flex-start',
+                                            flexWrap: 'wrap',
+                                            flexDirection: 'row',
+                                            justifyContent: 'flex-start',
+                                            marginVertical: 10,
+                                            marginHorizontal: 20,
+                                        }}>
+                                        {previouslySearchedQueries.map(
+                                            searchQuery => {
+                                                return (
+                                                    <Text
+                                                        onPress={() =>
+                                                            setSearchText(
+                                                                searchQuery,
+                                                            )
+                                                        }
+                                                        style={{
+                                                            color: text[0],
+                                                            fontSize: 16,
+                                                            paddingHorizontal: 10,
+                                                            paddingVertical: 6,
+                                                            borderRadius: 100,
+                                                            borderColor:
+                                                                themecolorrevert[0] +
+                                                                '7F',
+                                                            borderWidth: 1,
+                                                            marginHorizontal: 4,
+                                                            marginVertical: 5,
+                                                        }}>
+                                                        {searchQuery}
+                                                    </Text>
+                                                )
+                                            },
+                                        )}
                                     </View>
                                 </View>
-                            : null}
+                            ) : null}
 
                             {/* all the songs which are loaded are shown here */}
                             {/* main content here */}
