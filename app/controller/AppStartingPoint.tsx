@@ -11,32 +11,35 @@ import AppNavigation from './AppInside'
 
 import {FullScreenLoading, Prompt} from '../components'
 import SettingsProvider from '../context/Settings'
+import AppMainBackendApi from '../backend'
 
 const AppStartingPoint = () => {
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(true) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState<boolean>(false)
 
     return (
-        <MusicApi>
-            <MusicFetcher>
-                <ThemeProvider>
-                    <SettingsProvider>
-                        <Player>
-                            <Prompt>
-                                <NavigationContainer theme={DarkTheme}>
-                                    {!userLoggedIn ? (
-                                        <AuthenticationNavigation />
-                                    ) : (
-                                        <AppNavigation />
-                                    )}
-                                    <FullScreenLoading visible={loading} />
-                                </NavigationContainer>
-                            </Prompt>
-                        </Player>
-                    </SettingsProvider>
-                </ThemeProvider>
-            </MusicFetcher>
-        </MusicApi>
+        <AppMainBackendApi>
+            <MusicApi>
+                <MusicFetcher>
+                    <ThemeProvider>
+                        <SettingsProvider>
+                            <Player>
+                                <Prompt>
+                                    <NavigationContainer theme={DarkTheme}>
+                                        {!userLoggedIn ? (
+                                            <AuthenticationNavigation />
+                                        ) : (
+                                            <AppNavigation />
+                                        )}
+                                        <FullScreenLoading visible={loading} />
+                                    </NavigationContainer>
+                                </Prompt>
+                            </Player>
+                        </SettingsProvider>
+                    </ThemeProvider>
+                </MusicFetcher>
+            </MusicApi>
+        </AppMainBackendApi>
     )
 }
 
