@@ -7,13 +7,26 @@
             "previewLimit": 50,
             "server": "localhost",
             "port": 3306,
+            "askForPassword": true,
             "driver": "MariaDB",
             "name": "sobyte",
             "group": "Sobyte",
             "database": "sobyte",
-            "username": "sobhan",
-            "connectionTimeout": 10,
-            "password": "sobhan"
+            "username": "sobhan"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MySQL",
+            "name": "sobyte",
+            "group": "Sobyte",
+            "database": "sobyte",
+            "username": "sobhan"
         }
     ]
 }
