@@ -7,6 +7,8 @@ export {Limits}
 /** App details */
 export const APP_NAME = 'Sobyte'
 export const APP_DESCRIPTION = 'Free Music streamer and download.'
+export const APP_BACKEND_API_KEY =
+    '16e65baf9179f923b9019281b795b1c49ebbce2a3fbef51df5d13eb646a7a598'
 
 /** Author Details */
 export const AUTHOR_NAME = 'Sobhan Bera'
