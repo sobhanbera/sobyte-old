@@ -18,7 +18,7 @@ const TopicTitle = (props: Props) => {
                 globalStyles.topicTitle,
                 globalStyles.verySmallPaddingView,
                 globalStyles.lightBottomBorder,
-                {color: text[0],textAlign: props.textAlign || 'center'},
+                {color: text[0], textAlign: props.textAlign || 'center'},
             ]}>
             {props.title}
         </Text>
