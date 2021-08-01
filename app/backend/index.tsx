@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import axios, {AxiosRequestConfig} from 'axios'
+import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {getIpAddressSync} from 'react-native-device-info'
 
 import MAIN_API_ENDPOINT from '../constants/endPoints'
 import {APP_BACKEND_API_KEY} from '../constants'
 import {AllApiPostBodyArttributes} from '../interfaces/Modals'
+import ResponseCodes from '../constants/apiCodes'
+import {ToastAndroid} from 'react-native'
 
 interface DefaultApiPostBody {
     key: string
@@ -19,6 +21,16 @@ type ApiRequestType =
     | 'patch'
     | 'options'
     | 'head'
+
+interface RegularResponse extends AxiosResponse {
+    data: {
+        code: ResponseCodes
+        data: any
+    }
+}
+const BareApiResponse: Promise<RegularResponse> = new Promise(
+    (resolve, reject) => {},
+)
 const AppMainBackendApiContext = React.createContext({
     /**
      * all kinds of post api request to the main app backend will be done by this function
@@ -30,9 +42,9 @@ const AppMainBackendApiContext = React.createContext({
      */
     makeApiRequestPOST: (
         _endpoint: string,
-        _dataToPost: any,
-        _apiConfigs: AxiosRequestConfig,
-    ) => {},
+        _dataToPost: AllApiPostBodyArttributes,
+        _apiConfigs: AxiosRequestConfig = {},
+    ) => BareApiResponse,
     /**
      * function which reloads the IP address of the device
      * get the device local IP address and update the state...
@@ -48,7 +60,7 @@ const AppMainBackendApi = (props: Props) => {
     const [IP, setIP] = useState<string>('')
     const defaultApiBody: DefaultApiPostBody = {
         key: APP_BACKEND_API_KEY,
-        ip: '',
+        ip: IP,
     }
     let backendApiClient = axios.create({
         baseURL: MAIN_API_ENDPOINT,
@@ -89,8 +101,8 @@ const AppMainBackendApi = (props: Props) => {
     function makeApiRequestPOST(
         endpoint: string,
         dataToPost: AllApiPostBodyArttributes,
-        _apiConfigs: AxiosRequestConfig,
-    ) {
+        _apiConfigs: AxiosRequestConfig = {},
+    ): Promise<RegularResponse> {
         // the promise to return ...
         return new Promise((resolve, reject) => {
             // making the api request to the backend...
@@ -103,11 +115,24 @@ const AppMainBackendApi = (props: Props) => {
                     },
                     _apiConfigs,
                 )
-                .then(response => {
+                .then((response: RegularResponse) => {
+                    // const {data, status} = response
                     // if the response from the backend is with good status then resolve this promise...
+                    if (response.data.code === 'NOT_AUTHORIZED') {
+                        ToastAndroid.show(
+                            'Please update the app. This version is no longer supported in your device',
+                            ToastAndroid.SHORT,
+                        )
+                    } else if (response.data.code === 'IP_NOT_AUTHORIZED') {
+                        ToastAndroid.show(
+                            'Please check your internet connection.',
+                            ToastAndroid.SHORT,
+                        )
+                    }
                     resolve(response)
                 })
                 .catch(error => {
+                    console.log(IP)
                     // if the api request responded with any error
                     // reject this promise with that error..
                     reject(error)
