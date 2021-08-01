@@ -45,19 +45,19 @@ const AppLaunchingNavigation = (_props: Props) => {
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState<boolean>(true)
     const [userData, setUserData] = useState<AppUserData>()
+
     /**
      * user verification that the user data exists or not
      * if the data exists the user should get access to the application's main
      * navigation else the user should be shown the main authentication navigation...
      */
-    useEffect(() => {
-        // loading the user data from async local storage of the android ...
+
+    function loadUserData() {
         AsyncStorage.getItem(USER_DATA_STORAGE_KEY)
             .then(res => {
                 const localUserData: AppUserData = JSON.parse(
                     JSON.stringify(res),
                 )
-
                 /**
                  * if no user data is saved locally
                  * it means no user is logged in
@@ -104,6 +104,10 @@ const AppLaunchingNavigation = (_props: Props) => {
                 setLoading(false)
                 SplashScreen.hide()
             })
+    }
+    useEffect(() => {
+        // loading the user data from async local storage of the android ...
+        loadUserData()
     }, [])
 
     const userDataValues = {
