@@ -17,12 +17,33 @@ import AppInsideNavigation from './AppInsideNavigation'
 
 import {FullScreenLoading} from '../components'
 import {USER_DATA_STORAGE_KEY} from '../constants'
+import {AppUserData} from '../interfaces'
 
+const UserDataContext = React.createContext<AppUserData>({
+    uid: 0,
+    email: '',
+    username: '',
+    profile_image: null,
+    phone: null,
+    gender: '',
+    account_type: '',
+    account_type_upto: new Date(),
+    created_on: new Date(),
+    created_ip: '',
+    last_login_on: new Date(),
+    last_login_ip: '',
+    last_updated_on: new Date(),
+    last_updated_ip: '',
+    disabled: 0,
+    verified_account: 0,
+    verified_email: 0,
+    access_token: '',
+})
 interface Props {}
 const AppLaunchingNavigation = (props: Props) => {
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(true) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState<boolean>(true)
-
+    const [userData, setUserData] = useState<AppUserData>()
     /**
      * user verification that the user data exists or not
      * if the data exists the user should get access to the application's main
@@ -32,7 +53,9 @@ const AppLaunchingNavigation = (props: Props) => {
         // loading the user data from async local storage of the android ...
         AsyncStorage.getItem(USER_DATA_STORAGE_KEY)
             .then(res => {
-                const localUserData = JSON.parse(JSON.stringify(res))
+                const localUserData: AppUserData = JSON.parse(
+                    JSON.stringify(res),
+                )
                 console.log(localUserData)
 
                 /**
@@ -53,9 +76,12 @@ const AppLaunchingNavigation = (props: Props) => {
                      * or else we will think the user has clear the data or cache of the application and due to some error the full
                      * data could not be removed...
                      */
-                    if (localUserData.uid > 0) {
+                    if (localUserData.uid && localUserData.uid > 0) {
                         // user is logged in...
                         // update last login and many more...
+                        setUserData(localUserData)
+                        setUserLoggedIn(true)
+                        setLoading(false)
                     } else {
                         // user is not logged in...
                         setUserLoggedIn(false)
@@ -73,17 +99,23 @@ const AppLaunchingNavigation = (props: Props) => {
             })
     }, [])
 
+    const userDataValues = {
+        ...userData,
+    }
     return (
         <NavigationContainer theme={DarkTheme}>
-            {!userLoggedIn ? (
-                <AuthenticationNavigation />
-            ) : (
-                <AppInsideNavigation />
-            )}
-
+            <UserDataContext.Provider value={userDataValues}>
+                {!userLoggedIn ? (
+                    <AuthenticationNavigation />
+                ) : (
+                    <AppInsideNavigation />
+                )}
+            </UserDataContext.Provider>
             <FullScreenLoading visible={loading} />
         </NavigationContainer>
     )
 }
 
 export default AppLaunchingNavigation
+export const useUserData = () => React.useContext(UserDataContext)
+export {UserDataContext}
