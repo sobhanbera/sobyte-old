@@ -38,8 +38,8 @@ const Prompt = (props: Props) => {
         description: PropmptDescriptionType,
     ) => {
         clearTimeout(timeOutObject)
-        setTitle(title)
         setDescription(description)
+        setTitle(title)
         timeOutObject = setTimeout(() => {
             setTitle('')
             setDescription('primary')
@@ -53,8 +53,8 @@ const Prompt = (props: Props) => {
         <PromptContext.Provider value={promptValues}>
             {props.children}
             <Modal
-                animationInTiming={1000}
-                animationOutTiming={1000}
+                animationInTiming={500}
+                animationOutTiming={250}
                 animationIn="slideInUp"
                 animationOut="slideOutDown"
                 onBackdropPress={() => setTitle('')}
