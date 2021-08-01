@@ -1,6 +1,7 @@
 import React from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import {useTranslation} from 'react-i18next'
 
 import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
@@ -8,12 +9,14 @@ import {AuthButton, Scaler} from '../../components'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import {T_C_PrivacyPolicy} from '../../components'
+import {DEFAULT_ICON_SIZE} from '../../constants'
 
 interface IntroProps {
     navigation: any
 }
 const Intro = (props: IntroProps) => {
     const {themeColors} = useTheme()
+    const {t} = useTranslation()
 
     return (
         <LinearGradient
@@ -31,7 +34,7 @@ const Intro = (props: IntroProps) => {
                         />
                     </Scaler>
                     <Text style={[globalStyles.whiteText, styles.detailsText]}>
-                        Feel The Music
+                        {t('appSlogan')}
                     </Text>
                 </View>
 
@@ -49,7 +52,7 @@ const Intro = (props: IntroProps) => {
                                 buttonRight={
                                     <Icon
                                         name="login"
-                                        size={30}
+                                        size={DEFAULT_ICON_SIZE}
                                         color={'white'}
                                     />
                                 }
@@ -71,7 +74,7 @@ const Intro = (props: IntroProps) => {
                                 buttonRight={
                                     <Icon
                                         name="alternate-email"
-                                        size={30}
+                                        size={DEFAULT_ICON_SIZE}
                                         color={'white'}
                                     />
                                 }
