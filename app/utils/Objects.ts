@@ -161,8 +161,8 @@ export function generateRandomPassword(lengthOfPassword: number = 10) {
  * @param email a email string
  * @returns true if the email is temporary mail else false
  */
-export function emailIsAllowedAndNotATemporaryMail(email: string) {
+export function isEmailBlocked(email: string) {
     for (let i in FakeMailsList)
-        if (email.includes(FakeMailsList[i])) return false
-    return true
+        if (email.includes(FakeMailsList[i])) return true
+    return false
 }

@@ -31,7 +31,7 @@ import {
     getHightQualityImageFromLinkWithHeight,
     trimLargeString,
     checkIfPasswordIsAlphanumeric,
-    emailIsAllowedAndNotATemporaryMail,
+    isEmailBlocked,
     generateRandomPassword,
     randomNumber,
 } from './Objects'
@@ -51,7 +51,7 @@ export {
     getHightQualityImageFromLinkWithHeight,
     trimLargeString,
     checkIfPasswordIsAlphanumeric,
-    emailIsAllowedAndNotATemporaryMail,
+    isEmailBlocked,
     generateRandomPassword,
     randomNumber,
 }
