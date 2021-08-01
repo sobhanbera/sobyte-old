@@ -14,7 +14,7 @@ import {
     SobyteAlertBox,
 } from '../../components'
 
-import {useTheme, useApp} from '../../context'
+import {useTheme, useApp, useUserData, useBackendApi} from '../../context'
 
 interface LoginProps {
     navigation: any
@@ -22,7 +22,9 @@ interface LoginProps {
 const Login = (props: LoginProps) => {
     const {themeColors} = useTheme()
     const {setShowLoading} = useApp()
-    const {} = use
+    const {} = useUserData()
+    const {} = useBackendApi()
+
     const [visible, setVisibility] = useState(false)
 
     const [email, setEmail] = useState('')
