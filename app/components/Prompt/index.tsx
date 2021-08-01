@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Text, View} from 'react-native'
+import {View} from 'react-native'
 import Modal from 'react-native-modal'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -8,6 +8,7 @@ import MarqueeText from 'react-native-marquee'
 import {
     FontHelvetica,
     PROMPT_DURATION,
+    MARQUEE_TEXT_PROGRESS_DURATION,
     DEFAULT_SMALL_ICON_SIZE,
 } from '../../constants'
 import {useTheme} from '../../context'
@@ -105,9 +106,11 @@ const Prompt = (props: Props) => {
                             style={{
                                 flexDirection: 'row',
                                 justifyContent: 'flex-start',
+                                width: '90%',
                                 paddingVertical: 5,
                                 paddingHorizontal: 6,
-                                width: '90%',
+                                paddingRight: DEFAULT_SMALL_ICON_SIZE, // this is the width of the icon next to this component
+                                // because this text should be clear to the user not overflowed by the cross icon
                             }}>
                             <View
                                 style={{
@@ -161,11 +164,11 @@ const Prompt = (props: Props) => {
                                     fontFamily: FontHelvetica,
                                     color: themeColors.white[0],
                                 }}
-                                duration={PROMPT_DURATION}
+                                duration={MARQUEE_TEXT_PROGRESS_DURATION}
                                 marqueeOnStart
                                 loop
-                                marqueeDelay={1000}
-                                marqueeResetDelay={1000}>
+                                marqueeDelay={500}
+                                marqueeResetDelay={500}>
                                 {title}
                             </MarqueeText>
                         </View>
