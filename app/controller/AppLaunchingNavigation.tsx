@@ -19,6 +19,7 @@ import AppInsideNavigation from './AppInsideNavigation'
 import {FullScreenLoading} from '../components'
 import {USER_DATA_STORAGE_KEY} from '../constants'
 import {AppUserData} from '../interfaces'
+import {ToastAndroid} from 'react-native'
 
 type MyFunctionType = (data: string) => any
 interface ContextArttributs {
@@ -64,9 +65,9 @@ const AppLaunchingNavigation = (_props: Props) => {
      * navigation else the user should be shown the main authentication navigation...
      */
 
-    function loadUserData() {
+    async function loadUserData() {
         setLoading(true)
-        AsyncStorage.getItem(USER_DATA_STORAGE_KEY)
+        await AsyncStorage.getItem(USER_DATA_STORAGE_KEY)
             .then(res => {
                 const localUserData: AppUserData = JSON.parse(
                     JSON.stringify(res),
@@ -128,12 +129,22 @@ const AppLaunchingNavigation = (_props: Props) => {
      * after these tasks when the backend responded with data we will pass that data to this function
      * and save it in local storage
      */
-    function setLocalUserData(data: string) {
+    async function setLocalUserData(data: string) {
         // saving the data to the local storage
-        AsyncStorage.setItem(USER_DATA_STORAGE_KEY, data)
-        // after saving the data to local storage we need to load the
-        // user data and again render the right thing depending on the user data found
-        loadUserData()
+        await AsyncStorage.setItem(USER_DATA_STORAGE_KEY, String(data))
+            .then(_res => {
+                // after saving the data to local storage we need to load the
+                // user data and again render the right thing depending on the user data found
+                loadUserData()
+            })
+            .catch(_err => {
+                // cannot save the data locally display a error to the user...
+                ToastAndroid.show(
+                    'Login was successful, but could not save your data. Please try again!!',
+                    ToastAndroid.SHORT,
+                )
+                console.log(_err, 'USUSUSUSUSUSU')
+            })
     }
 
     function logoutCurrentUser() {
