@@ -34,6 +34,31 @@ export type ImageQualityType =
 export type LanguageType = 'en' | 'hi'
 
 /**
+ * user data interface
+ * which contains email, username, phone, gender, account_type, account_type_upto, etc...
+ */
+export interface AppUserData {
+    uid: number
+    email: string
+    username: string
+    profile_image: string | null
+    phone: string | null
+    gender: string | null
+    account_type: string | null
+    account_type_upto: Date
+    created_on: Date
+    created_ip: string | null
+    last_login_on: Date
+    last_login_ip: string | null
+    last_updated_on: Date
+    last_updated_ip: string | null
+    disabled: number
+    verified_account: number
+    verified_email: number
+    access_token: string | null
+}
+
+/**
  * interface which is a type of object among all the arttributes
  * in short this is the sum of all the input fields of the api
  * for example::
