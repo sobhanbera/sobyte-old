@@ -17,7 +17,7 @@ import AppLaunchingNavigation from './AppLaunchingNavigation'
 interface ContextAPIsRendererProps {
     children?: React.ReactChild
 }
-function AppStartingPoint(props: ContextAPIsRendererProps) {
+function AppStartingPoint(_props: ContextAPIsRendererProps) {
     return (
         <AppMainBackendApi>
             <MusicApi>
