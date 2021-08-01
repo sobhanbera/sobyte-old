@@ -121,10 +121,10 @@ const AppLaunchingNavigation = (_props: Props) => {
 
     function logoutCurrentUser() {
         AsyncStorage.setItem(USER_DATA_STORAGE_KEY, JSON.stringify({}))
-            .then(res => {
+            .then(_res => {
                 loadUserData()
             })
-            .catch(err => {
+            .catch(_err => {
                 loadUserData()
             })
     }
