@@ -40,8 +40,8 @@ const UserDataContext = React.createContext<AppUserData>({
     access_token: '',
 })
 interface Props {}
-const AppLaunchingNavigation = (props: Props) => {
-    const [userLoggedIn, setUserLoggedIn] = useState<boolean>(true) // initial value must be false... true only for development purpose
+const AppLaunchingNavigation = (_props: Props) => {
+    const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState<boolean>(true)
     const [userData, setUserData] = useState<AppUserData>()
     /**
