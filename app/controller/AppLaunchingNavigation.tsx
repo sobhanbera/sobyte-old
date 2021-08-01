@@ -20,6 +20,7 @@ import {FullScreenLoading} from '../components'
 import {USER_DATA_STORAGE_KEY} from '../constants'
 import {AppUserData} from '../interfaces'
 import {ToastAndroid} from 'react-native'
+import {useBackendApi} from '../context'
 
 type MyFunctionType = (data: string) => any
 interface ContextArttributs {
@@ -55,16 +56,18 @@ const UserDataContext = React.createContext<ContextArttributs>({
 })
 interface Props {}
 const AppLaunchingNavigation = (_props: Props) => {
+    const {makeApiRequestPOST} = useBackendApi()
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState<boolean>(true)
     const [userData, setUserData] = useState<AppUserData>({})
+
+    function updateLastLogin() {}
 
     /**
      * user verification that the user data exists or not
      * if the data exists the user should get access to the application's main
      * navigation else the user should be shown the main authentication navigation...
      */
-
     async function loadUserData() {
         setLoading(true)
         await AsyncStorage.getItem(USER_DATA_STORAGE_KEY)
