@@ -68,10 +68,13 @@ const AppLaunchingNavigation = (_props: Props) => {
     async function loadUserData() {
         setLoading(true)
         await AsyncStorage.getItem(USER_DATA_STORAGE_KEY)
-            .then(res => {
+            .then((res: any) => {
                 const localUserData: AppUserData = JSON.parse(
-                    JSON.stringify(res),
+                    // JSON.stringify(
+                    res,
+                    // ),
                 )
+                console.log(localUserData.email, localUserData)
                 /**
                  * if no user data is saved locally
                  * it means no user is logged in
