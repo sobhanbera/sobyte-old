@@ -1,14 +1,11 @@
-import React, {createContext, useState} from 'react'
-import {
-    ImageBackground,
-    Modal,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native'
+import React from 'react'
+import {ImageBackground, Text, TouchableOpacity, View} from 'react-native'
+import Modal from 'react-native-modal'
+
 import {useTheme} from '../../context'
 import {FontRoboto} from '../../constants'
 import {Scaler} from '../'
+import globalStyles from '../../styles/global.styles'
 
 export interface SobyteAlertProps {
     title?: string
@@ -26,13 +23,22 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
     const {themeColors} = useTheme()
 
     return (
-        <Modal visible={props.visible} transparent>
+        <Modal
+            isVisible={props.visible}
+            animationIn="slideInLeft"
+            animationOut="slideOutRight"
+            onBackdropPress={() => props.setVisibility(false)}
+            onBackButtonPress={() => props.setVisibility(false)}
+            backdropOpacity={0}
+            swipeDirection="right"
+            onSwipeComplete={() => props.setVisibility(false)}
+            style={[globalStyles.bareModal]}>
             <View
                 style={{
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: '#00000050',
+                    backgroundColor: '#00000000',
                 }}>
                 <Scaler onPress={() => {}} touchableOpacity={1} scale={0.96}>
                     <ImageBackground
