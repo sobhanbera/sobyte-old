@@ -237,6 +237,7 @@ app
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Author
+
 sobhanbera (https://github.com/sobhanbera)
 
 ## Contact
@@ -266,4 +267,3 @@ sobhanbera (https://github.com/sobhanbera)
 <div align="center">
   <img alt="Sobyte Logo" src="https://github.com/sobhanbera/sobyte/blob/master/.github_src/logo_name.png" width="400px" />
 </div>
-
