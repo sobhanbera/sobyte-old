@@ -20,8 +20,10 @@ import {FullScreenLoading} from '../components'
 import {USER_DATA_STORAGE_KEY} from '../constants'
 import {AppUserData} from '../interfaces'
 
+type MyFunctionType = (data: string) => any
 interface ContextArttributs {
     data: AppUserData
+    setLocalUserData: MyFunctionType
     loadUserDataAgain: Function
     logout: Function
 }
@@ -46,6 +48,7 @@ const UserDataContext = React.createContext<ContextArttributs>({
         verified_email: 0,
         access_token: '',
     },
+    setLocalUserData: (_data: string) => {},
     loadUserDataAgain: () => {},
     logout: () => {},
 })
@@ -62,6 +65,7 @@ const AppLaunchingNavigation = (_props: Props) => {
      */
 
     function loadUserData() {
+        setLoading(true)
         AsyncStorage.getItem(USER_DATA_STORAGE_KEY)
             .then(res => {
                 const localUserData: AppUserData = JSON.parse(
@@ -119,6 +123,19 @@ const AppLaunchingNavigation = (_props: Props) => {
         loadUserData()
     }, [])
 
+    /**
+     * this function will help during login or registering user
+     * after these tasks when the backend responded with data we will pass that data to this function
+     * and save it in local storage
+     */
+    function setLocalUserData(data: string) {
+        // saving the data to the local storage
+        AsyncStorage.setItem(USER_DATA_STORAGE_KEY, data)
+        // after saving the data to local storage we need to load the
+        // user data and again render the right thing depending on the user data found
+        loadUserData()
+    }
+
     function logoutCurrentUser() {
         AsyncStorage.setItem(USER_DATA_STORAGE_KEY, JSON.stringify({}))
             .then(_res => {
@@ -131,6 +148,7 @@ const AppLaunchingNavigation = (_props: Props) => {
 
     const userDataValues = {
         data: userData,
+        setLocalUserData: setLocalUserData,
         loadUserDataAgain: loadUserData,
         logout: logoutCurrentUser,
     }
