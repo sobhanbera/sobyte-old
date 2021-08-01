@@ -83,4 +83,5 @@ export interface AllApiPostBodyArttributes {
     email?: string
     username?: string
     password?: string
+    [key: string]: any
 }
