@@ -9,6 +9,7 @@
  */
 
 import React, {useState, useEffect} from 'react'
+import SplashScreen from 'react-native-splash-screen'
 import {NavigationContainer, DarkTheme} from '@react-navigation/native'
 import AsyncStorage from '@react-native-community/async-storage'
 
@@ -56,7 +57,6 @@ const AppLaunchingNavigation = (_props: Props) => {
                 const localUserData: AppUserData = JSON.parse(
                     JSON.stringify(res),
                 )
-                console.log(localUserData)
 
                 /**
                  * if no user data is saved locally
@@ -64,9 +64,11 @@ const AppLaunchingNavigation = (_props: Props) => {
                  * we will render the authentication navigator
                  */
                 if (!res || !localUserData) {
+                    console.log('NO USER DATA FOUND')
                     // user is not logged in...
                     setUserLoggedIn(false)
                     setLoading(false)
+                    SplashScreen.hide()
                 } else if (localUserData) {
                     /**
                      * if some user data if found saved locally
@@ -77,15 +79,19 @@ const AppLaunchingNavigation = (_props: Props) => {
                      * data could not be removed...
                      */
                     if (localUserData.uid && localUserData.uid > 0) {
+                        console.log('USER DATA FOUND')
                         // user is logged in...
                         // update last login and many more...
                         setUserData(localUserData)
                         setUserLoggedIn(true)
                         setLoading(false)
+                        SplashScreen.hide()
                     } else {
+                        console.log('USER DATA FOUND BUT NOT ENOUGH')
                         // user is not logged in...
                         setUserLoggedIn(false)
                         setLoading(false)
+                        SplashScreen.hide()
                     }
                 }
             })
@@ -96,6 +102,7 @@ const AppLaunchingNavigation = (_props: Props) => {
                 // user is not logged in...
                 setUserLoggedIn(false)
                 setLoading(false)
+                SplashScreen.hide()
             })
     }, [])
 

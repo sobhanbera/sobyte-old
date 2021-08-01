@@ -13,8 +13,6 @@ import TrackPlayer, {
 import AppStartingPoint from './controller/AppStartingPoint'
 import {Loader} from './components'
 
-import SplashScreen from 'react-native-splash-screen'
-
 const AppContext = createContext({
     showLoading: false,
     setShowLoading: (_value: boolean) => {},
@@ -75,8 +73,6 @@ const MainApp = () => {
             maxCacheSize: 1024 * 2, // 1 MB max cache size
             waitForBuffer: false, // should the player wait to load the buffer and then play
         }).then(async () => {})
-
-        SplashScreen.hide()
     }, [])
 
     return (
