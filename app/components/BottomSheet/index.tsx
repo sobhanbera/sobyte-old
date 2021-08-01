@@ -11,10 +11,11 @@ import {
 } from 'react-native'
 import {Text} from 'react-native-paper'
 import Modal from 'react-native-modal'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {useTheme} from '../../context'
 import {DEFAULT_ICON_SIZE, FontUbuntu} from '../../constants'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import globalStyles from '../../styles/global.styles'
 
 interface Props {
     cancelText?: string
@@ -53,7 +54,7 @@ const BottomSheet = (props: Props) => {
             backdropOpacity={0}
             swipeDirection="down"
             onSwipeComplete={() => props.setVisible(false)}
-            style={[styles.modal]}>
+            style={[globalStyles.bareModal]}>
             <TouchableOpacity onPress={() => props.setVisible(false)}>
                 <View style={styles.takeTheInvisibleHeight}></View>
             </TouchableOpacity>
@@ -171,18 +172,6 @@ const BottomSheet = (props: Props) => {
 }
 
 const styles = StyleSheet.create({
-    modal: {
-        height: '100%',
-        width: '100%',
-        // bottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
-        margin: 0,
-        padding: 0,
-        justifyContent: 'center',
-        backgroundColor: 'transparent',
-        overflow: 'hidden',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-    },
     takeTheInvisibleHeight: {
         height: '45%',
     },
