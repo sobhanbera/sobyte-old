@@ -8,10 +8,10 @@ import {AllApiPostBodyArttributes} from '../interfaces/Modals'
 import ResponseCodes from '../constants/apiCodes'
 import {ToastAndroid} from 'react-native'
 
-interface DefaultApiPostBody {
-    key: string
-    ip: string
-}
+// interface DefaultApiPostBody {
+//     key: string
+//     ip: string
+// }
 // type ApiRequestType =
 //     | 'all'
 //     | 'get'
