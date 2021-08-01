@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - renders the authentication flow of the application
+ */
+
 import React, {useState, useEffect} from 'react'
 import {NavigationContainer, DarkTheme} from '@react-navigation/native'
 import AsyncStorage from '@react-native-community/async-storage'
