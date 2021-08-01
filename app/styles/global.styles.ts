@@ -170,6 +170,22 @@ const globalStyles = StyleSheet.create({
     },
 
     /**
+     * modal designs for the application are here-
+     */
+    bareModal: {
+        height: '100%',
+        width: '100%',
+        // bottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
+        margin: 0,
+        padding: 0,
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+    },
+
+    /**
      * animated header style design ends
      */
 })
