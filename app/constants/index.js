@@ -16,7 +16,7 @@ export const AUTHOR_NAME_LOWER = 'sobhanbera'
 
 /** Constants */
 /** Storage key Constants */
-export const USER_DATA_STORAGE_KEY = '@APP:USER_DATA'
+export const USER_DATA_STORAGE_KEY = '@APP:USER_DATA' // the storage key where the user data like email, username, etc will be stored in android itself...
 export const LANGUAGE_CODE_STORAGE_KEY = '@APP:LANGUAGE_CODE' // Storage key where the app language variable exists, for internationlization purpose
 export const AUDIO_QUALITY_STORAGE_KEY = '@APP:AUDIO_QUALITY' // Storage key for audio quality
 export const THEME_STORAGE_KEY = '@APP:THEME' // Storage key for the app's theme
