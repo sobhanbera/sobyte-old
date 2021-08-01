@@ -4,6 +4,7 @@ import {
     LARGE_TEXT_LENGTH,
     PASSWORD_CHARACTERS,
 } from '../constants'
+import {FakeMailsList} from '../constants/fakeMails'
 
 export function returnNullCallback(nullableValue: any, defaultValue: any): any {
     return !nullableValue ||
@@ -154,4 +155,14 @@ export function generateRandomPassword(lengthOfPassword: number = 10) {
         password += PASSWORD_CHARACTERS.charAt(randomNumber(0, n))
     }
     return password
+}
+
+/**
+ * @param email a email string
+ * @returns true if the email is temporary mail else false
+ */
+export function emailIsAllowedAndNotATemporaryMail(email = '') {
+    for (let i in FakeMailsList)
+        if (email.includes(FakeMailsList[i])) return false
+    return true
 }
