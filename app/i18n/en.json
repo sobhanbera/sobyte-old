@@ -29,6 +29,15 @@
         "graphite": "Graphite",
         "disco": "Disco"
     },
+    "authentication": {
+        "signin": "Sign In",
+        "signup": "Sign Up",
+        "login": "Login",
+        "register": "Register",
+        "forgotpassword": "Forgot Password",
+        "resetpassword": "Reset Password",
+        "otpsent": "OTP Sent"
+    },
     "words": {
         "cancel": "Cancel",
         "hello": "Hello",
@@ -39,7 +48,10 @@
     "sentences": {
         "valid_number_above_60_below_720": "Please enter a valid number above 60 and below 720.",
         "increase_image_quality_warning": "Increasing image quality will consume more data. \nNote: This may affect user experience",
-        "search_for_songs_artists": "Search for songs, artists..."
+        "search_for_songs_artists": "Search for songs, artists...",
+
+        "already_an_user": "Already a user",
+        "new_user": "New user"
     },
     "common": {
         "appName": "Sobyte",
