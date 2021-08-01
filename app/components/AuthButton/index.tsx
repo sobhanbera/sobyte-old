@@ -10,7 +10,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient'
 
 import {useTheme} from '../../context'
-import {FontLucida, FontTahoma, FontUbuntu, FontVerdana} from '../../constants'
+import {FontLucida} from '../../constants'
 
 interface ButtonProps {
     title: string
