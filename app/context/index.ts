@@ -2,6 +2,12 @@
 import {useBackendApi, AppMainBackendApiContext} from '../backend' // the major and main secure backend api of the application
 export {useBackendApi, AppMainBackendApiContext}
 
+import {
+    useUserData,
+    UserDataContext,
+} from '../controller/AppLaunchingNavigation'
+export {useUserData, UserDataContext}
+
 // other context providers
 import {useMusicApi} from '../api' // the main music loader
 import {useApp} from '../MainApp' // the app starting
