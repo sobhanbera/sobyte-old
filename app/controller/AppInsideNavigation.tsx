@@ -14,7 +14,7 @@ import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 
 const BarNavigator = createMaterialBottomTabNavigator()
-const AuthenticationNavigation = () => {
+const AppInsideNavigation = () => {
     const {t} = useTranslation()
 
     const {themeColors} = useTheme()
@@ -168,4 +168,4 @@ const AuthenticationNavigation = () => {
 //     },
 // })
 
-export default AuthenticationNavigation
+export default AppInsideNavigation
