@@ -43,6 +43,7 @@
     },
     "common": {
         "appName": "Sobyte",
+        "appSlogan": "Feel The Music",
         "langs": {
             "english": "English",
             "hindi": "हिंदी"
