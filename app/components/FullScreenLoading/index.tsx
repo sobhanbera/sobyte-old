@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient'
 
 import {useTheme} from '../../context'
 import {Scaler} from '../'
+import {DEFAULT_ICON_SIZE} from '../../constants'
 
 interface LoadingProps {
     visible: boolean
@@ -36,7 +37,10 @@ const FullScreenLoading: React.FC<LoadingProps> = props => {
                                 borderWidth: 0.8,
                                 borderColor: themeColors.primary.main[0] + '5f',
                             }}>
-                            <ActivityIndicator color="white" size={40} />
+                            <ActivityIndicator
+                                color="white"
+                                size={DEFAULT_ICON_SIZE}
+                            />
                         </View>
                     </Scaler>
                 </View>
