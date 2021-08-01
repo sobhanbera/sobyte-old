@@ -1,3 +1,31 @@
+// all the response code in one type
+// we need this because when the actual then or catch block will execute we could automatically get that code from reponse argument of then block...
+type ResponseCodes =
+    | 'NOT_AUTHORIZED'
+    | 'IP_NOT_AUTHORIZED'
+    | 'SUCCESS'
+    | 'FAILED'
+    | 'ERROR'
+    | 'WARNING'
+    | 'DANGER'
+    | 'PARTIAL_SUCCESS'
+    | 'SIGNIN_FAILED'
+    | 'SIGNUP_FAILED'
+    | 'PROVIDED_INCOMPLETE_DATA'
+    | 'EMAIL_PATTERN_NOT_MATCHED'
+    | 'SHORT_PASSWORD'
+    | 'SHORT_USERNAME'
+    | 'EMAIL_LENGTH_EXCEED'
+    | 'USERNAME_LENGTH_EXCEED'
+    | 'PASSWORD_LENGTH_EXCEED'
+    | 'TEMPORARY_EMAIL_IS_NOT_ALLOWED'
+    | 'USER_ID_NOT_PROVIDED'
+    | 'USER_ALREADY_EXIST'
+    | 'USER_NOT_FOUND'
+    | 'WRONG_PASSWORD'
+    | 'USER_ACCOUNT_IS_DISABLED'
+export default ResponseCodes
+
 // api common response codes...
 export const NOT_AUTHORIZED = 'NOT_AUTHORIZED' // if the api key is not provided
 export const IP_NOT_AUTHORIZED = 'IP_NOT_AUTHORIZED' // ip address not provided during making api request or the ip is banned
