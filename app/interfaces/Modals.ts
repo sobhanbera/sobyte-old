@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - many data types and instances
+ */
+
 export interface DominatingColors {
     average: string | ''
     darkMuted: string | ''
