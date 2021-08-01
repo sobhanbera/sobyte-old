@@ -119,3 +119,13 @@ export const EXTRA_SONGS_SCREEN = 'EXTRA_SONGS_SCREEN' // props - (ArtistObject 
  */
 const AppLogoAnimationConstant = require('../assets/animations/animation.json')
 export {AppLogoAnimationConstant}
+
+// regex for email and ip address type
+export const EMAIL_REGEX =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+export const IP_ADDRESS_REGEX =
+    /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+
+// this variable will not be used since there is not use of this but instead to recognize some
+// patern of backend this variable is here...
+export const bannedIPs = ['127.0.0.0', '0.0.0.0', 'localhost']
