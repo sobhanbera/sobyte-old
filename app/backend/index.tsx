@@ -132,7 +132,8 @@ const AppMainBackendApi = (props: Props) => {
                     resolve(response)
                 })
                 .catch(error => {
-                    console.log(IP)
+                    console.log('IP ADDRESS: ', IP)
+                    if (IP.length <= 0) updateIpAddress()
                     // if the api request responded with any error
                     // reject this promise with that error..
                     reject(error)
