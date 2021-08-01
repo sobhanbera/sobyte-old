@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios, {AxiosRequestConfig} from 'axios'
-import {getIpAddress, getIpAddressSync} from 'react-native-device-info'
+import {getIpAddressSync} from 'react-native-device-info'
 
 import MAIN_API_ENDPOINT from '../constants/endPoints'
 import {APP_BACKEND_API_KEY} from '../constants'
