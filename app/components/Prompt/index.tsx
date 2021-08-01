@@ -21,7 +21,10 @@ type PropmptDescriptionType =
     | 'danger'
     | 'warning'
 const PromptContext = React.createContext({
-    prompt: (_title: string, _description: PropmptDescriptionType) => {},
+    prompt: (
+        _title: string,
+        _description: PropmptDescriptionType = 'success',
+    ) => {},
     clearPrompt: () => {},
 })
 
@@ -37,7 +40,7 @@ const Prompt = (props: Props) => {
 
     const prompt = (
         title: string = '',
-        description: PropmptDescriptionType,
+        description: PropmptDescriptionType = 'success',
     ) => {
         clearTimeout(timeOutObject)
         setDescription(description)
