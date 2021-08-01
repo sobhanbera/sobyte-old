@@ -21,6 +21,7 @@ type PropmptDescriptionType =
     | 'warning'
 const PromptContext = React.createContext({
     prompt: (_title: string, _description: PropmptDescriptionType) => {},
+    clearPrompt: () => {},
 })
 
 interface Props {
@@ -45,8 +46,13 @@ const Prompt = (props: Props) => {
             setDescription('primary')
         }, PROMPT_DURATION)
     }
+    const clearPrompt = () => {
+        clearTimeout(timeOutObject)
+        setTitle('')
+    }
     const promptValues = {
         prompt: prompt,
+        clearPrompt: clearPrompt,
     }
 
     return (
@@ -57,8 +63,8 @@ const Prompt = (props: Props) => {
                 animationOutTiming={250}
                 animationIn="slideInUp"
                 animationOut="slideOutDown"
-                onBackdropPress={() => setTitle('')}
-                onBackButtonPress={() => setTitle('')}
+                onBackdropPress={() => clearPrompt()}
+                onBackButtonPress={() => clearPrompt()}
                 useNativeDriverForBackdrop
                 isVisible={title.length > 0}
                 backdropOpacity={0}
@@ -77,7 +83,7 @@ const Prompt = (props: Props) => {
                 <Scaler
                     touchableOpacity={1}
                     scale={1}
-                    onPress={() => setTitle('')}
+                    onPress={() => clearPrompt()}
                     containerStyle={{
                         backgroundColor: themeColors.surfacelight[0],
                         width: '100%',
