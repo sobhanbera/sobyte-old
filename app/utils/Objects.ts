@@ -1,5 +1,9 @@
 import {SongArtistObject, SongObject, ThumbnailObject} from '../interfaces'
-import {LARGE_TEXT_LENGTH} from '../constants'
+import {
+    ALPHA_NUMERIC_PASSWORD_REGEX,
+    LARGE_TEXT_LENGTH,
+    PASSWORD_CHARACTERS,
+} from '../constants'
 
 export function returnNullCallback(nullableValue: any, defaultValue: any): any {
     return !nullableValue ||
@@ -123,4 +127,31 @@ export function trimLargeString(
 
 export function firstLetterCap(text: string) {
     return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+/**
+ * @returns function which returns a random number in a range
+ */
+export function randomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min) + min)
+}
+
+/**
+ * @param password the password string for which the checks must be done,
+ * @returns if the password is allowed or not or in other words if the password contains both alphabets and numbers (alphanumeric)...
+ */
+export function checkIfPasswordIsAlphanumeric(password: string) {
+    return ALPHA_NUMERIC_PASSWORD_REGEX.test(password)
+}
+
+/**
+ * @returns a random string with alphanumeric characters
+ * this could be used as a password generator...
+ */
+export function generateRandomPassword(lengthOfPassword: number = 10) {
+    let password = ''
+    for (var i = 0, n = PASSWORD_CHARACTERS.length; i < lengthOfPassword; ++i) {
+        password += PASSWORD_CHARACTERS.charAt(randomNumber(0, n))
+    }
+    return password
 }
