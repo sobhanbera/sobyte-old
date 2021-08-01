@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     touchableButtonText: {
-        fontSize: 20,
+        fontSize: 19,
         color: 'white',
         textAlign: 'center',
         textAlignVertical: 'center',
