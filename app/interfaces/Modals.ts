@@ -79,7 +79,7 @@ export interface AppUserData {
 export interface AllApiPostBodyArttributes {
     key?: string
     id?: string
-    uid?: string
+    uid?: string | number
     email?: string
     username?: string
     password?: string

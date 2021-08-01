@@ -9,6 +9,7 @@
  */
 
 import React, {useState, useEffect} from 'react'
+import {ToastAndroid} from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import {NavigationContainer, DarkTheme} from '@react-navigation/native'
 import AsyncStorage from '@react-native-community/async-storage'
@@ -19,8 +20,8 @@ import AppInsideNavigation from './AppInsideNavigation'
 import {FullScreenLoading} from '../components'
 import {USER_DATA_STORAGE_KEY} from '../constants'
 import {AppUserData} from '../interfaces'
-import {ToastAndroid} from 'react-native'
 import {useBackendApi} from '../context'
+import {UPDATE_LAST_LOGIN_ROUTE_ENDPOINT} from '../constants/endPoints'
 
 type MyFunctionType = (data: string) => any
 interface ContextArttributs {
@@ -61,7 +62,74 @@ const AppLaunchingNavigation = (_props: Props) => {
     const [loading, setLoading] = useState<boolean>(true)
     const [userData, setUserData] = useState<AppUserData>({})
 
-    function updateLastLogin() {}
+    function updateLastLogin(userID: number) {
+        /**
+         * updating and loading the ip address of the device
+         * since many time a error is comming due to which the api request is incomplete
+         * and that's because of the IP address not loaded at the initial of the application launch..
+         */
+        // reloadIP()
+        /**
+         * now the above statement is automatically done since when any request is
+         * made immediately the ip address is loaded and makes the api request then
+         */
+
+        /**
+         * we will not show any alert/propmt if any error
+         * occurred in below api request
+         * since this task is optional and not a user controlled task
+         * instead automated
+         */
+        makeApiRequestPOST(UPDATE_LAST_LOGIN_ROUTE_ENDPOINT, {
+            uid: userID,
+        })
+            .then(_res => {
+                console.log(_res.data.code)
+                if (_res.data.code === 'USER_ID_NOT_PROVIDED') {
+                    /**
+                     * user data may not be stored in the local storage correctly
+                     * or the user data is stored correctly but cannot load it during
+                     * app launch correctly...
+                     */
+                } else if (_res.data.code === 'FAILED') {
+                    /**
+                     * any error occured while making the
+                     * query in the backend
+                     * no worries
+                     */
+                } else if (_res.data.code === 'PARTIAL_SUCCESS') {
+                    /**
+                     * user last login time is updated but cannot get the
+                     * latest user data from the database
+                     */
+                } else if (_res.data.code === 'SUCCESS') {
+                    /**
+                     * user last login is successfully updated
+                     * and got a user data so we should save this data instead of the previous one
+                     */
+                    AsyncStorage.setItem(
+                        USER_DATA_STORAGE_KEY,
+                        JSON.stringify(_res.data.data),
+                    )
+                        .then(_saved => {
+                            setUserData(_res.data.data)
+                            console.log('LAST LOGIN UPDATED')
+                        })
+                        .catch(_notSaved => {
+                            setUserData(_res.data.data)
+                            console.log('COULD NOT UPDATE LAST LOGIN')
+                        })
+                }
+            })
+            .catch(_err => {
+                /**
+                 * cannot update the last login
+                 * maybe the user's internet connection is slow
+                 * or maybe there is some problem in backend
+                 * maybe there is some internal issue
+                 */
+            })
+    }
 
     /**
      * user verification that the user data exists or not
@@ -77,14 +145,12 @@ const AppLaunchingNavigation = (_props: Props) => {
                     res,
                     // ),
                 )
-                console.log(localUserData.email, localUserData)
                 /**
                  * if no user data is saved locally
                  * it means no user is logged in
                  * we will render the authentication navigator
                  */
                 if (!res || !localUserData) {
-                    console.log('NO USER DATA FOUND')
                     // user is not logged in...
                     setUserLoggedIn(false)
                     setLoading(false)
@@ -99,18 +165,23 @@ const AppLaunchingNavigation = (_props: Props) => {
                      * data could not be removed...
                      */
                     if (localUserData.uid && localUserData.uid > 0) {
-                        console.log('USER DATA FOUND')
                         // user is logged in...
                         // update last login and many more...
                         setUserData(localUserData)
                         setUserLoggedIn(true)
                         setLoading(false)
+
+                        // hiding the splash screen after verifying user data is available or not
                         SplashScreen.hide()
+
+                        // since the user data is valid so we can update the last login of the user too...
+                        updateLastLogin(localUserData.uid)
                     } else {
-                        console.log('USER DATA FOUND BUT NOT ENOUGH')
                         // user is not logged in...
                         setUserLoggedIn(false)
                         setLoading(false)
+
+                        // hiding the splash screen after verifying user data is available or not
                         SplashScreen.hide()
                     }
                 }
@@ -122,6 +193,8 @@ const AppLaunchingNavigation = (_props: Props) => {
                 // user is not logged in...
                 setUserLoggedIn(false)
                 setLoading(false)
+
+                // hiding the splash screen after verifying user data is available or not
                 SplashScreen.hide()
             })
     }
@@ -149,7 +222,6 @@ const AppLaunchingNavigation = (_props: Props) => {
                     'Login was successful, but could not save your data. Please try again!!',
                     ToastAndroid.SHORT,
                 )
-                console.log(_err, 'USUSUSUSUSUSU')
             })
     }
 
