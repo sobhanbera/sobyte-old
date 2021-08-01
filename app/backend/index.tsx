@@ -3,7 +3,7 @@ import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {getIpAddressSync} from 'react-native-device-info'
 
 import MAIN_API_ENDPOINT from '../constants/endPoints'
-import {APP_BACKEND_API_KEY} from '../constants'
+import {APP_BACKEND_API_KEY, IP_ADDRESS_REGEX} from '../constants'
 import {AllApiPostBodyArttributes} from '../interfaces/Modals'
 import ResponseCodes from '../constants/apiCodes'
 import {ToastAndroid} from 'react-native'
@@ -12,15 +12,15 @@ interface DefaultApiPostBody {
     key: string
     ip: string
 }
-type ApiRequestType =
-    | 'all'
-    | 'get'
-    | 'post'
-    | 'put'
-    | 'delete'
-    | 'patch'
-    | 'options'
-    | 'head'
+// type ApiRequestType =
+//     | 'all'
+//     | 'get'
+//     | 'post'
+//     | 'put'
+//     | 'delete'
+//     | 'patch'
+//     | 'options'
+//     | 'head'
 
 interface RegularResponse extends AxiosResponse {
     data: {
@@ -29,7 +29,7 @@ interface RegularResponse extends AxiosResponse {
     }
 }
 const BareApiResponse: Promise<RegularResponse> = new Promise(
-    (resolve, reject) => {},
+    (_resolve, _reject) => {},
 )
 const AppMainBackendApiContext = React.createContext({
     /**
@@ -58,10 +58,6 @@ interface Props {
 }
 const AppMainBackendApi = (props: Props) => {
     const [IP, setIP] = useState<string>('')
-    const defaultApiBody: DefaultApiPostBody = {
-        key: APP_BACKEND_API_KEY,
-        ip: IP,
-    }
     let backendApiClient = axios.create({
         baseURL: MAIN_API_ENDPOINT,
         headers: {
@@ -79,6 +75,7 @@ const AppMainBackendApi = (props: Props) => {
         const deviceIPSynced = getIpAddressSync()
         // setting the device IP address...
         setIP(deviceIPSynced)
+        console.log('GETTING THE IP', deviceIPSynced)
     }
     /**
      * at the starting of this component or while initiating
@@ -87,8 +84,13 @@ const AppMainBackendApi = (props: Props) => {
      */
     useEffect(() => {
         // this is the function to load device ip address
-        updateIpAddress()
-    }, [])
+        if (IP.length <= 0 || IP_ADDRESS_REGEX.test(IP) === false)
+            updateIpAddress()
+        /**
+         * if the ip is not loaded or the loaded ip
+         * is not valid load the IP address of the device again
+         */
+    }, [IP])
 
     /**
      * all kinds of post api request to the main app backend will be done by this function
@@ -110,7 +112,9 @@ const AppMainBackendApi = (props: Props) => {
                 .post(
                     endpoint,
                     {
-                        ...defaultApiBody,
+                        // default values with app api key and IP address
+                        key: APP_BACKEND_API_KEY,
+                        ip: getIpAddressSync(),
                         ...dataToPost,
                     },
                     _apiConfigs,
@@ -132,7 +136,7 @@ const AppMainBackendApi = (props: Props) => {
                     resolve(response)
                 })
                 .catch(error => {
-                    console.log('IP ADDRESS: ', IP)
+                    console.log('IP ADDRESS ERROR: ', IP)
                     if (IP.length <= 0) updateIpAddress()
                     // if the api request responded with any error
                     // reject this promise with that error..
