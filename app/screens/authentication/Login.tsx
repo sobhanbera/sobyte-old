@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - user login / helps in authentication flow of the application
+ */
+
 import React, {useState} from 'react'
 import {
     Keyboard,
