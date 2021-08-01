@@ -30,6 +30,10 @@ import {
     getHightQualityImageFromLink,
     getHightQualityImageFromLinkWithHeight,
     trimLargeString,
+    checkIfPasswordIsAlphanumeric,
+    emailIsAllowedAndNotATemporaryMail,
+    generateRandomPassword,
+    randomNumber,
 } from './Objects'
 export {
     returnNullCallback,
@@ -46,4 +50,8 @@ export {
     getHightQualityImageFromLink,
     getHightQualityImageFromLinkWithHeight,
     trimLargeString,
+    checkIfPasswordIsAlphanumeric,
+    emailIsAllowedAndNotATemporaryMail,
+    generateRandomPassword,
+    randomNumber,
 }
