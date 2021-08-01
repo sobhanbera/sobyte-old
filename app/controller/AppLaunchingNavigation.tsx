@@ -20,31 +20,40 @@ import {FullScreenLoading} from '../components'
 import {USER_DATA_STORAGE_KEY} from '../constants'
 import {AppUserData} from '../interfaces'
 
-const UserDataContext = React.createContext<AppUserData>({
-    uid: 0,
-    email: '',
-    username: '',
-    profile_image: null,
-    phone: null,
-    gender: '',
-    account_type: '',
-    account_type_upto: new Date(),
-    created_on: new Date(),
-    created_ip: '',
-    last_login_on: new Date(),
-    last_login_ip: '',
-    last_updated_on: new Date(),
-    last_updated_ip: '',
-    disabled: 0,
-    verified_account: 0,
-    verified_email: 0,
-    access_token: '',
+interface ContextArttributs {
+    data: AppUserData
+    loadUserDataAgain: Function
+    logout: Function
+}
+const UserDataContext = React.createContext<ContextArttributs>({
+    data: {
+        uid: 0,
+        email: '',
+        username: '',
+        profile_image: null,
+        phone: null,
+        gender: '',
+        account_type: '',
+        account_type_upto: new Date(),
+        created_on: new Date(),
+        created_ip: '',
+        last_login_on: new Date(),
+        last_login_ip: '',
+        last_updated_on: new Date(),
+        last_updated_ip: '',
+        disabled: 0,
+        verified_account: 0,
+        verified_email: 0,
+        access_token: '',
+    },
+    loadUserDataAgain: () => {},
+    logout: () => {},
 })
 interface Props {}
 const AppLaunchingNavigation = (_props: Props) => {
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState<boolean>(true)
-    const [userData, setUserData] = useState<AppUserData>()
+    const [userData, setUserData] = useState<AppUserData>({})
 
     /**
      * user verification that the user data exists or not
@@ -110,8 +119,20 @@ const AppLaunchingNavigation = (_props: Props) => {
         loadUserData()
     }, [])
 
+    function logoutCurrentUser() {
+        AsyncStorage.setItem(USER_DATA_STORAGE_KEY, JSON.stringify({}))
+            .then(res => {
+                loadUserData()
+            })
+            .catch(err => {
+                loadUserData()
+            })
+    }
+
     const userDataValues = {
-        ...userData,
+        data: userData,
+        loadUserDataAgain: loadUserData,
+        logout: logoutCurrentUser,
     }
     return (
         <NavigationContainer theme={DarkTheme}>
