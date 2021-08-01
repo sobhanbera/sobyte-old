@@ -42,8 +42,8 @@ const AppLaunchingNavigation = (props: Props) => {
                  */
                 if (!res || !localUserData) {
                     // user is not logged in...
-                    setLoading(false)
                     setUserLoggedIn(false)
+                    setLoading(false)
                 } else if (localUserData) {
                     /**
                      * if some user data if found saved locally
@@ -58,8 +58,8 @@ const AppLaunchingNavigation = (props: Props) => {
                         // update last login and many more...
                     } else {
                         // user is not logged in...
-                        setLoading(false)
                         setUserLoggedIn(false)
+                        setLoading(false)
                     }
                 }
             })
@@ -68,8 +68,8 @@ const AppLaunchingNavigation = (props: Props) => {
                 // we could not load the user data from the local storage or any error occurred in then block
                 // logout the user
                 // user is not logged in...
-                setLoading(false)
                 setUserLoggedIn(false)
+                setLoading(false)
             })
     }, [])
 
