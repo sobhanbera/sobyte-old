@@ -1,7 +1,7 @@
 export default {
     name: 'Sobyte',
     displayName: 'Sobyte',
-    author: 'Sobhan Bera',
+    author: 'Sobhan Bera <https://github.com/sobhanbera>',
     /** @version = String( @vc + "." + @vn ) */
     version: 0.1,
     /** @vc - version code */
