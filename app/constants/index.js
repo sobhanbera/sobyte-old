@@ -138,4 +138,6 @@ export const PASSWORD_CHARACTERS =
 
 // this constant must contain a space at the end or else when making request this could not be separated from space
 export const API_AUTHORIZATION_BEARER_TOKEN_PREFIX =
-    'Sobyte_Bearer_Access_Token '
+    'Sobyte-Bearer-Access-Token '
+// this is the tag which will also be sent to the client as a response during a api requested in the client-side it can be fetched from the header of the response we sent...
+export const API_DETAILS_TAG = 'Sobyte-App-Details'
