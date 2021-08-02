@@ -116,8 +116,8 @@ export const DarkTheme: ThemeColors = {
         '#5E2000',
     ],
     mixGradient: [
-        '#3D01F0',
-        '#3D01F0',
+        '#5D02FF',
+        '#5D02FF',
         '#3B01A3',
         '#3B0171',
         '#3B0171',
