@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {DarkTheme} from '@react-navigation/native'
 import {useTranslation} from 'react-i18next'
 
@@ -108,6 +109,117 @@ const AppInsideNavigation = () => {
     )
 }
 
+const BottomTabBarNavigator = createBottomTabNavigator()
+const AppInsideNavigation2 = () => {
+    const {t} = useTranslation()
+
+    const {themeColors} = useTheme()
+    const {initMusicApi} = useMusicApi()
+    const [playMusicAtInitial, setPlayMusicAtInit] = useState(false)
+
+    let i = 0
+    useEffect(() => {
+        // if (!loaded || error) {
+        //     console.log('Music Api Init...')
+        initMusicApi()
+        // }
+    }, [])
+
+    return (
+        <BottomTabBarNavigator.Navigator
+            tabBarOptions={{
+                style: {
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    // height: 54,
+                    elevation: 0,
+                    margin: 0,
+                    padding: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'transparent',
+                    borderWidth: 0,
+                    borderTopColor: 'transparent',
+                    borderTopWidth: 0,
+                },
+                keyboardHidesTabBar: true,
+                activeTintColor: themeColors.white[0],
+                inactiveTintColor: themeColors.grey[0],
+                // activeBackgroundColor: 'black',
+                // inactiveBackgroundColor: 'black',
+                showLabel: true,
+                adaptive: true,
+                allowFontScaling: true,
+                tabStyle: {
+                    backgroundColor: themeColors.themecolor[0] + 'EA',
+                },
+            }}
+            screenOptions={({}) => ({})}
+            lazy={true}
+            sceneContainerStyle={
+                {
+                    // this should be empty always or unwanted things may happen
+                }
+            }
+            backBehavior="history"
+            initialRouteName={playMusicAtInitial ? 'MusicPlayer' : 'Explore'}>
+            <BottomTabBarNavigator.Screen
+                name="Explore"
+                component={ExploreStackNavigator}
+                options={{
+                    tabBarAccessibilityLabel: 'Explore Tab',
+                    tabBarLabel: t('words:explore'),
+                    tabBarIcon: ({focused, color}) => (
+                        <Ionicons
+                            name={focused ? 'md-search' : 'md-search-outline'}
+                            size={DEFAULT_ICON_SIZE}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+
+            {/* PLAYER SCREEN WHERE ALL THE SONGS PLAYING INTERFACE EXISTS */}
+            <BottomTabBarNavigator.Screen
+                name="MusicPlayer"
+                component={MusicPlayer}
+                options={{
+                    tabBarAccessibilityLabel: 'Music Player Tab',
+                    tabBarLabel: t('common:appName'),
+                    tabBarIcon: ({focused, color}) => (
+                        <Ionicons
+                            name={
+                                focused
+                                    ? 'musical-note'
+                                    : 'musical-note-outline'
+                            }
+                            size={DEFAULT_ICON_SIZE}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+
+            <BottomTabBarNavigator.Screen
+                name="Profile"
+                component={ProfileStackNavigator}
+                options={{
+                    tabBarAccessibilityLabel: 'Profile Tab',
+                    tabBarLabel: t('words:profile'),
+                    tabBarIcon: ({focused, color}) => (
+                        <AntDesign
+                            name={focused ? 'star' : 'staro'}
+                            size={DEFAULT_SMALL_ICON_SIZE}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+        </BottomTabBarNavigator.Navigator>
+    )
+}
+
 /**
  * @important_note may be useful in future...
  */
@@ -168,4 +280,4 @@ const AppInsideNavigation = () => {
 //     },
 // })
 
-export default AppInsideNavigation
+export default AppInsideNavigation2
