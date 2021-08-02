@@ -135,3 +135,7 @@ export const bannedIPs = ['127.0.0.0', '0.0.0.0', 'localhost']
 
 export const PASSWORD_CHARACTERS =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@$%^&*(){}[]-_+|<>'
+
+// this constant must contain a space at the end or else when making request this could not be separated from space
+export const API_AUTHORIZATION_BEARER_TOKEN_PREFIX =
+    'Sobyte_Bearer_Access_Token '
