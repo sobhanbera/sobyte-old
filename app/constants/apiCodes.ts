@@ -2,6 +2,7 @@
 // we need this because when the actual then or catch block will execute we could automatically get that code from reponse argument of then block...
 type ResponseCodes =
     | 'NOT_AUTHORIZED'
+    | 'NOT_AUTHENTICATED'
     | 'IP_NOT_AUTHORIZED'
     | 'SUCCESS'
     | 'FAILED'
@@ -28,6 +29,7 @@ export default ResponseCodes
 
 // api common response codes...
 export const NOT_AUTHORIZED = 'NOT_AUTHORIZED' // if the api key is not provided
+export const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED' // if the user could not provide any access_token or refresh_token to the server while making api request (wherever needed)
 export const IP_NOT_AUTHORIZED = 'IP_NOT_AUTHORIZED' // ip address not provided during making api request or the ip is banned
 
 export const SUCCESS = 'SUCCESS' // api returned something with success status
