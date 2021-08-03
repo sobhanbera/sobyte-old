@@ -22,9 +22,9 @@ interface SettingsProviderContextProps {
     audioQuality: AudioQualityType //extreme, good, poor, auto
     language: LanguageType // language code this is available in i18n.js
     imageQuality: ImageQualityType
-    setSetting: Function
+    setSetting(key: string, value: string): any
 
-    changeLanguage: Function
+    changeLanguage(language: LanguageType): any
 }
 export const SettingsProviderContext =
     React.createContext<SettingsProviderContextProps>({
