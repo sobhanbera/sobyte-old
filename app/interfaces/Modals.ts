@@ -41,7 +41,7 @@ export type ImageQualityType =
     | '200'
     | '120'
     | '60'
-export type LanguageType = 'en' | 'hi'
+export type LanguageType = 'en' | 'hi' | 'bn'
 
 /**
  * user data interface
