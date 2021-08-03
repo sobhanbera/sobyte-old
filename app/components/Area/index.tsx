@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, Touchable, TouchableHighlight} from 'react-native'
+import {View, Text, TouchableHighlight} from 'react-native'
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import {useTheme} from '../../context'
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const Area = (props: Props) => {
-    const {white, grey, surfacelight, surface, red} = useTheme().themeColors
+    const {white, grey, surface, red} = useTheme().themeColors
 
     return (
         <TouchableHighlight
