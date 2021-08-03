@@ -85,7 +85,6 @@ const AppLaunchingNavigation = (_props: Props) => {
             uid: userID,
         })
             .then(_res => {
-                console.log(_res.data.code)
                 if (_res.data.code === 'USER_ID_NOT_PROVIDED') {
                     /**
                      * user data may not be stored in the local storage correctly
@@ -118,7 +117,6 @@ const AppLaunchingNavigation = (_props: Props) => {
                         })
                         .catch(_notSaved => {
                             setUserData(_res.data.data)
-                            console.log('COULD NOT UPDATE LAST LOGIN')
                         })
                 }
             })
