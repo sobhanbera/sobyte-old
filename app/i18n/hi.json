@@ -27,7 +27,9 @@
         "canary": "केनारी",
         "celeste": "सेलेस्टे",
         "graphite": "ग्रेफाइट",
-        "disco": "डिस्को"
+        "disco": "डिस्को",
+
+        "logout": "लॉग आउट"
     },
     "authentication": {
         "signin": "साइन इन करें",

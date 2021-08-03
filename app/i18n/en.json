@@ -27,7 +27,9 @@
         "canary": "Canary",
         "celeste": "Celeste",
         "graphite": "Graphite",
-        "disco": "Disco"
+        "disco": "Disco",
+
+        "logout": "Logout"
     },
     "authentication": {
         "signin": "Sign In",
