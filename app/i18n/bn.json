@@ -1,66 +1,67 @@
 {
     "setting": {
-        "settings": "Settings",
-        "app_language": "App Language",
-        "default_app_language": "Default App Language",
-        "choose_audio_quality": "Choose Audio Quality",
-        "image_optimization": "Image Optimization",
-        "customize_background_theme": "Cusomize Background Theme",
+        "settings": "সেটিংস",
+        "app_language": "অ্যাপের ভাষা",
+        "default_app_language": "ডিফল্ট অ্যাপ ভাষা",
+        "choose_audio_quality": "অডিও কোয়ালিটি বেছে নিন",
+        "image_optimization": "ইমেজ অপটিমাইজেশন",
+        "customize_background_theme": "ব্যাকগ্রাউন্ড থিম কাস্টমাইজ করুন",
 
-        "extreme": "Extreme",
-        "good": "Good",
-        "poor": "Poor",
-        "auto": "Auto",
+        "extreme": "চরম",
+        "good": "ভাল",
+        "poor": "দরিদ্র",
+        "auto": "অটো",
 
-        "very_high_quality": "Very High",
-        "high_quality": "High",
-        "medium_quality": "Medium",
-        "low_quality": "Low",
-        "clear_quality": "Clear",
-        "blured_quality": "Blured",
+        "very_high_quality": "সুউচ্চ",
+        "high_quality": "উচ্চ",
+        "medium_quality": "মধ্যম",
+        "low_quality": "কম",
+        "clear_quality": "স্পষ্ট",
+        "blured_quality": "অস্পষ্ট",
 
-        "random": "Random",
-        "bisman": "Bisman",
-        "flamingo": "Flamingo",
-        "phoenix": "Phoenix",
-        "emerald": "Emerald",
-        "canary": "Canary",
-        "celeste": "Celeste",
-        "graphite": "Graphite",
-        "disco": "Disco",
+        "random": "এলোমেলো",
+        "bisman": "বিসম্যান",
+        "flamingo": "ফ্লেমিঙ্গো",
+        "phoenix": "গোলাপী",
+        "emerald": "সবুজ",
+        "canary": "ক্যানারি",
+        "celeste": "সেলেস্তে",
+        "graphite": "গ্রাফাইট",
+        "disco": "ডিস্কো",
 
-        "logout": "Logout"
+        "logout": "লগ আউট করুন"
     },
     "authentication": {
-        "signin": "Sign In",
-        "signup": "Sign Up",
-        "login": "Login",
-        "register": "Register",
-        "forgotpassword": "Forgot Password",
-        "resetpassword": "Reset Password",
-        "otpsent": "OTP Sent"
+        "signin": "সাইন ইন করুন",
+        "signup": "নিবন্ধন করুন",
+        "login": "প্রবেশ",
+        "register": "নিবন্ধন",
+        "forgotpassword": "পাসওয়ার্ড ভুলে গেছেন",
+        "resetpassword": "পাসওয়ার্ড রিসেট করুন",
+        "otpsent": "ওটিপি পাঠানো হয়েছে"
     },
     "words": {
-        "cancel": "Cancel",
-        "hello": "Hello",
-        "profile": "Me",
-        "music": "Music",
-        "explore": "Explore"
+        "cancel": "বাতিল",
+        "hello": "হ্যালো",
+        "profile": "প্রোফাইল",
+        "music": "সঙ্গীত",
+        "explore": "আরো দেখুন"
     },
     "sentences": {
-        "valid_number_above_60_below_720": "Please enter a valid number above 60 and below 720.",
-        "increase_image_quality_warning": "Increasing image quality will consume more data. \nNote: This may affect user experience",
-        "search_for_songs_artists": "Search for songs, artists...",
+        "valid_number_above_60_below_720": "দয়া করে 60 এর উপরে এবং 720 এর নিচে একটি বৈধ সংখ্যা লিখুন।",
+        "increase_image_quality_warning": "ইমেজ কোয়ালিটি বাড়ালে আরও বেশি ডাটা খরচ হবে।",
+        "search_for_songs_artists": "গান, শিল্পীদের জন্য অনুসন্ধান করুন ...",
 
-        "already_an_user": "Already a user",
-        "new_user": "New user"
+        "already_an_user": "ইতিমধ্যে একজন ব্যবহারকারী",
+        "new_user": "নতুন ব্যবহারকারী"
     },
     "common": {
         "appName": "Sobyte",
         "appSlogan": "Feel The Music",
         "langs": {
             "english": "English",
-            "hindi": "हिंदी"
+            "hindi": "हिंदी",
+            "bengali": "বাংলা"
         }
     }
 }
