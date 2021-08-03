@@ -16,10 +16,11 @@ interface Props {
     settingIcon?: React.ReactNode
     settingIconName?: string
     iconName?: string
+    danger?: boolean
 }
 
 const Area = (props: Props) => {
-    const {white, grey, surfacelight, surface} = useTheme().themeColors
+    const {white, grey, surfacelight, surface, red} = useTheme().themeColors
 
     return (
         <TouchableHighlight
@@ -35,7 +36,7 @@ const Area = (props: Props) => {
                 style={{
                     paddingVertical: 5,
                     paddingHorizontal: props.noBackground ? 0 : 22,
-                    backgroundColor: surface[0] + '33',
+                    backgroundColor: props.danger ? red[0] : surface[0] + '33',
                     flexDirection: props.column ? 'column' : 'row',
                     justifyContent: props.spacing ? 'space-between' : 'center',
                     alignItems: 'center',
@@ -71,7 +72,7 @@ const Area = (props: Props) => {
                     <Entypo
                         name={props.iconName || 'chevron-thin-right'}
                         size={20}
-                        color={grey[0]}
+                        color={props.danger ? white[0] : grey[0]}
                     />
                 ) : null}
             </View>
