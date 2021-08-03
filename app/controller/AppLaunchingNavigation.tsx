@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import AuthenticationNavigation from './Authentication'
 import AppInsideNavigation from './AppInsideNavigation'
 
-import {FullScreenLoading} from '../components'
+import {FullScreenLoading, SobyteAlertBox} from '../components'
 import {USER_DATA_STORAGE_KEY} from '../constants'
 import {AppUserData} from '../interfaces'
 import {useBackendApi} from '../context'
@@ -61,6 +61,7 @@ const AppLaunchingNavigation = (_props: Props) => {
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState<boolean>(true)
     const [userData, setUserData] = useState<AppUserData>({})
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
 
     function updateLastLogin(userID: number) {
         /**
@@ -229,17 +230,23 @@ const AppLaunchingNavigation = (_props: Props) => {
         AsyncStorage.setItem(USER_DATA_STORAGE_KEY, JSON.stringify({}))
             .then(_res => {
                 loadUserData()
+                setShowLogoutConfirm(false)
             })
             .catch(_err => {
+                setShowLogoutConfirm(false)
                 loadUserData()
             })
+    }
+
+    function logout() {
+        setShowLogoutConfirm(true)
     }
 
     const userDataValues = {
         data: userData,
         setLocalUserData: setLocalUserData,
         loadUserDataAgain: loadUserData,
-        logout: logoutCurrentUser,
+        logout: logout,
     }
     return (
         <NavigationContainer theme={DarkTheme}>
@@ -250,6 +257,20 @@ const AppLaunchingNavigation = (_props: Props) => {
                     <AppInsideNavigation />
                 )}
             </UserDataContext.Provider>
+
+            {/* logout confirm alert box */}
+            <SobyteAlertBox
+                setVisibility={setShowLogoutConfirm}
+                visible={showLogoutConfirm}
+                title="Confirm Logout!!"
+                description="Are you sure to logout from your account? This will remove all authentication data and user data from your device. You have to login again to continue with this account."
+                activeOpacity={0.5}
+                cancelText="No"
+                confirmText="Yes"
+                onConfirm={() => logoutCurrentUser()}
+                cancelBackgroundColor={'blue'}
+                confirmBackgroundColor={'transparent'}
+            />
             <FullScreenLoading visible={loading} />
         </NavigationContainer>
     )
