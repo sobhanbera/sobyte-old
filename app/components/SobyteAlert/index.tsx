@@ -3,7 +3,7 @@ import {ImageBackground, Text, TouchableOpacity, View} from 'react-native'
 import Modal from 'react-native-modal'
 
 import {useTheme} from '../../context'
-import {FontRoboto} from '../../constants'
+import {FontRoboto, FontRobotoBold} from '../../constants'
 import {Scaler} from '../'
 import globalStyles from '../../styles/global.styles'
 
@@ -18,6 +18,9 @@ export interface SobyteAlertProps {
     activeOpacity?: number
     setVisibility: (value: any) => void
     onConfirm?: () => void
+
+    cancelBackgroundColor?: string
+    confirmBackgroundColor?: string
 }
 const SobyteAlert: React.FC<SobyteAlertProps> = props => {
     const {themeColors} = useTheme()
@@ -47,7 +50,7 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                         style={{
                             width: 310,
                             paddingTop: 10,
-                            backgroundColor: themeColors.surface[0] + 'FF',
+                            backgroundColor: themeColors.surface[0] + 'FA',
                             borderRadius: 10,
                             elevation: 5,
                             justifyContent: 'center',
@@ -62,7 +65,7 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                 paddingBottom: 8,
                                 paddingTop: 3,
                                 color: themeColors.white[0],
-                                fontFamily: FontRoboto,
+                                fontFamily: FontRobotoBold,
                                 borderBottomColor: themeColors.white[0] + '0f',
                                 borderBottomWidth: 1,
                             }}>
@@ -99,13 +102,14 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                         paddingVertical: 10,
                                         paddingHorizontal: 8,
                                         backgroundColor:
+                                            props.cancelBackgroundColor ||
                                             themeColors.onDanger[0] + '7F',
                                         borderBottomLeftRadius: 8,
                                     }}>
                                     <Text
                                         style={{
                                             fontSize: 16,
-                                            fontFamily: FontRoboto,
+                                            fontFamily: FontRobotoBold,
                                             width: '100%',
                                             color: themeColors.white[0],
                                             textAlignVertical: 'center',
@@ -133,7 +137,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                     paddingHorizontal: 8,
                                     backgroundColor: props.onlyConfirmButton
                                         ? themeColors.black[0] + '2F'
-                                        : themeColors.primary.dark[0] + 'FF',
+                                        : props.confirmBackgroundColor ||
+                                          themeColors.primary.dark[0] + 'FF',
                                     borderBottomRightRadius: 8,
                                     borderBottomLeftRadius:
                                         props.onlyConfirmButton ? 8 : 0,
@@ -141,7 +146,7 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                 <Text
                                     style={{
                                         fontSize: 16,
-                                        fontFamily: FontRoboto,
+                                        fontFamily: FontRobotoBold,
                                         width: '100%',
                                         color: themeColors.white[0],
                                         textAlignVertical: 'center',
