@@ -92,15 +92,21 @@ const Setting: React.FC<SettingProps> = props => {
                 setVisible={setLanguageVisible}
                 buttons={[
                     {
-                        text: t('setting:default_app_language'),
+                        text: t('setting:default_app_language'), // default - english
                         onPress: () => changeLanguage('en'),
                     },
                     {
-                        text: t('common:langs:english'),
+                        text: t('common:langs:english'), // english language
                         onPress: () => changeLanguage('en'),
                     },
                     {
-                        text: t('common:langs:hindi'),
+                        text: t('common:langs:bengali'), // bengali language
+                        onPress: () => {
+                            changeLanguage('bn')
+                        },
+                    },
+                    {
+                        text: t('common:langs:hindi'), // hindi language
                         onPress: () => {
                             changeLanguage('hi')
                         },
