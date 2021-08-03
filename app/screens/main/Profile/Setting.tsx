@@ -211,7 +211,7 @@ const Setting: React.FC<SettingProps> = props => {
                         },
                     },
                     {
-                        text: t('setting:blured_quality'),
+                        text: t('setting:blurred_quality'),
                         extraText: '60px',
                         onPress: () => {
                             setSetting(
