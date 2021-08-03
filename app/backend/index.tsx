@@ -123,7 +123,6 @@ const AppMainBackendApi = (props: Props) => {
                      */
                     if (localUserData.uid && localUserData.uid > 0) {
                         // user is logged in...
-                        console.log('LCOALLALSCL', localUserData.access_token)
                         setAccessToken(localUserData.access_token)
                     } else {
                         // user is not logged in...
@@ -153,7 +152,10 @@ const AppMainBackendApi = (props: Props) => {
         // the promise to return ...
         return new Promise((resolve, reject) => {
             // making the api request to the backend...
-            console.log('ACCESS_TOKEN', accessToken)
+            console.log(
+                'ACCESS_TOKEN WHILE MAKING REQUEST IS ->>>',
+                accessToken,
+            )
 
             backendApiClient
                 .post(
