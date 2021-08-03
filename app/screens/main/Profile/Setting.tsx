@@ -8,7 +8,7 @@ import {
     GradientBackground,
     HeaderMain,
 } from '../../../components'
-import {useSetting, useTheme} from '../../../context'
+import {useSetting, useTheme, useUserData} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
 import {
     AUDIO_QUALITY_STORAGE_KEY,
@@ -23,6 +23,7 @@ const Setting: React.FC<SettingProps> = props => {
     const {t} = useTranslation()
     const {themeColors} = useTheme()
     const {setSetting, changeLanguage} = useSetting()
+    const {logout} = useUserData()
 
     const [languageVisible, setLanguageVisible] = useState<boolean>(false)
     const [audioQualityVisible, setAudioQualityVisible] =
@@ -75,6 +76,13 @@ const Setting: React.FC<SettingProps> = props => {
                     onPress={() => setBackgroundThemeVisible(true)}>
                     <Text style={globalStyles.areaTitle}>
                         {t('setting:customize_background_theme')}
+                    </Text>
+                </Area>
+
+                {/* THIS IS AT THE LAST AND IS LOGOUT BUTTON.... */}
+                <Area icon spacing onPress={() => logout()} danger>
+                    <Text style={globalStyles.areaTitle}>
+                        {t('setting:logout')}
                     </Text>
                 </Area>
             </ScrollView>
