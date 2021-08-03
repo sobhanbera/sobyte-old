@@ -24,7 +24,7 @@ project(':@react-native-community_slider').projectDir = new File(rootProject.pro
 include ':react-native-track-player'
 project(':react-native-track-player').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-track-player/android')
 
-/** this library provides blured background view component */
+/** this library provides blurred background view component */
 include ':@react-native-community_blur'
 project(':@react-native-community_blur').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/blur/android')
 
@@ -44,11 +44,11 @@ project(':react-native-vector-icons').projectDir = new File(rootProject.projectD
 include ':@react-native-community_async-storage'
 project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
 
-/** added for react native webview to render - in app web pages, websites, svg animations etc. */
+/** added for react native web view to render - in app web pages, websites, svg animations etc. */
 include ':react-native-webview'
 project(':react-native-webview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview/android')
 
-/** added for react native webview to render - svg animations etc. */
+/** added for react native web view to render - svg animations etc. */
 include ':react-native-svg'
 project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
 
