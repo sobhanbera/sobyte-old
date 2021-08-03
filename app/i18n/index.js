@@ -3,8 +3,10 @@ import {initReactI18next} from 'react-i18next'
 import locale from 'react-native-locale-detector'
 import AsyncStorage from '@react-native-community/async-storage'
 
-import en from './en.json'
-import hi from './hi.json'
+import en from './en.json' /*  english          */
+import hi from './hi.json' /*  hindi            */
+import bn from './bn.json' /*  bengali          */
+// import other from './other.json' /*  other          */
 
 import {LANGUAGE_CODE_STORAGE_KEY} from '../constants'
 
@@ -33,7 +35,7 @@ i18n.use(languageDetector)
         react: {
             useSuspense: false,
         },
-        resources: {en, hi},
+        resources: {en /* english */, hi /* hindi */, bn /* bengali */},
 
         ns: ['common'],
         defaultNS: 'common',
