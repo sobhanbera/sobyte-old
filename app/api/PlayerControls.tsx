@@ -176,7 +176,18 @@ const Player: FC<PlayerProps> = props => {
      * list of songs which are next to the current song
      * this is generated when a new song is played or the last song reached
      */
-    const [nextSongsList, setNextSongsList] = useState<Array<Track>>([])
+    const [nextSongsList, setNextSongsList] = useState<Array<Track>>([
+        {
+            artist: 'My Self',
+            artwork:
+                'https://wonderfulengineering.com/wp-content/uploads/2014/10/wallpaper-photos-31.jpg',
+            duration: 10023,
+            id: '123asd',
+            title: 'Demo Songs & will be removed',
+            url: 'asdf',
+            playlistId: 'sadfi8ysaod909',
+        },
+    ])
     /**
      * playerstate provide the info about the track player that the song is
      * playing, paused, stopped, buffering, etc...
