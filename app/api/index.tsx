@@ -1,9 +1,10 @@
-import React, {useState} from 'react' // as usual import
+import React, {useState, useEffect} from 'react' // as usual import
 import axios from 'axios' // for making api requests
 import RNLocalize from 'react-native-localize' // to pass the location of user in the api call
 import querystring from 'querystring' // string methods
 import _ from 'lodash' // util methods
 import AsyncStorage from '@react-native-community/async-storage'
+import NetInfo from '@react-native-community/netinfo'
 
 import * as utils from './utils' // local util path
 import * as parsers from './parsers' // local parser path
@@ -236,6 +237,7 @@ const MusicApi = (props: MusicApiProps) => {
     const [musicConfig, setMusicConfig] = useState<{[key: string]: any}>({})
     const [error, setError] = useState(true)
     const [loaded, setLoaded] = useState(false)
+    const [internetAvailable, setInternetAvailable] = useState(true)
 
     /**
      * main and core required variable to make requests to the backend
@@ -250,6 +252,19 @@ const MusicApi = (props: MusicApiProps) => {
         },
         withCredentials: true,
     })
+
+    useEffect(() => {
+        const unsubscribeInternetConnection = NetInfo.addEventListener(
+            state => {
+                setInternetAvailable(state.isConnected === true)
+            },
+        )
+
+        // Unsubscribing to the event listener for internet connection info provider
+        return () => {
+            unsubscribeInternetConnection()
+        }
+    }, [])
 
     /**
      * @returns a promise after initializing the music api fetcher this
@@ -626,6 +641,7 @@ const MusicApi = (props: MusicApiProps) => {
         saveToLocalStorage: boolean = false,
         _pageLimit: number = 1,
     ) => {
+        console.log('SEARCHINASDASDKALKSJD')
         return new Promise((resolve, reject) => {
             var result: any = {}
             _createApiRequest('search', {
@@ -689,6 +705,7 @@ const MusicApi = (props: MusicApiProps) => {
                                 .catch(() => {})
                         }
                     } catch (error) {
+                        console.log('ERROR RSEARCHINGNGN...')
                         return resolve({
                             error: error.message,
                         })
