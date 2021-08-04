@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - all the components are exported from here
+ */
+
 import Scaler from './Scaler'
 import AuthButton from './AuthButton'
 import ScalerAuthButton from './ScalerAuthButton'
