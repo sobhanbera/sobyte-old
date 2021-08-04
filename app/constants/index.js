@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Javascript
+ *
+ * Purpose - all application constants are here
+ */
+
 import React from 'react'
 import {View} from 'react-native'
 
