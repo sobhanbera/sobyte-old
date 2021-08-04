@@ -666,16 +666,17 @@ const MusicApi = (props: MusicApiProps) => {
              * so if the saveToLocalStorage is true than we are confirm that this data is also saved locally previously
              * then only we will procced to resolve with this data
              */
-            if (saveToLocalStorage) {
-                if (internetAvailable === false) {
+            if (internetAvailable === false) {
+                if (saveToLocalStorage) {
                     AsyncStorage.getItem(
                         `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
                     )
                         .then((res: any) => {
                             // checking if the data exists in local storage or not...
-                            if (res !== null)
+                            if (res !== null) {
                                 // load data and provide it for rendering purpose...
                                 return resolve(JSON.parse(res))
+                            }
                         })
                         .catch(err => {
                             // console.log('ERROR LOCALLY LOAD', err)
