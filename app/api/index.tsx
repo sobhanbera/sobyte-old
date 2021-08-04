@@ -675,7 +675,6 @@ const MusicApi = (props: MusicApiProps) => {
                             // checking if the data exists in local storage or not...
                             if (res !== null) {
                                 // load data and provide it for rendering purpose...
-                                console.log(res)
                                 return resolve(JSON.parse(res))
                                 // console.log(i++, 'LOADED AND IT IS ', res)
                             }
