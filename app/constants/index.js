@@ -30,9 +30,9 @@ export const SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY =
     '@APP:SEARCHED_SONG_OFFLINE_DATA:' // the storage key where the fallbacks searched songs results will be stored this method is available in main music api under api/index.tsx in search method
 /**
  * here for the above constant
- * like the searched query is New Bollywood songs
+ * like the searched query is New Bollywood songs and the category is PLAYLIST (may be)
  * then the results of it would be saved in here
- * "@APP:SEARCHED_SONG_OFFLINE_DATA:New Bollywood songs"
+ * "@APP:SEARCHED_SONG_OFFLINE_DATA:New Bollywood songs:PLAYLIST"
  * at this local storage key refrence...
  *
  * we can then get this value when there is no internet connection available OR
