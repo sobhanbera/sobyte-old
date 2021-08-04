@@ -26,14 +26,49 @@ const DemoMusicContextReturn = () => new Promise<any>(() => {})
 // }
 
 export interface MusicContextApiProviderProps {
+    /**
+     * @returns a promise after initializing the music api fetcher this
+     * function should be called in the root element of the app where the
+     * main app starts after using this function context provider
+     */
     initialize(): Promise<any>
+
+    /**
+     * @returns a promise after initializing the music api fetcher this
+     * function should be called in the root element of the app where the
+     * main app starts after using this function context provider
+     */
     initMusicApi(): Promise<any>
+
+    /**
+     * @param endpointName this is the endpoint name like "search" or anything else
+     * @param continuation this is the continuation object which is provided in the fetched data after making any request to get more data of the same type...
+     * @returns return the same type of object for which the continuation is provided
+     */
     getContinuation(
         _endpointName: string | 'search' | '',
         _continuation: ContinuationObject,
         _dataType: TypeOFDatas,
     ): Promise<any>
+
+    /**
+     * @param query the query string for getting suggestions
+     * @returns object with array of strings containing the search suggestion...
+     */
     getSearchSuggestions(_search: string): Promise<string[]>
+
+    /**
+     * @param query the query string
+     * @param categoryName what type of data is needed like "song" | "album" | "playlist"
+     * @param getARandomResult boolean value if true then will provide a random search result out of the result got from api
+     * @param saveToLocalStorage boolean if true then after searching and providing the results this function will also save the data in local storage for offline use cases.
+     * @param _pageLimit number of data page wise (this argument is not in use currently).... and not prefered to use in future too...
+     * @returns the search result after making api request
+     *
+     * the local storage will store the data in form of key value pair like {"search_query": JSON.stringify("search_result_json_value")}
+     * when any error occured or seems to have no internet connection then if the particular search result is saved in local storage this function will return it in place of returning the new updated data
+     * since there should be some 2nd plan for every work...
+     */
     search(
         _query: string,
         _dataType: TypeOFDatas,
@@ -41,20 +76,53 @@ export interface MusicContextApiProviderProps {
         _saveToLocalStorage?: boolean,
         _pageLimit?: number,
     ): Promise<any>
+
+    /**
+     * @param browseId id of the album
+     * @returns the object with album data
+     */
     getAlbum(_browseId: string): Promise<any>
+
+    /**
+     * @param browseId id of the playlist
+     * @param contentLimit limiting the data
+     * @returns the object with playlist data
+     */
     getPlaylist(_browseId: string): Promise<any>
+
+    /**
+     * @param browseId id of the artist
+     * @returns the object with artist data
+     */
     getArtist(_browseId: string): Promise<any>
+
+    /**
+     * @param musicId id of the music
+     * @param playlistId id of the playlist
+     * @param paramString id of the param string if any
+     * @returns the object with songs list in that particular playlist
+     */
     getNext(
         _musicId: string,
         _playlistId: string,
         _paramString: string,
     ): Promise<any>
+
+    /**
+     * @param musicId id of the music
+     * @param playlistId id of the playlist
+     * @param paramString id of the param string if any
+     * @returns the object with songs data
+     */
     getPlayer(
         _musicId: string,
         _playlistId: string,
         _paramString: string,
     ): Promise<any>
 
+    /**
+     * state of main api component
+     */
     musicConfig: object | any
     error: boolean
     loaded: boolean
