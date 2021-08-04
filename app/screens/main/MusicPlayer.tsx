@@ -71,7 +71,7 @@ const Player: React.FC<PlayerProps> = _props => {
             .then(() => {
                 initMusicApi()
                     .then(() => {
-                        loadInitialMusicPlayerData()
+                        // loadInitialMusicPlayerData()
                     })
                     .catch(() => {})
             })
