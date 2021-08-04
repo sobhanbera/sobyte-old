@@ -1,4 +1,14 @@
 /**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - theme related props and interfaces
+ */
+
+/**
  * Some Common Color which always are constant and universal...
  * @common_colors_interface
  */

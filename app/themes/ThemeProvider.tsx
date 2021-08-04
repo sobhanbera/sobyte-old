@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - theme related component (provides what theme and all such good stuffs)
+ */
+
 import React, {
     createContext,
     useCallback,

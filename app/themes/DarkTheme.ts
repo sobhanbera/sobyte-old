@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - apps dark and default theme scheme
+ */
+
 import ThemeColors, {RequiredCommonColors} from './ThemeProps'
 
 /**
