@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - many types of interface/datatypes/types etc
+ */
+
 import {
     DominatingColors,
     AudioQualityType,
