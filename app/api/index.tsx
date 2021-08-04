@@ -8,7 +8,10 @@ import AsyncStorage from '@react-native-community/async-storage'
 import * as utils from './utils' // local util path
 import * as parsers from './parsers' // local parser path
 import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // objects required for instances in this files
-import {API_CONFIG_DATA_STORAGE_KEY} from '../constants'
+import {
+    API_CONFIG_DATA_STORAGE_KEY,
+    SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY,
+} from '../constants'
 
 /**
  * this is the all types of data which could be fetched
@@ -662,7 +665,29 @@ const MusicApi = (props: MusicApiProps) => {
                                 result = parsers.parseSearchResult(context)
                                 break
                         }
+
                         resolve(result)
+
+                        /**
+                         * saving the data if it is required to save
+                         * this data will be available when user is offline or any such case of error
+                         * or anything else in world happens...
+                         * we can get this same saved searched results from the refrence below
+                         *
+                         * "@APP:SEARCHED_SONG_OFFLINE_DATA:searched_query"
+                         *
+                         * for simply using the below line of code to get the item from local storage
+                         *
+                         * `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}`
+                         */
+                        if (saveToLocalStorage) {
+                            AsyncStorage.setItem(
+                                `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}`,
+                                JSON.stringify(result),
+                            )
+                                .then(() => {})
+                                .catch(() => {})
+                        }
                     } catch (error) {
                         return resolve({
                             error: error.message,
