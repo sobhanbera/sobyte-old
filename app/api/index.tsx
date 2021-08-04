@@ -641,8 +641,45 @@ const MusicApi = (props: MusicApiProps) => {
         saveToLocalStorage: boolean = false,
         _pageLimit: number = 1,
     ) => {
-        console.log('SEARCHINASDASDKALKSJD')
         return new Promise((resolve, reject) => {
+            /**
+             * if there is not internet connection we will check if the searched results are
+             * saved in the local storage properly if it is stored then we could resolve with that data only
+             * instead of searching again
+             * NOTE: this will be only performed for offline purpose not for online use case...
+             */
+            // AND - AND
+            /**
+             * may be the user is offline
+             * but that does not means that every searched query's results are saved locally
+             * so we need to check if it exists or not
+             * so if the saveToLocalStorage is true than we are confirm that this data is also saved locally previously
+             * then only we will procced to resolve with this data
+             */
+            if (saveToLocalStorage) {
+                if (internetAvailable === false) {
+                    AsyncStorage.getItem(
+                        `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
+                    )
+                        .then((res: any) => {
+                            // checking if the data exists in local storage or not...
+                            if (res !== null || res !== undefined) {
+                                // load data and provide it for rendering purpose...
+                                return resolve(JSON.parse(res))
+                                // console.log(i++, 'LOADED AND IT IS ', res)
+                            }
+                        })
+                        .catch(err => {
+                            console.log('ERROR LOCALLY LOAD', err)
+                        })
+                }
+            }
+
+            /**
+             * if the user is connected to internet
+             * not need to get the locally saved data instead
+             * we could search again and give the latest and updated data to the user...z
+             */
             var result: any = {}
             _createApiRequest('search', {
                 query: query,
@@ -685,27 +722,30 @@ const MusicApi = (props: MusicApiProps) => {
                         resolve(result)
 
                         /**
-                         * saving the data if it is required to save
+                         * saving the data if it is required to save and also if the internet connection is
+                         * avaialable or if we save while offline unstable data may get saved
+                         *
                          * this data will be available when user is offline or any such case of error
                          * or anything else in world happens...
                          * we can get this same saved searched results from the refrence below
                          *
-                         * "@APP:SEARCHED_SONG_OFFLINE_DATA:searched_query"
+                         * "@APP:SEARCHED_SONG_OFFLINE_DATA:searched_query:searched_category"
                          *
                          * for simply using the below line of code to get the item from local storage
                          *
-                         * `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}`
+                         * `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`
                          */
                         if (saveToLocalStorage) {
-                            AsyncStorage.setItem(
-                                `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}`,
-                                JSON.stringify(result),
-                            )
-                                .then(() => {})
-                                .catch(() => {})
+                            if (internetAvailable) {
+                                AsyncStorage.setItem(
+                                    `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
+                                    JSON.stringify(result),
+                                )
+                                    .then(() => {})
+                                    .catch(() => {})
+                            }
                         }
                     } catch (error) {
-                        console.log('ERROR RSEARCHINGNGN...')
                         return resolve({
                             error: error.message,
                         })
