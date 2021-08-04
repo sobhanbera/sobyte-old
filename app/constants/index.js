@@ -26,6 +26,18 @@ export const BACKGROUND_COLOR_OR_THEME_STORAGE_KEY =
     '@APP:BACKGROUND_COLOR_OR_THEME' // Storage key where the app's background colors choice will be saved (this is among the gradient colors in ThemeProps.tsx like the blueGradient, pinkGradient and so on)
 export const PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY =
     '@APP:PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY' // Storage key where some or all the previously searched queries will be saved...
+export const SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY =
+    '@APP:SEARCHED_SONG_OFFLINE_DATA:' // the storage key where the fallbacks searched songs results will be stored this method is available in main music api under api/index.tsx in search method
+/**
+ * here for the above constant
+ * like the searched query is New Bollywood songs
+ * then the results of it would be saved in here
+ * "@APP:SEARCHED_SONG_OFFLINE_DATA:New Bollywood songs"
+ * at this local storage key refrence...
+ *
+ * we can then get this value when there is no internet connection available OR
+ * when any error occurred while searching results...
+ */
 
 export const API_CONFIG_DATA_STORAGE_KEY = '@APP:API_CONFIG_DATA' // Storage key for header fetched by the api everytime...
 
