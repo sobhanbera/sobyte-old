@@ -11,33 +11,56 @@ import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // ob
 import {API_CONFIG_DATA_STORAGE_KEY} from '../constants'
 
 /**
- * @deprecated for now at least
- */
-export interface MusicContextProviderHelper {
-    initialize: any
-    initMusicApi: any
-    getContinuation: any
-    getSearchSuggestions: any
-    search: any
-    getAlbum: any
-    getPlaylist: any
-    getArtist: any
-    getNext: any
-
-    musicConfig: object
-    error: boolean
-    loaded: boolean
-}
-
-/**
  * this is the all types of data which could be fetched
  * from the backend api
  */
 type TypeOFDatas = 'SONG' | 'ALBUM' | 'ARTIST' | 'PLAYLIST' | 'VIDEO'
 
-// const DemoMusicContextReturn = () => axios.request<any>({})
 const DemoMusicContextReturn = () => new Promise<any>(() => {})
-const MusicContext = React.createContext({
+// interface BareMinimumFetchedDataType {
+//     content: object[] | any[]
+//     continuation: {
+//         continuation: string
+//         clickTrackingParams: string
+//     }
+// }
+
+export interface MusicContextApiProviderProps {
+    initialize(): Promise<any>
+    initMusicApi(): Promise<any>
+    getContinuation(
+        _endpointName: string | 'search' | '',
+        _continuation: ContinuationObject,
+        _dataType: TypeOFDatas,
+    ): Promise<any>
+    getSearchSuggestions(_search: string): Promise<string[]>
+    search(
+        _query: string,
+        _dataType: TypeOFDatas,
+        _getARandomSong?: boolean,
+        _saveToLocalStorage?: boolean,
+        _pageLimit?: number,
+    ): Promise<any>
+    getAlbum(_browseId: string): Promise<any>
+    getPlaylist(_browseId: string): Promise<any>
+    getArtist(_browseId: string): Promise<any>
+    getNext(
+        _musicId: string,
+        _playlistId: string,
+        _paramString: string,
+    ): Promise<any>
+    getPlayer(
+        _musicId: string,
+        _playlistId: string,
+        _paramString: string,
+    ): Promise<any>
+
+    musicConfig: object | any
+    error: boolean
+    loaded: boolean
+}
+
+const MusicContext = React.createContext<MusicContextApiProviderProps>({
     /**
      * @returns a promise after initializing the music api fetcher this
      * function should be called in the root element of the app where the
@@ -68,13 +91,20 @@ const MusicContext = React.createContext({
     /**
      * @param query the query string
      * @param categoryName what type of data is needed like "song" | "album" | "playlist"
-     * @param _pageLimit number of data page wise
+     * @param getARandomResult boolean value if true then will provide a random search result out of the result got from api
+     * @param saveToLocalStorage boolean if true then after searching and providing the results this function will also save the data in local storage for offline use cases.
+     * @param _pageLimit number of data page wise (this argument is not in use currently).... and not prefered to use in future too...
      * @returns the search result after making api request
+     *
+     * the local storage will store the data in form of key value pair like {"search_query": JSON.stringify("search_result_json_value")}
+     * when any error occured or seems to have no internet connection then if the particular search result is saved in local storage this function will return it in place of returning the new updated data
+     * since there should be some 2nd plan for every work...
      */
     search: (
         _query: string,
         _dataType: TypeOFDatas,
         _getARandomSong: boolean = false,
+        _saveToLocalStorage: boolean = false,
         _pageLimit: number = 1,
     ) => DemoMusicContextReturn(),
     /**
@@ -481,7 +511,7 @@ const MusicApi = (props: MusicApiProps) => {
 
         getSearchSuggestionsCancelToken = axios.CancelToken.source()
 
-        return new Promise((resolve, reject) => {
+        return new Promise<string[]>((resolve, reject) => {
             _createApiRequest(
                 'music/get_search_suggestions',
                 {
@@ -509,13 +539,20 @@ const MusicApi = (props: MusicApiProps) => {
     /**
      * @param query the query string
      * @param categoryName what type of data is needed like "song" | "album" | "playlist"
-     * @param _pageLimit number of data page wise
+     * @param getARandomResult boolean value if true then will provide a random search result out of the result got from api
+     * @param saveToLocalStorage boolean if true then after searching and providing the results this function will also save the data in local storage for offline use cases.
+     * @param _pageLimit number of data page wise (this argument is not in use currently).... and not prefered to use in future too...
      * @returns the search result after making api request
+     *
+     * the local storage will store the data in form of key value pair like {"search_query": JSON.stringify("search_result_json_value")}
+     * when any error occured or seems to have no internet connection then if the particular search result is saved in local storage this function will return it in place of returning the new updated data
+     * since there should be some 2nd plan for every work...
      */
     const search = (
         query: string,
         categoryName: TypeOFDatas = 'SONG',
-        getARandomSong: boolean = false,
+        getARandomResult: boolean = false,
+        saveToLocalStorage: boolean = false,
         _pageLimit: number = 1,
     ) => {
         return new Promise((resolve, reject) => {
@@ -529,7 +566,7 @@ const MusicApi = (props: MusicApiProps) => {
                         switch (_.upperCase(categoryName)) {
                             case 'SONG':
                                 result = parsers.parseSongSearchResult(context)
-                                if (getARandomSong) {
+                                if (getARandomResult) {
                                     result =
                                         result.content[
                                             Math.floor(
