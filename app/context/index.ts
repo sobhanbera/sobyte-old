@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - all application contexts are exported from here
+ */
+
 // the main app backend api context provider
 import {useBackendApi, AppMainBackendApiContext} from '../backend' // the major and main secure backend api of the application
 export {useBackendApi, AppMainBackendApiContext}
