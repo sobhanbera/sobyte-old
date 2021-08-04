@@ -336,9 +336,9 @@ const MusicApi = (props: MusicApiProps) => {
                          * will be done that the api data is available if not then this function will be called and this would be more faster and
                          * efficient than the usual code...
                          */
-                        console.log(
-                            'STARTED INIT API CODE 1: under else condition...',
-                        )
+                        // console.log(
+                        //     'STARTED INIT API CODE 1: under else condition...',
+                        // )
                         client
                             .get('/')
                             .then(async res => {
@@ -399,9 +399,9 @@ const MusicApi = (props: MusicApiProps) => {
                      * will be done that the api data is available if not then this function will be called and this would be more faster and
                      * efficient than the usual code...
                      */
-                    console.log(
-                        'STARTED INIT API CODE 2: under catch statement...',
-                    )
+                    // console.log(
+                    //     'STARTED INIT API CODE 2: under catch statement...',
+                    // )
                     client
                         .get('/')
                         .then(async res => {
@@ -673,14 +673,12 @@ const MusicApi = (props: MusicApiProps) => {
                     )
                         .then((res: any) => {
                             // checking if the data exists in local storage or not...
-                            if (res !== null) {
+                            if (res !== null)
                                 // load data and provide it for rendering purpose...
                                 return resolve(JSON.parse(res))
-                                // console.log(i++, 'LOADED AND IT IS ', res)
-                            }
                         })
                         .catch(err => {
-                            console.log('ERROR LOCALLY LOAD', err)
+                            // console.log('ERROR LOCALLY LOAD', err)
                         })
                 }
             }
