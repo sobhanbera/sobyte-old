@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - array of fake/temporary mail sevices
+ */
+
 export const FakeMailsList = [
     '0-mail.com',
     '0815.ru',
