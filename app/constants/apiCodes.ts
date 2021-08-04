@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - every code that can be get as a response from main app backend
+ */
+
 // all the response code in one type
 // we need this because when the actual then or catch block will execute we could automatically get that code from reponse argument of then block...
 type ResponseCodes =
