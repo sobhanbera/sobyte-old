@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Typescript
+ *
+ * Purpose - main music data loading component (context api)
+ */
+
 import React, {useState, useEffect} from 'react' // as usual import
 import axios from 'axios' // for making api requests
 import RNLocalize from 'react-native-localize' // to pass the location of user in the api call
