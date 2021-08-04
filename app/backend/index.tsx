@@ -201,6 +201,10 @@ const AppMainBackendApi = (props: Props) => {
                     // if (IP.length <= 0) updateIpAddress()
                     // if the api request responded with any error
                     // reject this promise with that error..
+                    console.log(
+                        'ERRORO WHILE MAKING BACKEND API REQUEST := ',
+                        error,
+                    )
                     reject(error)
                 })
         })
