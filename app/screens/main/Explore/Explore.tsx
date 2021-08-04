@@ -64,16 +64,17 @@ const Explore: React.FC<ExploreTabProps> = props => {
     /**
      * Function which loads all sutaible data required in this tab (explore tab)
      * like songs list in different languages, preference wise songs list, and many more...
+     * now also saving the data to the local storage for offline usage later on...
      */
     const loadExploreData = React.useCallback(() => {
         Promise.all([
-            search('trending songs', 'SONG'), // 0th type of song data list
-            search('bollywood new hits', 'SONG'), // 1st type of song data list
-            search('top romantic songs', 'SONG'), // 2nd type of song data list
-            search('popular songs', 'SONG'), // 3rd type of song data list
-            search('pop beats', 'SONG'), // 4th type of song data list
-            search('Chill beats', 'SONG'), // 5th type of song data list
-            search('sad songs', 'SONG'), // 6th type of song data list
+            search('trending songs', 'SONG', false, true), // 0th type of song data list
+            search('bollywood new hits', 'SONG', false, true), // 1st type of song data list
+            search('top romantic songs', 'SONG', false, true), // 2nd type of song data list
+            search('popular songs', 'SONG', false, true), // 3rd type of song data list
+            search('pop beats', 'SONG', false, true), // 4th type of song data list
+            search('Chill beats', 'SONG', false, true), // 5th type of song data list
+            search('sad songs', 'SONG', false, true), // 6th type of song data list
         ])
             .then((res: FetchedSongObject[]) => {
                 setMusicData(res)
@@ -81,9 +82,9 @@ const Explore: React.FC<ExploreTabProps> = props => {
             .catch(_err => {})
 
         Promise.all([
-            search('new bollywood songs', 'ARTIST'),
-            search('trending bollywood songs', 'ARTIST'),
-            search('new english songs', 'ARTIST'),
+            search('new bollywood songs', 'ARTIST', false, true),
+            search('trending bollywood songs', 'ARTIST', false, true),
+            search('new english songs', 'ARTIST', false, true),
         ])
             .then((res: FetchedArtistObject[]) => {
                 // this is the list which would be assigned to the main UI component or the state of this component
