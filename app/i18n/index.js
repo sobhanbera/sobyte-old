@@ -1,3 +1,13 @@
+/**
+ * © 2010 Sobyte
+ *
+ * @author : Sobhan Bera (sobhanbera)
+ * @other_editors :
+ * @file : Javascript
+ *
+ * Purpose - application's main i18n controller service
+ */
+
 import i18n from 'i18next'
 import {initReactI18next} from 'react-i18next'
 import locale from 'react-native-locale-detector'
