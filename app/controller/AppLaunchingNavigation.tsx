@@ -107,17 +107,15 @@ const AppLaunchingNavigation = (_props: Props) => {
                      * user last login is successfully updated
                      * and got a user data so we should save this data instead of the previous one
                      */
+
+                    setUserData(_res.data.data)
+
                     AsyncStorage.setItem(
                         USER_DATA_STORAGE_KEY,
                         JSON.stringify(_res.data.data),
                     )
-                        .then(_saved => {
-                            setUserData(_res.data.data)
-                            console.log('LAST LOGIN UPDATED')
-                        })
-                        .catch(_notSaved => {
-                            setUserData(_res.data.data)
-                        })
+                        .then(_saved => {})
+                        .catch(_notSaved => {})
                 }
             })
             .catch(_err => {
