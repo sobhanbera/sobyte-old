@@ -13,6 +13,7 @@ import ExploreStackNavigator from './ExploreStack'
 import MusicPlayer from '../screens/main/MusicPlayer'
 import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
+import {TouchableOpacity} from 'react-native'
 
 const BarNavigator = createMaterialBottomTabNavigator()
 const AppInsideNavigation = () => {
@@ -33,11 +34,12 @@ const AppInsideNavigation = () => {
         <BarNavigator.Navigator
             labeled={true}
             theme={DarkTheme}
-            activeColor={themeColors.white[0]}
-            inactiveColor={themeColors.grey[0]}
-            sceneAnimationEnabled
+            // activeColor={themeColors.white[0]}
+            // inactiveColor={themeColors.grey[0]}
+            sceneAnimationEnabled={false}
             backBehavior="history"
-            shifting
+            shifting={false}
+            keyboardHidesNavigationBar={true}
             barStyle={{
                 position: 'absolute',
                 bottom: 0,
@@ -280,4 +282,4 @@ const AppInsideNavigation2 = () => {
 //     },
 // })
 
-export default AppInsideNavigation2
+export default AppInsideNavigation
