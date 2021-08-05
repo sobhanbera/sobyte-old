@@ -38,8 +38,7 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    // const {current, play, playSongAtIndex, getTheIndexOfCurrentSong} =
-    //     usePlayer()
+    const {current, play} = usePlayer()
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
@@ -111,24 +110,35 @@ const Player: FC<PlayerProps> = _props => {
      * according to the index or the position of scroll
      */
     // const scrollChangedHandler = (event: any) => {
-    //     const scrollPostion = event.nativeEvent.contentOffset.x
+    //     const scrollPostion = event.nativeEvent.contentOffset.y
     //     const screenWidth = width
-    //     if (scrollPostion % screenWidth === 0) {
-    //         const songIndex = scrollPostion / screenWidth
-    //         const currentSongIndex: any = getTheIndexOfCurrentSong()
+    //     const screenHeight = height
+    //     // if (scrollPostion % screenWidth === 0) {
+    //     //     const songIndex = scrollPostion / screenWidth
+    //     /**
+    //      * if the song which we are gonna playing is not the currently playing song
+    //      */
+    //     // }
+
+    //     // for vertical scrollview
+    //     if (scrollPostion % screenHeight === 0) {
+    //         const songIndex = scrollPostion / screenHeight
+    //         console.log(songIndex)
+
+    //         play({
+    //             artist: songs?.content[songIndex].
+    //         })
+
     //         /**
     //          * if the song which we are gonna playing is not the currently playing song
     //          */
-    //         if (songIndex !== currentSongIndex) {
-    //             playSongAtIndex(songIndex)
-    //         }
     //     }
 
-    /**
-     * TODO: when the user scroll this scroll reference to the last second song player control
-     * will load more song and push them to the nextSongsList variable so that the next songs list never ends
-     * and continues for much time
-     */
+    //     /**
+    //      * TODO: when the user scroll this scroll reference to the last second song player control
+    //      * will load more song and push them to the nextSongsList variable so that the next songs list never ends
+    //      * and continues for much time
+    //      */
     // }
 
     const renderItem = useCallback(
@@ -178,15 +188,15 @@ const Player: FC<PlayerProps> = _props => {
                     alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    // onScroll={Animated.event(
-                    //     [{nativeEvent: {contentOffset: {x: scrollX}}}],
-                    //     {
-                    //         useNativeDriver: true,
-                    //         listener: event => {
-                    //             scrollChangedHandler(event)
-                    //         },
-                    //     },
-                    // )}
+                    onScroll={Animated.event(
+                        [{nativeEvent: {contentOffset: {x: scrollX}}}],
+                        {
+                            useNativeDriver: true,
+                            listener: event => {
+                                scrollChangedHandler(event)
+                            },
+                        },
+                    )}
                 />
             ) : (
                 <View
