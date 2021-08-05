@@ -736,7 +736,6 @@ const MusicApi = (props: MusicApiProps) => {
                          *
                          * `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`
                          */
-                        console.log(isOffline)
                         if (saveToLocalStorage) {
                             if (isOffline) {
                                 AsyncStorage.setItem(
