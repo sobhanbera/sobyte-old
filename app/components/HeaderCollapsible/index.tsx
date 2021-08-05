@@ -45,6 +45,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                 flexDirection: 'column',
                 paddingVertical: 10,
                 backgroundColor: props.headerScrollColor,
+                paddingTop: 25,
             }}>
             <View
                 style={{

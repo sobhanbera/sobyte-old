@@ -154,7 +154,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
 
     return (
         <View style={globalStyles.flex}>
-            <StatusBar backgroundColor={'transparent'} translucent animated />
+            <StatusBar backgroundColor={'transparent'} animated />
             <ScrollView
                 refreshControl={
                     <RefreshControl
