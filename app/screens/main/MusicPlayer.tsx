@@ -3,29 +3,30 @@ import {
     Text,
     View,
     Image,
+    ImageBackground,
     Dimensions,
-    StyleSheet,
     Animated,
     ListRenderItemInfo,
+    StatusBar,
 } from 'react-native'
+import LottieView from 'lottie-react-native'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
-import {DoubleTap, TrackPlayerController} from '../../components'
+import {DoubleTap, TrackPlayerController, TrackProgress} from '../../components'
 import {
     APP_LOGO_LINK,
-    BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
     HEADER_MAX_HEIGHT,
-    HEADER_MIN_HEIGHT,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
 } from '../../constants'
-import {formatArtists, getHightQualityImageFromLink} from '../../utils'
+import {
+    formatArtists,
+    getHightQualityImageFromLinkWithHeight,
+} from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import MusicPlayerSongCardView from '../../components/MusicPlayerSongCardView'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
-import {ListRenderItem} from 'react-native'
-import LottieView from 'lottie-react-native'
 
-const {width, height} = Dimensions.get('screen')
+const {width, height} = Dimensions.get('window')
 
 const LikeAnimation = require('../../assets/animations/like.json')
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
@@ -40,8 +41,6 @@ const Player: FC<PlayerProps> = _props => {
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
-
-    const likeAnimRef = useRef<LottieView>(null)
 
     const scrollX = useRef(new Animated.Value(0)).current
     const scrollReference = useRef<any>(null)
@@ -72,13 +71,6 @@ const Player: FC<PlayerProps> = _props => {
                 )
             })
     }, [error])
-
-    const playLikeAnimation = () => {
-        likeAnimRef.current?.play(0, 65)
-        setTimeout(() => {
-            likeAnimRef.current?.reset()
-        }, LIKE_ANIMATION_DISAPPEAR_DURATION)
-    }
 
     // useEffect(() => {
     // console.log('CURRENT INDEX 1', getTheIndexOfCurrentSong())
@@ -140,37 +132,15 @@ const Player: FC<PlayerProps> = _props => {
     const renderItem = useCallback(
         (itemDetails: ListRenderItemInfo<SongObject>) => {
             const {item} = itemDetails
-            return (
-                <DoubleTap onDoubleTap={playLikeAnimation}>
-                    <View
-                        style={{
-                            width,
-                            height: height - HEADER_MAX_HEIGHT,
-                            // marginBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
-                            flexDirection: 'column',
-                            justifyContent: 'space-between',
-                            backgroundColor: 'white',
-                        }}>
-                        <Text
-                            style={{color: 'white', backgroundColor: 'black'}}>
-                            {item.name}
-                        </Text>
-
-                        <View
-                            style={{
-                                marginBottom: 200,
-                            }}></View>
-                    </View>
-                </DoubleTap>
-            )
+            return <MusicPLayerSongView song={item} />
         },
         [],
     )
     const keyExtractor = useCallback((item: SongObject) => item.musicId, [])
     const getItemLayout = useCallback(
         (data, index) => ({
-            length: width,
-            offset: width * index,
+            length: height,
+            offset: height * index,
             index,
         }),
         [],
@@ -183,7 +153,10 @@ const Player: FC<PlayerProps> = _props => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 width: '100%',
+                height: '100%',
             }}>
+            <StatusBar backgroundColor={'transparent'} translucent animated />
+
             {songs?.content.length && songs.content[0].musicId.length > 0 ? (
                 <Animated.FlatList
                     data={songs.content}
@@ -191,12 +164,16 @@ const Player: FC<PlayerProps> = _props => {
                     keyExtractor={keyExtractor}
                     getItemLayout={getItemLayout}
                     ref={scrollReference}
-                    pagingEnabled={true}
                     scrollEventThrottle={16}
                     scrollToOverflowEnabled
-                    overScrollMode={'always'}
-                    bounces={true}
-                    horizontal={true}
+                    overScrollMode={'never'}
+                    pagingEnabled
+                    bounces
+                    // horizontal
+                    nestedScrollEnabled
+                    bouncesZoom
+                    alwaysBounceVertical
+                    alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     // onScroll={Animated.event(
@@ -232,20 +209,6 @@ const Player: FC<PlayerProps> = _props => {
                 </View>
             )}
 
-            <LottieView
-                ref={likeAnimRef}
-                source={PopupLikeAnimation}
-                style={{
-                    width: 275,
-                    position: 'absolute',
-                }}
-                speed={2}
-                autoSize={true}
-                autoPlay={false}
-                cacheStrategy="strong"
-                loop={false}
-            />
-
             {/* main content of this particular tab */}
             {/* {songs.length > 0 && songs[0].artwork.length ? (
                 <View style={StyleSheet.absoluteFillObject}>
@@ -279,6 +242,80 @@ const Player: FC<PlayerProps> = _props => {
                     />
                 </View> */}
         </View>
+    )
+}
+
+interface SongView {
+    song: SongObject
+}
+const MusicPLayerSongView = ({song}: SongView) => {
+    const likeAnimRef = useRef<LottieView>(null)
+
+    const playLikeAnimation = () => {
+        likeAnimRef.current?.play(0, 65)
+        setTimeout(() => {
+            likeAnimRef.current?.reset()
+        }, LIKE_ANIMATION_DISAPPEAR_DURATION)
+    }
+
+    const highQualityImage = getHightQualityImageFromLinkWithHeight(
+        song.thumbnails[0].url,
+        song.thumbnails[0].height,
+        100,
+        100,
+    )
+
+    return (
+        <DoubleTap onDoubleTap={playLikeAnimation}>
+            <ImageBackground
+                loadingIndicatorSource={{uri: highQualityImage}}
+                source={{uri: highQualityImage}}
+                style={{
+                    flex: 1,
+                    width,
+                    height: height,
+                    //  - HEADER_MAX_HEIGHT,
+                    // marginBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    backgroundColor: 'white',
+                }}>
+                <Text style={{color: 'white'}}>{song.name}</Text>
+
+                <View
+                    onStartShouldSetResponder={v => false}
+                    style={{
+                        // flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'relative',
+                    }}>
+                    <LottieView
+                        ref={likeAnimRef}
+                        source={PopupLikeAnimation}
+                        style={{
+                            width: 250,
+                            position: 'absolute',
+                            borderRadius: 1000,
+                            overflow: 'hidden',
+                        }}
+                        speed={2}
+                        autoSize={false}
+                        autoPlay={false}
+                        cacheStrategy="strong"
+                        loop={false}
+                    />
+                </View>
+
+                <TrackProgress color={'white'} duration={song.duration} />
+
+                <View
+                    style={{
+                        marginBottom: 200,
+                    }}></View>
+            </ImageBackground>
+        </DoubleTap>
     )
 }
 
