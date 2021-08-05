@@ -72,6 +72,7 @@ const GridSongItem = React.memo(
                         source={{
                             uri: songImage,
                             priority: FastImage.priority.normal,
+                            cache: 'immutable',
                         }}
                         style={[
                             styles.contentImage,
