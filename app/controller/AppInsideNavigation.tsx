@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {DarkTheme} from '@react-navigation/native'
@@ -13,15 +13,13 @@ import ExploreStackNavigator from './ExploreStack'
 import MusicPlayer from '../screens/main/MusicPlayer'
 import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
-import {TouchableOpacity} from 'react-native'
 
 const BarNavigator = createMaterialBottomTabNavigator()
-const AppInsideNavigation = () => {
+const AppInsideNavigationWithMaterialTabBar = () => {
     const {t} = useTranslation()
 
     const {themeColors} = useTheme()
     const {initMusicApi} = useMusicApi()
-    const [playMusicAtInitial, setPlayMusicAtInit] = useState(false)
 
     useEffect(() => {
         // if (!loaded || error) {
@@ -51,7 +49,7 @@ const AppInsideNavigation = () => {
                 padding: 0,
                 backgroundColor: 'transparent',
             }}
-            initialRouteName={playMusicAtInitial ? 'MusicPlayer' : 'Explore'}>
+            initialRouteName={'MusicPlayer'}>
             <BarNavigator.Screen
                 name="Explore"
                 component={ExploreStackNavigator}
@@ -112,14 +110,12 @@ const AppInsideNavigation = () => {
 }
 
 const BottomTabBarNavigator = createBottomTabNavigator()
-const AppInsideNavigation2 = () => {
+export const AppInsideNavigationWithSimpleTabBar = () => {
     const {t} = useTranslation()
 
     const {themeColors} = useTheme()
     const {initMusicApi} = useMusicApi()
-    const [playMusicAtInitial, setPlayMusicAtInit] = useState(false)
 
-    let i = 0
     useEffect(() => {
         // if (!loaded || error) {
         //     console.log('Music Api Init...')
@@ -165,7 +161,7 @@ const AppInsideNavigation2 = () => {
                 }
             }
             backBehavior="history"
-            initialRouteName={playMusicAtInitial ? 'MusicPlayer' : 'Explore'}>
+            initialRouteName={'MusicPlayer'}>
             <BottomTabBarNavigator.Screen
                 name="Explore"
                 component={ExploreStackNavigator}
@@ -282,4 +278,4 @@ const AppInsideNavigation2 = () => {
 //     },
 // })
 
-export default AppInsideNavigation
+export default AppInsideNavigationWithMaterialTabBar
