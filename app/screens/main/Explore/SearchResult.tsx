@@ -236,7 +236,7 @@ const SearchResult: React.FC<Props> = props => {
      */
     return (
         <>
-            <StatusBar backgroundColor={'transparent'} translucent={false} />
+            <StatusBar backgroundColor={surfacelight[0]} translucent={false} />
 
             {showSearchSuggestions && Array.isArray(searchSuggestions) ? (
                 <View
