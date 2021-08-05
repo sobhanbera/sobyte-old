@@ -16,7 +16,6 @@ const TrackPlayerController = (props: Props) => {
                 justifyContent: 'center',
             }}>
             <MainControls color={props.color} />
-            <TrackProgress color={props.color} />
         </View>
     )
 }
