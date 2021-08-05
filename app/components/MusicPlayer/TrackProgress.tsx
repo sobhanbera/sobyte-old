@@ -1,12 +1,11 @@
 import React from 'react'
 import {View} from 'react-native'
 import Slider from '@react-native-community/slider'
-import {Slider as ElementSlider} from 'react-native-elements'
 
 import {usePlayer, usePlayerProgress} from '../../context'
 
 interface Props {
-    color: string
+    color?: string
     duration: number
 }
 const TrackProgress = (props: Props) => {
@@ -34,17 +33,11 @@ const TrackProgress = (props: Props) => {
                     value={actualPosition}
                     minimumValue={0}
                     maximumValue={actualDuration}
-                    thumbTintColor={props.color || '#DFDFDF'}
-                    minimumTrackTintColor={props.color || '#DFDFDF'}
-                    maximumTrackTintColor={(props.color || '#DFDFDF') + '7F'} // half brightness of the given color prop
+                    thumbTintColor={props.color || '#FFFFFF'}
+                    minimumTrackTintColor={props.color || '#FFFFFF'}
+                    maximumTrackTintColor={(props.color || '#FFFFFF') + '7F'} // half brightness of the given color prop
                     onSlidingComplete={(value: number) => {
                         seekTo(Math.floor(value)) // the e is in seconds
-                        console.log(
-                            'LOAOAO',
-                            value,
-                            position,
-                            props.duration / 1000,
-                        )
                     }}
                     thumbImage={require('../../assets/images/icons/thumb.png')}
                     minimumTrackImage={require('../../assets/images/icons/track.png')}
@@ -54,6 +47,7 @@ const TrackProgress = (props: Props) => {
                         height: 20,
                         marginVertical: 10,
                         borderRadius: 10,
+                        // transform: [{rotateZ: '270deg'}],
                     }}
                 />
             </View>
