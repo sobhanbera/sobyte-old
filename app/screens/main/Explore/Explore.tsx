@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {View, ScrollView, RefreshControl} from 'react-native'
+import {View, ScrollView, RefreshControl, StatusBar} from 'react-native'
 import {Text as BlockTitle} from 'react-native-paper'
 
 import {
@@ -154,6 +154,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
 
     return (
         <View style={globalStyles.flex}>
+            <StatusBar backgroundColor={'transparent'} translucent animated />
             <ScrollView
                 refreshControl={
                     <RefreshControl
