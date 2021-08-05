@@ -46,6 +46,7 @@ const GridArtistItem = React.memo(
                         source={{
                             uri: highQualityImage,
                             priority: FastImage.priority.normal,
+                            cache: 'immutable',
                         }}
                         style={[
                             styles.contentImage,
