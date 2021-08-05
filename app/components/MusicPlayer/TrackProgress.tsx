@@ -7,14 +7,14 @@ import {usePlayer, usePlayerProgress} from '../../context'
 
 interface Props {
     color: string
+    duration: number
 }
 const TrackProgress = (props: Props) => {
     const {
         position, // unit - second
-        duration, // unit - millisecond
     } = usePlayerProgress()
     const actualPosition = Math.floor(position)
-    const actualDuration = Math.floor(duration / 1000)
+    const actualDuration = Math.floor(props.duration / 1000)
     const {seekTo} = usePlayer()
 
     return (
@@ -39,7 +39,12 @@ const TrackProgress = (props: Props) => {
                     maximumTrackTintColor={(props.color || '#DFDFDF') + '7F'} // half brightness of the given color prop
                     onSlidingComplete={(value: number) => {
                         seekTo(Math.floor(value)) // the e is in seconds
-                        console.log('LOAOAO', value, position, duration / 1000)
+                        console.log(
+                            'LOAOAO',
+                            value,
+                            position,
+                            props.duration / 1000,
+                        )
                     }}
                     thumbImage={require('../../assets/images/icons/thumb.png')}
                     minimumTrackImage={require('../../assets/images/icons/track.png')}
