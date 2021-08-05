@@ -36,7 +36,7 @@ const AppInsideNavigationWithMaterialTabBar = () => {
             // inactiveColor={themeColors.grey[0]}
             sceneAnimationEnabled={false}
             backBehavior="history"
-            shifting={false}
+            shifting={true}
             keyboardHidesNavigationBar={true}
             barStyle={{
                 position: 'absolute',
