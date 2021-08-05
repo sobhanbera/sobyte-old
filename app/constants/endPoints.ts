@@ -1,5 +1,5 @@
 // main api endpoint url...
-const MAIN_API_ENDPOINT = 'http://192.168.43.184:8000'
+const MAIN_API_ENDPOINT = 'http://192.168.29.184:8000'
 export default MAIN_API_ENDPOINT
 
 // other sub routes of the api endpoint are...
