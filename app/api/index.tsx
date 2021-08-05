@@ -8,7 +8,7 @@
  * Purpose - main music data loading component (context api)
  */
 
-import React, {useState, useEffect} from 'react' // as usual import
+import React, {useState} from 'react' // as usual import
 import axios from 'axios' // for making api requests
 import RNLocalize from 'react-native-localize' // to pass the location of user in the api call
 import querystring from 'querystring' // string methods
@@ -247,7 +247,6 @@ const MusicApi = (props: MusicApiProps) => {
     const [musicConfig, setMusicConfig] = useState<{[key: string]: any}>({})
     const [error, setError] = useState(true)
     const [loaded, setLoaded] = useState(false)
-    const [internetAvailable, setInternetAvailable] = useState(true)
 
     /**
      * main and core required variable to make requests to the backend
@@ -262,19 +261,6 @@ const MusicApi = (props: MusicApiProps) => {
         },
         withCredentials: true,
     })
-
-    useEffect(() => {
-        const unsubscribeInternetConnection = NetInfo.addEventListener(
-            state => {
-                setInternetAvailable(state.isConnected === true)
-            },
-        )
-
-        // Unsubscribing to the event listener for internet connection info provider
-        return () => {
-            unsubscribeInternetConnection()
-        }
-    }, [])
 
     /**
      * @returns a promise after initializing the music api fetcher this
@@ -651,6 +637,7 @@ const MusicApi = (props: MusicApiProps) => {
         saveToLocalStorage: boolean = false,
         _pageLimit: number = 1,
     ) => {
+        var isOffline = false
         return new Promise((resolve, reject) => {
             /**
              * if there is not internet connection we will check if the searched results are
@@ -666,23 +653,28 @@ const MusicApi = (props: MusicApiProps) => {
              * so if the saveToLocalStorage is true than we are confirm that this data is also saved locally previously
              * then only we will procced to resolve with this data
              */
-            if (internetAvailable === false) {
-                if (saveToLocalStorage) {
-                    AsyncStorage.getItem(
-                        `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
-                    )
-                        .then((res: any) => {
-                            // checking if the data exists in local storage or not...
-                            if (res !== null) {
-                                // load data and provide it for rendering purpose...
-                                return resolve(JSON.parse(res))
-                            }
-                        })
-                        .catch(err => {
-                            // console.log('ERROR LOCALLY LOAD', err)
-                        })
-                }
+            if (saveToLocalStorage) {
+                NetInfo.fetch().then(state => {
+                    if (state.isConnected !== true) {
+                        isOffline = true
+                        AsyncStorage.getItem(
+                            `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
+                        )
+                            .then((res: any) => {
+                                // checking if the data exists in local storage or not...
+                                if (res !== null) {
+                                    // load data and provide it for rendering purpose...
+                                    return resolve(JSON.parse(res))
+                                }
+                            })
+                            .catch(err => {
+                                // console.log('ERROR LOCALLY LOAD', err)
+                            })
+                    }
+                })
             }
+
+            if (isOffline) return
 
             /**
              * if the user is connected to internet
@@ -744,8 +736,9 @@ const MusicApi = (props: MusicApiProps) => {
                          *
                          * `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`
                          */
+                        console.log(isOffline)
                         if (saveToLocalStorage) {
-                            if (internetAvailable) {
+                            if (isOffline) {
                                 AsyncStorage.setItem(
                                     `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
                                     JSON.stringify(result),
