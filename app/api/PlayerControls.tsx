@@ -433,7 +433,7 @@ const Player: FC<PlayerProps> = props => {
                 await TrackPlayer.add([trackGot])
                 await TrackPlayer.skip(trackGot.id)
                 await TrackPlayer.play()
-
+                return
                 /**
                  * after playing or starting playing the song loading of song which
                  * occurs next will start
@@ -764,3 +764,9 @@ const Player: FC<PlayerProps> = props => {
 
 export default Player
 export const usePlayer = () => useContext(PlayerContext)
+
+/**
+ * we are no more providing the next songs list
+ * from this context api component
+ * those should be featched and renderered in there own components
+ */
