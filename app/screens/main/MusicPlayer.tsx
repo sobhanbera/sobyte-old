@@ -49,40 +49,21 @@ const Player: React.FC<PlayerProps> = _props => {
     }
 
     useEffect(() => {
-        initializeMusicPlayer()
-    }, [])
-
-    const loadInitialMusicPlayerData = () => {
-        if (current.id.length <= 0) {
-            console.log('Playing...')
-            search('bollywood new hits', 'SONG', true)
-                .then((res: SongObject) => {
-                    const artist = formatArtists(res.artist)
-                    const artwork = getHightQualityImageFromLink(
-                        res.thumbnails[0].url,
-                        '720',
-                    )
-                    play({
-                        artist: artist,
-                        artwork: artwork,
-                        duration: res.duration,
-                        id: res.musicId,
-                        playlistId: res.playlistId,
-                        title: res.name,
-                        url: '',
+        initMusicApi()
+            .then(() => {
+                initMusicApi()
+                    .then(() => {
+                        initializeMusicPlayer()
                     })
-                    // if (scrollReference !== null)
-                    //     scrollReference.current.scrollTo({
-                    //         animated: true,
-                    //         x: 0,
-                    //         y: 0,
-                    //     })
-                })
-                .catch(_err => {})
-        } else {
-            console.log('Not Playing...')
-        }
-    }
+                    .catch(() => {})
+            })
+            .catch(() => {
+                // this will only be called when the internet connectivity is very slow or not present...
+                console.error(
+                    '(Outer) Error Initiating Music Api... no internet connection found',
+                )
+            })
+    }, [error])
 
     /**
      * we are calling the loadData -(which loads all the data for explore tab) function twice
@@ -107,62 +88,62 @@ const Player: React.FC<PlayerProps> = _props => {
             })
     }, [error])
 
-    useEffect(() => {
-        // console.log('CURRENT INDEX 1', getTheIndexOfCurrentSong())
-        // const playbackQueueEnded = TrackPlayer.addEventListener(
-        //     'playback-track-changed',
-        //     () => {
-        //         console.log('CURRENT INDEX 2', getTheIndexOfCurrentSong())
-        //         // console.log(scrollReference.current)
-        //         const currentIndexOfScroll: any = getTheIndexOfCurrentSong()
-        //         if (currentIndexOfScroll < nextSongsList.length - 1) {
-        //             scrollReference.current.scrollToIndex({
-        //                 animated: true,
-        //                 index: currentIndexOfScroll + 1,
-        //             })
-        //             console.log(
-        //                 'SCROLLED: ',
-        //                 currentIndexOfScroll,
-        //                 nextSongsList.length,
-        //             )
-        //         } else {
-        //             console.log(
-        //                 'NOT SCROLLED: ',
-        //                 currentIndexOfScroll,
-        //                 nextSongsList.length,
-        //             )
-        //         }
-        //     },
-        // )
-        // return () => {
-        //     playbackQueueEnded.remove()
-        // }
-    }, [])
+    // useEffect(() => {
+    // console.log('CURRENT INDEX 1', getTheIndexOfCurrentSong())
+    // const playbackQueueEnded = TrackPlayer.addEventListener(
+    //     'playback-track-changed',
+    //     () => {
+    //         console.log('CURRENT INDEX 2', getTheIndexOfCurrentSong())
+    //         // console.log(scrollReference.current)
+    //         const currentIndexOfScroll: any = getTheIndexOfCurrentSong()
+    //         if (currentIndexOfScroll < nextSongsList.length - 1) {
+    //             scrollReference.current.scrollToIndex({
+    //                 animated: true,
+    //                 index: currentIndexOfScroll + 1,
+    //             })
+    //             console.log(
+    //                 'SCROLLED: ',
+    //                 currentIndexOfScroll,
+    //                 nextSongsList.length,
+    //             )
+    //         } else {
+    //             console.log(
+    //                 'NOT SCROLLED: ',
+    //                 currentIndexOfScroll,
+    //                 nextSongsList.length,
+    //             )
+    //         }
+    //     },
+    // )
+    // return () => {
+    //     playbackQueueEnded.remove()
+    // }
+    // }, [])
 
     /**
      * whenever the scroll position changes this code will be executed and change the song
      * according to the index or the position of scroll
      */
-    const scrollChangedHandler = (event: any) => {
-        const scrollPostion = event.nativeEvent.contentOffset.x
-        const screenWidth = width
-        if (scrollPostion % screenWidth === 0) {
-            const songIndex = scrollPostion / screenWidth
-            const currentSongIndex: any = getTheIndexOfCurrentSong()
-            /**
-             * if the song which we are gonna playing is not the currently playing song
-             */
-            if (songIndex !== currentSongIndex) {
-                playSongAtIndex(songIndex)
-            }
-        }
+    // const scrollChangedHandler = (event: any) => {
+    //     const scrollPostion = event.nativeEvent.contentOffset.x
+    //     const screenWidth = width
+    //     if (scrollPostion % screenWidth === 0) {
+    //         const songIndex = scrollPostion / screenWidth
+    //         const currentSongIndex: any = getTheIndexOfCurrentSong()
+    //         /**
+    //          * if the song which we are gonna playing is not the currently playing song
+    //          */
+    //         if (songIndex !== currentSongIndex) {
+    //             playSongAtIndex(songIndex)
+    //         }
+    //     }
 
-        /**
-         * TODO: when the user scroll this scroll reference to the last second song player control
-         * will load more song and push them to the nextSongsList variable so that the next songs list never ends
-         * and continues for much time
-         */
-    }
+    /**
+     * TODO: when the user scroll this scroll reference to the last second song player control
+     * will load more song and push them to the nextSongsList variable so that the next songs list never ends
+     * and continues for much time
+     */
+    // }
 
     const renderItem = useCallback(
         (itemDetails: ListRenderItemInfo<SongObject>) => {
