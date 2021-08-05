@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {TouchableWithoutFeedback, ViewStyle} from 'react-native'
+import {Pressable, ViewStyle} from 'react-native'
 import {DOUBLE_TAP_DELAY} from '../../constants'
 
 interface DoubleTapProps {
@@ -21,11 +21,9 @@ const DoubleTap: React.FC<DoubleTapProps> = props => {
     }
 
     return (
-        <TouchableWithoutFeedback
-            style={props.style}
-            onPress={() => handleDoubleTap()}>
+        <Pressable style={props.style} onPress={() => handleDoubleTap()}>
             {props.children}
-        </TouchableWithoutFeedback>
+        </Pressable>
     )
 }
 
