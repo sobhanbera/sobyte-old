@@ -10,12 +10,13 @@ import {
 } from 'react-native'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
-import {TrackPlayerController} from '../../components'
+import {DoubleTap, TrackPlayerController} from '../../components'
 import {
     APP_LOGO_LINK,
     BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
     HEADER_MAX_HEIGHT,
     HEADER_MIN_HEIGHT,
+    LIKE_ANIMATION_DISAPPEAR_DURATION,
 } from '../../constants'
 import {formatArtists, getHightQualityImageFromLink} from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
@@ -28,6 +29,7 @@ const {width, height} = Dimensions.get('screen')
 
 const LikeAnimation = require('../../assets/animations/like.json')
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
+const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
 
 interface PlayerProps {
     navigation?: any
@@ -72,14 +74,12 @@ const Player: FC<PlayerProps> = _props => {
     }, [error])
 
     const playLikeAnimation = () => {
-        likeAnimRef.current?.play(0, 90)
+        likeAnimRef.current?.play(0, 65)
         setTimeout(() => {
             likeAnimRef.current?.reset()
-        }, 2000)
+        }, LIKE_ANIMATION_DISAPPEAR_DURATION)
     }
-    useEffect(() => {
-        playLikeAnimation()
-    }, [])
+
     // useEffect(() => {
     // console.log('CURRENT INDEX 1', getTheIndexOfCurrentSong())
     // const playbackQueueEnded = TrackPlayer.addEventListener(
@@ -141,40 +141,40 @@ const Player: FC<PlayerProps> = _props => {
         (itemDetails: ListRenderItemInfo<SongObject>) => {
             const {item} = itemDetails
             return (
-                <View
-                    style={{
-                        width,
-                        height: height,
-                        marginBottom: HEADER_MAX_HEIGHT,
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                    }}>
-                    <Text style={{color: 'white', backgroundColor: 'black'}}>
-                        {item.name}
-                    </Text>
-
-                    <Text style={{color: 'white', backgroundColor: 'black'}}>
-                        {item.name}
-                    </Text>
+                <DoubleTap onDoubleTap={playLikeAnimation}>
                     <View
                         style={{
-                            marginBottom: 200,
-                        }}></View>
-                </View>
+                            width,
+                            height: height - HEADER_MAX_HEIGHT,
+                            // marginBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            backgroundColor: 'white',
+                        }}>
+                        <Text
+                            style={{color: 'white', backgroundColor: 'black'}}>
+                            {item.name}
+                        </Text>
+
+                        <View
+                            style={{
+                                marginBottom: 200,
+                            }}></View>
+                    </View>
+                </DoubleTap>
             )
         },
         [],
     )
-
     const keyExtractor = useCallback((item: SongObject) => item.musicId, [])
-
-    const getItemLayout = useCallback((data, index) => {
-        return {
+    const getItemLayout = useCallback(
+        (data, index) => ({
             length: width,
             offset: width * index,
             index,
-        }
-    }, [])
+        }),
+        [],
+    )
 
     return (
         <View
@@ -236,10 +236,11 @@ const Player: FC<PlayerProps> = _props => {
                 ref={likeAnimRef}
                 source={PopupLikeAnimation}
                 style={{
+                    width: 275,
                     position: 'absolute',
-                    // backgroundColor: 'white',
                 }}
-                autoSize={false}
+                speed={2}
+                autoSize={true}
                 autoPlay={false}
                 cacheStrategy="strong"
                 loop={false}
