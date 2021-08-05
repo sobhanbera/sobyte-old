@@ -28,9 +28,11 @@ import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/Back
 
 const {width, height} = Dimensions.get('window')
 
-const LikeAnimation = require('../../assets/animations/like.json')
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
+const LikeAnimation = require('../../assets/animations/like.json')
 const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
+
+const IMAGE_BLUR_RADIUS = 25
 
 interface PlayerProps {
     navigation?: any
@@ -261,27 +263,57 @@ const MusicPLayerSongView = ({song}: SongView) => {
     const highQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
-        100,
+        720,
         100,
     )
 
     return (
         <DoubleTap onDoubleTap={playLikeAnimation}>
             <ImageBackground
-                loadingIndicatorSource={{uri: highQualityImage}}
-                source={{uri: highQualityImage}}
+                loadingIndicatorSource={{
+                    uri: highQualityImage,
+                    cache: 'force-cache',
+                }}
+                source={{
+                    uri: highQualityImage,
+                    cache: 'force-cache',
+                    scale: 1,
+                    height,
+                }}
+                fadeDuration={500}
                 style={{
                     flex: 1,
                     width,
                     height: height,
                     //  - HEADER_MAX_HEIGHT,
-                    // marginBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
                     flexDirection: 'column',
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-evenly',
                     alignItems: 'center',
-                    backgroundColor: 'white',
-                }}>
+                }}
+                blurRadius={IMAGE_BLUR_RADIUS}>
                 <Text style={{color: 'white'}}>{song.name}</Text>
+
+                <Image
+                    loadingIndicatorSource={{
+                        uri: highQualityImage,
+                        cache: 'force-cache',
+                    }}
+                    source={{
+                        uri: highQualityImage,
+                        cache: 'force-cache',
+                        scale: 1,
+                        height,
+                    }}
+                    fadeDuration={500}
+                    style={{
+                        width: 260,
+                        height: 260,
+                        borderRadius: 3,
+                        resizeMode: 'cover',
+                        marginVertical: 20,
+                    }}
+                    blurRadius={0}
+                />
 
                 <View
                     onStartShouldSetResponder={v => false}
@@ -303,12 +335,15 @@ const MusicPLayerSongView = ({song}: SongView) => {
                         speed={2}
                         autoSize={false}
                         autoPlay={false}
-                        cacheStrategy="strong"
+                        // cacheStrategy="strong"
                         loop={false}
                     />
                 </View>
 
-                <TrackProgress color={'white'} duration={song.duration} />
+                <TrackProgress
+                    // color={'white'}
+                    duration={song.duration}
+                />
 
                 <View
                     style={{
