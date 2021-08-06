@@ -10,12 +10,12 @@ import {
     StatusBar,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
+import FastImage from 'react-native-fast-image'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
 import {DoubleTap, TrackPlayerController, TrackProgress} from '../../components'
 import {
     APP_LOGO_LINK,
-    HEADER_MAX_HEIGHT,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
     ViewabilityConfig,
 } from '../../constants'
@@ -37,10 +37,8 @@ const IMAGE_BLUR_RADIUS = 25
 
 export type ViewToken = {
     item: SongObject
-    // The key of this item
     key: string
     index: number
-    // indicated whether this item is viewable or not
     isViewable: boolean
     section?: any
 }
@@ -48,23 +46,53 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    // const {current, play} = usePlayer()
-    const {themeColors} = useTheme()
+    const {play} = usePlayer()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
 
     const scrollReference = useRef<any>(null)
 
+    const likeAnimRef = useRef<LottieView>(null)
+    const isAnimationPlaying = useRef<boolean>(false)
+
+    const playLikeAnimationForMusicId = useCallback((musicId: string) => {
+        if (isAnimationPlaying.current) return
+
+        isAnimationPlaying.current = true
+        likeAnimRef.current?.play(0, 65)
+
+        setTimeout(() => {
+            likeAnimRef.current?.reset()
+            isAnimationPlaying.current = false
+        }, LIKE_ANIMATION_DISAPPEAR_DURATION)
+    }, [])
+
     const initializeMusicPlayer = () => {
         search('most listened bollywood songs', 'SONG')
             .then((res: FetchedSongObject) => {
                 setSongs(res)
+
+                // initial data
+                const initialTrack = res.content[0]
+                const artist = formatArtists(initialTrack.artist)
+
+                play(
+                    {
+                        artist,
+                        artwork: initialTrack.thumbnails[1].url,
+                        id: initialTrack.musicId,
+                        duration: initialTrack.duration,
+                        playlistId: initialTrack.playlistId,
+                        title: initialTrack.name,
+                        url: '',
+                    },
+                    false,
+                )
             })
             .catch(err => {
                 console.log('ERROR IN MUSIC PLAYER', err)
             })
     }
-
     useEffect(() => {
         initMusicApi()
             .then(() => {
@@ -85,7 +113,14 @@ const Player: FC<PlayerProps> = _props => {
     const renderItem = useCallback(
         (itemDetails: ListRenderItemInfo<SongObject>) => {
             const {item} = itemDetails
-            return <MusicPLayerSongView song={item} />
+            return (
+                <MusicPLayerSongView
+                    song={item}
+                    playLikeAnimation={() =>
+                        playLikeAnimationForMusicId(item.musicId)
+                    }
+                />
+            )
         },
         [],
     )
@@ -98,7 +133,6 @@ const Player: FC<PlayerProps> = _props => {
         }),
         [],
     )
-
     const onViewableItemsChanged = ({viewableItems, changed}: any) => {
         console.log('Visible items are', viewableItems)
     }
@@ -121,14 +155,16 @@ const Player: FC<PlayerProps> = _props => {
                     keyExtractor={keyExtractor}
                     getItemLayout={getItemLayout}
                     ref={scrollReference}
-                    viewabilityConfig={ViewabilityConfig}
-                    onViewableItemsChanged={onViewableItemsChanged}
+                    // viewabilityConfig={ViewabilityConfig}
+                    // onViewableItemsChanged={onViewableItemsChanged}
                     scrollEventThrottle={16}
                     scrollToOverflowEnabled
                     overScrollMode={'never'}
                     pagingEnabled
                     bounces
                     // horizontal
+                    snapToAlignment="start"
+                    snapToStart
                     nestedScrollEnabled
                     bouncesZoom
                     alwaysBounceVertical
@@ -145,8 +181,8 @@ const Player: FC<PlayerProps> = _props => {
                         width: '100%',
                         height: '100%',
                     }}>
-                    <Image
-                        source={{uri: APP_LOGO_LINK}}
+                    <FastImage
+                        source={{uri: APP_LOGO_LINK, priority: 'high'}}
                         style={[
                             {
                                 opacity: 1,
@@ -175,38 +211,47 @@ const Player: FC<PlayerProps> = _props => {
                 </View>
             ) : null} */}
 
-            {/* <View
+            {isAnimationPlaying.current || true ? (
+                <View
+                    onStartShouldSetResponder={() => false} // a event variable is also received from this function
                     style={{
-                        // height: 100,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        width: '100%',
-                        backgroundColor: themeColors.themecolor[0] + '50',
-                        paddingTop: 20,
-                        paddingBottom: BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
-                        borderTopRightRadius: 25,
-                        borderTopLeftRadius: 25,
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        backgroundColor: 'black',
                     }}>
-                    <TrackPlayerController
-                        color={themeColors.themecolorrevert[0]}
+                    <LottieView
+                        ref={likeAnimRef}
+                        source={PopupLikeAnimation}
+                        style={{
+                            width: 250,
+                            position: 'absolute',
+                            // borderRadius: 1000,
+                            // overflow: 'hidden',
+                            // top: 0,
+                            // left: 0,
+                            zIndex: 1000,
+                        }}
+                        speed={2}
+                        autoSize={false}
+                        autoPlay={false}
+                        // cacheStrategy="strong"
+                        loop={false}
                     />
-                </View> */}
+                </View>
+            ) : null}
         </View>
     )
 }
 
 interface SongView {
     song: SongObject
+    playLikeAnimation: Function
 }
-const MusicPLayerSongView = ({song}: SongView) => {
-    const likeAnimRef = useRef<LottieView>(null)
-
-    const playLikeAnimation = () => {
-        likeAnimRef.current?.play(0, 65)
-        setTimeout(() => {
-            likeAnimRef.current?.reset()
-        }, LIKE_ANIMATION_DISAPPEAR_DURATION)
-    }
+const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
+    const {themeColors} = useTheme()
 
     const highQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
@@ -214,6 +259,8 @@ const MusicPLayerSongView = ({song}: SongView) => {
         720,
         100,
     )
+
+    const artists = formatArtists(song.artist)
 
     return (
         <DoubleTap onDoubleTap={playLikeAnimation}>
@@ -233,13 +280,13 @@ const MusicPLayerSongView = ({song}: SongView) => {
                     flex: 1,
                     width,
                     height: height,
-                    //  - HEADER_MAX_HEIGHT,
                     flexDirection: 'column',
                     justifyContent: 'space-evenly',
                     alignItems: 'center',
                 }}
                 blurRadius={IMAGE_BLUR_RADIUS}>
                 <Text style={{color: 'white'}}>{song.name}</Text>
+                <Text style={{color: 'white'}}>{artists}</Text>
 
                 <Image
                     loadingIndicatorSource={{
@@ -264,39 +311,17 @@ const MusicPLayerSongView = ({song}: SongView) => {
                 />
 
                 <View
-                    onStartShouldSetResponder={v => false}
                     style={{
-                        // flex: 1,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        position: 'relative',
+                        width: '100%',
+                        backgroundColor: themeColors.themecolor[0] + '50',
                     }}>
-                    <LottieView
-                        ref={likeAnimRef}
-                        source={PopupLikeAnimation}
-                        style={{
-                            width: 250,
-                            position: 'absolute',
-                            borderRadius: 1000,
-                            overflow: 'hidden',
-                        }}
-                        speed={2}
-                        autoSize={false}
-                        autoPlay={false}
-                        // cacheStrategy="strong"
-                        loop={false}
+                    <TrackProgress
+                        color={themeColors.themecolorrevert[0]}
+                        duration={song.duration}
                     />
                 </View>
-
-                <TrackProgress
-                    // color={'white'}
-                    duration={song.duration}
-                />
-
-                <View
-                    style={{
-                        marginBottom: 200,
-                    }}></View>
             </ImageBackground>
         </DoubleTap>
     )
