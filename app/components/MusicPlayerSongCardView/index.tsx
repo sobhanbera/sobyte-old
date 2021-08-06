@@ -14,7 +14,7 @@ interface Props {
     scrollX: Animated.Value
     item: Track
 }
-const MusicPlayerSongCardView = (props: Props) => {
+const AnimatedMusicPlayerSongCardView = (props: Props) => {
     const {item, index, scrollX} = props
     const inputRange = [(index - 1) * width, index * width, (index + 1) * width]
     // const translateRange = index % 2 === 0 ? -100 : -100
@@ -67,4 +67,4 @@ const MusicPlayerSongCardView = (props: Props) => {
     )
 }
 
-export default MusicPlayerSongCardView
+export default AnimatedMusicPlayerSongCardView
