@@ -2,20 +2,24 @@ import React, {FC, useState, useEffect, useCallback, useRef} from 'react'
 import {
     Text,
     View,
-    Image,
     ImageBackground,
     Dimensions,
     Animated,
     ListRenderItemInfo,
-    StatusBar,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import FastImage from 'react-native-fast-image'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
-import {DoubleTap, TrackPlayerController, TrackProgress} from '../../components'
+import {
+    DoubleTap,
+    GradientBackground,
+    TrackPlayerController,
+    TrackProgress,
+} from '../../components'
 import {
     APP_LOGO_LINK,
+    DefaultStatusBarComponent,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
     ViewabilityConfig,
 } from '../../constants'
@@ -24,14 +28,14 @@ import {
     getHightQualityImageFromLinkWithHeight,
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
-import MusicPlayerSongCardView from '../../components/MusicPlayerSongCardView'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
+import {StyleSheet} from 'react-native'
 
 const {width, height} = Dimensions.get('window')
 
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
-const LikeAnimation = require('../../assets/animations/like.json')
-const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
+// const LikeAnimation = require('../../assets/animations/like.json')
+// const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
 
 const IMAGE_BLUR_RADIUS = 25
 
@@ -47,9 +51,11 @@ interface PlayerProps {
 }
 const Player: FC<PlayerProps> = _props => {
     const {play} = usePlayer()
+    const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
 
+    const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = useRef<any>(null)
 
     const likeAnimRef = useRef<LottieView>(null)
@@ -98,7 +104,7 @@ const Player: FC<PlayerProps> = _props => {
             .then(() => {
                 initMusicApi()
                     .then(() => {
-                        initializeMusicPlayer()
+                        // initializeMusicPlayer()
                     })
                     .catch(() => {})
             })
@@ -138,15 +144,38 @@ const Player: FC<PlayerProps> = _props => {
     }
 
     return (
-        <View
+        <GradientBackground
             style={{
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
                 width: '100%',
                 height: '100%',
-            }}>
-            <StatusBar backgroundColor={'transparent'} translucent animated />
+            }}
+            colors={[
+                themeColors.secondary.main[0],
+                themeColors.primary.main[0],
+                themeColors.primary.dark[0],
+            ]}
+            location={[0.1, 0.6, 0.7]}
+            angle={174}>
+            <DefaultStatusBarComponent backgroundColor={'transparent'} />
+
+            {/* main content of this particular tab */}
+            {songs?.content.length && songs?.content[0].musicId.length ? (
+                <View style={StyleSheet.absoluteFillObject}>
+                    {songs.content.map((song, _) => {
+                        return (
+                            <BackgroundBluredImage
+                                key={`${song.id}-${_}`}
+                                image={song.thumbnails[1].url}
+                                index={_}
+                                scrollX={scrollX}
+                            />
+                        )
+                    })}
+                </View>
+            ) : null}
 
             {songs?.content.length && songs.content[0].musicId.length > 0 ? (
                 <Animated.FlatList
@@ -171,6 +200,15 @@ const Player: FC<PlayerProps> = _props => {
                     alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
+                    onScroll={Animated.event(
+                        [{nativeEvent: {contentOffset: {y: scrollX}}}],
+                        {
+                            useNativeDriver: true,
+                            // listener: event => {
+                            // scrollChangedHandler(event)
+                            // },
+                        },
+                    )}
                 />
             ) : (
                 <View
@@ -182,7 +220,11 @@ const Player: FC<PlayerProps> = _props => {
                         height: '100%',
                     }}>
                     <FastImage
-                        source={{uri: APP_LOGO_LINK, priority: 'high'}}
+                        source={{
+                            uri: APP_LOGO_LINK,
+                            priority: 'high',
+                            cache: 'immutable',
+                        }}
                         style={[
                             {
                                 opacity: 1,
@@ -190,26 +232,9 @@ const Player: FC<PlayerProps> = _props => {
                                 height: 276 / 2,
                             },
                         ]}
-                        // blurRadius={IMAGE_BLUR_RADIUS / 5000}
                     />
                 </View>
             )}
-
-            {/* main content of this particular tab */}
-            {/* {songs.length > 0 && songs[0].artwork.length ? (
-                <View style={StyleSheet.absoluteFillObject}>
-                    {songs.map((song, _) => {
-                        return (
-                            <BackgroundBluredImage
-                                key={`${song.id}-${_}`}
-                                song={song}
-                                index={_}
-                                scrollX={scrollX}
-                            />
-                        )
-                    })}
-                </View>
-            ) : null} */}
 
             {isAnimationPlaying.current || true ? (
                 <View
@@ -242,7 +267,7 @@ const Player: FC<PlayerProps> = _props => {
                     />
                 </View>
             ) : null}
-        </View>
+        </GradientBackground>
     )
 }
 
@@ -262,18 +287,26 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
 
     const artists = formatArtists(song.artist)
 
+    FastImage.preload([
+        {
+            uri: highQualityImage,
+            priority: 'high',
+            cache: 'cacheOnly',
+        },
+    ])
+
     return (
         <DoubleTap onDoubleTap={playLikeAnimation}>
             <ImageBackground
                 loadingIndicatorSource={{
                     uri: highQualityImage,
                     cache: 'force-cache',
+                    scale: 1,
                 }}
                 source={{
                     uri: highQualityImage,
                     cache: 'force-cache',
                     scale: 1,
-                    height,
                 }}
                 fadeDuration={500}
                 style={{
@@ -288,26 +321,18 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
                 <Text style={{color: 'white'}}>{song.name}</Text>
                 <Text style={{color: 'white'}}>{artists}</Text>
 
-                <Image
-                    loadingIndicatorSource={{
-                        uri: highQualityImage,
-                        cache: 'force-cache',
-                    }}
+                <FastImage
                     source={{
                         uri: highQualityImage,
-                        cache: 'force-cache',
-                        scale: 1,
-                        height,
+                        priority: 'high',
+                        cache: 'web',
                     }}
-                    fadeDuration={500}
                     style={{
                         width: 260,
                         height: 260,
                         borderRadius: 3,
-                        resizeMode: 'cover',
                         marginVertical: 20,
                     }}
-                    blurRadius={0}
                 />
 
                 <View
