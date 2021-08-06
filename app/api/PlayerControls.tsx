@@ -429,11 +429,11 @@ const Player: FC<PlayerProps> = props => {
             return
         }
 
-        setShowLoading(true)
+        if (play) setShowLoading(true)
         fetchMusic(track.id)
             .then(async (__res: any) => {
                 resetPlayer()
-                setShowLoading(false)
+                if (play) setShowLoading(false)
 
                 const trackGot = {
                     ...track,
