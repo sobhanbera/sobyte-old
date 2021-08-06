@@ -8,6 +8,7 @@ import {
     IMAGE_SMALL_SIZE_TO_SHOW,
     DEFAULT_TINY_ICON_SIZE,
     IMAGE_TINY_SIZE_TO_SHOW,
+    DEVICE_STATUSBAR_HEIGHT_CONSTANT,
 } from '../constants'
 import {StyleSheet} from 'react-native'
 
@@ -57,6 +58,7 @@ const globalStyles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 15,
+        marginTop: DEVICE_STATUSBAR_HEIGHT_CONSTANT,
     },
 
     extraPaddingView: {
