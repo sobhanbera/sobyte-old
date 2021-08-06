@@ -38,18 +38,30 @@ const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
 
 const IMAGE_BLUR_RADIUS = 25
 
+/**
+ * the interface or data type which will be giving the types for the song data whenever the user scrolls
+ * to different song/track and provide with a callback function which recieve this data
+ */
 export type ViewToken = {
-    item: SongObject
-    key: string
-    index: number
-    isViewable: boolean
-    section?: any
+    viewableItems: Array<{
+        item: SongObject
+        key: string
+        index: number
+        isViewable: boolean
+        section?: any
+    }>
+    changed: Array<{
+        index: number
+        isViewable: boolean
+        item: SongObject
+        key: string
+    }>
 }
 interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    const {play} = usePlayer()
+    const {play, pause} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
@@ -138,13 +150,33 @@ const Player: FC<PlayerProps> = _props => {
         }),
         [],
     )
-    const onViewableItemsChanged = useRef(
-        ({viewableItems /*, changed */}: any) => {
-            console.log('Visible items are', viewableItems)
-        },
-    ).current
+    const onViewableItemsChanged = useRef((data: any) => {
+        const {viewableItems}: ViewToken = data
+        const {item} = viewableItems[0]
+        const trackImage = getHightQualityImageFromLinkWithHeight(
+            item.thumbnails[0].url,
+            item.thumbnails[0].height,
+            300,
+            90,
+        )
+        const artists = formatArtists(item.artist)
+        pause()
+        play({
+            url: '',
+            id: item.musicId,
+            duration: item.duration,
+            title: item.name,
+            playlistId: item.playlistId,
+            artist: artists,
+            artwork: trackImage,
+        })
+
+        console.log('Playing', item.name, 'by', artists)
+    }).current
+
     const ViewabilityConfig = useRef({
         viewAreaCoveragePercentThreshold: 50,
+        minimumViewTime: 0,
     }).current
 
     return (
@@ -322,6 +354,7 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
                     flexDirection: 'column',
                     justifyContent: 'space-evenly',
                     alignItems: 'center',
+                    paddingBottom: 20, // the main bottom tab bar navigation height is overlping the children component so providing a padding bottom of 15~25
                 }}
                 blurRadius={IMAGE_BLUR_RADIUS}>
                 <Text style={{color: 'white'}}>{song.name}</Text>
@@ -346,18 +379,11 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         width: '100%',
-                        backgroundColor: themeColors.themecolor[0] + '50',
+                        // backgroundColor: themeColors.themecolor[0] + '50',
                     }}>
-                    <View
-                        style={{
-                            width: '100%',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}>
-                        <TrackButtonControls
-                            color={themeColors.themecolorrevert[0]}
-                        />
-                    </View>
+                    <TrackButtonControls
+                        color={themeColors.themecolorrevert[0]}
+                    />
 
                     <TrackProgress
                         color={themeColors.themecolorrevert[0]}
