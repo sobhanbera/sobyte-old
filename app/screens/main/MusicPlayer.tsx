@@ -11,12 +11,7 @@ import LottieView from 'lottie-react-native'
 import FastImage from 'react-native-fast-image'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
-import {
-    DoubleTap,
-    GradientBackground,
-    TrackPlayerController,
-    TrackProgress,
-} from '../../components'
+import {DoubleTap, GradientBackground, TrackProgress} from '../../components'
 import {
     APP_LOGO_LINK,
     DefaultStatusBarComponent,
@@ -29,6 +24,7 @@ import {
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
 import {StyleSheet} from 'react-native'
+import MainControls from 'app/components/MusicPlayer/MainControls'
 
 const {width, height} = Dimensions.get('window')
 
@@ -348,6 +344,15 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
                         width: '100%',
                         backgroundColor: themeColors.themecolor[0] + '50',
                     }}>
+                    <View
+                        style={{
+                            width: '100%',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}>
+                        <MainControls color={themeColors.themecolorrevert[0]} />
+                    </View>
+
                     <TrackProgress
                         color={themeColors.themecolorrevert[0]}
                         duration={song.duration}
