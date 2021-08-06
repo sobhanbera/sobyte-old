@@ -27,6 +27,7 @@ import {
     PaddingBottomView,
     AppLogoAnimationConstant,
     PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY,
+    DefaultStatusBarComponent,
 } from '../../../constants'
 import {
     FetchedSongObject,
@@ -236,7 +237,7 @@ const SearchResult: React.FC<Props> = props => {
      */
     return (
         <>
-            <StatusBar backgroundColor={surfacelight[0]} translucent={false} />
+            <DefaultStatusBarComponent backgroundColor={surfacelight[0]} />
 
             {showSearchSuggestions && Array.isArray(searchSuggestions) ? (
                 <View
