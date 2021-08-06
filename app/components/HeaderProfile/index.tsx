@@ -2,6 +2,7 @@ import React from 'react'
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native'
 
 import {useTheme} from '../../context'
+import {DEVICE_STATUSBAR_HEIGHT_CONSTANT} from '../../constants'
 
 interface Props {
     navigation: any
@@ -15,6 +16,7 @@ const HeaderProfile = (props: Props) => {
                 styles.header,
                 {
                     backgroundColor: surface[0],
+                    marginTop: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // the height of the statusbar of the device
                 },
             ]}>
             <TouchableOpacity
