@@ -51,7 +51,7 @@ interface PlayerProps {
 }
 const Player: FC<PlayerProps> = _props => {
     const {play} = usePlayer()
-    const {themeColors} = useTheme()
+    const {themeColors, randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
 
@@ -153,12 +153,13 @@ const Player: FC<PlayerProps> = _props => {
                 height: '100%',
             }}
             colors={[
-                themeColors.secondary.main[0],
-                themeColors.primary.main[0],
-                themeColors.primary.dark[0],
+                randomGradient[2],
+                randomGradient[3],
+                randomGradient[4],
+                randomGradient[5],
             ]}
-            location={[0.1, 0.6, 0.7]}
-            angle={174}>
+            location={[0.2, 0.4, 0.6, 0.8]}
+            angle={175}>
             <DefaultStatusBarComponent backgroundColor={'transparent'} />
 
             {/* main content of this particular tab */}
