@@ -66,6 +66,9 @@ const PlayerContext = createContext({
     },
 
     /**
+     * @param _track the actual track to play
+     * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
+     *
      * the common and normal play function which had many checks and then plays the song
      * also generate next songs list and there url...
      *
@@ -73,7 +76,7 @@ const PlayerContext = createContext({
      * and also if the track is a valid track
      * else it will play the current track and returns from the function....
      */
-    play: (_track: Track) => {},
+    play: (_track: Track, _play?: boolean) => {},
     /**
      * function to pause the track player
      */
@@ -398,10 +401,17 @@ const Player: FC<PlayerProps> = props => {
     }
 
     /**
+     * @param _track the actual track to play
+     * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
+     *
      * the common and normal play function which had many checks and then plays the song
      * also generate next songs list and there url...
+     *
+     * first this function will check that the track which is passed is the current playing track
+     * and also if the track is a valid track
+     * else it will play the current track and returns from the function....
      */
-    const play = async (track: Track) => {
+    const play = async (track: Track, play: boolean = true) => {
         /**
          * first this function will check that the track which is passed is the current playing track
          * and also if the track is a valid track
@@ -432,8 +442,9 @@ const Player: FC<PlayerProps> = props => {
                 }
                 await TrackPlayer.add([trackGot])
                 await TrackPlayer.skip(trackGot.id)
-                await TrackPlayer.play()
+                if (play) await TrackPlayer.play()
                 return
+
                 /**
                  * after playing or starting playing the song loading of song which
                  * occurs next will start
