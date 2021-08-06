@@ -3,7 +3,7 @@ import {StyleSheet, Animated, Dimensions} from 'react-native'
 
 import {APP_LOGO_LINK} from '../../constants'
 
-const {width} = Dimensions.get('screen')
+const {width, height} = Dimensions.get('screen')
 const IMAGE_BLUR_RADIUS = 50
 
 interface Props {
@@ -13,7 +13,11 @@ interface Props {
 }
 const BackgroundBluredImage = (props: Props) => {
     const {image, scrollX, index} = props
-    const inputRange = [(index - 1) * width, index * width, (index + 1) * width]
+    const inputRange = [
+        (index - 1) * height,
+        index * height,
+        (index + 1) * height,
+    ]
     const opacity = scrollX.interpolate({
         inputRange: inputRange,
         outputRange: [0, 1, 0],
@@ -27,7 +31,7 @@ const BackgroundBluredImage = (props: Props) => {
                     opacity: opacity,
                 },
             ]}
-            source={{uri: image || APP_LOGO_LINK}}
+            source={{uri: image || APP_LOGO_LINK, cache: 'force-cache'}}
             blurRadius={IMAGE_BLUR_RADIUS}
         />
     )
