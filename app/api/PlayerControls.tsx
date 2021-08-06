@@ -11,6 +11,8 @@ import {useApp, useFetcher, useMusicApi} from '../context'
 import {SongObjectWithArtistAsString} from '../interfaces'
 import {getHighQualityImageFromSongImage} from '../utils'
 
+let previouslyLoadedSongs: {[key: string]: string} = {}
+
 /**
  * the data type or the object type for each Tracks of the song
  */
@@ -434,6 +436,24 @@ const Player: FC<PlayerProps> = props => {
             return
         }
 
+        console.log(previouslyLoadedSongs[track.id])
+        if (
+            previouslyLoadedSongs[track.id] !== null &&
+            previouslyLoadedSongs[track.id] !== undefined
+        ) {
+            resetPlayer()
+            const trackGot = {
+                ...track,
+                url: previouslyLoadedSongs[track.id],
+                description: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
+            }
+            console.log('PLAYING FROM SAVED')
+            await TrackPlayer.add([trackGot])
+            await TrackPlayer.skip(trackGot.id)
+            if (play) await TrackPlayer.play()
+            return
+        }
+
         if (showLoading && play) setShowLoading(true)
         fetchMusic(track.id)
             .then(async (__res: any) => {
@@ -447,6 +467,7 @@ const Player: FC<PlayerProps> = props => {
                 }
                 await TrackPlayer.add([trackGot])
                 await TrackPlayer.skip(trackGot.id)
+                previouslyLoadedSongs[track.id] = __res
                 if (play) await TrackPlayer.play()
                 return
 
