@@ -112,6 +112,7 @@ export const IMAGE_PADDING_H_TO_SHOW = 4 // padding horizontal of the image whic
 export const IMAGE_PADDING_V_TO_SHOW = 4 // padding vertical of the image which should be shown in the UI
 
 export const LIKE_ANIMATION_DISAPPEAR_DURATION = 1650 // the duration after which the like animation while be hidden
+export const HIGHEST_Z_INDEX_VALUE = 987654 // the largest z index value
 
 export const PaddingBottomView = props => (
     <View
