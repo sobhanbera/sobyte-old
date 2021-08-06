@@ -6,9 +6,11 @@ import {
     Dimensions,
     Animated,
     ListRenderItemInfo,
+    StyleSheet,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import FastImage from 'react-native-fast-image'
+import musicFetch from 'react-native-ytdl'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
 import {
@@ -28,7 +30,6 @@ import {
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
-import {StyleSheet} from 'react-native'
 
 const {width, height} = Dimensions.get('window')
 
@@ -115,7 +116,7 @@ const Player: FC<PlayerProps> = _props => {
             .then(() => {
                 initMusicApi()
                     .then(() => {
-                        initializeMusicPlayer()
+                        // initializeMusicPlayer()
                     })
                     .catch(() => {})
             })
@@ -126,6 +127,18 @@ const Player: FC<PlayerProps> = _props => {
                 )
             })
     }, [error])
+
+    useEffect(() => {
+        console.error('STARTED->>>>')
+        const result = async () => {
+            const results = await musicFetch(
+                'https://www.youtube.com/watch?v=HFX6AZ5bDDo',
+                {quality: 'highestaudio'},
+            )
+            console.error('RESULT IS ISI SIS', results)
+        }
+        result()
+    }, [])
 
     const renderItem = useCallback(
         (itemDetails: ListRenderItemInfo<SongObject>) => {
