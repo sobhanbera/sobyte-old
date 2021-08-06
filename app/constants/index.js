@@ -165,3 +165,36 @@ export const API_AUTHORIZATION_BEARER_TOKEN_PREFIX =
     'sobyte-bearer-access-token '
 // this is the tag which will also be sent to the client as a response during a api requested in the client-side it can be fetched from the header of the response we sent...
 export const API_DETAILS_TAG = 'sobyte-app-details'
+
+/**
+ * This is the config of the flatlist to provide the
+ * currently viewed item in that particular flatlist or scrollview
+ * this config is needed or it will through a error:-
+ * Changing onViewableItemsChanged on the fly is not supported...
+ */
+export const ViewabilityConfig = {
+    /**
+     * Minimum amount of time (in milliseconds) that an item must be physically viewable before the
+     * viewability callback will be fired. A high number means that scrolling through content without
+     * stopping will not mark the content as viewable.
+     */
+    //   minimumViewTime?: number, // not required
+    /**
+     * Percent of viewport that must be covered for a partially occluded item to count as
+     * "viewable", 0-100. Fully visible items are always considered viewable. A value of 0 means
+     * that a single pixel in the viewport makes the item viewable, and a value of 100 means that
+     * an item must be either entirely visible or cover the entire viewport to count as viewable.
+     */
+    viewAreaCoveragePercentThreshold: 75, // percent %
+    /**
+     * Similar to `viewAreaPercentThreshold`, but considers the percent of the item that is visible,
+     * rather than the fraction of the viewable area it covers.
+     */
+    itemVisiblePercentThreshold: 50, // percent %
+
+    /**
+     * Nothing is considered viewable until the user scrolls or `recordInteraction` is called after
+     * render.
+     */
+    waitForInteraction: false, // boolean
+}
