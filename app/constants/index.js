@@ -209,5 +209,5 @@ export const ViewabilityConfig = {
      * Nothing is considered viewable until the user scrolls or `recordInteraction` is called after
      * render.
      */
-    waitForInteraction: false, // boolean
+    // waitForInteraction: false, // boolean
 }

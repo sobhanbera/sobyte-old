@@ -21,7 +21,6 @@ import {
     APP_LOGO_LINK,
     DefaultStatusBarComponent,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
-    ViewabilityConfig,
 } from '../../constants'
 import {
     formatArtists,
@@ -51,7 +50,7 @@ interface PlayerProps {
 }
 const Player: FC<PlayerProps> = _props => {
     const {play} = usePlayer()
-    const {themeColors, randomGradient} = useTheme()
+    const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
 
@@ -104,7 +103,7 @@ const Player: FC<PlayerProps> = _props => {
             .then(() => {
                 initMusicApi()
                     .then(() => {
-                        // initializeMusicPlayer()
+                        initializeMusicPlayer()
                     })
                     .catch(() => {})
             })
@@ -132,16 +131,21 @@ const Player: FC<PlayerProps> = _props => {
     )
     const keyExtractor = useCallback((item: SongObject) => item.musicId, [])
     const getItemLayout = useCallback(
-        (data, index) => ({
+        (_data, index) => ({
             length: height,
             offset: height * index,
             index,
         }),
         [],
     )
-    const onViewableItemsChanged = ({viewableItems, changed}: any) => {
-        console.log('Visible items are', viewableItems)
-    }
+    const onViewableItemsChanged = useRef(
+        ({viewableItems /*, changed */}: any) => {
+            console.log('Visible items are', viewableItems)
+        },
+    ).current
+    const ViewabilityConfig = useRef({
+        viewAreaCoveragePercentThreshold: 50,
+    }).current
 
     return (
         <GradientBackground
@@ -185,8 +189,8 @@ const Player: FC<PlayerProps> = _props => {
                     keyExtractor={keyExtractor}
                     getItemLayout={getItemLayout}
                     ref={scrollReference}
-                    // viewabilityConfig={ViewabilityConfig}
-                    // onViewableItemsChanged={onViewableItemsChanged}
+                    viewabilityConfig={ViewabilityConfig}
+                    onViewableItemsChanged={onViewableItemsChanged}
                     scrollEventThrottle={16}
                     scrollToOverflowEnabled
                     overScrollMode={'never'}
@@ -237,6 +241,7 @@ const Player: FC<PlayerProps> = _props => {
                 </View>
             )}
 
+            {/* like animation when the user presses the like button or double tap the track (on the screen) */}
             {isAnimationPlaying.current || true ? (
                 <View
                     onStartShouldSetResponder={() => false} // a event variable is also received from this function
