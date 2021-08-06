@@ -190,7 +190,7 @@ export const ViewabilityConfig = {
      * Similar to `viewAreaPercentThreshold`, but considers the percent of the item that is visible,
      * rather than the fraction of the viewable area it covers.
      */
-    itemVisiblePercentThreshold: 50, // percent %
+    // itemVisiblePercentThreshold: 50, // percent %
 
     /**
      * Nothing is considered viewable until the user scrolls or `recordInteraction` is called after
