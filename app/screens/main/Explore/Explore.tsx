@@ -12,6 +12,7 @@ import {
     BlockCardArtistList,
 } from '../../../components'
 import {
+    DefaultStatusBarComponent,
     IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
     PaddingBottomView,
 } from '../../../constants'
@@ -154,7 +155,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
 
     return (
         <View style={globalStyles.flex}>
-            <StatusBar backgroundColor={'transparent'} animated />
+            <DefaultStatusBarComponent backgroundColor={'transparent'} />
             <ScrollView
                 refreshControl={
                     <RefreshControl
