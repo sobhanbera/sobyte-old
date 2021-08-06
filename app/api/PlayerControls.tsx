@@ -68,6 +68,7 @@ const PlayerContext = createContext({
     /**
      * @param _track the actual track to play
      * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
+     * @param _showLoading wheather to show loading while loading the song data
      *
      * the common and normal play function which had many checks and then plays the song
      * also generate next songs list and there url...
@@ -76,7 +77,7 @@ const PlayerContext = createContext({
      * and also if the track is a valid track
      * else it will play the current track and returns from the function....
      */
-    play: (_track: Track, _play?: boolean) => {},
+    play: (_track: Track, _play?: boolean, _showLoading?: boolean) => {},
     /**
      * function to pause the track player
      */
@@ -411,7 +412,11 @@ const Player: FC<PlayerProps> = props => {
      * and also if the track is a valid track
      * else it will play the current track and returns from the function....
      */
-    const play = async (track: Track, play: boolean = true) => {
+    const play = async (
+        track: Track,
+        play: boolean = true,
+        showLoading: boolean = false,
+    ) => {
         /**
          * first this function will check that the track which is passed is the current playing track
          * and also if the track is a valid track
@@ -429,11 +434,11 @@ const Player: FC<PlayerProps> = props => {
             return
         }
 
-        if (play) setShowLoading(true)
+        if (showLoading && play) setShowLoading(true)
         fetchMusic(track.id)
             .then(async (__res: any) => {
                 resetPlayer()
-                if (play) setShowLoading(false)
+                if (showLoading && play) setShowLoading(false)
 
                 const trackGot = {
                     ...track,
