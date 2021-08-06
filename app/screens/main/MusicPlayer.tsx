@@ -17,6 +17,7 @@ import {
     APP_LOGO_LINK,
     HEADER_MAX_HEIGHT,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
+    ViewabilityConfig,
 } from '../../constants'
 import {
     formatArtists,
@@ -38,7 +39,7 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    const {current, play} = usePlayer()
+    // const {current, play} = usePlayer()
     const {themeColors} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
@@ -109,37 +110,32 @@ const Player: FC<PlayerProps> = _props => {
      * whenever the scroll position changes this code will be executed and change the song
      * according to the index or the position of scroll
      */
-    // const scrollChangedHandler = (event: any) => {
-    //     const scrollPostion = event.nativeEvent.contentOffset.y
-    //     const screenWidth = width
-    //     const screenHeight = height
-    //     // if (scrollPostion % screenWidth === 0) {
-    //     //     const songIndex = scrollPostion / screenWidth
-    //     /**
-    //      * if the song which we are gonna playing is not the currently playing song
-    //      */
-    //     // }
+    const scrollChangedHandler = (event: any) => {
+        const scrollPostion = event.nativeEvent.contentOffset.y
+        const screenWidth = width
+        const screenHeight = height
+        // if (scrollPostion % screenWidth === 0) {
+        //     const songIndex = scrollPostion / screenWidth
+        /**
+         * if the song which we are gonna playing is not the currently playing song
+         */
+        // }
 
-    //     // for vertical scrollview
-    //     if (scrollPostion % screenHeight === 0) {
-    //         const songIndex = scrollPostion / screenHeight
-    //         console.log(songIndex)
+        // for vertical scrollview
+        if (scrollPostion % screenHeight === 0) {
+            const songIndex = scrollPostion / screenHeight
+            console.log(songIndex)
+            /**
+             * if the song which we are gonna playing is not the currently playing song
+             */
+        }
 
-    //         play({
-    //             artist: songs?.content[songIndex].
-    //         })
-
-    //         /**
-    //          * if the song which we are gonna playing is not the currently playing song
-    //          */
-    //     }
-
-    //     /**
-    //      * TODO: when the user scroll this scroll reference to the last second song player control
-    //      * will load more song and push them to the nextSongsList variable so that the next songs list never ends
-    //      * and continues for much time
-    //      */
-    // }
+        /**
+         * TODO: when the user scroll this scroll reference to the last second song player control
+         * will load more song and push them to the nextSongsList variable so that the next songs list never ends
+         * and continues for much time
+         */
+    }
 
     const renderItem = useCallback(
         (itemDetails: ListRenderItemInfo<SongObject>) => {
@@ -157,6 +153,10 @@ const Player: FC<PlayerProps> = _props => {
         }),
         [],
     )
+
+    const onViewableItemsChanged = ({viewableItems, changed}: any) => {
+        console.log('Visible items are', viewableItems)
+    }
 
     return (
         <View
@@ -176,6 +176,8 @@ const Player: FC<PlayerProps> = _props => {
                     keyExtractor={keyExtractor}
                     getItemLayout={getItemLayout}
                     ref={scrollReference}
+                    viewabilityConfig={ViewabilityConfig}
+                    onViewableItemsChanged={onViewableItemsChanged}
                     scrollEventThrottle={16}
                     scrollToOverflowEnabled
                     overScrollMode={'never'}
