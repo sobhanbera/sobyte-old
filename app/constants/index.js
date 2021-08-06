@@ -9,7 +9,10 @@
  */
 
 import React from 'react'
-import {View} from 'react-native'
+import {View, NativeModules} from 'react-native'
+
+const {StatusBarManager} = NativeModules
+export const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT
 
 import * as Limits from './limits'
 export {Limits}
