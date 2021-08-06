@@ -35,6 +35,15 @@ const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
 
 const IMAGE_BLUR_RADIUS = 25
 
+export type ViewToken = {
+    item: SongObject
+    // The key of this item
+    key: string
+    index: number
+    // indicated whether this item is viewable or not
+    isViewable: boolean
+    section?: any
+}
 interface PlayerProps {
     navigation?: any
 }
