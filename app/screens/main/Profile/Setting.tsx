@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ScrollView, Text, ToastAndroid} from 'react-native'
+import {ScrollView, Text, ToastAndroid, StatusBar} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {
@@ -45,6 +45,10 @@ const Setting: React.FC<SettingProps> = props => {
 
     return (
         <GradientBackground uniformColor>
+            <StatusBar
+                backgroundColor={themeColors.surfacelight[0]}
+                translucent={false}
+            />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <HeaderMain
                     navigation={props.navigation}
