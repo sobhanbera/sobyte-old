@@ -10,7 +10,7 @@ import {Scaler} from '../'
 interface Props {
     color: string
 }
-const MainControls = (props: Props) => {
+const TrackButtonControls = (props: Props) => {
     const {playing, seekInterval, playonly, pause} = usePlayer()
 
     const [localPlaying, setLocalPlaying] = useState<boolean>(playing)
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
     icon: {},
 })
 
-export default MainControls
+export default TrackButtonControls

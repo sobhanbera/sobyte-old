@@ -100,6 +100,8 @@ export {CommonSongList, CommonSongItem, CommonArtistList, CommonArtistItem}
 /** music player components */
 import TrackProgress from './MusicPlayer/TrackProgress'
 export {TrackProgress}
+import TrackButtonControls from './MusicPlayer/TrackButtonControls'
+export {TrackButtonControls}
 
 /** many others */
 import GridSongList from './GridSongList'
