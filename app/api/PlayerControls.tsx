@@ -352,13 +352,11 @@ const Player: FC<PlayerProps> = props => {
      */
     const addSongAndPlay = async (track: Track) => {
         if (!track) {
-            console.log('First Condition IN DIRECT PLAY')
             if (currentTrack)
                 if (playerState === STATE_PAUSED) await TrackPlayer.play()
             return
         }
         if (currentTrack && track.id === currentTrack.id) {
-            console.log('Second Condition IN DIRECT PLAY')
             if (playerState === STATE_PAUSED) await TrackPlayer.play()
             return
         }
@@ -423,13 +421,11 @@ const Player: FC<PlayerProps> = props => {
          * else it will play the current track and returns from the function....
          */
         if (!track) {
-            console.log('First Condition')
             if (currentTrack)
                 if (playerState === STATE_PAUSED) await TrackPlayer.play()
             return
         }
         if (currentTrack && track.id === currentTrack.id) {
-            console.log('Second Condition')
             if (playerState === STATE_PAUSED) await TrackPlayer.play()
             return
         }
@@ -596,41 +592,6 @@ const Player: FC<PlayerProps> = props => {
                 setShowLoading(false)
                 console.error('ERROR PLAYING SONG...', err)
             })
-
-        /**
-         * @deprecated the below code becuase it was a much junk then this usual one
-         * it was causing many performance issues because of many checks, async tasks...
-         */
-        // try {
-        //we are checking that the track exists or not...
-        // await TrackPlayer.getTrack(track.id)
-        //     .then(async res => {
-        //         if (!res || res === null) {
-        //             await TrackPlayer.add([track])
-        //         }
-        //     })
-        //     .catch(async err => {
-        //         await TrackPlayer.add([track])
-        //     })
-        // } catch (err) {
-        //track not found than add it...
-        // await TrackPlayer.add([track])
-        // } finally {
-        //and finally set currentTrack to track and
-        //play after skiping to the track with id [track.id]
-        // setCurrentTrack(track)
-        // setLoading(false);here
-        /* await TrackPlayer.skip(track.id)
-                .then(res => {})
-                .catch(async err => {
-                    // console.log('SSSSSS', err);
-                    // const qu = await TrackPlayer.getQueue()
-                    // console.log('QUQUQU', qu);
-                }) */
-        /* await TrackPlayer.play()
-                .then(res => {})
-                .catch(err => {}) */
-        // }
     }
 
     /**
@@ -671,8 +632,6 @@ const Player: FC<PlayerProps> = props => {
      * skip to some interger interval
      */
     const seekTo = async (level: number) => {
-        // console.log('SEKE');
-        // console.log(level);
         if (!Number.isNaN(level)) {
             await TrackPlayer.seekTo(level)
         }
@@ -716,9 +675,7 @@ const Player: FC<PlayerProps> = props => {
     const previous = async () => {
         TrackPlayer.skipToPrevious()
             .then(_res => {})
-            .catch(_err => {
-                // console.log('ERRO WHILE PREVIOUS', err.code);
-            })
+            .catch(_err => {})
     }
 
     /**
@@ -729,9 +686,7 @@ const Player: FC<PlayerProps> = props => {
     const next = async () => {
         TrackPlayer.skipToNext()
             .then(_res => {})
-            .catch(_err => {
-                // console.log('ERRO WHILE NEXT', err.code);
-            })
+            .catch(_err => {})
     }
 
     /**
