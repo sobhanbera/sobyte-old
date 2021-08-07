@@ -88,6 +88,7 @@ export interface MusicContextApiProviderProps {
         _dataType: TypeOFDatas,
         _getARandomSong?: boolean,
         _saveToLocalStorage?: boolean,
+        saveToCustomLocation?: string,
         _pageLimit?: number,
     ): Promise<any>
 
@@ -187,6 +188,7 @@ const MusicContext = React.createContext<MusicContextApiProviderProps>({
         _dataType: TypeOFDatas,
         _getARandomSong: boolean = false,
         _saveToLocalStorage: boolean = false,
+        _saveToCustomLocation: string = '',
         _pageLimit: number = 1,
     ) => DemoMusicContextReturn(),
     /**
@@ -623,6 +625,7 @@ const MusicApi = (props: MusicApiProps) => {
      * @param categoryName what type of data is needed like "song" | "album" | "playlist"
      * @param getARandomResult boolean value if true then will provide a random search result out of the result got from api
      * @param saveToLocalStorage boolean if true then after searching and providing the results this function will also save the data in local storage for offline use cases.
+     * @param saveToCustomLocation this is a string if any part of app needs only one type of data everytime then provide a custom location reference we will save the data instead of `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}` location this could be used in music player main UI component since there many different types of random queries are done and we have to load it in offline purpose so no need to save everytype query of data only one is sufficient
      * @param _pageLimit number of data page wise (this argument is not in use currently).... and not prefered to use in future too...
      * @returns the search result after making api request
      *
@@ -635,7 +638,8 @@ const MusicApi = (props: MusicApiProps) => {
         categoryName: TypeOFDatas = 'SONG',
         getARandomResult: boolean = false,
         saveToLocalStorage: boolean = false,
-        _pageLimit: number = 1,
+        saveToCustomLocation: string = '',
+        pageLimit: number = 1,
     ) => {
         var isOffline = false
         return new Promise((resolve, reject) => {
@@ -658,7 +662,8 @@ const MusicApi = (props: MusicApiProps) => {
                     if (state.isConnected !== true) {
                         isOffline = true
                         AsyncStorage.getItem(
-                            `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
+                            saveToCustomLocation ||
+                                `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
                         )
                             .then((res: any) => {
                                 // checking if the data exists in local storage or not...
@@ -739,7 +744,8 @@ const MusicApi = (props: MusicApiProps) => {
                         if (saveToLocalStorage) {
                             if (isOffline) {
                                 AsyncStorage.setItem(
-                                    `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
+                                    saveToCustomLocation ||
+                                        `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
                                     JSON.stringify(result),
                                 )
                                     .then(() => {})
