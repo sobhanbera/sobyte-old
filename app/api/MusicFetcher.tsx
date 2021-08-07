@@ -47,7 +47,7 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
         id: string,
         _quality: AudioQualityType = quality,
     ) {
-        return new Promise(async (resolve, _reject) => {
+        return new Promise((resolve, _reject) => {
             /**
              * if the songs is already played than providing the previously stored data
              * source of that particular songs/track
