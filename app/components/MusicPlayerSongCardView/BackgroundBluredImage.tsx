@@ -31,7 +31,10 @@ const BackgroundBluredImage = (props: Props) => {
                     opacity: opacity,
                 },
             ]}
-            source={{uri: image || APP_LOGO_LINK, cache: 'force-cache'}}
+            source={{
+                uri: image || APP_LOGO_LINK,
+                // cache: 'force-cache',
+            }}
             blurRadius={IMAGE_BLUR_RADIUS}
         />
     )
