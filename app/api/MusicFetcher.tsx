@@ -47,8 +47,6 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
         id: string,
         _quality: AudioQualityType = quality,
     ) {
-        const startTime = new Date().getTime()
-        console.log('Started in MusicFetcher.tsx')
         return new Promise((resolve, _reject) => {
             /**
              * if the songs is already played than providing the previously stored data
@@ -80,11 +78,6 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                      * so we are returning the url value directly
                      */
                     resolve(res)
-                    const endTime = new Date().getTime()
-                    console.log(
-                        'TIME TOOK IN MusicFetcher.tsx',
-                        endTime - startTime,
-                    )
                 })
                 .catch(_err => {})
         })
