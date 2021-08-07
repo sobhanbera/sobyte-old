@@ -71,6 +71,7 @@ export async function getTrackURL(
         const {min, max} = getAudioBitrateLimitsFromQuality(
             finalOptions.audioQuality || 'auto',
         )
+        console.log('THE LENGTH OF THE LIST OF RESULTS', formats.length)
         /**
          * filtering (this is the actual work we need to do and then after provide it to the frontend)
          * this filter depends on the properties/options given through the parameter
