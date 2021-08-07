@@ -29,7 +29,6 @@ import {
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
-import {getTrackURL} from '../../api/Music'
 
 const {width, height} = Dimensions.get('window')
 
@@ -116,7 +115,7 @@ const Player: FC<PlayerProps> = _props => {
             .then(() => {
                 initMusicApi()
                     .then(() => {
-                        // initializeMusicPlayer()
+                        initializeMusicPlayer()
                     })
                     .catch(() => {})
             })
