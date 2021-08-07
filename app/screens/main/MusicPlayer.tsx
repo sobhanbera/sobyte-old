@@ -29,6 +29,7 @@ import {
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
+import {pauseTrack} from '../../api/PlayerControlsCommons'
 
 const {width, height} = Dimensions.get('window')
 
@@ -61,7 +62,7 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    const {play, pause} = usePlayer()
+    const {play} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const [songs, setSongs] = useState<FetchedSongObject>()
@@ -160,7 +161,7 @@ const Player: FC<PlayerProps> = _props => {
             90,
         )
         const artists = formatArtists(item.artist)
-        pause()
+        pauseTrack()
         play({
             url: '',
             id: item.musicId,
