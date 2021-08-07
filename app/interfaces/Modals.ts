@@ -32,7 +32,7 @@ export type ColorGradientCodeName =
     | 'disco'
 
 export type ThemeType = 'd' | 'l' | 'c'
-export type AudioQualityType = 'e' | 'g' | 'p' | 'a'
+export type AudioQualityType = 'extreme' | 'good' | 'poor' | 'auto'
 export type ImageQualityType =
     | '720'
     | '512'
