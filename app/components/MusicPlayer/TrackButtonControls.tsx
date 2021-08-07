@@ -6,25 +6,21 @@ import TrackPlayer, {STATE_PLAYING} from 'react-native-track-player'
 
 import {usePlayer} from '../../context'
 import {Scaler} from '../'
+import {
+    playTrack,
+    pauseTrack,
+    seekTrackInterval,
+} from '../../api/PlayerControlsCommons'
 
 interface Props {
     color: string
 }
 const TrackButtonControls = (props: Props) => {
-    const {playing, seekInterval, playonly, pause} = usePlayer()
+    const {playing} = usePlayer()
 
     const [localPlaying, setLocalPlaying] = useState<boolean>(playing)
 
     useEffect(() => {
-        const playEvent = TrackPlayer.addEventListener('remote-play', () => {
-            setLocalPlaying(true)
-        })
-        const pauseEvent = TrackPlayer.addEventListener('remote-pause', () => {
-            setLocalPlaying(false)
-        })
-        const stopEvent = TrackPlayer.addEventListener('remote-stop', () => {
-            setLocalPlaying(false)
-        })
         const stateChangeEvent = TrackPlayer.addEventListener(
             'playback-state',
             (state: {state: number}) => {
@@ -36,9 +32,6 @@ const TrackButtonControls = (props: Props) => {
             },
         )
         return () => {
-            playEvent.remove()
-            pauseEvent.remove()
-            stopEvent.remove()
             stateChangeEvent.remove()
         }
     }, [])
@@ -50,7 +43,7 @@ const TrackButtonControls = (props: Props) => {
                     size={20}
                     color={props.color}
                     name={'backward'}
-                    onPress={() => seekInterval(-10)}
+                    onPress={() => seekTrackInterval(-10)}
                 />
             </View>
 
@@ -59,7 +52,7 @@ const TrackButtonControls = (props: Props) => {
                     <Scaler
                         onPress={() => {
                             setLocalPlaying(false)
-                            pause()
+                            pauseTrack()
                         }}
                         touchableOpacity={0.2}>
                         <Ionicons
@@ -72,7 +65,7 @@ const TrackButtonControls = (props: Props) => {
                     <Scaler
                         onPress={() => {
                             setLocalPlaying(true)
-                            playonly()
+                            playTrack()
                         }}
                         touchableOpacity={0.2}>
                         <Ionicons size={32} color={props.color} name={'play'} />
@@ -85,7 +78,7 @@ const TrackButtonControls = (props: Props) => {
                     size={20}
                     color={props.color}
                     name={'forward'}
-                    onPress={() => seekInterval(10)}
+                    onPress={() => seekTrackInterval(10)}
                 />
             </View>
         </View>
