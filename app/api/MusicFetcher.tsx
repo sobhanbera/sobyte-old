@@ -77,11 +77,9 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                      * }]
                      * so we are returning the url value directly
                      */
-                    return resolve(res)
+                    resolve(res)
                 })
-                .catch(err => {
-                    console.log('MUSIC FETCHER ERR', err)
-                })
+                .catch(_err => {})
         })
     }
 
