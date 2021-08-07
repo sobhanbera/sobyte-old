@@ -14,7 +14,6 @@ interface AudioQualityLimit {
 export function getAudioBitrateLimitsFromQuality(
     quality: AudioQualityType,
 ): AudioQualityLimit {
-    console.log('AUQOIU', quality)
     switch (quality) {
         case 'extreme':
             return {min: 150, max: 1000}
@@ -78,7 +77,6 @@ export async function getTrackURL(
          * as well as the default values
          */
         const finalDatas = formats.filter(data => {
-            console.log(data.contentLength, data.approxDurationMs)
             if (
                 data.hasAudio == finalOptions.hasAudio &&
                 data.hasVideo === finalOptions.hasVideo &&
