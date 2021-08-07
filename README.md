@@ -96,18 +96,33 @@ yarn global add react-native
     1. There is only one patch for now :-
 
     - `Ctrl+Press` on the `TriggeringView` Component imported from `react-native-image-header-scroll-view` package in any file (just search for it)
+
     - And change the follwing code `componentWillMount` to `UNSAFE_componentWillMount` and `componentWillReceiveProps` to `UNSAFE_componentWillReceiveProps`.
+
+    - In short :-
+
+        ```diff
+             ...
+
+        -    componentWillMount() {}
+        +    UNSAFE_componentWillMount() {}
+
+        -    componentWillReceiveProps() {}
+        +    UNSAFE_componentWillReceiveProps() {}
+             ...
+             ...
+        ```
 
 6. This is also a IMP setup for the music fetcher to work.
     1. Change the following lines in `react-native-ytdl` package `info.js` file :-
-    ```diff
+        ```diff
         const ytdl = (link, options) => {
             return ytdl.getInfo(link, options).then(info => {
-    +            return info
-    -            return getURLsFromInfoCallback(info, options);
+        +       return info
+        -       return getURLsFromInfoCallback(info, options);
             });
         };
-    ```
+        ```
 
 ## File Structure (Tree)
 
