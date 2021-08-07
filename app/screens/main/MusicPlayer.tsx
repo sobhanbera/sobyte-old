@@ -21,6 +21,7 @@ import {
 import {
     APP_LOGO_LINK,
     DefaultStatusBarComponent,
+    DEFAULT_HIGH_IMAGE_QUALITY,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
 } from '../../constants'
 import {
@@ -258,8 +259,8 @@ const Player: FC<PlayerProps> = _props => {
                     <FastImage
                         source={{
                             uri: APP_LOGO_LINK,
-                            priority: 'high',
-                            cache: 'immutable',
+                            // priority: 'high',
+                            // cache: 'immutable',
                         }}
                         style={[
                             {
@@ -315,35 +316,41 @@ interface SongView {
 const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
     const {themeColors} = useTheme()
 
+    const averageQualityImage = getHightQualityImageFromLinkWithHeight(
+        song.thumbnails[0].url,
+        song.thumbnails[0].height,
+        '120',
+        50,
+    )
     const highQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
-        720,
+        DEFAULT_HIGH_IMAGE_QUALITY,
         100,
     )
 
     const artists = formatArtists(song.artist)
 
-    FastImage.preload([
-        {
-            uri: highQualityImage,
-            priority: 'high',
-            cache: 'cacheOnly',
-        },
-    ])
+    // FastImage.preload([
+    //     {
+    //         uri: highQualityImage,
+    //         priority: 'high',
+    //         cache: 'cacheOnly',
+    //     },
+    // ])
 
     return (
         <DoubleTap onDoubleTap={playLikeAnimation}>
             <ImageBackground
-                loadingIndicatorSource={{
-                    uri: highQualityImage,
-                    cache: 'force-cache',
-                    scale: 1,
-                }}
+                // loadingIndicatorSource={{
+                // uri: highQualityImage,
+                // cache: 'force-cache',
+                // scale: 1,
+                // }}
                 source={{
-                    uri: highQualityImage,
-                    cache: 'force-cache',
-                    scale: 1,
+                    uri: averageQualityImage,
+                    // cache: 'force-cache',
+                    // scale: 1,
                 }}
                 fadeDuration={500}
                 style={{
@@ -362,8 +369,8 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
                 <FastImage
                     source={{
                         uri: highQualityImage,
-                        priority: 'high',
-                        cache: 'web',
+                        // priority: 'high',
+                        // cache: 'web',
                     }}
                     style={{
                         width: 260,
