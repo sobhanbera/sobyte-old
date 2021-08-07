@@ -415,6 +415,8 @@ const Player: FC<PlayerProps> = props => {
         play: boolean = true,
         showLoading: boolean = false,
     ) => {
+        const startTime = new Date().getTime()
+        console.log('Started in PlayerControls.tsx')
         /**
          * first this function will check that the track which is passed is the current playing track
          * and also if the track is a valid track
@@ -444,6 +446,11 @@ const Player: FC<PlayerProps> = props => {
                 await TrackPlayer.add([trackGot])
                 await TrackPlayer.skip(trackGot.id)
                 if (play) await TrackPlayer.play()
+                const endTime = new Date().getTime()
+                console.log(
+                    'TIME TOOK IN PlayerControls.tsx',
+                    endTime - startTime,
+                )
                 return
 
                 /**
