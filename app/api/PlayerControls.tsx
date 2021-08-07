@@ -435,7 +435,10 @@ const Player: FC<PlayerProps> = props => {
         if (showLoading && play) setShowLoading(true)
         fetchMusic(track.id)
             .then(async (__res: any) => {
+                let start = new Date().getTime()
                 resetPlayer()
+                console.log('Time to reset', new Date().getTime() - start)
+
                 if (showLoading && play) setShowLoading(false)
 
                 const trackGot = {
@@ -443,12 +446,19 @@ const Player: FC<PlayerProps> = props => {
                     url: __res,
                     description: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
+
+                start = new Date().getTime()
                 await TrackPlayer.add([trackGot])
+                console.log('Time to add', new Date().getTime() - start)
+
+                start = new Date().getTime()
                 await TrackPlayer.skip(trackGot.id)
+                console.log('Time to skip', new Date().getTime() - start)
+
                 if (play) await TrackPlayer.play()
                 const endTime = new Date().getTime()
                 console.log(
-                    'TIME TOOK IN PlayerControls.tsx',
+                    'Total time in PlayerControls.tsx',
                     endTime - startTime,
                 )
                 return
