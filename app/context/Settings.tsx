@@ -29,7 +29,7 @@ interface SettingsProviderContextProps {
 export const SettingsProviderContext =
     React.createContext<SettingsProviderContextProps>({
         theme: 'd',
-        audioQuality: 'a',
+        audioQuality: 'extreme',
         language: 'en',
         imageQuality: '200',
         setSetting: (_key: string, _value: string) => {},
@@ -42,7 +42,8 @@ interface Props {
 const SettingsProvider = (props: Props) => {
     const {i18n} = useTranslation()
     const [theme, setTheme] = useState<ThemeType>('d')
-    const [audioQuality, setAudioQuality] = useState<AudioQualityType>('g')
+    const [audioQuality, setAudioQuality] =
+        useState<AudioQualityType>('extreme')
     const [language, setLanguage] = useState<LanguageType>('en')
     const [imageQuality, setImageQuality] = useState<ImageQualityType>('200')
 
@@ -70,7 +71,7 @@ const SettingsProvider = (props: Props) => {
             (_err, response: any) => {
                 setTheme(response[0][1] || 'd')
                 setLanguage(response[1][1] || 'en')
-                setAudioQuality(response[2][1] || 'a')
+                setAudioQuality(response[2][1] || 'extreme')
                 setImageQuality(response[3][1] || DEFAULT_IMAGE_QUALITY)
                 console.log(response)
             },
