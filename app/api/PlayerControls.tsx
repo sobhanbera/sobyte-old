@@ -332,6 +332,7 @@ const Player: FC<PlayerProps> = props => {
         play: boolean = true,
         showLoading: boolean = false,
     ) => {
+        const start = new Date().getTime()
         /**
          * first this function will check that the track which is passed is the current playing track
          * and also if the track is a valid track
@@ -350,7 +351,6 @@ const Player: FC<PlayerProps> = props => {
         if (showLoading && play) setShowLoading(true)
         fetchMusic(track.id)
             .then((__res: any) => {
-                const start = new Date().getTime()
                 resetPlayer()
 
                 if (showLoading && play) setShowLoading(false)
