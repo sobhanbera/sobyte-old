@@ -204,3 +204,7 @@ interface MusicFormats {
         }
     }
 }
+
+/**
+ * completed task and fixes #25
+ */
