@@ -16,6 +16,7 @@ const {StatusBarManager} = NativeModules
 export const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT
 
 import * as Limits from './limits'
+import queries from './queries'
 export {Limits}
 
 /** App details */
@@ -212,3 +213,6 @@ export const ViewabilityConfig = {
      */
     // waitForInteraction: false, // boolean
 }
+
+export const RANDOM_SEARCH_QUERY =
+    queries[Math.floor(Math.random() * queries.length)]
