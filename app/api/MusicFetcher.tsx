@@ -34,7 +34,6 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                     setQuality('extreme')
                 } else {
                     setQuality(res)
-                    console.log(res)
                 }
             })
             .catch(_err => {})
@@ -62,7 +61,11 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                 console.log('PROVIDED FROM I')
                 return resolve(previouslyLoadedSongs[id])
             }
-            getTrackURL(id)
+            getTrackURL(id, {
+                hasAudio: true,
+                hasVideo: false,
+                audioQuality: _quality,
+            })
                 .then(res => {
                     // saving the data to use later on if the same song is played with the same musicID
                     previouslyLoadedSongs[id] = res
