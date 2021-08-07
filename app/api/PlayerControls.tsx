@@ -78,20 +78,6 @@ const PlayerContext = createContext({
      * else it will play the current track and returns from the function....
      */
     play: (_track: Track, _play?: boolean, _showLoading?: boolean) => {},
-    /**
-     * function to pause the track player
-     */
-    pause: () => {},
-    /**
-     * function to continue playing the track player
-     */
-    playonly: () => {},
-
-    /**
-     * function to toggle the player state
-     * if paused then start playing and vice versa
-     */
-    toggleState: () => {},
 
     /**
      * @param musicId is the id of the any track
@@ -115,58 +101,6 @@ const PlayerContext = createContext({
      * since this function doesn't has any checks for the url of the music or the image or any other property
      */
     addSongAndPlay: (_track: Track) => {},
-
-    /**
-     * skips to previous song
-     * not is use in this application
-     * @deprecated
-     */
-    previous: () => {},
-    /**
-     * skips to next song
-     * not is use in this application
-     * @deprecated
-     */
-    next: () => {},
-
-    /**
-     * @param level of the track player position
-     * skip to some interger interval
-     */
-    seekTo: (_level: number) => {},
-    /**
-     * @param interval the interval to skip
-     * skip to some number of interval in any direction
-     * negative will make backward skip to the interval and +ve will forward skip to the interval
-     */
-    seekInterval: (_interval: number) => {},
-
-    /**
-     * rate of the track player
-     */
-    rate: 1,
-    /**
-     * volume of the track player and
-     * rate of the track player
-     */
-    volume: 1,
-    /**
-     * @param rate the level of volume
-     * this function returns the rate text
-     * for Ex:
-     * 1X, 2X, 5X, 0.5X, 0.25X, 0.75X etc...
-     */
-    getRateText: () => {},
-    /**
-     * @param level the level of rate
-     * sets rate level of the track player
-     */
-    setRate: (_level: number) => {},
-    /**
-     * @param level the level of volume
-     * sets volume level of the track player
-     */
-    setVolume: (_level: number) => {},
 })
 interface PlayerProps {
     children: any
@@ -209,13 +143,6 @@ const Player: FC<PlayerProps> = props => {
         url: '',
         playlistId: '',
     })
-
-    /**
-     * volume of the track player and
-     * rate of the track player
-     */
-    const [volume, setVolume] = useState(1)
-    const [rate, setRate] = useState(1)
 
     useEffect(() => {
         const listener = TrackPlayer.addEventListener(
@@ -282,15 +209,6 @@ const Player: FC<PlayerProps> = props => {
                 }))
             },
         )
-        ;(async () => {
-            await TrackPlayer.getVolume().then(res => {
-                setVolume(res)
-            })
-
-            await TrackPlayer.getRate().then(res => {
-                setRate(res)
-            })
-        })()
 
         return () => {
             listener.remove()
@@ -350,14 +268,14 @@ const Player: FC<PlayerProps> = props => {
      * this function resets the player and add the track which is passed and plays it directly but the track must be valid
      * since this function doesn't has any checks for the url of the music or the image or any other property
      */
-    const addSongAndPlay = async (track: Track) => {
+    const addSongAndPlay = (track: Track) => {
         if (!track) {
             if (currentTrack)
-                if (playerState === STATE_PAUSED) await TrackPlayer.play()
+                if (playerState === STATE_PAUSED) TrackPlayer.play()
             return
         }
         if (currentTrack && track.id === currentTrack.id) {
-            if (playerState === STATE_PAUSED) await TrackPlayer.play()
+            if (playerState === STATE_PAUSED) TrackPlayer.play()
             return
         }
 
@@ -366,9 +284,8 @@ const Player: FC<PlayerProps> = props => {
             ...track,
             albdescriptionum: track.playlistId, // since we are setting the current track in playback-track-changed event listener above in the useEffect function
         }
-        await TrackPlayer.add([trackGot])
-        await TrackPlayer.skip(trackGot.id)
-        await TrackPlayer.play()
+        TrackPlayer.add([trackGot])
+        TrackPlayer.play()
     }
 
     /**
@@ -410,7 +327,7 @@ const Player: FC<PlayerProps> = props => {
      * and also if the track is a valid track
      * else it will play the current track and returns from the function....
      */
-    const play = async (
+    const play = (
         track: Track,
         play: boolean = true,
         showLoading: boolean = false,
@@ -424,20 +341,18 @@ const Player: FC<PlayerProps> = props => {
          */
         if (!track) {
             if (currentTrack)
-                if (playerState === STATE_PAUSED) await TrackPlayer.play()
+                if (playerState === STATE_PAUSED) TrackPlayer.play()
             return
         }
         if (currentTrack && track.id === currentTrack.id) {
-            if (playerState === STATE_PAUSED) await TrackPlayer.play()
+            if (playerState === STATE_PAUSED) TrackPlayer.play()
             return
         }
 
         if (showLoading && play) setShowLoading(true)
         fetchMusic(track.id)
-            .then(async (__res: any) => {
-                let start = new Date().getTime()
+            .then((__res: any) => {
                 resetPlayer()
-                console.log('Time to reset', new Date().getTime() - start)
 
                 if (showLoading && play) setShowLoading(false)
 
@@ -447,15 +362,9 @@ const Player: FC<PlayerProps> = props => {
                     description: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
 
-                start = new Date().getTime()
-                await TrackPlayer.add([trackGot])
-                console.log('Time to add', new Date().getTime() - start)
+                TrackPlayer.add([trackGot])
 
-                start = new Date().getTime()
-                await TrackPlayer.skip(trackGot.id)
-                console.log('Time to skip', new Date().getTime() - start)
-
-                if (play) await TrackPlayer.play()
+                if (play) TrackPlayer.play()
                 const endTime = new Date().getTime()
                 console.log(
                     'Total time in PlayerControls.tsx',
@@ -612,101 +521,6 @@ const Player: FC<PlayerProps> = props => {
     }
 
     /**
-     * function to pause the track player
-     */
-    const pause = async () => {
-        await TrackPlayer.pause()
-    }
-
-    /**
-     * function to continue playing the track player
-     */
-    const playonly = async () => {
-        await TrackPlayer.play()
-    }
-
-    /**
-     * function to toggle the player state
-     * if paused then start playing and vice versa
-     */
-    const toggleState = async () => {
-        if (playerState === STATE_PLAYING) await TrackPlayer.pause()
-        else if (playerState === STATE_PAUSED) await TrackPlayer.play()
-    }
-
-    /**
-     * @param interval the interval to skip
-     * skip to some number of interval in any direction
-     * negative will make backward skip to the interval and +ve will forward skip to the interval
-     */
-    const seekInterval = async (interval: number = 10) => {
-        const currPos = await TrackPlayer.getPosition()
-        await TrackPlayer.seekTo(currPos + interval)
-    }
-
-    /**
-     * @param level of the track player position
-     * skip to some interger interval
-     */
-    const seekTo = async (level: number) => {
-        if (!Number.isNaN(level)) {
-            await TrackPlayer.seekTo(level)
-        }
-    }
-
-    /**
-     * @param level the level of volume
-     * sets volume level of the track player
-     */
-    const setVolumeLevel = (level: number) => {
-        TrackPlayer.setVolume(level).then(async () => {
-            await TrackPlayer.getVolume().then(res => {
-                setVolume(res)
-            })
-        })
-    }
-
-    /**
-     * @param rate the level of volume
-     * this function returns the rate text
-     * for Ex:
-     * 1X, 2X, 5X, 0.5X, 0.25X, 0.75X etc...
-     */
-    const getRateText = () => {}
-
-    /**
-     * @param level the level of rate
-     * sets rate level of the track player
-     */
-    const setRateLevel = (level: number) => {
-        TrackPlayer.setRate(level).then(async () => {
-            setRate(level)
-        })
-    }
-
-    /**
-     * skips to previous song
-     * not is use in this application
-     * @deprecated
-     */
-    const previous = async () => {
-        TrackPlayer.skipToPrevious()
-            .then(_res => {})
-            .catch(_err => {})
-    }
-
-    /**
-     * skips to next song
-     * not is use in this application
-     * @deprecated
-     */
-    const next = async () => {
-        TrackPlayer.skipToNext()
-            .then(_res => {})
-            .catch(_err => {})
-    }
-
-    /**
      * all the values of the Context API for all the
      * children components...
      */
@@ -720,27 +534,11 @@ const Player: FC<PlayerProps> = props => {
         nextSongsList: nextSongsList,
 
         play: play,
-        playonly: playonly,
-        pause: pause,
-        toggleState: toggleState,
 
         checkSongAlreadyInNextSongsList: checkSongAlreadyInNextSongsList,
         playSongAtIndex: playSongAtIndex,
         getTheIndexOfCurrentSong: getTheIndexOfCurrentSong,
         addSongAndPlay: addSongAndPlay,
-
-        next: next,
-        previous: previous,
-
-        seekTo: seekTo,
-        seekInterval: seekInterval,
-
-        rate: rate,
-        getRateText: getRateText,
-        setRate: setRateLevel,
-
-        volume: volume,
-        setVolume: setVolumeLevel,
     }
 
     return (
