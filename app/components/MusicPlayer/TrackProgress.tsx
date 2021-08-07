@@ -2,7 +2,8 @@ import React from 'react'
 import {View} from 'react-native'
 import Slider from '@react-native-community/slider'
 
-import {usePlayer, usePlayerProgress} from '../../context'
+import {usePlayerProgress} from '../../context'
+import {seekTrackTo} from '../../api/PlayerControlsCommons'
 
 interface Props {
     color?: string
@@ -14,7 +15,6 @@ const TrackProgress = (props: Props) => {
     } = usePlayerProgress()
     const actualPosition = Math.floor(position)
     const actualDuration = Math.floor(props.duration / 1000)
-    const {seekTo} = usePlayer()
 
     return (
         <View
@@ -37,7 +37,7 @@ const TrackProgress = (props: Props) => {
                     minimumTrackTintColor={props.color || '#FFFFFF'}
                     maximumTrackTintColor={(props.color || '#FFFFFF') + '7F'} // half brightness of the given color prop
                     onSlidingComplete={(value: number) => {
-                        seekTo(Math.floor(value)) // the e is in seconds
+                        seekTrackTo(Math.floor(value)) // the e is in seconds
                     }}
                     thumbImage={require('../../assets/images/icons/thumb.png')}
                     minimumTrackImage={require('../../assets/images/icons/track.png')}
