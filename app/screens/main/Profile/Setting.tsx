@@ -125,25 +125,25 @@ const Setting: React.FC<SettingProps> = props => {
                     {
                         text: t('setting:extreme'),
                         onPress: () => {
-                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'e')
+                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'extreme')
                         },
                     },
                     {
                         text: t('setting:good'),
                         onPress: () => {
-                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'g')
+                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'good')
                         },
                     },
                     {
                         text: t('setting:poor'),
                         onPress: () => {
-                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'p')
+                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'poor')
                         },
                     },
                     {
                         text: t('setting:auto'),
                         onPress: () => {
-                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'a')
+                            setSetting(AUDIO_QUALITY_STORAGE_KEY, 'auto')
                         },
                     },
                 ]}
