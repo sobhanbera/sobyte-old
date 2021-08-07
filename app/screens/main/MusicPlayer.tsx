@@ -23,6 +23,7 @@ import {
     DefaultStatusBarComponent,
     DEFAULT_HIGH_IMAGE_QUALITY,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
+    RANDOM_SEARCH_QUERY,
 } from '../../constants'
 import {
     formatArtists,
@@ -87,7 +88,7 @@ const Player: FC<PlayerProps> = _props => {
     }, [])
 
     const initializeMusicPlayer = () => {
-        search('most listened bollywood songs', 'SONG')
+        search(RANDOM_SEARCH_QUERY, 'SONG')
             .then((res: FetchedSongObject) => {
                 setSongs(res)
 
