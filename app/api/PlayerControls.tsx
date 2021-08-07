@@ -361,15 +361,8 @@ const Player: FC<PlayerProps> = props => {
                     url: __res,
                     description: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
-
                 TrackPlayer.add([trackGot])
-
                 if (play) TrackPlayer.play()
-                const endTime = new Date().getTime()
-                console.log(
-                    'Total time in PlayerControls.tsx',
-                    endTime - startTime,
-                )
                 return
 
                 /**
