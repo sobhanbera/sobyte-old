@@ -3,6 +3,8 @@ export default [
     // artists...
     //
     'Kishore Kumar',
+    'Lata Mangeshkar',
+    'Asha Bhosle',
     'Jubin Nautiyal',
     'Dhvani Bhanushali',
     'Guru Randhawa',
@@ -28,6 +30,8 @@ export default [
     'Raj Barman',
     'Rochak Kohli',
     'Mohit Chauhan',
+    'Shankar Mahadevan',
+    'Sachin Jigar',
     'A.R. Rahman',
     'Kumar Sanu',
     'Yo Yo Honey Singh',
@@ -39,6 +43,7 @@ export default [
     'Mika Singh',
     'Monali Thakur',
     'Tulsi Kumar',
+    'Neha Bhasin',
     'Palak Muchhal',
     'Harshdeep Kaur',
     'Aditya Narayan',
@@ -62,6 +67,21 @@ export default [
     'Post Malone',
     'Nick Jonas',
     'Imagine Dragons',
+    'Shankar Ehsaan Loy',
+    'Cardi B',
+    'Sia',
+    'Lauv',
+    'Fifth Harmony',
+    'Chainsmoker',
+    'Akasa',
+    'Jasleen Royal',
+    'Tanishk Bagachi',
+    'KK',
+    'Salim Merchant',
+    'Jonita Gandhi',
+    'Vishal Dadlani',
+    'Amit Trivedi',
+    'Prateek Kuhad',
     //
     // search queries...
     //
