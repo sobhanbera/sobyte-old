@@ -3,7 +3,7 @@ import {useEffect} from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
 
 import {AUDIO_QUALITY_STORAGE_KEY} from '../constants'
-import {getTrackURL} from '../utils/Music'
+import {getTrackURL} from '../api/Music'
 import {AudioQualityType} from '../interfaces'
 
 /**

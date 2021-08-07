@@ -29,7 +29,7 @@ import {
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
-import {getTrackURL} from '../../utils/Music'
+import {getTrackURL} from '../../api/Music'
 
 const {width, height} = Dimensions.get('window')
 
