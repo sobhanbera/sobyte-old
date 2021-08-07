@@ -73,7 +73,7 @@ const SettingsProvider = (props: Props) => {
                 setLanguage(response[1][1] || 'en')
                 setAudioQuality(response[2][1] || 'extreme')
                 setImageQuality(response[3][1] || DEFAULT_IMAGE_QUALITY)
-                console.log(response)
+                // console.log(response)
             },
         )
     }
