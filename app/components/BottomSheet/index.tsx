@@ -15,6 +15,7 @@ import BottomSheetMain, {BottomSheetScrollView} from '@gorhom/bottom-sheet'
 import {useTheme} from '../../context'
 import {DEFAULT_ICON_SIZE, FontUbuntu} from '../../constants'
 import {Handle} from './Handle'
+import {Backdrop} from './Backdrop'
 
 interface Props {
     cancelText?: string
@@ -35,16 +36,18 @@ interface Props {
     extraFunction?: Function
 }
 const BottomSheet = (props: Props) => {
-    const {surfacelight, text, placeholder, primary, onWarning} =
+    const {surfacelight, text, placeholder, primary, border, onWarning} =
         useTheme().themeColors
 
     const executeExtraFunctionHelper = () =>
         props.extraFunction ? props.extraFunction() : {}
 
+    if (!props.isVisible) return null
+
     return (
         <BottomSheetMain
             index={props.isVisible ? 0 : -1}
-            snapPoints={[300, 640]}
+            snapPoints={[300, '100%']}
             onChange={position => {
                 if (position <= -1) props.setVisible(false)
             }}
@@ -55,7 +58,9 @@ const BottomSheet = (props: Props) => {
             enableContentPanningGesture
             style={{
                 backgroundColor: surfacelight[0],
+                elevation: 5,
             }}
+            backdropComponent={Backdrop}
             handleHeight={40}
             keyboardBehavior="extend"
             keyboardBlurBehavior="restore"
@@ -131,7 +136,12 @@ const BottomSheet = (props: Props) => {
                                     executeExtraFunctionHelper()
                                     props.setVisible(false)
                                 }}
-                                style={styles.button}>
+                                style={[
+                                    styles.button,
+                                    {
+                                        borderBottomColor: border[0],
+                                    },
+                                ]}>
                                 <Text
                                     style={[
                                         styles.textItem,
@@ -165,7 +175,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderBottomWidth: 0.4,
-        borderBottomColor: '#303030',
     },
     textItem: {
         color: '#FFFFFFFF',
