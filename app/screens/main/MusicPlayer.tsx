@@ -36,7 +36,6 @@ import {
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
 import {pauseTrack} from '../../api/PlayerControlsCommons'
-import {usePrompt} from '../../context'
 
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
 // const LikeAnimation = require('../../assets/animations/like.json')
@@ -68,7 +67,6 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    const {prompt} = usePrompt()
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
