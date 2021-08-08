@@ -82,9 +82,24 @@ export default [
     'Vishal Dadlani',
     'Amit Trivedi',
     'Prateek Kuhad',
+    'Black Pink',
+    'BTS',
+    'Michael Jackson',
+    'Tupac Shakur',
+    'Demi Lovato',
+    'Drake',
+    'Travis Scott',
+    'Lil Wayne',
+    'Kendrick Lamar',
+
+    // '',
+    // '',
+
     //
     // search queries...
     //
+    'new tracks',
+    'new hits',
     'new movies',
     'new remix',
     'hindi remakes',
