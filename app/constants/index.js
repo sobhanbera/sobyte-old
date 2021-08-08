@@ -51,7 +51,8 @@ export const SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY =
  * we can then get this value when there is no internet connection available OR
  * when any error occurred while searching results...
  */
-
+export const MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY =
+    '@APP:MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY' // the storage key where the user data like email, username, etc will be stored in android itself...
 export const API_CONFIG_DATA_STORAGE_KEY = '@APP:API_CONFIG_DATA' // Storage key for header fetched by the api everytime...
 
 /** Fonts Short Name */
