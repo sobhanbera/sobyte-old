@@ -8,16 +8,14 @@ import {
     Text,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
-import FastImage from 'react-native-fast-image'
 
-import {useMusicApi, usePlayer, usePrompt, useTheme} from '../../context'
+import {useMusicApi, usePlayer, useTheme} from '../../context'
 import {
     GradientBackground,
     MusicPlayerSongView,
     BackgroundBluredImage,
 } from '../../components'
 import {
-    APP_LOGO_LINK,
     DefaultStatusBarComponent,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
     RANDOM_SEARCH_QUERY,
@@ -60,7 +58,6 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    const {prompt} = usePrompt()
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
