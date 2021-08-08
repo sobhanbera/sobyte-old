@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Text} from 'react-native'
 import Modal from 'react-native-modal'
 
-import {FontUbuntu} from '../../constants'
+import {FontUbuntu, PROMPT_DURATION} from '../../constants'
 import {useTheme} from '../../context'
 import Scaler from '../Scaler'
 
@@ -27,7 +27,7 @@ const Prompt = (props: Props) => {
         setTitle(title)
         timeOutObject = setTimeout(() => {
             setTitle('')
-        }, 3000)
+        }, PROMPT_DURATION)
     }
     const clearPrompt = () => {
         clearTimeout(timeOutObject)
@@ -42,16 +42,16 @@ const Prompt = (props: Props) => {
         <PromptContext.Provider value={promptValues}>
             {props.children}
             <Modal
-                hideModalContentWhileAnimating
-                animationInTiming={1200}
-                animationOutTiming={1200}
-                animationIn="zoomIn"
-                animationOut="zoomOut"
-                onBackdropPress={() => clearPrompt()}
-                onBackButtonPress={() => clearPrompt()}
+                backdropOpacity={0}
                 useNativeDriverForBackdrop
                 isVisible={title.length > 0}
-                backdropOpacity={0}
+                hideModalContentWhileAnimating
+                animationInTiming={1000}
+                animationOutTiming={1000}
+                animationIn="fadeInDown"
+                animationOut="fadeOutDown"
+                onBackdropPress={() => clearPrompt()}
+                onBackButtonPress={() => clearPrompt()}
                 style={{
                     justifyContent: 'flex-end',
                     alignItems: 'center',
