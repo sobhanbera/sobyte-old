@@ -38,49 +38,43 @@ const TrackButtonControls = (props: Props) => {
 
     return (
         <View style={styles.wrapper}>
-            <View style={styles.iconWrapper}>
-                <FontAwesome5
-                    size={20}
-                    color={props.color}
-                    name={'backward'}
-                    onPress={() => seekTrackInterval(-10)}
-                />
-            </View>
+            <FontAwesome5
+                style={styles.iconWrapper}
+                size={20}
+                color={props.color}
+                name={'backward'}
+                onPress={() => seekTrackInterval(-10)}
+            />
 
-            <View style={styles.iconWrapper}>
-                {localPlaying ? (
-                    <Scaler
-                        onPress={() => {
-                            setLocalPlaying(false)
-                            pauseTrack()
-                        }}
-                        touchableOpacity={0.2}>
-                        <Ionicons
-                            size={32}
-                            color={props.color}
-                            name={'pause'}
-                        />
-                    </Scaler>
-                ) : (
-                    <Scaler
-                        onPress={() => {
-                            setLocalPlaying(true)
-                            playTrack()
-                        }}
-                        touchableOpacity={0.2}>
-                        <Ionicons size={32} color={props.color} name={'play'} />
-                    </Scaler>
-                )}
-            </View>
+            {localPlaying ? (
+                <Scaler
+                    containerStyle={styles.iconWrapper}
+                    onPress={() => {
+                        setLocalPlaying(false)
+                        pauseTrack()
+                    }}
+                    touchableOpacity={0.2}>
+                    <Ionicons size={32} color={props.color} name={'pause'} />
+                </Scaler>
+            ) : (
+                <Scaler
+                    containerStyle={styles.iconWrapper}
+                    onPress={() => {
+                        setLocalPlaying(true)
+                        playTrack()
+                    }}
+                    touchableOpacity={0.2}>
+                    <Ionicons size={32} color={props.color} name={'play'} />
+                </Scaler>
+            )}
 
-            <View style={styles.iconWrapper}>
-                <FontAwesome5
-                    size={20}
-                    color={props.color}
-                    name={'forward'}
-                    onPress={() => seekTrackInterval(10)}
-                />
-            </View>
+            <FontAwesome5
+                style={styles.iconWrapper}
+                size={20}
+                color={props.color}
+                name={'forward'}
+                onPress={() => seekTrackInterval(10)}
+            />
         </View>
     )
 }
