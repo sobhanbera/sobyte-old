@@ -8,9 +8,7 @@
  * Purpose - all application constants are here
  */
 
-import React from 'react'
-import {StatusBar, StatusBarPropsAndroid} from 'react-native'
-import {View, NativeModules} from 'react-native'
+import {NativeModules} from 'react-native'
 
 const {StatusBarManager} = NativeModules
 export const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT
@@ -121,22 +119,13 @@ export const IMAGE_PADDING_V_TO_SHOW = 4 // padding vertical of the image which 
 export const LIKE_ANIMATION_DISAPPEAR_DURATION = 1650 // the duration after which the like animation while be hidden
 export const HIGHEST_Z_INDEX_VALUE = 987654 // the largest z index value
 
-export const PaddingBottomView = props => (
-    <View
-        style={{
-            paddingBottom: 120,
-            backgroundColor: props.backgroundColor || 'transparent',
-        }}
-    />
-)
-export const DefaultStatusBarComponent = (props: StatusBarPropsAndroid) => (
-    <StatusBar
-        backgroundColor={'black'}
-        translucent={true}
-        barStyle="light-content"
-        {...props}
-    />
-)
+/**
+ * jsx components................................
+ *
+ *
+ */
+import {DefaultStatusBarComponent, PaddingBottomView} from './components'
+export {DefaultStatusBarComponent, PaddingBottomView}
 
 /** equal partition arrays for linear gradient locations */
 export const LINEAR_GRADIENT_LOCATIONS_2 = [0, 0.5]
@@ -201,18 +190,18 @@ export const ViewabilityConfig = {
      * that a single pixel in the viewport makes the item viewable, and a value of 100 means that
      * an item must be either entirely visible or cover the entire viewport to count as viewable.
      */
-    viewAreaCoveragePercentThreshold: 75, // percent %
+    // viewAreaCoveragePercentThreshold: 90, // percent %
     /**
      * Similar to `viewAreaPercentThreshold`, but considers the percent of the item that is visible,
      * rather than the fraction of the viewable area it covers.
      */
-    // itemVisiblePercentThreshold: 50, // percent %
+    itemVisiblePercentThreshold: 80, // percent %
 
     /**
      * Nothing is considered viewable until the user scrolls or `recordInteraction` is called after
      * render.
      */
-    // waitForInteraction: false, // boolean
+    waitForInteraction: true, // boolean
 }
 
 export const RANDOM_SEARCH_QUERY =
