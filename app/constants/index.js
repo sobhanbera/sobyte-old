@@ -119,6 +119,8 @@ export const IMAGE_PADDING_V_TO_SHOW = 4 // padding vertical of the image which 
 export const LIKE_ANIMATION_DISAPPEAR_DURATION = 1650 // the duration after which the like animation while be hidden
 export const HIGHEST_Z_INDEX_VALUE = 987654 // the largest z index value
 
+export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD = 5 // the initial number of tracks we have to load when the app launched and music player UI is shown
+
 /**
  * jsx components................................
  *
