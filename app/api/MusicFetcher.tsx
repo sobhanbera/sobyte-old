@@ -46,11 +46,22 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
             .catch(_err => {})
     }
 
+    /**
+     * load the audio quality data from local storage
+     */
     useEffect(() => {
         loadQualityData()
     }, [])
 
+    // variable if > 0 we will does not show the prompt like "playing over wifi" and all
     let alreadyShownPrompt = 0
+    /**
+     * actual function which will load the music URL
+     * and return it
+     * @param id the musicId
+     * @param _quality a custom audio quality
+     * @returns the URL of the songs related to the musicID provided
+     */
     async function fetchMusic(
         id: string,
         _quality: AudioQualityType = quality,
@@ -69,42 +80,53 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                 console.log('PROVIDED FROM I')
                 return resolve(previouslyLoadedSongs[id])
             }
+            // the songs is not played already so loading the URL again and then providing it
+
+            /**
+             * this is the final audio quality variable which will
+             * decide what quality of song/track to play depending on the internet connection
+             */
+
             let finalQuality: AudioQualityType = 'good'
             NetInfo.fetch()
                 .then((res: any) => {
+                    /**
+                     * if the internet connection is not 4g we
+                     * the song will be of poor quality...
+                     */
                     if (
                         res.details?.cellularGeneration !== undefined &&
                         !String(res.details?.cellularGeneration)
                             .toLowerCase()
                             .includes('4g')
                     ) {
-                        finalQuality = 'poor'
+                        finalQuality = 'poor' // 3g or 2g internet
                     } else if (
                         res.details?.strength &&
                         res.details?.strength >= 100
                     ) {
-                        finalQuality = 'auto'
+                        finalQuality = 'auto' // if the internet strength is equals to 100
                     } else if (
                         res.details?.strength &&
                         res.details?.strength >= 90
                     ) {
-                        finalQuality = 'auto'
+                        finalQuality = 'auto' // if the internet strength is some what is the line of excellent
                     } else if (
                         res.details?.strength &&
                         res.details?.strength >= 85
                     ) {
-                        finalQuality = 'good'
+                        finalQuality = 'good' // if the internet strength is between 85 and 90
                     } else if (
                         res.details?.strength &&
                         res.details?.strength < 85
                     ) {
-                        finalQuality = 'poor'
+                        finalQuality = 'poor' // if the internet strength is less than 85
                     } else if (res.details?.isConnectionExpensive === true) {
-                        finalQuality = 'good'
+                        finalQuality = 'good' // if the internet is causing some more energy or power consumption
                     } else {
-                        finalQuality = 'poor'
+                        finalQuality = 'good' // else the default quality song will be played
                     }
-                    console.log(res.type)
+                    // audio quality decided
                     getTrackURL(id, {
                         hasAudio: true,
                         hasVideo: false,
@@ -114,6 +136,11 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                             // saving the data to use later on if the same song is played with the same musicID
                             previouslyLoadedSongs[id] = songUrl
 
+                            /**
+                             * if we haven't shown the prompt once then show it and make the control variable false
+                             * so that from next time the prompt is not shown
+                             * if we have shown the propmt once
+                             */
                             if (alreadyShownPrompt <= 0)
                                 if (
                                     [
@@ -125,10 +152,12 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                                         'vpn',
                                     ].includes(res.type)
                                 ) {
+                                    // showing the prompt...
                                     propmt(
                                         `playing over ${res.type}.`,
                                         'danger',
                                     )
+                                    // incrementing the control variable..
                                     alreadyShownPrompt++
                                 }
 
@@ -144,6 +173,8 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                         .catch(_err => {})
                 })
                 .catch(err => {
+                    // if any error occured just provide the data not need to care about the audio quality this time
+                    // and this time the audio quality will be default to "good"
                     getTrackURL(id, {
                         hasAudio: true,
                         hasVideo: false,
