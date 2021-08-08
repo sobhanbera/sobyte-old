@@ -11,9 +11,8 @@ const Profile: React.FC<ProfileProps> = props => {
     return (
         <GradientBackground>
             <DefaultStatusBarComponent backgroundColor={'black'} />
-            <SafeAreaView style={{flex: 1}}>
-                <HeaderProfile navigation={props.navigation} />
-            </SafeAreaView>
+
+            <HeaderProfile navigation={props.navigation} />
         </GradientBackground>
     )
 }

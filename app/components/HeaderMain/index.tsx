@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 
 import Entypo from 'react-native-vector-icons/Entypo'
-import {FontRobotoBold} from '../../constants'
+import {DEVICE_STATUSBAR_HEIGHT_CONSTANT, FontRobotoBold} from '../../constants'
 import Scaler from '../Scaler'
 import {useTheme} from '../../context'
 
@@ -26,6 +26,7 @@ const HeaderMain = (props: Props) => {
                     backgroundColor: props.backgroundColor || surfacelight[0],
                     borderBottomColor: border[0],
                     borderBottomWidth: 1,
+                    marginTop: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // the height of the statusbar of the device
                 },
             ]}>
             <Scaler onPress={() => props.navigation.goBack()}>

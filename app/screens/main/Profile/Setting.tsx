@@ -13,6 +13,7 @@ import globalStyles from '../../../styles/global.styles'
 import {
     AUDIO_QUALITY_STORAGE_KEY,
     BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+    DefaultStatusBarComponent,
     SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
 } from '../../../constants'
 
@@ -45,9 +46,8 @@ const Setting: React.FC<SettingProps> = props => {
 
     return (
         <GradientBackground uniformColor>
-            <StatusBar
+            <DefaultStatusBarComponent
                 backgroundColor={themeColors.surfacelight[0]}
-                translucent={false}
             />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <HeaderMain
