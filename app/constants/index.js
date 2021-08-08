@@ -84,7 +84,7 @@ export const APP_LOGO_LINK =
 /** number constants and more */
 export const MUSIC_PLAYER_BLUR = 19 // blurRadius value
 export const DOUBLE_TAP_DELAY = 500 // the delay in milliseconds between two press for double press component
-export const PROMPT_DURATION = 6500 // duration for showing prompt in milliseconds
+export const PROMPT_DURATION = 3500 // duration for showing prompt in milliseconds
 export const MARQUEE_TEXT_PROGRESS_DURATION = 2000 // duration for showing prompt in milliseconds
 export const MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION = 6500 // duration for scrolling the song name which is a large string or so...
 
