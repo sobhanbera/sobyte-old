@@ -736,7 +736,7 @@ const MusicApi = (props: MusicApiProps) => {
                         /**
                          * if the provided subarray is correct then we will provide the data in that range
                          */
-                        if (provideASubarray[0] > provideASubarray[1]) {
+                        if (provideASubarray[0] <= provideASubarray[1]) {
                             /**
                              * checking that sufficient data is available or not and then providing the data
                              */
