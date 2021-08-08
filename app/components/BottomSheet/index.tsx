@@ -155,38 +155,11 @@ const BottomSheet = (props: Props) => {
 }
 
 const styles = StyleSheet.create({
-    takeTheInvisibleHeight: {
-        height: '45%',
-    },
-    wrapper: {
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        width: '100%',
-        height: 50,
-    },
     flex: {
         flex: 1,
     },
     flexEnd: {
         justifyContent: 'space-between',
-    },
-    lineArea: {
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderBottomWidth: 0.4,
-        borderBottomColor: '#353535',
-    },
-    line: {
-        width: 45,
-        height: 4,
-        backgroundColor: '#BFBFBF',
-        overflow: 'hidden',
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        borderBottomLeftRadius: 50,
-        borderBottomRightRadius: 50,
     },
     button: {
         flexDirection: 'row',
