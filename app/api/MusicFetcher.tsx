@@ -1,10 +1,12 @@
 import React, {useContext, useState} from 'react'
 import {useEffect} from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
+import NetInfo from '@react-native-community/netinfo' // if the internet connection is slow than we will load low quality track else load high quality progressively...
 
 import {AUDIO_QUALITY_STORAGE_KEY} from '../constants'
 import {getTrackURL} from '../api/Music'
 import {AudioQualityType} from '../interfaces'
+import {usePrompt} from '../context'
 
 /**
  * this is the previously listened songs list
@@ -19,6 +21,11 @@ const MusicFetcherContext = React.createContext({
 })
 interface MusicFetcherProps {}
 const MusicFetcher: React.FC<MusicFetcherProps> = props => {
+    /**
+     * prompt when the song is playing
+     * only for first time...
+     */
+    const propmt = usePrompt().prompt
     const [quality, setQuality] = useState<AudioQualityType>('extreme')
 
     const loadQualityData = async () => {
@@ -61,25 +68,96 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                 console.log('PROVIDED FROM I')
                 return resolve(previouslyLoadedSongs[id])
             }
-            getTrackURL(id, {
-                hasAudio: true,
-                hasVideo: false,
-                audioQuality: _quality,
-            })
-                .then(res => {
-                    // saving the data to use later on if the same song is played with the same musicID
-                    previouslyLoadedSongs[id] = res
+            let finalQuality: AudioQualityType = 'good'
+            NetInfo.fetch()
+                .then((res: any) => {
+                    if (
+                        res.details?.cellularGeneration !== undefined &&
+                        !String(res.details?.cellularGeneration)
+                            .toLowerCase()
+                            .includes('4g')
+                    ) {
+                        finalQuality = 'poor'
+                    } else if (
+                        res.details?.strength &&
+                        res.details?.strength >= 100
+                    ) {
+                        finalQuality = 'auto'
+                    } else if (
+                        res.details?.strength &&
+                        res.details?.strength >= 90
+                    ) {
+                        finalQuality = 'auto'
+                    } else if (
+                        res.details?.strength &&
+                        res.details?.strength >= 85
+                    ) {
+                        finalQuality = 'good'
+                    } else if (
+                        res.details?.strength &&
+                        res.details?.strength < 85
+                    ) {
+                        finalQuality = 'poor'
+                    } else if (res.details?.isConnectionExpensive === true) {
+                        finalQuality = 'good'
+                    } else {
+                        finalQuality = 'poor'
+                    }
+                    console.log(res.type)
+                    getTrackURL(id, {
+                        hasAudio: true,
+                        hasVideo: false,
+                        audioQuality: finalQuality,
+                    })
+                        .then(songUrl => {
+                            // saving the data to use later on if the same song is played with the same musicID
+                            previouslyLoadedSongs[id] = songUrl
 
-                    /** since the result will provide a object like this:-
-                     * result = [{
-                     *     "header": [],
-                     *     "url": string
-                     * }]
-                     * so we are returning the url value directly
-                     */
-                    resolve(res)
+                            if (
+                                [
+                                    'cellular',
+                                    'wifi',
+                                    'bluetooth',
+                                    'ethernet',
+                                    'wimax',
+                                    'vpn',
+                                ].includes(res.type)
+                            ) {
+                                propmt(`playing using ${res.type}`, 'danger')
+                            }
+
+                            /** since the result will provide a object like this:-
+                             * result = [{
+                             *     "header": [],
+                             *     "url": string
+                             * }]
+                             * so we are returning the url value directly
+                             */
+                            resolve(songUrl)
+                        })
+                        .catch(_err => {})
                 })
-                .catch(_err => {})
+                .catch(err => {
+                    getTrackURL(id, {
+                        hasAudio: true,
+                        hasVideo: false,
+                        audioQuality: finalQuality,
+                    })
+                        .then(songUrl => {
+                            // saving the data to use later on if the same song is played with the same musicID
+                            previouslyLoadedSongs[id] = songUrl
+
+                            /** since the result will provide a object like this:-
+                             * result = [{
+                             *     "header": [],
+                             *     "url": string
+                             * }]
+                             * so we are returning the url value directly
+                             */
+                            resolve(songUrl)
+                        })
+                        .catch(_err => {})
+                })
         })
     }
 
