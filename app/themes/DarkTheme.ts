@@ -56,7 +56,7 @@ export const DarkTheme: ThemeColors = {
 
     surface: ['#050505'], // for surface components
     surfacelight: ['#21242b'], // for cards
-    border: ['#272727'],
+    border: ['#303030'],
     placeholder: ['#CFCFCF'],
     text: ['#EFEFEF'],
 
