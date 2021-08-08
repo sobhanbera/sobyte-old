@@ -50,6 +50,7 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
         loadQualityData()
     }, [])
 
+    let alreadyShownPrompt = 0
     async function fetchMusic(
         id: string,
         _quality: AudioQualityType = quality,
@@ -113,18 +114,23 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                             // saving the data to use later on if the same song is played with the same musicID
                             previouslyLoadedSongs[id] = songUrl
 
-                            if (
-                                [
-                                    'cellular',
-                                    'wifi',
-                                    'bluetooth',
-                                    'ethernet',
-                                    'wimax',
-                                    'vpn',
-                                ].includes(res.type)
-                            ) {
-                                propmt(`playing using ${res.type}`, 'danger')
-                            }
+                            if (alreadyShownPrompt <= 0)
+                                if (
+                                    [
+                                        'cellular',
+                                        'wifi',
+                                        'bluetooth',
+                                        'ethernet',
+                                        'wimax',
+                                        'vpn',
+                                    ].includes(res.type)
+                                ) {
+                                    propmt(
+                                        `playing over ${res.type}.`,
+                                        'danger',
+                                    )
+                                    alreadyShownPrompt++
+                                }
 
                             /** since the result will provide a object like this:-
                              * result = [{
