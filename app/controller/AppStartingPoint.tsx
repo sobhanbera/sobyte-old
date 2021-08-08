@@ -19,21 +19,23 @@ interface ContextAPIsRendererProps {
 }
 function AppStartingPoint(_props: ContextAPIsRendererProps) {
     return (
-        <AppMainBackendApi>
-            <MusicApi>
-                <MusicFetcher>
-                    <ThemeProvider>
-                        <SettingsProvider>
-                            <Player>
-                                <Prompt>
+        // we need prompt in music fetcher context api
+        <Prompt>
+            {/* we need backend api everywhere so it is the next parent context api */}
+            <AppMainBackendApi>
+                <MusicApi>
+                    <MusicFetcher>
+                        <ThemeProvider>
+                            <SettingsProvider>
+                                <Player>
                                     <AppLaunchingNavigation />
-                                </Prompt>
-                            </Player>
-                        </SettingsProvider>
-                    </ThemeProvider>
-                </MusicFetcher>
-            </MusicApi>
-        </AppMainBackendApi>
+                                </Player>
+                            </SettingsProvider>
+                        </ThemeProvider>
+                    </MusicFetcher>
+                </MusicApi>
+            </AppMainBackendApi>
+        </Prompt>
     )
 }
 
