@@ -172,7 +172,7 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                         })
                         .catch(_err => {})
                 })
-                .catch(err => {
+                .catch(_err => {
                     // if any error occured just provide the data not need to care about the audio quality this time
                     // and this time the audio quality will be default to "good"
                     getTrackURL(id, {
