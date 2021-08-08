@@ -14,7 +14,6 @@ import BottomSheetMain, {BottomSheetScrollView} from '@gorhom/bottom-sheet'
 
 import {useTheme} from '../../context'
 import {DEFAULT_ICON_SIZE, FontUbuntu} from '../../constants'
-import globalStyles from '../../styles/global.styles'
 import {Handle} from './Handle'
 
 interface Props {
@@ -35,7 +34,7 @@ interface Props {
     }>
     extraFunction?: Function
 }
-const BottomSheet2 = (props: Props) => {
+const BottomSheet = (props: Props) => {
     const {surfacelight, text, placeholder, primary, onWarning} =
         useTheme().themeColors
 
@@ -217,4 +216,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default BottomSheet2
+export default BottomSheet
