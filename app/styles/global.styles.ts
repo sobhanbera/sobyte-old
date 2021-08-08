@@ -28,6 +28,21 @@ const globalStyles = StyleSheet.create({
         color: 'black',
     },
 
+    loadingArea: {
+        width: '100%',
+        paddingVertical: 10,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        minHeight: 120,
+    },
+    appLogoAnimation: {
+        width: 38,
+    },
+    loadingText: {
+        fontSize: 19,
+        color: 'white',
+    },
+
     topicTitle: {
         fontSize: 20,
         fontFamily: FontRobotoBold,
