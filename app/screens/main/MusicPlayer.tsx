@@ -1,8 +1,6 @@
 import React, {FC, useState, useEffect, useCallback, useRef} from 'react'
 import {
-    Text,
     View,
-    ImageBackground,
     Dimensions,
     Animated,
     ListRenderItemInfo,
@@ -10,39 +8,31 @@ import {
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import FastImage from 'react-native-fast-image'
-import MarqueeText from 'react-native-text-ticker'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
 import {
-    DoubleTap,
     GradientBackground,
-    TrackProgress,
-    TrackButtonControls,
+    MusicPlayerSongView,
+    BackgroundBluredImage,
 } from '../../components'
 import {
     APP_LOGO_LINK,
     DefaultStatusBarComponent,
-    DEFAULT_HIGH_IMAGE_QUALITY,
-    FontUbuntuBold,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
-    MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION,
     RANDOM_SEARCH_QUERY,
 } from '../../constants'
 import {
     formatArtists,
     getHightQualityImageFromLinkWithHeight,
-    capitalizeWords,
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
-import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
 import {pauseTrack} from '../../api/PlayerControlsCommons'
 
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
 // const LikeAnimation = require('../../assets/animations/like.json')
 // const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
 
-const IMAGE_BLUR_RADIUS = 25
-const {width, height} = Dimensions.get('window')
+const {height} = Dimensions.get('window')
 
 /**
  * the interface or data type which will be giving the types for the song data whenever the user scrolls
@@ -138,7 +128,7 @@ const Player: FC<PlayerProps> = _props => {
         (itemDetails: ListRenderItemInfo<SongObject>) => {
             const {item} = itemDetails
             return (
-                <MusicPLayerSongView
+                <MusicPlayerSongView
                     song={item}
                     playLikeAnimation={() =>
                         playLikeAnimationForMusicId(item.musicId)
@@ -311,123 +301,6 @@ const Player: FC<PlayerProps> = _props => {
                 </View>
             ) : null}
         </GradientBackground>
-    )
-}
-
-interface SongView {
-    song: SongObject
-    playLikeAnimation: Function
-}
-const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
-    const {themeColors} = useTheme()
-    const averageQualityImage = getHightQualityImageFromLinkWithHeight(
-        song.thumbnails[0].url,
-        song.thumbnails[0].height,
-        '120',
-        50,
-    )
-    const highQualityImage = getHightQualityImageFromLinkWithHeight(
-        song.thumbnails[0].url,
-        song.thumbnails[0].height,
-        DEFAULT_HIGH_IMAGE_QUALITY,
-        100,
-    )
-    const artists = formatArtists(song.artist)
-
-    return (
-        <DoubleTap onDoubleTap={playLikeAnimation}>
-            <ImageBackground
-                // loadingIndicatorSource={{
-                // uri: highQualityImage,
-                // cache: 'force-cache',
-                // scale: 1,
-                // }}
-                source={{
-                    uri: averageQualityImage,
-                    // cache: 'force-cache',
-                    // scale: 1,
-                }}
-                fadeDuration={500}
-                style={{
-                    flex: 1,
-                    width,
-                    height: height,
-                    flexDirection: 'column',
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',
-                    paddingBottom: 20, // the main bottom tab bar navigation height is overlping the children component so providing a padding bottom of 15~25
-                }}
-                blurRadius={IMAGE_BLUR_RADIUS}>
-                <View
-                    style={{
-                        width: '75%',
-                        alignSelf: 'flex-start',
-                        marginHorizontal: 20,
-                    }}>
-                    <MarqueeText
-                        style={{
-                            fontSize: 25,
-                            fontFamily: FontUbuntuBold,
-                            color: 'white',
-                            textAlign: 'left',
-                            width: '100%',
-                            alignSelf: 'flex-start',
-                            paddingVertical: 3,
-                            paddingHorizontal: 5,
-                        }}
-                        loop
-                        scroll
-                        useNativeDriver
-                        duration={MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION}
-                        bounceSpeed={1}
-                        scrollSpeed={1}
-                        animationType="scroll"
-                        marqueeDelay={1000}>
-                        {capitalizeWords(song.name)}
-                    </MarqueeText>
-                    <Text
-                        style={{
-                            fontSize: 16,
-                            color: 'white',
-                            paddingVertical: 1,
-                            paddingHorizontal: 5,
-                        }}>
-                        {capitalizeWords(artists)}
-                    </Text>
-                </View>
-
-                <FastImage
-                    source={{
-                        uri: highQualityImage,
-                        // priority: 'high',
-                        // cache: 'web',
-                    }}
-                    style={{
-                        width: 260,
-                        height: 260,
-                        borderRadius: 5,
-                        marginVertical: 20,
-                    }}
-                />
-
-                <View
-                    style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                        // backgroundColor: themeColors.themecolor[0] + '50',
-                    }}>
-                    <TrackButtonControls
-                        color={themeColors.themecolorrevert[0]}
-                    />
-
-                    <TrackProgress
-                        color={themeColors.themecolorrevert[0]}
-                        duration={song.duration}
-                    />
-                </View>
-            </ImageBackground>
-        </DoubleTap>
     )
 }
 
