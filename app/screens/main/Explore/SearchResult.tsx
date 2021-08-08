@@ -7,7 +7,6 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
     RefreshControl,
-    StatusBar,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import LottieView from 'lottie-react-native'
