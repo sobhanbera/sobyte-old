@@ -46,8 +46,8 @@ const Prompt = (props: Props) => {
                 useNativeDriverForBackdrop
                 isVisible={title.length > 0}
                 hideModalContentWhileAnimating
-                animationInTiming={1000}
-                animationOutTiming={1000}
+                animationInTiming={500}
+                animationOutTiming={500}
                 animationIn="fadeIn"
                 animationOut="fadeOut"
                 onBackdropPress={() => clearPrompt()}
