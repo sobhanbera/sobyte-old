@@ -28,8 +28,8 @@ import com.dylanvann.fastimage.FastImageViewPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 
-//import com.facebook.react.bridge.JSIModulePackage;
-//import com.swmansion.reanimated.ReanimatedJSIModulePackage;
+import com.facebook.react.bridge.JSIModulePackage;
+import com.swmansion.reanimated.ReanimatedJSIModulePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -41,10 +41,10 @@ public class MainApplication extends Application implements ReactApplication {
           }
 
           /** this function is added becuase we are using react-native-reanimated library */
-//          @Override
-//          protected JSIModulePackage getJSIModulePackage() {
-//              return new ReanimatedJSIModulePackage(); // <- add
-//          }
+          @Override
+          protected JSIModulePackage getJSIModulePackage() {
+              return new ReanimatedJSIModulePackage(); // <- add
+          }
 
           /** this function contains all the package list required */
           @Override
