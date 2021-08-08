@@ -432,3 +432,5 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
 }
 
 export default Player
+
+// just to commit a previously issue fixed...
