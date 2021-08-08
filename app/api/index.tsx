@@ -647,7 +647,7 @@ const MusicApi = (props: MusicApiProps) => {
         saveToLocalStorage: boolean = false,
         saveToCustomLocation: string = '',
         provideASubarray: number[] = [0, 100], // default list count would be less than 30 so for safe case we are using 100 items
-        pageLimit: number = 1,
+        _pageLimit: number = 1,
     ) => {
         var isOffline = false
         return new Promise((resolve, reject) => {
@@ -680,7 +680,7 @@ const MusicApi = (props: MusicApiProps) => {
                                     return resolve(JSON.parse(res))
                                 }
                             })
-                            .catch(err => {
+                            .catch(_err => {
                                 // console.log('ERROR LOCALLY LOAD', err)
                             })
                     }
