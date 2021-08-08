@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import FastImage from 'react-native-fast-image'
+import MarqueeText from 'react-native-text-ticker'
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
 import {
@@ -22,12 +23,15 @@ import {
     APP_LOGO_LINK,
     DefaultStatusBarComponent,
     DEFAULT_HIGH_IMAGE_QUALITY,
+    FontUbuntuBold,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
+    MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION,
     RANDOM_SEARCH_QUERY,
 } from '../../constants'
 import {
     formatArtists,
     getHightQualityImageFromLinkWithHeight,
+    capitalizeWords,
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
@@ -316,7 +320,6 @@ interface SongView {
 }
 const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
     const {themeColors} = useTheme()
-
     const averageQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
@@ -329,16 +332,7 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
         DEFAULT_HIGH_IMAGE_QUALITY,
         100,
     )
-
     const artists = formatArtists(song.artist)
-
-    // FastImage.preload([
-    //     {
-    //         uri: highQualityImage,
-    //         priority: 'high',
-    //         cache: 'cacheOnly',
-    //     },
-    // ])
 
     return (
         <DoubleTap onDoubleTap={playLikeAnimation}>
@@ -364,8 +358,43 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
                     paddingBottom: 20, // the main bottom tab bar navigation height is overlping the children component so providing a padding bottom of 15~25
                 }}
                 blurRadius={IMAGE_BLUR_RADIUS}>
-                <Text style={{color: 'white'}}>{song.name}</Text>
-                <Text style={{color: 'white'}}>{artists}</Text>
+                <View
+                    style={{
+                        width: '75%',
+                        alignSelf: 'flex-start',
+                        marginHorizontal: 20,
+                    }}>
+                    <MarqueeText
+                        style={{
+                            fontSize: 25,
+                            fontFamily: FontUbuntuBold,
+                            color: 'white',
+                            textAlign: 'left',
+                            width: '100%',
+                            alignSelf: 'flex-start',
+                            paddingVertical: 3,
+                            paddingHorizontal: 5,
+                        }}
+                        loop
+                        scroll
+                        useNativeDriver
+                        duration={MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION}
+                        bounceSpeed={1}
+                        scrollSpeed={1}
+                        animationType="scroll"
+                        marqueeDelay={1000}>
+                        {capitalizeWords(song.name)}
+                    </MarqueeText>
+                    <Text
+                        style={{
+                            fontSize: 16,
+                            color: 'white',
+                            paddingVertical: 1,
+                            paddingHorizontal: 5,
+                        }}>
+                        {capitalizeWords(artists)}
+                    </Text>
+                </View>
 
                 <FastImage
                     source={{
@@ -376,7 +405,7 @@ const MusicPLayerSongView = ({song, playLikeAnimation}: SongView) => {
                     style={{
                         width: 260,
                         height: 260,
-                        borderRadius: 3,
+                        borderRadius: 5,
                         marginVertical: 20,
                     }}
                 />
