@@ -1,7 +1,5 @@
 export default [
-    //
     // artists...
-    //
     'Kishore Kumar',
     'Lata Mangeshkar',
     'Mohammad Rafi',
@@ -109,13 +107,7 @@ export default [
     'Travis Scott',
     'Lil Wayne',
     'Kendrick Lamar',
-
-    // '',
-    // '',
-
-    //
     // search queries...
-    //
     'new tracks',
     'new hits',
     'new movies',
