@@ -1,14 +1,8 @@
 import React, {useState} from 'react'
-import {View} from 'react-native'
+import {Text} from 'react-native'
 import Modal from 'react-native-modal'
-import MarqueeText from 'react-native-marquee'
 
-import {
-    FontHelvetica,
-    PROMPT_DURATION,
-    MARQUEE_TEXT_PROGRESS_DURATION,
-    DEFAULT_SMALL_ICON_SIZE,
-} from '../../constants'
+import {FontUbuntu} from '../../constants'
 import {useTheme} from '../../context'
 import Scaler from '../Scaler'
 
@@ -33,7 +27,7 @@ const Prompt = (props: Props) => {
         setTitle(title)
         timeOutObject = setTimeout(() => {
             setTitle('')
-        }, PROMPT_DURATION)
+        }, 3000)
     }
     const clearPrompt = () => {
         clearTimeout(timeOutObject)
@@ -48,10 +42,11 @@ const Prompt = (props: Props) => {
         <PromptContext.Provider value={promptValues}>
             {props.children}
             <Modal
-                animationInTiming={500}
-                animationOutTiming={250}
-                animationIn="slideInUp"
-                animationOut="slideOutDown"
+                hideModalContentWhileAnimating
+                animationInTiming={1200}
+                animationOutTiming={1200}
+                animationIn="zoomIn"
+                animationOut="zoomOut"
                 onBackdropPress={() => clearPrompt()}
                 onBackButtonPress={() => clearPrompt()}
                 useNativeDriverForBackdrop
@@ -62,7 +57,7 @@ const Prompt = (props: Props) => {
                     alignItems: 'center',
                     left: 0,
                     right: 0,
-                    bottom: 40,
+                    bottom: '50%',
                     position: 'absolute',
                     maxHeight: 80,
                     width: '90%',
@@ -74,51 +69,27 @@ const Prompt = (props: Props) => {
                     scale={1}
                     onPress={() => clearPrompt()}
                     containerStyle={{
-                        backgroundColor: themeColors.surfacelight[0],
+                        backgroundColor: themeColors.surfacelight[0] + 'AF',
                         width: '100%',
                         paddingVertical: 1,
                         paddingHorizontal: 6,
                         borderRadius: 7,
                         overflow: 'hidden',
                     }}>
-                    <View
+                    <Text
                         style={{
+                            textAlign: 'center',
+                            textAlignVertical: 'center',
+                            paddingHorizontal: 9,
+                            paddingVertical: 12,
+                            fontSize: 16,
+                            color: themeColors.white[0],
+                            fontFamily: FontUbuntu,
                             width: '100%',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            paddingVertical: 5,
-                            paddingHorizontal: 6,
+                            alignSelf: 'center',
                         }}>
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'flex-start',
-                                width: '90%',
-                                paddingVertical: 5,
-                                paddingHorizontal: 6,
-                                paddingRight: DEFAULT_SMALL_ICON_SIZE, // this is the width of the icon next to this component
-                                // because this text should be clear to the user not overflowed by the cross icon
-                            }}>
-                            <MarqueeText
-                                style={{
-                                    textAlign: 'left',
-                                    textAlignVertical: 'center',
-                                    // paddingVertical: 5,
-                                    paddingHorizontal: 6,
-                                    fontSize: 16,
-                                    fontFamily: FontHelvetica,
-                                    color: themeColors.white[0],
-                                }}
-                                duration={MARQUEE_TEXT_PROGRESS_DURATION}
-                                marqueeOnStart
-                                loop
-                                marqueeDelay={500}
-                                marqueeResetDelay={500}>
-                                {title}
-                            </MarqueeText>
-                        </View>
-                    </View>
+                        {title}
+                    </Text>
                 </Scaler>
             </Modal>
         </PromptContext.Provider>
