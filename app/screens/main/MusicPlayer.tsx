@@ -5,11 +5,12 @@ import {
     Animated,
     ListRenderItemInfo,
     StyleSheet,
+    Text,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import FastImage from 'react-native-fast-image'
 
-import {useMusicApi, usePlayer, useTheme} from '../../context'
+import {useMusicApi, usePlayer, usePrompt, useTheme} from '../../context'
 import {
     GradientBackground,
     MusicPlayerSongView,
@@ -27,7 +28,9 @@ import {
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import {pauseTrack} from '../../api/PlayerControlsCommons'
+import globalStyles from '../../styles/global.styles'
 
+const AppLoadingAnimation = require('../../assets/animations/animation.json')
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
 // const LikeAnimation = require('../../assets/animations/like.json')
 // const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
@@ -57,10 +60,23 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
+    const {prompt} = usePrompt()
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
-    const [songs, setSongs] = useState<FetchedSongObject>()
+
+    /**
+     * a demo value just for rendering the laoding properly or else if there
+     * is no songs.content and it would be undefined and
+     * always show the flatlist not the loading component...
+     */
+    const [songs, setSongs] = useState<FetchedSongObject>({
+        content: [],
+        continuation: {
+            continuation: '',
+            clickTrackingParams: '',
+        },
+    })
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = useRef<any>(null)
@@ -243,28 +259,15 @@ const Player: FC<PlayerProps> = _props => {
                     )}
                 />
             ) : (
-                <View
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                        height: '100%',
-                    }}>
-                    <FastImage
-                        source={{
-                            uri: APP_LOGO_LINK,
-                            // priority: 'high',
-                            // cache: 'immutable',
-                        }}
-                        style={[
-                            {
-                                opacity: 1,
-                                width: 218 / 2,
-                                height: 276 / 2,
-                            },
-                        ]}
+                <View style={globalStyles.loadingArea}>
+                    <LottieView
+                        source={AppLoadingAnimation}
+                        style={globalStyles.appLogoAnimation}
+                        speed={1}
+                        autoPlay
+                        loop
                     />
+                    <Text style={globalStyles.loadingText}>Loading...</Text>
                 </View>
             )}
 
