@@ -25,7 +25,7 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
      * prompt when the song is playing
      * only for first time...
      */
-    const propmt = usePrompt().prompt
+    const {prompt} = usePrompt()
     const [quality, setQuality] = useState<AudioQualityType>('extreme')
 
     const loadQualityData = async () => {
@@ -153,10 +153,7 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                                     ].includes(res.type)
                                 ) {
                                     // showing the prompt...
-                                    propmt(
-                                        `playing over ${res.type}.`,
-                                        'danger',
-                                    )
+                                    prompt(`playing over ${res.type}.`)
                                     // incrementing the control variable..
                                     alreadyShownPrompt++
                                 }

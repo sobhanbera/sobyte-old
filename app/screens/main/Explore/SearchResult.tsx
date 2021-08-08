@@ -152,7 +152,7 @@ const SearchResult: React.FC<Props> = props => {
                 setLoading(false)
             })
             .catch(_err => {
-                prompt('Sorry! Cannot load data currently.', 'error')
+                prompt('Sorry! Cannot load data currently.')
                 setLoading(false)
             })
     }
@@ -168,7 +168,7 @@ const SearchResult: React.FC<Props> = props => {
                 setArtists(res)
             })
             .catch(_err => {
-                prompt('Sorry! Cannot load data currently.', 'error')
+                prompt('Sorry! Cannot load data currently.')
                 setLoading(false)
             })
     }

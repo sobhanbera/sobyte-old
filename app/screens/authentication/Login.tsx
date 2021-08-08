@@ -66,31 +66,25 @@ const Login = (props: LoginProps) => {
     const LoginUser = () => {
         if (!user) {
             //  * 1. email should be present for regular signin option (not by OTP)
-            prompt('Email is required for signing in.', 'warning')
+            prompt('Email is required for signing in.')
         } else if (EMAIL_REGEX.test(user) && isEmailBlocked(user)) {
             // 2. email should be valid
             // 3. email should not be a temporary mail ID
             // 2,3. check if the user text is a type of email the if it is a email check wheather it is a temporary mail if it is then don't continue else continue...
-            prompt('Account will be blocked if you use this email.', 'warning')
-            // prompt('Enter a valid email ID.', 'warning')
+            prompt('Account will be blocked if you use this email.')
+            // prompt('Enter a valid email ID.')
         } else if (EMAIL_REGEX.test(user) && user.length > MAX_EMAIL_LENGTH) {
             // 5. if the user provided an email checking if it is of correct length
-            prompt('Valid email length must be under 320.', 'warning')
+            prompt('Valid email length must be under 320.')
         } else if (!password) {
             // 1. password should be present for regular signin option (not by OTP)
-            prompt('Passoword is required for regular signing in.', 'warning')
+            prompt('Passoword is required for regular signing in.')
         } else if (password.length < MIN_PASSWORD_LENGTH) {
             // 4. password length should be valid
-            prompt(
-                'SHORT: Password length must be of 8-30 and alphanumeric.',
-                'warning',
-            )
+            prompt('SHORT: Password length must be of 8-30 and alphanumeric.')
         } else if (password.length > MAX_PASSWORD_LENGTH) {
             // 4. password length should be valid
-            prompt(
-                'LONG: Password length must be of 8-30 and alphanumeric.',
-                'warning',
-            )
+            prompt('LONG: Password length must be of 8-30 and alphanumeric.')
         } else {
             // all checks are passed we could login the user if the credentials are correct after
             // making api request to the backend
@@ -101,38 +95,33 @@ const Login = (props: LoginProps) => {
                 .then(res => {
                     const {code} = res.data
                     if (code === 'PROVIDED_INCOMPLETE_DATA') {
-                        prompt('Something went wrong in your end.', 'warning')
+                        prompt('Something went wrong in your end.')
                     } else if (res.data.code === 'EMAIL_LENGTH_EXCEED') {
                         prompt(
                             'The account with this detail is blocked/deleted or may be now allowed.',
-                            'warning',
                         )
                     } else if (
                         res.data.code === 'SHORT_PASSWORD' ||
                         res.data.code === 'PASSWORD_LENGTH_EXCEED'
                     ) {
-                        prompt('Wrong password. Please try again.', 'warning')
+                        prompt('Wrong password. Please try again.')
                     } else if (res.data.code === 'SIGNIN_FAILED') {
-                        prompt(
-                            'Something went wrong. Please try again.',
-                            'error',
-                        )
+                        prompt('Something went wrong. Please try again.')
                     } else if (res.data.code === 'USER_NOT_FOUND') {
-                        prompt('No user account found with this data.', 'error')
+                        prompt('No user account found with this data.')
                     } else if (res.data.code === 'WRONG_PASSWORD') {
-                        prompt('Wrong password. Please try again.', 'warning')
+                        prompt('Wrong password. Please try again.')
                     } else if (res.data.code === 'USER_ACCOUNT_IS_DISABLED') {
                         prompt(
                             'This account is disabled and not allowed to login.',
-                            'warning',
                         )
                     } else if (res.data.code === 'SUCCESS') {
-                        prompt('User successfully logged in.', 'success')
+                        prompt('User successfully logged in.')
                         setLocalUserData(JSON.stringify(res.data.data))
                     }
                 })
                 .catch(_err => {
-                    prompt('Something went wrong. Please try again.', 'error')
+                    prompt('Something went wrong. Please try again.')
                 })
         }
     }
