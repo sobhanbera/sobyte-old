@@ -88,6 +88,7 @@ export const MUSIC_PLAYER_BLUR = 19 // blurRadius value
 export const DOUBLE_TAP_DELAY = 500 // the delay in milliseconds between two press for double press component
 export const PROMPT_DURATION = 6500 // duration for showing prompt in milliseconds
 export const MARQUEE_TEXT_PROGRESS_DURATION = 2000 // duration for showing prompt in milliseconds
+export const MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION = 6500 // duration for scrolling the song name which is a large string or so...
 
 export const BOTTOM_TAB_BAR_NAVIGATION_HEIGHT = 54 // this is the height of the bottom tab bar navigation in the AppInside.tsx file navigator
 export const HEADER_MAX_HEIGHT = 85 // collapsible header max height
