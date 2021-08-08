@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-    ScrollView,
     StyleProp,
     StyleSheet,
     TextInput,
@@ -10,7 +9,6 @@ import {
     View,
 } from 'react-native'
 import {Text} from 'react-native-paper'
-import Modal from 'react-native-modal'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import BottomSheetMain, {BottomSheetScrollView} from '@gorhom/bottom-sheet'
 
@@ -37,142 +35,6 @@ interface Props {
     }>
     extraFunction?: Function
 }
-const BottomSheet = (props: Props) => {
-    const {surfacelight, text, placeholder, primary, onWarning} =
-        useTheme().themeColors
-
-    const executeExtraFunctionHelper = () =>
-        props.extraFunction ? props.extraFunction() : {}
-
-    return (
-        <Modal
-            // animationInTiming={400}
-            // animationOutTiming={400}
-            isVisible={props.isVisible}
-            animationIn="slideInUp"
-            animationOut="slideOutDown"
-            onBackdropPress={() => props.setVisible(false)}
-            onBackButtonPress={() => props.setVisible(false)}
-            backdropOpacity={0}
-            swipeDirection="down"
-            onSwipeComplete={() => props.setVisible(false)}
-            style={[globalStyles.bareModal]}>
-            <TouchableOpacity onPress={() => props.setVisible(false)}>
-                <View style={styles.takeTheInvisibleHeight}></View>
-            </TouchableOpacity>
-            <View
-                style={[
-                    styles.wrapper,
-                    {
-                        backgroundColor: surfacelight[0],
-                        borderColor: '#303030',
-                        borderWidth: 1,
-                        borderBottomWidth: 0,
-                        elevation: 2,
-                    },
-                ]}>
-                <TouchableOpacity
-                    onPress={() => props.setVisible(false)}
-                    style={styles.flex}>
-                    <View style={styles.lineArea}>
-                        <View style={styles.line}></View>
-                    </View>
-                </TouchableOpacity>
-            </View>
-            <View style={[styles.flex, styles.flexEnd]}>
-                <ScrollView
-                    style={{
-                        backgroundColor: surfacelight[0],
-                        flex: 1,
-                    }}
-                    showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}>
-                    {props.buttons.map((button, _) => {
-                        if (button.type === 'input') {
-                            return (
-                                <View key={_}>
-                                    <View style={styles.inputHolder}>
-                                        <TextInput
-                                            placeholder={button.placeholder}
-                                            value={button.text}
-                                            onChangeText={e =>
-                                                button.setText
-                                                    ? button.setText(e)
-                                                    : {}
-                                            }
-                                            selectionColor={primary.dark[0]}
-                                            keyboardType="numeric"
-                                            placeholderTextColor={
-                                                placeholder[0]
-                                            }
-                                            {...button.inputProps}
-                                            style={{
-                                                flex: 1,
-                                                // width: '90%',
-                                                color: text[0],
-                                                fontSize: 18,
-                                            }}
-                                        />
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                button.onPress()
-                                            }}
-                                            style={{padding: 15}}>
-                                            <MaterialIcon
-                                                name="done"
-                                                size={DEFAULT_ICON_SIZE}
-                                                color={text[0]}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View>
-                                        <Text
-                                            style={[
-                                                styles.textItem,
-                                                {
-                                                    fontSize: 14,
-                                                    color: onWarning[0],
-                                                },
-                                            ]}>
-                                            {button.errorText
-                                                ? button.errorText
-                                                : ''}
-                                        </Text>
-                                    </View>
-                                </View>
-                            )
-                        }
-                        return (
-                            <TouchableOpacity
-                                key={_}
-                                onPress={() => {
-                                    button.onPress()
-                                    executeExtraFunctionHelper()
-                                    props.setVisible(false)
-                                }}
-                                style={styles.button}>
-                                <Text
-                                    style={[
-                                        styles.textItem,
-                                        props.startingTextAlign ||
-                                        button.extraText?.length
-                                            ? styles.startingTextAlign
-                                            : {},
-                                    ]}>
-                                    {button.text}
-                                </Text>
-                                <Text style={[styles.textItem]}>
-                                    {button.extraText}
-                                </Text>
-                            </TouchableOpacity>
-                        )
-                    })}
-                </ScrollView>
-            </View>
-        </Modal>
-    )
-}
-
 const BottomSheet2 = (props: Props) => {
     const {surfacelight, text, placeholder, primary, onWarning} =
         useTheme().themeColors
