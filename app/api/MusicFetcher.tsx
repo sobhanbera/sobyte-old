@@ -77,7 +77,6 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                 previouslyLoadedSongs[id] !== null &&
                 previouslyLoadedSongs[id] !== undefined
             ) {
-                console.log('PROVIDED FROM I')
                 return resolve(previouslyLoadedSongs[id])
             }
             // the songs is not played already so loading the URL again and then providing it
