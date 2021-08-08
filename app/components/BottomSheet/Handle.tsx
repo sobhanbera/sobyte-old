@@ -27,7 +27,7 @@ interface HandleProps extends BottomSheetHandleProps {
 }
 
 export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
-    const {surfacelight} = useTheme().themeColors
+    const {surfacelight, border} = useTheme().themeColors
 
     const indicatorTransformOriginY = useDerivedValue(() =>
         interpolate(
@@ -46,6 +46,8 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
             styles.header,
             {
                 backgroundColor: surfacelight[0],
+                borderBottomWidth: 0.4,
+                borderBottomColor: border[0],
             },
             style,
         ],
