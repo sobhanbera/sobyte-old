@@ -38,12 +38,28 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
         ),
     )
 
-    const containerStyle = useMemo(() => [styles.header, style], [style])
+    /**
+     * constant styles for the right indicator
+     */
+    const containerStyle = useMemo(
+        () => [
+            styles.header,
+            {
+                backgroundColor: surfacelight[0],
+            },
+            style,
+        ],
+        [style],
+    )
+    /**
+     * the main animated styles for the main wrapper of this
+     * indicator handle section
+     */
     const containerAnimatedStyle = useAnimatedStyle(() => {
         const borderTopRadius = interpolate(
             animatedIndex.value,
-            [1, 2],
-            [20, 0],
+            [0, 1, 2],
+            [13, 0, 0], // 13 is the default border radius of the top section of the handle component provided by bottom-sheet
             Extrapolate.CLAMP,
         )
         return {
@@ -51,6 +67,10 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
             borderTopRightRadius: borderTopRadius,
         }
     })
+
+    /**
+     * constant styles for the left indicator...
+     */
     const leftIndicatorStyle = useMemo(
         () => ({
             ...styles.indicator,
@@ -58,6 +78,10 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
         }),
         [],
     )
+    /**
+     * animated left indicator style
+     * this value is the must to change the rotation of the left indication...
+     */
     const leftIndicatorAnimatedStyle = useAnimatedStyle(() => {
         const leftIndicatorRotate = interpolate(
             animatedIndex.value,
@@ -72,11 +96,15 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
                     rotate: `${leftIndicatorRotate}rad`,
                 },
                 {
-                    translateX: -5,
+                    translateX: -7, // this translate property's value must be the half of the indicator width / 2
                 },
             ),
         }
     })
+
+    /**
+     * constant styles for the right indicator....
+     */
     const rightIndicatorStyle = useMemo(
         () => ({
             ...styles.indicator,
@@ -84,6 +112,10 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
         }),
         [],
     )
+    /**
+     * animated right indicator style
+     * this value is the must to change the rotation of the right indication...
+     */
     const rightIndicatorAnimatedStyle = useAnimatedStyle(() => {
         const rightIndicatorRotate = interpolate(
             animatedIndex.value,
@@ -98,7 +130,7 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
                     rotate: `${rightIndicatorRotate}rad`,
                 },
                 {
-                    translateX: 5,
+                    translateX: 7, // this translate property's value must be the half of the indicator width / 2
                 },
             ),
         }
@@ -125,14 +157,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'white',
         paddingVertical: 14,
-        borderBottomWidth: 1,
-        borderBottomColor: '#fff',
+        height: 55,
     },
     indicator: {
         position: 'absolute',
-        width: 10,
-        height: 4,
-        backgroundColor: '#999',
+        width: 14,
+        height: 3,
+        backgroundColor: 'white',
     },
     leftIndicator: {
         borderTopStartRadius: 2,
