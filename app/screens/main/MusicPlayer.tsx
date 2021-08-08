@@ -36,14 +36,14 @@ import {
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import BackgroundBluredImage from '../../components/MusicPlayerSongCardView/BackgroundBluredImage'
 import {pauseTrack} from '../../api/PlayerControlsCommons'
-
-const {width, height} = Dimensions.get('window')
+import {usePrompt} from '../../context'
 
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
 // const LikeAnimation = require('../../assets/animations/like.json')
 // const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
 
 const IMAGE_BLUR_RADIUS = 25
+const {width, height} = Dimensions.get('window')
 
 /**
  * the interface or data type which will be giving the types for the song data whenever the user scrolls
@@ -68,6 +68,7 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
+    const {prompt} = usePrompt()
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
@@ -110,6 +111,7 @@ const Player: FC<PlayerProps> = _props => {
                         title: initialTrack.name,
                         url: '',
                     },
+                    false,
                     false,
                 )
             })
