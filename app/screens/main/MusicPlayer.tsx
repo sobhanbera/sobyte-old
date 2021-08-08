@@ -209,10 +209,10 @@ const Player: FC<PlayerProps> = _props => {
                 height: '100%',
             }}
             colors={[
-                randomGradient[2],
-                randomGradient[3],
-                randomGradient[4],
-                randomGradient[5],
+                randomGradient[6] + 'AF', // light to dark
+                randomGradient[3] + 'AF', // we are adding AF
+                randomGradient[4] + 'AF', // alpha value to give it some darkness
+                randomGradient[5] + 'AF', // because the extreme backgorund is black in color
             ]}
             location={[0.2, 0.4, 0.6, 0.8]}
             angle={175}>
