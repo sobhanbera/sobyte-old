@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {View, StyleSheet} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import TrackPlayer, {STATE_PLAYING} from 'react-native-track-player'
 
 import {usePlayer} from '../../context'
@@ -11,9 +12,12 @@ import {
     pauseTrack,
     seekTrackInterval,
 } from '../../api/PlayerControlsCommons'
+import {LIKE_ICON_OR_TEXT_COLOR} from '../../constants'
 
 interface Props {
     color: string
+    isLiked: boolean
+    likeIsMusic: Function
 }
 const TrackButtonControls = (props: Props) => {
     const {playing} = usePlayer()
@@ -38,8 +42,16 @@ const TrackButtonControls = (props: Props) => {
 
     return (
         <View style={styles.wrapper}>
+            <FontAwesome
+                style={styles.icon}
+                size={24}
+                color={props.isLiked ? LIKE_ICON_OR_TEXT_COLOR : props.color}
+                name={'heart'}
+                onPress={() => props.likeIsMusic()}
+            />
+
             <FontAwesome5
-                style={styles.iconWrapper}
+                style={styles.icon}
                 size={20}
                 color={props.color}
                 name={'backward'}
@@ -48,7 +60,7 @@ const TrackButtonControls = (props: Props) => {
 
             {localPlaying ? (
                 <Scaler
-                    containerStyle={styles.iconWrapper}
+                    containerStyle={styles.icon}
                     onPress={() => {
                         setLocalPlaying(false)
                         pauseTrack()
@@ -58,7 +70,7 @@ const TrackButtonControls = (props: Props) => {
                 </Scaler>
             ) : (
                 <Scaler
-                    containerStyle={styles.iconWrapper}
+                    containerStyle={styles.icon}
                     onPress={() => {
                         setLocalPlaying(true)
                         playTrack()
@@ -69,7 +81,7 @@ const TrackButtonControls = (props: Props) => {
             )}
 
             <FontAwesome5
-                style={styles.iconWrapper}
+                style={styles.icon}
                 size={20}
                 color={props.color}
                 name={'forward'}
@@ -87,11 +99,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
     },
-    iconWrapper: {
+    icon: {
         padding: 12,
         borderRadius: 100,
     },
-    icon: {},
 })
 
 export default TrackButtonControls
