@@ -48,8 +48,8 @@ const Prompt = (props: Props) => {
                 hideModalContentWhileAnimating
                 animationInTiming={1000}
                 animationOutTiming={1000}
-                animationIn="fadeInDown"
-                animationOut="fadeOutDown"
+                animationIn="fadeIn"
+                animationOut="fadeOut"
                 onBackdropPress={() => clearPrompt()}
                 onBackButtonPress={() => clearPrompt()}
                 style={{
@@ -69,12 +69,12 @@ const Prompt = (props: Props) => {
                     scale={1}
                     onPress={() => clearPrompt()}
                     containerStyle={{
-                        backgroundColor: themeColors.surfacelight[0] + 'AF',
                         width: '100%',
                         paddingVertical: 1,
                         paddingHorizontal: 6,
                         borderRadius: 7,
                         overflow: 'hidden',
+                        backgroundColor: themeColors.surfacelight[0] + 'DF',
                     }}>
                     <Text
                         style={{
