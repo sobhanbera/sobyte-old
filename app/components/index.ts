@@ -109,3 +109,7 @@ export {GridSongList}
 
 import GridArtistList from './GridArtistList'
 export {GridArtistList}
+
+import MusicPlayerSongView from './MusicPlayerSongView'
+import BackgroundBluredImage from './MusicPlayerSongView/BackgroundBluredImage'
+export {MusicPlayerSongView, BackgroundBluredImage}
