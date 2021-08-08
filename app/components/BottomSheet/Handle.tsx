@@ -1,22 +1,6 @@
 import React, {useMemo} from 'react'
-import {
-    ScrollView,
-    StyleProp,
-    StyleSheet,
-    TextInput,
-    TextInputProps,
-    TextStyle,
-    TouchableOpacity,
-    View,
-    ViewStyle,
-} from 'react-native'
-import {Text} from 'react-native-paper'
-import Modal from 'react-native-modal'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import BottomSheetMain, {
-    BottomSheetScrollView,
-    BottomSheetHandleProps,
-} from '@gorhom/bottom-sheet'
+import {StyleProp, StyleSheet, ViewStyle} from 'react-native'
+import {BottomSheetHandleProps} from '@gorhom/bottom-sheet'
 import Animated, {
     Extrapolate,
     interpolate,
