@@ -9,6 +9,8 @@ import Animated, {
 } from 'react-native-reanimated'
 import {toRad} from 'react-native-redash'
 
+import {useTheme} from '../../context'
+
 export const transformOrigin = ({x, y}: any, ...transformations: any) => {
     'worklet'
     return [
@@ -25,7 +27,8 @@ interface HandleProps extends BottomSheetHandleProps {
 }
 
 export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
-    //#region animations
+    const {surfacelight} = useTheme().themeColors
+
     const indicatorTransformOriginY = useDerivedValue(() =>
         interpolate(
             animatedIndex.value,
@@ -34,9 +37,7 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
             Extrapolate.CLAMP,
         ),
     )
-    //#endregion
 
-    //#region styles
     const containerStyle = useMemo(() => [styles.header, style], [style])
     const containerAnimatedStyle = useAnimatedStyle(() => {
         const borderTopRadius = interpolate(
@@ -102,9 +103,7 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
             ),
         }
     })
-    //#endregion
 
-    // render
     return (
         <Animated.View
             style={[containerStyle, containerAnimatedStyle]}
