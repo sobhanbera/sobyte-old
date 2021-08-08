@@ -16,7 +16,7 @@
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {
-        "@gorhom/bottom-sheet": "^3.6.6",
+        "@gorhom/bottom-sheet": "^4.0.0-alpha.25",
         "@react-native-community/async-storage": "^1.12.1",
         "@react-native-community/blur": "^3.6.0",
         "@react-native-community/masked-view": "^0.1.11",
@@ -51,7 +51,7 @@
         "react-native-marquee": "^0.3.2",
         "react-native-modal": "^12.0.2",
         "react-native-paper": "^4.9.2",
-        "react-native-reanimated": "^2.0.0",
+        "react-native-reanimated": "^2.2.0",
         "react-native-safe-area-context": "^3.2.0",
         "react-native-screens": "^3.4.0",
         "react-native-scrubber": "^1.1.5",
