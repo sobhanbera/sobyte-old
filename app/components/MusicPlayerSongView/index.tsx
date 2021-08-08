@@ -22,9 +22,9 @@ const {width, height} = Dimensions.get('window')
 
 interface SongView {
     song: SongObject
-    playLikeAnimation: Function
+    likeIsMusic: Function
 }
-const MusicPlayerSongView = ({song, playLikeAnimation}: SongView) => {
+const MusicPlayerSongView = ({song, likeIsMusic}: SongView) => {
     const {themeColors} = useTheme()
     const averageQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
@@ -41,7 +41,7 @@ const MusicPlayerSongView = ({song, playLikeAnimation}: SongView) => {
     const artists = formatArtists(song.artist)
 
     return (
-        <DoubleTap onDoubleTap={playLikeAnimation}>
+        <DoubleTap onDoubleTap={likeIsMusic}>
             <ImageBackground
                 // loadingIndicatorSource={{
                 // uri: highQualityImage,
@@ -124,6 +124,8 @@ const MusicPlayerSongView = ({song, playLikeAnimation}: SongView) => {
                         // backgroundColor: themeColors.themecolor[0] + '50',
                     }}>
                     <TrackButtonControls
+                        isLiked={false}
+                        likeIsMusic={likeIsMusic}
                         color={themeColors.themecolorrevert[0]}
                     />
 

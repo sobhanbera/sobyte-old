@@ -155,7 +155,7 @@ const Player: FC<PlayerProps> = _props => {
             return (
                 <MusicPlayerSongView
                     song={item}
-                    playLikeAnimation={() =>
+                    likeIsMusic={() =>
                         playLikeAnimationForMusicId(item.musicId)
                     }
                 />
