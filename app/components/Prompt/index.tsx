@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import {View} from 'react-native'
 import Modal from 'react-native-modal'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import AntDesign from 'react-native-vector-icons/AntDesign'
 import MarqueeText from 'react-native-marquee'
 
 import {
@@ -14,17 +12,8 @@ import {
 import {useTheme} from '../../context'
 import Scaler from '../Scaler'
 
-type PropmptDescriptionType =
-    | 'primary'
-    | 'success'
-    | 'error'
-    | 'danger'
-    | 'warning'
 const PromptContext = React.createContext({
-    prompt: (
-        _title: string,
-        _description: PropmptDescriptionType = 'success',
-    ) => {},
+    prompt: (_title: string) => {},
     clearPrompt: () => {},
 })
 
@@ -34,20 +23,16 @@ interface Props {
 const Prompt = (props: Props) => {
     const {themeColors} = useTheme()
     const [title, setTitle] = useState('')
-    const [description, setDescription] =
-        useState<PropmptDescriptionType>('primary')
     let timeOutObject = setTimeout(() => {}, 0)
 
-    const prompt = (
-        title: string = '',
-        description: PropmptDescriptionType = 'success',
-    ) => {
+    /**
+     * @param title the main string which should be shown in the prompt
+     */
+    const prompt = (title: string = '') => {
         clearTimeout(timeOutObject)
-        setDescription(description)
         setTitle(title)
         timeOutObject = setTimeout(() => {
             setTitle('')
-            setDescription('primary')
         }, PROMPT_DURATION)
     }
     const clearPrompt = () => {
@@ -115,48 +100,6 @@ const Prompt = (props: Props) => {
                                 paddingRight: DEFAULT_SMALL_ICON_SIZE, // this is the width of the icon next to this component
                                 // because this text should be clear to the user not overflowed by the cross icon
                             }}>
-                            <View
-                                style={{
-                                    paddingRight: 10,
-                                    marginRight: 3,
-                                    borderRightWidth: 0.5,
-                                    borderRightColor: themeColors.grey[0],
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}>
-                                {description === 'error' ? (
-                                    <MaterialIcons
-                                        name="error-outline"
-                                        size={DEFAULT_SMALL_ICON_SIZE}
-                                        color={themeColors.onError[0]}
-                                    />
-                                ) : description === 'danger' ? (
-                                    <MaterialIcons
-                                        name="dangerous"
-                                        size={DEFAULT_SMALL_ICON_SIZE}
-                                        color={themeColors.onDanger[0]}
-                                    />
-                                ) : description === 'warning' ? (
-                                    <AntDesign
-                                        name="warning"
-                                        size={DEFAULT_SMALL_ICON_SIZE}
-                                        color={themeColors.onWarning[0]}
-                                    />
-                                ) : description === 'success' ? (
-                                    <MaterialIcons
-                                        name="thumb-up-alt"
-                                        size={DEFAULT_SMALL_ICON_SIZE}
-                                        color={themeColors.onSuccess[0]}
-                                    />
-                                ) : (
-                                    <AntDesign
-                                        name="check"
-                                        size={DEFAULT_SMALL_ICON_SIZE}
-                                        color={themeColors.primary.dark[0]}
-                                    />
-                                )}
-                            </View>
-
                             <MarqueeText
                                 style={{
                                     textAlign: 'left',
@@ -174,13 +117,6 @@ const Prompt = (props: Props) => {
                                 marqueeResetDelay={500}>
                                 {title}
                             </MarqueeText>
-                        </View>
-                        <View>
-                            <MaterialIcons
-                                name="cancel"
-                                size={DEFAULT_SMALL_ICON_SIZE}
-                                color={themeColors.grey[0]}
-                            />
                         </View>
                     </View>
                 </Scaler>
