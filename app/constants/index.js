@@ -121,6 +121,7 @@ export const LIKE_ANIMATION_DISAPPEAR_DURATION = 1650 // the duration after whic
 export const HIGHEST_Z_INDEX_VALUE = 987654 // the largest z index value
 
 export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD = 5 // the initial number of tracks we have to load when the app launched and music player UI is shown
+export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB = 11 // the initial number of tracks we have to load when the app launched and exlore tab is shown
 
 /**
  * jsx components................................
