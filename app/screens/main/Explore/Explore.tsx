@@ -14,6 +14,7 @@ import {
 import {
     DefaultStatusBarComponent,
     IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
+    INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
     PaddingBottomView,
 } from '../../../constants'
 import {
@@ -69,16 +70,45 @@ const Explore: React.FC<ExploreTabProps> = props => {
      */
     const loadExploreData = React.useCallback(() => {
         Promise.all([
-            search('trending songs', 'SONG', false, true), // 0th type of song data list
-            search('bollywood new hits', 'SONG', false, true), // 1st type of song data list
-            search('top romantic songs', 'SONG', false, true), // 2nd type of song data list
-            search('popular songs', 'SONG', false, true), // 3rd type of song data list
-            search('pop beats', 'SONG', false, true), // 4th type of song data list
-            search('Chill beats', 'SONG', false, true), // 5th type of song data list
-            search('sad songs', 'SONG', false, true), // 6th type of song data list
+            // 0th type of song data list
+            search('trending songs', 'SONG', false, true, '', [
+                0,
+                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
+            ]),
+            // 1st type of song data list
+            search('bollywood new hits', 'SONG', false, true, '', [
+                0,
+                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
+            ]),
+            // 2nd type of song data list
+            search('top romantic songs', 'SONG', false, true, '', [
+                0,
+                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
+            ]),
+            // 3rd type of song data list
+            search('popular songs', 'SONG', false, true, '', [
+                0,
+                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
+            ]),
+            // 4th type of song data list
+            search('pop beats', 'SONG', false, true, '', [
+                0,
+                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
+            ]),
+            // 5th type of song data list
+            search('Chill beats', 'SONG', false, true, '', [
+                0,
+                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
+            ]),
+            // 6th type of song data list
+            search('sad songs', 'SONG', false, true, '', [
+                0,
+                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
+            ]),
         ])
             .then((res: FetchedSongObject[]) => {
                 setMusicData(res)
+                for (let i in res) console.log(res[i].content.length)
             })
             .catch(_err => {})
 
