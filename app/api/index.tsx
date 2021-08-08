@@ -76,6 +76,8 @@ export interface MusicContextApiProviderProps {
      * @param categoryName what type of data is needed like "song" | "album" | "playlist"
      * @param getARandomResult boolean value if true then will provide a random search result out of the result got from api
      * @param saveToLocalStorage boolean if true then after searching and providing the results this function will also save the data in local storage for offline use cases.
+     * @param saveToCustomLocation this is a string if any part of app needs only one type of data everytime then provide a custom location reference we will save the data instead of `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}` location this could be used in music player main UI component since there many different types of random queries are done and we have to load it in offline purpose so no need to save everytype query of data only one is sufficient
+     * @param provideASubarray if any part of the app wants a subarray from the fetched content about 0 to 5 then use [0, 5]... etc.
      * @param _pageLimit number of data page wise (this argument is not in use currently).... and not prefered to use in future too...
      * @returns the search result after making api request
      *
@@ -89,6 +91,7 @@ export interface MusicContextApiProviderProps {
         _getARandomSong?: boolean,
         _saveToLocalStorage?: boolean,
         saveToCustomLocation?: string,
+        _provideASubarray?: number[],
         _pageLimit?: number,
     ): Promise<any>
 
@@ -176,6 +179,8 @@ const MusicContext = React.createContext<MusicContextApiProviderProps>({
      * @param categoryName what type of data is needed like "song" | "album" | "playlist"
      * @param getARandomResult boolean value if true then will provide a random search result out of the result got from api
      * @param saveToLocalStorage boolean if true then after searching and providing the results this function will also save the data in local storage for offline use cases.
+     * @param saveToCustomLocation this is a string if any part of app needs only one type of data everytime then provide a custom location reference we will save the data instead of `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}` location this could be used in music player main UI component since there many different types of random queries are done and we have to load it in offline purpose so no need to save everytype query of data only one is sufficient
+     * @param provideASubarray if any part of the app wants a subarray from the fetched content about 0 to 5 then use [0, 5]... etc.
      * @param _pageLimit number of data page wise (this argument is not in use currently).... and not prefered to use in future too...
      * @returns the search result after making api request
      *
@@ -189,6 +194,7 @@ const MusicContext = React.createContext<MusicContextApiProviderProps>({
         _getARandomSong: boolean = false,
         _saveToLocalStorage: boolean = false,
         _saveToCustomLocation: string = '',
+        _provideASubarray: number[] = [0, 100], // default list count would be less than 30 so for safe case we are using 100 items
         _pageLimit: number = 1,
     ) => DemoMusicContextReturn(),
     /**
@@ -626,6 +632,7 @@ const MusicApi = (props: MusicApiProps) => {
      * @param getARandomResult boolean value if true then will provide a random search result out of the result got from api
      * @param saveToLocalStorage boolean if true then after searching and providing the results this function will also save the data in local storage for offline use cases.
      * @param saveToCustomLocation this is a string if any part of app needs only one type of data everytime then provide a custom location reference we will save the data instead of `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}` location this could be used in music player main UI component since there many different types of random queries are done and we have to load it in offline purpose so no need to save everytype query of data only one is sufficient
+     * @param provideASubarray if any part of the app wants a subarray from the fetched content about 0 to 5 then use [0, 5]... etc.
      * @param _pageLimit number of data page wise (this argument is not in use currently).... and not prefered to use in future too...
      * @returns the search result after making api request
      *
@@ -639,6 +646,7 @@ const MusicApi = (props: MusicApiProps) => {
         getARandomResult: boolean = false,
         saveToLocalStorage: boolean = false,
         saveToCustomLocation: string = '',
+        provideASubarray: number[] = [0, 100], // default list count would be less than 30 so for safe case we are using 100 items
         pageLimit: number = 1,
     ) => {
         var isOffline = false
@@ -725,7 +733,27 @@ const MusicApi = (props: MusicApiProps) => {
                                 break
                         }
 
-                        resolve(result)
+                        /**
+                         * if the provided subarray is correct then we will provide the data in that range
+                         */
+                        if (provideASubarray[0] > provideASubarray[1]) {
+                            /**
+                             * checking that sufficient data is available or not and then providing the data
+                             */
+                            if (result.content.length > 0) {
+                                resolve({
+                                    ...result,
+                                    content: result.content.slice(
+                                        provideASubarray[0],
+                                        provideASubarray[1],
+                                    ),
+                                })
+                            } else {
+                                resolve(result)
+                            }
+                        } else {
+                            resolve(result)
+                        }
 
                         /**
                          * saving the data if it is required to save and also if the internet connection is
@@ -981,9 +1009,12 @@ const MusicApi = (props: MusicApiProps) => {
     const musicApiValues = {
         initialize: initialize,
         initMusicApi: initialize,
+
         getContinuation: getContinuation,
         getSearchSuggestions: getSearchSuggestions,
+
         search: search,
+
         getAlbum: getAlbum,
         getPlaylist: getPlaylist,
         getArtist: getArtist,
