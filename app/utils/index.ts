@@ -34,6 +34,8 @@ import {
     isEmailBlocked,
     generateRandomPassword,
     randomNumber,
+    capitalizeWords,
+    IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX,
 } from './Objects'
 export {
     returnNullCallback,
@@ -54,4 +56,6 @@ export {
     isEmailBlocked,
     generateRandomPassword,
     randomNumber,
+    capitalizeWords,
+    IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX,
 }

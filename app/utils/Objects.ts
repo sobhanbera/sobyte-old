@@ -166,3 +166,14 @@ export function isEmailBlocked(email: string) {
         if (email.includes(FakeMailsList[i])) return true
     return false
 }
+
+/**
+ * capitalize all words of a string
+ * @param string the sentence or the statement
+ * @returns a string which contains capital letter after each spaces...
+ */
+export function capitalizeWords(string: string) {
+    return string.replace(/(?:^|\s)\S/g, function (a) {
+        return a.toUpperCase()
+    })
+}
