@@ -19,6 +19,8 @@ import {
     DefaultStatusBarComponent,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
     RANDOM_SEARCH_QUERY,
+    INITIAL_NUMBER_OF_TRACKS_TO_LOAD,
+    MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY,
 } from '../../constants'
 import {
     formatArtists,
@@ -94,7 +96,17 @@ const Player: FC<PlayerProps> = _props => {
     }, [])
 
     const initializeMusicPlayer = () => {
-        search(RANDOM_SEARCH_QUERY, 'SONG')
+        /**
+         * we don't need to save this data
+         */
+        search(
+            RANDOM_SEARCH_QUERY,
+            'SONG',
+            false,
+            true,
+            MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY,
+            [0, INITIAL_NUMBER_OF_TRACKS_TO_LOAD],
+        )
             .then((res: FetchedSongObject) => {
                 setSongs(res)
 
