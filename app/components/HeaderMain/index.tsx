@@ -45,7 +45,7 @@ const HeaderMain = (props: Props) => {
                 {props.title}
             </Text>
             {/* this below is a temporary component for making the parent center the title text component */}
-            <Text></Text>
+            <Text style={{fontSize: 20}}>{'   '}</Text>
         </View>
     )
 }
