@@ -36,7 +36,7 @@ const globalStyles = StyleSheet.create({
         minHeight: 120,
     },
     appLogoAnimation: {
-        width: 38,
+        width: 35,
     },
     loadingText: {
         fontSize: 19,
