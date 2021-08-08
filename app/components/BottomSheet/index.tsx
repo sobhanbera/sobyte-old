@@ -12,10 +12,12 @@ import {
 import {Text} from 'react-native-paper'
 import Modal from 'react-native-modal'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import BottomSheetMain, {BottomSheetScrollView} from '@gorhom/bottom-sheet'
 
 import {useTheme} from '../../context'
 import {DEFAULT_ICON_SIZE, FontUbuntu} from '../../constants'
 import globalStyles from '../../styles/global.styles'
+import {Handle} from './Handle'
 
 interface Props {
     cancelText?: string
@@ -171,6 +173,126 @@ const BottomSheet = (props: Props) => {
     )
 }
 
+const BottomSheet2 = (props: Props) => {
+    const {surfacelight, text, placeholder, primary, onWarning} =
+        useTheme().themeColors
+
+    const executeExtraFunctionHelper = () =>
+        props.extraFunction ? props.extraFunction() : {}
+
+    return (
+        <BottomSheetMain
+            index={props.isVisible ? 0 : -1}
+            snapPoints={[300, 640]}
+            onChange={position => {
+                if (position <= -1) props.setVisible(false)
+            }}
+            handleComponent={Handle}
+            enableOverDrag
+            enablePanDownToClose
+            enableHandlePanningGesture
+            enableContentPanningGesture
+            style={{
+                backgroundColor: surfacelight[0],
+            }}
+            handleHeight={40}
+            keyboardBehavior="extend"
+            keyboardBlurBehavior="restore"
+            animateOnMount>
+            <View style={[styles.flex, styles.flexEnd]}>
+                <BottomSheetScrollView
+                    style={{
+                        backgroundColor: surfacelight[0],
+                        flex: 1,
+                    }}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}>
+                    {props.buttons.map((button, _) => {
+                        if (button.type === 'input') {
+                            return (
+                                <View key={_}>
+                                    <View style={styles.inputHolder}>
+                                        <TextInput
+                                            placeholder={button.placeholder}
+                                            value={button.text}
+                                            onChangeText={e =>
+                                                button.setText
+                                                    ? button.setText(e)
+                                                    : {}
+                                            }
+                                            selectionColor={primary.dark[0]}
+                                            keyboardType="numeric"
+                                            placeholderTextColor={
+                                                placeholder[0]
+                                            }
+                                            {...button.inputProps}
+                                            style={{
+                                                flex: 1,
+                                                // width: '90%',
+                                                color: text[0],
+                                                fontSize: 18,
+                                            }}
+                                        />
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                button.onPress()
+                                            }}
+                                            style={{padding: 15}}>
+                                            <MaterialIcon
+                                                name="done"
+                                                size={DEFAULT_ICON_SIZE}
+                                                color={text[0]}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View>
+                                        <Text
+                                            style={[
+                                                styles.textItem,
+                                                {
+                                                    fontSize: 14,
+                                                    color: onWarning[0],
+                                                },
+                                            ]}>
+                                            {button.errorText
+                                                ? button.errorText
+                                                : ''}
+                                        </Text>
+                                    </View>
+                                </View>
+                            )
+                        }
+                        return (
+                            <TouchableOpacity
+                                key={_}
+                                onPress={() => {
+                                    button.onPress()
+                                    executeExtraFunctionHelper()
+                                    props.setVisible(false)
+                                }}
+                                style={styles.button}>
+                                <Text
+                                    style={[
+                                        styles.textItem,
+                                        props.startingTextAlign ||
+                                        button.extraText?.length
+                                            ? styles.startingTextAlign
+                                            : {},
+                                    ]}>
+                                    {button.text}
+                                </Text>
+                                <Text style={[styles.textItem]}>
+                                    {button.extraText}
+                                </Text>
+                            </TouchableOpacity>
+                        )
+                    })}
+                </BottomSheetScrollView>
+            </View>
+        </BottomSheetMain>
+    )
+}
+
 const styles = StyleSheet.create({
     takeTheInvisibleHeight: {
         height: '45%',
@@ -233,4 +355,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default BottomSheet
+export default BottomSheet2
