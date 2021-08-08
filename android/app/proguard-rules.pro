@@ -8,3 +8,6 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+
+# Added because we are using react-native-reanimated-2 package
+-keep class com.facebook.react.turbomodule.** { *; }
