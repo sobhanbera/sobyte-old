@@ -8,6 +8,7 @@ import {
     Text,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
+import NetInfo from '@react-native-community/netinfo' // if the internet connection is slow than we will load low quality track else load high quality progressively...
 
 import {useMusicApi, usePlayer, useTheme} from '../../context'
 import {
@@ -167,9 +168,17 @@ const Player: FC<PlayerProps> = _props => {
         // if promptShown1Time is true that means the prompt is shown once no need to show it again just return
         if (promptShown1Time.current === true) return
         // if the prompt is not shown any time then show it and update the promptShown1Time to true
-        setPromptTitle('Playing song through internet...')
-        // now the prompt will not longer be shown again...
-        promptShown1Time.current = true
+        NetInfo.fetch()
+            .then(res => {
+                setPromptTitle(`playing song over ${res.type}.`)
+                // now the prompt will not longer be shown again...
+                promptShown1Time.current = true
+            })
+            .catch(_err => {
+                // some error occurred we should only set the prompt value to true and not show any prompt
+                // since we don't know what type of network is available in device
+                promptShown1Time.current = true
+            })
     }
 
     /**
