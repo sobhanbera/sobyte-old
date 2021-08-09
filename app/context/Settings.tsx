@@ -7,7 +7,7 @@ import {
     AUDIO_QUALITY_STORAGE_KEY,
     LANGUAGE_CODE_STORAGE_KEY,
     SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-    DEFAULT_IMAGE_QUALITY,
+    DEFAULT_IMAGE_SIZE,
     BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
 } from '../constants'
 import {
@@ -72,7 +72,7 @@ const SettingsProvider = (props: Props) => {
                 setTheme(response[0][1] || 'd')
                 setLanguage(response[1][1] || 'en')
                 setAudioQuality(response[2][1] || 'extreme')
-                setImageQuality(response[3][1] || DEFAULT_IMAGE_QUALITY)
+                setImageQuality(response[3][1] || DEFAULT_IMAGE_SIZE)
                 // console.log(response)
             },
         )

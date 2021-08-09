@@ -5,12 +5,13 @@ import Shimmer from 'react-native-shimmer'
 
 import {useSetting} from '../../context'
 import {
-    getHighQualityImageFromSongImage,
+    getHightQualityImageFromLinkWithHeight,
     formatArtists,
     trimLargeString,
 } from '../../utils/Objects'
 import {
     DEFAULT_IMAGE_QUALITY,
+    DEFAULT_IMAGE_SIZE,
     DEFAULT_TINY_ICON_SIZE,
     IMAGE_SMALL_SIZE_TO_SHOW,
 } from '../../constants'
@@ -90,14 +91,19 @@ const CardSong = ({
                   })
                 : songs[0].musicId.length > 0
                 ? songs.map(song => {
-                      const songImage = getHighQualityImageFromSongImage(
-                          song.thumbnails[0],
-                          imageQuality || DEFAULT_IMAGE_QUALITY,
+                      const songImage = getHightQualityImageFromLinkWithHeight(
+                          song.thumbnails[0].url,
+                          song.thumbnails[0].height,
+                          imageQuality || DEFAULT_IMAGE_SIZE,
+                          DEFAULT_IMAGE_QUALITY,
                       )
-                      const highQualityImage = getHighQualityImageFromSongImage(
-                          song.thumbnails[0],
-                          '450',
-                      )
+                      const highQualityImage =
+                          getHightQualityImageFromLinkWithHeight(
+                              song.thumbnails[0].url,
+                              song.thumbnails[0].height,
+                              '450',
+                              DEFAULT_IMAGE_QUALITY,
+                          )
                       const artist = formatArtists(song.artist)
 
                       return (

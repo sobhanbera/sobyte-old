@@ -11,6 +11,7 @@ import {
 } from '../../utils'
 import {songComponentsStyles} from '../../styles/global.styles'
 import {
+    DEFAULT_HIGH_IMAGE_SIZE,
     DEFAULT_IMAGE_QUALITY,
     DEFAULT_TINY_ICON_SIZE,
     IMAGE_SMALL_SIZE_TO_SHOW,
@@ -33,8 +34,8 @@ const CommonSongItem = ({
     const songImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
-        imageQuality || DEFAULT_IMAGE_QUALITY,
-        90,
+        imageQuality || DEFAULT_HIGH_IMAGE_SIZE,
+        DEFAULT_IMAGE_QUALITY,
     )
     const highQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,

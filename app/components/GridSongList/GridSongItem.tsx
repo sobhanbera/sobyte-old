@@ -10,7 +10,7 @@ import {
     getHightQualityImageFromLinkWithHeight,
 } from '../../utils/Objects'
 import {styles} from './'
-import {DEFAULT_IMAGE_QUALITY} from '../../constants'
+import {DEFAULT_IMAGE_SIZE, DEFAULT_HIGH_IMAGE_QUALITY} from '../../constants'
 import {usePlayer} from '../../context'
 
 interface Props {
@@ -30,8 +30,8 @@ const GridSongItem = React.memo(
                 getHightQualityImageFromLinkWithHeight(
                     item.thumbnails[0].url,
                     item.thumbnails[0].height,
-                    imageQuality || DEFAULT_IMAGE_QUALITY,
-                    100,
+                    imageQuality || DEFAULT_IMAGE_SIZE,
+                    DEFAULT_HIGH_IMAGE_QUALITY,
                 ),
             [],
         )

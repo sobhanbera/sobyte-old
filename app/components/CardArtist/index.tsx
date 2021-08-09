@@ -3,10 +3,14 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native'
 
 import {useSetting} from '../../context'
 import {
-    getHighQualityImageFromSongImage,
+    getHightQualityImageFromLinkWithHeight,
     firstLetterCap,
 } from '../../utils/Objects'
-import {DEFAULT_IMAGE_QUALITY, IMAGE_TINY_SIZE_TO_SHOW} from '../../constants'
+import {
+    DEFAULT_IMAGE_QUALITY,
+    DEFAULT_IMAGE_SIZE,
+    IMAGE_TINY_SIZE_TO_SHOW,
+} from '../../constants'
 import {ArtistObject, CasualDemoList} from '../../interfaces'
 import Shimmer from 'react-native-shimmer'
 
@@ -68,14 +72,19 @@ const CardSong = ({
                   })
                 : artists[0].browseId.length > 0
                 ? artists.map(artist => {
-                      const songImage = getHighQualityImageFromSongImage(
-                          artist.thumbnails[0],
-                          imageQuality || DEFAULT_IMAGE_QUALITY,
+                      const songImage = getHightQualityImageFromLinkWithHeight(
+                          artist.thumbnails[0].url,
+                          artist.thumbnails[0].height,
+                          imageQuality || DEFAULT_IMAGE_SIZE,
+                          DEFAULT_IMAGE_QUALITY,
                       )
-                      const highQualityImage = getHighQualityImageFromSongImage(
-                          artist.thumbnails[0],
-                          '450',
-                      )
+                      const highQualityImage =
+                          getHightQualityImageFromLinkWithHeight(
+                              artist.thumbnails[0].url,
+                              artist.thumbnails[0].height,
+                              '450',
+                              DEFAULT_IMAGE_QUALITY,
+                          )
 
                       if (artist.browseId.length <= 0) return null
 

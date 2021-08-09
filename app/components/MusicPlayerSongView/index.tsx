@@ -6,6 +6,7 @@ import MarqueeText from 'react-native-text-ticker'
 import {useTheme} from '../../context'
 import {DoubleTap, TrackProgress, TrackButtonControls} from '../../components'
 import {
+    DEFAULT_HIGH_IMAGE_SIZE,
     DEFAULT_HIGH_IMAGE_QUALITY,
     FontUbuntuBold,
     MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION,
@@ -35,8 +36,8 @@ const MusicPlayerSongView = ({song, likeIsMusic}: SongView) => {
     const highQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
+        DEFAULT_HIGH_IMAGE_SIZE,
         DEFAULT_HIGH_IMAGE_QUALITY,
-        100,
     )
     const artists = formatArtists(song.artist)
 

@@ -7,7 +7,12 @@ import {
     getHightQualityImageFromLinkWithHeight,
 } from '../../utils'
 import {songComponentsStyles} from '../../styles/global.styles'
-import {DEFAULT_IMAGE_QUALITY, IMAGE_TINY_SIZE_TO_SHOW} from '../../constants'
+import {
+    DEFAULT_IMAGE_SIZE,
+    DEFAULT_IMAGE_QUALITY,
+    IMAGE_TINY_SIZE_TO_SHOW,
+    DEFAULT_HIGH_IMAGE_QUALITY,
+} from '../../constants'
 
 interface Props {
     artist: ArtistObject
@@ -26,14 +31,14 @@ const CommonSongItem = ({
     const artistImage = getHightQualityImageFromLinkWithHeight(
         artist.thumbnails[0].url,
         artist.thumbnails[0].height,
-        imageQuality || DEFAULT_IMAGE_QUALITY,
-        90,
+        imageQuality || DEFAULT_IMAGE_SIZE,
+        DEFAULT_IMAGE_QUALITY,
     )
     const highQualityImage = getHightQualityImageFromLinkWithHeight(
         artist.thumbnails[0].url,
         artist.thumbnails[0].height,
-        imageQuality || DEFAULT_IMAGE_QUALITY,
-        100,
+        imageQuality || DEFAULT_IMAGE_SIZE,
+        DEFAULT_HIGH_IMAGE_QUALITY,
     )
 
     if (artist.browseId.length <= 0) return null
