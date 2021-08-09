@@ -210,11 +210,13 @@ const Player: FC<PlayerProps> = _props => {
          * so the user has not decided finally which song to play
          * so we will not change the track yet...
          */
+        console.log('Started...', changed)
         if (changed[0].isViewable === false) return
         /**
          * if the content is fully rendered or shown to the user
          * change the track if it is different than the current track/song
          */
+        console.log('Playing...', changed)
         const {item} = changed[0]
 
         /**
