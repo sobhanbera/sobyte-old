@@ -23,7 +23,6 @@ import {useMusicApi} from '../api' // the main music loader
 import {useApp} from '../MainApp' // the app starting
 import {useTheme} from '../themes/ThemeProvider' // theme context
 import {useFetcher} from '../api/MusicFetcher' // track featching methods
-import {usePrompt} from '../components/Prompt' // global app prompts
 import Setting, {useSetting} from './Settings' // global settings
 
 import Player, {usePlayer} from '../api/PlayerControls' // global player options
@@ -31,15 +30,7 @@ import Player, {usePlayer} from '../api/PlayerControls' // global player options
 export default Player
 export {Setting}
 
-export {
-    useSetting,
-    useTheme,
-    useApp,
-    useFetcher,
-    useMusicApi,
-    usePlayer,
-    usePrompt,
-}
+export {useSetting, useTheme, useApp, useFetcher, useMusicApi, usePlayer}
 
 /** external apis */
 import {useTrackPlayerProgress} from 'react-native-track-player'
