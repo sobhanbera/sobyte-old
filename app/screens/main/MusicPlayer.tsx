@@ -182,6 +182,7 @@ const Player: FC<PlayerProps> = _props => {
             90,
         )
         const artists = formatArtists(item.artist)
+
         pauseTrack()
         play({
             url: '',
@@ -194,9 +195,15 @@ const Player: FC<PlayerProps> = _props => {
         })
     }).current
 
+    /**
+     * this variable's copy could be found in the main constants
+     * file
+     */
     const ViewabilityConfig = useRef({
-        viewAreaCoveragePercentThreshold: 50,
-        minimumViewTime: 0,
+        minimumViewTime: 1000, // there should be a miminum time only after which the process of playing the song or else should start
+        viewAreaCoveragePercentThreshold: 98, // since when we are giving a less area view port it occur much before the scroll actually occurs
+        // itemVisiblePercentThreshold: 90, // percent %
+        waitForInteraction: false, // false because we want the song must be played instantly when it is loaded
     }).current
 
     return (
