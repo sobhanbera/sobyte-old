@@ -187,3 +187,22 @@ export function capitalizeWords(string: string) {
         return character.toUpperCase()
     })
 }
+
+/**
+ * @param {Array} array an array of any type of variables
+ * @returns a random and shuffled order of the same array
+ */
+export function shuffleArray(array: Array<any>) {
+    var currIndex = array.length,
+        temp,
+        random
+    // the current index and random index variable with one temporary variable
+    while (0 !== currIndex) {
+        random = Math.floor(Math.random() * currIndex)
+        currIndex -= 1
+        temp = array[currIndex]
+        array[currIndex] = array[random]
+        array[random] = temp
+    }
+    return array
+}
