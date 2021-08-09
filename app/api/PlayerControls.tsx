@@ -145,15 +145,6 @@ const Player: FC<PlayerProps> = props => {
         playlistId: '',
     })
 
-    /**
-     * variable just to save the currently playing track's id
-     * this will not be passed to the children components and just only
-     * to compare does the new song to play is different than current
-     * when a new song is requested to play...
-     * @deprecated use of this variable any more...
-     */
-    // const currentTrackID = useRef<string>('')
-
     useEffect(() => {
         const listener = TrackPlayer.addEventListener(
             'playback-state',
@@ -196,7 +187,6 @@ const Player: FC<PlayerProps> = props => {
                             artwork: result.artwork,
                             playlistId: result.description || '',
                         }
-                        // currentTrackID.current = result.id
                     })
                     .catch(_err => {})
             },
@@ -246,7 +236,6 @@ const Player: FC<PlayerProps> = props => {
                 artwork: 'noimage',
                 playlistId: '',
             }
-            // currentTrackID.current = ''
         })
     }
 
