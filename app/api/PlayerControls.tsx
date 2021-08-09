@@ -1,4 +1,5 @@
 import React, {useState, createContext, FC, useContext, useEffect} from 'react'
+import {useRef} from 'react'
 
 import TrackPlayer, {
     STATE_PLAYING,
@@ -134,7 +135,7 @@ const Player: FC<PlayerProps> = props => {
     /**
      * the current track which is playing...
      */
-    const [currentTrack, setCurrentTrack] = useState<Track>({
+    const currentTrack = useRef<Track>({
         artist: '',
         artwork: '',
         duration: 0,
@@ -143,6 +144,15 @@ const Player: FC<PlayerProps> = props => {
         url: '',
         playlistId: '',
     })
+
+    /**
+     * variable just to save the currently playing track's id
+     * this will not be passed to the children components and just only
+     * to compare does the new song to play is different than current
+     * when a new song is requested to play...
+     * @deprecated use of this variable any more...
+     */
+    // const currentTrackID = useRef<string>('')
 
     useEffect(() => {
         const listener = TrackPlayer.addEventListener(
@@ -177,7 +187,7 @@ const Player: FC<PlayerProps> = props => {
                         if (result === null) {
                             return
                         }
-                        setCurrentTrack({
+                        currentTrack.current = {
                             id: result.id,
                             url: result.url,
                             duration: result.duration || 0,
@@ -185,7 +195,8 @@ const Player: FC<PlayerProps> = props => {
                             artist: result.artist,
                             artwork: result.artwork,
                             playlistId: result.description || '',
-                        })
+                        }
+                        // currentTrackID.current = result.id
                     })
                     .catch(_err => {})
             },
@@ -198,15 +209,15 @@ const Player: FC<PlayerProps> = props => {
         const playbackQueueEnded = TrackPlayer.addEventListener(
             'playback-queue-ended',
             () => {
-                setCurrentTrack(track => ({
-                    id: track.id,
-                    url: track.url,
-                    duration: track.duration,
-                    title: track.title,
-                    artist: track.artist,
-                    artwork: track.artwork,
-                    playlistId: track.playlistId,
-                }))
+                // setCurrentTrack(track => ({
+                //     id: track.id,
+                //     url: track.url,
+                //     duration: track.duration,
+                //     title: track.title,
+                //     artist: track.artist,
+                //     artwork: track.artwork,
+                //     playlistId: track.playlistId,
+                // }))
             },
         )
 
@@ -226,7 +237,7 @@ const Player: FC<PlayerProps> = props => {
      */
     const resetPlayer = async () => {
         await TrackPlayer.reset().then(_res => {
-            setCurrentTrack({
+            currentTrack.current = {
                 id: '',
                 url: '',
                 duration: 0,
@@ -234,7 +245,8 @@ const Player: FC<PlayerProps> = props => {
                 artist: '',
                 artwork: 'noimage',
                 playlistId: '',
-            })
+            }
+            // currentTrackID.current = ''
         })
     }
 
@@ -243,7 +255,7 @@ const Player: FC<PlayerProps> = props => {
      * @returns that the track with id is in the next songs list
      */
     const checkSongAlreadyInNextSongsList = (musicId: string) => {
-        if (currentTrack.id === musicId) return true
+        if (currentTrack.current.id === musicId) return true
 
         for (let i in nextSongsList)
             if (nextSongsList[i].id === musicId) return true
@@ -274,7 +286,7 @@ const Player: FC<PlayerProps> = props => {
                 if (playerState === STATE_PAUSED) TrackPlayer.play()
             return
         }
-        if (currentTrack && track.id === currentTrack.id) {
+        if (currentTrack && track.id === currentTrack.current.id) {
             if (playerState === STATE_PAUSED) TrackPlayer.play()
             return
         }
@@ -304,7 +316,7 @@ const Player: FC<PlayerProps> = props => {
      * returns -1 if no data is found
      */
     const getTheIndexOfCurrentSong = () => {
-        const currentSongID = currentTrack.id
+        const currentSongID = currentTrack.current.id
         for (let i in nextSongsList) {
             if (nextSongsList[i].id === currentSongID) {
                 return i
@@ -339,12 +351,14 @@ const Player: FC<PlayerProps> = props => {
          * else it will play the current track and returns from the function....
          */
         if (!track) {
-            if (currentTrack)
+            if (currentTrack.current.id)
                 if (playerState === STATE_PAUSED) TrackPlayer.play()
+            console.log('Condition 1')
             return
         }
-        if (currentTrack && track.id === currentTrack.id) {
+        if (currentTrack.current.id && track.id === currentTrack.current.id) {
             if (playerState === STATE_PAUSED) TrackPlayer.play()
+            console.log('Condition 2')
             return
         }
 
@@ -523,7 +537,7 @@ const Player: FC<PlayerProps> = props => {
         stopped: playerState === STATE_STOPPED,
         buffering: playerState === STATE_BUFFERING,
 
-        current: currentTrack,
+        current: currentTrack.current,
         nextSongsList: nextSongsList,
 
         play: play,
