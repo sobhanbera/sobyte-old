@@ -123,9 +123,6 @@ const Player: FC<PlayerProps> = _props => {
     }, [])
 
     const initializeMusicPlayer = () => {
-        /**
-         * we don't need to save this data
-         */
         search(
             RANDOM_SEARCH_QUERY,
             'SONG',
@@ -306,7 +303,7 @@ const Player: FC<PlayerProps> = _props => {
          * finally play the songs
          * after all this loading and checkings
          */
-        // pauseTrack()
+        pauseTrack()
         play({
             url: '',
             id: item.musicId,
