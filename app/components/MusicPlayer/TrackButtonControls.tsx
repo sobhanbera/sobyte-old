@@ -25,6 +25,15 @@ const TrackButtonControls = (props: Props) => {
     const [localPlaying, setLocalPlaying] = useState<boolean>(false)
 
     useEffect(() => {
+        const playEvent = TrackPlayer.addEventListener('remote-play', () => {
+            setLocalPlaying(true)
+        })
+        const pauseEvent = TrackPlayer.addEventListener('remote-pause', () => {
+            setLocalPlaying(false)
+        })
+        const stopEvent = TrackPlayer.addEventListener('remote-stop', () => {
+            setLocalPlaying(false)
+        })
         const stateChangeEvent = TrackPlayer.addEventListener(
             'playback-state',
             (state: {state: number}) => {
@@ -36,6 +45,9 @@ const TrackButtonControls = (props: Props) => {
             },
         )
         return () => {
+            playEvent.remove()
+            pauseEvent.remove()
+            stopEvent.remove()
             stateChangeEvent.remove()
         }
     }, [])
