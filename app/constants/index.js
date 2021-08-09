@@ -189,25 +189,24 @@ export const ViewabilityConfig = {
      * viewability callback will be fired. A high number means that scrolling through content without
      * stopping will not mark the content as viewable.
      */
-    //   minimumViewTime?: number, // not required
     /**
      * Percent of viewport that must be covered for a partially occluded item to count as
      * "viewable", 0-100. Fully visible items are always considered viewable. A value of 0 means
      * that a single pixel in the viewport makes the item viewable, and a value of 100 means that
      * an item must be either entirely visible or cover the entire viewport to count as viewable.
      */
-    // viewAreaCoveragePercentThreshold: 90, // percent %
     /**
      * Similar to `viewAreaPercentThreshold`, but considers the percent of the item that is visible,
      * rather than the fraction of the viewable area it covers.
      */
-    itemVisiblePercentThreshold: 80, // percent %
-
     /**
      * Nothing is considered viewable until the user scrolls or `recordInteraction` is called after
      * render.
      */
-    waitForInteraction: true, // boolean
+    minimumViewTime: 1000, // there should be a miminum time only after which the process of playing the song or else should start
+    viewAreaCoveragePercentThreshold: 98, // since when we are giving a less area view port it occur much before the scroll actually occurs
+    // itemVisiblePercentThreshold: 90, // percent %
+    waitForInteraction: false, // false because we want the song must be played instantly when it is loaded
 }
 
 export const RANDOM_SEARCH_QUERY =
