@@ -21,14 +21,9 @@ import {
     PaddingView,
     SobyteTextInput,
     ScalerAuthButton,
+    Prompt,
 } from '../../components'
-import {
-    useTheme,
-    useApp,
-    usePrompt,
-    useUserData,
-    useBackendApi,
-} from '../../context'
+import {useTheme, useApp, useUserData, useBackendApi} from '../../context'
 import {
     MAX_EMAIL_LENGTH,
     MAX_PASSWORD_LENGTH,
@@ -44,12 +39,17 @@ interface LoginProps {
 const Login = (props: LoginProps) => {
     const {themeColors} = useTheme() // theme context api provider...
     const {setShowLoading} = useApp() // loader context api
-    const {prompt} = usePrompt() // prompt context api
     const {setLocalUserData} = useUserData() // user data, load user data and many more
     const {makeApiRequestPOST} = useBackendApi() // to make API requests to the backend...
 
     const [user, setUser] = useState('sobhanbera258@gmail.com') // the username or email id field text...
     const [password, setPassword] = useState('sobhanber') // the password field text...
+
+    /**
+     * the prompt component to show error, log, warning, result
+     * and many more, this is the update after the prompt is converted into component from context api...
+     */
+    const [promptTitle, setPromptTitle] = useState('')
 
     /**
      * this is the main login function of the application
@@ -66,25 +66,29 @@ const Login = (props: LoginProps) => {
     const LoginUser = () => {
         if (!user) {
             //  * 1. email should be present for regular signin option (not by OTP)
-            prompt('Email is required for signing in.')
+            setPromptTitle('Email is required for signing in.')
         } else if (EMAIL_REGEX.test(user) && isEmailBlocked(user)) {
             // 2. email should be valid
             // 3. email should not be a temporary mail ID
             // 2,3. check if the user text is a type of email the if it is a email check wheather it is a temporary mail if it is then don't continue else continue...
-            prompt('Account will be blocked if you use this email.')
-            // prompt('Enter a valid email ID.')
+            setPromptTitle('Account will be blocked if you use this email.')
+            // setPromptTitle('Enter a valid email ID.')
         } else if (EMAIL_REGEX.test(user) && user.length > MAX_EMAIL_LENGTH) {
             // 5. if the user provided an email checking if it is of correct length
-            prompt('Valid email length must be under 320.')
+            setPromptTitle('Valid email length must be under 320.')
         } else if (!password) {
             // 1. password should be present for regular signin option (not by OTP)
-            prompt('Passoword is required for regular signing in.')
+            setPromptTitle('Passoword is required for regular signing in.')
         } else if (password.length < MIN_PASSWORD_LENGTH) {
             // 4. password length should be valid
-            prompt('SHORT: Password length must be of 8-30 and alphanumeric.')
+            setPromptTitle(
+                'SHORT: Password length must be of 8-30 and alphanumeric.',
+            )
         } else if (password.length > MAX_PASSWORD_LENGTH) {
             // 4. password length should be valid
-            prompt('LONG: Password length must be of 8-30 and alphanumeric.')
+            setPromptTitle(
+                'LONG: Password length must be of 8-30 and alphanumeric.',
+            )
         } else {
             // all checks are passed we could login the user if the credentials are correct after
             // making api request to the backend
@@ -95,33 +99,35 @@ const Login = (props: LoginProps) => {
                 .then(res => {
                     const {code} = res.data
                     if (code === 'PROVIDED_INCOMPLETE_DATA') {
-                        prompt('Something went wrong in your end.')
+                        setPromptTitle('Something went wrong in your end.')
                     } else if (res.data.code === 'EMAIL_LENGTH_EXCEED') {
-                        prompt(
+                        setPromptTitle(
                             'The account with this detail is blocked/deleted or may be now allowed.',
                         )
                     } else if (
                         res.data.code === 'SHORT_PASSWORD' ||
                         res.data.code === 'PASSWORD_LENGTH_EXCEED'
                     ) {
-                        prompt('Wrong password. Please try again.')
+                        setPromptTitle('Wrong password. Please try again.')
                     } else if (res.data.code === 'SIGNIN_FAILED') {
-                        prompt('Something went wrong. Please try again.')
+                        setPromptTitle(
+                            'Something went wrong. Please try again.',
+                        )
                     } else if (res.data.code === 'USER_NOT_FOUND') {
-                        prompt('No user account found with this data.')
+                        setPromptTitle('No user account found with this data.')
                     } else if (res.data.code === 'WRONG_PASSWORD') {
-                        prompt('Wrong password. Please try again.')
+                        setPromptTitle('Wrong password. Please try again.')
                     } else if (res.data.code === 'USER_ACCOUNT_IS_DISABLED') {
-                        prompt(
+                        setPromptTitle(
                             'This account is disabled and not allowed to login.',
                         )
                     } else if (res.data.code === 'SUCCESS') {
-                        prompt('User successfully logged in.')
+                        setPromptTitle('User successfully logged in.')
                         setLocalUserData(JSON.stringify(res.data.data))
                     }
                 })
                 .catch(_err => {
-                    prompt('Something went wrong. Please try again.')
+                    setPromptTitle('Something went wrong. Please try again.')
                 })
         }
     }
@@ -175,6 +181,8 @@ const Login = (props: LoginProps) => {
                     </PaddingView>
                 </KeyboardAvoidingView>
             </LinearGradient>
+
+            <Prompt title={promptTitle} setTitle={setPromptTitle} />
         </TouchableWithoutFeedback>
     )
 }
