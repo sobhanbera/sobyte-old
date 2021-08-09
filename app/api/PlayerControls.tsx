@@ -32,11 +32,6 @@ export interface Track {
     // [key: string]: any
 }
 interface PlayerControlsModal {
-    playing: boolean // player state is playing or not...
-    paused: boolean // player state is paused or not...
-    stopped: boolean // player state is stopped or not...
-    buffering: boolean // player state is buffering or not...
-
     /**
      * list of songs which are next to the current song
      * this is generated when a new song is played or the last song reached
@@ -86,11 +81,6 @@ interface PlayerControlsModal {
     addSongAndPlay(_track: Track): any
 }
 const PlayerContext = createContext<PlayerControlsModal>({
-    playing: false, // player state is playing or not...
-    paused: false, // player state is paused or not...
-    stopped: false, // player state is stopped or not...
-    buffering: false, // player state is buffering or not...
-
     /**
      * list of songs which are next to the current song
      * this is generated when a new song is played or the last song reached
@@ -401,7 +391,7 @@ const Player: FC<PlayerProps> = props => {
         }
         if (currentTrack.current.id && track.id === currentTrack.current.id) {
             if (playerState === STATE_PAUSED) TrackPlayer.play()
-            console.log('Condition 2')
+            console.log('Condition 2', playerState, STATE_PAUSED)
             return
         }
 
@@ -575,11 +565,6 @@ const Player: FC<PlayerProps> = props => {
      * children components...
      */
     const playerValues = {
-        playing: playerState === STATE_PLAYING,
-        paused: playerState === STATE_PAUSED,
-        stopped: playerState === STATE_STOPPED,
-        buffering: playerState === STATE_BUFFERING,
-
         current: currentTrack.current,
         nextSongsList: nextSongsList,
 
