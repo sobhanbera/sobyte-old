@@ -36,6 +36,7 @@ import {
     randomNumber,
     capitalizeWords,
     IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX,
+    shuffleArray,
 } from './Objects'
 export {
     returnNullCallback,
@@ -58,4 +59,5 @@ export {
     randomNumber,
     capitalizeWords,
     IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX,
+    shuffleArray,
 }
