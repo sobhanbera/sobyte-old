@@ -137,6 +137,7 @@ export const LIKE_ICON_OR_TEXT_COLOR = '#D61F26'
  *
  */
 import {DefaultStatusBarComponent, PaddingBottomView} from './components'
+import {shuffleArray} from './utils/Objects'
 export {DefaultStatusBarComponent, PaddingBottomView}
 
 /** equal partition arrays for linear gradient locations */
@@ -217,4 +218,4 @@ export const ViewabilityConfig = {
 }
 
 export const RANDOM_SEARCH_QUERY =
-    queries[Math.floor(Math.random() * queries.length)]
+    shuffleArray(queries)[Math.floor(Math.random() * queries.length)]
