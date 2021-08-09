@@ -4,7 +4,6 @@ import Modal from 'react-native-modal'
 
 import {FontUbuntu, PROMPT_DURATION} from '../../constants'
 import {useTheme} from '../../context'
-import Scaler from '../Scaler'
 
 interface Props {
     title: string
@@ -40,12 +39,12 @@ const Prompt = (props: Props) => {
         <Modal
             backdropOpacity={0}
             useNativeDriverForBackdrop
-            isVisible={title.length > 0}
-            hideModalContentWhileAnimating
-            animationInTiming={500}
-            animationOutTiming={500}
-            animationIn="fadeIn"
-            animationOut="fadeOut"
+            isVisible={title > ''} // title.length will take time to get the length each time so providing operator. -> this method is more efficient than previous since a string of any length > 0 will return this condition as true
+            hideModalContentWhileAnimating={false}
+            animationInTiming={1000}
+            animationOutTiming={1000}
+            animationIn="fadeInDown"
+            animationOut="fadeOutDown"
             onBackdropPress={() => clearPrompt()}
             onBackButtonPress={() => clearPrompt()}
             style={{
@@ -60,33 +59,24 @@ const Prompt = (props: Props) => {
                 backgroundColor: 'transparent',
                 borderRadius: 7,
             }}>
-            <Scaler
-                touchableOpacity={1}
-                scale={1}
+            <Text
                 onPress={() => clearPrompt()}
-                containerStyle={{
-                    width: '100%',
-                    paddingVertical: 1,
-                    paddingHorizontal: 6,
+                style={{
+                    width: '96%',
+                    fontSize: 16,
                     borderRadius: 7,
                     overflow: 'hidden',
+                    alignSelf: 'center',
+                    textAlign: 'center',
+                    textAlignVertical: 'center',
+                    paddingVertical: 13,
+                    paddingHorizontal: 8,
+                    color: themeColors.white[0],
+                    fontFamily: FontUbuntu,
                     backgroundColor: themeColors.surfacelight[0] + 'DF',
                 }}>
-                <Text
-                    style={{
-                        textAlign: 'center',
-                        textAlignVertical: 'center',
-                        paddingHorizontal: 9,
-                        paddingVertical: 12,
-                        fontSize: 16,
-                        color: themeColors.white[0],
-                        fontFamily: FontUbuntu,
-                        width: '100%',
-                        alignSelf: 'center',
-                    }}>
-                    {title}
-                </Text>
-            </Scaler>
+                {title}
+            </Text>
         </Modal>
     )
 }
