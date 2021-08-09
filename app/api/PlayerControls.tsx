@@ -31,7 +31,61 @@ export interface Track {
     // rating?: number | boolean
     // [key: string]: any
 }
-const PlayerContext = createContext({
+interface PlayerControlsModal {
+    playing: boolean // player state is playing or not...
+    paused: boolean // player state is paused or not...
+    stopped: boolean // player state is stopped or not...
+    buffering: boolean // player state is buffering or not...
+
+    /**
+     * list of songs which are next to the current song
+     * this is generated when a new song is played or the last song reached
+     */
+    nextSongsList: Array<Track>
+
+    /**
+     * the current track which is playing...
+     */
+    current: Track
+
+    /**
+     * @param _track the actual track to play
+     * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
+     * @param _showLoading wheather to show loading while loading the song data
+     *
+     * the common and normal play function which had many checks and then plays the song
+     * also generate next songs list and there url...
+     *
+     * first this function will check that the track which is passed is the current playing track
+     * and also if the track is a valid track
+     * else it will play the current track and returns from the function....
+     */
+    play(_track: Track, _play?: boolean, _showLoading?: boolean): any
+
+    /**
+     * @param musicId is the id of the any track
+     * @returns that the track with id is in the next songs list
+     */
+    checkSongAlreadyInNextSongsList(_musicId: string): any
+    /**
+     * @param index a number which should be an index for the nextSongList
+     * this function is exactly a helper function of the @function addSongAndPlay which checks that the index is among
+     * the nextsong list index and plays it then directly
+     */
+    playSongAtIndex(_index: number): any
+    /**
+     * @returns the index of the current playing song from next songs list data
+     * returns -1 if no data is found
+     */
+    getTheIndexOfCurrentSong(): any
+    /**
+     * @param track is the track which is provided to play directly
+     * this function resets the player and add the track which is passed and plays it directly but the track must be valid
+     * since this function doesn't has any checks for the url of the music or the image or any other property
+     */
+    addSongAndPlay(_track: Track): any
+}
+const PlayerContext = createContext<PlayerControlsModal>({
     playing: false, // player state is playing or not...
     paused: false, // player state is paused or not...
     stopped: false, // player state is stopped or not...
