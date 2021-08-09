@@ -14,6 +14,7 @@ import {
     GradientBackground,
     MusicPlayerSongView,
     BackgroundBluredImage,
+    Prompt,
 } from '../../components'
 import {
     DefaultStatusBarComponent,
@@ -78,6 +79,13 @@ const Player: FC<PlayerProps> = _props => {
             clickTrackingParams: '',
         },
     })
+
+    /**
+     * the prompt component to show error, log, warning, result
+     * and many more, this is the update after the prompt is converted into component from context api...
+     */
+    const [promptTitle, setPromptTitle] = useState('')
+    const promptShown1Time = useRef<boolean>(false) // varialble which controls wheather the prompt is show once when the user launched application or not...
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = useRef<any>(null)
@@ -150,6 +158,19 @@ const Player: FC<PlayerProps> = _props => {
                 )
             })
     }, [error])
+
+    /**
+     * @description to show the prompt when a song is played over cellular, wifi,
+     * ethernet, or any other network just once...
+     */
+    const showThePromptForFirstTime = () => {
+        // if promptShown1Time is true that means the prompt is shown once no need to show it again just return
+        if (promptShown1Time.current === true) return
+        // if the prompt is not shown any time then show it and update the promptShown1Time to true
+        setPromptTitle('Playing song through internet...')
+        // now the prompt will not longer be shown again...
+        promptShown1Time.current = true
+    }
 
     /**
      * item rendered for the list item
@@ -244,7 +265,32 @@ const Player: FC<PlayerProps> = _props => {
             artist: artists,
             artwork: trackImage,
         })
+
+        // showing the prompt...
+        showThePromptForFirstTime()
     }).current
+
+    /**
+     * if we haven't shown the prompt once then show it and make the control variable false
+     * so that from next time the prompt is not shown
+     * if we have shown the propmt once
+     */
+    //  if (alreadyShownPrompt <= 0)
+    //  if (
+    //      [
+    //          'cellular',
+    //          'wifi',
+    //          'bluetooth',
+    //          'ethernet',
+    //          'wimax',
+    //          'vpn',
+    //      ].includes(res.type)
+    //  ) {
+    //      // showing the prompt...
+    //      prompt(`playing over ${res.type}.`)
+    //      // incrementing the control variable..
+    //      alreadyShownPrompt++
+    //  }
 
     return (
         <GradientBackground
@@ -359,6 +405,9 @@ const Player: FC<PlayerProps> = _props => {
                     />
                 </View>
             ) : null}
+
+            {/* the prompt component to show that user is playing song through network for the first time song is being played... */}
+            <Prompt title={promptTitle} setTitle={setPromptTitle} />
         </GradientBackground>
     )
 }
