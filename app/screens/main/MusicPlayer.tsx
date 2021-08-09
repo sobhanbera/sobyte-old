@@ -201,7 +201,7 @@ const Player: FC<PlayerProps> = _props => {
      */
     const ViewabilityConfig = useRef({
         minimumViewTime: 1000, // there should be a miminum time only after which the process of playing the song or else should start
-        viewAreaCoveragePercentThreshold: 98, // since when we are giving a less area view port it occur much before the scroll actually occurs
+        viewAreaCoveragePercentThreshold: 99, // since when we are giving a less area view port it occur much before the scroll actually occurs
         // itemVisiblePercentThreshold: 90, // percent %
         waitForInteraction: false, // false because we want the song must be played instantly when it is loaded
     }).current
