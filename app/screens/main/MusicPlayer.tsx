@@ -151,6 +151,10 @@ const Player: FC<PlayerProps> = _props => {
             })
     }, [error])
 
+    /**
+     * item rendered for the list item
+     * provide the song data...
+     */
     const renderItem = useCallback(
         (itemDetails: ListRenderItemInfo<SongObject>) => {
             const {item} = itemDetails
@@ -165,7 +169,12 @@ const Player: FC<PlayerProps> = _props => {
         },
         [],
     )
+    // key extractor for each item of the UI...
     const keyExtractor = useCallback((item: SongObject) => item.musicId, [])
+    /**
+     * layout of each music item or the song view component
+     * like width and height are provided through this function...
+     */
     const getItemLayout = useCallback(
         (_data, index) => ({
             length: height,
