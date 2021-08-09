@@ -21,6 +21,8 @@ import {
     RANDOM_SEARCH_QUERY,
     INITIAL_NUMBER_OF_TRACKS_TO_LOAD,
     MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY,
+    DEFAULT_NOTIFICATION_IMAGE_QUALITY,
+    DEFAULT_IMAGE_QUALITY,
 } from '../../constants'
 import {
     formatArtists,
@@ -172,28 +174,6 @@ const Player: FC<PlayerProps> = _props => {
         }),
         [],
     )
-    const onViewableItemsChanged = useRef((data: any) => {
-        const {viewableItems}: ViewToken = data
-        const {item} = viewableItems[0]
-        const trackImage = getHightQualityImageFromLinkWithHeight(
-            item.thumbnails[0].url,
-            item.thumbnails[0].height,
-            300,
-            90,
-        )
-        const artists = formatArtists(item.artist)
-
-        pauseTrack()
-        play({
-            url: '',
-            id: item.musicId,
-            duration: item.duration,
-            title: item.name,
-            playlistId: item.playlistId,
-            artist: artists,
-            artwork: trackImage,
-        })
-    }).current
 
     /**
      * this variable's copy could be found in the main constants
@@ -204,6 +184,55 @@ const Player: FC<PlayerProps> = _props => {
         viewAreaCoveragePercentThreshold: 99, // since when we are giving a less area view port it occur much before the scroll actually occurs
         // itemVisiblePercentThreshold: 90, // percent %
         waitForInteraction: false, // false because we want the song must be played instantly when it is loaded
+    }).current
+    /**
+     * when user scrolls the main music player to the next songs
+     * this function gets trigger according to the configs above..
+     *
+     * it provides the ViewToken type of variable
+     * if any changed item with isViewable property is true we can play that song in place of the current playing song
+     * if it is not true than this means the two tracks are partially shown in the UI to the user
+     */
+    const onViewableItemsChanged = useRef((data: any) => {
+        const {changed}: ViewToken = data
+        /**
+         * two tracks are shown in the UI to the user
+         * this may be the user has just half way scrolled the current song
+         * so the user has not decided finally which song to play
+         * so we will not change the track yet...
+         */
+        if (changed[0].isViewable === false) return
+        /**
+         * if the content is fully rendered or shown to the user
+         * change the track if it is different than the current track/song
+         */
+        const {item} = changed[0]
+
+        /**
+         * generating the data required for playing the song
+         */
+        const trackImage = getHightQualityImageFromLinkWithHeight(
+            item.thumbnails[0].url,
+            item.thumbnails[0].height,
+            DEFAULT_NOTIFICATION_IMAGE_QUALITY,
+            DEFAULT_IMAGE_QUALITY,
+        )
+        const artists = formatArtists(item.artist)
+
+        /**
+         * finally play the songs
+         * after all this loading and checkings
+         */
+        pauseTrack()
+        play({
+            url: '',
+            id: item.musicId,
+            duration: item.duration,
+            title: item.name,
+            playlistId: item.playlistId,
+            artist: artists,
+            artwork: trackImage,
+        })
     }).current
 
     return (
