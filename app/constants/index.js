@@ -104,6 +104,7 @@ export const DEFAULT_OVERLAY_OPACITY = 0.55 // threshold default opacity overlay
 export const DEFAULT_OVERLAY_OPACITY_MIN = 0.375692 // minimum opacity overlay over any view, component, image, etc
 export const DEFAULT_IMAGE_QUALITY = '200' // default image width and height in string...
 export const DEFAULT_HIGH_IMAGE_QUALITY = '576' // default high quality image width and height in string...
+export const DEFAULT_NOTIFICATION_IMAGE_QUALITY = '180' // the quality of the image which will be shown in the notification of when a track is played short size of image would take less time to load and play the song faster then previously...
 
 export const INFINITE_SCROLL_OFFSET = 1000 // default image width and height in string...
 
@@ -204,7 +205,7 @@ export const ViewabilityConfig = {
      * render.
      */
     minimumViewTime: 1000, // there should be a miminum time only after which the process of playing the song or else should start
-    viewAreaCoveragePercentThreshold: 98, // since when we are giving a less area view port it occur much before the scroll actually occurs
+    viewAreaCoveragePercentThreshold: 99, // since when we are giving a less area view port it occur much before the scroll actually occurs
     // itemVisiblePercentThreshold: 90, // percent %
     waitForInteraction: false, // false because we want the song must be played instantly when it is loaded
 }
