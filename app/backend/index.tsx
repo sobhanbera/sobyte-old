@@ -152,10 +152,10 @@ const AppMainBackendApi = (props: Props) => {
         // the promise to return ...
         return new Promise((resolve, reject) => {
             // making the api request to the backend...
-            console.log(
-                'ACCESS_TOKEN WHILE MAKING REQUEST IS ->>>',
-                accessToken,
-            )
+            // console.log(
+            //     'ACCESS_TOKEN WHILE MAKING REQUEST IS ->>>',
+            //     accessToken,
+            // )
 
             backendApiClient
                 .post(
@@ -201,10 +201,10 @@ const AppMainBackendApi = (props: Props) => {
                     // if (IP.length <= 0) updateIpAddress()
                     // if the api request responded with any error
                     // reject this promise with that error..
-                    console.log(
-                        'ERRORO WHILE MAKING BACKEND API REQUEST := ',
-                        error,
-                    )
+                    // console.log(
+                    //     'ERRORO WHILE MAKING BACKEND API REQUEST := ',
+                    //     error,
+                    // )
                     reject(error)
                 })
         })
