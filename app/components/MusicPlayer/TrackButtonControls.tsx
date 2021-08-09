@@ -8,7 +8,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 import TrackPlayer, {STATE_PLAYING} from 'react-native-track-player'
 
-import {usePlayer} from '../../context'
 import {Scaler} from '../'
 import {
     playTrack,
@@ -23,9 +22,7 @@ interface Props {
     likeIsMusic: Function
 }
 const TrackButtonControls = (props: Props) => {
-    const {playing} = usePlayer()
-
-    const [localPlaying, setLocalPlaying] = useState<boolean>(playing)
+    const [localPlaying, setLocalPlaying] = useState<boolean>(false)
 
     useEffect(() => {
         const stateChangeEvent = TrackPlayer.addEventListener(
