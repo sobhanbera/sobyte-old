@@ -137,7 +137,7 @@ export const LIKE_ICON_OR_TEXT_COLOR = '#D61F26'
  *
  */
 import {DefaultStatusBarComponent, PaddingBottomView} from './components'
-import {shuffleArray} from './utils/Objects'
+import {shuffleArray} from './utils'
 export {DefaultStatusBarComponent, PaddingBottomView}
 
 /** equal partition arrays for linear gradient locations */
