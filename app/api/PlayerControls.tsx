@@ -1,12 +1,7 @@
 import React, {useState, createContext, FC, useContext, useEffect} from 'react'
 import {useRef} from 'react'
 
-import TrackPlayer, {
-    STATE_PLAYING,
-    STATE_PAUSED,
-    STATE_STOPPED,
-    STATE_BUFFERING,
-} from 'react-native-track-player'
+import TrackPlayer, {STATE_PAUSED} from 'react-native-track-player'
 
 import {useApp, useFetcher, useMusicApi} from '../context'
 import {SongObjectWithArtistAsString} from '../interfaces'
@@ -175,7 +170,7 @@ const Player: FC<PlayerProps> = props => {
      * playerstate provide the info about the track player that the song is
      * playing, paused, stopped, buffering, etc...
      */
-    const [playerState, setPlayerState] = useState()
+    const playerState = useRef<number>()
     /**
      * the current track which is playing...
      */
@@ -193,7 +188,7 @@ const Player: FC<PlayerProps> = props => {
         const listener = TrackPlayer.addEventListener(
             'playback-state',
             ({state}) => {
-                setPlayerState(state)
+                playerState.current = state
             },
         )
 
@@ -316,11 +311,11 @@ const Player: FC<PlayerProps> = props => {
     const addSongAndPlay = (track: Track) => {
         if (!track) {
             if (currentTrack)
-                if (playerState === STATE_PAUSED) TrackPlayer.play()
+                if (playerState.current === STATE_PAUSED) TrackPlayer.play()
             return
         }
         if (currentTrack && track.id === currentTrack.current.id) {
-            if (playerState === STATE_PAUSED) TrackPlayer.play()
+            if (playerState.current === STATE_PAUSED) TrackPlayer.play()
             return
         }
 
@@ -385,13 +380,13 @@ const Player: FC<PlayerProps> = props => {
          */
         if (!track) {
             if (currentTrack.current.id)
-                if (playerState === STATE_PAUSED) TrackPlayer.play()
+                if (playerState.current === STATE_PAUSED) TrackPlayer.play()
             console.log('Condition 1')
             return
         }
         if (currentTrack.current.id && track.id === currentTrack.current.id) {
-            if (playerState === STATE_PAUSED) TrackPlayer.play()
-            console.log('Condition 2', playerState, STATE_PAUSED)
+            if (playerState.current === STATE_PAUSED) TrackPlayer.play()
+            console.log('Condition 2', playerState.current, STATE_PAUSED)
             return
         }
 
