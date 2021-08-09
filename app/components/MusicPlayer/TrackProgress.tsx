@@ -7,7 +7,7 @@ import {seekTrackTo} from '../../api/PlayerControlsCommons'
 
 interface Props {
     color?: string
-    duration: number
+    duration: number // since the duration will be the same for an unique track so why we should extract it from the progress we could get it from props this will cause less renders in the UI...
 }
 const TrackProgress = (props: Props) => {
     const {
@@ -29,7 +29,7 @@ const TrackProgress = (props: Props) => {
                     alignItems: 'center',
                 }}>
                 <Slider
-                    // step={0.001}
+                    step={0.01}
                     value={actualPosition}
                     minimumValue={0}
                     maximumValue={actualDuration}
