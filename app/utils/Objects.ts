@@ -173,7 +173,15 @@ export function isEmailBlocked(email: string) {
  * @returns a string which contains capital letter after each spaces...
  */
 export function capitalizeWords(string: string) {
-    return string.replace(/(?:^|\s)\S/g, function (a) {
-        return a.toUpperCase()
+    /**
+     * we are converting the whole string to lowercase because
+     * the input string may be like this:
+     * Input:- THIS IS A SENTENCE OR STRING
+     * Output:- THIS IS A SENTENCE OR STRING
+     * But We Want:- This Is A Sentence Or String
+     * that's why
+     */
+    return string.toLowerCase().replace(/(?:^|\s)\S/g, function (character) {
+        return character.toUpperCase()
     })
 }
