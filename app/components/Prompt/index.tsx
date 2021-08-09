@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 import {Text} from 'react-native'
 import Modal from 'react-native-modal'
 
@@ -6,22 +6,31 @@ import {FontUbuntu, PROMPT_DURATION} from '../../constants'
 import {useTheme} from '../../context'
 import Scaler from '../Scaler'
 
-interface Props {}
+interface Props {
+    title: string
+    setTitle: Function
+}
 const Prompt = (props: Props) => {
     const {themeColors} = useTheme()
-    const [title, setTitle] = useState('')
+    const {setTitle, title} = props
     let timeOutObject = setTimeout(() => {}, 0)
 
     /**
-     * @param title the main string which should be shown in the prompt
+     * whenever the title prop changes this function will be executed and if
+     * the title is available to show means its length is >0 than we will clear
+     * it after some interval and set the title to ''
+     * else we will return from the function immediately...
      */
-    const prompt = (title: string = '') => {
+    const prompt = () => {
+        if (title.length <= 0) return
         clearTimeout(timeOutObject)
-        setTitle(title)
         timeOutObject = setTimeout(() => {
             setTitle('')
         }, PROMPT_DURATION)
     }
+    useEffect(() => {
+        prompt()
+    }, [props.title])
     const clearPrompt = () => {
         clearTimeout(timeOutObject)
         setTitle('')
