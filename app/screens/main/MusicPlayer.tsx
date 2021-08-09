@@ -64,7 +64,7 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    const {play} = usePlayer()
+    const {play, current} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
 
@@ -80,6 +80,22 @@ const Player: FC<PlayerProps> = _props => {
             clickTrackingParams: '',
         },
     })
+
+    /**
+     * a variable which provides the music id of the track which is played currently
+     * in this local music player
+     * when a new song is played from other section of the app like the explore section
+     * then the current track will change in "playerControls.tsx context api"
+     * and it will make this component load data for that particular song
+     * but if the song is played from here itself then also the current track will change
+     * and load the data, we don't need to load data this time at-least since may be many data is loaded next to the current song
+     * why load more than
+     * therefore this variable will control this behaviour
+     * if the current track change in "playerControls.tsx context api" then we will check wheather the ID are different from the song currently rendered in this component
+     * if different then only we will load the data for next songs
+     * else no need..................................
+     */
+    const currentlyPlayingTrackID = useRef<string>('')
 
     /**
      * the prompt component to show error, log, warning, result
@@ -161,6 +177,31 @@ const Player: FC<PlayerProps> = _props => {
     }, [error])
 
     /**
+     * whenever the current track changes in the playerControls.tsx
+     * this function will get triggered eventually...
+     */
+    const trackChangedInPlayerControlsLoadDifferentData = () => {
+        // if the current track's id is empty or null this could be becuase there are no track/song in the queue
+        if (current.id.length <= 0) return
+
+        /**
+         * checking if the current track's id from player controls context api is the
+         * same as the local current track's id here in this component
+         * if - the id is same than it means that the user had scrolled and than the song is changed
+         * else - the song is played from outside of this component like explore tab or search tab
+         */
+        if (current.id === currentlyPlayingTrackID.current) {
+            console.log('This is already rendered in the UI.')
+            return
+        } else {
+            console.log('Different song needs to be load different data')
+        }
+    }
+    useEffect(() => {
+        trackChangedInPlayerControlsLoadDifferentData()
+    }, [current.id])
+
+    /**
      * @description to show the prompt when a song is played over cellular, wifi,
      * ethernet, or any other network just once...
      */
@@ -240,13 +281,11 @@ const Player: FC<PlayerProps> = _props => {
          * so the user has not decided finally which song to play
          * so we will not change the track yet...
          */
-        console.log('Started...', changed)
         if (changed[0].isViewable === false) return
         /**
          * if the content is fully rendered or shown to the user
          * change the track if it is different than the current track/song
          */
-        console.log('Playing...', changed)
         const {item} = changed[0]
 
         /**
@@ -260,11 +299,14 @@ const Player: FC<PlayerProps> = _props => {
         )
         const artists = formatArtists(item.artist)
 
+        // we are changing the current track playing in this local music player UI itself...
+        currentlyPlayingTrackID.current = item.musicId // this is the id of the current track which is playing or going to be played...
+
         /**
          * finally play the songs
          * after all this loading and checkings
          */
-        pauseTrack()
+        // pauseTrack()
         play({
             url: '',
             id: item.musicId,
