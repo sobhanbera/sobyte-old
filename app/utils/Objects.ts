@@ -180,6 +180,8 @@ export function capitalizeWords(string: string) {
      * Output:- THIS IS A SENTENCE OR STRING
      * But We Want:- This Is A Sentence Or String
      * that's why
+     *
+     * this is one of the edge case....
      */
     return string.toLowerCase().replace(/(?:^|\s)\S/g, function (character) {
         return character.toUpperCase()
