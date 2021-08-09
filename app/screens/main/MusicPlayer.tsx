@@ -207,7 +207,19 @@ const Player: FC<PlayerProps> = _props => {
         // if the prompt is not shown any time then show it and update the promptShown1Time to true
         NetInfo.fetch()
             .then(res => {
-                setPromptTitle(`playing song over ${res.type}.`)
+                if (
+                    [
+                        'cellular',
+                        'wifi',
+                        'bluetooth',
+                        'ethernet',
+                        'wimax',
+                        'vpn',
+                    ].includes(res.type)
+                ) {
+                    // showing the prompt...
+                    setPromptTitle(`playing song over ${res.type}.`)
+                }
                 // now the prompt will not longer be shown again...
                 promptShown1Time.current = true
             })
@@ -321,22 +333,6 @@ const Player: FC<PlayerProps> = _props => {
      * so that from next time the prompt is not shown
      * if we have shown the propmt once
      */
-    //  if (alreadyShownPrompt <= 0)
-    //  if (
-    //      [
-    //          'cellular',
-    //          'wifi',
-    //          'bluetooth',
-    //          'ethernet',
-    //          'wimax',
-    //          'vpn',
-    //      ].includes(res.type)
-    //  ) {
-    //      // showing the prompt...
-    //      prompt(`playing over ${res.type}.`)
-    //      // incrementing the control variable..
-    //      alreadyShownPrompt++
-    //  }
 
     return (
         <GradientBackground
