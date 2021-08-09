@@ -7,6 +7,7 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
     RefreshControl,
+    ToastAndroid,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import LottieView from 'lottie-react-native'
@@ -18,7 +19,7 @@ import {
     GridArtistList,
     CommonSongList,
 } from '../../../components'
-import {useMusicApi, usePrompt, useTheme} from '../../../context'
+import {useMusicApi, useTheme} from '../../../context'
 import {
     DEFAULT_SMALL_ICON_SIZE,
     HEADER_MIN_HEIGHT,
@@ -58,7 +59,6 @@ interface Props {
 const SearchResult: React.FC<Props> = props => {
     const {surfacelight, text, themecolorrevert} = useTheme().themeColors
     const {getSearchSuggestions, search, getContinuation} = useMusicApi()
-    const {prompt} = usePrompt()
 
     const [searchText, setSearchText] = useState<string>('')
     const [songs, setSongs] = useState<FetchedSongObject>(
@@ -151,7 +151,11 @@ const SearchResult: React.FC<Props> = props => {
                 setLoading(false)
             })
             .catch(_err => {
-                prompt('Sorry! Cannot load data currently.')
+                ToastAndroid.showWithGravity(
+                    'Sorry! Cannot load data currently.',
+                    ToastAndroid.SHORT,
+                    ToastAndroid.CENTER,
+                )
                 setLoading(false)
             })
     }
@@ -167,7 +171,11 @@ const SearchResult: React.FC<Props> = props => {
                 setArtists(res)
             })
             .catch(_err => {
-                prompt('Sorry! Cannot load data currently.')
+                ToastAndroid.showWithGravity(
+                    'Sorry! Cannot load data currently.',
+                    ToastAndroid.SHORT,
+                    ToastAndroid.CENTER,
+                )
                 setLoading(false)
             })
     }
