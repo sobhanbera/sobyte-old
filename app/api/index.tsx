@@ -21,6 +21,7 @@ import * as parsers from './parsers' // local parser path
 import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // objects required for instances in this files
 import {
     API_CONFIG_DATA_STORAGE_KEY,
+    // MUSIC_ID_REGEX,
     SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY,
 } from '../constants'
 
@@ -713,6 +714,8 @@ const MusicApi = (props: MusicApiProps) => {
                                             )
                                         ]
                                 }
+                                // this line below provides a list of valid tracks list
+                                // result = result.content.filter((songItem: any) => songItem.musicId.match(MUSIC_ID_REGEX))
                                 break
                             case 'VIDEO':
                                 result = parsers.parseVideoSearchResult(context)
