@@ -6,7 +6,6 @@ import NetInfo from '@react-native-community/netinfo' // if the internet connect
 import {AUDIO_QUALITY_STORAGE_KEY} from '../constants'
 import {getTrackURL} from '../api/Music'
 import {AudioQualityType} from '../interfaces'
-import {usePrompt} from '../context'
 
 /**
  * this is the previously listened songs list
@@ -21,11 +20,6 @@ const MusicFetcherContext = React.createContext({
 })
 interface MusicFetcherProps {}
 const MusicFetcher: React.FC<MusicFetcherProps> = props => {
-    /**
-     * prompt when the song is playing
-     * only for first time...
-     */
-    const {prompt} = usePrompt()
     const [quality, setQuality] = useState<AudioQualityType>('extreme')
 
     const loadQualityData = async () => {
@@ -53,8 +47,6 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
         loadQualityData()
     }, [])
 
-    // variable if > 0 we will does not show the prompt like "playing over wifi" and all
-    let alreadyShownPrompt = 0
     /**
      * actual function which will load the music URL
      * and return it
@@ -134,28 +126,6 @@ const MusicFetcher: React.FC<MusicFetcherProps> = props => {
                         .then(songUrl => {
                             // saving the data to use later on if the same song is played with the same musicID
                             previouslyLoadedSongs[id] = songUrl
-
-                            /**
-                             * if we haven't shown the prompt once then show it and make the control variable false
-                             * so that from next time the prompt is not shown
-                             * if we have shown the propmt once
-                             */
-                            if (alreadyShownPrompt <= 0)
-                                if (
-                                    [
-                                        'cellular',
-                                        'wifi',
-                                        'bluetooth',
-                                        'ethernet',
-                                        'wimax',
-                                        'vpn',
-                                    ].includes(res.type)
-                                ) {
-                                    // showing the prompt...
-                                    prompt(`playing over ${res.type}.`)
-                                    // incrementing the control variable..
-                                    alreadyShownPrompt++
-                                }
 
                             /** since the result will provide a object like this:-
                              * result = [{
