@@ -31,7 +31,6 @@ import {
     getHightQualityImageFromLinkWithHeight,
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
-import {pauseTrack} from '../../api/PlayerControlsCommons'
 import globalStyles from '../../styles/global.styles'
 
 const AppLoadingAnimation = require('../../assets/animations/animation.json')
@@ -188,10 +187,10 @@ const Player: FC<PlayerProps> = _props => {
          * else - the song is played from outside of this component like explore tab or search tab
          */
         if (current.id === currentlyPlayingTrackID.current) {
-            console.log('This is already rendered in the UI.')
+            console.log('<<<< MUSIC PLAYER >>>> .')
             return
         } else {
-            console.log('Different song needs to be load different data')
+            console.log('<<<< CONTROLS >>>> .')
         }
     }
     useEffect(() => {
@@ -303,7 +302,6 @@ const Player: FC<PlayerProps> = _props => {
          * finally play the songs
          * after all this loading and checkings
          */
-        pauseTrack()
         play({
             url: '',
             id: item.musicId,

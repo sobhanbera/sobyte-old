@@ -391,6 +391,7 @@ const Player: FC<PlayerProps> = props => {
         }
 
         if (showLoading && play) setShowLoading(true)
+        TrackPlayer.pause()
         fetchMusic(track.id)
             .then((__res: any) => {
                 resetPlayer()
