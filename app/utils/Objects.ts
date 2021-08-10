@@ -87,8 +87,8 @@ export const getHightQualityImageFromLinkWithHeight = (
 export function formatArtistsListFromArray(artists: Array<SongArtistObject>) {
     let str = ''
     for (let i = 0; i < artists.length; ++i) {
-        if (i >= 2) break
-        str += firstLetterCap(`${artists[i].name}, `)
+        str += firstLetterCap(`${artists[i].name}`)
+        if (i < artists.length - 1) str += ', ' // we are not adding comma after the last artist's name
     }
     return trimLargeString(str, 25)
 }

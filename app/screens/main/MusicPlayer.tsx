@@ -152,7 +152,7 @@ const Player: FC<PlayerProps> = _props => {
                 )
             })
             .catch(err => {
-                // console.log('ERROR IN MUSIC PLAYER', err)
+                console.log('ERROR IN MUSIC PLAYER', err)
             })
     }
     useEffect(() => {
