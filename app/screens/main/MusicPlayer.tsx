@@ -10,7 +10,7 @@ import {
 import LottieView from 'lottie-react-native'
 import NetInfo from '@react-native-community/netinfo' // if the internet connection is slow than we will load low quality track else load high quality progressively...
 
-import {useMusicApi, usePlayer, useTheme} from '../../context'
+import {useFetcher, useMusicApi, usePlayer, useTheme} from '../../context'
 import {
     GradientBackground,
     MusicPlayerSongView,
@@ -66,6 +66,7 @@ const Player: FC<PlayerProps> = _props => {
     const {play, current} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
+    const {fetchMusic} = useFetcher()
 
     /**
      * a demo value just for rendering the laoding properly or else if there
@@ -150,9 +151,23 @@ const Player: FC<PlayerProps> = _props => {
                     false,
                     false,
                 )
+
+                /**
+                 * here we are getting the data url of some next songs
+                 * so that when the user scrolls some of these are played instantly...
+                 * if this songs exists then only we will load the URL of this tracks...
+                 *
+                 * actually we should load all the songs music URL where the song exists
+                 * since it will only take time so why to load later
+                 */
+                const time = new Date().getTime()
+                for (let i = 1; i < res.content.length; ++i)
+                    fetchMusic(res.content[i].musicId)
+                console.log('Time elapsed', new Date().getTime() - time)
+                // for now we are loading every songs URL...
             })
-            .catch(err => {
-                console.log('ERROR IN MUSIC PLAYER', err)
+            .catch(_err => {
+                // console.log('ERROR IN MUSIC PLAYER', err)
             })
     }
     useEffect(() => {
