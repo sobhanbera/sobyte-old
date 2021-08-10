@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import {View, StyleSheet} from 'react-native'
+import {View, StyleSheet, ActivityIndicator} from 'react-native'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-import TrackPlayer, {STATE_PLAYING} from 'react-native-track-player'
+import TrackPlayer, {
+    STATE_PLAYING,
+    STATE_BUFFERING,
+} from 'react-native-track-player'
 
 import {Scaler} from '../'
 import {
@@ -16,31 +19,41 @@ import {
 } from '../../api/PlayerControlsCommons'
 import {LIKE_ICON_OR_TEXT_COLOR} from '../../constants'
 
+// if the song is playing then set to playing and rest are also same...
+type LocalPlayState = 'playing' | 'paused' | 'buffering' | 'ready'
 interface Props {
     color: string
     isLiked: boolean
     likeIsMusic: Function
 }
 const TrackButtonControls = (props: Props) => {
-    const [localPlaying, setLocalPlaying] = useState<boolean>(false)
+    // by default its value is paused since we don't need the user is pausing even if the song haven't started
+    const [localPlayingState, setLocalPlayingState] =
+        useState<LocalPlayState>('paused')
 
     useEffect(() => {
+        // triggered when the song/track is played from notification/lock-screen/other parts of the android
         const playEvent = TrackPlayer.addEventListener('remote-play', () => {
-            setLocalPlaying(true)
+            setLocalPlayingState('playing')
         })
+        // triggered when the song/track is paused from notification/lock-screen/other parts of the android
         const pauseEvent = TrackPlayer.addEventListener('remote-pause', () => {
-            setLocalPlaying(false)
+            setLocalPlayingState('paused')
         })
+        // triggered when the song/track is stopped from notification/lock-screen/other parts of the android
         const stopEvent = TrackPlayer.addEventListener('remote-stop', () => {
-            setLocalPlaying(false)
+            setLocalPlayingState('paused')
         })
+        // triggered when any state changes related to song from notification/lock-screen/other parts of the android
         const stateChangeEvent = TrackPlayer.addEventListener(
             'playback-state',
             (state: {state: number}) => {
-                if (state.state == STATE_PLAYING) {
-                    setLocalPlaying(true)
+                if (state.state === STATE_PLAYING) {
+                    setLocalPlayingState('playing')
+                } else if (state.state === STATE_BUFFERING) {
+                    setLocalPlayingState('buffering')
                 } else {
-                    setLocalPlaying(false)
+                    setLocalPlayingState('paused')
                 }
             },
         )
@@ -86,11 +99,23 @@ const TrackButtonControls = (props: Props) => {
                 onPress={() => seekTrackInterval(-10)}
             />
 
-            {localPlaying ? (
+            {/**
+             * if the track is playing then show pause button
+             * else if the track is paused then show the play button
+             * else if the track is buffering or connecting to the data url of the song then show a loading indicator
+             * else we will decide 👍
+             */}
+            {localPlayingState === 'buffering' ? (
+                <ActivityIndicator
+                    style={styles.icon}
+                    color={props.color}
+                    size={32}
+                />
+            ) : localPlayingState === 'playing' ? (
                 <Scaler
                     containerStyle={styles.icon}
                     onPress={() => {
-                        setLocalPlaying(false)
+                        setLocalPlayingState('paused')
                         pauseTrack()
                     }}
                     touchableOpacity={0.2}>
@@ -100,7 +125,7 @@ const TrackButtonControls = (props: Props) => {
                 <Scaler
                     containerStyle={styles.icon}
                     onPress={() => {
-                        setLocalPlaying(true)
+                        setLocalPlayingState('playing')
                         playTrack()
                     }}
                     touchableOpacity={0.2}>
