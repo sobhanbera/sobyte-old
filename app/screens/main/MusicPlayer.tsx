@@ -271,7 +271,7 @@ const Player: FC<PlayerProps> = _props => {
         minimumViewTime: 1000, // there should be a miminum time only after which the process of playing the song or else should start
         viewAreaCoveragePercentThreshold: 99, // since when we are giving a less area view port it occur much before the scroll actually occurs
         // itemVisiblePercentThreshold: 90, // percent %
-        waitForInteraction: false, // false because we want the song must be played instantly when it is loaded
+        waitForInteraction: true, // true because we want the song must be after the user has interacted with the UI. this would be helpful if the user doesnot want to remain in music player after launching and want to go to profile only than no need to play song automatically
     }).current
     /**
      * when user scrolls the main music player to the next songs
