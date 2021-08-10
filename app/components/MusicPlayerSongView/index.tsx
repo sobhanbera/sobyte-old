@@ -15,6 +15,7 @@ import {
     formatArtists,
     getHightQualityImageFromLinkWithHeight,
     capitalizeWords,
+    formatTrackTitle,
 } from '../../utils'
 import {SongObject} from '../../interfaces'
 
@@ -90,7 +91,7 @@ const MusicPlayerSongView = ({song, likeIsMusic}: SongView) => {
                         scrollSpeed={1}
                         animationType="scroll"
                         marqueeDelay={1000}>
-                        {capitalizeWords(song.name)}
+                        {formatTrackTitle(song.name)}
                     </MarqueeText>
                     <Text
                         style={{
