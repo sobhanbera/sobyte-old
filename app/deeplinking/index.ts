@@ -22,18 +22,7 @@ export const DEEP_LINKING_PREFIXES = [
  */
 const DeepLinkingConfig: LinkingOptions = {
     prefixes: DEEP_LINKING_PREFIXES,
-    config: {
-        screens: {
-            Profile: {
-                path: 'Profile',
-                screens: {
-                    profile: {
-                        path: 'profile/:id',
-                    },
-                },
-            },
-        },
-    },
+    // config: {},
 }
 
 export default DeepLinkingConfig
