@@ -1,4 +1,6 @@
-export default {
+import {LinkingOptions} from '@react-navigation/native'
+
+const DeepLinkingConfig: LinkingOptions = {
     prefixes: ['https://sobytemusic.com/android', 'sobytemusic://android'],
     config: {
         screens: {
@@ -13,3 +15,5 @@ export default {
         },
     },
 }
+
+export default DeepLinkingConfig
