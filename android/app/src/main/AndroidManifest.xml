@@ -33,6 +33,30 @@
 <!--            <action android:name="android.intent.action.MAIN" />-->
 <!--            <category android:name="android.intent.category.LAUNCHER" />-->
 <!--        </intent-filter>-->
+          <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <category android:name="android.intent.category.BROWSABLE" />
+              <data android:scheme="@string/deep_linking_https_scheme"
+                  android:host="@string/deep_linking_https_host"
+                  android:pathPrefix="@string/deep_linking_https_pathPrefix" />
+          </intent-filter>
+          <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <category android:name="android.intent.category.BROWSABLE" />
+              <data android:scheme="@string/deep_linking_http_scheme"
+                  android:host="@string/deep_linking_http_host"
+                  android:pathPrefix="@string/deep_linking_http_pathPrefix" />
+          </intent-filter>
+          <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <category android:name="android.intent.category.BROWSABLE" />
+              <!-- Accepts URIs that begin with "sobytemusic://android” -->
+              <data android:scheme="@string/deep_linking_local_scheme"
+                  android:host="@string/deep_linking_local_host" />
+          </intent-filter>
       </activity>
     </application>
 </manifest>
