@@ -23,6 +23,8 @@ import {AppUserData} from '../interfaces'
 import {useBackendApi} from '../context'
 import {UPDATE_LAST_LOGIN_ROUTE_ENDPOINT} from '../constants/endPoints'
 
+import DeepLinkingConfig from '../deeplinking'
+
 type MyFunctionType = (data: string) => any
 interface ContextArttributs {
     data: AppUserData
@@ -245,7 +247,7 @@ const AppLaunchingNavigation = (_props: Props) => {
         logout: logout,
     }
     return (
-        <NavigationContainer theme={DarkTheme}>
+        <NavigationContainer linking={DeepLinkingConfig} theme={DarkTheme}>
             <UserDataContext.Provider value={userDataValues}>
                 {userLoggedIn ? (
                     <AppInsideNavigation />
