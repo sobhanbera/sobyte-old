@@ -2,4 +2,22 @@
     <string name="app_name">Sobyte</string>
     <string name="app_name_lower">sobyte</string>
     <string name="splash_screen_image">splash screen image</string>
+
+    <!-- deep linking uris/links/urls -->
+    <!-- "https://sobytemusic.com/android” -->
+    <string name="deep_linking_https_scheme">https</string>
+    <string name="deep_linking_https_host">sobytemusic.com</string>
+    <string name="deep_linking_https_pathPrefix">/listen</string>
+    <!-- note that the leading "/" is required for pathPrefix-->
+
+    <!-- "http://sobytemusic.com/android” -->
+    <string name="deep_linking_http_scheme">http</string>
+    <string name="deep_linking_http_host">sobytemusic.com</string>
+    <string name="deep_linking_http_pathPrefix">/listen</string>
+    <!-- note that the leading "/" is required for pathPrefix-->
+
+    <!-- sobytemusic:android -->
+    <string name="deep_linking_local_scheme">sobytemusic</string>
+    <string name="deep_linking_local_host">android</string>
+
 </resources>
