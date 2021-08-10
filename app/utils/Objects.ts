@@ -1,6 +1,7 @@
 import {SongArtistObject, SongObject, ThumbnailObject} from '../interfaces'
 import {
     ALPHA_NUMERIC_PASSWORD_REGEX,
+    BRACKET_BRACES_AND_PARENTHESIS_INSIDE_TEXT,
     LARGE_TEXT_LENGTH,
     PASSWORD_CHARACTERS,
 } from '../constants'
@@ -186,6 +187,17 @@ export function capitalizeWords(string: string) {
     return string.toLowerCase().replace(/(?:^|\s)\S/g, function (character) {
         return character.toUpperCase()
     })
+}
+
+/**
+ * @param {string} trackTitle the name or the string of the song
+ * @returns the capitalized words string
+ * but the change is this function replaces text between (), [] and {} to null/empty
+ */
+export function formatTrackTitle(trackTitle: string) {
+    return capitalizeWords(
+        trackTitle.replace(BRACKET_BRACES_AND_PARENTHESIS_INSIDE_TEXT, ''),
+    )
 }
 
 /**
