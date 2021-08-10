@@ -67,13 +67,19 @@ const TrackButtonControls = (props: Props) => {
 
     return (
         <View style={styles.wrapper}>
-            <FontAwesome
-                style={styles.icon}
-                size={24}
-                color={props.isLiked ? LIKE_ICON_OR_TEXT_COLOR : props.color}
-                name={'heart'}
+            <Scaler
                 onPress={() => props.likeIsMusic()} // TODO like feature
-            />
+                touchableOpacity={1}
+                scale={0.85}>
+                <FontAwesome
+                    style={styles.icon}
+                    size={24}
+                    color={
+                        props.isLiked ? LIKE_ICON_OR_TEXT_COLOR : props.color
+                    }
+                    name={'heart'}
+                />
+            </Scaler>
 
             <MaterialIcons
                 style={styles.icon}
