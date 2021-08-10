@@ -112,25 +112,27 @@ const TrackButtonControls = (props: Props) => {
                     size={32}
                 />
             ) : localPlayingState === 'playing' ? (
-                <Scaler
-                    containerStyle={styles.icon}
+                <Ionicons
+                    style={styles.icon}
                     onPress={() => {
                         setLocalPlayingState('paused')
                         pauseTrack()
                     }}
-                    touchableOpacity={0.2}>
-                    <Ionicons size={32} color={props.color} name={'pause'} />
-                </Scaler>
+                    size={32}
+                    color={props.color}
+                    name={'pause'}
+                />
             ) : (
-                <Scaler
-                    containerStyle={styles.icon}
+                <Ionicons
+                    style={styles.icon}
                     onPress={() => {
                         setLocalPlayingState('playing')
                         playTrack()
                     }}
-                    touchableOpacity={0.2}>
-                    <Ionicons size={32} color={props.color} name={'play'} />
-                </Scaler>
+                    size={32}
+                    color={props.color}
+                    name={'play'}
+                />
             )}
 
             <FontAwesome5
