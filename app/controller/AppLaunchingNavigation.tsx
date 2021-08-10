@@ -247,10 +247,10 @@ const AppLaunchingNavigation = (_props: Props) => {
     return (
         <NavigationContainer theme={DarkTheme}>
             <UserDataContext.Provider value={userDataValues}>
-                {!userLoggedIn ? (
-                    <AuthenticationNavigation />
-                ) : (
+                {userLoggedIn ? (
                     <AppInsideNavigation />
+                ) : (
+                    <AuthenticationNavigation />
                 )}
             </UserDataContext.Provider>
 
