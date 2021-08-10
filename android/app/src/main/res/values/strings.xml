@@ -4,20 +4,20 @@
     <string name="splash_screen_image">splash screen image</string>
 
     <!-- deep linking uris/links/urls -->
-    <!-- "https://sobytemusic.com/android” -->
+    <!-- "https://sobytemusic.com/listen” -->
     <string name="deep_linking_https_scheme">https</string>
     <string name="deep_linking_https_host">sobytemusic.com</string>
     <string name="deep_linking_https_pathPrefix">/listen</string>
     <!-- note that the leading "/" is required for pathPrefix-->
 
-    <!-- "http://sobytemusic.com/android” -->
+    <!-- "http://sobytemusic.com/listen” -->
     <string name="deep_linking_http_scheme">http</string>
     <string name="deep_linking_http_host">sobytemusic.com</string>
     <string name="deep_linking_http_pathPrefix">/listen</string>
     <!-- note that the leading "/" is required for pathPrefix-->
 
-    <!-- sobytemusic:android -->
+    <!-- sobytemusic:listen” -->
     <string name="deep_linking_local_scheme">sobytemusic</string>
-    <string name="deep_linking_local_host">android</string>
+    <string name="deep_linking_local_host">listen”</string>
 
 </resources>
