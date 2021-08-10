@@ -37,6 +37,7 @@ import {
     capitalizeWords,
     IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX,
     shuffleArray,
+    formatTrackTitle,
 } from './Objects'
 export {
     returnNullCallback,
@@ -60,4 +61,5 @@ export {
     capitalizeWords,
     IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX,
     shuffleArray,
+    formatTrackTitle,
 }
