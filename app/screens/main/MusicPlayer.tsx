@@ -160,10 +160,8 @@ const Player: FC<PlayerProps> = _props => {
                  * actually we should load all the songs music URL where the song exists
                  * since it will only take time so why to load later
                  */
-                const time = new Date().getTime()
                 for (let i = 1; i < res.content.length; ++i)
                     fetchMusic(res.content[i].musicId)
-                console.log('Time elapsed', new Date().getTime() - time)
                 // for now we are loading every songs URL...
             })
             .catch(_err => {
