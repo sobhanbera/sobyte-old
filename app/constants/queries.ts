@@ -124,4 +124,12 @@ export default [
     'most listened romantic songs',
     'top new songs',
     'top hindi raps',
+    'top romantic songs',
+    'best romantic songs',
+    'party songs',
+    'study songs',
+    'new bollywood songs',
+    'best boolywood trending',
+    'trending hits',
+    'pop',
 ]
