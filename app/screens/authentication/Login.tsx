@@ -179,10 +179,10 @@ const Login = (props: LoginProps) => {
                             scale={0.95}
                         />
                     </PaddingView>
+
+                    <Prompt title={promptTitle} setTitle={setPromptTitle} />
                 </KeyboardAvoidingView>
             </LinearGradient>
-
-            <Prompt title={promptTitle} setTitle={setPromptTitle} />
         </TouchableWithoutFeedback>
     )
 }
