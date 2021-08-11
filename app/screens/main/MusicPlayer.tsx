@@ -176,7 +176,7 @@ const Player: FC<PlayerProps> = _props => {
             .then(() => {
                 initMusicApi()
                     .then(() => {
-                        // initializeMusicPlayer()
+                        initializeMusicPlayer()
                     })
                     .catch(() => {})
             })
