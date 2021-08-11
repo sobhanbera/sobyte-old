@@ -160,8 +160,11 @@ const Player: FC<PlayerProps> = _props => {
                  * actually we should load all the songs music URL where the song exists
                  * since it will only take time so why to load later
                  */
-                for (let i = 1; i < res.content.length; ++i)
-                    fetchMusic(res.content[i].musicId)
+                for (let i = 1; i < res.content.length; ++i) {
+                    if (i >= 2) break // we are only loading 2 more songs data after the 0th index song (first song/track)
+                    if (res.content[i].musicId)
+                        fetchMusic(res.content[i].musicId)
+                }
                 // for now we are loading every songs URL...
             })
             .catch(_err => {
@@ -173,7 +176,7 @@ const Player: FC<PlayerProps> = _props => {
             .then(() => {
                 initMusicApi()
                     .then(() => {
-                        initializeMusicPlayer()
+                        // initializeMusicPlayer()
                     })
                     .catch(() => {})
             })
