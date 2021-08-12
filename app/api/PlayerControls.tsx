@@ -34,11 +34,6 @@ interface PlayerControlsModal {
     nextSongsList: Array<Track>
 
     /**
-     * the current track which is playing...
-     */
-    current: Track
-
-    /**
      * @param _track the actual track to play
      * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
      * @param _showLoading wheather to show loading while loading the song data
@@ -91,19 +86,6 @@ const PlayerContext = createContext<PlayerControlsModal>({
             playlistId: '',
         },
     ],
-
-    /**
-     * the current track which is playing...
-     */
-    current: {
-        id: '',
-        url: '',
-        duration: 0,
-        title: '',
-        artist: '',
-        artwork: '',
-        playlistId: '',
-    },
 
     /**
      * @param _track the actual track to play
@@ -172,17 +154,10 @@ const Player: FC<PlayerProps> = props => {
      */
     const playerState = useRef<number>()
     /**
-     * the current track which is playing...
+     * the current track's ID which is playing currenlty...
+     * this will be changed depending when the track is changed or new track is player from any where in the application...
      */
-    const currentTrack = useRef<Track>({
-        artist: '',
-        artwork: '',
-        duration: 0,
-        id: '',
-        title: '',
-        url: '',
-        playlistId: '',
-    })
+    const currentTrackID = useRef<string>('')
 
     useEffect(() => {
         const listener = TrackPlayer.addEventListener(
@@ -211,23 +186,16 @@ const Player: FC<PlayerProps> = props => {
                 if (!res.nextTrack) {
                     return
                 }
+                currentTrackID.current = res.nextTrack // res.nextTrack is the is of the currently playing song so why to get the track we can get the id from here itself..
 
-                await TrackPlayer.getTrack(res.nextTrack)
-                    .then(async result => {
-                        if (result === null) {
-                            return
-                        }
-                        currentTrack.current = {
-                            id: result.id,
-                            url: result.url,
-                            duration: result.duration || 0,
-                            title: result.title,
-                            artist: result.artist,
-                            artwork: result.artwork,
-                            playlistId: result.description || '',
-                        }
-                    })
-                    .catch(_err => {})
+                // await TrackPlayer.getTrack(res.nextTrack)
+                //     .then(async result => {
+                //         if (result === null) {
+                //             return
+                //         }
+                //         currentTrackID.current = result.id
+                //     })
+                //     .catch(_err => {})
             },
         )
 
@@ -266,15 +234,7 @@ const Player: FC<PlayerProps> = props => {
      */
     const resetPlayer = async () => {
         await TrackPlayer.reset().then(_res => {
-            currentTrack.current = {
-                id: '',
-                url: '',
-                duration: 0,
-                title: '',
-                artist: '',
-                artwork: 'noimage',
-                playlistId: '',
-            }
+            currentTrackID.current = ''
         })
     }
 
@@ -283,7 +243,7 @@ const Player: FC<PlayerProps> = props => {
      * @returns that the track with id is in the next songs list
      */
     const checkSongAlreadyInNextSongsList = (musicId: string) => {
-        if (currentTrack.current.id === musicId) return true
+        if (currentTrackID.current === musicId) return true
 
         for (let i in nextSongsList)
             if (nextSongsList[i].id === musicId) return true
@@ -310,11 +270,11 @@ const Player: FC<PlayerProps> = props => {
      */
     const addSongAndPlay = (track: Track) => {
         if (!track) {
-            if (currentTrack)
+            if (currentTrackID.current)
                 if (playerState.current === STATE_PAUSED) TrackPlayer.play()
             return
         }
-        if (currentTrack && track.id === currentTrack.current.id) {
+        if (currentTrackID.current && track.id === currentTrackID.current) {
             if (playerState.current === STATE_PAUSED) TrackPlayer.play()
             return
         }
@@ -344,7 +304,7 @@ const Player: FC<PlayerProps> = props => {
      * returns -1 if no data is found
      */
     const getTheIndexOfCurrentSong = () => {
-        const currentSongID = currentTrack.current.id
+        const currentSongID = currentTrackID.current
         for (let i in nextSongsList) {
             if (nextSongsList[i].id === currentSongID) {
                 return i
@@ -379,12 +339,12 @@ const Player: FC<PlayerProps> = props => {
          * else it will play the current track and returns from the function....
          */
         if (!track) {
-            if (currentTrack.current.id)
+            if (currentTrackID.current)
                 if (playerState.current === STATE_PAUSED) TrackPlayer.play()
             console.log('Condition 1')
             return
         }
-        if (currentTrack.current.id && track.id === currentTrack.current.id) {
+        if (currentTrackID.current && track.id === currentTrackID.current) {
             if (playerState.current === STATE_PAUSED) TrackPlayer.play()
             console.log('Condition 2', playerState.current, STATE_PAUSED)
             return
@@ -561,7 +521,6 @@ const Player: FC<PlayerProps> = props => {
      * children components...
      */
     const playerValues = {
-        current: currentTrack.current,
         nextSongsList: nextSongsList,
 
         play: play,
