@@ -1,10 +1,8 @@
 import React from 'react'
-import {View} from 'react-native'
-import {ScrollView, Text} from 'react-native'
+import {ScrollView} from 'react-native'
 
-import {GradientBackground, HeaderProfile, Scaler} from '../../../components'
+import {GradientBackground, HeaderProfile} from '../../../components'
 import {DefaultStatusBarComponent} from '../../../constants'
-import EMOJIS_STRING from '../../../constants/emojis'
 
 interface ProfileProps {
     navigation?: any
