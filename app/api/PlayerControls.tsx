@@ -215,12 +215,10 @@ const Player: FC<PlayerProps> = props => {
         if (!track) {
             if (currentTrackID.current)
                 if (playerState.current === STATE_PAUSED) TrackPlayer.play()
-            console.log('Condition 1')
             return
         }
         if (currentTrackID.current && track.id === currentTrackID.current) {
             if (playerState.current === STATE_PAUSED) TrackPlayer.play()
-            console.log('Condition 2', playerState.current, STATE_PAUSED)
             return
         }
 
@@ -241,9 +239,8 @@ const Player: FC<PlayerProps> = props => {
                 if (play) TrackPlayer.play()
                 console.log('Time took to play: ', new Date().getTime() - start)
             })
-            .catch(err => {
+            .catch(() => {
                 setShowLoading(false)
-                console.error('ERROR PLAYING SONG...', err)
             })
     }
 
