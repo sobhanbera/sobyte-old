@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import NetInfo from '@react-native-community/netinfo' // if the internet connection is slow than we will load low quality track else load high quality progressively...
+import TrackPlayer from 'react-native-track-player'
 
 import {useFetcher, useMusicApi, usePlayer, useTheme} from '../../context'
 import {
@@ -188,30 +189,44 @@ const Player: FC<PlayerProps> = _props => {
             })
     }, [error])
 
-    // /**
-    //  * whenever the current track changes in the playerControls.tsx
-    //  * this function will get triggered eventually...
-    //  */
-    // const trackChangedInPlayerControlsLoadDifferentData = () => {
-    //     // if the current track's id is empty or null this could be becuase there are no track/song in the queue
-    //     if (current.id.length <= 0) return
+    /**
+     * whenever a new song is played or the current track is also played this function will be called
+     * if the song if played from music player by scrolling up/down this function will do nothing
+     * while if the track/song is played from other sections of the application like the explore tab, search tab, or from the downloads list, songs details screen,
+     * artists tabs, etc.
+     * then this funtion will load more data related to the song which is changed or played (the latest song)
+     */
+    const trackChangedInPlayerControlsLoadDifferentData = (
+        currentTrackID: string,
+    ) => {
+        /**
+         * if the current track's id is empty or null this could be becuase there are no track/song in the queue
+         * this could also happen because we called this before the change of song this is good because the function will again execute when the actual song is played
+         * if the song's id is null or the music player's current track's id is null do nothing since we could not say what is the current song and can't load the next songs list
+         */
+        if (!currentTrackID || !currentlyPlayingTrackID) return
+        // if both the id are valid and present in the memory and track is successfully played...
+        // if the new songs id is different from the saved id of this local music player
 
-    //     /**
-    //      * checking if the current track's id from player controls context api is the
-    //      * same as the local current track's id here in this component
-    //      * if - the id is same than it means that the user had scrolled and than the song is changed
-    //      * else - the song is played from outside of this component like explore tab or search tab
-    //      */
-    //     if (current.id === currentlyPlayingTrackID.current) {
-    //         console.log('<<<< MUSIC PLAYER >>>> .')
-    //         return
-    //     } else {
-    //         console.log('<<<< CONTROLS >>>> .')
-    //     }
-    // }
-    // useEffect(() => {
-    //     trackChangedInPlayerControlsLoadDifferentData()
-    // }, [current.id])
+        /**
+         * checking if the current track's id from global track-player is
+         * same as the local current track's id here in this component
+         * if - the id is same than it means that the user had scrolled and then the song is changed in this case do nothing
+         * else - the song is played from outside of this component like explore tab or search tab, download list, artists list, albums, playlist, songs list outside of this component, etc...
+         * in this case load more data which should be played after the current song which is changed....
+         */
+        if (currentTrackID === currentlyPlayingTrackID.current) {
+            console.log('<<<< MUSIC PLAYER >>>> .')
+        } else {
+            console.log('<<<< OUTER >>>> .')
+        }
+    }
+
+    useEffect(() => {
+        TrackPlayer.addEventListener('playback-track-changed', trackData => {
+            trackChangedInPlayerControlsLoadDifferentData(trackData.nextTrack)
+        })
+    }, [])
 
     /**
      * @description to show the prompt when a song is played over cellular, wifi,
@@ -323,7 +338,10 @@ const Player: FC<PlayerProps> = _props => {
         )
         const artists = formatArtists(item.artist)
 
-        // we are changing the current track playing in this local music player UI itself...
+        /**
+         *  this below step is very very very important to load data and show data in the UI
+         * we are changing the current track playing in this local music player UI itself...
+         */
         currentlyPlayingTrackID.current = item.musicId // this is the id of the current track which is playing or going to be played...
 
         /**
