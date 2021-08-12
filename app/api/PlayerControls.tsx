@@ -28,12 +28,6 @@ export interface Track {
 }
 interface PlayerControlsModal {
     /**
-     * list of songs which are next to the current song
-     * this is generated when a new song is played or the last song reached
-     */
-    nextSongsList: Array<Track>
-
-    /**
      * @param _track the actual track to play
      * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
      * @param _showLoading wheather to show loading while loading the song data
@@ -48,22 +42,6 @@ interface PlayerControlsModal {
     play(_track: Track, _play?: boolean, _showLoading?: boolean): any
 
     /**
-     * @param musicId is the id of the any track
-     * @returns that the track with id is in the next songs list
-     */
-    checkSongAlreadyInNextSongsList(_musicId: string): any
-    /**
-     * @param index a number which should be an index for the nextSongList
-     * this function is exactly a helper function of the @function addSongAndPlay which checks that the index is among
-     * the nextsong list index and plays it then directly
-     */
-    playSongAtIndex(_index: number): any
-    /**
-     * @returns the index of the current playing song from next songs list data
-     * returns -1 if no data is found
-     */
-    getTheIndexOfCurrentSong(): any
-    /**
      * @param track is the track which is provided to play directly
      * this function resets the player and add the track which is passed and plays it directly but the track must be valid
      * since this function doesn't has any checks for the url of the music or the image or any other property
@@ -71,22 +49,6 @@ interface PlayerControlsModal {
     addSongAndPlay(_track: Track): any
 }
 const PlayerContext = createContext<PlayerControlsModal>({
-    /**
-     * list of songs which are next to the current song
-     * this is generated when a new song is played or the last song reached
-     */
-    nextSongsList: [
-        {
-            id: '',
-            url: '',
-            duration: 0,
-            title: '',
-            artist: '',
-            artwork: '',
-            playlistId: '',
-        },
-    ],
-
     /**
      * @param _track the actual track to play
      * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
@@ -102,22 +64,6 @@ const PlayerContext = createContext<PlayerControlsModal>({
     play: (_track: Track, _play?: boolean, _showLoading?: boolean) => {},
 
     /**
-     * @param musicId is the id of the any track
-     * @returns that the track with id is in the next songs list
-     */
-    checkSongAlreadyInNextSongsList: (_musicId: string) => {},
-    /**
-     * @param index a number which should be an index for the nextSongList
-     * this function is exactly a helper function of the @function addSongAndPlay which checks that the index is among
-     * the nextsong list index and plays it then directly
-     */
-    playSongAtIndex: (_index: number) => {},
-    /**
-     * @returns the index of the current playing song from next songs list data
-     * returns -1 if no data is found
-     */
-    getTheIndexOfCurrentSong: () => {},
-    /**
      * @param track is the track which is provided to play directly
      * this function resets the player and add the track which is passed and plays it directly but the track must be valid
      * since this function doesn't has any checks for the url of the music or the image or any other property
@@ -130,24 +76,7 @@ interface PlayerProps {
 const Player: FC<PlayerProps> = props => {
     const {setShowLoading} = useApp()
     const {fetchMusic} = useFetcher()
-    const {getNext, getPlayer} = useMusicApi()
 
-    /**
-     * list of songs which are next to the current song
-     * this is generated when a new song is played or the last song reached
-     */
-    const [nextSongsList, setNextSongsList] = useState<Array<Track>>([
-        {
-            artist: 'My Self',
-            artwork:
-                'https://wonderfulengineering.com/wp-content/uploads/2014/10/wallpaper-photos-31.jpg',
-            duration: 10023,
-            id: '123asd',
-            title: 'Demo Songs & will be removed',
-            url: 'asdf',
-            playlistId: 'sadfi8ysaod909',
-        },
-    ])
     /**
      * playerstate provide the info about the track player that the song is
      * playing, paused, stopped, buffering, etc...
@@ -239,31 +168,6 @@ const Player: FC<PlayerProps> = props => {
     }
 
     /**
-     * @param musicId is the id of the any track
-     * @returns that the track with id is in the next songs list
-     */
-    const checkSongAlreadyInNextSongsList = (musicId: string) => {
-        if (currentTrackID.current === musicId) return true
-
-        for (let i in nextSongsList)
-            if (nextSongsList[i].id === musicId) return true
-        return false
-    }
-
-    /**
-     * @param musicId is the id of the any track
-     * @param list the list where to check the id is present
-     * @returns that the track with id is in the the list passed...
-     */
-    const checkSongAlreadyInTemporaryNextSongsList = (
-        musicId: string,
-        list: Array<Track>,
-    ) => {
-        for (let i in list) if (list[i].id === musicId) return true
-        return false
-    }
-
-    /**
      * @param track is the track which is provided to play directly
      * this function resets the player and add the track which is passed and plays it directly but the track must be valid
      * since this function doesn't has any checks for the url of the music or the image or any other property
@@ -286,34 +190,6 @@ const Player: FC<PlayerProps> = props => {
         }
         TrackPlayer.add([trackGot])
         TrackPlayer.play()
-    }
-
-    /**
-     * @param index a number which should be an index for the nextSongList
-     * this function is exactly a helper function of the @function addSongAndPlay which checks that the index is among
-     * the nextsong list index and plays it then directly
-     */
-    const playSongAtIndex = (index: number) => {
-        if (nextSongsList.length > index) {
-            addSongAndPlay(nextSongsList[index])
-        }
-    }
-
-    /**
-     * @returns the index of the current playing song from next songs list data
-     * returns -1 if no data is found
-     */
-    const getTheIndexOfCurrentSong = () => {
-        const currentSongID = currentTrackID.current
-        for (let i in nextSongsList) {
-            if (nextSongsList[i].id === currentSongID) {
-                return i
-            }
-        }
-        /**
-         * returns -1 if no data is found
-         */
-        return -1
     }
 
     /**
@@ -366,149 +242,6 @@ const Player: FC<PlayerProps> = props => {
                 TrackPlayer.add([trackGot])
                 if (play) TrackPlayer.play()
                 console.log('Time took to play: ', new Date().getTime() - start)
-                return
-
-                /**
-                 * after playing or starting playing the song loading of song which
-                 * occurs next will start
-                 */
-                const nextSongsData: Array<Track> = []
-                nextSongsData.push({
-                    id: trackGot.id,
-                    artist: trackGot.artist,
-                    artwork: trackGot.artwork,
-                    duration: trackGot.duration,
-                    playlistId: trackGot.playlistId,
-                    title: trackGot.title,
-                    url: __res,
-                })
-                /**
-                 * generating the next song list to show in the music player tab UI
-                 */
-                const ShouldLoadMoreData = true
-                const ShouldShowDataInUI = true // if this variable is true the above varialble should be true
-                // then the below code will load one more track data so that it updates the UI and show it in the music player UI...
-                // condition true- to load more data, false- to load no more data...
-                if (ShouldLoadMoreData && ShouldShowDataInUI)
-                    // this check is given bcz I need we any developer is only working on the first song then no need to render all the songs list in music player UI and wait sometime
-                    getNext(track.id, track.playlistId, '')
-                        .then(res => {
-                            /**
-                             * since result of next contains an array which contains Objects
-                             * these Object are of type {
-                             *      id: string
-                             *      playlistId: string
-                             * }
-                             * this is a demo type to resemble the object blueprint
-                             * here we are itterating over the result and getting its full song data with title, artist, thumbnail, duration etc
-                             */
-
-                            /**
-                             * we are getting the length of the content and according to that we are setting the @var nextSongsList only for 5 times.
-                             * one time is done as for the above code
-                             * one at the starting of below check
-                             * other 2 updates will be done below
-                             * and a final update will be done when everything is loaded
-                             */
-                            const numberOfContents = res.content.length
-                            /**
-                             * number of updates according the number of Content's...
-                             */
-                            const updatedDependent = Math.floor(
-                                numberOfContents / 3,
-                            ) // since the maximum next data we could get is 24
-                            // so we are dividing by 3 to get exactly 2 updates except the last one
-                            for (let i in res.content) {
-                                getPlayer(
-                                    res.content[i].musicId,
-                                    res.content[i].playlistId,
-                                    '',
-                                )
-                                    .then(
-                                        (
-                                            result: SongObjectWithArtistAsString,
-                                        ) => {
-                                            /**
-                                             * if the song already exists in the next song list we will continue to the next itteration
-                                             */
-                                            if (
-                                                !checkSongAlreadyInTemporaryNextSongsList(
-                                                    result.musicId,
-                                                    nextSongsData,
-                                                )
-                                            ) {
-                                                /**
-                                                 * if the song does not exists in the next sont list which is temporary in this case
-                                                 * then this code will fetch the song url using the fetchMusic function provided by the Fetcher Context API
-                                                 */
-                                                fetchMusic(result.musicId)
-                                                    .then(async (_res: any) => {
-                                                        /**
-                                                         * after getting the data will are also generating the high quality image link
-                                                         * of the song and the artist name with
-                                                         * finally pushing the whole data to nextSongList to get it in the music player UI
-                                                         */
-                                                        const highQualityImage =
-                                                            getHighQualityImageFromSongImage(
-                                                                result
-                                                                    .thumbnails[0],
-                                                                '720',
-                                                            )
-                                                        const artist =
-                                                            result.artist
-
-                                                        /**
-                                                         * final push to nextSongList
-                                                         */
-                                                        nextSongsData.push({
-                                                            id: result.musicId,
-                                                            artist: artist,
-                                                            artwork:
-                                                                highQualityImage,
-                                                            duration:
-                                                                result.duration,
-                                                            playlistId:
-                                                                result.playlistId,
-                                                            title: result.name,
-                                                            url: _res,
-                                                        })
-                                                        const currentIndex =
-                                                            Number(i)
-                                                        if (
-                                                            currentIndex ===
-                                                                1 ||
-                                                            currentIndex %
-                                                                updatedDependent ===
-                                                                0 ||
-                                                            currentIndex ===
-                                                                res.content
-                                                                    .length -
-                                                                    1
-                                                        ) {
-                                                            setNextSongsList(
-                                                                nextSongsData,
-                                                            )
-                                                        }
-                                                    })
-                                                    .catch(_err => {})
-                                            }
-                                        },
-                                    )
-                                    .catch(err => {
-                                        console.error(
-                                            'GETTING PLAYER ERROR',
-                                            err,
-                                        )
-                                    })
-                            }
-                            /**
-                             * setting the next song list from next song list temporary data...
-                             */
-                            // setNextSongsList(nextSongsData)
-                        })
-                        .catch(err => {
-                            console.error('GETTING NEXT LIST', err)
-                        })
             })
             .catch(err => {
                 setShowLoading(false)
@@ -521,13 +254,7 @@ const Player: FC<PlayerProps> = props => {
      * children components...
      */
     const playerValues = {
-        nextSongsList: nextSongsList,
-
         play: play,
-
-        checkSongAlreadyInNextSongsList: checkSongAlreadyInNextSongsList,
-        playSongAtIndex: playSongAtIndex,
-        getTheIndexOfCurrentSong: getTheIndexOfCurrentSong,
         addSongAndPlay: addSongAndPlay,
     }
 
