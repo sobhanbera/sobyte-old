@@ -111,16 +111,32 @@ const Player: FC<PlayerProps> = _props => {
     const likeAnimRef = useRef<LottieView>(null)
     const isAnimationPlaying = useRef<boolean>(false)
 
+    // a reference variable for the duration after which the like animation will be disappear...
+    let TimeOutVar = setTimeout(() => {}, 0)
     const playLikeAnimationForMusicId = useCallback((musicId: string) => {
-        if (isAnimationPlaying.current) return
-
-        isAnimationPlaying.current = true
+        /**
+         * clearing the previous timeout since we are going to do a new time out
+         * if we don't clear the previous time out then
+         * let the user have liked the song and duration is 3sec here if the user again liked the song after 2sec
+         * then the like animation will end in 3-2=1sec which is not good since the duration is 3sec
+         * so we are clearing the last timeout and overwiting it with a new one
+         */
+        clearTimeout(TimeOutVar)
+        // after clearing the timeout we can reset the like animation and play it
+        likeAnimRef.current?.reset()
         likeAnimRef.current?.play(0, 65)
 
-        setTimeout(() => {
+        // set a new timeout for the like animation hiding trigger
+        TimeOutVar = setTimeout(() => {
             likeAnimRef.current?.reset()
-            isAnimationPlaying.current = false
         }, LIKE_ANIMATION_DISAPPEAR_DURATION)
+
+        /**
+         * here we can make api requests to the backend to include the liked musicID
+         * in the user's liked playlist's songs list
+         * ACTUAL LIKE WORKING.....
+         */
+        console.log('YOU LIKED THIS SONG WITH ID:: ', musicId)
     }, [])
 
     const initializeMusicPlayer = () => {
