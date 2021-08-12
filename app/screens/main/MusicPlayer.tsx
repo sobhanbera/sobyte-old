@@ -63,7 +63,7 @@ interface PlayerProps {
     navigation?: any
 }
 const Player: FC<PlayerProps> = _props => {
-    const {play, current} = usePlayer()
+    const {play} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
@@ -188,30 +188,30 @@ const Player: FC<PlayerProps> = _props => {
             })
     }, [error])
 
-    /**
-     * whenever the current track changes in the playerControls.tsx
-     * this function will get triggered eventually...
-     */
-    const trackChangedInPlayerControlsLoadDifferentData = () => {
-        // if the current track's id is empty or null this could be becuase there are no track/song in the queue
-        if (current.id.length <= 0) return
+    // /**
+    //  * whenever the current track changes in the playerControls.tsx
+    //  * this function will get triggered eventually...
+    //  */
+    // const trackChangedInPlayerControlsLoadDifferentData = () => {
+    //     // if the current track's id is empty or null this could be becuase there are no track/song in the queue
+    //     if (current.id.length <= 0) return
 
-        /**
-         * checking if the current track's id from player controls context api is the
-         * same as the local current track's id here in this component
-         * if - the id is same than it means that the user had scrolled and than the song is changed
-         * else - the song is played from outside of this component like explore tab or search tab
-         */
-        if (current.id === currentlyPlayingTrackID.current) {
-            console.log('<<<< MUSIC PLAYER >>>> .')
-            return
-        } else {
-            console.log('<<<< CONTROLS >>>> .')
-        }
-    }
-    useEffect(() => {
-        trackChangedInPlayerControlsLoadDifferentData()
-    }, [current.id])
+    //     /**
+    //      * checking if the current track's id from player controls context api is the
+    //      * same as the local current track's id here in this component
+    //      * if - the id is same than it means that the user had scrolled and than the song is changed
+    //      * else - the song is played from outside of this component like explore tab or search tab
+    //      */
+    //     if (current.id === currentlyPlayingTrackID.current) {
+    //         console.log('<<<< MUSIC PLAYER >>>> .')
+    //         return
+    //     } else {
+    //         console.log('<<<< CONTROLS >>>> .')
+    //     }
+    // }
+    // useEffect(() => {
+    //     trackChangedInPlayerControlsLoadDifferentData()
+    // }, [current.id])
 
     /**
      * @description to show the prompt when a song is played over cellular, wifi,
