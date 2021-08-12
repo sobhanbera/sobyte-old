@@ -1,11 +1,9 @@
-import React, {useState, createContext, FC, useContext, useEffect} from 'react'
+import React, {createContext, FC, useContext, useEffect} from 'react'
 import {useRef} from 'react'
 
 import TrackPlayer, {STATE_PAUSED} from 'react-native-track-player'
 
-import {useApp, useFetcher, useMusicApi} from '../context'
-import {SongObjectWithArtistAsString} from '../interfaces'
-import {getHighQualityImageFromSongImage} from '../utils'
+import {useApp, useFetcher} from '../context'
 
 /**
  * the data type or the object type for each Tracks of the song
