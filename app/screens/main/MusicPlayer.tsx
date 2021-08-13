@@ -6,6 +6,7 @@ import {
     ListRenderItemInfo,
     StyleSheet,
     Text,
+    FlatList,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import NetInfo from '@react-native-community/netinfo' // if the internet connection is slow than we will load low quality track else load high quality progressively...
@@ -66,7 +67,8 @@ interface PlayerProps {
 const Player: FC<PlayerProps> = _props => {
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
-    const {initMusicApi, search, error} = useMusicApi()
+    const {initMusicApi, search, getNext, getContinuation, error} =
+        useMusicApi()
     const {fetchMusic} = useFetcher()
 
     /**
@@ -106,7 +108,7 @@ const Player: FC<PlayerProps> = _props => {
     const promptShown1Time = useRef<boolean>(false) // varialble which controls wheather the prompt is show once when the user launched application or not...
 
     const scrollX = React.useRef(new Animated.Value(0)).current
-    const scrollReference = useRef<any>(null)
+    const scrollReference = useRef<FlatList>(null)
 
     const likeAnimRef = useRef<LottieView>(null)
     const isAnimationPlaying = useRef<boolean>(false)
@@ -206,6 +208,44 @@ const Player: FC<PlayerProps> = _props => {
     }, [error])
 
     /**
+     * @param {number} index in the index of the song in where to scroll the flatlist
+     * function which scroll to the song at index @param index
+     */
+    const scrollToSongIndex = (index: number) => {
+        scrollReference.current?.scrollToIndex({
+            index: index, // scrolling to the next song in the list
+            animated: true,
+        })
+    }
+    /**
+     * this function will be called when the songs list has reached to its bottom or the list of songs is ended
+     * this function will load more songs data and append those data to the end of @var songs list...
+     * by this we can form a infinite scrolling songs list....
+     *
+     * @param {boolean} scrollToNextSongAfterLoadingMoreData is a variable that will say wheather to scroll to the next song after loading the data this variable could be used when the song has been scrolled to the end automatically and there is no songs next to it
+     * this may happen when there was no internet for sometime so when the last 3 or 2 song from end reached it could not load more data
+     * this is then the backup case if internet is found we can load and scroll to the next song
+     * @param {number} index this is the index of the song which was played currently if the @var scrollToNextSongAfterLoadingMoreData is true we will scroll to this index only, after loading more song/track data
+     */
+    const continueTheSongsList = (
+        scrollToNextSongAfterLoadingMoreData: boolean = false,
+        index: number = 0,
+    ) => {
+        getContinuation('search', songs.continuation, 'SONG')
+            .then((res: FetchedSongObject) => {
+                for (let i in res.content) {
+                    console.log(res.content[i].name)
+                }
+
+                // if the scrollToNextSongAfterLoadingMoreData variable is true than this function is called when a song is ended and the last song is reached in this case scroll to next song after setting the songs list
+                if (scrollToNextSongAfterLoadingMoreData) {
+                    scrollToSongIndex(index)
+                }
+            })
+            .catch(err => {})
+    }
+
+    /**
      * whenever a new song is played or the current track is also played this function will be called
      * if the song if played from music player by scrolling up/down this function will do nothing
      * while if the track/song is played from other sections of the application like the explore tab, search tab, or from the downloads list, songs details screen,
@@ -237,11 +277,75 @@ const Player: FC<PlayerProps> = _props => {
             console.log('<<<< OUTER >>>> .')
         }
     }
-
+    /**
+     * this function will be triggered automatically when a song is ended
+     * or exactly the current song which was playing is ended (the queue is ended)
+     */
+    const currentTrackEndedScrollDown = () => {
+        /**
+         * checking that which songs was playing currently
+         * by using the local variable @var currentlyPlayingTrackID and iterating over the songs list
+         * when the id is equal to any of the songs list music item it means that music was playing and we will check the index of that song item
+         * if the index is the last index of the song item then we will load more data and then scroll one index down for the flatlist
+         * other wise if the song index is not the last song than scroll to the next index and that song will be played than...
+         */
+        const numberOfSongs = songs.content.length
+        for (
+            let currentSongIndex = 0;
+            currentSongIndex < numberOfSongs;
+            ++currentSongIndex
+        ) {
+            if (
+                songs.content[currentSongIndex].musicId ===
+                currentlyPlayingTrackID.current
+            ) {
+                // if the track id which has been ended is found
+                if (currentSongIndex === numberOfSongs - 1) {
+                    // if the song is the last song which is available to play and has ended load more songs and then scroll to the next one...
+                    console.log('Load more data')
+                    continueTheSongsList(true, currentSongIndex + 1) // scroll to the song at index -> currentSongIndex + 1
+                } else {
+                    // if that song's index is not the last one in the list of songs than scroll to next song...
+                    scrollToSongIndex(currentSongIndex + 1) // scroll to the song at index -> currentSongIndex + 1
+                }
+            }
+        }
+    }
     useEffect(() => {
-        TrackPlayer.addEventListener('playback-track-changed', trackData => {
-            trackChangedInPlayerControlsLoadDifferentData(trackData.nextTrack)
-        })
+        /**
+         * when a new track is played from anywhere the application
+         * maybe from music player by scrolling or from other tabs like explore, search, downloads, etc...
+         * this callback function will be called
+         */
+        const playbackTrackChanged = TrackPlayer.addEventListener(
+            'playback-track-changed',
+            trackData => {
+                trackChangedInPlayerControlsLoadDifferentData(
+                    trackData.nextTrack,
+                )
+            },
+        )
+
+        /**
+         * we the current song will end we will scroll down to the next song if
+         * there is a song exists let see the function implementation first...
+         */
+        const playbackQueueEnded = TrackPlayer.addEventListener(
+            'playback-queue-ended',
+            _queueEndedData => {
+                currentTrackEndedScrollDown()
+                // console.log('Queue ended with this data', queueEndedData)
+            },
+        )
+
+        /**
+         * cleaning up the event listeners of react-native-track-player
+         * so that no memory overflow or state managment error/warnings occurs...
+         */
+        return () => {
+            playbackTrackChanged.remove()
+            playbackQueueEnded.remove()
+        }
     }, [])
 
     /**
