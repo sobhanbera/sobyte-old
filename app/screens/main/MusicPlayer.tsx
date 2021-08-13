@@ -67,8 +67,7 @@ interface PlayerProps {
 const Player: FC<PlayerProps> = _props => {
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
-    const {initMusicApi, search, getNext, getContinuation, error} =
-        useMusicApi()
+    const {initMusicApi, search, getNext, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
 
     /**
@@ -157,6 +156,9 @@ const Player: FC<PlayerProps> = _props => {
                 const initialTrack = res.content[0]
                 const artist = formatArtists(initialTrack.artist)
 
+                // without this below line the songs will only scroll after the user somewhat scrolls the flatlist...
+                currentlyPlayingTrackID.current = initialTrack.musicId // setting the first song which would be played so that there is no such user interaction is required to auto scroll from next time
+
                 play(
                     {
                         artist,
@@ -226,16 +228,22 @@ const Player: FC<PlayerProps> = _props => {
      * this may happen when there was no internet for sometime so when the last 3 or 2 song from end reached it could not load more data
      * this is then the backup case if internet is found we can load and scroll to the next song
      * @param {number} index this is the index of the song which was played currently if the @var scrollToNextSongAfterLoadingMoreData is true we will scroll to this index only, after loading more song/track data
+     * @param {SongObject} previousSong a object which is the the last song which is playing or added...
+     * actually this is the previous song for which next song must be loaded
      */
-    const continueTheSongsList = (
+    const loadMoreSongsDataNextToTheCurrent = (
         scrollToNextSongAfterLoadingMoreData: boolean = false,
         index: number = 0,
+        previousSong: SongObject = songs.content[songs.content.length - 1],
     ) => {
-        getContinuation('search', songs.continuation, 'SONG')
+        /**
+         * if the previous song is provided that means the song is played from the other parts of the application because it would be provided from the current track playing
+         * in react-native-track-player we could be playlistID from the description and the musicID from the track id itself...
+         */
+
+        getNext(previousSong.musicId, previousSong.playlistId, 'SONG')
             .then((res: FetchedSongObject) => {
-                for (let i in res.content) {
-                    console.log(res.content[i].name)
-                }
+                console.log(res.content.length)
 
                 // if the scrollToNextSongAfterLoadingMoreData variable is true than this function is called when a song is ended and the last song is reached in this case scroll to next song after setting the songs list
                 if (scrollToNextSongAfterLoadingMoreData) {
@@ -303,11 +311,16 @@ const Player: FC<PlayerProps> = _props => {
                 if (currentSongIndex === numberOfSongs - 1) {
                     // if the song is the last song which is available to play and has ended load more songs and then scroll to the next one...
                     console.log('Load more data')
-                    continueTheSongsList(true, currentSongIndex + 1) // scroll to the song at index -> currentSongIndex + 1
+                    loadMoreSongsDataNextToTheCurrent(
+                        true,
+                        currentSongIndex + 1,
+                    ) // scroll to the song at index -> currentSongIndex + 1
                 } else {
                     // if that song's index is not the last one in the list of songs than scroll to next song...
                     scrollToSongIndex(currentSongIndex + 1) // scroll to the song at index -> currentSongIndex + 1
                 }
+                // since we have found the song which was playing recently our task is completed so return from this function...
+                return
             }
         }
     }
@@ -334,7 +347,7 @@ const Player: FC<PlayerProps> = _props => {
             'playback-queue-ended',
             _queueEndedData => {
                 currentTrackEndedScrollDown()
-                // console.log('Queue ended with this data', queueEndedData)
+                console.log('Queue ended with this data', _queueEndedData)
             },
         )
 
@@ -546,6 +559,7 @@ const Player: FC<PlayerProps> = _props => {
                     alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
+                    onEndReached={() => loadMoreSongsDataNextToTheCurrent()} // more data when the end is reaching close while scrolling...
                     onScroll={Animated.event(
                         [{nativeEvent: {contentOffset: {y: scrollX}}}],
                         {
