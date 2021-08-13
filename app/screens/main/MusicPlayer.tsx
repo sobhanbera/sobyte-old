@@ -250,7 +250,7 @@ const Player: FC<PlayerProps> = _props => {
                     scrollToSongIndex(index)
                 }
             })
-            .catch(err => {})
+            .catch(_err => {})
     }
 
     /**
