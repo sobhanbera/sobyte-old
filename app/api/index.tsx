@@ -123,7 +123,8 @@ export interface MusicContextApiProviderProps {
     getNext(
         _musicId: string,
         _playlistId: string,
-        _paramString: string,
+        _param?: string,
+        _playerParams?: string,
     ): Promise<any>
 
     /**
@@ -145,7 +146,6 @@ export interface MusicContextApiProviderProps {
     error: boolean
     loaded: boolean
 }
-
 const MusicContext = React.createContext<MusicContextApiProviderProps>({
     /**
      * @returns a promise after initializing the music api fetcher this
@@ -223,7 +223,8 @@ const MusicContext = React.createContext<MusicContextApiProviderProps>({
     getNext: (
         _musicId: string,
         _playlistId: string,
-        _paramString: string = '',
+        _param: string = '',
+        _playerParams: string = '',
     ) => DemoMusicContextReturn(),
     /**
      * @param musicId id of the music
@@ -244,7 +245,6 @@ const MusicContext = React.createContext<MusicContextApiProviderProps>({
     error: true,
     loaded: false,
 })
-
 interface MusicApiProps {
     children: React.ReactChild
 }
@@ -701,7 +701,7 @@ const MusicApi = (props: MusicApiProps) => {
             })
                 .then(context => {
                     try {
-                        switch (_.upperCase(categoryName)) {
+                        switch (categoryName) {
                             case 'SONG':
                                 result = parsers.parseSongSearchResult(context)
                                 if (getARandomResult) {
@@ -943,13 +943,15 @@ const MusicApi = (props: MusicApiProps) => {
     const getNext = (
         musicId: string,
         playlistId: string,
-        paramString: string = '',
+        param: string = '',
+        playerParams: string = '',
     ) => {
         return new Promise((resolve, reject) => {
             _createApiRequest('next', {
                 enablePersistentPlaylistPanel: true,
                 isAudioOnly: true,
-                params: paramString,
+                params: param,
+                playerParams: playerParams,
                 playlistId: playlistId,
                 tunerSettingValue: 'AUTOMIX_SETTING_NORMAL',
                 videoId: musicId,
