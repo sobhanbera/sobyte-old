@@ -60,7 +60,7 @@ export interface MusicContextApiProviderProps {
      * @returns return the same type of object for which the continuation is provided
      */
     getContinuation(
-        _endpointName: string | 'search' | '',
+        _endpointName: 'search' | '',
         _continuation: ContinuationObject,
         _dataType: TypeOFDatas,
     ): Promise<any>
