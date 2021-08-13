@@ -18,11 +18,7 @@ import NetInfo from '@react-native-community/netinfo'
 
 import * as utils from './utils' // local util path
 import * as parsers from './parsers' // local parser path
-import {
-    ContinuationObjectItself,
-    ContinuationObject,
-    SongObject,
-} from '../interfaces' // objects required for instances in this files
+import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // objects required for instances in this files
 import {
     API_CONFIG_DATA_STORAGE_KEY,
     SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY,
@@ -126,6 +122,8 @@ export interface MusicContextApiProviderProps {
      * @param {string} param id of the param string if any
      * @param {string} playerParams id of the param string if any
      * @returns the next songs list may be bare or with full data of each song
+     *
+     * current the use of @param provideFullData and @param numberOfSongs is deprecated
      */
     getNext(
         _musicId: string,
@@ -231,6 +229,8 @@ const MusicContext = React.createContext<MusicContextApiProviderProps>({
      * @param {string} param id of the param string if any
      * @param {string} playerParams id of the param string if any
      * @returns the next songs list may be bare or with full data of each song
+     *
+     * current the use of @param provideFullData and @param numberOfSongs is deprecated
      */
     getNext: (
         _musicId: string,
@@ -993,12 +993,14 @@ const MusicApi = (props: MusicApiProps) => {
      * @param {string} param id of the param string if any
      * @param {string} playerParams id of the param string if any
      * @returns the next songs list may be bare or with full data of each song
+     *
+     * current the use of @param provideFullData and @param numberOfSongs is deprecated
      */
     const getNext = (
         musicId: string,
         playlistId: string,
-        provideFullData: boolean = false,
-        numberOfSongs: number = 10,
+        _provideFullData: boolean = false,
+        _numberOfSongs: number = 10,
         param: string = '',
         playerParams: string = '',
     ) => {
@@ -1012,38 +1014,10 @@ const MusicApi = (props: MusicApiProps) => {
                 tunerSettingValue: 'AUTOMIX_SETTING_NORMAL',
                 videoId: musicId,
             })
-                .then(async context => {
+                .then(context => {
                     try {
-                        let results: {
-                            content: Array<{
-                                index: number
-                                musicId: string
-                                params: string
-                                playlistId: string
-                                selected: boolean
-                            }>
-                        } = parsers.parseNextPanel(context)
-                        let finalResult: SongObject[] = []
-
-                        if (provideFullData) {
-                            for (
-                                let i = 0;
-                                i <
-                                Math.min(numberOfSongs, results.content.length);
-                                ++i
-                            ) {
-                                await getPlayer(
-                                    results.content[i].musicId,
-                                    results.content[i].playlistId,
-                                )
-                                    .then((res: any) => {
-                                        finalResult.push(res)
-                                    })
-                                    .catch(_err => {})
-                            }
-                        }
-
-                        resolve(finalResult)
+                        let results = parsers.parseNextPanel(context)
+                        resolve(results)
                     } catch (error) {
                         resolve({
                             error: error.message,
