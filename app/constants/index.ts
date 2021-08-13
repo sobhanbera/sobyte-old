@@ -164,6 +164,13 @@ export const EXTRA_SONGS_SCREEN = 'EXTRA_SONGS_SCREEN' // props - (ArtistObject 
 const AppLogoAnimationConstant = require('../assets/animations/animation.json')
 export {AppLogoAnimationConstant}
 
+/**
+ * some app raw files as a constants exports
+ * this may be images, audios, json, any thing
+ */
+const AppIconConstant = require('../assets/images/sobyte_logo_white.png')
+export {AppIconConstant}
+
 // regex for email and ip address type
 export const EMAIL_REGEX =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
