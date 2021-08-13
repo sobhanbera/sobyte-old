@@ -131,6 +131,8 @@ export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB = 11 // the initial
 
 export const LIKE_ICON_OR_TEXT_COLOR = '#D61F26'
 
+export const DEFAULT_QR_CODE_IMAGE_SIZE = 180
+
 /**
  * jsx components................................
  *
