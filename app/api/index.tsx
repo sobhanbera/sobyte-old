@@ -18,7 +18,11 @@ import NetInfo from '@react-native-community/netinfo'
 
 import * as utils from './utils' // local util path
 import * as parsers from './parsers' // local parser path
-import {ContinuationObjectItself, ContinuationObject} from '../interfaces' // objects required for instances in this files
+import {
+    ContinuationObjectItself,
+    ContinuationObject,
+    SongObject,
+} from '../interfaces' // objects required for instances in this files
 import {
     API_CONFIG_DATA_STORAGE_KEY,
     SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY,
@@ -115,14 +119,19 @@ export interface MusicContextApiProviderProps {
     getArtist(_browseId: string): Promise<any>
 
     /**
-     * @param musicId id of the music
-     * @param playlistId id of the playlist
-     * @param paramString id of the param string if any
-     * @returns the object with songs list in that particular playlist
+     * @param {string} musicId id of the music
+     * @param {string} playlistId id of the playlist
+     * @param {boolean} provideFullData if true than will provide a SongObject type object else will provide only music Id and playlist Id object array
+     * @param {number} numberOfSongs the number of songs data to return from this function
+     * @param {string} param id of the param string if any
+     * @param {string} playerParams id of the param string if any
+     * @returns the next songs list may be bare or with full data of each song
      */
     getNext(
         _musicId: string,
         _playlistId: string,
+        _provideFullData?: boolean,
+        _numberOfSongs?: number,
         _param?: string,
         _playerParams?: string,
     ): Promise<any>
@@ -215,14 +224,19 @@ const MusicContext = React.createContext<MusicContextApiProviderProps>({
      */
     getArtist: (_browseId: string) => DemoMusicContextReturn(),
     /**
-     * @param musicId id of the music
-     * @param playlistId id of the playlist
-     * @param paramString id of the param string if any
-     * @returns the object with songs list in that particular playlist
+     * @param {string} musicId id of the music
+     * @param {string} playlistId id of the playlist
+     * @param {boolean} provideFullData if true than will provide a SongObject type object else will provide only music Id and playlist Id object array
+     * @param {number} numberOfSongs the number of songs data to return from this function
+     * @param {string} param id of the param string if any
+     * @param {string} playerParams id of the param string if any
+     * @returns the next songs list may be bare or with full data of each song
      */
     getNext: (
         _musicId: string,
         _playlistId: string,
+        _provideFullData: boolean = false,
+        _numberOfSongs: number = 10,
         _param: string = '',
         _playerParams: string = '',
     ) => DemoMusicContextReturn(),
@@ -938,42 +952,6 @@ const MusicApi = (props: MusicApiProps) => {
      * @param musicId id of the music
      * @param playlistId id of the playlist
      * @param paramString id of the param string if any
-     * @returns the object with songs list in that particular playlist
-     */
-    const getNext = (
-        musicId: string,
-        playlistId: string,
-        param: string = '',
-        playerParams: string = '',
-    ) => {
-        return new Promise((resolve, reject) => {
-            _createApiRequest('next', {
-                enablePersistentPlaylistPanel: true,
-                isAudioOnly: true,
-                params: param,
-                playerParams: playerParams,
-                playlistId: playlistId,
-                tunerSettingValue: 'AUTOMIX_SETTING_NORMAL',
-                videoId: musicId,
-            })
-                .then(context => {
-                    try {
-                        const result = parsers.parseNextPanel(context)
-                        resolve(result)
-                    } catch (error) {
-                        resolve({
-                            error: error.message,
-                        })
-                    }
-                })
-                .catch(error => reject(error))
-        })
-    }
-
-    /**
-     * @param musicId id of the music
-     * @param playlistId id of the playlist
-     * @param paramString id of the param string if any
      * @returns the object with songs data
      */
     const getPlayer = (
@@ -1008,6 +986,75 @@ const MusicApi = (props: MusicApiProps) => {
     }
 
     /**
+     * @param {string} musicId id of the music
+     * @param {string} playlistId id of the playlist
+     * @param {boolean} provideFullData if true than will provide a SongObject type object else will provide only music Id and playlist Id object array
+     * @param {number} numberOfSongs the number of songs data to return from this function
+     * @param {string} param id of the param string if any
+     * @param {string} playerParams id of the param string if any
+     * @returns the next songs list may be bare or with full data of each song
+     */
+    const getNext = (
+        musicId: string,
+        playlistId: string,
+        provideFullData: boolean = false,
+        numberOfSongs: number = 10,
+        param: string = '',
+        playerParams: string = '',
+    ) => {
+        return new Promise((resolve, reject) => {
+            _createApiRequest('next', {
+                enablePersistentPlaylistPanel: true,
+                isAudioOnly: true,
+                params: param,
+                playerParams: playerParams,
+                playlistId: playlistId,
+                tunerSettingValue: 'AUTOMIX_SETTING_NORMAL',
+                videoId: musicId,
+            })
+                .then(async context => {
+                    try {
+                        let results: {
+                            content: Array<{
+                                index: number
+                                musicId: string
+                                params: string
+                                playlistId: string
+                                selected: boolean
+                            }>
+                        } = parsers.parseNextPanel(context)
+                        let finalResult: SongObject[] = []
+
+                        if (provideFullData) {
+                            for (
+                                let i = 0;
+                                i <
+                                Math.min(numberOfSongs, results.content.length);
+                                ++i
+                            ) {
+                                await getPlayer(
+                                    results.content[i].musicId,
+                                    results.content[i].playlistId,
+                                )
+                                    .then((res: any) => {
+                                        finalResult.push(res)
+                                    })
+                                    .catch(_err => {})
+                            }
+                        }
+
+                        resolve(finalResult)
+                    } catch (error) {
+                        resolve({
+                            error: error.message,
+                        })
+                    }
+                })
+                .catch(error => reject(error))
+        })
+    }
+
+    /**
      * music api context values provider
      */
     const musicApiValues = {
@@ -1022,8 +1069,8 @@ const MusicApi = (props: MusicApiProps) => {
         getAlbum: getAlbum,
         getPlaylist: getPlaylist,
         getArtist: getArtist,
-        getNext: getNext,
         getPlayer: getPlayer,
+        getNext: getNext,
 
         musicConfig: musicConfig,
         error: error,
