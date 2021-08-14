@@ -34,6 +34,7 @@ import {
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import globalStyles from '../../styles/global.styles'
+import {useMemo} from 'react'
 
 const AppLoadingAnimation = require('../../assets/animations/animation.json')
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
@@ -67,7 +68,7 @@ interface PlayerProps {
 const Player: FC<PlayerProps> = _props => {
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
-    const {initMusicApi, search, getNext, error} = useMusicApi()
+    const {initMusicApi, search, getNext, getPlayer, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
 
     /**
@@ -231,27 +232,46 @@ const Player: FC<PlayerProps> = _props => {
      * @param {SongObject} previousSong a object which is the the last song which is playing or added...
      * actually this is the previous song for which next song must be loaded
      */
-    const loadMoreSongsDataNextToTheCurrent = (
-        scrollToNextSongAfterLoadingMoreData: boolean = false,
-        index: number = 0,
-        previousSong: SongObject = songs.content[songs.content.length - 1],
-    ) => {
-        /**
-         * if the previous song is provided that means the song is played from the other parts of the application because it would be provided from the current track playing
-         * in react-native-track-player we could be playlistID from the description and the musicID from the track id itself...
-         */
+    // const loadMoreSongsDataNextToTheCurrent = (
+    //     scrollToNextSongAfterLoadingMoreData: boolean = false,
+    //     index: number = 0,
+    //     previousSong: SongObject = songs.content[songs.content.length - 1],
+    // ) => {
+    /**
+     * if the previous song is provided that means the song is played from the other parts of the application because it would be provided from the current track playing
+     * in react-native-track-player we could be playlistID from the description and the musicID from the track id itself...
+     */
+    // console.log('loading')
+    // getNext(previousSong.musicId, previousSong.playlistId)
+    //     .then(async (res: any) => {
+    //         const moreSongs: SongObject[] = []
+    //         for (let i = 0; i < res.content.length; ++i) {
+    //             if (i >= 4) break // we are only loading 4 more songs when scroller reached to the end of the UI
+    //             console.log(i)
+    //             await getPlayer(
+    //                 res.content[i].musicId,
+    //                 res.content[i].playlistId,
+    //                 '',
+    //             )
+    //                 .then((res: SongObject) => {
+    //                     console.log('setting', i)
+    //                     moreSongs.push(res)
+    //                 })
+    //                 .catch(err => {})
+    //         }
+    //         console.log('Final More Songs->', moreSongs)
+    //         setSongs(songs => ({
+    //             content: songs.content.concat(moreSongs),
+    //             continuation: songs.continuation,
+    //         }))
 
-        getNext(previousSong.musicId, previousSong.playlistId, 'SONG')
-            .then((res: FetchedSongObject) => {
-                console.log(res.content.length)
-
-                // if the scrollToNextSongAfterLoadingMoreData variable is true than this function is called when a song is ended and the last song is reached in this case scroll to next song after setting the songs list
-                if (scrollToNextSongAfterLoadingMoreData) {
-                    scrollToSongIndex(index)
-                }
-            })
-            .catch(_err => {})
-    }
+    //         // if the scrollToNextSongAfterLoadingMoreData variable is true than this function is called when a song is ended and the last song is reached in this case scroll to next song after setting the songs list
+    //         if (scrollToNextSongAfterLoadingMoreData) {
+    //             scrollToSongIndex(index)
+    //         }
+    //     })
+    //     .catch(_err => {})
+    // }
 
     /**
      * whenever a new song is played or the current track is also played this function will be called
@@ -289,7 +309,7 @@ const Player: FC<PlayerProps> = _props => {
      * this function will be triggered automatically when a song is ended
      * or exactly the current song which was playing is ended (the queue is ended)
      */
-    const currentTrackEndedScrollDown = () => {
+    const currentTrackEndedScrollDown = useCallback(() => {
         /**
          * checking that which songs was playing currently
          * by using the local variable @var currentlyPlayingTrackID and iterating over the songs list
@@ -297,33 +317,38 @@ const Player: FC<PlayerProps> = _props => {
          * if the index is the last index of the song item then we will load more data and then scroll one index down for the flatlist
          * other wise if the song index is not the last song than scroll to the next index and that song will be played than...
          */
+        const endedSongIndex = songs.content.filter(
+            song => song.musicId === currentlyPlayingTrackID.current,
+        )
+        console.log(endedSongIndex)
         const numberOfSongs = songs.content.length
-        for (
-            let currentSongIndex = 0;
-            currentSongIndex < numberOfSongs;
-            ++currentSongIndex
-        ) {
+        console.log(numberOfSongs)
+        for (let index = 0; index < numberOfSongs; ++index) {
+            console.log(
+                songs.content[index].name,
+                currentlyPlayingTrackID.current,
+            )
             if (
-                songs.content[currentSongIndex].musicId ===
-                currentlyPlayingTrackID.current
+                songs.content[index].musicId === currentlyPlayingTrackID.current
             ) {
+                console.log(index, index + 1)
                 // if the track id which has been ended is found
-                if (currentSongIndex === numberOfSongs - 1) {
+                if (index === numberOfSongs - 1) {
                     // if the song is the last song which is available to play and has ended load more songs and then scroll to the next one...
                     console.log('Load more data')
-                    loadMoreSongsDataNextToTheCurrent(
-                        true,
-                        currentSongIndex + 1,
-                    ) // scroll to the song at index -> currentSongIndex + 1
+                    // loadMoreSongsDataNextToTheCurrent(
+                    //     true,
+                    //     index + 1,
+                    // ) // scroll to the song at index -> index + 1
                 } else {
                     // if that song's index is not the last one in the list of songs than scroll to next song...
-                    scrollToSongIndex(currentSongIndex + 1) // scroll to the song at index -> currentSongIndex + 1
+                    scrollToSongIndex(index + 1) // scroll to the song at index -> index + 1
                 }
                 // since we have found the song which was playing recently our task is completed so return from this function...
                 return
             }
         }
-    }
+    }, [songs])
     useEffect(() => {
         /**
          * when a new track is played from anywhere the application
@@ -559,7 +584,7 @@ const Player: FC<PlayerProps> = _props => {
                     alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    onEndReached={() => loadMoreSongsDataNextToTheCurrent()} // more data when the end is reaching close while scrolling...
+                    // onEndReached={() => loadMoreSongsDataNextToTheCurrent()} // more data when the end is reaching close while scrolling...
                     onScroll={Animated.event(
                         [{nativeEvent: {contentOffset: {y: scrollX}}}],
                         {
