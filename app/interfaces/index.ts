@@ -68,3 +68,9 @@ export {BareFetchedSongObjectInstance, BareSongObjectInstance, CasualDemoList}
 
 import {MoodCategories, GenresCategories} from './Data'
 export {MoodCategories, GenresCategories}
+
+/**
+ * player controller interfaces and modals
+ */
+import {Track} from '../api/PlayerControls'
+export type {Track}
