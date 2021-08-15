@@ -11,6 +11,7 @@ import {useTheme, useMusicApi} from '../context'
 
 import ExploreStackNavigator from './ExploreStack'
 import MusicPlayer from '../screens/main/MusicPlayer'
+import MusicPlayer2 from '../screens/main/MusicPlayer2'
 import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 
@@ -70,7 +71,7 @@ const AppInsideNavigationWithMaterialTabBar = () => {
             {/* PLAYER SCREEN WHERE ALL THE SONGS PLAYING INTERFACE EXISTS */}
             <BarNavigator.Screen
                 name="MusicPlayer"
-                component={MusicPlayer}
+                component={MusicPlayer2}
                 options={{
                     tabBarAccessibilityLabel: 'Music Player Tab',
                     tabBarColor: themeColors.primary.main[0] + '00',
