@@ -67,7 +67,7 @@ const TrackButtonControls = (props: Props) => {
             stopEvent.remove()
             stateChangeEvent.remove()
         }
-    }, [])
+    }, [props.color, props.isLiked])
 
     return (
         <View style={styles.wrapper}>
