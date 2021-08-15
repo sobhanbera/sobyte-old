@@ -170,20 +170,20 @@ const Player: FC<PlayerProps> = _props => {
             })
     }
     useEffect(() => {
-        // initMusicApi()
-        //     .then(() => {
-        //         initMusicApi()
-        //             .then(() => {
-        //                 initializeMusicPlayer()
-        //             })
-        //             .catch(() => {})
-        //     })
-        //     .catch(() => {
-        //         // this will only be called when the internet connectivity is very slow or not present...
-        //         console.error(
-        //             '(Outer) Error Initiating Music Api... no internet connection found',
-        //         )
-        //     })
+        initMusicApi()
+            .then(() => {
+                initMusicApi()
+                    .then(() => {
+                        initializeMusicPlayer()
+                    })
+                    .catch(() => {})
+            })
+            .catch(() => {
+                // this will only be called when the internet connectivity is very slow or not present...
+                console.error(
+                    '(Outer) Error Initiating Music Api... no internet connection found',
+                )
+            })
     }, [error])
 
     // a reference variable for the duration after which the like animation will be disappear...
@@ -344,7 +344,7 @@ const Player: FC<PlayerProps> = _props => {
                 // the scrollview/flatlist may be scrolled to some position so we are adjusting the position of that after loading the songs...
                 scrollToSongIndex(0)
             })
-            .catch(err => {})
+            .catch(_err => {})
     }
 
     /**
