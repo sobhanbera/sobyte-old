@@ -141,5 +141,5 @@ export default [
     // 'most listened romantic songs',
     // 'most played romantic songs',
     // 'top romantic songs',
-    'chal ghar chale',
+    'indian patriotic songs',
 ]
