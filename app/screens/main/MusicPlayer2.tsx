@@ -291,7 +291,10 @@ const Player: FC<PlayerProps> = _props => {
         [],
     )
     // key extractor for each item of the UI...
-    const keyExtractor = useCallback((item: SongObject) => item.musicId, [])
+    const keyExtractor = useCallback(
+        (item: SongObject, index: number) => `${item.musicId}-${index}`,
+        [],
+    )
     /**
      * layout of each music item or the song view component
      * like width and height are provided through this function...
