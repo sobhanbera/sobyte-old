@@ -7,6 +7,7 @@ import {
     StyleSheet,
     Text,
     FlatList,
+    ToastAndroid,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import NetInfo from '@react-native-community/netinfo' // if the internet connection is slow than we will load low quality track else load high quality progressively...
@@ -34,7 +35,6 @@ import {
 } from '../../utils'
 import {FetchedSongObject, SongObject} from '../../interfaces'
 import globalStyles from '../../styles/global.styles'
-import {useMemo} from 'react'
 
 const AppLoadingAnimation = require('../../assets/animations/animation.json')
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
@@ -68,11 +68,11 @@ interface PlayerProps {
 const Player: FC<PlayerProps> = _props => {
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
-    const {initMusicApi, search, getNext, getPlayer, error} = useMusicApi()
+    const {initMusicApi, search, getContinuation, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
 
     /**
-     * a demo value just for rendering the laoding properly or else if there
+     * initial value just for rendering the laoding properly or else if there
      * is no songs.content and it would be undefined and
      * always show the flatlist not the loading component...
      */
@@ -113,34 +113,7 @@ const Player: FC<PlayerProps> = _props => {
     const likeAnimRef = useRef<LottieView>(null)
     const isAnimationPlaying = useRef<boolean>(false)
 
-    // a reference variable for the duration after which the like animation will be disappear...
-    let TimeOutVar = setTimeout(() => {}, 0)
-    const playLikeAnimationForMusicId = useCallback((musicId: string) => {
-        /**
-         * clearing the previous timeout since we are going to do a new time out
-         * if we don't clear the previous time out then
-         * let the user have liked the song and duration is 3sec here if the user again liked the song after 2sec
-         * then the like animation will end in 3-2=1sec which is not good since the duration is 3sec
-         * so we are clearing the last timeout and overwiting it with a new one
-         */
-        clearTimeout(TimeOutVar)
-        // after clearing the timeout we can reset the like animation and play it
-        likeAnimRef.current?.reset()
-        likeAnimRef.current?.play(0, 65)
-
-        // set a new timeout for the like animation hiding trigger
-        TimeOutVar = setTimeout(() => {
-            likeAnimRef.current?.reset()
-        }, LIKE_ANIMATION_DISAPPEAR_DURATION)
-
-        /**
-         * here we can make api requests to the backend to include the liked musicID
-         * in the user's liked playlist's songs list
-         * ACTUAL LIKE WORKING.....
-         */
-        console.log('YOU LIKED THIS SONG WITH ID:: ', musicId)
-    }, [])
-
+    // initializing the songs list...
     const initializeMusicPlayer = () => {
         search(
             RANDOM_SEARCH_QUERY,
@@ -170,24 +143,18 @@ const Player: FC<PlayerProps> = _props => {
                         title: initialTrack.name,
                         url: '',
                     },
+                    {},
                     false,
                     false,
                 )
 
-                /**
-                 * here we are getting the data url of some next songs
-                 * so that when the user scrolls some of these are played instantly...
-                 * if this songs exists then only we will load the URL of this tracks...
-                 *
-                 * actually we should load all the songs music URL where the song exists
-                 * since it will only take time so why to load later
-                 */
-                for (let i = 1; i < res.content.length; ++i) {
-                    if (i >= 2) break // we are only loading 2 more songs data after the 0th index song (first song/track)
-                    if (res.content[i].musicId)
-                        fetchMusic(res.content[i].musicId)
+                // loading the next songs data...
+                if (
+                    res.content[1] !== undefined &&
+                    res.content[1].musicId.length > 0
+                ) {
+                    fetchMusic(res.content[1].musicId)
                 }
-                // for now we are loading every songs URL...
             })
             .catch(_err => {
                 // console.log('ERROR IN MUSIC PLAYER', err)
@@ -210,16 +177,34 @@ const Player: FC<PlayerProps> = _props => {
             })
     }, [error])
 
-    /**
-     * @param {number} index in the index of the song in where to scroll the flatlist
-     * function which scroll to the song at index @param index
-     */
-    const scrollToSongIndex = (index: number) => {
-        scrollReference.current?.scrollToIndex({
-            index: index, // scrolling to the next song in the list
-            animated: true,
-        })
-    }
+    // a reference variable for the duration after which the like animation will be disappear...
+    let TimeOutVar = setTimeout(() => {}, 0)
+    const playLikeAnimationForMusicId = useCallback((musicId: string) => {
+        /**
+         * clearing the previous timeout since we are going to do a new time out
+         * if we don't clear the previous time out then
+         * let the user have liked the song and duration is 3sec here if the user again liked the song after 2sec
+         * then the like animation will end in 3-2=1sec which is not good since the duration is 3sec
+         * so we are clearing the last timeout and overwiting it with a new one
+         */
+        clearTimeout(TimeOutVar)
+        // after clearing the timeout we can reset the like animation and play it
+        likeAnimRef.current?.reset()
+        likeAnimRef.current?.play(0, 65)
+
+        // set a new timeout for the like animation hiding trigger
+        TimeOutVar = setTimeout(() => {
+            likeAnimRef.current?.reset()
+        }, LIKE_ANIMATION_DISAPPEAR_DURATION)
+
+        /**
+         * here we can make api requests to the backend to include the liked musicID
+         * in the user's liked playlist's songs list
+         * ACTUAL LIKE WORKING.....
+         */
+        console.log('YOU LIKED THIS SONG WITH ID:: ', musicId)
+    }, [])
+
     /**
      * this function will be called when the songs list has reached to its bottom or the list of songs is ended
      * this function will load more songs data and append those data to the end of @var songs list...
@@ -231,47 +216,38 @@ const Player: FC<PlayerProps> = _props => {
      * @param {number} index this is the index of the song which was played currently if the @var scrollToNextSongAfterLoadingMoreData is true we will scroll to this index only, after loading more song/track data
      * @param {SongObject} previousSong a object which is the the last song which is playing or added...
      * actually this is the previous song for which next song must be loaded
+     *
+     * above parameters were used in previous version of music player UI component...
      */
-    // const loadMoreSongsDataNextToTheCurrent = (
-    //     scrollToNextSongAfterLoadingMoreData: boolean = false,
-    //     index: number = 0,
-    //     previousSong: SongObject = songs.content[songs.content.length - 1],
-    // ) => {
-    /**
-     * if the previous song is provided that means the song is played from the other parts of the application because it would be provided from the current track playing
-     * in react-native-track-player we could be playlistID from the description and the musicID from the track id itself...
-     */
-    // console.log('loading')
-    // getNext(previousSong.musicId, previousSong.playlistId)
-    //     .then(async (res: any) => {
-    //         const moreSongs: SongObject[] = []
-    //         for (let i = 0; i < res.content.length; ++i) {
-    //             if (i >= 4) break // we are only loading 4 more songs when scroller reached to the end of the UI
-    //             console.log(i)
-    //             await getPlayer(
-    //                 res.content[i].musicId,
-    //                 res.content[i].playlistId,
-    //                 '',
-    //             )
-    //                 .then((res: SongObject) => {
-    //                     console.log('setting', i)
-    //                     moreSongs.push(res)
-    //                 })
-    //                 .catch(err => {})
-    //         }
-    //         console.log('Final More Songs->', moreSongs)
-    //         setSongs(songs => ({
-    //             content: songs.content.concat(moreSongs),
-    //             continuation: songs.continuation,
-    //         }))
-
-    //         // if the scrollToNextSongAfterLoadingMoreData variable is true than this function is called when a song is ended and the last song is reached in this case scroll to next song after setting the songs list
-    //         if (scrollToNextSongAfterLoadingMoreData) {
-    //             scrollToSongIndex(index)
-    //         }
-    //     })
-    //     .catch(_err => {})
-    // }
+    const loadMoreSongsDatas = (
+        scrollToNextSongAfterLoadingMoreData: boolean = false,
+        scrollToNextIndex: number = -1,
+    ) => {
+        /**
+         * we are continously getting the songs using the continuation object of the FetchedSongsObjects...
+         */
+        getContinuation('search', songs.continuation, 'SONG')
+            .then((res: FetchedSongObject) => {
+                // more data for continous songs list is loaded now we can set this data to the state...
+                setSongs(songs => ({
+                    content: songs.content.concat(res.content),
+                    continuation: res.continuation,
+                }))
+                // if the end of the scroll is reached and there are no songs then we will scroll to the next song after loading more songs
+                if (
+                    scrollToNextSongAfterLoadingMoreData &&
+                    scrollToNextIndex >= 0
+                ) {
+                    scrollToSongIndex(scrollToNextIndex)
+                }
+            })
+            .catch(_err => {
+                ToastAndroid.show(
+                    'Cannot load more data. Internet Issues found.',
+                    ToastAndroid.SHORT,
+                )
+            })
+    }
 
     /**
      * whenever a new song is played or the current track is also played this function will be called
@@ -305,11 +281,23 @@ const Player: FC<PlayerProps> = _props => {
             console.log('<<<< OUTER >>>> .')
         }
     }
+
+    /**
+     * @param {number} index in the index of the song in where to scroll the flatlist
+     * function which scroll to the song at index @param index
+     */
+    const scrollToSongIndex = (index: number) => {
+        scrollReference.current?.scrollToIndex({
+            index: index, // scrolling to the next song in the list
+            animated: true,
+        })
+    }
+
     /**
      * this function will be triggered automatically when a song is ended
      * or exactly the current song which was playing is ended (the queue is ended)
      */
-    const currentTrackEndedScrollDown = useCallback(() => {
+    const currentTrackEndedScrollDown = () => {
         /**
          * checking that which songs was playing currently
          * by using the local variable @var currentlyPlayingTrackID and iterating over the songs list
@@ -317,38 +305,44 @@ const Player: FC<PlayerProps> = _props => {
          * if the index is the last index of the song item then we will load more data and then scroll one index down for the flatlist
          * other wise if the song index is not the last song than scroll to the next index and that song will be played than...
          */
-        const endedSongIndex = songs.content.filter(
-            song => song.musicId === currentlyPlayingTrackID.current,
-        )
-        console.log(endedSongIndex)
         const numberOfSongs = songs.content.length
-        console.log(numberOfSongs)
         for (let index = 0; index < numberOfSongs; ++index) {
-            console.log(
-                songs.content[index].name,
-                currentlyPlayingTrackID.current,
-            )
             if (
                 songs.content[index].musicId === currentlyPlayingTrackID.current
             ) {
-                console.log(index, index + 1)
                 // if the track id which has been ended is found
                 if (index === numberOfSongs - 1) {
                     // if the song is the last song which is available to play and has ended load more songs and then scroll to the next one...
-                    console.log('Load more data')
-                    // loadMoreSongsDataNextToTheCurrent(
-                    //     true,
-                    //     index + 1,
-                    // ) // scroll to the song at index -> index + 1
+                    loadMoreSongsDatas(true, index + 1) // scroll to the song at index -> index + 1
                 } else {
                     // if that song's index is not the last one in the list of songs than scroll to next song...
+                    // also play the song first
+
+                    // play data
+                    const initialTrack = songs.content[index + 1]
+                    const artist = formatArtists(initialTrack.artist)
+
+                    play(
+                        {
+                            artist,
+                            artwork: initialTrack.thumbnails[1].url,
+                            id: initialTrack.musicId,
+                            duration: initialTrack.duration,
+                            playlistId: initialTrack.playlistId,
+                            title: initialTrack.name,
+                            url: '',
+                        },
+                        {},
+                    )
+                    currentlyPlayingTrackID.current = initialTrack.musicId
                     scrollToSongIndex(index + 1) // scroll to the song at index -> index + 1
                 }
                 // since we have found the song which was playing recently our task is completed so return from this function...
-                return
+                break
             }
         }
-    }, [songs])
+    }
+
     useEffect(() => {
         /**
          * when a new track is played from anywhere the application
@@ -358,6 +352,14 @@ const Player: FC<PlayerProps> = _props => {
         const playbackTrackChanged = TrackPlayer.addEventListener(
             'playback-track-changed',
             trackData => {
+                TrackPlayer.getTrack(trackData.nextTrack)
+                    .then(async result => {
+                        if (result === null) {
+                            return
+                        }
+                        console.log('CHANGED SONG', result)
+                    })
+                    .catch(_err => {})
                 trackChangedInPlayerControlsLoadDifferentData(
                     trackData.nextTrack,
                 )
@@ -371,8 +373,7 @@ const Player: FC<PlayerProps> = _props => {
         const playbackQueueEnded = TrackPlayer.addEventListener(
             'playback-queue-ended',
             _queueEndedData => {
-                currentTrackEndedScrollDown()
-                console.log('Queue ended with this data', _queueEndedData)
+                if (_queueEndedData.position > 0) currentTrackEndedScrollDown() // since if the queue ending position of the song must be a +ve integer
             },
         )
 
@@ -384,7 +385,7 @@ const Player: FC<PlayerProps> = _props => {
             playbackTrackChanged.remove()
             playbackQueueEnded.remove()
         }
-    }, [])
+    }, [songs])
 
     /**
      * @description to show the prompt when a song is played over cellular, wifi,
@@ -438,7 +439,10 @@ const Player: FC<PlayerProps> = _props => {
         [],
     )
     // key extractor for each item of the UI...
-    const keyExtractor = useCallback((item: SongObject) => item.musicId, [])
+    const keyExtractor = useCallback(
+        (item: SongObject, index: number) => `${item.musicId}-${index}`,
+        [],
+    )
     /**
      * layout of each music item or the song view component
      * like width and height are provided through this function...
@@ -460,7 +464,9 @@ const Player: FC<PlayerProps> = _props => {
         minimumViewTime: 1000, // there should be a miminum time only after which the process of playing the song or else should start
         viewAreaCoveragePercentThreshold: 99, // since when we are giving a less area view port it occur much before the scroll actually occurs
         // itemVisiblePercentThreshold: 90, // percent %
-        waitForInteraction: true, // true because we want the song must be after the user has interacted with the UI. this would be helpful if the user doesnot want to remain in music player after launching and want to go to profile only than no need to play song automatically
+        waitForInteraction: false, // true because we want the song must be after the user has interacted with the UI. this would be helpful if the user doesnot want to remain in music player after launching and want to go to profile only than no need to play song automatically
+        // and if this value is false because we want change the song even if the scrollview is scrolled automatically...
+        // both cases are fine but we need false case...
     }).current
     /**
      * when user scrolls the main music player to the next songs
@@ -506,25 +512,44 @@ const Player: FC<PlayerProps> = _props => {
          * finally play the songs
          * after all this loading and checkings
          */
-        play({
-            url: '',
-            id: item.musicId,
-            duration: item.duration,
-            title: item.name,
-            playlistId: item.playlistId,
-            artist: artists,
-            artwork: trackImage,
-        })
+        play(
+            {
+                url: '',
+                id: item.musicId,
+                duration: item.duration,
+                title: item.name,
+                playlistId: item.playlistId,
+                artist: artists,
+                artwork: trackImage,
+            },
+            {},
+        )
 
         // showing the prompt...
         showThePromptForFirstTime()
     }).current
 
-    /**
-     * if we haven't shown the prompt once then show it and make the control variable false
-     * so that from next time the prompt is not shown
-     * if we have shown the propmt once
-     */
+    const scrollChangedHandler = (event: any) => {
+        /**
+         * here we are also loading the next song's data url
+         * in advance so that if the user scrolls down the song plays in the least time
+         * and more efficient if some time is given and then scrolled
+         *
+         * IMP NOTE: this task will only be done if the next indexed song exists...
+         *
+         * if the scroll position is showing a full part of any song than only we will load the next song data url
+         */
+
+        if (event.nativeEvent.contentOffset.y % height === 0) {
+            const nextSongIndex = event.nativeEvent.contentOffset.y / height
+            if (
+                songs.content[nextSongIndex + 1] !== undefined &&
+                songs.content[nextSongIndex + 1].musicId.length > 0
+            ) {
+                fetchMusic(songs.content[nextSongIndex + 1].musicId)
+            }
+        }
+    }
 
     return (
         <GradientBackground
@@ -584,14 +609,14 @@ const Player: FC<PlayerProps> = _props => {
                     alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    // onEndReached={() => loadMoreSongsDataNextToTheCurrent()} // more data when the end is reaching close while scrolling...
+                    onEndReached={() => loadMoreSongsDatas()} // more data when the end is reaching close while scrolling...
                     onScroll={Animated.event(
                         [{nativeEvent: {contentOffset: {y: scrollX}}}],
                         {
                             useNativeDriver: true,
-                            // listener: event => {
-                            // scrollChangedHandler(event)
-                            // },
+                            listener: event => {
+                                scrollChangedHandler(event)
+                            },
                         },
                     )}
                 />
