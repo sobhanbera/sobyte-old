@@ -4,7 +4,6 @@ import {StatusBar} from 'react-native'
 import TrackPlayer, {
     CAPABILITY_PLAY,
     CAPABILITY_PAUSE,
-    CAPABILITY_STOP,
     CAPABILITY_JUMP_BACKWARD,
     CAPABILITY_JUMP_FORWARD,
     CAPABILITY_SKIP,
@@ -39,7 +38,6 @@ const MainApp = () => {
             capabilities: [
                 CAPABILITY_PLAY,
                 CAPABILITY_PAUSE,
-                CAPABILITY_STOP,
                 CAPABILITY_SKIP,
                 CAPABILITY_JUMP_BACKWARD,
                 CAPABILITY_JUMP_FORWARD,
@@ -47,14 +45,12 @@ const MainApp = () => {
             notificationCapabilities: [
                 CAPABILITY_PLAY,
                 CAPABILITY_PAUSE,
-                CAPABILITY_STOP,
                 CAPABILITY_JUMP_BACKWARD,
                 CAPABILITY_JUMP_FORWARD,
             ],
             compactCapabilities: [
                 CAPABILITY_PLAY,
                 CAPABILITY_PAUSE,
-                CAPABILITY_STOP,
                 CAPABILITY_JUMP_BACKWARD,
                 CAPABILITY_JUMP_FORWARD,
             ],
