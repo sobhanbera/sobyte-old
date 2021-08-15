@@ -17,6 +17,7 @@ import {
     ColorGradientCodeName,
     AllApiPostBodyArttributes,
     AppUserData,
+    MusicTrack,
 } from './Modals'
 export type {
     DominatingColors,
@@ -27,6 +28,7 @@ export type {
     ColorGradientCodeName,
     AllApiPostBodyArttributes,
     AppUserData,
+    MusicTrack,
 }
 
 import SongCategory from './SongCategory'

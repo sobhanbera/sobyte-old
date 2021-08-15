@@ -43,6 +43,24 @@ export type ImageQualityType =
     | '60'
 export type LanguageType = 'en' | 'hi' | 'bn'
 
+// music track type which is the main type of the songs playing/played each time...
+export interface MusicTrack {
+    id: string
+    url: string
+    duration: number
+    title: string
+    artist: string
+    artwork: string | any
+    playlistId: string
+    type?: 'default' | 'dash' | 'hls' | 'smoothstreaming'
+    pitchAlgorithm?: string | number
+    genre?: string
+    description?: string
+    album?: string
+    rating?: number | boolean
+    [key: string]: any
+}
+
 /**
  * user data interface
  * which contains email, username, phone, gender, account_type, account_type_upto, etc...
