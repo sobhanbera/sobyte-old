@@ -40,7 +40,7 @@ interface PlayerControlsModal {
      */
     play(
         track: Track,
-        continuation: ContinuationObject | {} | {},
+        searchQuery: string,
         play?: boolean,
         showLoading?: boolean,
     ): any
@@ -67,7 +67,7 @@ const PlayerContext = createContext<PlayerControlsModal>({
      */
     play: (
         _track: Track,
-        _continuation: ContinuationObject | {} | {} = {},
+        _searchQuery: string,
         _play?: boolean,
         _showLoading?: boolean,
     ) => {},
@@ -214,7 +214,7 @@ const Player: FC<PlayerProps> = props => {
      */
     const play = (
         track: Track,
-        continuation: ContinuationObject | {} = {},
+        searchQuery: string,
         play: boolean = true,
         showLoading: boolean = false,
     ) => {
@@ -245,7 +245,7 @@ const Player: FC<PlayerProps> = props => {
                 const trackGot = {
                     ...track,
                     url: __res,
-                    description: JSON.stringify(continuation), // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
+                    description: searchQuery, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
                 TrackPlayer.add([trackGot])
                 if (play) TrackPlayer.play()
