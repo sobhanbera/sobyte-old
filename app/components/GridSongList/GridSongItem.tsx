@@ -61,7 +61,10 @@ const GridSongItem = React.memo(
                             playlistId: item.playlistId,
                             url: '',
                         },
-                        id,
+                        {
+                            ...item,
+                            keyword: id,
+                        },
                     )
                 }>
                 <View
