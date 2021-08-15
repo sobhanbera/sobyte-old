@@ -330,7 +330,7 @@ const Player: FC<PlayerProps> = _props => {
          * if the content is fully rendered or shown to the user
          * change the track if it is different than the current track/song
          */
-        const {item, index} = changed[0]
+        const {item} = changed[0]
 
         /**
          * generating the data required for playing the song
@@ -365,22 +365,29 @@ const Player: FC<PlayerProps> = _props => {
 
         // showing the prompt...
         showThePromptForFirstTime()
+    }).current
 
-        console.log(data)
+    const scrollChangedHandler = (event: any) => {
         /**
          * here we are also loading the next song's data url
          * in advance so that if the user scrolls down the song plays in the least time
          * and more efficient if some time is given and then scrolled
          *
          * IMP NOTE: this task will only be done if the next indexed song exists...
+         *
+         * if the scroll position is showing a full part of any song than only we will load the next song data url
          */
-        if (
-            songs.content[index + 1] !== undefined &&
-            songs.content[index + 1].musicId.length > 0
-        ) {
-            fetchMusic(songs.content[index + 1].musicId)
+
+        if (event.nativeEvent.contentOffset.y % height === 0) {
+            const nextSongIndex = event.nativeEvent.contentOffset.y / height
+            if (
+                songs.content[nextSongIndex + 1] !== undefined &&
+                songs.content[nextSongIndex + 1].musicId.length > 0
+            ) {
+                fetchMusic(songs.content[nextSongIndex + 1].musicId)
+            }
         }
-    }).current
+    }
 
     return (
         <GradientBackground
@@ -445,9 +452,9 @@ const Player: FC<PlayerProps> = _props => {
                         [{nativeEvent: {contentOffset: {y: scrollX}}}],
                         {
                             useNativeDriver: true,
-                            // listener: event => {
-                            // scrollChangedHandler(event)
-                            // },
+                            listener: event => {
+                                scrollChangedHandler(event)
+                            },
                         },
                     )}
                 />
