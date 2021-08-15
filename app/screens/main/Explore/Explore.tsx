@@ -108,7 +108,6 @@ const Explore: React.FC<ExploreTabProps> = props => {
         ])
             .then((res: FetchedSongObject[]) => {
                 setMusicData(res)
-                for (let i in res) console.log(res[i].content.length)
             })
             .catch(_err => {})
 
