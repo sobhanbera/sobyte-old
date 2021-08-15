@@ -143,6 +143,7 @@ const Player: FC<PlayerProps> = _props => {
                         title: initialTrack.name,
                         url: '',
                     },
+                    {},
                     false,
                     false,
                 )
@@ -222,17 +223,11 @@ const Player: FC<PlayerProps> = _props => {
         scrollToNextSongAfterLoadingMoreData: boolean = false,
         scrollToNextIndex: number = -1,
     ) => {
-        console.log(
-            'LOADING MORE SONG DATAS -=+.><,>>',
-            songs.content[songs.content.length - 1].musicId,
-            songs.content[songs.content.length - 1].playlistId,
-        )
         /**
          * we are continously getting the songs using the continuation object of the FetchedSongsObjects...
          */
         getContinuation('search', songs.continuation, 'SONG')
             .then((res: FetchedSongObject) => {
-                console.log(':SONGS LOADED')
                 // more data for continous songs list is loaded now we can set this data to the state...
                 setSongs(songs => ({
                     content: songs.content.concat(res.content),
@@ -318,27 +313,27 @@ const Player: FC<PlayerProps> = _props => {
                 // if the track id which has been ended is found
                 if (index === numberOfSongs - 1) {
                     // if the song is the last song which is available to play and has ended load more songs and then scroll to the next one...
-                    console.log('Load more data')
-                    loadMoreSongsDatas(true) // scroll to the song at index -> index + 1
+                    loadMoreSongsDatas(true, index + 1) // scroll to the song at index -> index + 1
                 } else {
                     // if that song's index is not the last one in the list of songs than scroll to next song...
                     // also play the song first
-
-                    console.log('playing =', songs.content[index + 1].name)
 
                     // play data
                     const initialTrack = songs.content[index + 1]
                     const artist = formatArtists(initialTrack.artist)
 
-                    play({
-                        artist,
-                        artwork: initialTrack.thumbnails[1].url,
-                        id: initialTrack.musicId,
-                        duration: initialTrack.duration,
-                        playlistId: initialTrack.playlistId,
-                        title: initialTrack.name,
-                        url: '',
-                    })
+                    play(
+                        {
+                            artist,
+                            artwork: initialTrack.thumbnails[1].url,
+                            id: initialTrack.musicId,
+                            duration: initialTrack.duration,
+                            playlistId: initialTrack.playlistId,
+                            title: initialTrack.name,
+                            url: '',
+                        },
+                        {},
+                    )
                     currentlyPlayingTrackID.current = initialTrack.musicId
                     scrollToSongIndex(index + 1) // scroll to the song at index -> index + 1
                 }
@@ -357,6 +352,14 @@ const Player: FC<PlayerProps> = _props => {
         const playbackTrackChanged = TrackPlayer.addEventListener(
             'playback-track-changed',
             trackData => {
+                TrackPlayer.getTrack(trackData.nextTrack)
+                    .then(async result => {
+                        if (result === null) {
+                            return
+                        }
+                        console.log('CHANGED SONG', result)
+                    })
+                    .catch(_err => {})
                 trackChangedInPlayerControlsLoadDifferentData(
                     trackData.nextTrack,
                 )
@@ -370,7 +373,6 @@ const Player: FC<PlayerProps> = _props => {
         const playbackQueueEnded = TrackPlayer.addEventListener(
             'playback-queue-ended',
             _queueEndedData => {
-                console.log('Queue ended with this data', _queueEndedData)
                 if (_queueEndedData.position > 0) currentTrackEndedScrollDown() // since if the queue ending position of the song must be a +ve integer
             },
         )
@@ -510,15 +512,18 @@ const Player: FC<PlayerProps> = _props => {
          * finally play the songs
          * after all this loading and checkings
          */
-        play({
-            url: '',
-            id: item.musicId,
-            duration: item.duration,
-            title: item.name,
-            playlistId: item.playlistId,
-            artist: artists,
-            artwork: trackImage,
-        })
+        play(
+            {
+                url: '',
+                id: item.musicId,
+                duration: item.duration,
+                title: item.name,
+                playlistId: item.playlistId,
+                artist: artists,
+                artwork: trackImage,
+            },
+            {},
+        )
 
         // showing the prompt...
         showThePromptForFirstTime()
