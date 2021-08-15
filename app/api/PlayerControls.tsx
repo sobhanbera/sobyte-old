@@ -24,11 +24,15 @@ export interface Track {
     // rating?: number | boolean
     // [key: string]: any
 }
+interface ContinousDataTrackDetails extends Track {
+    searchQuery: string
+}
 interface PlayerControlsModal {
     /**
-     * @param _track the actual track to play
-     * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
-     * @param _showLoading wheather to show loading while loading the song data
+     * @param track the actual track to play
+     * @param details the full details of the song if played from out side of music player UI...
+     * @param play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
+     * @param showLoading wheather to show loading while loading the song data
      *
      * the common and normal play function which had many checks and then plays the song
      * also generate next songs list and there url...
@@ -39,7 +43,7 @@ interface PlayerControlsModal {
      */
     play(
         track: Track,
-        searchQuery: string,
+        details: ContinousDataTrackDetails | {},
         play?: boolean,
         showLoading?: boolean,
     ): any
@@ -54,6 +58,7 @@ interface PlayerControlsModal {
 const PlayerContext = createContext<PlayerControlsModal>({
     /**
      * @param _track the actual track to play
+     * @param _details the full details of the song if played from out side of music player UI...
      * @param _play we will load the track to queue but this data decise wheather to play it without user interaction (default value is true)
      * @param _showLoading wheather to show loading while loading the song data
      *
@@ -66,7 +71,7 @@ const PlayerContext = createContext<PlayerControlsModal>({
      */
     play: (
         _track: Track,
-        _searchQuery: string,
+        _details: ContinousDataTrackDetails | {},
         _play?: boolean,
         _showLoading?: boolean,
     ) => {},
@@ -213,7 +218,7 @@ const Player: FC<PlayerProps> = props => {
      */
     const play = (
         track: Track,
-        searchQuery: string,
+        details: ContinousDataTrackDetails | {},
         play: boolean = true,
         showLoading: boolean = false,
     ) => {
@@ -244,7 +249,7 @@ const Player: FC<PlayerProps> = props => {
                 const trackGot = {
                     ...track,
                     url: __res,
-                    description: searchQuery, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
+                    description: JSON.stringify(details), // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
                 TrackPlayer.add([trackGot])
                 if (play) TrackPlayer.play()
