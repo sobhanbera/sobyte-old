@@ -8,7 +8,6 @@ export default [
     'Talat Mahmood',
     'Asha Bhosle',
     'Hemanta Mukherjee',
-    'Jagjit Singh',
     'Manna Dey',
     'Mahendra Kapoor',
     'Hariharan',
