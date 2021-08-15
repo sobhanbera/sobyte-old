@@ -4,6 +4,7 @@ import {useRef} from 'react'
 import TrackPlayer, {STATE_PAUSED} from 'react-native-track-player'
 
 import {useApp, useFetcher} from '../context'
+import {ContinuationObject} from '../interfaces'
 
 /**
  * the data type or the object type for each Tracks of the song
@@ -37,14 +38,19 @@ interface PlayerControlsModal {
      * and also if the track is a valid track
      * else it will play the current track and returns from the function....
      */
-    play(_track: Track, _play?: boolean, _showLoading?: boolean): any
+    play(
+        track: Track,
+        continuation: ContinuationObject | {} | {},
+        play?: boolean,
+        showLoading?: boolean,
+    ): any
 
     /**
      * @param track is the track which is provided to play directly
      * this function resets the player and add the track which is passed and plays it directly but the track must be valid
      * since this function doesn't has any checks for the url of the music or the image or any other property
      */
-    addSongAndPlay(_track: Track): any
+    addSongAndPlay(track: Track): any
 }
 const PlayerContext = createContext<PlayerControlsModal>({
     /**
@@ -59,7 +65,12 @@ const PlayerContext = createContext<PlayerControlsModal>({
      * and also if the track is a valid track
      * else it will play the current track and returns from the function....
      */
-    play: (_track: Track, _play?: boolean, _showLoading?: boolean) => {},
+    play: (
+        _track: Track,
+        _continuation: ContinuationObject | {} | {} = {},
+        _play?: boolean,
+        _showLoading?: boolean,
+    ) => {},
 
     /**
      * @param track is the track which is provided to play directly
@@ -203,6 +214,7 @@ const Player: FC<PlayerProps> = props => {
      */
     const play = (
         track: Track,
+        continuation: ContinuationObject | {} = {},
         play: boolean = true,
         showLoading: boolean = false,
     ) => {
@@ -233,7 +245,7 @@ const Player: FC<PlayerProps> = props => {
                 const trackGot = {
                     ...track,
                     url: __res,
-                    description: track.playlistId, // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
+                    description: JSON.stringify(continuation), // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
                 TrackPlayer.add([trackGot])
                 if (play) TrackPlayer.play()
