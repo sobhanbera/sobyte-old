@@ -140,5 +140,6 @@ export default [
     // 'top new bollywood romantic songs',
     // 'most listened romantic songs',
     // 'most played romantic songs',
-    'top romantic songs',
+    // 'top romantic songs',
+    'chal ghar chale',
 ]
