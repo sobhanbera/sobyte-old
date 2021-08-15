@@ -147,7 +147,13 @@ const Player: FC<PlayerProps> = _props => {
                     false,
                 )
 
-                // for now we are loading every songs URL...
+                // loading the next songs data...
+                if (
+                    res.content[1] !== undefined &&
+                    res.content[1].musicId.length > 0
+                ) {
+                    fetchMusic(res.content[1].musicId)
+                }
             })
             .catch(_err => {
                 // console.log('ERROR IN MUSIC PLAYER', err)
