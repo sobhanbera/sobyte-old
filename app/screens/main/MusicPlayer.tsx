@@ -340,6 +340,9 @@ const Player: FC<PlayerProps> = _props => {
 
                 // now updating the main song list state
                 setSongs({content: songsList, continuation: res.continuation})
+
+                // the scrollview/flatlist may be scrolled to some position so we are adjusting the position of that after loading the songs...
+                scrollToSongIndex(0)
             })
             .catch(err => {})
     }
