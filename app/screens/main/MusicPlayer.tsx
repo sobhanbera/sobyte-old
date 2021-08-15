@@ -33,8 +33,9 @@ import {
     formatArtists,
     getHightQualityImageFromLinkWithHeight,
 } from '../../utils'
-import {FetchedSongObject, SongObject} from '../../interfaces'
+import {FetchedSongObject, MusicTrack, SongObject} from '../../interfaces'
 import globalStyles from '../../styles/global.styles'
+import {Track} from '../../interfaces'
 
 const AppLoadingAnimation = require('../../assets/animations/animation.json')
 const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
@@ -42,6 +43,14 @@ const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
 // const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
 
 const {height} = Dimensions.get('window')
+
+interface ExtraTypeHelper extends SongObject {
+    keyword: string
+}
+// this is the type when a song is changed this data is provided through the track description
+interface ContinousDataTrackDetails extends Track {
+    description: string
+}
 
 /**
  * the interface or data type which will be giving the types for the song data whenever the user scrolls
@@ -161,20 +170,20 @@ const Player: FC<PlayerProps> = _props => {
             })
     }
     useEffect(() => {
-        initMusicApi()
-            .then(() => {
-                initMusicApi()
-                    .then(() => {
-                        initializeMusicPlayer()
-                    })
-                    .catch(() => {})
-            })
-            .catch(() => {
-                // this will only be called when the internet connectivity is very slow or not present...
-                console.error(
-                    '(Outer) Error Initiating Music Api... no internet connection found',
-                )
-            })
+        // initMusicApi()
+        //     .then(() => {
+        //         initMusicApi()
+        //             .then(() => {
+        //                 initializeMusicPlayer()
+        //             })
+        //             .catch(() => {})
+        //     })
+        //     .catch(() => {
+        //         // this will only be called when the internet connectivity is very slow or not present...
+        //         console.error(
+        //             '(Outer) Error Initiating Music Api... no internet connection found',
+        //         )
+        //     })
     }, [error])
 
     // a reference variable for the duration after which the like animation will be disappear...
@@ -250,39 +259,6 @@ const Player: FC<PlayerProps> = _props => {
     }
 
     /**
-     * whenever a new song is played or the current track is also played this function will be called
-     * if the song if played from music player by scrolling up/down this function will do nothing
-     * while if the track/song is played from other sections of the application like the explore tab, search tab, or from the downloads list, songs details screen,
-     * artists tabs, etc.
-     * then this funtion will load more data related to the song which is changed or played (the latest song)
-     */
-    const trackChangedInPlayerControlsLoadDifferentData = (
-        currentTrackID: string,
-    ) => {
-        /**
-         * if the current track's id is empty or null this could be becuase there are no track/song in the queue
-         * this could also happen because we called this before the change of song this is good because the function will again execute when the actual song is played
-         * if the song's id is null or the music player's current track's id is null do nothing since we could not say what is the current song and can't load the next songs list
-         */
-        if (!currentTrackID || !currentlyPlayingTrackID) return
-        // if both the id are valid and present in the memory and track is successfully played...
-        // if the new songs id is different from the saved id of this local music player
-
-        /**
-         * checking if the current track's id from global track-player is
-         * same as the local current track's id here in this component
-         * if - the id is same than it means that the user had scrolled and then the song is changed in this case do nothing
-         * else - the song is played from outside of this component like explore tab or search tab, download list, artists list, albums, playlist, songs list outside of this component, etc...
-         * in this case load more data which should be played after the current song which is changed....
-         */
-        if (currentTrackID === currentlyPlayingTrackID.current) {
-            console.log('<<<< MUSIC PLAYER >>>> .')
-        } else {
-            console.log('<<<< OUTER >>>> .')
-        }
-    }
-
-    /**
      * @param {number} index in the index of the song in where to scroll the flatlist
      * function which scroll to the song at index @param index
      */
@@ -291,6 +267,81 @@ const Player: FC<PlayerProps> = _props => {
             index: index, // scrolling to the next song in the list
             animated: true,
         })
+    }
+
+    /**
+     * whenever a new song is played or the current track is also played this function will be called
+     * if the song if played from music player by scrolling up/down this function will do nothing
+     * while if the track/song is played from other sections of the application like the explore tab, search tab, or from the downloads list, songs details screen,
+     * artists tabs, etc.
+     * then this funtion will load more data related to the song which is changed or played (the latest song)
+     */
+    const onTrackChangedFromGlobalContext = (
+        track: ContinousDataTrackDetails,
+    ) => {
+        /** this will the case when the search query is not provided while playing the song and this will only occur when the song is changed through music player itself
+         * but if it is changed within music player then this code will not reach it will terminate much before. before calling this function from the event listener...
+         */
+        if (
+            // typeof track.description === 'string' &&
+            String(track.description).length <= 0
+        ) {
+            return
+        }
+        // if the above condition is false then search data and song data is provided now we could go futhure..
+        const TrackDescription: ExtraTypeHelper = JSON.parse(track.description)
+
+        /**
+         * if the current track's id is empty or null this could be becuase there are no track/song in the queue
+         * this could also happen because we called this before the change of song this is good because the function will again execute when the actual song is played
+         * if the song's id is null or the music player's current track's id is null do nothing since we could not say what is the current song and can't load the next songs list
+         *
+         * in short we are detecting that every data is present or not which is required to do the task later this check
+         */
+        if (
+            !track.id ||
+            !currentlyPlayingTrackID ||
+            TrackDescription.keyword.length <= 0 ||
+            TrackDescription.musicId.length <= 0
+        )
+            return
+        // if both the id are valid and present in the memory and track is successfully played...
+        // if the new songs id is different from the saved id of this local music player
+
+        // this is the variable which will be updated to the main songs state after loading the data...
+        const songsList: SongObject[] = [
+            {
+                ...TrackDescription,
+            },
+        ]
+        setSongs({
+            content: songsList,
+            continuation: {
+                clickTrackingParams: '', // providing some initial data to resolve warnings...
+                continuation: '',
+            },
+        })
+        search(TrackDescription.keyword, 'SONG', false, false, '', [0, 10])
+            .then((res: FetchedSongObject) => {
+                /**
+                 * itterating over all the results we have got and checking wheather the results song
+                 * includes the song which is played currently..
+                 */
+                for (let i in res.content) {
+                    if (res.content[i].musicId === TrackDescription.musicId) {
+                        continue // if the song is exist in this result that means we do not need to do anything
+                        // buy one thing is sure that the user have played the song from the result just after the searching or searched result.
+                        // that means the user has not loaded more data or so ...
+                        // although this is temporary
+                    } else {
+                        songsList.push(res.content[i]) // include this song data
+                    }
+                }
+
+                // now updating the main song list state
+                setSongs({content: songsList, continuation: res.continuation})
+            })
+            .catch(err => {})
     }
 
     /**
@@ -352,17 +403,27 @@ const Player: FC<PlayerProps> = _props => {
         const playbackTrackChanged = TrackPlayer.addEventListener(
             'playback-track-changed',
             trackData => {
-                TrackPlayer.getTrack(trackData.nextTrack)
-                    .then(async result => {
-                        if (result === null) {
-                            return
-                        }
-                        console.log('CHANGED SONG', result)
-                    })
-                    .catch(_err => {})
-                trackChangedInPlayerControlsLoadDifferentData(
-                    trackData.nextTrack,
-                )
+                /**
+                 * checking if the current track's id from global track-player is
+                 * same as the local current track's id here in this component
+                 * if - the id is same than it means that the user had scrolled and then the song is changed in this case do nothing
+                 * else - the song is played from outside of this component like explore tab or search tab, download list, artists list, albums, playlist, songs list outside of this component, etc...
+                 * in this case load more data which should be played after the current song which is changed....
+                 */
+                if (trackData.nextTrack === currentlyPlayingTrackID.current) {
+                    // do nothing since the song is played from music player itself
+                    // may be by user's scrolling or the multiple songs are ended...
+                } else {
+                    // load more data in this case
+                    TrackPlayer.getTrack(trackData.nextTrack)
+                        .then((result: any | MusicTrack) => {
+                            if (result === null || result === undefined) {
+                                return
+                            }
+                            onTrackChangedFromGlobalContext(result)
+                        })
+                        .catch(_err => {})
+                }
             },
         )
 
