@@ -1,3 +1,4 @@
+import {SongObject} from 'app/interfaces'
 import React, {createContext, FC, useContext, useEffect} from 'react'
 import {useRef} from 'react'
 
@@ -24,8 +25,8 @@ export interface Track {
     // rating?: number | boolean
     // [key: string]: any
 }
-interface ContinousDataTrackDetails extends Track {
-    searchQuery: string
+interface ContinousDataTrackDetails extends SongObject {
+    keyword: string
 }
 interface PlayerControlsModal {
     /**
@@ -43,7 +44,7 @@ interface PlayerControlsModal {
      */
     play(
         track: Track,
-        details: ContinousDataTrackDetails | {},
+        details: ContinousDataTrackDetails | '',
         play?: boolean,
         showLoading?: boolean,
     ): any
@@ -71,7 +72,7 @@ const PlayerContext = createContext<PlayerControlsModal>({
      */
     play: (
         _track: Track,
-        _details: ContinousDataTrackDetails | {},
+        _details: ContinousDataTrackDetails | '',
         _play?: boolean,
         _showLoading?: boolean,
     ) => {},
@@ -218,7 +219,7 @@ const Player: FC<PlayerProps> = props => {
      */
     const play = (
         track: Track,
-        details: ContinousDataTrackDetails | {},
+        details: ContinousDataTrackDetails | '',
         play: boolean = true,
         showLoading: boolean = false,
     ) => {
@@ -249,7 +250,12 @@ const Player: FC<PlayerProps> = props => {
                 const trackGot = {
                     ...track,
                     url: __res,
-                    description: JSON.stringify(details), // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
+                    description:
+                        typeof details === 'string'
+                            ? JSON.stringify({
+                                  keyword: '',
+                              })
+                            : JSON.stringify(details), // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
                 TrackPlayer.add([trackGot])
                 if (play) TrackPlayer.play()
