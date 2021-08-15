@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react'
-import {View, Image, Pressable} from 'react-native'
+import {View, Pressable} from 'react-native'
 import {Text} from 'react-native-paper'
 import FastImage from 'react-native-fast-image'
 
@@ -19,12 +19,13 @@ interface Props {
     index: number
     subColor: string
     textColor: string
-    id?: string
-    play: Function
+    id: string // here id is the search query for the search means the keyword of song searching...
 }
 
 const GridSongItem = React.memo(
-    ({item, imageQuality, index, subColor, textColor, play, id}: Props) => {
+    ({item, imageQuality, index, subColor, textColor, id}: Props) => {
+        const {play} = usePlayer()
+
         const songImage = useMemo(
             () =>
                 getHightQualityImageFromLinkWithHeight(
@@ -50,14 +51,18 @@ const GridSongItem = React.memo(
         return (
             <Pressable
                 onPress={() =>
-                    play({
-                        id: item.musicId,
-                        duration: item.duration,
-                        title: item.name,
-                        artist: artist,
-                        artwork: highQualityImage,
-                        playlistId: item.playlistId,
-                    })
+                    play(
+                        {
+                            id: item.musicId,
+                            duration: item.duration,
+                            title: item.name,
+                            artist: artist,
+                            artwork: highQualityImage,
+                            playlistId: item.playlistId,
+                            url: '',
+                        },
+                        id,
+                    )
                 }>
                 <View
                     style={[
@@ -106,17 +111,4 @@ const GridSongItem = React.memo(
     },
 )
 
-function select() {
-    const {play} = usePlayer()
-    return {
-        play: play,
-    }
-}
-function connect(WrappedComponent: React.ElementType, select: Function) {
-    return function (props: any) {
-        const selectors = select()
-        return <WrappedComponent {...selectors} {...props} />
-    }
-}
-
-export default connect(GridSongItem, select)
+export default GridSongItem
