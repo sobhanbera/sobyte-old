@@ -143,7 +143,7 @@ const Player: FC<PlayerProps> = _props => {
                         title: initialTrack.name,
                         url: '',
                     },
-                    {},
+                    '',
                     false,
                     false,
                 )
@@ -332,7 +332,7 @@ const Player: FC<PlayerProps> = _props => {
                             title: initialTrack.name,
                             url: '',
                         },
-                        {},
+                        '',
                     )
                     currentlyPlayingTrackID.current = initialTrack.musicId
                     scrollToSongIndex(index + 1) // scroll to the song at index -> index + 1
@@ -522,7 +522,7 @@ const Player: FC<PlayerProps> = _props => {
                 artist: artists,
                 artwork: trackImage,
             },
-            {},
+            '',
         )
 
         // showing the prompt...
