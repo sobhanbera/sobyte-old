@@ -4,7 +4,6 @@ import {useRef} from 'react'
 import TrackPlayer, {STATE_PAUSED} from 'react-native-track-player'
 
 import {useApp, useFetcher} from '../context'
-import {ContinuationObject} from '../interfaces'
 
 /**
  * the data type or the object type for each Tracks of the song
