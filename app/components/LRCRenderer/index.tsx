@@ -33,6 +33,10 @@ const LRC_LINE = /^(\[[0-9]+:[0-9]+(\.[0-9]+)?\])+.*/
 const LRC_TIMESTAMP_WITH_BRACKET = /\[[0-9]+:[0-9]+(\.[0-9]+)?\]/g
 const LRC_TIMESTAMP = /[0-9]+/g
 
+/**
+ * function to parse a valid lrc string to its seperated lines and timestamps
+ * @returns a array of the timestamp and the line at that timestamp
+ */
 const parseLrc = (lrc: string): LrcLine[] => {
     const lrcLineList: LrcLine[] = []
     const lineList = lrc.split('\n')
@@ -81,7 +85,6 @@ interface Props {
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 function LRCRenderer(props: Props) {
     const lrcRef = useRef<ScrollView>(null)
-    const scrollX = React.useRef(new Animated.Value(0)).current
     const lrcLineList = useMemo(() => parseLrc(props.lrc), [props.lrc])
     const currentIndex = useCurrentIndex({
         lrcLineList,
@@ -125,13 +128,15 @@ function LRCRenderer(props: Props) {
         <AnimatedScrollView
             {...props}
             ref={lrcRef}
-            scrollEventThrottle={40}
+            scrollEventThrottle={16}
+            scrollToOverflowEnabled
+            overScrollMode={'never'}
             onScroll={Animated.event(
-                [{nativeEvent: {contentOffset: {x: scrollX}}}],
+                [], // we are not setting the value of the current position of scroll to any state because that is not needed
                 {
                     useNativeDriver: false,
                     listener: _event => {
-                        onScroll()
+                        onScroll() // instead we are doing some other tasks depending on wheather user is scrolling or not....
                     },
                 },
             )}
@@ -149,7 +154,10 @@ function LRCRenderer(props: Props) {
                  * in other works the offset from top where the current line will be rendered
                  */}
                 <View
-                    style={{width: '100%', height: 0.1 * props.containerHeight}}
+                    style={{
+                        width: '100%',
+                        height: 0.25 * props.containerHeight, // from the 25% of the total height available...
+                    }}
                 />
 
                 {lrcLineList.map((lrcLine, index) => (
