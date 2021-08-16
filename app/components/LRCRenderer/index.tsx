@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState, useCallback, useMemo} from 'react'
+import React, {useRef, useEffect, useCallback, useState, useMemo} from 'react'
 import {
     ScrollView,
     StyleProp,
@@ -111,7 +111,7 @@ function LRCRenderer({
 
     // a reference variable for the duration after which the like animation will be disappear...
     let TimeOutVar = setTimeout(() => {}, 0)
-    const onScroll = () => {
+    const onScroll = useCallback(() => {
         /**
          * clearing the previous timeout since we are going to do a new time out
          * if we don't clear the previous time out then
@@ -127,11 +127,11 @@ function LRCRenderer({
         // set a new timeout to make the auto scrolling enabled after some duration
         TimeOutVar = setTimeout(() => {
             setLocalAutoScroll(true)
+            console.log('AF')
         }, AUTO_SCROLL_AFTER_USER_SCROLL)
-    }
-    useEffect(() => {}, [])
+    }, [])
 
-    // auto scroll
+    // since the auto scroll is enabled by default for now...
     useEffect(() => {
         if (localAutoScroll) {
             lrcRef.current?.scrollTo({
@@ -150,7 +150,7 @@ function LRCRenderer({
                 [{nativeEvent: {contentOffset: {x: scrollX}}}],
                 {
                     useNativeDriver: false,
-                    listener: event => {
+                    listener: _event => {
                         onScroll()
                     },
                 },
