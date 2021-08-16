@@ -18,6 +18,7 @@ import {
     AllApiPostBodyArttributes,
     AppUserData,
     MusicTrack,
+    LrcLine,
 } from './Modals'
 export type {
     DominatingColors,
@@ -29,6 +30,7 @@ export type {
     AllApiPostBodyArttributes,
     AppUserData,
     MusicTrack,
+    LrcLine,
 }
 
 import SongCategory from './SongCategory'

@@ -61,6 +61,13 @@ export interface MusicTrack {
     [key: string]: any
 }
 
+// lrc lines modal for callback function returing object's type...
+export interface LrcLine {
+    id: string
+    millisecond: number
+    content: string
+}
+
 /**
  * user data interface
  * which contains email, username, phone, gender, account_type, account_type_upto, etc...
