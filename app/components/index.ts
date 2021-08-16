@@ -55,6 +55,9 @@ import CommonSongItem from './CommonSongItem'
 import CommonArtistList from './CommonArtistList'
 import CommonArtistItem from './CommonArtistItem'
 
+import KeywordResultsRenderer_Songs from './KeywordResultsRenderer/Songs'
+import KeywordResultsRenderer_Artists from './KeywordResultsRenderer/Artists'
+
 export {
     Scaler,
     AuthButton,
@@ -93,6 +96,8 @@ export {
     SingleBlockArtists as BlockCardArtistList,
     TopicTitle,
     Caption,
+    KeywordResultsRenderer_Songs,
+    KeywordResultsRenderer_Artists,
 }
 
 export {CommonSongList, CommonSongItem, CommonArtistList, CommonArtistItem}
