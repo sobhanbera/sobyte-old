@@ -10,12 +10,12 @@ import {
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 
-import {useFetcher, useMusicApi, usePlayer, useTheme} from '../../context'
+import {useFetcher, useMusicApi, usePlayer, useTheme} from '../../../context'
 import {
     GradientBackground,
     MusicPlayerSongView,
     BackgroundBluredImage,
-} from '../../components'
+} from '../../../components'
 import {
     DefaultStatusBarComponent,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
@@ -24,18 +24,18 @@ import {
     MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY,
     DEFAULT_NOTIFICATION_IMAGE_QUALITY,
     DEFAULT_IMAGE_QUALITY,
-} from '../../constants'
+} from '../../../constants'
 import {
     formatArtists,
     getHightQualityImageFromLinkWithHeight,
-} from '../../utils'
-import {FetchedSongObject, SongObject} from '../../interfaces'
-import globalStyles from '../../styles/global.styles'
+} from '../../../utils'
+import {FetchedSongObject, SongObject} from '../../../interfaces'
+import globalStyles from '../../../styles/global.styles'
 
-const AppLoadingAnimation = require('../../assets/animations/animation.json')
-const PopupLikeAnimation = require('../../assets/animations/like_popup.json')
-// const LikeAnimation = require('../../assets/animations/like.json')
-// const FlyingLikeAnimation = require('../../assets/animations/like_flying.json')
+const AppLoadingAnimation = require('../../../assets/animations/animation.json')
+const PopupLikeAnimation = require('../../../assets/animations/like_popup.json')
+// const LikeAnimation = require('../../../assets/animations/like.json')
+// const FlyingLikeAnimation = require('../../../assets/animations/like_flying.json')
 
 const {height} = Dimensions.get('window')
 

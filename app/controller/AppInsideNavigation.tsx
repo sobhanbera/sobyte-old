@@ -10,8 +10,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import {useTheme, useMusicApi} from '../context'
 
 import ExploreStackNavigator from './ExploreStack'
-import MusicPlayer from '../screens/main/MusicPlayer'
-import BareMinimumMusicPlayerUIOnlyForTesting from '../screens/main/BareMinimumMusicPlayerForTestingPurpose'
+import MusicPlayer from '../screens/main/Music/MusicPlayer'
+import BareMinimumMusicPlayerUIOnlyForTesting from '../screens/main/Music/BareMinimumMusicPlayerForTestingPurpose'
 import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 
