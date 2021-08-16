@@ -81,6 +81,7 @@ interface Props {
     containerHeight: number
     lineHeight: number
     activeLineHeight: number
+    spacing: number
 }
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 function LRCRenderer(props: Props) {
@@ -176,6 +177,19 @@ function LRCRenderer(props: Props) {
                         })}
                     </View>
                 ))}
+
+                {/**
+                 * auto scroll is true
+                 * and this is the bottom spacing after which the main lyrics line will be showing
+                 * in other works the offset from bottom where the current line will be rendered
+                 */}
+
+                <View
+                    style={{
+                        width: '100%',
+                        height: props.spacing, // from the 25% of the total height available...
+                    }}
+                />
             </View>
         </AnimatedScrollView>
     )
