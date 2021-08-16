@@ -133,6 +133,7 @@ export const LIKE_ICON_OR_TEXT_COLOR = '#D61F26'
 
 export const DEFAULT_QR_CODE_IMAGE_SIZE = 180
 
+export const AUTO_SCROLL_AFTER_USER_SCROLL = 3500 // duration after which the song's lyrics will be auto scrolled to its perfect position. NOTE: if the user has scrolled to different position of lyrics than this will work...
 /**
  * jsx components................................
  *
