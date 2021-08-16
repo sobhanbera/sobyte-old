@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, Dimensions, Image, StyleSheet} from 'react-native'
+import {View, Text, Dimensions, Image} from 'react-native'
 import {useCallback} from 'react'
 import MarqueeText from 'react-native-text-ticker'
 
@@ -153,21 +153,6 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    icon: {
-        padding: 12,
-        borderRadius: 100,
-    },
-    // when the user plays or pause the track the icon size is constant
-    // but when the track is being buffering the icon size is bit small which maked the whole UI shifts
-    // so this style is for a constant width and height of such dynamic icons...
-    constantIcon: {
-        width: 50,
-        height: 50,
-        // backgroundColor: 'black',
-    },
-})
 
 export default SongLyricsRenderer
 
