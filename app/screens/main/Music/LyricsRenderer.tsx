@@ -1,10 +1,17 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, Dimensions} from 'react-native'
 import LRCRenderer from '../../../components/LRCRenderer'
 import {useCallback} from 'react'
 
 import {usePlayerProgress} from '../../../context'
 import TrackPlayer from 'react-native-track-player'
+import {HeaderMain} from '../../../components'
+import {
+    DefaultStatusBarComponent,
+    DEVICE_STATUSBAR_HEIGHT_CONSTANT,
+} from '../../../constants'
+
+const {height} = Dimensions.get('window')
 
 interface Props {
     navigation: any
@@ -35,15 +42,23 @@ const SongLyricsRenderer = ({navigation}: Props) => {
 
     return (
         <View>
+            <DefaultStatusBarComponent backgroundColor={'grey'} />
+
+            <HeaderMain
+                navigation={navigation}
+                title={'Lyrics'}
+                color={'white'}
+                goBack={navigation.goBack}
+                backgroundColor={'grey'}
+            />
             <LRCRenderer
-                height={300}
-                style={{height: 300}}
+                containerHeight={height - 55 - DEVICE_STATUSBAR_HEIGHT_CONSTANT}
+                // style={{height: 300}}
                 lrc={LRC_STRING}
                 currentTime={position * 1000}
                 lineHeight={16}
                 activeLineHeight={20}
                 lineRenderer={lineRenderer}
-                autoScrollAfterUserScroll={1000}
             />
 
             <Text
