@@ -4,7 +4,7 @@ import {View, Text} from 'react-native'
 interface Props {
     keyword: string
 }
-const KeywordResultsRenderer_Artists = (props: Props) => {
+const ArtistsKeywordResultsRenderer = (props: Props) => {
     return (
         <View>
             <Text></Text>
@@ -12,4 +12,4 @@ const KeywordResultsRenderer_Artists = (props: Props) => {
     )
 }
 
-export default KeywordResultsRenderer_Artists
+export default ArtistsKeywordResultsRenderer

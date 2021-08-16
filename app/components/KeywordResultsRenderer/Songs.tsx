@@ -1,4 +1,3 @@
-import {INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB} from 'app/constants'
 import React, {useState, useEffect} from 'react'
 import {BlockCardSongsList} from '..'
 import {useMusicApi} from '../../api'
@@ -6,13 +5,14 @@ import {
     BareFetchedSongObjectInstance,
     FetchedSongObject,
 } from '../../interfaces'
+import {INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB} from '../../constants'
 
 interface Props {
     keyword: string
     title: string
     refreshing: boolean
 }
-const KeywordResultsRenderer_Songs = ({keyword, title, refreshing}: Props) => {
+const SongsKeywordResultsRenderer = ({keyword, title, refreshing}: Props) => {
     const {search, error} = useMusicApi()
     const [musicData, setMusicData] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
@@ -56,4 +56,4 @@ const KeywordResultsRenderer_Songs = ({keyword, title, refreshing}: Props) => {
     )
 }
 
-export default KeywordResultsRenderer_Songs
+export default SongsKeywordResultsRenderer
