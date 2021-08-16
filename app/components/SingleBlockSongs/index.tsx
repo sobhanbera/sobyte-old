@@ -3,7 +3,7 @@ import {Text as BlockTitle} from 'react-native-paper'
 
 import Block from '../Block'
 import GridSongList from '../GridSongList'
-import {useTheme} from '../../context'
+import {useSetting, useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
 import {FetchedSongObject} from '../../interfaces'
 
@@ -16,6 +16,7 @@ interface Props {
 }
 const SingleBlockSongs = (props: Props) => {
     const {themeColors} = useTheme()
+    const {imageQuality} = useSetting()
 
     return (
         <Block
@@ -56,6 +57,7 @@ const SingleBlockSongs = (props: Props) => {
                 subColor={themeColors.text[0] + '70'}
                 contentLength={props.musicData.content.length}
                 content={props.musicData.content}
+                imageQuality={imageQuality}
             />
         </Block>
     )

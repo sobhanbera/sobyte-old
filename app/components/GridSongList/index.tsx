@@ -19,7 +19,7 @@ interface Props {
     subColor: string
     shimmerDirection: 'up' | 'down' | 'left' | 'right'
     id: string
-    imageQuality?: string
+    imageQuality: string
 }
 const GridSongList = React.memo(
     ({
@@ -81,19 +81,6 @@ const GridSongList = React.memo(
     },
 )
 
-function select() {
-    const {imageQuality} = useSetting()
-    return {
-        imageQuality: imageQuality,
-    }
-}
-function connect(WrappedComponent: React.ElementType, select: Function) {
-    return function (props: any) {
-        const selectors = select()
-        return <WrappedComponent {...selectors} {...props} />
-    }
-}
-
 export const styles = StyleSheet.create({
     contentWrapper: {
         // backgroundColor: '#0000007f',
@@ -144,4 +131,4 @@ export const styles = StyleSheet.create({
     },
 })
 
-export default connect(GridSongList, select)
+export default GridSongList
