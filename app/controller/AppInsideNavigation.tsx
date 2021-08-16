@@ -10,10 +10,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import {useTheme, useMusicApi} from '../context'
 
 import ExploreStackNavigator from './ExploreStack'
-import MusicPlayer from '../screens/main/Music/MusicPlayer'
-import BareMinimumMusicPlayerUIOnlyForTesting from '../screens/main/Music/BareMinimumMusicPlayerForTestingPurpose'
 import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
+import MusicPlayerStackNavigator from './MusicStack'
 
 const BarNavigator = createMaterialBottomTabNavigator()
 const AppInsideNavigationWithMaterialTabBar = () => {
@@ -71,7 +70,7 @@ const AppInsideNavigationWithMaterialTabBar = () => {
             {/* PLAYER SCREEN WHERE ALL THE SONGS PLAYING INTERFACE EXISTS */}
             <BarNavigator.Screen
                 name="MusicPlayer"
-                component={BareMinimumMusicPlayerUIOnlyForTesting}
+                component={MusicPlayerStackNavigator}
                 options={{
                     tabBarAccessibilityLabel: 'Music Player Tab',
                     tabBarColor: themeColors.primary.main[0] + '00',
@@ -182,7 +181,7 @@ export const AppInsideNavigationWithSimpleTabBar = () => {
             {/* PLAYER SCREEN WHERE ALL THE SONGS PLAYING INTERFACE EXISTS */}
             <BottomTabBarNavigator.Screen
                 name="MusicPlayer"
-                component={MusicPlayer}
+                component={MusicPlayerStackNavigator}
                 options={{
                     tabBarAccessibilityLabel: 'Music Player Tab',
                     tabBarLabel: t('common:appName'),
