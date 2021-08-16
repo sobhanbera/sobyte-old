@@ -2,7 +2,7 @@ import React, {useRef, useEffect, useCallback, useState, useMemo} from 'react'
 import {ScrollView, StyleProp, View, ViewStyle, Animated} from 'react-native'
 
 import {LrcLine} from '../../interfaces'
-import {AUTO_SCROLL_AFTER_USER_SCROLL} from '../../constants'
+import {AUTO_SCROLL_AFTER_USER_SCROLL_DURATION} from '../../constants'
 import {getRandomNumberString} from '../../utils'
 
 const useCurrentIndex = ({
@@ -108,7 +108,7 @@ function LRCRenderer(props: Props) {
         // set a new timeout to make the auto scrolling enabled after some duration
         TimeOutVar = setTimeout(() => {
             setLocalAutoScroll(true)
-        }, AUTO_SCROLL_AFTER_USER_SCROLL)
+        }, AUTO_SCROLL_AFTER_USER_SCROLL_DURATION)
     }, [])
 
     // since the auto scroll is enabled by default for now...
