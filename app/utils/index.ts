@@ -38,6 +38,7 @@ import {
     IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX,
     shuffleArray,
     formatTrackTitle,
+    getRandomNumberString,
 } from './Objects'
 export {
     returnNullCallback,
@@ -62,4 +63,5 @@ export {
     IMAGE_DYNAMIC_WIDTH_HEIGHT_FORMATTING_REGEX,
     shuffleArray,
     formatTrackTitle,
+    getRandomNumberString,
 }

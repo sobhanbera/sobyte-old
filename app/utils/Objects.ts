@@ -137,6 +137,13 @@ export function firstLetterCap(text: string) {
 export function randomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min) + min)
 }
+/**
+ * this function is the exact same as the above one but the difference is that this function provides the string of that number
+ * @returns a random string constaining numbers
+ */
+export function getRandomNumberString() {
+    return Math.random().toString(36).substring(7)
+}
 
 /**
  * @param password the password string for which the checks must be done,
