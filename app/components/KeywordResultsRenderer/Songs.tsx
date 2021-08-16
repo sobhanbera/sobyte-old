@@ -14,6 +14,10 @@ interface Props {
 }
 const SongsKeywordResultsRenderer = ({keyword, title, refreshing}: Props) => {
     const {search, error} = useMusicApi()
+
+    /**
+     * "main" @state of the list for all the types of music list data...
+     */
     const [musicData, setMusicData] = useState<FetchedSongObject>(
         BareFetchedSongObjectInstance,
     )
