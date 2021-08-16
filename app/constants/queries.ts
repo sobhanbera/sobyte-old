@@ -141,5 +141,5 @@ export default [
     // 'most listened romantic songs',
     // 'most played romantic songs',
     // 'top romantic songs',
-    'top romantic songs',
+    'Lag Jaa Gale - Sadhana, Lata Mangeshkar, Woh Kaun Thi Romantic',
 ]
