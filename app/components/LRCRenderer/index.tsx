@@ -79,34 +79,26 @@ interface Props {
         index: number
         active: boolean
     }) => React.ReactNode
-    currentTime?: number
-    autoScrollAfterUserScroll?: number
-    style: StyleProp<ViewStyle>
-    height: number
+    currentTime: number
+    style?: StyleProp<ViewStyle>
+    containerHeight: number
     lineHeight: number
     activeLineHeight: number
 }
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
-function LRCRenderer({
-    lrc,
-    lineRenderer = ({lrcLine: {content}, active}) => (
-        <Text style={{textAlign: 'center', color: active ? 'green' : '#666'}}>
-            {content}
-        </Text>
-    ),
-    currentTime = 0,
-    lineHeight = 16,
-    activeLineHeight = lineHeight,
-    autoScrollAfterUserScroll = AUTO_SCROLL_AFTER_USER_SCROLL,
-    height = 300,
-    style,
-    ...props
-}: Props) {
+function LRCRenderer(props: Props) {
     const lrcRef = useRef<ScrollView>(null)
     const scrollX = React.useRef(new Animated.Value(0)).current
-    const lrcLineList = useMemo(() => parseLrc(lrc), [lrc])
-    const currentIndex = useCurrentIndex({lrcLineList, currentTime})
-
+    const lrcLineList = useMemo(() => parseLrc(props.lrc), [props.lrc])
+    const currentIndex = useCurrentIndex({
+        lrcLineList,
+        currentTime: props.currentTime,
+    })
+    // lineRenderer = ({lrcLine: {content}, active}) => (
+    //     <Text style={{textAlign: 'center', color: active ? 'green' : '#666'}}>
+    //         {content}
+    //     </Text>
+    // ),
     const [localAutoScroll, setLocalAutoScroll] = useState(true) // wheather to auto scroll the lyrics lines...
 
     // a reference variable for the duration after which the like animation will be disappear...
@@ -135,11 +127,11 @@ function LRCRenderer({
     useEffect(() => {
         if (localAutoScroll) {
             lrcRef.current?.scrollTo({
-                y: currentIndex * lineHeight || 0,
+                y: currentIndex * props.lineHeight || 0,
                 animated: true,
             })
         }
-    }, [currentIndex, localAutoScroll, lineHeight])
+    }, [currentIndex, localAutoScroll, props.lineHeight])
 
     return (
         <AnimatedScrollView
@@ -158,12 +150,19 @@ function LRCRenderer({
             style={[
                 {
                     // flex: 1,
+                    height: props.containerHeight || 450,
                 },
-                style,
+                props.style,
             ]}>
             <View>
-                {/* auto scroll is true */}
-                <View style={{width: '100%', height: 0.45 * height}} />
+                {/**
+                 * auto scroll is true
+                 * and this is the top spacing after which the main lyrics line will be showing
+                 * in other works the offset from top where the current line will be rendered
+                 */}
+                <View
+                    style={{width: '100%', height: 0.1 * props.containerHeight}}
+                />
 
                 {lrcLineList.map((lrcLine, index) => (
                     <View
@@ -171,19 +170,16 @@ function LRCRenderer({
                         style={{
                             height:
                                 currentIndex === index
-                                    ? activeLineHeight
-                                    : lineHeight,
+                                    ? props.activeLineHeight
+                                    : props.lineHeight,
                         }}>
-                        {lineRenderer({
+                        {props.lineRenderer({
                             lrcLine,
                             index,
                             active: currentIndex === index,
                         })}
                     </View>
                 ))}
-
-                {/* auto scroll is true */}
-                <View style={{width: '100%', height: 0.5 * height}} />
             </View>
         </AnimatedScrollView>
     )
