@@ -343,6 +343,7 @@ const Player: FC<PlayerProps> = _props => {
      * or exactly the current song which was playing is ended (the queue is ended)
      */
     const currentTrackEndedScrollDown = () => {
+        if (currentlyPlayingTrackID.current.length <= 0) return
         /**
          * checking that which songs was playing currently
          * by using the local variable @var currentlyPlayingTrackID and iterating over the songs list
@@ -428,7 +429,17 @@ const Player: FC<PlayerProps> = _props => {
         const playbackQueueEnded = TrackPlayer.addEventListener(
             'playback-queue-ended',
             _queueEndedData => {
-                if (_queueEndedData.position > 0) currentTrackEndedScrollDown() // since if the queue ending position of the song must be a +ve integer
+                /**
+                 * since sometime this happens that even if the song is not playing when refreshed in development build
+                 * then the song automatically changed (no song is played then also) for that case we are providing a condition
+                 * where the track should not be null to continue...
+                 * and rest is given as another comment see below line...
+                 */
+                if (
+                    _queueEndedData.position > 0 &&
+                    _queueEndedData.track !== null
+                )
+                    currentTrackEndedScrollDown() // since if the queue ending position of the song must be a +ve integer
             },
         )
 
