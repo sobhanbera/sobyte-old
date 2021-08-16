@@ -7,18 +7,14 @@ import {
     StyleSheet,
     Text,
     FlatList,
-    ToastAndroid,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
-import NetInfo from '@react-native-community/netinfo' // if the internet connection is slow than we will load low quality track else load high quality progressively...
-import TrackPlayer from 'react-native-track-player'
 
 import {useFetcher, useMusicApi, usePlayer, useTheme} from '../../context'
 import {
     GradientBackground,
     MusicPlayerSongView,
     BackgroundBluredImage,
-    Prompt,
 } from '../../components'
 import {
     DefaultStatusBarComponent,
@@ -68,7 +64,7 @@ interface PlayerProps {
 const Player: FC<PlayerProps> = _props => {
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
-    const {initMusicApi, search, getContinuation, error} = useMusicApi()
+    const {initMusicApi, search, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
 
     /**
@@ -99,13 +95,6 @@ const Player: FC<PlayerProps> = _props => {
      * else no need..................................
      */
     const currentlyPlayingTrackID = useRef<string>('')
-
-    /**
-     * the prompt component to show error, log, warning, result
-     * and many more, this is the update after the prompt is converted into component from context api...
-     */
-    const [promptTitle, setPromptTitle] = useState('')
-    const promptShown1Time = useRef<boolean>(false) // varialble which controls wheather the prompt is show once when the user launched application or not...
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = useRef<FlatList>(null)
@@ -143,7 +132,7 @@ const Player: FC<PlayerProps> = _props => {
                         title: initialTrack.name,
                         url: '',
                     },
-                    {},
+                    '',
                     false,
                     false,
                 )
@@ -204,221 +193,6 @@ const Player: FC<PlayerProps> = _props => {
          */
         console.log('YOU LIKED THIS SONG WITH ID:: ', musicId)
     }, [])
-
-    /**
-     * this function will be called when the songs list has reached to its bottom or the list of songs is ended
-     * this function will load more songs data and append those data to the end of @var songs list...
-     * by this we can form a infinite scrolling songs list....
-     *
-     * @param {boolean} scrollToNextSongAfterLoadingMoreData is a variable that will say wheather to scroll to the next song after loading the data this variable could be used when the song has been scrolled to the end automatically and there is no songs next to it
-     * this may happen when there was no internet for sometime so when the last 3 or 2 song from end reached it could not load more data
-     * this is then the backup case if internet is found we can load and scroll to the next song
-     * @param {number} index this is the index of the song which was played currently if the @var scrollToNextSongAfterLoadingMoreData is true we will scroll to this index only, after loading more song/track data
-     * @param {SongObject} previousSong a object which is the the last song which is playing or added...
-     * actually this is the previous song for which next song must be loaded
-     *
-     * above parameters were used in previous version of music player UI component...
-     */
-    const loadMoreSongsDatas = (
-        scrollToNextSongAfterLoadingMoreData: boolean = false,
-        scrollToNextIndex: number = -1,
-    ) => {
-        /**
-         * we are continously getting the songs using the continuation object of the FetchedSongsObjects...
-         */
-        getContinuation('search', songs.continuation, 'SONG')
-            .then((res: FetchedSongObject) => {
-                // more data for continous songs list is loaded now we can set this data to the state...
-                setSongs(songs => ({
-                    content: songs.content.concat(res.content),
-                    continuation: res.continuation,
-                }))
-                // if the end of the scroll is reached and there are no songs then we will scroll to the next song after loading more songs
-                if (
-                    scrollToNextSongAfterLoadingMoreData &&
-                    scrollToNextIndex >= 0
-                ) {
-                    scrollToSongIndex(scrollToNextIndex)
-                }
-            })
-            .catch(_err => {
-                ToastAndroid.show(
-                    'Cannot load more data. Internet Issues found.',
-                    ToastAndroid.SHORT,
-                )
-            })
-    }
-
-    /**
-     * whenever a new song is played or the current track is also played this function will be called
-     * if the song if played from music player by scrolling up/down this function will do nothing
-     * while if the track/song is played from other sections of the application like the explore tab, search tab, or from the downloads list, songs details screen,
-     * artists tabs, etc.
-     * then this funtion will load more data related to the song which is changed or played (the latest song)
-     */
-    const trackChangedInPlayerControlsLoadDifferentData = (
-        currentTrackID: string,
-    ) => {
-        /**
-         * if the current track's id is empty or null this could be becuase there are no track/song in the queue
-         * this could also happen because we called this before the change of song this is good because the function will again execute when the actual song is played
-         * if the song's id is null or the music player's current track's id is null do nothing since we could not say what is the current song and can't load the next songs list
-         */
-        if (!currentTrackID || !currentlyPlayingTrackID) return
-        // if both the id are valid and present in the memory and track is successfully played...
-        // if the new songs id is different from the saved id of this local music player
-
-        /**
-         * checking if the current track's id from global track-player is
-         * same as the local current track's id here in this component
-         * if - the id is same than it means that the user had scrolled and then the song is changed in this case do nothing
-         * else - the song is played from outside of this component like explore tab or search tab, download list, artists list, albums, playlist, songs list outside of this component, etc...
-         * in this case load more data which should be played after the current song which is changed....
-         */
-        if (currentTrackID === currentlyPlayingTrackID.current) {
-            console.log('<<<< MUSIC PLAYER >>>> .')
-        } else {
-            console.log('<<<< OUTER >>>> .')
-        }
-    }
-
-    /**
-     * @param {number} index in the index of the song in where to scroll the flatlist
-     * function which scroll to the song at index @param index
-     */
-    const scrollToSongIndex = (index: number) => {
-        scrollReference.current?.scrollToIndex({
-            index: index, // scrolling to the next song in the list
-            animated: true,
-        })
-    }
-
-    /**
-     * this function will be triggered automatically when a song is ended
-     * or exactly the current song which was playing is ended (the queue is ended)
-     */
-    const currentTrackEndedScrollDown = () => {
-        /**
-         * checking that which songs was playing currently
-         * by using the local variable @var currentlyPlayingTrackID and iterating over the songs list
-         * when the id is equal to any of the songs list music item it means that music was playing and we will check the index of that song item
-         * if the index is the last index of the song item then we will load more data and then scroll one index down for the flatlist
-         * other wise if the song index is not the last song than scroll to the next index and that song will be played than...
-         */
-        const numberOfSongs = songs.content.length
-        for (let index = 0; index < numberOfSongs; ++index) {
-            if (
-                songs.content[index].musicId === currentlyPlayingTrackID.current
-            ) {
-                // if the track id which has been ended is found
-                if (index === numberOfSongs - 1) {
-                    // if the song is the last song which is available to play and has ended load more songs and then scroll to the next one...
-                    loadMoreSongsDatas(true, index + 1) // scroll to the song at index -> index + 1
-                } else {
-                    // if that song's index is not the last one in the list of songs than scroll to next song...
-                    // also play the song first
-
-                    // play data
-                    const initialTrack = songs.content[index + 1]
-                    const artist = formatArtists(initialTrack.artist)
-
-                    play(
-                        {
-                            artist,
-                            artwork: initialTrack.thumbnails[1].url,
-                            id: initialTrack.musicId,
-                            duration: initialTrack.duration,
-                            playlistId: initialTrack.playlistId,
-                            title: initialTrack.name,
-                            url: '',
-                        },
-                        {},
-                    )
-                    currentlyPlayingTrackID.current = initialTrack.musicId
-                    scrollToSongIndex(index + 1) // scroll to the song at index -> index + 1
-                }
-                // since we have found the song which was playing recently our task is completed so return from this function...
-                break
-            }
-        }
-    }
-
-    useEffect(() => {
-        /**
-         * when a new track is played from anywhere the application
-         * maybe from music player by scrolling or from other tabs like explore, search, downloads, etc...
-         * this callback function will be called
-         */
-        const playbackTrackChanged = TrackPlayer.addEventListener(
-            'playback-track-changed',
-            trackData => {
-                TrackPlayer.getTrack(trackData.nextTrack)
-                    .then(async result => {
-                        if (result === null) {
-                            return
-                        }
-                        console.log('CHANGED SONG', result)
-                    })
-                    .catch(_err => {})
-                trackChangedInPlayerControlsLoadDifferentData(
-                    trackData.nextTrack,
-                )
-            },
-        )
-
-        /**
-         * we the current song will end we will scroll down to the next song if
-         * there is a song exists let see the function implementation first...
-         */
-        const playbackQueueEnded = TrackPlayer.addEventListener(
-            'playback-queue-ended',
-            _queueEndedData => {
-                if (_queueEndedData.position > 0) currentTrackEndedScrollDown() // since if the queue ending position of the song must be a +ve integer
-            },
-        )
-
-        /**
-         * cleaning up the event listeners of react-native-track-player
-         * so that no memory overflow or state managment error/warnings occurs...
-         */
-        return () => {
-            playbackTrackChanged.remove()
-            playbackQueueEnded.remove()
-        }
-    }, [songs])
-
-    /**
-     * @description to show the prompt when a song is played over cellular, wifi,
-     * ethernet, or any other network just once...
-     */
-    const showThePromptForFirstTime = () => {
-        // if promptShown1Time is true that means the prompt is shown once no need to show it again just return
-        if (promptShown1Time.current === true) return
-        // if the prompt is not shown any time then show it and update the promptShown1Time to true
-        NetInfo.fetch()
-            .then(res => {
-                if (
-                    [
-                        'cellular',
-                        'wifi',
-                        'bluetooth',
-                        'ethernet',
-                        'wimax',
-                        'vpn',
-                    ].includes(res.type)
-                ) {
-                    // showing the prompt...
-                    setPromptTitle(`playing song over ${res.type}.`)
-                }
-                // now the prompt will not longer be shown again...
-                promptShown1Time.current = true
-            })
-            .catch(_err => {
-                // some error occurred we should only set the prompt value to true and not show any prompt
-                // since we don't know what type of network is available in device
-                promptShown1Time.current = true
-            })
-    }
 
     /**
      * item rendered for the list item
@@ -522,34 +296,9 @@ const Player: FC<PlayerProps> = _props => {
                 artist: artists,
                 artwork: trackImage,
             },
-            {},
+            '',
         )
-
-        // showing the prompt...
-        showThePromptForFirstTime()
     }).current
-
-    const scrollChangedHandler = (event: any) => {
-        /**
-         * here we are also loading the next song's data url
-         * in advance so that if the user scrolls down the song plays in the least time
-         * and more efficient if some time is given and then scrolled
-         *
-         * IMP NOTE: this task will only be done if the next indexed song exists...
-         *
-         * if the scroll position is showing a full part of any song than only we will load the next song data url
-         */
-
-        if (event.nativeEvent.contentOffset.y % height === 0) {
-            const nextSongIndex = event.nativeEvent.contentOffset.y / height
-            if (
-                songs.content[nextSongIndex + 1] !== undefined &&
-                songs.content[nextSongIndex + 1].musicId.length > 0
-            ) {
-                fetchMusic(songs.content[nextSongIndex + 1].musicId)
-            }
-        }
-    }
 
     return (
         <GradientBackground
@@ -600,7 +349,6 @@ const Player: FC<PlayerProps> = _props => {
                     overScrollMode={'never'}
                     pagingEnabled
                     bounces
-                    // horizontal
                     snapToAlignment="start"
                     snapToStart
                     nestedScrollEnabled
@@ -609,16 +357,9 @@ const Player: FC<PlayerProps> = _props => {
                     alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    onEndReached={() => loadMoreSongsDatas()} // more data when the end is reaching close while scrolling...
-                    onScroll={Animated.event(
-                        [{nativeEvent: {contentOffset: {y: scrollX}}}],
-                        {
-                            useNativeDriver: true,
-                            listener: event => {
-                                scrollChangedHandler(event)
-                            },
-                        },
-                    )}
+                    onScroll={Animated.event([
+                        {nativeEvent: {contentOffset: {y: scrollX}}},
+                    ])}
                 />
             ) : (
                 <View style={globalStyles.loadingArea}>
@@ -665,9 +406,6 @@ const Player: FC<PlayerProps> = _props => {
                     />
                 </View>
             ) : null}
-
-            {/* the prompt component to show that user is playing song through network for the first time song is being played... */}
-            <Prompt title={promptTitle} setTitle={setPromptTitle} />
         </GradientBackground>
     )
 }
