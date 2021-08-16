@@ -61,7 +61,7 @@ export type ViewToken = {
 interface PlayerProps {
     navigation?: any
 }
-const Player: FC<PlayerProps> = _props => {
+const Player: FC<PlayerProps> = props => {
     const {play} = usePlayer()
     const {randomGradient} = useTheme()
     const {initMusicApi, search, error} = useMusicApi()
@@ -207,6 +207,7 @@ const Player: FC<PlayerProps> = _props => {
                     likeIsMusic={() =>
                         playLikeAnimationForMusicId(item.musicId)
                     }
+                    navigation={props.navigation}
                 />
             )
         },

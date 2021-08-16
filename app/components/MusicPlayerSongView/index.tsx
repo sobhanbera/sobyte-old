@@ -25,8 +25,9 @@ const {width, height} = Dimensions.get('window')
 interface SongView {
     song: SongObject
     likeIsMusic: Function
+    navigation: any
 }
-const MusicPlayerSongView = ({song, likeIsMusic}: SongView) => {
+const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
     const {themeColors} = useTheme()
     const averageQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
@@ -126,6 +127,7 @@ const MusicPlayerSongView = ({song, likeIsMusic}: SongView) => {
                         // backgroundColor: themeColors.themecolor[0] + '50',
                     }}>
                     <TrackButtonControls
+                        navigation={navigation}
                         isLiked={false}
                         likeIsMusic={likeIsMusic}
                         color={themeColors.themecolorrevert[0]}
