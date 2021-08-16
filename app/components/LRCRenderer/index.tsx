@@ -1,12 +1,5 @@
 import React, {useRef, useEffect, useCallback, useState, useMemo} from 'react'
-import {
-    ScrollView,
-    StyleProp,
-    Text,
-    View,
-    ViewStyle,
-    Animated,
-} from 'react-native'
+import {ScrollView, StyleProp, View, ViewStyle, Animated} from 'react-native'
 
 import {LrcLine} from '../../interfaces'
 import {AUTO_SCROLL_AFTER_USER_SCROLL} from '../../constants'
@@ -94,11 +87,7 @@ function LRCRenderer(props: Props) {
         lrcLineList,
         currentTime: props.currentTime,
     })
-    // lineRenderer = ({lrcLine: {content}, active}) => (
-    //     <Text style={{textAlign: 'center', color: active ? 'green' : '#666'}}>
-    //         {content}
-    //     </Text>
-    // ),
+
     const [localAutoScroll, setLocalAutoScroll] = useState(true) // wheather to auto scroll the lyrics lines...
 
     // a reference variable for the duration after which the like animation will be disappear...
@@ -119,7 +108,6 @@ function LRCRenderer(props: Props) {
         // set a new timeout to make the auto scrolling enabled after some duration
         TimeOutVar = setTimeout(() => {
             setLocalAutoScroll(true)
-            console.log('AF')
         }, AUTO_SCROLL_AFTER_USER_SCROLL)
     }, [])
 
@@ -186,3 +174,4 @@ function LRCRenderer(props: Props) {
 }
 
 export default LRCRenderer
+export {parseLrc as ParseLRC}
