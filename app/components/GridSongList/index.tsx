@@ -1,14 +1,7 @@
 import React from 'react'
-import {
-    FlatList,
-    StyleSheet,
-    Text,
-    View,
-    ListRenderItemInfo,
-} from 'react-native'
+import {FlatList, StyleSheet, ListRenderItemInfo} from 'react-native'
 
 import {SongObject} from '../../interfaces'
-import {useSetting} from '../../context'
 import {
     IMAGE_SIZE_TO_SHOW,
     IMAGE_MARGIN_TO_SHOW,
