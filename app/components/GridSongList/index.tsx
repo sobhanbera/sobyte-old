@@ -1,5 +1,11 @@
 import React from 'react'
-import {FlatList, StyleSheet, Text, View} from 'react-native'
+import {
+    FlatList,
+    StyleSheet,
+    Text,
+    View,
+    ListRenderItemInfo,
+} from 'react-native'
 
 import {SongObject} from '../../interfaces'
 import {useSetting} from '../../context'
@@ -30,18 +36,21 @@ const GridSongList = React.memo(
         shimmerDirection,
         imageQuality,
     }: Props) => {
-        // const renderItem = React.useCallback(({item, index}) => {
-        //     return (
-        //         <GridSongItem
-        //             id={id}
-        //             item={item}
-        //             index={index}
-        //             imageQuality={imageQuality}
-        //             subColor={subColor}
-        //             textColor={textColor}
-        //         />
-        //     )
-        // }, [])
+        const renderItem = React.useCallback(
+            (itemDetails: ListRenderItemInfo<SongObject>) => {
+                return (
+                    <GridSongItem
+                        id={id}
+                        item={itemDetails.item}
+                        index={itemDetails.index}
+                        imageQuality={imageQuality}
+                        subColor={subColor}
+                        textColor={textColor}
+                    />
+                )
+            },
+            [],
+        )
 
         const keyExtractor = React.useCallback(
             (item: SongObject, _: number) => item.musicId,
@@ -64,18 +73,7 @@ const GridSongList = React.memo(
                 }
                 data={content}
                 keyExtractor={keyExtractor}
-                renderItem={({item, index}) => {
-                    return (
-                        <GridSongItem
-                            id={id}
-                            item={item}
-                            index={index}
-                            imageQuality={imageQuality}
-                            subColor={subColor}
-                            textColor={textColor}
-                        />
-                    )
-                }}
+                renderItem={renderItem}
             />
         )
     },
