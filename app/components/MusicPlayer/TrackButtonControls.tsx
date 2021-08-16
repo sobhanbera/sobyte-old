@@ -29,7 +29,7 @@ interface Props {
     color: string
     isLiked: boolean
     likeIsMusic: Function
-    navigation: any
+    launchLyrics: Function
 }
 const TrackButtonControls = (props: Props) => {
     // by default its value is paused since we don't need the user is pausing even if the song haven't started
@@ -94,9 +94,7 @@ const TrackButtonControls = (props: Props) => {
                     size={DEFAULT_ICON_SIZE}
                     color={props.color}
                     name={'queue-music'}
-                    onPress={() => {
-                        props.navigation.navigate('lyrics')
-                    }} // TODO playlist feature
+                    onPress={() => props.launchLyrics()} // TODO playlist feature
                 />
             </View>
 

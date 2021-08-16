@@ -127,7 +127,9 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                         // backgroundColor: themeColors.themecolor[0] + '50',
                     }}>
                     <TrackButtonControls
-                        navigation={navigation}
+                        launchLyrics={() =>
+                            navigation.navigate('lyrics', {song})
+                        }
                         isLiked={false}
                         likeIsMusic={likeIsMusic}
                         color={themeColors.themecolorrevert[0]}
