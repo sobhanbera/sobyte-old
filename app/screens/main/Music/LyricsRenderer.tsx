@@ -6,8 +6,10 @@ import {useCallback} from 'react'
 import {usePlayerProgress} from '../../../context'
 import TrackPlayer from 'react-native-track-player'
 
-interface Props {}
-const SongLyricsRenderer = (props: Props) => {
+interface Props {
+    navigation: any
+}
+const SongLyricsRenderer = ({navigation}: Props) => {
     const {
         position, // unit - second
     } = usePlayerProgress()
@@ -41,7 +43,6 @@ const SongLyricsRenderer = (props: Props) => {
                 lineHeight={16}
                 activeLineHeight={20}
                 lineRenderer={lineRenderer}
-                autoScroll={true}
                 autoScrollAfterUserScroll={1000}
             />
 
