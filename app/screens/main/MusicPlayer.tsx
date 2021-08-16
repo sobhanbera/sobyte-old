@@ -10,7 +10,6 @@ import {
     ToastAndroid,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
-import NetInfo from '@react-native-community/netinfo' // if the internet connection is slow than we will load low quality track else load high quality progressively...
 import TrackPlayer from 'react-native-track-player'
 
 import {useFetcher, useMusicApi, usePlayer, useTheme} from '../../context'
@@ -18,7 +17,6 @@ import {
     GradientBackground,
     MusicPlayerSongView,
     BackgroundBluredImage,
-    Prompt,
 } from '../../components'
 import {
     DefaultStatusBarComponent,
@@ -108,13 +106,6 @@ const Player: FC<PlayerProps> = _props => {
      * else no need..................................
      */
     const currentlyPlayingTrackID = useRef<string>('')
-
-    /**
-     * the prompt component to show error, log, warning, result
-     * and many more, this is the update after the prompt is converted into component from context api...
-     */
-    const [promptTitle, setPromptTitle] = useState('')
-    const promptShown1Time = useRef<boolean>(false) // varialble which controls wheather the prompt is show once when the user launched application or not...
 
     const scrollX = React.useRef(new Animated.Value(0)).current
     const scrollReference = useRef<FlatList>(null)
@@ -452,39 +443,6 @@ const Player: FC<PlayerProps> = _props => {
     }, [songs])
 
     /**
-     * @description to show the prompt when a song is played over cellular, wifi,
-     * ethernet, or any other network just once...
-     */
-    const showThePromptForFirstTime = () => {
-        // if promptShown1Time is true that means the prompt is shown once no need to show it again just return
-        if (promptShown1Time.current === true) return
-        // if the prompt is not shown any time then show it and update the promptShown1Time to true
-        NetInfo.fetch()
-            .then(res => {
-                if (
-                    [
-                        'cellular',
-                        'wifi',
-                        'bluetooth',
-                        'ethernet',
-                        'wimax',
-                        'vpn',
-                    ].includes(res.type)
-                ) {
-                    // showing the prompt...
-                    setPromptTitle(`playing song over ${res.type}.`)
-                }
-                // now the prompt will not longer be shown again...
-                promptShown1Time.current = true
-            })
-            .catch(_err => {
-                // some error occurred we should only set the prompt value to true and not show any prompt
-                // since we don't know what type of network is available in device
-                promptShown1Time.current = true
-            })
-    }
-
-    /**
      * item rendered for the list item
      * provide the song data...
      */
@@ -588,9 +546,6 @@ const Player: FC<PlayerProps> = _props => {
             },
             '',
         )
-
-        // showing the prompt...
-        showThePromptForFirstTime()
     }).current
 
     const scrollChangedHandler = (event: any) => {
@@ -729,9 +684,6 @@ const Player: FC<PlayerProps> = _props => {
                     />
                 </View>
             ) : null}
-
-            {/* the prompt component to show that user is playing song through network for the first time song is being played... */}
-            <Prompt title={promptTitle} setTitle={setPromptTitle} />
         </GradientBackground>
     )
 }
