@@ -7,7 +7,7 @@ import SongsLyricsScreen from '../../screens/main/Music/LyricsRenderer'
 
 const ProfileStack = createStackNavigator()
 interface Props {}
-const ProfileStackNavigator = (props: Props) => {
+const MusicPlayerStackNavigator = (props: Props) => {
     return (
         <ProfileStack.Navigator
             screenOptions={{
@@ -20,4 +20,4 @@ const ProfileStackNavigator = (props: Props) => {
     )
 }
 
-export default ProfileStackNavigator
+export default MusicPlayerStackNavigator
