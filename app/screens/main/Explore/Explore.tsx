@@ -8,25 +8,18 @@ import {
     Block,
     CenterButtonView,
     GridCategory,
-    BlockCardSongsList,
-    BlockCardArtistList,
     SongsKeywordResultsRenderer,
+    ArtistsKeywordResultsRenderer,
 } from '../../../components'
 import {
     DefaultStatusBarComponent,
     IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
-    INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
     PaddingBottomView,
 } from '../../../constants'
 import {
-    FetchedSongObject,
-    BareFetchedSongObjectInstance,
     MoodCategories,
     GenresCategories,
     SongCategory,
-    FetchedArtistObject,
-    ArtistObject,
-    BareArtistObject,
 } from '../../../interfaces'
 import {useTheme, useMusicApi} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
@@ -36,134 +29,26 @@ interface ExploreTabProps {
 }
 const Explore: React.FC<ExploreTabProps> = props => {
     const {themeColors} = useTheme()
-    const {initMusicApi, search, error} = useMusicApi()
+    const {initMusicApi, error} = useMusicApi()
 
     const [loading, setLoading] = useState<boolean>(false)
     const scrollViewReference = useRef<ScrollView>(null)
 
     /**
-     * different categories of music without search at all
-     * popular, top rated, lo-fi,
-     * bollywood essentials, top new songs,
-     * artist list, language list,
-     * last played song item
+     * music player initializer function
      */
-    /**
-     * "main" @state of the list for all the types of music list data...
-     */
-    const [musicData, setMusicData] = useState<FetchedSongObject[]>([
-        BareFetchedSongObjectInstance, // 0 - trendings...
-        BareFetchedSongObjectInstance, // 1 - bollywood hits...
-        BareFetchedSongObjectInstance, // 2 - romantic...
-        BareFetchedSongObjectInstance, // 3 - hot songs...
-        BareFetchedSongObjectInstance, // 4 - popular songs list...
-        BareFetchedSongObjectInstance, // 5 - most rated songs...
-        BareFetchedSongObjectInstance, // 6 - pops...
-    ])
-    const [artistsData, setArtistsData] = useState<ArtistObject[]>([
-        BareArtistObject,
-    ])
-
-    /**
-     * Function which loads all sutaible data required in this tab (explore tab)
-     * like songs list in different languages, preference wise songs list, and many more...
-     * now also saving the data to the local storage for offline usage later on...
-     */
-    const loadExploreData = React.useCallback(() => {
-        Promise.all([
-            // 0th type of song data list
-            search('trending songs', 'SONG', false, true, '', [
-                0,
-                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
-            ]),
-            // 1st type of song data list
-            search('bollywood new hits', 'SONG', false, true, '', [
-                0,
-                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
-            ]),
-            // 2nd type of song data list
-            search('top romantic songs', 'SONG', false, true, '', [
-                0,
-                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
-            ]),
-            // 3rd type of song data list
-            search('popular songs', 'SONG', false, true, '', [
-                0,
-                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
-            ]),
-            // 4th type of song data list
-            search('pop beats', 'SONG', false, true, '', [
-                0,
-                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
-            ]),
-            // 5th type of song data list
-            search('Chill beats', 'SONG', false, true, '', [
-                0,
-                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
-            ]),
-            // 6th type of song data list
-            search('sad songs', 'SONG', false, true, '', [
-                0,
-                INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB,
-            ]),
-        ])
-            .then((res: FetchedSongObject[]) => {
-                setMusicData(res)
-            })
-            .catch(_err => {})
-
-        Promise.all([
-            search('new bollywood songs', 'ARTIST', false, true),
-            search('trending bollywood songs', 'ARTIST', false, true),
-            search('new english songs', 'ARTIST', false, true),
-        ])
-            .then((res: FetchedArtistObject[]) => {
-                // this is the list which would be assigned to the main UI component or the state of this component
-                const FirstTypeOFArtistsList: ArtistObject[] = []
-                for (let i in res) {
-                    // if the list contains more than 10 artists that's enough to show
-                    // In the UI
-                    if (FirstTypeOFArtistsList.length >= 10) break
-                    for (let j in res[i].content) {
-                        if (FirstTypeOFArtistsList.length >= 10) break
-                        // check weather the artist already exists in the list if not
-                        // then extend the list with the new artists...
-                        const ArtistAlreadyExistsInList =
-                            FirstTypeOFArtistsList.filter(
-                                artist =>
-                                    artist.browseId ===
-                                    res[i].content[j].browseId,
-                            )
-                        /**
-                         * if @variable ArtistAlreadyExistsInList length is more than 0 than the artist is already present in the list no
-                         * need to add it again...
-                         */
-                        if (ArtistAlreadyExistsInList.length <= 0) {
-                            FirstTypeOFArtistsList.push(res[i].content[j])
-                        }
-                    }
-                }
-                setArtistsData(FirstTypeOFArtistsList)
-            })
-            .catch(_err => {})
-    }, [error])
-
-    /**
-     * we are calling the loadData -(which loads all the data for explore tab) function twice
-     * because it may not be ready or compiled when we call it for the first time so indented calling
-     * also with a fallback variable error whenever it changed again everything will load from beginning
-     * this function is also used in music player UI
-     */
-    useEffect(() => {
+    const loacalMusicApiInit = () => {
         setLoading(true)
         initMusicApi()
             .then(() => {
                 setLoading(false)
-                loadExploreData()
             })
             .catch(() => {
                 setLoading(false)
             })
+    }
+    useEffect(() => {
+        loacalMusicApiInit()
     }, [error])
 
     /**
@@ -190,7 +75,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                 refreshControl={
                     <RefreshControl
                         refreshing={loading}
-                        onRefresh={loadExploreData}
+                        onRefresh={loacalMusicApiInit}
                         progressBackgroundColor={themeColors.white[0]}
                         colors={themeColors.rgbstreakgradient}
                     />
@@ -199,7 +84,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground>
                     <HeaderCollapsible
-                        onPress={loadExploreData}
+                        onPress={loacalMusicApiInit}
                         headerScrollColor={themeColors.transparent[0]}
                         onInputFocus={launchSearchScreen}
                     />
@@ -268,12 +153,15 @@ const Explore: React.FC<ExploreTabProps> = props => {
                     />
 
                     {/* artists list */}
-                    <BlockCardArtistList
+                    <ArtistsKeywordResultsRenderer
+                        keywords={[
+                            'new bollywood songs',
+                            'trending bollywood songs',
+                            'new english songs',
+                        ]}
+                        title="Artists You May Like"
+                        refreshing={loading}
                         navigation={props.navigation}
-                        cardTitle={'Artists You May Like'}
-                        artistsData={artistsData}
-                        noBackground={true}
-                        appearanceType="not-card"
                     />
 
                     {/* romantic */}
