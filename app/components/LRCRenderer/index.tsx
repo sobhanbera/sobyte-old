@@ -12,28 +12,6 @@ import {LrcLine} from '../../interfaces'
 import {AUTO_SCROLL_AFTER_USER_SCROLL} from '../../constants'
 import {getRandomNumberString} from '../../utils'
 
-function useDebounce(fn: Function, delay: number = 300) {
-    const {current} = useRef<{timer?: NodeJS.Timeout}>({})
-    return function (this: any, ...args: any[]) {
-        if (current.timer) {
-            clearTimeout(current.timer)
-        }
-        current.timer = setTimeout(() => fn.apply(this, args), delay)
-    }
-}
-
-function useThrottle(fn: Function, delay: number = 300) {
-    const {current} = useRef<{timer?: NodeJS.Timeout}>({})
-    return function (this: any, ...args: any[]) {
-        if (!current.timer) {
-            current.timer = setTimeout(() => {
-                delete current.timer
-            }, delay)
-            fn.apply(this, args)
-        }
-    }
-}
-
 const useCurrentIndex = ({
     lrcLineList,
     currentTime,
@@ -102,15 +80,7 @@ interface Props {
         active: boolean
     }) => React.ReactNode
     currentTime?: number
-    autoScroll?: boolean
     autoScrollAfterUserScroll?: number
-    // onCurrentLineChange?: ({
-    //     index,
-    //     lrcLine,
-    // }: {
-    //     index: number
-    //     lrcLine: LrcLine | null
-    // }) => void
     style: StyleProp<ViewStyle>
     height: number
     lineHeight: number
@@ -125,37 +95,41 @@ function LRCRenderer({
         </Text>
     ),
     currentTime = 0,
-    autoScroll = true,
     lineHeight = 16,
     activeLineHeight = lineHeight,
     autoScrollAfterUserScroll = AUTO_SCROLL_AFTER_USER_SCROLL,
-    // onCurrentLineChange,
     height = 300,
     style,
     ...props
 }: Props) {
-    // ref,
     const lrcRef = useRef<ScrollView>(null)
     const scrollX = React.useRef(new Animated.Value(0)).current
     const lrcLineList = useMemo(() => parseLrc(lrc), [lrc])
     const currentIndex = useCurrentIndex({lrcLineList, currentTime})
 
-    const [localAutoScroll, setLocalAutoScroll] = useState(autoScroll)
+    const [localAutoScroll, setLocalAutoScroll] = useState(true) // wheather to auto scroll the lyrics lines...
 
-    const resetLocalAutoScroll = useCallback(
-        () => setLocalAutoScroll(autoScroll),
-        [autoScroll],
-    )
+    // a reference variable for the duration after which the like animation will be disappear...
+    let TimeOutVar = setTimeout(() => {}, 0)
+    const onScroll = () => {
+        /**
+         * clearing the previous timeout since we are going to do a new time out
+         * if we don't clear the previous time out then
+         * let the user have scrolled somepart of the lyrics to different position is 3sec here if the user again scrolled after 2sec (let)
+         * then the auto scroll will end in 3-2=1sec which is not good since the duration is 3sec
+         * so we are clearing the last timeout and overwiting it with a new one
+         */
+        clearTimeout(TimeOutVar)
 
-    const resetAutoScrollAfterUserScroll = useDebounce(
-        () => setLocalAutoScroll(autoScroll),
-        autoScrollAfterUserScroll,
-    )
-
-    const onScroll = useThrottle(() => {
+        // setting the auto scroll to false since the user is scrolling continously...
         setLocalAutoScroll(false)
-        resetAutoScrollAfterUserScroll()
-    })
+
+        // set a new timeout to make the auto scrolling enabled after some duration
+        TimeOutVar = setTimeout(() => {
+            setLocalAutoScroll(true)
+        }, AUTO_SCROLL_AFTER_USER_SCROLL)
+    }
+    useEffect(() => {}, [])
 
     // auto scroll
     useEffect(() => {
@@ -167,15 +141,6 @@ function LRCRenderer({
         }
     }, [currentIndex, localAutoScroll, lineHeight])
 
-    // on current line change
-    // useEffect(() => {
-    //     onCurrentLineChange &&
-    //         onCurrentLineChange({
-    //             index: currentIndex,
-    //             lrcLine: lrcLineList[currentIndex] || null,
-    //         })
-    // }, [lrcLineList, currentIndex, onCurrentLineChange])
-
     return (
         <AnimatedScrollView
             {...props}
@@ -184,9 +149,9 @@ function LRCRenderer({
             onScroll={Animated.event(
                 [{nativeEvent: {contentOffset: {x: scrollX}}}],
                 {
-                    useNativeDriver: true,
+                    useNativeDriver: false,
                     listener: event => {
-                        onScroll(event)
+                        onScroll()
                     },
                 },
             )}
