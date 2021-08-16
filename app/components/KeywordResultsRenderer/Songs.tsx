@@ -52,6 +52,7 @@ const SongsKeywordResultsRenderer = ({keyword, title, refreshing}: Props) => {
 
     return (
         <BlockCardSongsList
+            keyword={keyword}
             cardTitle={title}
             musicData={musicData}
             noBackground={true}

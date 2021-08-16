@@ -12,6 +12,7 @@ interface Props {
     cardTitle: string
     appearanceType?: 'card' | 'not-card'
     noBackground?: boolean
+    keyword: string
 }
 const SingleBlockSongs = (props: Props) => {
     const {themeColors} = useTheme()
@@ -49,7 +50,7 @@ const SingleBlockSongs = (props: Props) => {
             </Block>
 
             <GridSongList
-                id={props.cardTitle}
+                id={props.keyword}
                 shimmerDirection="left"
                 textColor={themeColors.text[0] + 'E7'}
                 subColor={themeColors.text[0] + '70'}
