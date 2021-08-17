@@ -1,14 +1,6 @@
 import React from 'react'
-import {
-    View,
-    Text,
-    Dimensions,
-    Image,
-    Animated,
-    ImageBackground,
-} from 'react-native'
+import {View, Dimensions, Animated, ImageBackground} from 'react-native'
 import {useCallback} from 'react'
-import MarqueeText from 'react-native-text-ticker'
 
 import {usePlayerProgress, useTheme} from '../../../context'
 import {HeaderMain, TrackProgress} from '../../../components'
@@ -18,19 +10,13 @@ import {
     DEFAULT_HIGH_IMAGE_QUALITY,
     DEFAULT_HIGH_IMAGE_SIZE,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
-    FontRobotoBold,
-    FontTahoma,
-    FontUbuntu,
     FontUbuntuBold,
     HEADER_MAX_HEIGHT,
-    MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION,
     MUSIC_PLAYER_BLUR,
 } from '../../../constants'
 import LRCRenderer from '../../../components/LRCRenderer'
 import {SongObject} from '../../../interfaces'
 import {
-    capitalizeWords,
-    formatArtists,
     formatTrackTitle,
     getHightQualityImageFromLinkWithHeight,
 } from '../../../utils'
@@ -59,9 +45,8 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
         DEFAULT_HIGH_IMAGE_SIZE,
         DEFAULT_HIGH_IMAGE_QUALITY,
     )
-    const artists = formatArtists(song.artist)
 
-    const lineRenderer = useCallback((item: any, currentIndex: number) => {
+    const lineRenderer = useCallback((item: any, _currentIndex: number) => {
         return (
             <Animated.Text
                 style={{
@@ -86,7 +71,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
 
             <HeaderMain
                 navigation={navigation}
-                title={'Lyrics'}
+                title={`Lyrics  "${formatTrackTitle(song.name)}"`}
                 color={themeColors.themecolorrevert[0]}
                 goBack
                 backgroundColor={themeColors.transparent[0]}
@@ -123,55 +108,6 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                     color={themeColors.themecolorrevert[0]}
                     duration={duration}
                 />
-            </View>
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '100%',
-                }}>
-                <Image
-                    source={{uri: song.thumbnails[1].url}}
-                    style={{height: 75, width: 75, borderRadius: 5}}
-                />
-                <View
-                    style={{
-                        width: '50%',
-                        alignSelf: 'flex-start',
-                        marginHorizontal: 20,
-                    }}>
-                    <MarqueeText
-                        style={{
-                            fontSize: 23,
-                            fontFamily: FontUbuntuBold,
-                            color: 'white',
-                            textAlign: 'left',
-                            width: '100%',
-                            alignSelf: 'flex-start',
-                            paddingVertical: 3,
-                            paddingHorizontal: 5,
-                        }}
-                        loop
-                        scroll
-                        useNativeDriver
-                        duration={MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION}
-                        bounceSpeed={1}
-                        scrollSpeed={1}
-                        animationType="scroll"
-                        marqueeDelay={1000}>
-                        {formatTrackTitle(song.name)}
-                    </MarqueeText>
-                    <Text
-                        style={{
-                            fontSize: 16,
-                            color: 'white',
-                            paddingVertical: 1,
-                            paddingHorizontal: 5,
-                        }}>
-                        {capitalizeWords(artists)}
-                    </Text>
-                </View>
             </View>
         </ImageBackground>
     )
