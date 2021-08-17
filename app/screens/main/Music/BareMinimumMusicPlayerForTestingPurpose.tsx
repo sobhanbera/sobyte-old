@@ -112,8 +112,13 @@ const Player: FC<PlayerProps> = props => {
             MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY,
             [0, INITIAL_NUMBER_OF_TRACKS_TO_LOAD],
         )
-            .then((res: FetchedSongObject) => {
+            .then(async (res: FetchedSongObject) => {
                 setSongs(res)
+
+                // console.log(
+                //     res.content[0],
+                //     await fetchMusic(res.content[0].musicId),
+                // )
 
                 // initial data
                 const initialTrack = res.content[0]
