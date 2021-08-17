@@ -61,20 +61,18 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 // style={{height: 300}}
                 lrc={LRC_STRING}
                 currentTime={position * 1000}
-                lineHeight={24}
-                activeLineHeight={30}
+                lineHeight={34} // the maximum height of each lyrics line including margin, padding vertical, fontsize, scale, etc
+                activeLineHeight={58} // the maximum height of the current lyrics line including margin, padding vertical, fontsize, scale, etc
                 lineRenderer={item => {
                     return (
                         <Animated.Text
                             style={{
                                 textAlign: 'left',
                                 color: item.active ? 'white' : '#AFAFAF',
-                                fontSize: item.active ? 20 : 16,
-                                fontFamily: item.active
-                                    ? FontUbuntuBold
-                                    : FontUbuntu,
+                                fontSize: item.active ? 22 : 16,
+                                fontFamily: FontUbuntu,
                                 paddingHorizontal: 25,
-                                paddingVertical: 3,
+                                marginVertical: item.active ? 18 : 9,
                             }}>
                             {item.currentLine.content}
                         </Animated.Text>
@@ -160,7 +158,7 @@ const LRC_STRING = `
 [la:HI]
 [ve:4.00]
 
-[00:21.76]Maine Jab Dekha Tha Tujhko
+[00:00.76]Maine Jab Dekha Tha Tujhko
 
 [00:24.40]Raat Bhi Woh Yaad Hai Mujhko
 
