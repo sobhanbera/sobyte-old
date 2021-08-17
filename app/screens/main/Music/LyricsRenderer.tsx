@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, Dimensions, Image} from 'react-native'
+import {View, Text, Dimensions, Image, Animated} from 'react-native'
 import {useCallback} from 'react'
 import MarqueeText from 'react-native-text-ticker'
 
@@ -9,8 +9,7 @@ import {
     BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
     DefaultStatusBarComponent,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
-    FontRoboto,
-    FontRobotoBold,
+    FontUbuntu,
     FontUbuntuBold,
     HEADER_MAX_HEIGHT,
     MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION,
@@ -64,20 +63,21 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 currentTime={position * 1000}
                 lineHeight={24}
                 activeLineHeight={30}
-                lineRenderer={(currentLine, index, currentIndex, active) => {
+                lineRenderer={item => {
                     return (
-                        <Text
+                        <Animated.Text
                             style={{
                                 textAlign: 'left',
-                                color: active ? 'white' : 'grey',
-                                fontSize: active ? 25 : 20,
-                                fontFamily: active
-                                    ? FontRobotoBold
-                                    : FontRoboto,
+                                color: item.active ? 'white' : '#AFAFAF',
+                                fontSize: item.active ? 20 : 16,
+                                fontFamily: item.active
+                                    ? FontUbuntuBold
+                                    : FontUbuntu,
                                 paddingHorizontal: 25,
+                                paddingVertical: 3,
                             }}>
-                            {currentLine.content}
-                        </Text>
+                            {item.currentLine.content}
+                        </Animated.Text>
                     )
                 }}
                 spacing={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
@@ -152,60 +152,120 @@ export default SongLyricsRenderer
 
 // testing
 const LRC_STRING = `
-[00:01.23]लग जा गले
-[00:07.43]हं हं
-[00:12.60]हसीन रात
-[00:16.36]हं
-[00:25.02]लग जा गले
-[00:27.67]के फ़िर ये
-[00:29.96]हसीन रात हो ना हो
-[00:36.74]शायद
-[00:37.99]फ़िर इस जनम में
-[00:41.13]मुलाकात हो ना हो
-[00:47.88]लग जा गले
-[00:50.42]के फ़िर ये
-[00:52.45]हसीन रात हो ना हो
-[00:59.11]शायद
-[01:00.41]फ़िर इस जनम में
-[01:03.55]मुलाकात हो ना हो
-[01:10.13]लग जा गले
-[01:13.03]ए
-[01:14.41]ए
-[01:32.07]हम को मिली है आज ये
-[01:37.20]घडियां नसीब से
-[01:45.86]हम को मिली है आज ये
-[01:50.92]घडियां नसीब से
-[01:56.99]जी भर के देख लीजिए
-[02:01.94]हम को
-[02:03.62]करीब से
-[02:08.05]फ़िर आपके
-[02:10.51]नसीब में
-[02:12.72]ये बात हो ना हो
-[02:19.06]शायद
-[02:20.32]फ़िर इस जनम में
-[02:23.44]मुलाकात हो ना हो
-[02:29.98]लग जा गले
-[02:32.79]ए
-[02:34.21]ए
-[02:51.70]पास आईए के हम नहीं
-[02:56.85]आएंगे बार बार
-[03:05.55]पास आईए के हम नहीं
-[03:10.47]आएंगे बार बार
-[03:16.41]बाहें गले में डाल के
-[03:21.49]हम रोलें ज़ार ज़ार
-[03:27.27]आंखों से फ़िर
-[03:29.64]ये प्यार की
-[03:31.92]बरसात हो ना हो
-[03:38.21]शायद
-[03:39.44]फ़िर इस जनम में
-[03:42.48]मुलाकात हो ना हो
-[03:49.06]लग जा गले
-[03:51.51]के फ़िर ये
-[03:53.46]हसीन रात हो ना हो
-[04:00.06]शायद
-[04:01.31]फ़िर इस जनम में
-[04:04.26]मुलाकात हो ना हो
-[04:10.83]लग जा गले
-[04:13.67]ए
-[04:15.09]ए
+[ti:lut gaye]
+[ar:Jubin Nautiyal, Tanishk Bagchi, Nusrat Fateh Ali Khan]
+[al:Dont]
+[au:JN]
+[by:sobhanbera]
+[la:HI]
+[ve:4.00]
+
+[00:21.76]Maine Jab Dekha Tha Tujhko
+
+[00:24.40]Raat Bhi Woh Yaad Hai Mujhko
+
+[00:27.00]Taare Ginte Ginte So Gaya
+
+
+[00:32.16]Dil Mera Dhadka Tha Kass Ke
+
+[00:34.81]Kuch Kaha Tha Tune Hass Ke
+
+[00:37.44]Main Usi Pal Tera Ho Gaya
+
+
+[00:42.78]Aasmano Pe Jo Khuda Hai
+
+[00:45.42]Usse Meri Yahi Dua Hai
+
+[00:47.98]Chand Yeh Har Roz Main Dekhu
+
+[00:50.92]Tere Sath Mein
+
+
+[00:52.63]Aankh Uthi Mohabbat Ne Angrai Li
+
+[00:57.71]Dil Ka Sauda Hua Chandani Raat Mein
+
+[01:02.73]Oh Teri Nazron Ne Kuch Aisa Jaadoo Kiya
+
+[01:06.51]Lut Gaye Hum Toh Pehli Mulaqaat Mein
+
+[01:13.81]Oh Aankh Uthi!
+
+
+[01:35.58]Paao Rakhna Na Zameen Par
+
+[01:37.76]Jaan Rukja Tu Ghadi Bhar
+
+[01:39.87]Thode Taare Toh Bichha Du
+
+[01:42.91]Main Tere Vaaste
+
+
+[01:45.52]Aajmale Mujhko Yaara
+
+[01:48.07]Tu Zara Sa Kar Ishaara
+
+[01:50.51]Dil Jala Ke Jagmaga Du
+
+[01:53.47]Main Tere Raaste
+
+
+[01:56.74]Haan Mere Jaisa Ishq Mein Pagal
+
+[01:59.18]Phir Mile Ya Na Mile Kal
+
+[02:01.86]Sochna Kya Hath Ye Dede
+
+[02:04.35]Mere Hath Mein
+
+
+[02:06.18]Aankh Uthi Mohabbat Ne Angrai Li
+
+[02:11.39]Dil Ka Sauda Hua Chandani Raat Mein
+
+[02:16.57]Oh Teri Nazron Ne Kuch Aisa Jaadoo Kiya
+
+[02:22.08]Lut Gaye Hum Toh Pehli Mulaqaat Mein
+
+[02:27.07]Oh Aankh Uthi!
+
+
+[02:38.05]Haan Kisse Mohabbat Ke
+
+[02:51.99]Hain Jo Kitabon Mein
+
+[02:54.69]Sab Chahta Hoon Main
+
+[02:57.27]Sang Tere Dohrana
+
+
+[02:59.90]Kitna Zaroori Hai
+
+[03:02.54]Ab Meri Khatir Tu
+
+[03:05.25]Mushqil Hai Mushqil Hai
+
+[03:08.27]Lafzon Mein Keh Pana
+
+
+[03:10.52]Ab Toh Yeh Alam Hai
+
+[03:13.16]Tu Jaan Mange Toh
+
+[03:15.64]Main Shaunk Se Dedu
+
+[03:18.06]Saugat Mein
+
+
+[03:20.52]Aankh Uthi Mohabbat Ne Angrai Li
+
+[03:24.93]Dil Ka Sauda Hua Chandani Raat Mein
+
+[03:30.24]Oh Teri Nazron Ne Kuch Aisa Jaadoo Kiya
+
+[03:35.95]Lut Gaye Hum Toh Pehli Mulaqaat Mein
+
+[03:41.01]Oh Aankh Uthi!
 `
