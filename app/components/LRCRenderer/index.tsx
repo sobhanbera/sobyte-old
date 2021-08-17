@@ -156,7 +156,7 @@ function LRCRenderer(props: Props) {
                 <View
                     style={{
                         width: '100%',
-                        height: 0.25 * props.containerHeight, // from the 25% of the total height available...
+                        height: 0.5 * props.containerHeight, // from the 25% of the total height available...
                     }}
                 />
 
