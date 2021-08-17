@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, StyleProp, ViewStyle} from 'react-native'
 
 import Entypo from 'react-native-vector-icons/Entypo'
 import {DEVICE_STATUSBAR_HEIGHT_CONSTANT, FontRobotoBold} from '../../constants'
@@ -14,6 +14,7 @@ interface Props {
     color: string
     backgroundColor?: string
     onPress?: Function
+    style?: StyleProp<ViewStyle>
 }
 const HeaderMain = (props: Props) => {
     const {border, surfacelight} = useTheme().themeColors
@@ -28,6 +29,7 @@ const HeaderMain = (props: Props) => {
                     borderBottomWidth: 1,
                     marginTop: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // the height of the statusbar of the device
                 },
+                props.style,
             ]}>
             <Scaler onPress={() => props.navigation.goBack()}>
                 <Entypo
