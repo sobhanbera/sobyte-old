@@ -140,6 +140,5 @@ export default [
     // 'top new bollywood romantic songs',
     // 'most listened romantic songs',
     // 'most played romantic songs',
-    // 'top romantic songs',
-    'Lag Jaa Gale - Sadhana, Lata Mangeshkar, Woh Kaun Thi Romantic',
+    'top hindi romantic songs',
 ]
