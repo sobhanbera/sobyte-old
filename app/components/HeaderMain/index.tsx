@@ -43,8 +43,10 @@ const HeaderMain = (props: Props) => {
                     styles.title,
                     {
                         color: props.color,
+                        paddingHorizontal: 20,
                     },
-                ]}>
+                ]}
+                numberOfLines={1}>
                 {props.title}
             </Text>
             {/* this below is a temporary component for making the parent center the title text component */}
