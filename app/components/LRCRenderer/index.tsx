@@ -80,7 +80,6 @@ interface Props {
     containerHeight: number
     lineHeight: number
     activeLineHeight: number
-    spacing: number
 }
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 function LRCRenderer(props: Props) {
@@ -182,7 +181,7 @@ function LRCRenderer(props: Props) {
                 <View
                     style={{
                         width: '100%',
-                        height: props.spacing, // from the 25% of the total height available...
+                        height: 0.33 * props.containerHeight, // from the 25% of the total height available...
                     }}
                 />
             </View>

@@ -1,9 +1,9 @@
 import React from 'react'
-import {View, Dimensions, Animated, ImageBackground} from 'react-native'
+import {Dimensions, Animated, ImageBackground} from 'react-native'
 import {useCallback} from 'react'
 
 import {usePlayerProgress, useTheme} from '../../../context'
-import {HeaderMain, TrackProgress} from '../../../components'
+import {HeaderMain} from '../../../components'
 import {
     BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
     DefaultStatusBarComponent,
@@ -94,21 +94,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 lineHeight={28} // the maximum height of each lyrics line including margin, padding vertical, fontsize, scale, etc
                 activeLineHeight={56} // the maximum height of the current lyrics line including margin, padding vertical, fontsize, scale, etc
                 lineRenderer={lineRenderer}
-                spacing={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
             />
-
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '100%',
-                }}>
-                <TrackProgress
-                    color={themeColors.themecolorrevert[0]}
-                    duration={duration}
-                />
-            </View>
         </ImageBackground>
     )
 }
