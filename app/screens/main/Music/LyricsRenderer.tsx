@@ -35,7 +35,6 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
     const {song} = route.params
     const {
         position, // unit - second
-        duration,
     } = usePlayerProgress()
     const {themeColors} = useTheme()
 
