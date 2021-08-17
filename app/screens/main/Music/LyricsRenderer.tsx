@@ -52,7 +52,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 style={{
                     textAlign: 'left',
                     color: item.active ? 'white' : '#FFFFFFDF',
-                    fontSize: item.active ? 28 : 18,
+                    fontSize: item.active ? 30 : 20,
                     fontFamily: FontUbuntuBold,
                     paddingHorizontal: 25,
                     marginVertical: 12,
@@ -91,8 +91,8 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 // style={{height: 300}}
                 lrc={LRC_STRING}
                 currentTime={position * 1000}
-                lineHeight={24} // the maximum height of each lyrics line including margin, padding vertical, fontsize, scale, etc
-                activeLineHeight={52} // the maximum height of the current lyrics line including margin, padding vertical, fontsize, scale, etc
+                lineHeight={28} // the maximum height of each lyrics line including margin, padding vertical, fontsize, scale, etc
+                activeLineHeight={56} // the maximum height of the current lyrics line including margin, padding vertical, fontsize, scale, etc
                 lineRenderer={lineRenderer}
                 spacing={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
             />
