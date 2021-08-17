@@ -1,5 +1,12 @@
 import React from 'react'
-import {View, Text, Dimensions, Image, Animated} from 'react-native'
+import {
+    View,
+    Text,
+    Dimensions,
+    Image,
+    Animated,
+    ImageBackground,
+} from 'react-native'
 import {useCallback} from 'react'
 import MarqueeText from 'react-native-text-ticker'
 
@@ -8,17 +15,25 @@ import {HeaderMain, TrackProgress} from '../../../components'
 import {
     BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
     DefaultStatusBarComponent,
+    DEFAULT_HIGH_IMAGE_QUALITY,
+    DEFAULT_HIGH_IMAGE_SIZE,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
     FontUbuntu,
     FontUbuntuBold,
     HEADER_MAX_HEIGHT,
     MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION,
+    MUSIC_PLAYER_BLUR,
 } from '../../../constants'
 import LRCRenderer from '../../../components/LRCRenderer'
 import {SongObject} from '../../../interfaces'
-import {capitalizeWords, formatArtists, formatTrackTitle} from '../../../utils'
+import {
+    capitalizeWords,
+    formatArtists,
+    formatTrackTitle,
+    getHightQualityImageFromLinkWithHeight,
+} from '../../../utils'
 
-const {height} = Dimensions.get('window')
+const {height, width} = Dimensions.get('window')
 
 interface Props {
     navigation: any
@@ -36,10 +51,35 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
     } = usePlayerProgress()
     const {themeColors} = useTheme()
 
+    const highQualityImage = getHightQualityImageFromLinkWithHeight(
+        song.thumbnails[0].url,
+        song.thumbnails[0].height,
+        DEFAULT_HIGH_IMAGE_SIZE,
+        DEFAULT_HIGH_IMAGE_QUALITY,
+    )
     const artists = formatArtists(song.artist)
 
+    const lineRenderer = useCallback((item: any) => {
+        return (
+            <Animated.Text
+                style={{
+                    textAlign: 'left',
+                    color: item.active ? 'white' : '#AFAFAF',
+                    fontSize: item.active ? 22 : 16,
+                    fontFamily: FontUbuntu,
+                    paddingHorizontal: 25,
+                    marginVertical: item.active ? 18 : 9,
+                }}>
+                {item.currentLine.content}
+            </Animated.Text>
+        )
+    }, [])
+
     return (
-        <View>
+        <ImageBackground
+            source={{uri: highQualityImage}}
+            style={{width, height}}
+            blurRadius={MUSIC_PLAYER_BLUR}>
             <DefaultStatusBarComponent backgroundColor={'grey'} />
 
             <HeaderMain
@@ -47,7 +87,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 title={'Lyrics'}
                 color={'white'}
                 goBack
-                backgroundColor={'grey'}
+                backgroundColor={themeColors.transparent[0]}
             />
 
             <LRCRenderer
@@ -63,21 +103,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 currentTime={position * 1000}
                 lineHeight={34} // the maximum height of each lyrics line including margin, padding vertical, fontsize, scale, etc
                 activeLineHeight={58} // the maximum height of the current lyrics line including margin, padding vertical, fontsize, scale, etc
-                lineRenderer={item => {
-                    return (
-                        <Animated.Text
-                            style={{
-                                textAlign: 'left',
-                                color: item.active ? 'white' : '#AFAFAF',
-                                fontSize: item.active ? 22 : 16,
-                                fontFamily: FontUbuntu,
-                                paddingHorizontal: 25,
-                                marginVertical: item.active ? 18 : 9,
-                            }}>
-                            {item.currentLine.content}
-                        </Animated.Text>
-                    )
-                }}
+                lineRenderer={lineRenderer}
                 spacing={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
             />
 
@@ -142,7 +168,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                     </Text>
                 </View>
             </View>
-        </View>
+        </ImageBackground>
     )
 }
 
