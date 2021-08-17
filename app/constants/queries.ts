@@ -140,5 +140,5 @@ export default [
     // 'top new bollywood romantic songs',
     // 'most listened romantic songs',
     // 'most played romantic songs',
-    'top hindi romantic songs',
+    'Lut Gaye',
 ]
