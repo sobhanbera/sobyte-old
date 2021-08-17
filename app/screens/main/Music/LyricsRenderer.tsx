@@ -37,27 +37,6 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
     } = usePlayerProgress()
     const {themeColors} = useTheme()
 
-    const lineRenderer = useCallback(
-        ({lrcLine: {content}, active}) => (
-            <Text
-                style={{
-                    textAlign: 'left',
-                    color: active ? 'white' : 'grey',
-                    fontSize: active ? 25 : 20,
-                    fontFamily: active ? FontRobotoBold : FontRoboto,
-                    paddingHorizontal: 25,
-                }}>
-                {content}
-            </Text>
-        ),
-        [],
-    )
-    //   const onCurrentLineChange = useCallback(
-    //     ({ lrcLine: { millisecond, content }, index }) =>
-    //       console.log(index, millisecond, content),
-    //     [],
-    //   );
-
     const artists = formatArtists(song.artist)
 
     return (
@@ -85,7 +64,22 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 currentTime={position * 1000}
                 lineHeight={24}
                 activeLineHeight={30}
-                lineRenderer={lineRenderer}
+                lineRenderer={(currentLine, index, currentIndex, active) => {
+                    return (
+                        <Text
+                            style={{
+                                textAlign: 'left',
+                                color: active ? 'white' : 'grey',
+                                fontSize: active ? 25 : 20,
+                                fontFamily: active
+                                    ? FontRobotoBold
+                                    : FontRoboto,
+                                paddingHorizontal: 25,
+                            }}>
+                            {currentLine.content}
+                        </Text>
+                    )
+                }}
                 spacing={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
             />
 
