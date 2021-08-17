@@ -128,6 +128,8 @@ function LRCRenderer(props: Props) {
         <AnimatedScrollView
             {...props}
             ref={lrcRef}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
             scrollEventThrottle={16}
             scrollToOverflowEnabled
             overScrollMode={'never'}
