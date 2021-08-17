@@ -68,10 +68,12 @@ const parseLrc = (lrc: string): LrcLine[] => {
 interface Props {
     lrc: string
     lineRenderer(
-        currentLine: LrcLine,
-        index: number,
+        item: {
+            currentLine: LrcLine
+            index: number
+            active: boolean
+        },
         currentIndex: number,
-        active: boolean,
     ): React.ReactNode
     currentTime: number
     style?: StyleProp<ViewStyle>
@@ -158,12 +160,14 @@ function LRCRenderer(props: Props) {
                     }}
                 />
 
-                {lrcLineList.map((lrcLine, index) =>
+                {lrcLineList.map((currentLine, index) =>
                     props.lineRenderer(
-                        lrcLine,
-                        index,
+                        {
+                            currentLine,
+                            index,
+                            active: currentIndex === index,
+                        },
                         currentIndex,
-                        currentIndex === index,
                     ),
                 )}
 
