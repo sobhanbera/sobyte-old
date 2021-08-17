@@ -18,6 +18,8 @@ import {
     DEFAULT_HIGH_IMAGE_QUALITY,
     DEFAULT_HIGH_IMAGE_SIZE,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
+    FontRobotoBold,
+    FontTahoma,
     FontUbuntu,
     FontUbuntuBold,
     HEADER_MAX_HEIGHT,
@@ -59,16 +61,16 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
     )
     const artists = formatArtists(song.artist)
 
-    const lineRenderer = useCallback((item: any) => {
+    const lineRenderer = useCallback((item: any, currentIndex: number) => {
         return (
             <Animated.Text
                 style={{
                     textAlign: 'left',
-                    color: item.active ? 'white' : '#AFAFAF',
-                    fontSize: item.active ? 22 : 16,
-                    fontFamily: FontUbuntu,
+                    color: item.active ? 'white' : '#FFFFFFDF',
+                    fontSize: item.active ? 28 : 18,
+                    fontFamily: FontUbuntuBold,
                     paddingHorizontal: 25,
-                    marginVertical: item.active ? 18 : 9,
+                    marginVertical: 12,
                 }}>
                 {item.currentLine.content}
             </Animated.Text>
@@ -80,14 +82,17 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
             source={{uri: highQualityImage}}
             style={{width, height}}
             blurRadius={MUSIC_PLAYER_BLUR}>
-            <DefaultStatusBarComponent backgroundColor={'grey'} />
+            <DefaultStatusBarComponent backgroundColor={'transparent'} />
 
             <HeaderMain
                 navigation={navigation}
                 title={'Lyrics'}
-                color={'white'}
+                color={themeColors.themecolorrevert[0]}
                 goBack
                 backgroundColor={themeColors.transparent[0]}
+                style={{
+                    borderBottomWidth: 0,
+                }}
             />
 
             <LRCRenderer
@@ -101,8 +106,8 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 // style={{height: 300}}
                 lrc={LRC_STRING}
                 currentTime={position * 1000}
-                lineHeight={34} // the maximum height of each lyrics line including margin, padding vertical, fontsize, scale, etc
-                activeLineHeight={58} // the maximum height of the current lyrics line including margin, padding vertical, fontsize, scale, etc
+                lineHeight={24} // the maximum height of each lyrics line including margin, padding vertical, fontsize, scale, etc
+                activeLineHeight={52} // the maximum height of the current lyrics line including margin, padding vertical, fontsize, scale, etc
                 lineRenderer={lineRenderer}
                 spacing={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
             />
