@@ -67,15 +67,12 @@ const parseLrc = (lrc: string): LrcLine[] => {
 
 interface Props {
     lrc: string
-    lineRenderer: ({
-        lrcLine,
-        index,
-        active,
-    }: {
-        lrcLine: LrcLine
-        index: number
-        active: boolean
-    }) => React.ReactNode
+    lineRenderer(
+        currentLine: LrcLine,
+        index: number,
+        currentIndex: number,
+        active: boolean,
+    ): React.ReactNode
     currentTime: number
     style?: StyleProp<ViewStyle>
     containerHeight: number
@@ -161,22 +158,14 @@ function LRCRenderer(props: Props) {
                     }}
                 />
 
-                {lrcLineList.map((lrcLine, index) => (
-                    <View
-                        key={lrcLine.id}
-                        style={{
-                            height:
-                                currentIndex === index
-                                    ? props.activeLineHeight
-                                    : props.lineHeight,
-                        }}>
-                        {props.lineRenderer({
-                            lrcLine,
-                            index,
-                            active: currentIndex === index,
-                        })}
-                    </View>
-                ))}
+                {lrcLineList.map((lrcLine, index) =>
+                    props.lineRenderer(
+                        lrcLine,
+                        index,
+                        currentIndex,
+                        currentIndex === index,
+                    ),
+                )}
 
                 {/**
                  * auto scroll is true
