@@ -93,8 +93,8 @@ const TrackButtonControls = (props: Props) => {
                     style={styles.icon}
                     size={DEFAULT_ICON_SIZE}
                     color={props.color}
-                    name={'queue-music'}
-                    onPress={() => props.launchLyrics()} // TODO playlist feature
+                    name={'multitrack-audio'}
+                    onPress={() => props.launchLyrics()}
                 />
             </View>
 
