@@ -36,6 +36,10 @@ target 'Sobyte' do
 
   pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
+  pod 'react-native-view-shot', :path => '../node_modules/react-native-view-shot'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing
