@@ -87,14 +87,6 @@ interface Props {
      * container style for the lyrics string
      */
     style?: StyleProp<ViewStyle>
-    /**
-     * regular height of the line which are not playing or active
-     */
-    lineHeight: number
-    /**
-     * the active lyrics line height
-     */
-    activeLineHeight: number
 }
 function LRCRenderer(props: Props) {
     const lrcRef = useRef<FlatList>(null)
@@ -135,7 +127,7 @@ function LRCRenderer(props: Props) {
                 animated: true,
             })
         }
-    }, [currentIndex, localAutoScroll, props.lineHeight])
+    }, [currentIndex, localAutoScroll])
 
     return (
         <>
@@ -170,6 +162,7 @@ function LRCRenderer(props: Props) {
                 style={[
                     {
                         // flex: 1,
+                        minHeight: 400,
                     },
                     props.style,
                 ]}
@@ -177,7 +170,7 @@ function LRCRenderer(props: Props) {
             <View
                 style={{
                     width: '100%',
-                    height: 250,
+                    paddingBottom: 250,
                 }}
             />
         </>

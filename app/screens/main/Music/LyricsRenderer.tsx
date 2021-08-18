@@ -60,12 +60,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 }}
             />
 
-            <LRCRenderer
-                lrc={LRC_STRING}
-                currentTime={position}
-                lineHeight={60} // the maximum height of each lyrics line including height, margin, padding vertical, fontsize, scale, etc
-                activeLineHeight={60} // the maximum height of the current lyrics line including height, margin, padding vertical, fontsize, scale, etc
-            />
+            <LRCRenderer lrc={LRC_STRING} currentTime={position} />
         </ImageBackground>
     )
 }
