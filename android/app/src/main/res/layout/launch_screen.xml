@@ -5,7 +5,8 @@
     android:background="@color/splash_screen_background_color"
     android:gravity="center"
     android:orientation="vertical"
-    android:textAlignment="center">
+    android:textAlignment="center"
+    android:fitsSystemWindows="true">
 
     <!-- actual image dimensions are width - 1109px, height - 1408px -->
     <!-- 10th multiple of actual width & height -->
@@ -16,17 +17,16 @@
         android:src="@mipmap/ic_launcher_dark_logo"
         android:contentDescription="@string/splash_screen_image"/>
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:text="@string/app_name_lower"-->
-<!--        android:textAlignment="center"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:layout_marginBottom="100dp"-->
-<!--        android:textColor="@android:color/white"-->
-<!--        android:textSize="22dp"-->
-<!--        android:textStyle="bold" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/app_name_lower"
+        android:textAlignment="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="100dp"
+        android:textColor="@android:color/white"
+        android:textSize="22dp"
+        android:textStyle="bold" />
 
-    <!--    android:layout_marginTop="24dp"-->
 </LinearLayout>
