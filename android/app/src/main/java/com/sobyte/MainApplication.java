@@ -4,10 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.zoontek.rnpermissions.RNPermissionsPackage;
-import fr.greweb.reactnativeviewshot.RNViewShotPackage;
-import org.reactnative.camera.RNCameraPackage;
 import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -31,6 +27,11 @@ import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
+import org.reactnative.camera.RNCameraPackage;
+
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.zoontek.rnpermissions.RNPermissionsPackage;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 
 import com.facebook.react.bridge.JSIModulePackage;
 import com.swmansion.reanimated.ReanimatedJSIModulePackage;
