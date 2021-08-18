@@ -1,9 +1,14 @@
 import React, {useRef, useEffect, useCallback, useState, useMemo} from 'react'
-import {ScrollView, StyleProp, View, ViewStyle, Animated} from 'react-native'
+import {StyleProp, View, ViewStyle, Animated} from 'react-native'
 
 import {LrcLine} from '../../interfaces'
-import {AUTO_SCROLL_AFTER_USER_SCROLL_DURATION} from '../../constants'
+import {
+    AUTO_SCROLL_AFTER_USER_SCROLL_DURATION,
+    FontUbuntuBold,
+} from '../../constants'
 import {getRandomNumberString} from '../../utils'
+import {Text} from 'react-native'
+import {FlatList} from 'react-native'
 
 /**
  * @param lrcLineList the lrc string in form of array
@@ -21,14 +26,13 @@ const useCurrentIndex = ({
 
     useEffect(() => {
         const {length} = lrcLineList
-        let i = 0
-        for (; i < length; i += 1) {
+        for (let i = 0; i < length; i += 1) {
             const {millisecond} = lrcLineList[i]
             if (currentTime * 1000 < millisecond) {
+                setCurrentIndex(i - 1)
                 break
             }
         }
-        setCurrentIndex(i - 1)
     }, [currentTime, lrcLineList])
 
     return currentIndex
@@ -76,17 +80,6 @@ interface Props {
      */
     lrc: string
     /**
-     * the line renderer function
-     */
-    lineRenderer(
-        item: {
-            currentLine: LrcLine
-            index: number
-            active: boolean
-        },
-        currentIndex: number,
-    ): React.ReactNode
-    /**
      * the current position of the current track/song in seconds
      */
     currentTime: number
@@ -103,9 +96,8 @@ interface Props {
      */
     activeLineHeight: number
 }
-const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 function LRCRenderer(props: Props) {
-    const lrcRef = useRef<ScrollView>(null)
+    const lrcRef = useRef<FlatList>(null)
     const lrcLineList = useMemo(() => parseLrc(props.lrc), [props.lrc])
     const currentIndex = useCurrentIndex({
         lrcLineList,
@@ -138,61 +130,82 @@ function LRCRenderer(props: Props) {
     // since the auto scroll is enabled by default for now...
     useEffect(() => {
         if (localAutoScroll) {
-            lrcRef.current?.scrollTo({
-                y: currentIndex * props.lineHeight || 0,
+            lrcRef.current?.scrollToIndex({
+                index: currentIndex <= 0 ? 0 : currentIndex,
                 animated: true,
             })
         }
     }, [currentIndex, localAutoScroll, props.lineHeight])
 
     return (
-        <AnimatedScrollView
-            {...props}
-            ref={lrcRef}
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={16}
-            scrollToOverflowEnabled
-            overScrollMode={'never'}
-            onScroll={Animated.event(
-                [], // we are not setting the value of the current position of scroll to any state because that is not needed
-                {
-                    useNativeDriver: false,
-                    listener: _event => {
-                        onScroll() // instead we are doing some other tasks depending on wheather user is scrolling or not....
-                    },
-                },
-            )}
-            style={[
-                {
-                    // flex: 1,
-                },
-                props.style,
-            ]}>
-            {lrcLineList.map((currentLine, index) =>
-                props.lineRenderer(
+        <>
+            <Animated.FlatList
+                {...props}
+                ref={lrcRef}
+                data={lrcLineList}
+                renderItem={({item, index}) => {
+                    return (
+                        <LyricLineRenderer
+                            key={item.id}
+                            lyricLine={item}
+                            currentIndex={currentIndex}
+                            index={index}
+                        />
+                    )
+                }}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+                scrollEventThrottle={16}
+                scrollToOverflowEnabled
+                overScrollMode={'never'}
+                onScroll={Animated.event(
+                    [], // we are not setting the value of the current position of scroll to any state because that is not needed
                     {
-                        currentLine: currentLine,
-                        index: index,
-                        active: currentIndex === index,
+                        useNativeDriver: false,
+                        listener: _event => {
+                            onScroll() // instead we are doing some other tasks depending on wheather user is scrolling or not....
+                        },
                     },
-                    currentIndex,
-                ),
-            )}
-
-            {/**
-             * auto scroll is true
-             * and this is the bottom spacing after which the main lyrics line will be showing
-             * in other works the offset from bottom where the current line will be rendered
-             */}
-
+                )}
+                style={[
+                    {
+                        // flex: 1,
+                    },
+                    props.style,
+                ]}
+            />
             <View
                 style={{
                     width: '100%',
                     height: 250,
                 }}
             />
-        </AnimatedScrollView>
+        </>
+    )
+}
+
+interface Pops {
+    lyricLine: LrcLine
+    index: number
+    currentIndex: number
+}
+const LyricLineRenderer = (props: Pops) => {
+    const {lyricLine, index, currentIndex} = props
+    const isActive = index === currentIndex
+
+    return (
+        <Text
+            // onPress={() => seekTrackTo(item.currentLine.millisecond / 1000)}
+            style={{
+                textAlign: 'left',
+                color: isActive ? 'white' : '#FFFFFFAF',
+                fontSize: isActive ? 28 : 20,
+                fontFamily: FontUbuntuBold,
+                paddingHorizontal: 20,
+                paddingVertical: isActive ? 11 : 15,
+            }}>
+            {lyricLine.content}
+        </Text>
     )
 }
 
