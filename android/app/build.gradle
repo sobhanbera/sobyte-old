@@ -137,6 +137,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        missingDimensionStrategy 'react-native-camera', 'general' // to overcome with the error of "Could not resolve project :react-native-camera."
     }
     splits {
         abi {
@@ -196,6 +197,8 @@ dependencies {
     implementation project(':react-native-track-player')
     implementation project(':@react-native-community_slider')
     implementation project(':react-native-community-netinfo')
+
+    implementation project(':react-native-camera')
 
     implementation project(':react-native-webview')
     implementation project(':react-native-svg')
