@@ -49,26 +49,6 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
 
     // TrackPlayer.setRate(1)
 
-    const lineRenderer = useCallback((item: any, _currentIndex: number) => {
-        return (
-            <Text
-                key={item.index}
-                onPress={() => seekTrackTo(item.currentLine.millisecond / 1000)}
-                style={{
-                    textAlign: 'left',
-                    color: item.active
-                        ? themeColors.white[0]
-                        : themeColors.white[0] + 'AF',
-                    fontSize: item.active ? 28 : 20,
-                    fontFamily: FontUbuntuBold,
-                    paddingHorizontal: 20,
-                    paddingVertical: item.active ? 11 : 15,
-                }}>
-                {item.currentLine.content}
-            </Text>
-        )
-    }, [])
-
     return (
         <ImageBackground
             source={{uri: highQualityImage}}
@@ -92,7 +72,6 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 currentTime={position}
                 lineHeight={60} // the maximum height of each lyrics line including height, margin, padding vertical, fontsize, scale, etc
                 activeLineHeight={60} // the maximum height of the current lyrics line including height, margin, padding vertical, fontsize, scale, etc
-                lineRenderer={lineRenderer}
             />
         </ImageBackground>
     )
