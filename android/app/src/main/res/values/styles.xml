@@ -3,14 +3,23 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">@color/splash_screen_background_color</item>
         <item name="android:statusBarColor">@color/splash_screen_background_color</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <!--    Splash Screen themes which includes the window to show and the splash screen to show -->
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:textColor">@color/splash_screen_background_color</item>
         <item name="android:windowBackground">@drawable/background_splash</item>
         <item name="android:statusBarColor">@color/splash_screen_background_color</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
+<!--        <item name="android:fitsSystemWindows">true</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
     </style>
 
 </resources>
