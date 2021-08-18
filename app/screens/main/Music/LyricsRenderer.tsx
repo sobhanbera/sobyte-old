@@ -4,10 +4,12 @@ import {Dimensions, ImageBackground} from 'react-native'
 import {usePlayerProgress, useTheme} from '../../../context'
 import {HeaderMain} from '../../../components'
 import {
+    BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
     DefaultStatusBarComponent,
     DEFAULT_HIGH_IMAGE_QUALITY,
     DEFAULT_HIGH_IMAGE_SIZE,
     MUSIC_PLAYER_BLUR,
+    PaddingBottomView,
 } from '../../../constants'
 import LRCRenderer from '../../../components/LRCRenderer'
 import {SongObject} from '../../../interfaces'
@@ -61,6 +63,10 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
             />
 
             <LRCRenderer lrc={LRC_STRING} currentTime={position} />
+
+            <PaddingBottomView
+                paddingBottom={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
+            />
         </ImageBackground>
     )
 }
