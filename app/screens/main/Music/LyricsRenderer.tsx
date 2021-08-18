@@ -1,18 +1,12 @@
 import React from 'react'
-import {Text, Dimensions, ImageBackground} from 'react-native'
-import {useCallback} from 'react'
-import TrackPlayer from 'react-native-track-player'
+import {Dimensions, ImageBackground} from 'react-native'
 
 import {usePlayerProgress, useTheme} from '../../../context'
 import {HeaderMain} from '../../../components'
 import {
-    BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
     DefaultStatusBarComponent,
     DEFAULT_HIGH_IMAGE_QUALITY,
     DEFAULT_HIGH_IMAGE_SIZE,
-    DEVICE_STATUSBAR_HEIGHT_CONSTANT,
-    FontUbuntuBold,
-    HEADER_MAX_HEIGHT,
     MUSIC_PLAYER_BLUR,
 } from '../../../constants'
 import LRCRenderer from '../../../components/LRCRenderer'
@@ -21,7 +15,6 @@ import {
     formatTrackTitle,
     getHightQualityImageFromLinkWithHeight,
 } from '../../../utils'
-import {seekTrackTo} from '../../../api/PlayerControlsCommons'
 
 const {height, width} = Dimensions.get('window')
 
