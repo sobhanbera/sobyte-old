@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useCallback, useState, useMemo} from 'react'
-import {StyleProp, View, ViewStyle, Animated} from 'react-native'
+import {StyleProp, ViewStyle, Animated} from 'react-native'
 
 import {LrcLine} from '../../interfaces'
 import {
@@ -130,50 +130,36 @@ function LRCRenderer(props: Props) {
     }, [currentIndex, localAutoScroll])
 
     return (
-        <>
-            <Animated.FlatList
-                {...props}
-                ref={lrcRef}
-                data={lrcLineList}
-                renderItem={({item, index}) => {
-                    return (
-                        <LyricLineRenderer
-                            key={item.id}
-                            lyricLine={item}
-                            currentIndex={currentIndex}
-                            index={index}
-                        />
-                    )
-                }}
-                showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-                scrollEventThrottle={16}
-                scrollToOverflowEnabled
-                overScrollMode={'never'}
-                onScroll={Animated.event(
-                    [], // we are not setting the value of the current position of scroll to any state because that is not needed
-                    {
-                        useNativeDriver: false,
-                        listener: _event => {
-                            onScroll() // instead we are doing some other tasks depending on wheather user is scrolling or not....
-                        },
+        <Animated.FlatList
+            {...props}
+            ref={lrcRef}
+            data={lrcLineList}
+            renderItem={({item, index}) => {
+                return (
+                    <LyricLineRenderer
+                        key={item.id}
+                        lyricLine={item}
+                        currentIndex={currentIndex}
+                        index={index}
+                    />
+                )
+            }}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            scrollEventThrottle={16}
+            scrollToOverflowEnabled
+            overScrollMode={'never'}
+            onScroll={Animated.event(
+                [], // we are not setting the value of the current position of scroll to any state because that is not needed
+                {
+                    useNativeDriver: false,
+                    listener: _event => {
+                        onScroll() // instead we are doing some other tasks depending on wheather user is scrolling or not....
                     },
-                )}
-                style={[
-                    {
-                        // flex: 1,
-                        minHeight: 400,
-                    },
-                    props.style,
-                ]}
-            />
-            <View
-                style={{
-                    width: '100%',
-                    paddingBottom: 250,
-                }}
-            />
-        </>
+                },
+            )}
+            style={props.style}
+        />
     )
 }
 
