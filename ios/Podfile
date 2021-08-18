@@ -40,6 +40,8 @@ target 'Sobyte' do
 
   pod 'react-native-view-shot', :path => '../node_modules/react-native-view-shot'
 
+  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
   target 'SobyteTests' do
     inherit! :complete
     # Pods for testing
