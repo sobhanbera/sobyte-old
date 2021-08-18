@@ -1,5 +1,11 @@
 rootProject.name = 'Sobyte'
 
+include ':react-native-view-shot'
+project(':react-native-view-shot').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-view-shot/android')
+
+include ':react-native-camera'
+project(':react-native-camera').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-camera/android')
+
 /** package for detecting user is connected with internet or not. simply detection of internet connection is done by this package */
 include ':react-native-community-netinfo'
 project(':react-native-community-netinfo').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/netinfo/android')
