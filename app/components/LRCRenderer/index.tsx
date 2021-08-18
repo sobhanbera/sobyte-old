@@ -95,10 +95,6 @@ interface Props {
      */
     style?: StyleProp<ViewStyle>
     /**
-     * full container height
-     */
-    containerHeight: number
-    /**
      * regular height of the line which are not playing or active
      */
     lineHeight: number
@@ -170,22 +166,9 @@ function LRCRenderer(props: Props) {
             style={[
                 {
                     // flex: 1,
-                    height: props.containerHeight,
                 },
                 props.style,
             ]}>
-            {/**
-             * auto scroll is true
-             * and this is the top spacing after which the main lyrics line will be showing
-             * in other works the offset from top where the current line will be rendered
-             */}
-            {/* <View
-                style={{
-                    width: '100%',
-                    height: 1 * props.containerHeight, // from the 25% of the total height available...
-                }}
-            /> */}
-
             {lrcLineList.map((currentLine, index) =>
                 props.lineRenderer(
                     {
@@ -203,12 +186,12 @@ function LRCRenderer(props: Props) {
              * in other works the offset from bottom where the current line will be rendered
              */}
 
-            {/* <View
+            <View
                 style={{
                     width: '100%',
-                    height: 1 * props.containerHeight, // from the 25% of the total height available...
+                    height: 250,
                 }}
-            /> */}
+            />
         </AnimatedScrollView>
     )
 }

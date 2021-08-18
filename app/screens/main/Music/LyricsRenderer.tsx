@@ -1,6 +1,7 @@
 import React from 'react'
-import {Dimensions, Animated, ImageBackground} from 'react-native'
+import {Text, Dimensions, ImageBackground} from 'react-native'
 import {useCallback} from 'react'
+import TrackPlayer from 'react-native-track-player'
 
 import {usePlayerProgress, useTheme} from '../../../context'
 import {HeaderMain} from '../../../components'
@@ -20,8 +21,7 @@ import {
     formatTrackTitle,
     getHightQualityImageFromLinkWithHeight,
 } from '../../../utils'
-import {View} from 'react-native'
-import {Text} from 'react-native'
+import {seekTrackTo} from '../../../api/PlayerControlsCommons'
 
 const {height, width} = Dimensions.get('window')
 
@@ -47,16 +47,22 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
         DEFAULT_HIGH_IMAGE_QUALITY,
     )
 
+    // TrackPlayer.setRate(1)
+
     const lineRenderer = useCallback((item: any, _currentIndex: number) => {
         return (
             <Text
-                key={item.id}
+                key={item.index}
+                onPress={() => seekTrackTo(item.currentLine.millisecond / 1000)}
                 style={{
                     textAlign: 'left',
-                    color: item.active ? 'white' : '#FFFFFFAF',
-                    fontSize: item.active ? 30 : 20,
+                    color: item.active
+                        ? themeColors.white[0]
+                        : themeColors.white[0] + 'AF',
+                    fontSize: item.active ? 28 : 20,
                     fontFamily: FontUbuntuBold,
-                    paddingHorizontal: 25,
+                    paddingHorizontal: 20,
+                    paddingVertical: item.active ? 11 : 15,
                 }}>
                 {item.currentLine.content}
             </Text>
@@ -82,18 +88,10 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
             />
 
             <LRCRenderer
-                containerHeight={
-                    height - // the available full height of the device
-                    BOTTOM_TAB_BAR_NAVIGATION_HEIGHT - // the bottom tab bar's height
-                    DEVICE_STATUSBAR_HEIGHT_CONSTANT - // the device statusbar's height
-                    HEADER_MAX_HEIGHT - // the height of header after statusbar
-                    200 // an offset
-                }
-                // style={{height: 300}}
                 lrc={LRC_STRING}
                 currentTime={position}
-                lineHeight={28} // the maximum height of each lyrics line including margin, padding vertical, fontsize, scale, etc
-                activeLineHeight={56} // the maximum height of the current lyrics line including margin, padding vertical, fontsize, scale, etc
+                lineHeight={60} // the maximum height of each lyrics line including height, margin, padding vertical, fontsize, scale, etc
+                activeLineHeight={60} // the maximum height of the current lyrics line including height, margin, padding vertical, fontsize, scale, etc
                 lineRenderer={lineRenderer}
             />
         </ImageBackground>
