@@ -5,6 +5,11 @@ import {LrcLine} from '../../interfaces'
 import {AUTO_SCROLL_AFTER_USER_SCROLL_DURATION} from '../../constants'
 import {getRandomNumberString} from '../../utils'
 
+/**
+ * @param lrcLineList the lrc string in form of array
+ * @param currentTime the current position of the track/song in seconds
+ * @returns provides all the data related to the current index of the lyrics line
+ */
 const useCurrentIndex = ({
     lrcLineList,
     currentTime,
@@ -19,7 +24,7 @@ const useCurrentIndex = ({
         let i = 0
         for (; i < length; i += 1) {
             const {millisecond} = lrcLineList[i]
-            if (currentTime < millisecond) {
+            if (currentTime * 1000 < millisecond) {
                 break
             }
         }
@@ -66,7 +71,13 @@ const parseLrc = (lrc: string): LrcLine[] => {
 }
 
 interface Props {
+    /**
+     * the main lrc string which includes the main lyrics lines of song/track
+     */
     lrc: string
+    /**
+     * the line renderer function
+     */
     lineRenderer(
         item: {
             currentLine: LrcLine
@@ -75,10 +86,25 @@ interface Props {
         },
         currentIndex: number,
     ): React.ReactNode
+    /**
+     * the current position of the current track/song in seconds
+     */
     currentTime: number
+    /**
+     * container style for the lyrics string
+     */
     style?: StyleProp<ViewStyle>
+    /**
+     * full container height
+     */
     containerHeight: number
+    /**
+     * regular height of the line which are not playing or active
+     */
     lineHeight: number
+    /**
+     * the active lyrics line height
+     */
     activeLineHeight: number
 }
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
@@ -144,47 +170,45 @@ function LRCRenderer(props: Props) {
             style={[
                 {
                     // flex: 1,
-                    height: props.containerHeight || 450,
+                    height: props.containerHeight,
                 },
                 props.style,
             ]}>
-            <View>
-                {/**
-                 * auto scroll is true
-                 * and this is the top spacing after which the main lyrics line will be showing
-                 * in other works the offset from top where the current line will be rendered
-                 */}
-                <View
-                    style={{
-                        width: '100%',
-                        height: 0.33 * props.containerHeight, // from the 25% of the total height available...
-                    }}
-                />
+            {/**
+             * auto scroll is true
+             * and this is the top spacing after which the main lyrics line will be showing
+             * in other works the offset from top where the current line will be rendered
+             */}
+            {/* <View
+                style={{
+                    width: '100%',
+                    height: 1 * props.containerHeight, // from the 25% of the total height available...
+                }}
+            /> */}
 
-                {lrcLineList.map((currentLine, index) =>
-                    props.lineRenderer(
-                        {
-                            currentLine,
-                            index,
-                            active: currentIndex === index,
-                        },
-                        currentIndex,
-                    ),
-                )}
+            {lrcLineList.map((currentLine, index) =>
+                props.lineRenderer(
+                    {
+                        currentLine: currentLine,
+                        index: index,
+                        active: currentIndex === index,
+                    },
+                    currentIndex,
+                ),
+            )}
 
-                {/**
-                 * auto scroll is true
-                 * and this is the bottom spacing after which the main lyrics line will be showing
-                 * in other works the offset from bottom where the current line will be rendered
-                 */}
+            {/**
+             * auto scroll is true
+             * and this is the bottom spacing after which the main lyrics line will be showing
+             * in other works the offset from bottom where the current line will be rendered
+             */}
 
-                <View
-                    style={{
-                        width: '100%',
-                        height: 0.33 * props.containerHeight, // from the 25% of the total height available...
-                    }}
-                />
-            </View>
+            {/* <View
+                style={{
+                    width: '100%',
+                    height: 1 * props.containerHeight, // from the 25% of the total height available...
+                }}
+            /> */}
         </AnimatedScrollView>
     )
 }
