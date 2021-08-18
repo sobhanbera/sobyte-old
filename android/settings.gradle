@@ -1,8 +1,14 @@
 rootProject.name = 'Sobyte'
 
+/** package which is used to give any any and any kind of permissions through out the application */
+include ':react-native-permissions'
+project(':react-native-permissions').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-permissions/android')
+
+/** package which takes any view, text, react-native component as a image and save it to local device */
 include ':react-native-view-shot'
 project(':react-native-view-shot').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-view-shot/android')
 
+/** this package will help us to get the access of camera component in our application itself */
 include ':react-native-camera'
 project(':react-native-camera').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-camera/android')
 
