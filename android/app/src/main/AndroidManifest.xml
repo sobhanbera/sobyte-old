@@ -42,6 +42,8 @@
 <!--            <category android:name="android.intent.category.LAUNCHER" />-->
 <!--        </intent-filter>-->
                 <intent-filter>
+                    <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/> <!-- to support rn-fetch-blob in the main application area -->
+
                     <action android:name="android.intent.action.VIEW" />
                     <category android:name="android.intent.category.DEFAULT" />
                     <category android:name="android.intent.category.BROWSABLE" />
