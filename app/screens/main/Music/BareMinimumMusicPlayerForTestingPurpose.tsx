@@ -363,9 +363,10 @@ const Player: FC<PlayerProps> = props => {
                     alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    onScroll={Animated.event([
-                        {nativeEvent: {contentOffset: {y: scrollX}}},
-                    ])}
+                    onScroll={Animated.event(
+                        [{nativeEvent: {contentOffset: {y: scrollX}}}],
+                        {useNativeDriver: true},
+                    )}
                 />
             ) : (
                 <View style={globalStyles.loadingArea}>
