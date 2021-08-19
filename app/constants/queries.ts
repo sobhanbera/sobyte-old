@@ -140,5 +140,7 @@ export default [
     // 'top new bollywood romantic songs',
     // 'most listened romantic songs',
     // 'most played romantic songs',
+    // single songs only for testing purpose
     'Lut Gaye',
+    'Wafa na raha sai',
 ]
