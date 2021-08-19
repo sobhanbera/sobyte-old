@@ -45,7 +45,9 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
         <ImageBackground
             source={{uri: highQualityImage}}
             style={{width, height}}>
-            <DefaultStatusBarComponent backgroundColor={'transparent'} />
+            <DefaultStatusBarComponent
+                backgroundColor={themeColors.black[0] + '7F'}
+            />
 
             <View
                 style={{
