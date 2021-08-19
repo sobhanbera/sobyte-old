@@ -96,38 +96,13 @@ function LRCRenderer(props: Props) {
         currentTime: props.currentTime,
     })
 
-    const [localAutoScroll, setLocalAutoScroll] = useState(true) // wheather to auto scroll the lyrics lines...
-
-    // a reference variable for the duration after which the like animation will be disappear...
-    let TimeOutVar = setTimeout(() => {}, 0)
-    const onScroll = useCallback(() => {
-        /**
-         * clearing the previous timeout since we are going to do a new time out
-         * if we don't clear the previous time out then
-         * let the user have scrolled somepart of the lyrics to different position is 3sec here if the user again scrolled after 2sec (let)
-         * then the auto scroll will end in 3-2=1sec which is not good since the duration is 3sec
-         * so we are clearing the last timeout and overwiting it with a new one
-         */
-        clearTimeout(TimeOutVar)
-
-        // setting the auto scroll to false since the user is scrolling continously...
-        setLocalAutoScroll(false)
-
-        // set a new timeout to make the auto scrolling enabled after some duration
-        TimeOutVar = setTimeout(() => {
-            setLocalAutoScroll(true)
-        }, 0)
-    }, [])
-
     // since the auto scroll is enabled by default for now...
     useEffect(() => {
-        if (localAutoScroll) {
-            lrcRef.current?.scrollToIndex({
-                index: currentIndex <= 0 ? 0 : currentIndex - 1,
-                animated: true,
-            })
-        }
-    }, [currentIndex, localAutoScroll])
+        lrcRef.current?.scrollToIndex({
+            index: currentIndex <= 0 ? 0 : currentIndex - 1,
+            animated: true,
+        })
+    }, [currentIndex])
 
     return (
         <Animated.FlatList
@@ -151,13 +126,6 @@ function LRCRenderer(props: Props) {
             scrollEventThrottle={16}
             scrollToOverflowEnabled
             overScrollMode={'never'}
-            onScroll={Animated.event(
-                [], // we are not setting the value of the current position of scroll to any state because that is not needed
-                {
-                    useNativeDriver: false,
-                    listener: _event => onScroll(), // instead we are doing some other tasks depending on wheather user is scrolling or not....
-                },
-            )}
             style={props.style}
         />
     )
