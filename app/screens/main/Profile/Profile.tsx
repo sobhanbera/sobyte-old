@@ -1,11 +1,10 @@
 import React from 'react'
-import {ToastAndroid, View} from 'react-native'
+import {ToastAndroid, View, StatusBar} from 'react-native'
 import {ScrollView} from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 
 import {GradientBackground, HeaderProfile} from '../../../components'
 import {
-    AppIconConstant,
     DefaultStatusBarComponent,
     DEFAULT_QR_CODE_IMAGE_SIZE,
 } from '../../../constants'
@@ -14,6 +13,8 @@ interface ProfileProps {
     navigation?: any
 }
 const Profile: React.FC<ProfileProps> = props => {
+    StatusBar.setBackgroundColor('black', true)
+
     return (
         <GradientBackground>
             <DefaultStatusBarComponent backgroundColor={'black'} />
