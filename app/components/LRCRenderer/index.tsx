@@ -99,7 +99,7 @@ function LRCRenderer(props: Props) {
     // since the auto scroll is enabled by default for now...
     useEffect(() => {
         lrcRef.current?.scrollToIndex({
-            index: currentIndex <= 0 ? 0 : currentIndex - 1,
+            index: currentIndex <= 0 ? 0 : currentIndex - 1, // here 1 is the offset of the number lyrics lines to show before current lyrics line
             animated: true,
         })
     }, [currentIndex])
