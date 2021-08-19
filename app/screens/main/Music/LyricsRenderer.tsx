@@ -56,7 +56,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                     title={`Lyrics  "${formatTrackTitle(song.name)}"`}
                     color={themeColors.themecolorrevert[0]}
                     goBack
-                    backgroundColor={themeColors.transparent[0]}
+                    backgroundColor={themeColors.black[0] + '7F'}
                     style={{
                         borderBottomWidth: 0,
                     }}
