@@ -17,6 +17,7 @@ export const DefaultStatusBarComponent = (props: StatusBarPropsAndroid) => (
         backgroundColor={'black'}
         translucent={true}
         barStyle="light-content"
+        animated={true}
         {...props}
     />
 )
