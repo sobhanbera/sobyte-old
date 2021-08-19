@@ -62,10 +62,17 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
                 }}
             />
 
-            <LRCRenderer lrc={LRC_STRING} currentTime={position} />
+            <LRCRenderer
+                style={{
+                    backgroundColor: themeColors.black[0] + '7F',
+                }}
+                lrc={LRC_STRING}
+                currentTime={position}
+            />
 
             <PaddingBottomView
                 paddingBottom={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
+                backgroundColor={themeColors.black[0] + '7F'}
             />
         </ImageBackground>
     )
