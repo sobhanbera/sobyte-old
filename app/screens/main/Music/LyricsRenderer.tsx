@@ -83,7 +83,7 @@ const LRC_STRING = `
 [la:HI]
 [ve:4.00]
 
-[00:25.97]Roun Ya Hansun Teri Harkat Pe
+[00:00.00]Roun Ya Hansun Teri Harkat Pe
 [00:35.68]Ya Phir Teri Taarif Karoon
 [00:41.17]Mere Dil Se Tu Aise Khel Gaya
 [00:44.50]Ab Jee Na Saku Mar Bhi Na Saku
