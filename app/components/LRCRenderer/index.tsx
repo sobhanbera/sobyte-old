@@ -1,11 +1,8 @@
-import React, {useRef, useEffect, useCallback, useState, useMemo} from 'react'
+import React, {useRef, useEffect, useState, useMemo} from 'react'
 import {StyleProp, ViewStyle, Animated} from 'react-native'
 
 import {LrcLine} from '../../interfaces'
-import {
-    AUTO_SCROLL_AFTER_USER_SCROLL_DURATION,
-    FontUbuntuBold,
-} from '../../constants'
+import {FontUbuntuBold} from '../../constants'
 import {getRandomNumberString} from '../../utils'
 import {Text} from 'react-native'
 import {FlatList} from 'react-native'
