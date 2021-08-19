@@ -116,14 +116,14 @@ function LRCRenderer(props: Props) {
         // set a new timeout to make the auto scrolling enabled after some duration
         TimeOutVar = setTimeout(() => {
             setLocalAutoScroll(true)
-        }, AUTO_SCROLL_AFTER_USER_SCROLL_DURATION)
+        }, 0)
     }, [])
 
     // since the auto scroll is enabled by default for now...
     useEffect(() => {
         if (localAutoScroll) {
             lrcRef.current?.scrollToIndex({
-                index: currentIndex <= 0 ? 0 : currentIndex,
+                index: currentIndex <= 0 ? 0 : currentIndex - 1,
                 animated: true,
             })
         }
@@ -144,6 +144,8 @@ function LRCRenderer(props: Props) {
                     />
                 )
             }}
+            snapToStart
+            snapToAlignment="start"
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
             scrollEventThrottle={16}
@@ -153,9 +155,7 @@ function LRCRenderer(props: Props) {
                 [], // we are not setting the value of the current position of scroll to any state because that is not needed
                 {
                     useNativeDriver: false,
-                    listener: _event => {
-                        onScroll() // instead we are doing some other tasks depending on wheather user is scrolling or not....
-                    },
+                    listener: _event => onScroll(), // instead we are doing some other tasks depending on wheather user is scrolling or not....
                 },
             )}
             style={props.style}
