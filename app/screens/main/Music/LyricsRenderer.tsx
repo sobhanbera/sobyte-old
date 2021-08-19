@@ -1,13 +1,14 @@
 import React from 'react'
-import {Dimensions, ImageBackground, View} from 'react-native'
+import {Dimensions, ImageBackground} from 'react-native'
 
 import {usePlayerProgress, useTheme} from '../../../context'
 import {HeaderMain} from '../../../components'
 import {
     BOTTOM_TAB_BAR_NAVIGATION_HEIGHT,
     DefaultStatusBarComponent,
-    DEFAULT_VERY_HIGH_IMAGE_QUALITY,
-    DEFAULT_VERY_HIGH_IMAGE_SIZE,
+    DEFAULT_IMAGE_BLUR,
+    DEFAULT_IMAGE_QUALITY,
+    DEFAULT_IMAGE_SIZE,
     PaddingBottomView,
 } from '../../../constants'
 import LRCRenderer from '../../../components/LRCRenderer'
@@ -37,39 +38,35 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
     const highQualityImage = getHightQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
-        DEFAULT_VERY_HIGH_IMAGE_SIZE,
-        DEFAULT_VERY_HIGH_IMAGE_QUALITY,
+        DEFAULT_IMAGE_SIZE,
+        DEFAULT_IMAGE_QUALITY,
     )
 
     return (
         <ImageBackground
             source={{uri: highQualityImage}}
-            style={{width, height}}>
+            style={{width, height}}
+            blurRadius={DEFAULT_IMAGE_BLUR}>
             <DefaultStatusBarComponent
                 backgroundColor={themeColors.black[0] + '7F'}
             />
 
-            <View
+            <HeaderMain
+                navigation={navigation}
+                title={`Lyrics  "${formatTrackTitle(song.name)}"`}
+                color={themeColors.themecolorrevert[0]}
+                goBack
+                backgroundColor={themeColors.black[0] + '7F'}
                 style={{
-                    backgroundColor: themeColors.black[0] + '7F',
-                }}>
-                <HeaderMain
-                    navigation={navigation}
-                    title={`Lyrics  "${formatTrackTitle(song.name)}"`}
-                    color={themeColors.themecolorrevert[0]}
-                    goBack
-                    backgroundColor={themeColors.black[0] + '7F'}
-                    style={{
-                        borderBottomWidth: 0,
-                    }}
-                />
+                    borderBottomWidth: 0,
+                }}
+            />
 
-                <LRCRenderer lrc={LRC_STRING} currentTime={position} />
+            <LRCRenderer lrc={LRC_STRING} currentTime={position} />
 
-                <PaddingBottomView
-                    paddingBottom={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
-                />
-            </View>
+            <PaddingBottomView
+                paddingBottom={BOTTOM_TAB_BAR_NAVIGATION_HEIGHT}
+            />
         </ImageBackground>
     )
 }
