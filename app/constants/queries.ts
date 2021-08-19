@@ -141,6 +141,6 @@ export default [
     // 'most listened romantic songs',
     // 'most played romantic songs',
     // single songs only for testing purpose
-    'Lut Gaye',
+    // 'Lut Gaye',
     'Wafa na raha sai',
 ]
