@@ -16,9 +16,9 @@
     <string name="deep_linking_http_pathPrefix">/listen</string>
     <!-- note that the leading "/" is required for pathPrefix-->
 
-    <!-- sobytemusic://listen” -->
+    <!-- sobytemusic://listen -->
     <string name="deep_linking_local_scheme">sobytemusic</string>
-    <string name="deep_linking_local_host">listen”</string>
+    <string name="deep_linking_local_host">listen</string>
     <string name="app_splash_screen">app_splash_screen</string>
 
 </resources>
