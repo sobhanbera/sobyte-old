@@ -1,7 +1,17 @@
 import React from 'react'
-import {ToastAndroid, View, StatusBar} from 'react-native'
+import {
+    ToastAndroid,
+    View,
+    Linking,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+} from 'react-native'
 import {ScrollView} from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
+
+import QRCodeScanner from 'react-native-qrcode-scanner'
+import {RNCamera} from 'react-native-camera'
 
 import {GradientBackground, HeaderProfile} from '../../../components'
 import {
@@ -13,8 +23,6 @@ interface ProfileProps {
     navigation?: any
 }
 const Profile: React.FC<ProfileProps> = props => {
-    StatusBar.setBackgroundColor('black', true)
-
     return (
         <GradientBackground>
             <DefaultStatusBarComponent backgroundColor={'black'} />
@@ -26,10 +34,28 @@ const Profile: React.FC<ProfileProps> = props => {
                 scrollEventThrottle={16}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}>
-                <HeaderProfile navigation={props.navigation} />
+                {/* <HeaderProfile navigation={props.navigation} /> */}
 
+                <QRCodeScanner
+                    onRead={e => {
+                        console.log(e)
+                    }}
+                    cameraType={'back'}
+                    cameraStyle={{}}
+                    cameraProps={{
+                        flashMode: 'on',
+                        onBarCodeRead: e => {
+                            console.log('DATA', e)
+                        },
+                    }}
+                    bottomContent={
+                        <TouchableOpacity style={styles.buttonTouchable}>
+                            <Text style={styles.buttonText}>OK. Got it!</Text>
+                        </TouchableOpacity>
+                    }
+                />
                 {/* qr code generation and rendering view */}
-                <View
+                {/* <View
                     style={{
                         borderRadius: 2,
                         overflow: 'hidden',
@@ -54,10 +80,30 @@ const Profile: React.FC<ProfileProps> = props => {
                             )
                         }}
                     />
-                </View>
+                </View> */}
             </ScrollView>
         </GradientBackground>
     )
 }
+
+const styles = StyleSheet.create({
+    centerText: {
+        flex: 1,
+        fontSize: 18,
+        padding: 32,
+        color: '#777',
+    },
+    textBold: {
+        fontWeight: '500',
+        color: '#000',
+    },
+    buttonText: {
+        fontSize: 21,
+        color: 'rgb(0,122,255)',
+    },
+    buttonTouchable: {
+        padding: 16,
+    },
+})
 
 export default Profile
