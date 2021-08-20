@@ -1,12 +1,5 @@
-import React from 'react'
-import {
-    ToastAndroid,
-    View,
-    Linking,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-} from 'react-native'
+import React, {useState} from 'react'
+import {ToastAndroid, View} from 'react-native'
 import {ScrollView} from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 
@@ -19,10 +12,14 @@ import {
     DEFAULT_QR_CODE_IMAGE_SIZE,
 } from '../../../constants'
 
+const QrCodeScanningAnimation = require('../../../assets/animations/qr_scanning.json')
+
 interface ProfileProps {
     navigation?: any
 }
 const Profile: React.FC<ProfileProps> = props => {
+    const [pos, setPos] = useState<{x: number; y: number}>({x: 0, y: 0})
+
     return (
         <GradientBackground>
             <DefaultStatusBarComponent backgroundColor={'black'} />
@@ -34,36 +31,50 @@ const Profile: React.FC<ProfileProps> = props => {
                 scrollEventThrottle={16}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}>
-                {/* <HeaderProfile navigation={props.navigation} /> */}
+                <HeaderProfile navigation={props.navigation} />
 
-                <QRCodeScanner
-                    onRead={e => {
-                        console.log(e)
-                    }}
-                    cameraType={'back'}
-                    cameraStyle={{}}
-                    cameraProps={{
-                        flashMode: 'on',
-                        onBarCodeRead: e => {
-                            console.log('DATA', e)
-                        },
-                    }}
-                    bottomContent={
-                        <TouchableOpacity style={styles.buttonTouchable}>
-                            <Text style={styles.buttonText}>OK. Got it!</Text>
-                        </TouchableOpacity>
-                    }
-                />
                 {/* qr code generation and rendering view */}
-                {/* <View
+                <View
                     style={{
                         borderRadius: 2,
                         overflow: 'hidden',
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                    <QRCode
-                        value={'1'}
+                    <QRCodeScanner
+                        onRead={() => {}}
+                        cameraType={'front'}
+                        cameraStyle={{}}
+                        cameraProps={{
+                            flashMode: 'on',
+                            onBarCodeRead: e => {
+                                // console.log('DATA', e)
+                                // alert(e.data)
+                            },
+                            onDoubleTap: e => {
+                                console.log(e)
+                                setPos(e)
+                            },
+                            autoFocus: 'on',
+                            focusDepth: 1,
+                        }}
+                        containerStyle={{
+                            position: 'relative',
+                        }}
+                    />
+                    <View
+                        style={{
+                            width: 10,
+                            height: 10,
+                            backgroundColor: '#4040ef',
+                            borderRadius: 100,
+                            top: pos.y,
+                            left: pos.x,
+                            position: 'absolute',
+                        }}
+                    />
+                    {/* <QRCode
+                        value={'68645582116258840.96939611'}
                         ecl="H"
                         color={'white'}
                         backgroundColor={'#0000007F'}
@@ -79,31 +90,11 @@ const Profile: React.FC<ProfileProps> = props => {
                                 ToastAndroid.SHORT,
                             )
                         }}
-                    />
-                </View> */}
+                    /> */}
+                </View>
             </ScrollView>
         </GradientBackground>
     )
 }
-
-const styles = StyleSheet.create({
-    centerText: {
-        flex: 1,
-        fontSize: 18,
-        padding: 32,
-        color: '#777',
-    },
-    textBold: {
-        fontWeight: '500',
-        color: '#000',
-    },
-    buttonText: {
-        fontSize: 21,
-        color: 'rgb(0,122,255)',
-    },
-    buttonTouchable: {
-        padding: 16,
-    },
-})
 
 export default Profile
