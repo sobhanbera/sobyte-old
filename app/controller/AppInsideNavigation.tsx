@@ -49,7 +49,7 @@ const AppInsideNavigationWithMaterialTabBar = () => {
                 padding: 0,
                 backgroundColor: 'transparent',
             }}
-            initialRouteName={'MusicPlayer'}>
+            initialRouteName={'Profile'}>
             <BarNavigator.Screen
                 name="Explore"
                 component={ExploreStackNavigator}
