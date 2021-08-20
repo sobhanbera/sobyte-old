@@ -9,7 +9,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <!--    Splash Screen themes which includes the window to show and the splash screen to show -->
+    <!-- Splash Screen themes which includes the window to show and the splash screen to show -->
     <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:textColor">@color/splash_screen_background_color</item>
         <item name="android:windowBackground">@drawable/background_splash</item>
