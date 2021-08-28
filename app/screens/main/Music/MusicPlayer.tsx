@@ -701,7 +701,3 @@ const Player: FC<PlayerProps> = props => {
 }
 
 export default Player
-
-// test commit
-// these are done since to check the code even works in production or not with different commits...
-// recently an error occurred due to git while generating the application
