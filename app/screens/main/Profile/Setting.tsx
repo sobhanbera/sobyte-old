@@ -45,15 +45,6 @@ const Setting: React.FC<SettingProps> = props => {
     }
 
     return (
-        <View
-            style={{
-                backgroundColor: 'red',
-                width: '100%',
-                height: Dimensions.get('window').height,
-            }}></View>
-    )
-
-    return (
         <GradientBackground uniformColor>
             <DefaultStatusBarComponent
                 backgroundColor={themeColors.surfacelight[0]}
