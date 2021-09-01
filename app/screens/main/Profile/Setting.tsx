@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ScrollView, Text, ToastAndroid} from 'react-native'
+import {Dimensions, ScrollView, Text, ToastAndroid, View} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {
@@ -43,6 +43,15 @@ const Setting: React.FC<SettingProps> = props => {
             ToastAndroid.LONG,
         )
     }
+
+    return (
+        <View
+            style={{
+                backgroundColor: 'red',
+                width: '100%',
+                height: Dimensions.get('window').height,
+            }}></View>
+    )
 
     return (
         <GradientBackground uniformColor>
