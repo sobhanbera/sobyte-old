@@ -43,7 +43,7 @@ const ThemeContext = createContext({
     ) => null,
 })
 const ThemeProvider = (props: {children: React.ReactChild}) => {
-    const random = Math.floor(Math.random() * 8)
+    const random = 4 // Math.floor(Math.random() * 8)
     const colorsArray = [
         DarkTheme.blueGradient, // 0
         DarkTheme.pinkGradient, // 1
