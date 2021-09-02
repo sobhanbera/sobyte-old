@@ -43,8 +43,8 @@ const Prompt = (props: Props) => {
             hideModalContentWhileAnimating={false}
             animationInTiming={1000}
             animationOutTiming={1000}
-            animationIn="fadeInDown"
-            animationOut="fadeOutDown"
+            animationIn="fadeInUp"
+            animationOut="fadeOutUp"
             onBackdropPress={() => clearPrompt()}
             onBackButtonPress={() => clearPrompt()}
             style={{
@@ -52,7 +52,7 @@ const Prompt = (props: Props) => {
                 alignItems: 'center',
                 left: 0,
                 right: 0,
-                bottom: '50%',
+                bottom: '20%',
                 position: 'absolute',
                 maxHeight: 80,
                 width: '90%',
