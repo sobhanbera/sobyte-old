@@ -116,6 +116,10 @@ function LRCRenderer(props: Props) {
                     />
                 )
             }}
+            bounces
+            alwaysBounceVertical
+            bouncesZoom
+            alwaysBounceHorizontal
             snapToStart
             snapToAlignment="start"
             showsVerticalScrollIndicator={false}
