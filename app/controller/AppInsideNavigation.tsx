@@ -13,7 +13,6 @@ import ExploreStackNavigator from './ExploreStack'
 import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 import MusicPlayerStackNavigator from './MusicStack'
-import {View} from 'react-native'
 
 // const BarNavigator = createMaterialBottomTabNavigator()
 // const AppInsideNavigationWithMaterialTabBar = () => {
