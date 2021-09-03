@@ -18,6 +18,8 @@ export const DefaultStatusBarComponent = (props: StatusBarPropsAndroid) => (
         translucent={true}
         barStyle="light-content"
         animated={true}
+        hidden={false}
+        showHideTransition={'fade'}
         {...props}
     />
 )
