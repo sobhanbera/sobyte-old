@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+// import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import {DarkTheme} from '@react-navigation/native'
+// import {DarkTheme} from '@react-navigation/native'
 import {useTranslation} from 'react-i18next'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -14,104 +14,104 @@ import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 import MusicPlayerStackNavigator from './MusicStack'
 
-const BarNavigator = createMaterialBottomTabNavigator()
-const AppInsideNavigationWithMaterialTabBar = () => {
-    const {t} = useTranslation()
+// const BarNavigator = createMaterialBottomTabNavigator()
+// const AppInsideNavigationWithMaterialTabBar = () => {
+//     const {t} = useTranslation()
 
-    const {themeColors} = useTheme()
-    const {initMusicApi} = useMusicApi()
+//     const {themeColors} = useTheme()
+//     const {initMusicApi} = useMusicApi()
 
-    useEffect(() => {
-        // if (!loaded || error) {
-        //     console.log('Music Api Init...')
-        initMusicApi()
-        // }
-    }, [])
+//     useEffect(() => {
+//         // if (!loaded || error) {
+//         //     console.log('Music Api Init...')
+//         initMusicApi()
+//         // }
+//     }, [])
 
-    return (
-        <BarNavigator.Navigator
-            labeled={true}
-            theme={DarkTheme}
-            // activeColor={themeColors.white[0]}
-            // inactiveColor={themeColors.grey[0]}
-            sceneAnimationEnabled={false}
-            backBehavior="history"
-            shifting={true}
-            keyboardHidesNavigationBar={true}
-            barStyle={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                // height: 54,
-                elevation: 0,
-                margin: 0,
-                padding: 0,
-                // backgroundColor: 'black',
-                borderColor: 'transparent',
-                borderWidth: 0,
-                borderTopColor: 'transparent',
-                borderTopWidth: 0,
-            }}
-            initialRouteName={'Explore'}>
-            <BarNavigator.Screen
-                name="Explore"
-                component={ExploreStackNavigator}
-                options={{
-                    tabBarAccessibilityLabel: 'Explore Tab',
-                    tabBarColor: themeColors.transparent[0],
-                    tabBarLabel: t('words:explore'),
-                    tabBarIcon: ({focused, color}) => (
-                        <Ionicons
-                            name={focused ? 'md-search' : 'md-search-outline'}
-                            size={DEFAULT_ICON_SIZE}
-                            color={color}
-                        />
-                    ),
-                }}
-            />
+//     return (
+//         <BarNavigator.Navigator
+//             labeled={true}
+//             theme={DarkTheme}
+//             // activeColor={themeColors.white[0]}
+//             // inactiveColor={themeColors.grey[0]}
+//             sceneAnimationEnabled={false}
+//             backBehavior="history"
+//             shifting={true}
+//             keyboardHidesNavigationBar={true}
+//             barStyle={{
+//                 position: 'absolute',
+//                 bottom: 0,
+//                 left: 0,
+//                 right: 0,
+//                 // height: 54,
+//                 elevation: 0,
+//                 margin: 0,
+//                 padding: 0,
+//                 // backgroundColor: 'black',
+//                 borderColor: 'transparent',
+//                 borderWidth: 0,
+//                 borderTopColor: 'transparent',
+//                 borderTopWidth: 0,
+//             }}
+//             initialRouteName={'Explore'}>
+//             <BarNavigator.Screen
+//                 name="Explore"
+//                 component={ExploreStackNavigator}
+//                 options={{
+//                     tabBarAccessibilityLabel: 'Explore Tab',
+//                     tabBarColor: themeColors.transparent[0],
+//                     tabBarLabel: t('words:explore'),
+//                     tabBarIcon: ({focused, color}) => (
+//                         <Ionicons
+//                             name={focused ? 'md-search' : 'md-search-outline'}
+//                             size={DEFAULT_ICON_SIZE}
+//                             color={color}
+//                         />
+//                     ),
+//                 }}
+//             />
 
-            {/* PLAYER SCREEN WHERE ALL THE SONGS PLAYING INTERFACE EXISTS */}
-            <BarNavigator.Screen
-                name="MusicPlayer"
-                component={MusicPlayerStackNavigator}
-                options={{
-                    tabBarAccessibilityLabel: 'Music Player Tab',
-                    tabBarColor: themeColors.primary.main[0] + '00',
-                    tabBarLabel: t('common:appName'),
-                    tabBarIcon: ({focused, color}) => (
-                        <Ionicons
-                            name={
-                                focused
-                                    ? 'musical-note'
-                                    : 'musical-note-outline'
-                            }
-                            size={DEFAULT_ICON_SIZE}
-                            color={color}
-                        />
-                    ),
-                }}
-            />
+//             {/* PLAYER SCREEN WHERE ALL THE SONGS PLAYING INTERFACE EXISTS */}
+//             <BarNavigator.Screen
+//                 name="MusicPlayer"
+//                 component={MusicPlayerStackNavigator}
+//                 options={{
+//                     tabBarAccessibilityLabel: 'Music Player Tab',
+//                     tabBarColor: themeColors.primary.main[0] + '00',
+//                     tabBarLabel: t('common:appName'),
+//                     tabBarIcon: ({focused, color}) => (
+//                         <Ionicons
+//                             name={
+//                                 focused
+//                                     ? 'musical-note'
+//                                     : 'musical-note-outline'
+//                             }
+//                             size={DEFAULT_ICON_SIZE}
+//                             color={color}
+//                         />
+//                     ),
+//                 }}
+//             />
 
-            <BarNavigator.Screen
-                name="Profile"
-                component={ProfileStackNavigator}
-                options={{
-                    tabBarAccessibilityLabel: 'Profile Tab',
-                    tabBarColor: themeColors.surface[0] + 'F7',
-                    tabBarLabel: t('words:profile'),
-                    tabBarIcon: ({focused, color}) => (
-                        <AntDesign
-                            name={focused ? 'star' : 'staro'}
-                            size={DEFAULT_SMALL_ICON_SIZE}
-                            color={color}
-                        />
-                    ),
-                }}
-            />
-        </BarNavigator.Navigator>
-    )
-}
+//             <BarNavigator.Screen
+//                 name="Profile"
+//                 component={ProfileStackNavigator}
+//                 options={{
+//                     tabBarAccessibilityLabel: 'Profile Tab',
+//                     tabBarColor: themeColors.surface[0] + 'F7',
+//                     tabBarLabel: t('words:profile'),
+//                     tabBarIcon: ({focused, color}) => (
+//                         <AntDesign
+//                             name={focused ? 'star' : 'staro'}
+//                             size={DEFAULT_SMALL_ICON_SIZE}
+//                             color={color}
+//                         />
+//                     ),
+//                 }}
+//             />
+//         </BarNavigator.Navigator>
+//     )
+// }
 
 const BottomTabBarNavigator = createBottomTabNavigator()
 export const AppInsideNavigationWithSimpleTabBar = () => {
