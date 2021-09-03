@@ -14,7 +14,7 @@ const MusicPlayerStackNavigator = (props: Props) => {
                 headerShown: false,
             }}
             initialRouteName="music">
-            <ProfileStack.Screen name="music" component={TestMusic} />
+            <ProfileStack.Screen name="music" component={Music} />
             <ProfileStack.Screen name="lyrics" component={SongsLyricsScreen} />
         </ProfileStack.Navigator>
     )
