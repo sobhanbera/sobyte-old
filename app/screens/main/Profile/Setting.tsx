@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ScrollView, Text, ToastAndroid, StatusBar} from 'react-native'
+import {ScrollView, Text, ToastAndroid} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {
