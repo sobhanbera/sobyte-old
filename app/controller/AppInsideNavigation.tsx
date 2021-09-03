@@ -13,6 +13,7 @@ import ExploreStackNavigator from './ExploreStack'
 import ProfileStackNavigator from './ProfileStack'
 import {DEFAULT_ICON_SIZE, DEFAULT_SMALL_ICON_SIZE} from '../constants'
 import MusicPlayerStackNavigator from './MusicStack'
+import {View} from 'react-native'
 
 // const BarNavigator = createMaterialBottomTabNavigator()
 // const AppInsideNavigationWithMaterialTabBar = () => {
@@ -139,16 +140,12 @@ export const AppInsideNavigationWithSimpleTabBar = () => {
                     elevation: 0,
                     margin: 0,
                     padding: 0,
-                    backgroundColor: 'black',
+                    backgroundColor: themeColors.themecolor[0] + 'AF',
                     borderColor: 'transparent',
                     borderWidth: 0,
                     borderTopColor: 'transparent',
                     borderTopWidth: 0,
                 },
-                inactiveBackgroundColor: 'blue',
-                activeBackgroundColor: 'green',
-                labelPosition: 'beside-icon',
-                labelStyle: {},
                 keyboardHidesTabBar: true,
                 activeTintColor: themeColors.white[0],
                 inactiveTintColor: themeColors.grey[0],
@@ -158,7 +155,7 @@ export const AppInsideNavigationWithSimpleTabBar = () => {
                 adaptive: true,
                 allowFontScaling: true,
                 tabStyle: {
-                    backgroundColor: themeColors.themecolor[0] + 'EA',
+                    backgroundColor: themeColors.transparent[0],
                 },
             }}
             screenOptions={({}) => ({})}
@@ -212,6 +209,7 @@ export const AppInsideNavigationWithSimpleTabBar = () => {
                 component={ProfileStackNavigator}
                 options={{
                     tabBarAccessibilityLabel: 'Profile Tab',
+
                     tabBarLabel: t('words:profile'),
                     tabBarIcon: ({focused, color}) => (
                         <AntDesign
