@@ -61,4 +61,4 @@ buck-out/
 
 # Customs
 */**/*.apk
-assets/*/**
+/assets/*
