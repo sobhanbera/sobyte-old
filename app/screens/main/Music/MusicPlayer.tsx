@@ -24,12 +24,10 @@ import {
     RANDOM_SEARCH_QUERY,
     INITIAL_NUMBER_OF_TRACKS_TO_LOAD,
     MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY,
-    DEFAULT_NOTIFICATION_IMAGE_QUALITY,
-    DEFAULT_IMAGE_QUALITY,
 } from '../../../constants'
 import {
     formatArtists,
-    getHighQualityImageFromLinkWithHeight,
+    getNotificationPlayerImageFromLinkWithHeight,
 } from '../../../utils'
 import {FetchedSongObject, MusicTrack, SongObject} from '../../../interfaces'
 import globalStyles from '../../../styles/global.styles'
@@ -129,11 +127,9 @@ const Player: FC<PlayerProps> = props => {
                 // initial data
                 const initialTrack = res.content[0]
                 const artist = formatArtists(initialTrack.artist)
-                const trackImage = getHighQualityImageFromLinkWithHeight(
+                const trackImage = getNotificationPlayerImageFromLinkWithHeight(
                     initialTrack.thumbnails[0].url,
                     initialTrack.thumbnails[0].height,
-                    DEFAULT_NOTIFICATION_IMAGE_QUALITY,
-                    DEFAULT_IMAGE_QUALITY,
                 )
 
                 // without this below line the songs will only scroll after the user somewhat scrolls the flatlist...
@@ -373,11 +369,16 @@ const Player: FC<PlayerProps> = props => {
                     // play data
                     const initialTrack = songs.content[index + 1]
                     const artist = formatArtists(initialTrack.artist)
+                    const trackImage =
+                        getNotificationPlayerImageFromLinkWithHeight(
+                            initialTrack.thumbnails[0].url,
+                            initialTrack.thumbnails[0].height,
+                        )
 
                     play(
                         {
                             artist,
-                            artwork: initialTrack.thumbnails[1].url,
+                            artwork: trackImage,
                             id: initialTrack.musicId,
                             duration: initialTrack.duration,
                             playlistId: initialTrack.playlistId,
@@ -534,11 +535,9 @@ const Player: FC<PlayerProps> = props => {
         /**
          * generating the data required for playing the song
          */
-        const trackImage = getHighQualityImageFromLinkWithHeight(
+        const trackImage = getNotificationPlayerImageFromLinkWithHeight(
             item.thumbnails[0].url,
             item.thumbnails[0].height,
-            DEFAULT_NOTIFICATION_IMAGE_QUALITY,
-            DEFAULT_IMAGE_QUALITY,
         )
         const artists = formatArtists(item.artist)
 
