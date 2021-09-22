@@ -140,14 +140,14 @@ const Explore: React.FC<ExploreTabProps> = props => {
 
                     {/* trendings */}
                     <SongsKeywordResultsRenderer
-                        keyword="trending songs"
+                        keyword="bollywood trending hits"
                         title="Trendings"
                         refreshing={loading}
                     />
 
                     {/* bollywood hits */}
                     <SongsKeywordResultsRenderer
-                        keyword="bollywood new hits"
+                        keyword="bollywood top new songs"
                         title="Bollywood Hits"
                         refreshing={loading}
                     />
