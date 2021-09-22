@@ -14,7 +14,7 @@ import {
     BareFetchedSongObjectInstance,
     FetchedSongObject,
 } from '../../../interfaces'
-import {getHightQualityImageFromLinkWithHeight} from '../../../utils'
+import {getHighQualityImageFromLinkWithHeight} from '../../../utils'
 import {useMusicApi} from '../../../api'
 import {useTheme} from '../../../context'
 import {EXTRA_SONGS_SCREEN} from '../../../constants'
@@ -45,7 +45,7 @@ const ArtistDetail = (props: Props) => {
      * high quality image of the artist
      * which will be passed to its children components wherever needed and here too...
      */
-    const highQualityArtistImage = getHightQualityImageFromLinkWithHeight(
+    const highQualityArtistImage = getHighQualityImageFromLinkWithHeight(
         artist.thumbnails[0].url,
         artist.thumbnails[0].height,
         720,

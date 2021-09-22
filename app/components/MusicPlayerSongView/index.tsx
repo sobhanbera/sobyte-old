@@ -13,7 +13,7 @@ import {
 } from '../../constants'
 import {
     formatArtists,
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
     capitalizeWords,
     formatTrackTitle,
 } from '../../utils'
@@ -29,13 +29,13 @@ interface SongView {
 }
 const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
     const {themeColors} = useTheme()
-    const averageQualityImage = getHightQualityImageFromLinkWithHeight(
+    const averageQualityImage = getHighQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
         '120',
         50,
     )
-    const highQualityImage = getHightQualityImageFromLinkWithHeight(
+    const highQualityImage = getHighQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
         DEFAULT_HIGH_IMAGE_SIZE,

@@ -7,7 +7,7 @@ import {SongObject} from '../../interfaces'
 import {
     formatArtists,
     trimLargeString,
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
 } from '../../utils/Objects'
 import {styles} from './'
 import {DEFAULT_IMAGE_SIZE, DEFAULT_HIGH_IMAGE_QUALITY} from '../../constants'
@@ -28,7 +28,7 @@ const GridSongItem = React.memo(
 
         const songImage = useMemo(
             () =>
-                getHightQualityImageFromLinkWithHeight(
+                getHighQualityImageFromLinkWithHeight(
                     item.thumbnails[0].url,
                     item.thumbnails[0].height,
                     imageQuality || DEFAULT_IMAGE_SIZE,

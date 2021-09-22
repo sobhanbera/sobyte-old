@@ -4,7 +4,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native'
 import {ArtistObject} from '../../interfaces'
 import {
     firstLetterCap,
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
 } from '../../utils'
 import {songComponentsStyles} from '../../styles/global.styles'
 import {
@@ -28,13 +28,13 @@ const CommonSongItem = ({
     textColor,
     imageQuality,
 }: Props) => {
-    const artistImage = getHightQualityImageFromLinkWithHeight(
+    const artistImage = getHighQualityImageFromLinkWithHeight(
         artist.thumbnails[0].url,
         artist.thumbnails[0].height,
         imageQuality || DEFAULT_IMAGE_SIZE,
         DEFAULT_IMAGE_QUALITY,
     )
-    const highQualityImage = getHightQualityImageFromLinkWithHeight(
+    const highQualityImage = getHighQualityImageFromLinkWithHeight(
         artist.thumbnails[0].url,
         artist.thumbnails[0].height,
         imageQuality || DEFAULT_IMAGE_SIZE,

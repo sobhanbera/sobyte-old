@@ -27,7 +27,7 @@ import {
 } from '../../../constants'
 import {
     formatArtists,
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
 } from '../../../utils'
 import {FetchedSongObject, SongObject} from '../../../interfaces'
 import globalStyles from '../../../styles/global.styles'
@@ -274,7 +274,7 @@ const Player: FC<PlayerProps> = props => {
         /**
          * generating the data required for playing the song
          */
-        const trackImage = getHightQualityImageFromLinkWithHeight(
+        const trackImage = getHighQualityImageFromLinkWithHeight(
             item.thumbnails[0].url,
             item.thumbnails[0].height,
             DEFAULT_NOTIFICATION_IMAGE_QUALITY,

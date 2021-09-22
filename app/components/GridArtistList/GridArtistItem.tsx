@@ -5,7 +5,7 @@ import FastImage from 'react-native-fast-image'
 
 import {ArtistObject} from '../../interfaces'
 import {
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
     trimLargeString,
 } from '../../utils/Objects'
 import {styles} from './'
@@ -24,7 +24,7 @@ const GridArtistItem = React.memo(
         if (!item.thumbnails[0].url) {
             console.log('THUMBNAIL NOT FOUND GRID ARTIST ITEM', item)
         }
-        const highQualityImage = getHightQualityImageFromLinkWithHeight(
+        const highQualityImage = getHighQualityImageFromLinkWithHeight(
             item.thumbnails[0].url,
             item.thumbnails[0].height,
             720,

@@ -6,7 +6,7 @@ import FastImage from 'react-native-fast-image'
 import {SongObject} from '../../interfaces'
 import {
     formatArtists,
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
     trimLargeString,
 } from '../../utils'
 import {songComponentsStyles} from '../../styles/global.styles'
@@ -31,13 +31,13 @@ const CommonSongItem = ({
     textColor,
     imageQuality,
 }: Props) => {
-    const songImage = getHightQualityImageFromLinkWithHeight(
+    const songImage = getHighQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
         imageQuality || DEFAULT_HIGH_IMAGE_SIZE,
         DEFAULT_IMAGE_QUALITY,
     )
-    const highQualityImage = getHightQualityImageFromLinkWithHeight(
+    const highQualityImage = getHighQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
         720,

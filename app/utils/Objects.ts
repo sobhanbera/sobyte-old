@@ -66,7 +66,7 @@ export const getHightQualityImageFromLink = (
         IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
         `w${height}-h${height}-l100-rj`,
     )
-export const getHightQualityImageFromLinkWithHeight = (
+export const getHighQualityImageFromLinkWithHeight = (
     imageLink: string,
     initialHeight: number | string,
     height: number | string = 244,

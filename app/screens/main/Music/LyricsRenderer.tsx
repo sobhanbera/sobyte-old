@@ -15,7 +15,7 @@ import LRCRenderer from '../../../components/LRCRenderer'
 import {SongObject} from '../../../interfaces'
 import {
     formatTrackTitle,
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
 } from '../../../utils'
 
 const {height, width} = Dimensions.get('window')
@@ -35,7 +35,7 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
     } = usePlayerProgress()
     const {themeColors} = useTheme()
 
-    const highQualityImage = getHightQualityImageFromLinkWithHeight(
+    const highQualityImage = getHighQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
         DEFAULT_IMAGE_SIZE,

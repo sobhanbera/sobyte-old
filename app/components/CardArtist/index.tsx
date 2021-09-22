@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native'
 
 import {useSetting} from '../../context'
 import {
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
     firstLetterCap,
 } from '../../utils/Objects'
 import {
@@ -72,14 +72,14 @@ const CardSong = ({
                   })
                 : artists[0].browseId.length > 0
                 ? artists.map(artist => {
-                      const songImage = getHightQualityImageFromLinkWithHeight(
+                      const songImage = getHighQualityImageFromLinkWithHeight(
                           artist.thumbnails[0].url,
                           artist.thumbnails[0].height,
                           imageQuality || DEFAULT_IMAGE_SIZE,
                           DEFAULT_IMAGE_QUALITY,
                       )
                       const highQualityImage =
-                          getHightQualityImageFromLinkWithHeight(
+                          getHighQualityImageFromLinkWithHeight(
                               artist.thumbnails[0].url,
                               artist.thumbnails[0].height,
                               '450',

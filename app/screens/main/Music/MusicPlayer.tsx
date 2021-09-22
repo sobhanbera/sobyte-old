@@ -29,7 +29,7 @@ import {
 } from '../../../constants'
 import {
     formatArtists,
-    getHightQualityImageFromLinkWithHeight,
+    getHighQualityImageFromLinkWithHeight,
 } from '../../../utils'
 import {FetchedSongObject, MusicTrack, SongObject} from '../../../interfaces'
 import globalStyles from '../../../styles/global.styles'
@@ -129,6 +129,12 @@ const Player: FC<PlayerProps> = props => {
                 // initial data
                 const initialTrack = res.content[0]
                 const artist = formatArtists(initialTrack.artist)
+                const trackImage = getHighQualityImageFromLinkWithHeight(
+                    initialTrack.thumbnails[0].url,
+                    initialTrack.thumbnails[0].height,
+                    DEFAULT_NOTIFICATION_IMAGE_QUALITY,
+                    DEFAULT_IMAGE_QUALITY,
+                )
 
                 // without this below line the songs will only scroll after the user somewhat scrolls the flatlist...
                 currentlyPlayingTrackID.current = initialTrack.musicId // setting the first song which would be played so that there is no such user interaction is required to auto scroll from next time
@@ -136,7 +142,7 @@ const Player: FC<PlayerProps> = props => {
                 play(
                     {
                         artist,
-                        artwork: initialTrack.thumbnails[1].url,
+                        artwork: trackImage,
                         id: initialTrack.musicId,
                         duration: initialTrack.duration,
                         playlistId: initialTrack.playlistId,
@@ -528,7 +534,7 @@ const Player: FC<PlayerProps> = props => {
         /**
          * generating the data required for playing the song
          */
-        const trackImage = getHightQualityImageFromLinkWithHeight(
+        const trackImage = getHighQualityImageFromLinkWithHeight(
             item.thumbnails[0].url,
             item.thumbnails[0].height,
             DEFAULT_NOTIFICATION_IMAGE_QUALITY,
