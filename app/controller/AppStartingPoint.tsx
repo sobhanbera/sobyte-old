@@ -29,11 +29,15 @@ function AppStartingPoint(_props: ContextAPIsRendererProps) {
                     <ThemeProvider>
                         <SettingsProvider>
                             <Player>
+                                {/* status bar design */}
                                 <SafeAreaProvider>
                                     <SafeAreaView style={globalStyles.flex}>
+                                        {/* main navigation for the application starts here */}
                                         <AppLaunchingNavigation />
+                                        {/* main navigation for the application ends here */}
                                     </SafeAreaView>
                                 </SafeAreaProvider>
+                                {/* status bar design ends */}
                             </Player>
                         </SettingsProvider>
                     </ThemeProvider>
