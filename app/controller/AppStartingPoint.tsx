@@ -1,4 +1,5 @@
 import React from 'react'
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context'
 
 import AppMainBackendApi from '../backend'
 import MusicApi from '../api'
@@ -8,6 +9,7 @@ import SettingsProvider from '../context/Settings'
 import Player from '../api/PlayerControls'
 
 import AppLaunchingNavigation from './AppLaunchingNavigation'
+import globalStyles from '../styles/global.styles'
 
 /**
  * application's main context api component renderer
@@ -27,7 +29,11 @@ function AppStartingPoint(_props: ContextAPIsRendererProps) {
                     <ThemeProvider>
                         <SettingsProvider>
                             <Player>
-                                <AppLaunchingNavigation />
+                                <SafeAreaProvider>
+                                    <SafeAreaView style={globalStyles.flex}>
+                                        <AppLaunchingNavigation />
+                                    </SafeAreaView>
+                                </SafeAreaProvider>
                             </Player>
                         </SettingsProvider>
                     </ThemeProvider>
