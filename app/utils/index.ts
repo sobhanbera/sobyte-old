@@ -39,6 +39,7 @@ import {
     shuffleArray,
     formatTrackTitle,
     getRandomNumberString,
+    getNotificationPlayerImageFromLinkWithHeight,
 } from './Objects'
 export {
     returnNullCallback,
@@ -64,4 +65,5 @@ export {
     shuffleArray,
     formatTrackTitle,
     getRandomNumberString,
+    getNotificationPlayerImageFromLinkWithHeight,
 }

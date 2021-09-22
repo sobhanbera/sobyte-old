@@ -2,6 +2,8 @@ import {SongArtistObject, SongObject, ThumbnailObject} from '../interfaces'
 import {
     ALPHA_NUMERIC_PASSWORD_REGEX,
     BRACKET_BRACES_AND_PARENTHESIS_INSIDE_TEXT,
+    DEFAULT_NOTIFICATION_IMAGE_QUALITY,
+    DEFAULT_NOTIFICATION_IMAGE_SIZE,
     LARGE_TEXT_LENGTH,
     PASSWORD_CHARACTERS,
 } from '../constants'
@@ -78,6 +80,18 @@ export const getHighQualityImageFromLinkWithHeight = (
             `=w${height}-h${height}`,
         )
         .replace(`-l90-rj`, `-l${imageQuality}-rj`)
+
+export const getNotificationPlayerImageFromLinkWithHeight = (
+    imageLink: string,
+    initialHeight: number | string,
+) => {
+    return imageLink
+        .replace(
+            `=w${initialHeight}-h${initialHeight}`,
+            `=w${DEFAULT_NOTIFICATION_IMAGE_SIZE}-h${DEFAULT_NOTIFICATION_IMAGE_SIZE}`,
+        )
+        .replace(`-l90-rj`, `-l${DEFAULT_NOTIFICATION_IMAGE_QUALITY}-rj`)
+}
 
 /**
  *
