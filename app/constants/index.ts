@@ -245,5 +245,5 @@ export const ViewabilityConfig = {
     waitForInteraction: false, // false because we want the song must be played instantly when it is loaded
 }
 
-export const RANDOM_SEARCH_QUERY =
+export const RANDOM_SEARCH_QUERY = () =>
     shuffleArray(queries)[Math.floor(Math.random() * queries.length)]

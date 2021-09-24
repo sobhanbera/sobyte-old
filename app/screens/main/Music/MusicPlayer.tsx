@@ -7,6 +7,7 @@ import {
     Text,
     FlatList,
     ToastAndroid,
+    RefreshControl,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import TrackPlayer from 'react-native-track-player'
@@ -70,7 +71,7 @@ interface PlayerProps {
 }
 const Player: FC<PlayerProps> = props => {
     const {play} = usePlayer()
-    const {randomGradient} = useTheme()
+    const {randomGradient, themeColors} = useTheme()
     const {initMusicApi, search, getContinuation, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
 
@@ -86,6 +87,12 @@ const Player: FC<PlayerProps> = props => {
             clickTrackingParams: '',
         },
     })
+
+    /**
+     * this is a boolean value which will be true if the songs are loading else false
+     * also when it's value is true we will show the refresh to pull animation...
+     */
+    const loading = useRef<boolean>(false)
 
     /**
      * a variable which provides the music id of the track which is played currently
@@ -111,8 +118,10 @@ const Player: FC<PlayerProps> = props => {
 
     // initializing the songs list...
     const initializeMusicPlayer = () => {
+        loading.current = true
+        const RANDOM_QUERY = RANDOM_SEARCH_QUERY()
         search(
-            RANDOM_SEARCH_QUERY,
+            RANDOM_QUERY,
             'SONG',
             false,
             true,
@@ -155,9 +164,11 @@ const Player: FC<PlayerProps> = props => {
                 ) {
                     fetchMusic(res.content[1].musicId)
                 }
+                loading.current = false
             })
             .catch(_err => {
                 // console.log('ERROR IN MUSIC PLAYER', err)
+                loading.current = false
             })
     }
     useEffect(() => {
@@ -623,6 +634,14 @@ const Player: FC<PlayerProps> = props => {
 
             {songs?.content.length && songs.content[0].musicId.length > 0 ? (
                 <Animated.FlatList
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={loading.current}
+                            onRefresh={initializeMusicPlayer}
+                            progressBackgroundColor={themeColors.white[0]}
+                            colors={themeColors.rgbstreakgradient}
+                        />
+                    }
                     data={songs.content}
                     renderItem={renderItem}
                     keyExtractor={keyExtractor}
