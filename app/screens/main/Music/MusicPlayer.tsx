@@ -7,7 +7,6 @@ import {
     Text,
     FlatList,
     ToastAndroid,
-    RefreshControl,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import TrackPlayer from 'react-native-track-player'
@@ -71,7 +70,7 @@ interface PlayerProps {
 }
 const Player: FC<PlayerProps> = props => {
     const {play} = usePlayer()
-    const {randomGradient, themeColors} = useTheme()
+    const {randomGradient} = useTheme()
     const {initMusicApi, search, getContinuation, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
 
@@ -625,18 +624,15 @@ const Player: FC<PlayerProps> = props => {
                 </View>
             ) : null}
 
+            <View
+                style={{
+                    height: 100,
+                    backgroundColor: 'green',
+                    position: 'absolute',
+                }}></View>
+
             {songs?.content.length && songs.content[0].musicId.length > 0 ? (
                 <Animated.FlatList
-                    // refreshControl={
-                    //     <RefreshControl
-                    //         refreshing={loading}
-                    //         onRefresh={initializeMusicPlayer}
-                    //         progressBackgroundColor={
-                    //             themeColors.surfacelight[0]
-                    //         }
-                    //         colors={themeColors.rgbstreakgradient}
-                    //     />
-                    // }
                     data={songs.content}
                     renderItem={renderItem}
                     keyExtractor={keyExtractor}
@@ -645,6 +641,9 @@ const Player: FC<PlayerProps> = props => {
                     viewabilityConfig={ViewabilityConfig}
                     onViewableItemsChanged={onViewableItemsChanged}
                     scrollEventThrottle={16}
+                    onResponderRelease={re => {
+                        console.log(re)
+                    }}
                     scrollToOverflowEnabled
                     overScrollMode={'never'}
                     pagingEnabled
