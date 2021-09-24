@@ -1,6 +1,7 @@
 import React from 'react'
-import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context'
+// import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context'
 
+// import globalStyles from '../styles/global.styles'
 import AppMainBackendApi from '../backend'
 import MusicApi from '../api'
 import MusicFetcher from '../api/MusicFetcher'
@@ -9,7 +10,6 @@ import SettingsProvider from '../context/Settings'
 import Player from '../api/PlayerControls'
 
 import AppLaunchingNavigation from './AppLaunchingNavigation'
-import globalStyles from '../styles/global.styles'
 
 /**
  * application's main context api component renderer
@@ -30,13 +30,13 @@ function AppStartingPoint(_props: ContextAPIsRendererProps) {
                         <SettingsProvider>
                             <Player>
                                 {/* status bar design */}
-                                <SafeAreaProvider>
-                                    <SafeAreaView style={globalStyles.flex}>
-                                        {/* main navigation for the application starts here */}
-                                        <AppLaunchingNavigation />
-                                        {/* main navigation for the application ends here */}
-                                    </SafeAreaView>
-                                </SafeAreaProvider>
+                                {/* <SafeAreaProvider> */}
+                                {/* <SafeAreaView style={globalStyles.flex}> */}
+                                {/* main navigation for the application starts here */}
+                                <AppLaunchingNavigation />
+                                {/* main navigation for the application ends here */}
+                                {/* </SafeAreaView> */}
+                                {/* </SafeAreaProvider> */}
                                 {/* status bar design ends */}
                             </Player>
                         </SettingsProvider>
