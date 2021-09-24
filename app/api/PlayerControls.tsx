@@ -257,9 +257,17 @@ const Player: FC<PlayerProps> = props => {
                               })
                             : JSON.stringify(details), // since we are setting the current track in  playback-track-changed event listener above in the useEffect function
                 }
-                TrackPlayer.add([trackGot])
+                TrackPlayer.add([
+                    {
+                        ...trackGot,
+                        duration: track.duration / 1000, // this extra field is required or else the duration will be wrong in the notification panel
+                    },
+                ])
                 if (play) TrackPlayer.play()
-                console.log('Time took to play: ', new Date().getTime() - start)
+                console.log(
+                    'Time took to play:: ',
+                    new Date().getTime() - start,
+                )
             })
             .catch(() => {
                 setShowLoading(false)
