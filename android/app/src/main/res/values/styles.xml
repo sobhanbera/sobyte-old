@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
@@ -7,6 +7,7 @@
         <item name="android:statusBarColor">@color/splash_screen_background_color</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="Q">false</item>
     </style>
 
     <!-- Splash Screen themes which includes the window to show and the splash screen to show -->
