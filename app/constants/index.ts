@@ -8,7 +8,7 @@
  * Purpose - all application constants are here
  */
 
-import {NativeModules} from 'react-native'
+import {NativeModules, Dimensions} from 'react-native'
 
 const {StatusBarManager} = NativeModules
 export const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT
@@ -54,6 +54,20 @@ export const SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY =
 export const MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY =
     '@APP:MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY' // the storage key where the user data like email, username, etc will be stored in android itself...
 export const API_CONFIG_DATA_STORAGE_KEY = '@APP:API_CONFIG_DATA' // Storage key for header fetched by the api everytime...
+
+// dimension instance for the device
+export const WINDOW_DIMENSION = Dimensions.get('window')
+export const SCREEN_DIMENSION = Dimensions.get('screen')
+// the window's dimenstions and diff parts
+export const WINDOW_WIDTH = WINDOW_DIMENSION.width // window's width
+export const WINDOW_HEIGHT = WINDOW_DIMENSION.height // window's height
+export const WINDOW_SCALE = WINDOW_DIMENSION.scale // window's scale
+export const WINDOW_FONT_SCALE = WINDOW_DIMENSION.fontScale // window's font scale
+// the screen's dimenstions and diff parts
+export const SCREEN_WIDTH = SCREEN_DIMENSION.width // screen's width
+export const SCREEN_HEIGHT = SCREEN_DIMENSION.height // screen's height
+export const SCREEN_SCALE = SCREEN_DIMENSION.scale // screen's scale
+export const SCREEN_FONT_SCALE = SCREEN_DIMENSION.fontScale // screen's font scale
 
 /** Fonts Short Name */
 export const FontRoboto = 'Roboto-Regular'
