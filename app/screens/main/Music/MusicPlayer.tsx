@@ -89,12 +89,6 @@ const Player: FC<PlayerProps> = props => {
     })
 
     /**
-     * this is a boolean value which will be true if the songs are loading else false
-     * also when it's value is true we will show the refresh to pull animation...
-     */
-    const loading = useRef<boolean>(false)
-
-    /**
      * a variable which provides the music id of the track which is played currently
      * in this local music player
      * when a new song is played from other section of the app like the explore section
@@ -118,8 +112,9 @@ const Player: FC<PlayerProps> = props => {
 
     // initializing the songs list...
     const initializeMusicPlayer = () => {
-        loading.current = true
+        // random song query before loading songs...
         const RANDOM_QUERY = RANDOM_SEARCH_QUERY()
+        console.log
         search(
             RANDOM_QUERY,
             'SONG',
@@ -164,11 +159,9 @@ const Player: FC<PlayerProps> = props => {
                 ) {
                     fetchMusic(res.content[1].musicId)
                 }
-                loading.current = false
             })
             .catch(_err => {
                 // console.log('ERROR IN MUSIC PLAYER', err)
-                loading.current = false
             })
     }
     useEffect(() => {
@@ -634,14 +627,16 @@ const Player: FC<PlayerProps> = props => {
 
             {songs?.content.length && songs.content[0].musicId.length > 0 ? (
                 <Animated.FlatList
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={loading.current}
-                            onRefresh={initializeMusicPlayer}
-                            progressBackgroundColor={themeColors.white[0]}
-                            colors={themeColors.rgbstreakgradient}
-                        />
-                    }
+                    // refreshControl={
+                    //     <RefreshControl
+                    //         refreshing={loading}
+                    //         onRefresh={initializeMusicPlayer}
+                    //         progressBackgroundColor={
+                    //             themeColors.surfacelight[0]
+                    //         }
+                    //         colors={themeColors.rgbstreakgradient}
+                    //     />
+                    // }
                     data={songs.content}
                     renderItem={renderItem}
                     keyExtractor={keyExtractor}
