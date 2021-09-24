@@ -1,7 +1,6 @@
 import React, {FC, useState, useEffect, useCallback, useRef} from 'react'
 import {
     View,
-    Dimensions,
     Animated,
     ListRenderItemInfo,
     StyleSheet,
