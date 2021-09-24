@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, ImageBackground, Dimensions} from 'react-native'
+import {Text, View, ImageBackground} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import MarqueeText from 'react-native-text-ticker'
 
@@ -10,6 +10,8 @@ import {
     DEFAULT_HIGH_IMAGE_QUALITY,
     FontUbuntuBold,
     MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION,
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
 } from '../../constants'
 import {
     formatArtists,
@@ -20,7 +22,6 @@ import {
 import {SongObject} from '../../interfaces'
 
 const IMAGE_BLUR_RADIUS = 25
-const {width, height} = Dimensions.get('window')
 
 interface SongView {
     song: SongObject
@@ -59,8 +60,8 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                 fadeDuration={500}
                 style={{
                     flex: 1,
-                    width,
-                    height: height,
+                    width: SCREEN_WIDTH,
+                    height: SCREEN_HEIGHT,
                     flexDirection: 'column',
                     justifyContent: 'space-evenly',
                     alignItems: 'center',

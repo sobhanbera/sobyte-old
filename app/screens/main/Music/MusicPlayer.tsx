@@ -24,6 +24,7 @@ import {
     RANDOM_SEARCH_QUERY,
     INITIAL_NUMBER_OF_TRACKS_TO_LOAD,
     MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY,
+    SCREEN_HEIGHT,
 } from '../../../constants'
 import {
     formatArtists,
@@ -37,8 +38,6 @@ const AppLoadingAnimation = require('../../../assets/animations/animation.json')
 const PopupLikeAnimation = require('../../../assets/animations/like_popup.json')
 // const LikeAnimation = require('../../../assets/animations/like.json')
 // const FlyingLikeAnimation = require('../../../assets/animations/like_flying.json')
-
-const {height} = Dimensions.get('window')
 
 interface ExtraTypeHelper extends SongObject {
     keyword: string
@@ -490,8 +489,8 @@ const Player: FC<PlayerProps> = props => {
      */
     const getItemLayout = useCallback(
         (_data, index) => ({
-            length: height,
-            offset: height * index,
+            length: SCREEN_HEIGHT,
+            offset: SCREEN_HEIGHT * index,
             index,
         }),
         [],
@@ -576,8 +575,9 @@ const Player: FC<PlayerProps> = props => {
          * if the scroll position is showing a full part of any song than only we will load the next song data url
          */
 
-        if (event.nativeEvent.contentOffset.y % height === 0) {
-            const nextSongIndex = event.nativeEvent.contentOffset.y / height
+        if (event.nativeEvent.contentOffset.y % SCREEN_HEIGHT === 0) {
+            const nextSongIndex =
+                event.nativeEvent.contentOffset.y / SCREEN_HEIGHT
             if (
                 songs.content[nextSongIndex + 1] !== undefined &&
                 songs.content[nextSongIndex + 1].musicId.length > 0
