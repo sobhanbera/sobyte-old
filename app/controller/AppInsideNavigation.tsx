@@ -33,7 +33,7 @@ const AppInsideNavigationWithMaterialTabBar = () => {
             labeled={true}
             theme={DarkTheme}
             activeColor={themeColors.white[0]}
-            inactiveColor={themeColors.grey[0]}
+            // inactiveColor={themeColors.grey[0]}
             sceneAnimationEnabled={false}
             backBehavior="history"
             shifting={true}
