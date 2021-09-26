@@ -39,6 +39,10 @@ interface ThemeContextProps {
         _lightOption: any,
         _customOption: any,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     ): null
+    /**
+     * @deprecated
+     * function which updated the random gradient color to a different set of random gradient colors
+     */
     setRandomColorScheme(): void
 }
 /**
@@ -58,6 +62,10 @@ const ThemeContext = createContext<ThemeContextProps>({
         _lightOption: any,
         _customOption: any,
     ) => null,
+    /**
+     * @deprecated
+     * function which updated the random gradient color to a different set of random gradient colors
+     */
     setRandomColorScheme: () => null
 })
 const ThemeProvider = (props: {children: React.ReactChild}) => {
@@ -127,6 +135,10 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
         }
     }, [])
 
+    /**
+     * @deprecated
+     * function which updated the random gradient color to a different set of random gradient colors
+     */
     const setRandomColorScheme = () => {
         random = Math.floor(Math.random() * GRADIENT_COLOR_SCHEME_ARRAY_MAX_LENGTH)
         setRandomGradient(colorsArray[random])
