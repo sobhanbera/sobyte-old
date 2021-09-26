@@ -11,11 +11,7 @@ import {
     SongsKeywordResultsRenderer,
     ArtistsKeywordResultsRenderer,
 } from '../../../components'
-import {
-    DefaultStatusBarComponent,
-    IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
-    PaddingBottomView,
-} from '../../../constants'
+import {DefaultStatusBarComponent, PaddingBottomView} from '../../../constants'
 import {
     MoodCategories,
     GenresCategories,
