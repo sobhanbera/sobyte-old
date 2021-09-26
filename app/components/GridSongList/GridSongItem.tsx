@@ -10,7 +10,12 @@ import {
     getHighQualityImageFromLinkWithHeight,
 } from '../../utils/Objects'
 import {styles} from './'
-import {DEFAULT_IMAGE_SIZE, DEFAULT_HIGH_IMAGE_QUALITY} from '../../constants'
+import {
+    DEFAULT_IMAGE_SIZE,
+    DEFAULT_HIGH_IMAGE_QUALITY,
+    DEFAULT_TITLE_MARGIN,
+    DEFAULT_IMAGE_BORDER_RADIUS,
+} from '../../constants'
 import {usePlayer} from '../../context'
 
 interface Props {
@@ -60,8 +65,11 @@ const GridSongItem = React.memo(
                 <View
                     style={[
                         styles.contentWrapper,
+                        styles.surrounding,
                         index === 0
-                            ? styles.firstContent
+                            ? {
+                                  marginLeft: 12,
+                              } //styles.firstContent
                             : //     : index === contentLength - 1
                               //     ? styles.lastContent
                               {},
@@ -77,6 +85,10 @@ const GridSongItem = React.memo(
                             {
                                 borderWidth: 0.2,
                                 borderColor: subColor,
+                                maxWidth: 150,
+                                maxHeight: 150,
+                                width: 135,
+                                height: 145,
                             },
                         ]}
                     />
@@ -86,7 +98,8 @@ const GridSongItem = React.memo(
                             {
                                 color: textColor,
                             },
-                        ]}>
+                        ]}
+                        numberOfLines={1}>
                         {trimLargeString(item.name)}
                     </Text>
                     <Text
@@ -95,7 +108,8 @@ const GridSongItem = React.memo(
                             {
                                 color: subColor,
                             },
-                        ]}>
+                        ]}
+                        numberOfLines={1}>
                         {artist}
                     </Text>
                 </View>

@@ -135,10 +135,13 @@ export const IMAGE_TINY_SIZE_TO_SHOW = 40 // width and height of the tiny sized 
 export const IMAGE_SMALL_SIZE_TO_SHOW = 60 // width and height of the small sized image which should be shown in the UI
 export const IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW = 90 // width and height of the small sized image which should be shown in the UI
 export const IMAGE_SIZE_TO_SHOW = 130 // width and height of the normal sized image which should be shown in the UI
-export const IMAGE_MARGIN_TO_SHOW = 4 // margin of the large sized image which should be shown in the UI
-export const IMAGE_PADDING_TO_SHOW = 4 // padding of the image which should be shown in the UI
-export const IMAGE_PADDING_H_TO_SHOW = 4 // padding horizontal of the image which should be shown in the UI
-export const IMAGE_PADDING_V_TO_SHOW = 4 // padding vertical of the image which should be shown in the UI
+export const IMAGE_MARGIN_TO_SHOW = 5 // margin of the large sized image which should be shown in the UI
+export const IMAGE_PADDING_TO_SHOW = 5 // padding of the image which should be shown in the UI
+export const IMAGE_PADDING_H_TO_SHOW = 5 // padding horizontal of the image which should be shown in the UI
+export const IMAGE_PADDING_V_TO_SHOW = 5 // padding vertical of the image which should be shown in the UI
+
+export const DEFAULT_IMAGE_BORDER_RADIUS = 10
+export const DEFAULT_TITLE_MARGIN = 9
 
 export const LIKE_ANIMATION_DISAPPEAR_DURATION = 1650 // the duration after which the like animation while be hidden
 export const HIGHEST_Z_INDEX_VALUE = 987654 // the largest z index value
@@ -160,6 +163,7 @@ export const AUTO_SCROLL_AFTER_USER_SCROLL_DURATION = 1000 // duration after whi
  */
 import {DefaultStatusBarComponent, PaddingBottomView} from './components'
 import {shuffleArray} from '../utils'
+import {CommonColors} from '../themes/ThemeProps'
 export {DefaultStatusBarComponent, PaddingBottomView}
 
 /** equal partition arrays for linear gradient locations */
@@ -249,3 +253,37 @@ export const ViewabilityConfig = {
 
 export const RANDOM_SEARCH_QUERY = () =>
     shuffleArray(queries)[Math.floor(Math.random() * queries.length)]
+
+/**
+ * this is the same constant colors which are primarily provided in theme prop interfaces containing file
+ */
+export const COMMON_COLORS: CommonColors = {
+    white: ['#FFFFFF'],
+    black: ['#000000'],
+    grey: ['#808080'],
+    dimGrey: ['#696969'],
+    lightSlateGrey: ['#778899'],
+    slateGrey: ['#708090'],
+    red: ['#FF0000'],
+    green: ['#00FF00'],
+    blue: ['#0000FF'],
+    yellow: ['#FFFF00'],
+    cyan: ['#00FFFF'],
+    pink: ['#FF00FF'],
+    purple: ['#800080'],
+    orange: ['#FFA500'],
+    lightBlue: ['#98C1D9'],
+    darkBlue: ['#3D5A80'],
+    cadetBlue: ['#293241'],
+    transparent: ['#00000000'],
+    rgbstreakgradient: [
+        '#f79533',
+        '#f37055',
+        '#ef4e7b',
+        '#a166ab',
+        '#5073b8',
+        '#1098ad',
+        '#07b39b',
+        '#6fba82',
+    ],
+}

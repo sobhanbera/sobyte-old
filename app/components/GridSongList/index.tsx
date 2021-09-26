@@ -6,6 +6,9 @@ import {
     IMAGE_SIZE_TO_SHOW,
     IMAGE_MARGIN_TO_SHOW,
     IMAGE_PADDING_TO_SHOW,
+    DEFAULT_IMAGE_BORDER_RADIUS,
+    COMMON_COLORS,
+    DEFAULT_TITLE_MARGIN,
 } from '../../constants'
 import GridSongList_SelfShimmer from './SelfShimmer'
 import GridSongItem from './GridSongItem'
@@ -62,7 +65,7 @@ const GridSongList = React.memo(
                     IMAGE_SIZE_TO_SHOW +
                     IMAGE_MARGIN_TO_SHOW +
                     IMAGE_PADDING_TO_SHOW +
-                    IMAGE_PADDING_TO_SHOW * 2
+                    IMAGE_PADDING_TO_SHOW
                 }
                 data={content}
                 keyExtractor={keyExtractor}
@@ -75,22 +78,29 @@ const GridSongList = React.memo(
 export const styles = StyleSheet.create({
     contentWrapper: {
         // backgroundColor: '#0000007f',
-        paddingTop: 10,
-        borderRadius: 6,
+        flex: 1,
+        paddingBottom: 8,
+        overflow: 'hidden',
+        borderRadius: DEFAULT_IMAGE_BORDER_RADIUS,
 
-        paddingHorizontal: IMAGE_PADDING_TO_SHOW,
+        paddingHorizontal: 0,
         marginHorizontal: IMAGE_MARGIN_TO_SHOW,
     },
     firstContent: {
-        paddingLeft: IMAGE_PADDING_TO_SHOW * 2,
-        marginLeft: IMAGE_MARGIN_TO_SHOW * 2,
+        marginLeft: IMAGE_MARGIN_TO_SHOW,
     },
     lastContent: {
-        paddingRight: IMAGE_PADDING_TO_SHOW * 2,
-        marginRight: IMAGE_MARGIN_TO_SHOW * 2,
+        marginRight: IMAGE_MARGIN_TO_SHOW,
+    },
+    surrounding: {
+        borderWidth: 1,
+        backgroundColor: COMMON_COLORS.black[0] + '60',
+        borderColor: COMMON_COLORS.white[0] + '10',
     },
     contentImage: {
         borderRadius: 6,
+        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 0,
         maxWidth: IMAGE_SIZE_TO_SHOW,
         maxHeight: IMAGE_SIZE_TO_SHOW,
         width: IMAGE_SIZE_TO_SHOW,
@@ -98,15 +108,17 @@ export const styles = StyleSheet.create({
     },
     songTitle: {
         width: IMAGE_SIZE_TO_SHOW,
-        fontSize: 16,
+        fontSize: 14,
         paddingTop: 5,
-        paddingBottom: 2,
+        paddingBottom: 1,
+        paddingHorizontal: DEFAULT_TITLE_MARGIN,
     },
     artist: {
         width: IMAGE_SIZE_TO_SHOW,
-        fontSize: 14,
-        paddingTop: 3,
-        paddingBottom: 2,
+        fontSize: 12,
+        paddingTop: 1,
+        paddingBottom: IMAGE_MARGIN_TO_SHOW + 3,
+        paddingHorizontal: DEFAULT_TITLE_MARGIN,
     },
 
     dummyBackground: {
