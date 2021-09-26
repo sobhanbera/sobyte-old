@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, ImageBackground, Pressable} from 'react-native'
 
 import {SongCategory} from '../../interfaces'
 import {
+    COMMON_COLORS,
     FontRobotoBold,
     IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
 } from '../../constants'
@@ -70,8 +71,8 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         margin: 6,
         elevation: 4,
-        borderWidth: 0.5,
-        borderColor: '#efefef',
+        borderWidth: 1,
+        borderColor: COMMON_COLORS.white[0] + '35',
     },
     image: {
         width: IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW,
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     text: {
-        fontSize: 17,
+        fontSize: 14,
         textTransform: 'uppercase',
         fontFamily: FontRobotoBold,
         color: 'white', // white text since the it's background if dark the above style...

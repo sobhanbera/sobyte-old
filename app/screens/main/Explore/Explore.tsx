@@ -28,7 +28,7 @@ interface ExploreTabProps {
     navigation?: any
 }
 const Explore: React.FC<ExploreTabProps> = props => {
-    const {themeColors, randomGradient,setRandomColorScheme} = useTheme()
+    const {themeColors, randomGradient, setRandomColorScheme} = useTheme()
     const {initMusicApi, error} = useMusicApi()
 
     const [loading, setLoading] = useState<boolean>(false)
