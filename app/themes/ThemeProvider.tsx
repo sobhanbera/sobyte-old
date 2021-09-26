@@ -19,17 +19,34 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 import {
     BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-    THEME_STORAGE_KEY,
+    THEME_STORAGE_KEY,GRADIENT_COLOR_SCHEME_ARRAY_MAX_LENGTH
 } from '../constants'
 import {DarkTheme} from './DarkTheme'
 import {ColorGradientCodeName} from 'app/interfaces'
+import ThemeColors from './ThemeProps'
 
+
+/**
+ * interface for the context api we are providing through
+ * this component
+ */
+interface ThemeContextProps {
+    theme: string
+    themeColors: ThemeColors
+    randomGradient: string[]
+    ChooseThemeOptions(
+        _darkOption: any,
+        _lightOption: any,
+        _customOption: any,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    ): null
+    setRandomColorScheme(): void
+}
 /**
  * @d - dark theme
  * @l - light theme
  * @c - custom theme
  */
-const ThemeContext = createContext({
+const ThemeContext = createContext<ThemeContextProps>({
     theme: 'd',
     themeColors: {
         ...DarkTheme,
@@ -41,9 +58,10 @@ const ThemeContext = createContext({
         _lightOption: any,
         _customOption: any,
     ) => null,
+    setRandomColorScheme: () => null
 })
 const ThemeProvider = (props: {children: React.ReactChild}) => {
-    const random = Math.floor(Math.random() * 8)
+    let random = Math.floor(Math.random() * GRADIENT_COLOR_SCHEME_ARRAY_MAX_LENGTH) // this value will be change when the user wants a different theme...
     const colorsArray = [
         DarkTheme.blueGradient, // 0
         DarkTheme.pinkGradient, // 1
@@ -109,6 +127,11 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
         }
     }, [])
 
+    const setRandomColorScheme = () => {
+        random = Math.floor(Math.random() * GRADIENT_COLOR_SCHEME_ARRAY_MAX_LENGTH)
+        setRandomGradient(colorsArray[random])
+    }
+
     // const setAppTheme = async (theme: string) => {
     //     if (['d', 'l', 'c'].includes(theme)) {
     //         setTheme(theme)
@@ -142,6 +165,7 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
         randomGradient: randomGradient,
         // setTheme: setAppTheme,
         ChooseThemeOptions,
+        setRandomColorScheme
     }
 
     return (
