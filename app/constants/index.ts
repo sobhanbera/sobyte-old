@@ -161,10 +161,14 @@ export const AUTO_SCROLL_AFTER_USER_SCROLL_DURATION = 1000 // duration after whi
  *
  *
  */
-import {DefaultStatusBarComponent, PaddingBottomView} from './components'
+import {
+    DefaultStatusBarComponent,
+    PaddingBottomView,
+    DefaultDeviceHeightView,
+} from './components'
 import {shuffleArray} from '../utils'
 import {CommonColors} from '../themes/ThemeProps'
-export {DefaultStatusBarComponent, PaddingBottomView}
+export {DefaultStatusBarComponent, PaddingBottomView, DefaultDeviceHeightView}
 
 /** equal partition arrays for linear gradient locations */
 export const LINEAR_GRADIENT_LOCATIONS_2 = [0, 0.5]
