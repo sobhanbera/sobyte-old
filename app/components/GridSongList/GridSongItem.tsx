@@ -10,12 +10,7 @@ import {
     getHighQualityImageFromLinkWithHeight,
 } from '../../utils/Objects'
 import {styles} from './'
-import {
-    DEFAULT_IMAGE_SIZE,
-    DEFAULT_HIGH_IMAGE_QUALITY,
-    DEFAULT_TITLE_MARGIN,
-    DEFAULT_IMAGE_BORDER_RADIUS,
-} from '../../constants'
+import {DEFAULT_IMAGE_SIZE, DEFAULT_HIGH_IMAGE_QUALITY} from '../../constants'
 import {usePlayer} from '../../context'
 
 interface Props {
