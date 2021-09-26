@@ -84,7 +84,11 @@ const Explore: React.FC<ExploreTabProps> = props => {
                 showsVerticalScrollIndicator={false}>
                 <GradientBackground>
                     <HeaderCollapsible
-                        onPress={loacalMusicApiInit}
+                        onPress={() => {
+                            // nothing for now
+                            // actually this function was to change the random gradient color to a
+                            // different set of random gradient color array
+                        }}
                         headerScrollColor={themeColors.transparent[0]}
                         onInputFocus={launchSearchScreen}
                     />
