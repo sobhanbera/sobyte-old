@@ -5,7 +5,11 @@ import {
     StatusBar,
     StatusBarPropsAndroid,
     StatusBarProps,
+    NativeModules,
 } from 'react-native'
+
+const {StatusBarManager} = NativeModules
+const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT
 
 export const PaddingBottomView = (props: ViewStyle) => (
     <View
@@ -29,5 +33,13 @@ export const DefaultStatusBarComponent = (
         hidden={false}
         showHideTransition={'fade'}
         {...props}
+    />
+)
+
+export const DefaultDeviceHeightView = () => (
+    <View
+        style={{
+            marginBottom: DEVICE_STATUSBAR_HEIGHT_CONSTANT,
+        }}
     />
 )
