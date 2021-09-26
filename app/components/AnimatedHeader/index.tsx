@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, Text, Image, Dimensions, Pressable} from 'react-native'
+import {View, Text, Dimensions, Pressable} from 'react-native'
 import ImageHeaderScrollView, {
     TriggeringView,
 } from 'react-native-image-header-scroll-view'
@@ -11,7 +11,9 @@ import ImageColors from 'react-native-image-colors'
 import {useEffect} from 'react'
 
 import {
+    DefaultStatusBarComponent,
     DEFAULT_OVERLAY_OPACITY_MIN,
+    DEVICE_STATUSBAR_HEIGHT_CONSTANT,
     HEADER_MAX_HEIGHT,
     HEADER_MIN_HEIGHT,
     PaddingBottomView,
@@ -156,8 +158,8 @@ const AnimatedHeader = (props: Props) => {
             overlayColor={themeColors.surfacelight[0]}
             maxOverlayOpacity={DEFAULT_OVERLAY_OPACITY_MIN}
             minOverlayOpacity={DEFAULT_OVERLAY_OPACITY_MIN}
-            maxHeight={350}
-            minHeight={HEADER_MIN_HEIGHT}
+            maxHeight={400}
+            minHeight={HEADER_MIN_HEIGHT + DEVICE_STATUSBAR_HEIGHT_CONSTANT} // since the status bar is overflowing with the application...
             headerImage={{
                 uri: props.headerImage,
             }}
@@ -209,6 +211,7 @@ const AnimatedHeader = (props: Props) => {
                         {
                             backgroundColor: themeColors.transparent[0], //themeColors.surfacelight[0],
                             // borderBottomWidth: 1,
+                            top: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // since the status bar is overflowing with the application...
                         },
                     ]}
                     ref={headerTitleReference}>
@@ -229,6 +232,11 @@ const AnimatedHeader = (props: Props) => {
                 onBeginDisplayed={hideHeaderTitle}
                 onDisplay={hideHeaderTitle}>
                 <View style={{backgroundColor: themeColors.themecolor[0]}}>
+                    <DefaultStatusBarComponent
+                        backgroundColor={'white'}
+                        translucent={false}
+                    />
+
                     <LinearGradient colors={imageColors}>
                         {props.children}
                     </LinearGradient>
