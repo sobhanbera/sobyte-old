@@ -28,7 +28,7 @@ interface ExploreTabProps {
     navigation?: any
 }
 const Explore: React.FC<ExploreTabProps> = props => {
-    const {themeColors} = useTheme()
+    const {themeColors, randomGradient} = useTheme()
     const {initMusicApi, error} = useMusicApi()
 
     const [loading, setLoading] = useState<boolean>(false)
@@ -213,6 +213,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                                 animated: true,
                             })
                         }
+                        buttonColor={randomGradient[2]}
                     />
                     {/* end of the scrollview we are providing some spacing to look nice */}
                     <PaddingBottomView />

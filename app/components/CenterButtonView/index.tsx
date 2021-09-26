@@ -8,6 +8,7 @@ import {FontUbuntuBold} from '../../constants'
 interface Props {
     onPress: Function
     title: string
+    buttonColor?: string
 }
 const CenterButtonView = (props: Props) => {
     const {text, primary} = useTheme().themeColors
@@ -19,7 +20,7 @@ const CenterButtonView = (props: Props) => {
                     style={[
                         styles.button,
                         {
-                            backgroundColor: primary.dark[0],
+                            backgroundColor: props.buttonColor ?? primary.dark[0],
                         },
                     ]}>
                     <Text
