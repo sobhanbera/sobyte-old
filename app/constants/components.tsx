@@ -1,5 +1,11 @@
 import React from 'react'
-import {View, ViewStyle, StatusBar, StatusBarPropsAndroid} from 'react-native'
+import {
+    View,
+    ViewStyle,
+    StatusBar,
+    StatusBarPropsAndroid,
+    StatusBarProps,
+} from 'react-native'
 
 export const PaddingBottomView = (props: ViewStyle) => (
     <View
@@ -12,7 +18,9 @@ export const PaddingBottomView = (props: ViewStyle) => (
         ]}
     />
 )
-export const DefaultStatusBarComponent = (props: StatusBarPropsAndroid) => (
+export const DefaultStatusBarComponent = (
+    props: StatusBarPropsAndroid | StatusBarProps,
+) => (
     <StatusBar
         backgroundColor={'black'}
         translucent={true}
