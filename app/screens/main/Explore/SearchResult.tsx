@@ -139,8 +139,25 @@ const SearchResult: React.FC<Props> = props => {
                 })
     }
 
+    // /**
+    //  * it the input box is empty that also means the search text's length is 0
+    //  * in this case we will show the recent searched result in the suggestion list
+    //  */
+    // const checkWheatherSearchTextAvailable = () => {
+    //     if (searchText.length <= 0) {
+    //         setSearchSuggestions(previouslySearchedQueries)
+    //         setShowSearchSuggestions(true)
+    //     }
+    // }
+
     useEffect(() => {
         getSearchSuggestionsList()
+        /**
+         * it the input box is empty that also means the search text's length is 0
+         * in this case we will show the recent searched result in the suggestion list
+         * @deprecated
+         */
+        // checkWheatherSearchTextAvailable()
     }, [searchText])
 
     const searchResults = (query: string = searchText) => {
