@@ -28,6 +28,7 @@ import {
     AppLogoAnimationConstant,
     PREVIOUSLY_SEARCHED_QUERIES_ARRAY_STORAGE_KEY,
     DefaultStatusBarComponent,
+    DEVICE_STATUSBAR_HEIGHT_CONSTANT,
 } from '../../../constants'
 import {
     FetchedSongObject,
@@ -250,7 +251,9 @@ const SearchResult: React.FC<Props> = props => {
                 <View
                     style={{
                         position: 'absolute',
-                        top: HEADER_MIN_HEIGHT,
+                        top:
+                            HEADER_MIN_HEIGHT +
+                            DEVICE_STATUSBAR_HEIGHT_CONSTANT,
                         left: 0,
                         right: 0,
                         width: '100%',
