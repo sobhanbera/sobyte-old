@@ -61,10 +61,14 @@ const styles = StyleSheet.create({
     mainGridContainer: {
         paddingLeft: 6,
         paddingVertical: 5,
-        flexDirection: 'column',
-        flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
+        flexDirection: 'row',
+        /**
+         * below is needed to make this list double grid horizontally
+         */
+        // flexDirection: 'column',
+        // flexWrap: 'wrap',
+        // justifyContent: 'space-evenly',
+        // alignItems: 'center',
     },
     linearGradient: {
         borderRadius: 5,

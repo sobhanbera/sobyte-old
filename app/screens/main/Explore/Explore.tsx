@@ -102,12 +102,16 @@ const Explore: React.FC<ExploreTabProps> = props => {
                             justifyContent: 'center',
                             alignItems: 'center',
                             // elevation: 30,
+
+                            /**
+                             * below is needed to make this list double grid horizontally
+                             */
                             // this is the static height of block or else it will be all horizontal scroll with one row
-                            height:
-                                IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW * 3 + // the image size of gridCategory component
-                                3 * 5 + // top padding of image
-                                3 * 5 + // bottom padding of image
-                                0, // a random height to fit the items
+                            // height:
+                            //     IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW * 3 + // the image size of gridCategory component
+                            //     3 * 5 + // top padding of image
+                            //     3 * 5 + // bottom padding of image
+                            //     0, // a random height to fit the items
                         }}
                         noBackground={true}>
                         <Block
