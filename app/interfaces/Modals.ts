@@ -91,6 +91,7 @@ export interface AppUserData {
     verified_account?: number
     verified_email?: number
     access_token?: string | null
+    refresh_token?: string | null
 }
 
 /**
