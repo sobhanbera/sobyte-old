@@ -11,17 +11,33 @@
 import {NativeModules, Dimensions} from 'react-native'
 
 const {StatusBarManager} = NativeModules
-export const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT
 
 import * as Limits from './limits'
 import queries from './queries'
 export {Limits}
+
+import {
+    DefaultStatusBarComponent,
+    PaddingBottomView,
+    DefaultDeviceHeightView,
+} from './components'
+import {shuffleArray} from '../utils'
+import {CommonColors} from '../themes/ThemeProps'
 
 /** App details */
 export const APP_NAME = 'Sobyte'
 export const APP_DESCRIPTION = 'Free Music streamer and download.'
 export const APP_BACKEND_API_KEY =
     '16e65baf9179f923b9019281b795b1c49ebbce2a3fbef51df5d13eb646a7a598'
+
+export const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT
+
+/**
+ * jsx components................................
+ *
+ *
+ */
+export {DefaultStatusBarComponent, PaddingBottomView, DefaultDeviceHeightView}
 
 /** Author Details */
 export const AUTHOR_NAME = 'Sobhan Bera'
@@ -158,19 +174,6 @@ export const DEFAULT_QR_CODE_IMAGE_SIZE = 180
 export const GRADIENT_COLOR_SCHEME_ARRAY_MAX_LENGTH = 8
 
 export const AUTO_SCROLL_AFTER_USER_SCROLL_DURATION = 1000 // duration after which the song's lyrics will be auto scrolled to its perfect position. NOTE: if the user has scrolled to different position of lyrics than this will work...
-/**
- * jsx components................................
- *
- *
- */
-import {
-    DefaultStatusBarComponent,
-    PaddingBottomView,
-    DefaultDeviceHeightView,
-} from './components'
-import {shuffleArray} from '../utils'
-import {CommonColors} from '../themes/ThemeProps'
-export {DefaultStatusBarComponent, PaddingBottomView, DefaultDeviceHeightView}
 
 /** equal partition arrays for linear gradient locations */
 export const LINEAR_GRADIENT_LOCATIONS_2 = [0, 0.5]
