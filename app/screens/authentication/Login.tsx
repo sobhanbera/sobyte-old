@@ -32,6 +32,17 @@ import {
 import {EMAIL_REGEX} from '../../constants'
 import {isEmailBlocked} from '../../utils'
 import {SIGN_IN_ROUTE_ENDPOINT} from '../../constants/endPoints'
+import {
+    SHORT_PASSWORD,
+    PROVIDED_INCOMPLETE_DATA,
+    EMAIL_LENGTH_EXCEED,
+    PASSWORD_LENGTH_EXCEED,
+    SIGNIN_FAILED,
+    USER_NOT_FOUND,
+    WRONG_PASSWORD,
+    USER_ACCOUNT_IS_DISABLED,
+    SUCCESS,
+} from '../../constants/apiCodes'
 
 interface LoginProps {
     navigation: any
@@ -98,30 +109,30 @@ const Login = (props: LoginProps) => {
             })
                 .then(res => {
                     const {code} = res.data
-                    if (code === 'PROVIDED_INCOMPLETE_DATA') {
+                    if (code === PROVIDED_INCOMPLETE_DATA) {
                         setPromptTitle('Something went wrong in your end.')
-                    } else if (res.data.code === 'EMAIL_LENGTH_EXCEED') {
+                    } else if (res.data.code === EMAIL_LENGTH_EXCEED) {
                         setPromptTitle(
                             'The account with this detail is blocked/deleted or may be now allowed.',
                         )
                     } else if (
-                        res.data.code === 'SHORT_PASSWORD' ||
-                        res.data.code === 'PASSWORD_LENGTH_EXCEED'
+                        res.data.code === SHORT_PASSWORD ||
+                        res.data.code === PASSWORD_LENGTH_EXCEED
                     ) {
                         setPromptTitle('Wrong password. Please try again.')
-                    } else if (res.data.code === 'SIGNIN_FAILED') {
+                    } else if (res.data.code === SIGNIN_FAILED) {
                         setPromptTitle(
                             'Something went wrong. Please try again.',
                         )
-                    } else if (res.data.code === 'USER_NOT_FOUND') {
+                    } else if (res.data.code === USER_NOT_FOUND) {
                         setPromptTitle('No user account found with this data.')
-                    } else if (res.data.code === 'WRONG_PASSWORD') {
+                    } else if (res.data.code === WRONG_PASSWORD) {
                         setPromptTitle('Wrong password. Please try again.')
-                    } else if (res.data.code === 'USER_ACCOUNT_IS_DISABLED') {
+                    } else if (res.data.code === USER_ACCOUNT_IS_DISABLED) {
                         setPromptTitle(
                             'This account is disabled and not allowed to login.',
                         )
-                    } else if (res.data.code === 'SUCCESS') {
+                    } else if (res.data.code === SUCCESS) {
                         setPromptTitle('User successfully logged in.')
                         setLocalUserData(JSON.stringify(res.data.data))
                     }
