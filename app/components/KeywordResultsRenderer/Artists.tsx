@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {BlockCardArtistList} from '..'
+import {BlockCardArtistList} from '../'
 import {useMusicApi} from '../../api'
 import {
     ArtistObject,

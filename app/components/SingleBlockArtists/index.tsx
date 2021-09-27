@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text as BlockTitle} from 'react-native-paper'
 
-import Block from '../Block'
+import {Block} from '../'
 import {GridArtistList} from '../'
 import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'

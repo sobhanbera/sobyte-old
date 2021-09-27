@@ -4,7 +4,7 @@ import {FlatList, StyleSheet} from 'react-native'
 import {ArtistObject} from '../../interfaces'
 import {useSetting} from '../../context'
 import {
-    IMAGE_SIZE_TO_SHOW,
+    MAX_IMAGE_SIZE_TO_SHOW,
     IMAGE_MARGIN_TO_SHOW,
     IMAGE_PADDING_TO_SHOW,
     ARTIST_DETAILS_SCREEN,
@@ -53,7 +53,7 @@ const GridArtistList = React.memo(
                 showsVerticalScrollIndicator={false}
                 horizontal
                 snapToInterval={
-                    IMAGE_SIZE_TO_SHOW +
+                    MAX_IMAGE_SIZE_TO_SHOW +
                     IMAGE_MARGIN_TO_SHOW +
                     IMAGE_PADDING_TO_SHOW +
                     IMAGE_PADDING_TO_SHOW * 2
@@ -112,14 +112,14 @@ export const styles = StyleSheet.create({
     },
     contentImage: {
         borderRadius: 180,
-        maxWidth: IMAGE_SIZE_TO_SHOW,
-        maxHeight: IMAGE_SIZE_TO_SHOW,
-        width: IMAGE_SIZE_TO_SHOW,
-        height: IMAGE_SIZE_TO_SHOW,
+        maxWidth: MAX_IMAGE_SIZE_TO_SHOW,
+        maxHeight: MAX_IMAGE_SIZE_TO_SHOW,
+        width: MAX_IMAGE_SIZE_TO_SHOW,
+        height: MAX_IMAGE_SIZE_TO_SHOW,
         overflow: 'hidden',
     },
     artistTitle: {
-        width: IMAGE_SIZE_TO_SHOW,
+        width: MAX_IMAGE_SIZE_TO_SHOW,
         fontSize: 16,
         paddingTop: 5,
         paddingBottom: 5,
@@ -127,7 +127,7 @@ export const styles = StyleSheet.create({
         textAlignVertical: 'center',
     },
     artist: {
-        width: IMAGE_SIZE_TO_SHOW,
+        width: MAX_IMAGE_SIZE_TO_SHOW,
         fontSize: 14,
         paddingTop: 3,
         paddingBottom: 2,
@@ -138,7 +138,7 @@ export const styles = StyleSheet.create({
         borderRadius: 6,
     },
     dummyText: {
-        width: IMAGE_SIZE_TO_SHOW,
+        width: MAX_IMAGE_SIZE_TO_SHOW,
         height: 10,
         borderRadius: 2,
         marginVertical: 5,
