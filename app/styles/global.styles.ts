@@ -9,6 +9,7 @@ import {
     DEFAULT_TINY_ICON_SIZE,
     IMAGE_TINY_SIZE_TO_SHOW,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
+    IMAGE_MARGIN_TO_SHOW,
 } from '../constants'
 import {StyleSheet} from 'react-native'
 
@@ -47,9 +48,9 @@ const globalStyles = StyleSheet.create({
         fontSize: 20,
         fontFamily: FontRobotoBold,
         letterSpacing: 0.6,
-        paddingHorizontal: 13,
+        paddingHorizontal: IMAGE_MARGIN_TO_SHOW,
         paddingVertical: 8,
-        marginHorizontal: 20,
+        marginHorizontal: IMAGE_MARGIN_TO_SHOW,
         textAlign: 'center',
         textAlignVertical: 'center',
     },
