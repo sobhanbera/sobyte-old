@@ -3,12 +3,14 @@ import {FlatList, StyleSheet, ListRenderItemInfo} from 'react-native'
 
 import {SongObject} from '../../interfaces'
 import {
-    IMAGE_SIZE_TO_SHOW,
+    MAX_IMAGE_SIZE_TO_SHOW,
     IMAGE_MARGIN_TO_SHOW,
     IMAGE_PADDING_TO_SHOW,
     DEFAULT_IMAGE_BORDER_RADIUS,
     COMMON_COLORS,
     DEFAULT_TITLE_MARGIN,
+    IMAGE_WIDTH_TO_SHOW,
+    IMAGE_HEIGHT_TO_SHOW,
 } from '../../constants'
 import GridSongList_SelfShimmer from './SelfShimmer'
 import GridSongItem from './GridSongItem'
@@ -62,7 +64,7 @@ const GridSongList = React.memo(
                 showsVerticalScrollIndicator={false}
                 horizontal
                 snapToInterval={
-                    IMAGE_SIZE_TO_SHOW +
+                    IMAGE_WIDTH_TO_SHOW +
                     IMAGE_MARGIN_TO_SHOW +
                     IMAGE_PADDING_TO_SHOW +
                     IMAGE_PADDING_TO_SHOW
@@ -101,20 +103,19 @@ export const styles = StyleSheet.create({
         borderRadius: 6,
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
-        maxWidth: IMAGE_SIZE_TO_SHOW,
-        maxHeight: IMAGE_SIZE_TO_SHOW,
-        width: IMAGE_SIZE_TO_SHOW,
-        height: IMAGE_SIZE_TO_SHOW,
+
+        maxWidth: MAX_IMAGE_SIZE_TO_SHOW,
+        maxHeight: MAX_IMAGE_SIZE_TO_SHOW,
+        width: IMAGE_WIDTH_TO_SHOW,
+        height: IMAGE_HEIGHT_TO_SHOW,
     },
     songTitle: {
-        width: IMAGE_SIZE_TO_SHOW,
         fontSize: 14,
         paddingTop: 5,
         paddingBottom: 1,
         paddingHorizontal: DEFAULT_TITLE_MARGIN,
     },
     artist: {
-        width: IMAGE_SIZE_TO_SHOW,
         fontSize: 12,
         paddingTop: 1,
         paddingBottom: IMAGE_MARGIN_TO_SHOW + 3,
@@ -126,7 +127,7 @@ export const styles = StyleSheet.create({
         borderRadius: 6,
     },
     dummyText: {
-        width: IMAGE_SIZE_TO_SHOW,
+        width: IMAGE_WIDTH_TO_SHOW,
         height: 10,
         borderRadius: 2,
         marginVertical: 5,

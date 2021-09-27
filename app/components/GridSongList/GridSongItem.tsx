@@ -80,10 +80,6 @@ const GridSongItem = React.memo(
                             {
                                 borderWidth: 0.2,
                                 borderColor: subColor,
-                                maxWidth: 150,
-                                maxHeight: 150,
-                                width: 135,
-                                height: 145,
                             },
                         ]}
                     />
