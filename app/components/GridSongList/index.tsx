@@ -106,16 +106,20 @@ export const styles = StyleSheet.create({
 
         maxWidth: MAX_IMAGE_SIZE_TO_SHOW,
         maxHeight: MAX_IMAGE_SIZE_TO_SHOW,
-        width: IMAGE_WIDTH_TO_SHOW,
+        width: IMAGE_WIDTH_TO_SHOW, // this should be the same below...
         height: IMAGE_HEIGHT_TO_SHOW,
     },
     songTitle: {
+        width: IMAGE_WIDTH_TO_SHOW, // this should be the same below...
+
         fontSize: 14,
         paddingTop: 5,
         paddingBottom: 1,
         paddingHorizontal: DEFAULT_TITLE_MARGIN,
     },
     artist: {
+        width: IMAGE_WIDTH_TO_SHOW, // this should be the same below...
+
         fontSize: 12,
         paddingTop: 1,
         paddingBottom: IMAGE_MARGIN_TO_SHOW + 3,
