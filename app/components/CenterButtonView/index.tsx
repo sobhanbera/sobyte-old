@@ -20,7 +20,8 @@ const CenterButtonView = (props: Props) => {
                     style={[
                         styles.button,
                         {
-                            backgroundColor: props.buttonColor ?? primary.dark[0],
+                            backgroundColor:
+                                props.buttonColor ?? primary.dark[0],
                         },
                     ]}>
                     <Text
