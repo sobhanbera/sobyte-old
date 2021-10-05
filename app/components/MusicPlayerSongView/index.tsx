@@ -41,7 +41,8 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
         DEFAULT_HIGH_IMAGE_SIZE,
         DEFAULT_HIGH_IMAGE_QUALITY,
     )
-    const artists = formatArtists(song.artist)
+    const title = formatTrackTitle(song.name)
+    const artistsString = capitalizeWords(formatArtists(song.artist))
 
     return (
         <DoubleTap onDoubleTap={likeIsMusic}>
@@ -78,7 +79,7 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                         style={{
                             fontSize: 25,
                             fontFamily: FontUbuntuBold,
-                            color: 'white',
+                            color: themeColors.white[0],
                             textAlign: 'left',
                             width: '100%',
                             alignSelf: 'flex-start',
@@ -93,16 +94,17 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                         scrollSpeed={1}
                         animationType="scroll"
                         marqueeDelay={1000}>
-                        {formatTrackTitle(song.name)}
+                        {title}
                     </MarqueeText>
                     <Text
                         style={{
-                            fontSize: 16,
-                            color: 'white',
+                            fontSize: 20,
+                            fontFamily: FontUbuntuBold,
+                            color: themeColors.white[0] + 'AF',
                             paddingVertical: 1,
                             paddingHorizontal: 5,
                         }}>
-                        {capitalizeWords(artists)}
+                        {artistsString}
                     </Text>
                 </View>
 
