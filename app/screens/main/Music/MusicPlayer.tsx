@@ -643,9 +643,9 @@ const Player: FC<PlayerProps> = props => {
                     viewabilityConfig={ViewabilityConfig}
                     onViewableItemsChanged={onViewableItemsChanged}
                     scrollEventThrottle={16}
-                    onResponderRelease={re => {
-                        console.log(re)
-                    }}
+                    // onResponderRelease={re => {
+                    //     console.log(re)
+                    // }}
                     scrollToOverflowEnabled
                     overScrollMode={'never'}
                     pagingEnabled
