@@ -608,10 +608,12 @@ const Player: FC<PlayerProps> = props => {
             angle={175}>
             <DefaultStatusBarComponent backgroundColor={'transparent'} />
 
+            {/* this section is temporarily commented */}
             {/* main content of this particular tab */}
-            {songs?.content.length && songs?.content[0].musicId.length ? (
+            {/* {songs?.content.length && songs?.content[0].musicId.length ? (
                 <View style={StyleSheet.absoluteFillObject}>
                     {songs.content.map((song, _) => {
+                        // return null
                         return (
                             <BackgroundBluredImage
                                 key={`${song.id}-${_}`}
@@ -622,7 +624,7 @@ const Player: FC<PlayerProps> = props => {
                         )
                     })}
                 </View>
-            ) : null}
+            ) : null} */}
 
             <View
                 style={{
