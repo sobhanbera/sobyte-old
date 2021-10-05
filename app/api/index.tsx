@@ -786,7 +786,8 @@ const MusicApi = (props: MusicApiProps) => {
                          * `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`
                          */
                         if (saveToLocalStorage) {
-                            if (isOffline) {
+                            // if the internet is available then only save the data
+                            if (!isOffline) {
                                 AsyncStorage.setItem(
                                     saveToCustomLocation ||
                                         `${SEARCHED_SONG_OFFLINE_DATA_STORAGE_KEY}${query}${categoryName}`,
