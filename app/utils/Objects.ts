@@ -216,6 +216,13 @@ export function capitalizeWords(string: string) {
  * but the change is this function replaces text between (), [] and {} to null/empty
  */
 export function formatTrackTitle(trackTitle: string) {
+    // we are checking if the trackTitle contain only one word
+    // in that case we will return the full uppercase of the word...
+    if (trackTitle.split(' ').length - 1 <= 0) {
+        return capitalizeWords(
+            trackTitle.replace(BRACKET_BRACES_AND_PARENTHESIS_INSIDE_TEXT, ''),
+        ).toUpperCase()
+    }
     return capitalizeWords(
         trackTitle.replace(BRACKET_BRACES_AND_PARENTHESIS_INSIDE_TEXT, ''),
     )
