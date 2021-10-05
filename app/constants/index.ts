@@ -146,7 +146,7 @@ export const DEFAULT_NOTIFICATION_IMAGE_QUALITY = '100' // the quality of the im
 
 export const INFINITE_SCROLL_OFFSET = 1000 // default image width and height in string...
 
-export const LARGE_TEXT_LENGTH = 15 // length of the text after which "..." will be shown
+export const MAX_DISPLAY_TEXT_LENGTH = 18 // length of the text after which "..." will be shown
 export const IMAGE_TINY_SIZE_TO_SHOW = 40 // width and height of the tiny sized image which should be shown in the UI
 export const IMAGE_SMALL_SIZE_TO_SHOW = 60 // width and height of the small sized image which should be shown in the UI
 export const IMAGE_CATEGORY_SMALL_SIZE_TO_SHOW = 90 // width and height of the small sized image which should be shown in the UI

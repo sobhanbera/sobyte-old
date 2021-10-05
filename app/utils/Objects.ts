@@ -4,7 +4,7 @@ import {
     BRACKET_BRACES_AND_PARENTHESIS_INSIDE_TEXT,
     DEFAULT_NOTIFICATION_IMAGE_QUALITY,
     DEFAULT_NOTIFICATION_IMAGE_SIZE,
-    LARGE_TEXT_LENGTH,
+    MAX_DISPLAY_TEXT_LENGTH,
     PASSWORD_CHARACTERS,
 } from '../constants'
 import {FakeMailsList} from '../constants/fakeMails'
@@ -135,7 +135,7 @@ export function formatArtists(
  */
 export function trimLargeString(
     text: string,
-    length: number = LARGE_TEXT_LENGTH,
+    length: number = MAX_DISPLAY_TEXT_LENGTH,
 ) {
     if (text.length > length) return text.substring(0, length) + '...'
     return firstLetterCap(text)
