@@ -749,6 +749,12 @@ const MusicApi = (props: MusicApiProps) => {
                                 break
                         }
 
+                        /** sometime the above same check may pass false since the network check may take time
+                         * so here we are making sure if any local data is present and user is offline then
+                         * no need to provide the latest data
+                         */
+                        if (isOffline) return
+
                         /**
                          * if the provided subarray is correct then we will provide the data in that range
                          */
