@@ -1,10 +1,9 @@
 import React from 'react'
 import {StyleSheet, Animated, Dimensions} from 'react-native'
 
-import {APP_LOGO_LINK} from '../../constants'
+import {APP_LOGO_LINK, MUSIC_PLAYER_BLUR} from '../../constants'
 
 const {width, height} = Dimensions.get('screen')
-const IMAGE_BLUR_RADIUS = 50
 
 interface Props {
     image: string
@@ -35,7 +34,7 @@ const BackgroundBluredImage = (props: Props) => {
                 uri: image || APP_LOGO_LINK,
                 // cache: 'force-cache',
             }}
-            blurRadius={IMAGE_BLUR_RADIUS}
+            blurRadius={MUSIC_PLAYER_BLUR}
         />
     )
 }

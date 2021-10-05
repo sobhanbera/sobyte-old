@@ -12,6 +12,7 @@ import {
     MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION,
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
+    MUSIC_PLAYER_BLUR,
 } from '../../constants'
 import {
     formatArtists,
@@ -20,8 +21,6 @@ import {
     formatTrackTitle,
 } from '../../utils'
 import {SongObject} from '../../interfaces'
-
-const IMAGE_BLUR_RADIUS = 25
 
 interface SongView {
     song: SongObject
@@ -33,7 +32,7 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
     const averageQualityImage = getHighQualityImageFromLinkWithHeight(
         song.thumbnails[0].url,
         song.thumbnails[0].height,
-        '120',
+        '300',
         50,
     )
     const highQualityImage = getHighQualityImageFromLinkWithHeight(
@@ -66,8 +65,9 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                     justifyContent: 'space-evenly',
                     alignItems: 'center',
                     paddingBottom: 20, // the main bottom tab bar navigation height is overlping the children component so providing a padding bottom of 15~25
+                    // opacity: 0,
                 }}
-                blurRadius={IMAGE_BLUR_RADIUS}>
+                blurRadius={MUSIC_PLAYER_BLUR}>
                 <View
                     style={{
                         width: '75%',
