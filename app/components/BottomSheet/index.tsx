@@ -13,7 +13,12 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import BottomSheetMain, {BottomSheetScrollView} from '@gorhom/bottom-sheet'
 
 import {useTheme} from '../../context'
-import {DEFAULT_ICON_SIZE, FontUbuntu} from '../../constants'
+import {
+    DEFAULT_ICON_SIZE,
+    DEVICE_STATUSBAR_HEIGHT_CONSTANT,
+    FontUbuntu,
+    SCREEN_HEIGHT,
+} from '../../constants'
 import {Handle} from './Handle'
 import {Backdrop} from './Backdrop'
 
@@ -47,7 +52,11 @@ const BottomSheet = (props: Props) => {
     return (
         <BottomSheetMain
             index={props.isVisible ? 0 : -1}
-            snapPoints={[300, '100%']}
+            snapPoints={[
+                300,
+                500,
+                SCREEN_HEIGHT - DEVICE_STATUSBAR_HEIGHT_CONSTANT,
+            ]}
             onChange={position => {
                 if (position <= -1) props.setVisible(false)
             }}
