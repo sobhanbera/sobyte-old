@@ -46,7 +46,7 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
             styles.header,
             {
                 backgroundColor: surfacelight[0],
-                borderBottomWidth: 0.4,
+                borderBottomWidth: 0,
                 borderBottomColor: border[0],
             },
             style,
@@ -98,7 +98,7 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
                     rotate: `${leftIndicatorRotate}rad`,
                 },
                 {
-                    translateX: -7, // this translate property's value must be the half of the indicator width / 2
+                    translateX: -5, // this translate property's value must be the half of the indicator width / 2
                 },
             ),
         }
@@ -132,7 +132,7 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
                     rotate: `${rightIndicatorRotate}rad`,
                 },
                 {
-                    translateX: 7, // this translate property's value must be the half of the indicator width / 2
+                    translateX: 5, // this translate property's value must be the half of the indicator width / 2
                 },
             ),
         }
@@ -159,12 +159,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'white',
         paddingVertical: 14,
-        height: 55,
+        height: 35,
     },
     indicator: {
         position: 'absolute',
-        width: 14,
-        height: 3,
+        width: 10,
+        height: 2,
         backgroundColor: 'white',
     },
     leftIndicator: {
