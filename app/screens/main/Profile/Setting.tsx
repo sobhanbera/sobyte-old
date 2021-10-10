@@ -1,21 +1,22 @@
 import React, {useState} from 'react'
-import {ScrollView, Text, ToastAndroid} from 'react-native'
+import {ScrollView, ToastAndroid} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {
     Area,
-    BottomSheet,
+    AreaTitle,
     GradientBackground,
     HeaderMain,
 } from '../../../components'
 import {useSetting, useTheme, useUserData} from '../../../context'
-import globalStyles from '../../../styles/global.styles'
 import {
     AUDIO_QUALITY_STORAGE_KEY,
     BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
     DefaultStatusBarComponent,
+    PaddingBottomView,
     SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
 } from '../../../constants'
+import AboutAppDetail from '../../../../app.data.details'
 
 interface SettingProps {
     navigation?: any
@@ -55,10 +56,13 @@ const Setting: React.FC<SettingProps> = props => {
                     color={themeColors.white[0] + 'DD'}
                 />
 
+                {/* main settings of the application */}
+                <AreaTitle title="Language" />
+
                 {/* component to update the global application language  */}
                 <Area
-                    icon
-                    spacing
+                    title={t('setting:app_language')}
+                    description={"Update application's language"}
                     onPress={() =>
                         openSettingsUpdater(
                             {
@@ -87,16 +91,14 @@ const Setting: React.FC<SettingProps> = props => {
                             },
                             t('setting:app_language'),
                         )
-                    }>
-                    <Text style={globalStyles.areaTitle}>
-                        {t('setting:app_language')}
-                    </Text>
-                </Area>
+                    }
+                />
 
+                <AreaTitle title="Data Saving" />
                 {/* component to update audio quality throughout the application */}
                 <Area
-                    icon
-                    spacing
+                    title={t('setting:choose_audio_quality')}
+                    description={'Choose audio quality for music'}
                     onPress={() =>
                         openSettingsUpdater(
                             {
@@ -141,16 +143,14 @@ const Setting: React.FC<SettingProps> = props => {
                             },
                             t('setting:choose_audio_quality'),
                         )
-                    }>
-                    <Text style={globalStyles.areaTitle}>
-                        {t('setting:choose_audio_quality')}
-                    </Text>
-                </Area>
-
+                    }
+                />
                 {/* component to update image quality throughout the application */}
                 <Area
-                    icon
-                    spacing
+                    title={t('setting:image_optimization')}
+                    description={
+                        'Choose the image quality to be loaded for songs'
+                    }
                     onPress={() =>
                         openSettingsUpdater(
                             {
@@ -263,16 +263,16 @@ const Setting: React.FC<SettingProps> = props => {
                             },
                             t('setting:choose_audio_quality'),
                         )
-                    }>
-                    <Text style={globalStyles.areaTitle}>
-                        {t('setting:image_optimization')}
-                    </Text>
-                </Area>
+                    }
+                />
 
+                <AreaTitle title="Customization" />
                 {/* component to update theme throughout the application */}
                 <Area
-                    icon
-                    spacing
+                    title={t('setting:customize_background_theme')}
+                    description={
+                        'Change global application theme according to your preference'
+                    }
                     onPress={() =>
                         openSettingsUpdater(
                             {
@@ -354,19 +354,65 @@ const Setting: React.FC<SettingProps> = props => {
                             },
                             t('setting:choose_audio_quality'),
                         )
-                    }>
-                    <Text style={globalStyles.areaTitle}>
-                        {t('setting:customize_background_theme')}
-                    </Text>
-                </Area>
+                    }
+                />
 
+                <AreaTitle title="Danger" />
                 {/* danger button for logging out user's account */}
                 {/* THIS IS AT THE LAST AND IS LOGOUT BUTTON.... */}
-                <Area icon spacing onPress={() => logout()} danger>
-                    <Text style={globalStyles.areaTitle}>
-                        {t('setting:logout')}
-                    </Text>
-                </Area>
+                <Area
+                    danger
+                    title={t('setting:logout')}
+                    description={'User data will be removed from your device.'}
+                    onPress={() => logout()}
+                />
+
+                <AreaTitle title="Information" />
+                <Area
+                    icon={false}
+                    disabled
+                    title={t('setting:version')}
+                    description={AboutAppDetail.version}
+                    onPress={() => {}}
+                />
+                <Area
+                    icon={false}
+                    title={t('setting:terms_and_conditions')}
+                    description={
+                        'Information you must know before using this application.'
+                    }
+                    onPress={() => {}}
+                />
+                <Area
+                    icon={false}
+                    title={t('setting:privacy_policy')}
+                    description={
+                        'Our privacy policies. This is very important for both of us.'
+                    }
+                    onPress={() => {}}
+                />
+                <Area
+                    title={t('setting:give_feedback')}
+                    description={'We are always waiting for your response.'}
+                    onPress={() => {}}
+                />
+                <Area
+                    title={t('setting:support')}
+                    description={
+                        'Any difficulty using the app? Submit a query.'
+                    }
+                    onPress={() => {}}
+                />
+                <Area
+                    icon={false}
+                    title={t('setting:app info about contributors')}
+                    description={
+                        'Information you must know before using this application.'
+                    }
+                    onPress={() => {}}
+                />
+
+                <PaddingBottomView />
             </ScrollView>
         </GradientBackground>
     )
