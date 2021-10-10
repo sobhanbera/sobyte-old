@@ -270,7 +270,7 @@ const Player: FC<PlayerProps> = props => {
                 )
             })
             .catch(() => {
-                setShowLoading(false)
+                if (showLoading && play) setShowLoading(false)
             })
     }
 
