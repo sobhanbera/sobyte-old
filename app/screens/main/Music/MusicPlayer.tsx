@@ -536,14 +536,11 @@ const Player: FC<PlayerProps> = props => {
         /**
          * generating the data required for playing the song
          */
-        // const trackImage = getNotificationPlayerImageFromLinkWithHeight(
-        //     item.thumbnails[0].url,
-        //     item.thumbnails[0].height,
-        // )
+        const trackImage = getNotificationPlayerImageFromLinkWithHeight(
+            item.thumbnails[0].url,
+            item.thumbnails[0].height,
+        )
         const artists = formatArtists(item.artist)
-
-        const trackImage =
-            'https://lh3.googleusercontent.com/lDDamgMBjF1o8ocsdDwoRPo-zuSaHNI3aGeyMpJO_AjNE6HAPZFyJ39wh-A2ySnx2XyPECOQb1HLKn3G=w550-h550-l80-rj'
 
         /**
          *  this below step is very very very important to load data and show data in the UI
