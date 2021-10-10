@@ -23,6 +23,7 @@ import HeaderSearch from './HeaderSearch'
 import HeaderCollapsible from './HeaderCollapsible'
 
 import Area from './Area'
+import AreaTitle from './AreaTitle'
 import Block from './Block'
 import Prompt from './Prompt'
 
@@ -80,8 +81,8 @@ export {
     DoubleTap,
     GradientBackground,
     Area,
+    AreaTitle,
     Block,
-    Area as Section,
     Prompt,
     BottomSheet,
     BottomSheet as SimpleBottomSheet,
