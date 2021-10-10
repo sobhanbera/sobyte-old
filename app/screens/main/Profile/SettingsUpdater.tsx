@@ -11,15 +11,18 @@ import {
 } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
+import {GradientBackground, HeaderMain} from '../../../components'
 import {useTheme} from '../../../context'
-import {DEFAULT_ICON_SIZE, FontUbuntu} from '../../../constants'
+import {
+    DEFAULT_ICON_SIZE,
+    FontUbuntu,
+    DefaultStatusBarComponent,
+} from '../../../constants'
 
 interface Props {
     route: {
         params: {
-            isVisible: boolean
-            setVisible: Function
-            startingTextAlign?: boolean
+            title: string
             extraFunction?: Function
             buttons: Array<{
                 text: string
@@ -34,19 +37,26 @@ interface Props {
             }>
         }
     }
+    navigation?: any
 }
 const SettingsUpdater: React.FC<Props> = realProps => {
     const props = realProps.route.params
 
-    const {surfacelight, text, placeholder, primary, border, onWarning} =
+    const {surfacelight, text, placeholder, primary, border, onWarning, white} =
         useTheme().themeColors
 
     const executeExtraFunctionHelper = () =>
         props.extraFunction ? props.extraFunction() : {}
-    if (!props.isVisible) return null
 
     return (
-        <View style={{backgroundColor: surfacelight[0]}}>
+        <GradientBackground uniformColor>
+            <DefaultStatusBarComponent backgroundColor={surfacelight[0]} />
+            <HeaderMain
+                navigation={realProps.navigation}
+                title={props.title}
+                color={white[0] + 'DD'}
+            />
+
             <View style={{backgroundColor: surfacelight[0]}}>
                 {props.buttons.map((button, _) => {
                     if (button.type === 'input') {
@@ -75,6 +85,7 @@ const SettingsUpdater: React.FC<Props> = realProps => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             button.onPress()
+                                            realProps.navigation.goBack()
                                         }}
                                         style={{padding: 15}}>
                                         <MaterialIcon
@@ -107,7 +118,7 @@ const SettingsUpdater: React.FC<Props> = realProps => {
                             onPress={() => {
                                 button.onPress()
                                 executeExtraFunctionHelper()
-                                props.setVisible(false)
+                                realProps.navigation.goBack()
                             }}
                             style={[
                                 styles.button,
@@ -115,16 +126,7 @@ const SettingsUpdater: React.FC<Props> = realProps => {
                                     borderBottomColor: border[0],
                                 },
                             ]}>
-                            <Text
-                                style={[
-                                    styles.textItem,
-                                    props.startingTextAlign ||
-                                    button.extraText?.length
-                                        ? styles.startingTextAlign
-                                        : {},
-                                ]}>
-                                {button.text}
-                            </Text>
+                            <Text style={[styles.textItem]}>{button.text}</Text>
                             <Text style={[styles.textItem]}>
                                 {button.extraText}
                             </Text>
@@ -132,7 +134,7 @@ const SettingsUpdater: React.FC<Props> = realProps => {
                     )
                 })}
             </View>
-        </View>
+        </GradientBackground>
     )
 }
 
