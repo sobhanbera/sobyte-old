@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 
 import Profile from '../../screens/main/Profile/Profile'
 import Setting from '../../screens/main/Profile/Setting'
+import SettingsUpdater from '../../screens/main/Profile/SettingsUpdater'
 
 const ProfileStack = createStackNavigator()
 interface Props {}
@@ -15,6 +16,10 @@ const ProfileStackNavigator = (props: Props) => {
             initialRouteName="profile">
             <ProfileStack.Screen name="profile" component={Profile} />
             <ProfileStack.Screen name="setting" component={Setting} />
+            <ProfileStack.Screen
+                name="settingsupdater"
+                component={SettingsUpdater}
+            />
         </ProfileStack.Navigator>
     )
 }
