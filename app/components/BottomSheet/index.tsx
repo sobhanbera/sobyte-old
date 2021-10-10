@@ -40,6 +40,12 @@ interface Props {
     }>
     extraFunction?: Function
 }
+/**
+ * @deprecated
+ * Bottom sheet component
+ * @param props
+ * @returns
+ */
 const BottomSheet = (props: Props) => {
     const {surfacelight, text, placeholder, primary, border, onWarning} =
         useTheme().themeColors
