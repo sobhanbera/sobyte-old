@@ -29,7 +29,11 @@
         "graphite": "গ্রাফাইট",
         "disco": "ডিস্কো",
 
-        "logout": "লগ আউট করুন"
+        "logout": "লগ আউট করুন",
+        "terms_and_conditions": "শর্তাবলী",
+        "privacy_policy": "গোপনীয়তা নীতি",
+        "give_feedback": "মতামত দিন",
+        "support": "সমর্থন পেতে"
     },
     "authentication": {
         "signin": "সাইন ইন করুন",

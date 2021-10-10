@@ -29,7 +29,11 @@
         "graphite": "Graphite",
         "disco": "Disco",
 
-        "logout": "Logout"
+        "logout": "Logout",
+        "terms_and_conditions": "Terms And Conditions",
+        "privacy_policy": "Privacy Policy",
+        "give_feedback": "Give Feedback",
+        "support": "Get Support"
     },
     "authentication": {
         "signin": "Sign In",

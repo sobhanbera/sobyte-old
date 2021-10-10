@@ -29,7 +29,11 @@
         "graphite": "ग्रेफाइट",
         "disco": "डिस्को",
 
-        "logout": "लॉग आउट"
+        "logout": "Logout",
+        "terms_and_conditions": "नियम और शर्तें",
+        "privacy_policy": "गोपनीयता नीति",
+        "give_feedback": "प्रतिक्रिया दें",
+        "support": "सहायता प्राप्त करें"
     },
     "authentication": {
         "signin": "साइन इन करें",
