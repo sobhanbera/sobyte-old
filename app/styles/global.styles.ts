@@ -10,6 +10,10 @@ import {
     IMAGE_TINY_SIZE_TO_SHOW,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
     IMAGE_MARGIN_TO_SHOW,
+    FontHelvetica,
+    FontLucida,
+    FontVerdana,
+    FontVerdanaBold,
 } from '../constants'
 import {StyleSheet} from 'react-native'
 
@@ -131,11 +135,25 @@ const globalStyles = StyleSheet.create({
         height: '100%',
     },
 
+    areaBoldTitle: {
+        color: '#DFDFDF',
+        fontSize: 14,
+        fontFamily: FontVerdanaBold,
+        paddingTop: 10,
+        paddingBottom: 0,
+        // includeFontPadding: true,
+    },
     areaTitle: {
-        color: '#FFFFFFE0',
-        fontSize: 18,
-        fontFamily: FontTahoma,
-        paddingVertical: 10,
+        color: '#DFDFDF',
+        fontSize: 16,
+        fontFamily: FontVerdana,
+        paddingBottom: 4,
+        includeFontPadding: true,
+    },
+    areaDescription: {
+        color: '#B7B7B7',
+        fontSize: 13,
+        fontFamily: FontVerdana,
         includeFontPadding: true,
     },
 
