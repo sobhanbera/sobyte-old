@@ -15,6 +15,7 @@ interface Props {
     icon?: React.ReactNode
     iconName?: string
     danger?: boolean
+    disabled?: boolean
 }
 
 const Area = (props: Props) => {
@@ -22,6 +23,7 @@ const Area = (props: Props) => {
 
     return (
         <TouchableRipple
+            disabled={props.disabled}
             rippleColor={props.danger ? red[0] : surface[0]}
             onPress={() => (props.onPress ? props.onPress() : {})}
             style={{
@@ -44,7 +46,11 @@ const Area = (props: Props) => {
                     }}>
                     <Text style={globalStyles.areaTitle}>{props.title}</Text>
 
-                    {!props.icon ? (
+                    {/**
+                     * if the component `icon` props is not defined then it will be displayed
+                     * also if the value is false then only the icon will be disabled not in other cases
+                     */}
+                    {props.icon !== false ? (
                         <Entypo
                             name={props.iconName || 'chevron-thin-right'}
                             size={DEFAULT_TINY_ICON_SIZE}
