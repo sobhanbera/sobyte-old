@@ -1,82 +1,65 @@
 import React from 'react'
-import {View, Text, TouchableHighlight} from 'react-native'
+import {View, Text} from 'react-native'
+import {TouchableRipple} from 'react-native-paper'
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import {useTheme} from '../../context'
+import {DEFAULT_TINY_ICON_SIZE} from '../../constants'
+import globalStyles from '../../styles/global.styles'
 
 interface Props {
-    noBackground?: boolean
     backgroundColor?: string
-    title?: string
-    children?: React.ReactNode
-    spacing?: boolean
-    column?: boolean
+    title: string
+    description?: string
     onPress?: Function
     icon?: React.ReactNode
-    settingIcon?: React.ReactNode
-    settingIconName?: string
     iconName?: string
     danger?: boolean
 }
 
 const Area = (props: Props) => {
-    const {white, grey, surface, red} = useTheme().themeColors
+    const {grey, surface, red} = useTheme().themeColors
 
     return (
-        <TouchableHighlight
+        <TouchableRipple
+            rippleColor={props.danger ? red[0] : surface[0]}
             onPress={() => (props.onPress ? props.onPress() : {})}
             style={{
-                marginTop: 12,
-                marginBottom: 3,
-                marginHorizontal: 6,
-                borderRadius: 10,
+                marginBottom: 10,
+                marginHorizontal: 0,
                 overflow: 'hidden',
+                paddingVertical: 10,
+                paddingHorizontal: 22,
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
             }}>
-            <View
-                style={{
-                    paddingVertical: 5,
-                    paddingHorizontal: props.noBackground ? 0 : 22,
-                    backgroundColor: props.danger ? red[0] : surface[0] + '33',
-                    flexDirection: props.column ? 'column' : 'row',
-                    justifyContent: props.spacing ? 'space-between' : 'center',
-                    alignItems: 'center',
-                }}>
-                {props.title ? (
-                    <Text
-                        style={{
-                            color: white[0],
-                            fontSize: 16,
-                            paddingBottom: 5,
-                            paddingTop: 0,
-                        }}>
-                        {props.title}
-                    </Text>
-                ) : null}
+            <>
+                <View
+                    style={{
+                        width: '100%',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    }}>
+                    <Text style={globalStyles.areaTitle}>{props.title}</Text>
 
-                <View>
-                    {props.settingIcon ? (
+                    {!props.icon ? (
                         <Entypo
-                            name={props.settingIconName || 'chevron-thin-right'}
-                            size={20}
+                            name={props.iconName || 'chevron-thin-right'}
+                            size={DEFAULT_TINY_ICON_SIZE}
                             color={grey[0]}
-                            style={{
-                                marginHorizontal: 6,
-                            }}
                         />
                     ) : null}
-
-                    {props.children}
                 </View>
 
-                {props.icon ? (
-                    <Entypo
-                        name={props.iconName || 'chevron-thin-right'}
-                        size={20}
-                        color={props.danger ? white[0] : grey[0]}
-                    />
+                {props.description ? (
+                    <Text style={globalStyles.areaDescription}>
+                        {props.description}
+                    </Text>
                 ) : null}
-            </View>
-        </TouchableHighlight>
+            </>
+        </TouchableRipple>
     )
 }
 
