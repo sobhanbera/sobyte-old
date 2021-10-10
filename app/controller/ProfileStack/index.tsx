@@ -12,6 +12,8 @@ const ProfileStackNavigator = (props: Props) => {
         <ProfileStack.Navigator
             screenOptions={{
                 headerShown: false,
+                gestureEnabled: true,
+                gestureDirection: 'vertical',
             }}
             initialRouteName="profile">
             <ProfileStack.Screen name="profile" component={Profile} />
