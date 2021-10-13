@@ -20,7 +20,7 @@ import {
 import {
     DefaultStatusBarComponent,
     LIKE_ANIMATION_DISAPPEAR_DURATION,
-    RANDOM_SEARCH_QUERY,
+    RANDOM_SEARCH_QUERY as getRandomSearchQuery,
     INITIAL_NUMBER_OF_TRACKS_TO_LOAD,
     MUSIC_PLAYER_SONGS_RESULT_STORAGE_KEY,
     SCREEN_HEIGHT,
@@ -112,10 +112,9 @@ const Player: FC<PlayerProps> = props => {
     // initializing the songs list...
     const initializeMusicPlayer = () => {
         // random song query before loading songs...
-        const RANDOM_QUERY = RANDOM_SEARCH_QUERY()
         console.log
         search(
-            RANDOM_QUERY,
+            getRandomSearchQuery(),
             'SONG',
             false,
             true,
