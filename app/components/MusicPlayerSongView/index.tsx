@@ -71,7 +71,7 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                 blurRadius={MUSIC_PLAYER_BLUR}>
                 <View
                     style={{
-                        width: '75%',
+                        width: '85%',
                         alignSelf: 'flex-start',
                         marginHorizontal: 20,
                     }}>
@@ -98,12 +98,14 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                     </MarqueeText>
                     <Text
                         style={{
-                            fontSize: 20,
+                            fontSize: 18,
                             fontFamily: FontUbuntuBold,
                             color: themeColors.white[0] + 'AF',
                             paddingVertical: 1,
                             paddingHorizontal: 5,
-                        }}>
+                            // backgroundColor: '#000000AF', // background is only just for testing purpose
+                        }}
+                        numberOfLines={1}>
                         {artistsString}
                     </Text>
                 </View>
