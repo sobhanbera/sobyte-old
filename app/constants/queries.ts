@@ -1,5 +1,52 @@
-export default [
-    // hindi artists...
+/**
+ * artists query lists
+ */
+export const BENGALI_ARTISTS_QUERIES = [
+    'Kishore Kumar',
+    'Lata Mangeshkar',
+    'Manna Dey',
+    'Kumar Sanu',
+    'Hemanta Mukherjee',
+    'Asha Bhosle',
+    'Debabrata Biswas',
+    'Sandhya Mukherjee',
+    'Arati Mukherjee',
+    'Syamal Mitra',
+    'Anup Ghoshal',
+    'SD. Burman',
+    'Usha Uthup',
+    'Arijit Singh',
+    'Mohammad Rafi',
+    'Suchitra Mitra',
+    'Bappi Lahiri',
+    '',
+]
+export const ENGLISH_ARTISTS_QUERIES = [
+    'Ariana Grande',
+    'Billie Eilish',
+    'Justin Beiber',
+    'Marshmello',
+    'Eminem',
+    'Ed Sheeran',
+    'Taylor Swift',
+    'Katy Perry',
+    'Alan Walker',
+    'Rihanna',
+    'Shawn Mendes',
+    'Selena Gomez',
+    'Imagine Dragons',
+    'Doja Cat',
+    'Dua Lipa',
+    'Sia',
+    'Shakira',
+    'Camila Cabello',
+    'Chainsmoker',
+    'Beyoncé Knowles',
+    'Blackpink',
+    'BTS',
+]
+export const GUJRATI_ARTISTS_QUERIES = []
+export const HINDI_ARTISTS_QUERIES = [
     'Kishore Kumar',
     'Alka Yagnik',
     'Udit Narayan',
@@ -23,76 +70,280 @@ export default [
     'Atif Aslam',
     'Darshan Raval',
     'Tulsi Kumar',
-
-    // english artists
-    'Ariana Grande',
-    'Billie Eilish',
-    'Justin Beiber',
-    'Marshmello',
-    'Eminem',
-    'Ed Sheeran',
-    'Taylor Swift',
-    'Katy Perry',
-    'Alan Walker',
-    'Rihanna',
-    'Shawn Mendes',
-    'Selena Gomez',
-    'Imagine Dragons',
-    'Doja Cat',
-    'Dua Lipa',
-    'Sia',
-    'Shakira',
-    'Camila Cabello',
-    'Chainsmoker',
-    'Beyoncé Knowles',
-
-    // others
-    'Blackpink',
-    'BTS',
-
-    // search queries...
-    // 'new tracks',
-    // 'new hits',
-    // 'new movies',
-    // 'new remix',
-    // 'hindi remakes',
-    // 'hindi remake',
-    // 'new hindi trendings',
-    // 'most rated hindi songs',
-    // 'most rated english songs',
-    // 'most rated songs',
-    // 'trending songs',
-    // 'most viewed song on youtube',
-    // 'bollywood romantic songs',
-    // 'most listened romantic songs',
-    // 'top new songs',
-    // 'top hindi raps',
-    // 'top romantic songs',
-    // 'best romantic songs',
-    // 'party songs',
-    // 'study songs',
-    // 'new bollywood songs',
-    // 'best boolywood trending',
-    // 'trending hits',
-    // 'pop',
-    // 'chal ghar chalen',
-    // 'most romantic songs',
-    // 'romantic songs jukebox',
-    // 'romantic songs mashup',
-    // 'top romantic songs mashups',
-    // 'top new romantic songs',
-    // 'top new bollywood romantic songs',
-    // 'most listened romantic songs',
-    // 'most played romantic songs',
-    // single songs only for testing purpose
-    // 'Lut Gaye',
-    // 'Wafa na raha',
+]
+export const KANNADA_ARTISTS_QUERIES = [
+    'Karthik',
+    'SP. Balasubramaniam',
+    'Rajkumar',
+    'Janaki',
+    'Shreya Ghoshal',
+    'Sri Vidyabhushana',
+    'Sonu Nigam',
+    'Yesudas',
+    'Rajesh Krishnan',
+    'Hariharan',
+    'PB. Srinivas',
+    'Vani Jayaram',
+    'Chitra',
+    'C. Ashwath',
+    'Puttur Narasimha Nayak',
+    'Rajesh',
+    'Anuradha Bhat',
+    'M. Balamurali Krishna',
+    'Lata Mangeshkar',
+    'Susheela',
+    'Unnikrishnan',
+    'Anuradha Paudwal',
+    'Manjula Gururaj',
+    'BR. Chaya',
+]
+export const PUNJABI_ARTISTS_QUERIES = [
+    'Miss Pooja',
+    'Hans Raj Hans',
+    'Kuldeep Manak',
+    'Feroz Khan',
+    'Harbhajan Mann',
+    'Jaspinder Narula',
+    'Surinder Shinda',
+    'Bhai Harjinder Singh',
+    'Honey Singh',
+    'Ravinder Grewal',
+    'Dharampreet',
+    'Rahat Fateh Ali Khan',
+    'Jassi Sidhu',
+    'Malkit Singh',
+    'Jasbir Jassi',
+    'Minu Bakshi',
+    'Sukhbir',
+    'Parminder Sandhu',
+    'Mangal Singh',
+    'Sukhwinder Sukhi',
+    'Debi Makhsoospuri',
+    'Nirmal Sidhu',
+    'Bhai Jasbir Singh Ji',
+    'AS. Kang',
+    'Bhai Bakhshish Singh Ji',
+    'Kuldeep Paras',
+    'Darshan Singh Ji Khalsa',
+    'Alam Lohar',
+    'Charanjit Channi',
+    'Pammi Bai',
+]
+export const TAMIL_ARTISTS_QUERIES = [
+    'SP. Balasubramaniam',
+    'Chitra',
+    'Yesudas',
+    'Illayaraja',
+    'Janaki',
+    'Hariharan',
+    'Unnikrishnan',
+    'Karthik',
+    'Mano',
+    'Swarnalatha',
+    'Shreya Ghoshal',
+    'Anuradha Sriram',
+    'Susheela',
+    'TM. Sounderarajan',
+    'Malaysia Vasudevan',
+    'Vijay',
+    'Srinivas',
+    'Sujatha',
+    'Shankar Mahadevan',
+    'Mahanadhi Shobana',
+    'Harini',
+    'Chinmayi',
+    'LR. Eswari',
+    'AR. Rahman',
+    'Suchitra',
+]
+export const TELEGU_ARTISTS_QUERIES = [
+    'SP. Balasubramaniam',
+    'Chitra',
+    'Shreya Ghoshal',
+    'Sunitha',
+    'Janaki',
+    'Yesudas',
+    'Geetha Madhuri',
+    'Karthik',
+    'Susheela',
+    'Usha',
+    'Mano',
+    'Shankar Mahadevan',
+    'MM. Keeravani',
+    'Ghantasala Venkateswara Rao',
+    'SP. Shailaja',
+    'Devi Sri Prasad',
+    'Malavika',
+    'Unnikrishnan',
+    'Chinmayi',
+    'Hariharan',
+    'MS. Subbulakshmi',
+    'Gopika Poornima',
+    'AR. Rahman',
+    'Suchitra',
 ]
 
-const HINDI_QUERIES = []
+/**
+ * songs queries lists
+ */
+export const BENGALI_SONGS_QUERIES = [
+    'bengali kishore kumar songs',
+    'bengali songs',
+    'bengali song',
+    'bengali',
+    'bengali band songs collection',
+    'bengali sad song',
+    'bengali hit songs',
+    'bengali romantic songs',
+    'bengali dj songs',
+    'bengali dj',
+    'new bengali songs',
+    'old bengali songs',
+    'most rated bengali songs',
+    'most played bengali songs',
+]
+export const ENGLISH_SONGS_QUERIES = [
+    'most rated english songs',
+    'most played english songs',
+    'english songs',
+    'english romantic songs',
+    'new english songs',
+    'top english songs',
+    'trending english songs',
+    'most played english songs',
+    'english mix',
+    'english hits',
+    'english 2021',
+    'english 2020',
+    'english 2019',
+]
+export const GUJRATI_SONGS_QUERIES = [
+    'most rated gujrati songs',
+    'most played gujrati songs',
+    'new gujrati songs',
+    'gujarati song',
+    'gujarati mix',
+    'gujarati hits',
+    'gujarati songs dj',
+    'gujarati dj hit song',
+    'gujarati hot romantic song',
+]
+export const HINDI_SONGS_QUERIES = [
+    'most rated hindi songs',
+    'hindi remake',
+    'hindi mix',
+    'top hindi songs',
+    'trending hindi songs',
+    'most played hindi songs',
+    'top romantic hindi songs',
+    'hindi romantic songs',
+    'hindi lofi',
+    'hindi songs dj',
+    'hindi songs new romantic',
+    'most played romantic hindi songs',
+    'new released hindi songs',
+    'new hindi trendings',
+    'top hindi raps',
+]
+export const KANNADA_SONGS_QUERIES = [
+    'most rated kannada songs',
+    'most played kannada songs',
+    'most listened kannada songs',
+    'new kannada trendings',
+    'kannada romantic songs',
+    'top romantic kannada songs',
+    'kannada mix',
+    'kannada hits',
+    'kannada remix',
+    'top kannada songs',
+]
+export const PUNJABI_SONGS_QUERIES = [
+    'most rated punjabi songs',
+    'most played punjabi songs',
+    'most listened punjabi songs',
+    'new punjabi trendings',
+    'punjabi romantic songs',
+    'top romantic punjabi songs',
+    'punjabi mix',
+    'punjabi hits',
+    'punjabi remix',
+    'top punjabi songs',
+]
+export const TAMIL_SONGS_QUERIES = [
+    'most rated tamil songs',
+    'most played tamil songs',
+    'most listened tamil songs',
+    'new tamil trendings',
+    'tamil romantic songs',
+    'top romantic tamil songs',
+    'tamil mix',
+    'tamil hits',
+    'tamil remix',
+    'top tamil songs',
+]
+export const TELEGU_SONGS_QUERIES = [
+    'most rated telegu songs',
+    'most played telegu songs',
+    'most listened telugu songs',
+    'new telugu trendings',
+    'telugu romantic songs',
+    'top romantic telugu songs',
+    'telugu mix',
+    'telugu hits',
+    'telugu remix',
+    'top telugu songs',
+]
 
-const ENGLISH_QUERIES = []
+/**
+ * global search queries for every languages
+ */
+export const GLOBAL_QUERIES = [
+    // search queries...
+    'new tracks',
+    'new hits',
+    'new movies songs',
+    'new mix',
+    'new remix',
+    'most rated songs',
+    'trending songs',
+    'most viewed song on youtube',
+    'bollywood romantic songs',
+    'most listened romantic songs',
+    'top new songs',
+    'top romantic songs',
+    'best romantic songs',
+    'party songs',
+    'study songs',
+    'new bollywood songs',
+    'best boolywood trending',
+    'trending hits',
+    'pop',
+    'most romantic songs',
+    'romantic songs jukebox',
+    'romantic songs mashup',
+    'top romantic songs mashups',
+    'top new romantic songs',
+    'top new bollywood romantic songs',
+    'most played romantic songs',
+]
 
-const HINDI_ARTISTS_QUERIES = []
-
-const ENGLISH_ARTISTS_QUERIES = []
+/**
+ * default export will be the concatation of all these above queries
+ * this feature is just for now
+ */
+export default GLOBAL_QUERIES.concat(BENGALI_ARTISTS_QUERIES)
+    .concat(ENGLISH_ARTISTS_QUERIES)
+    .concat(GUJRATI_ARTISTS_QUERIES)
+    .concat(HINDI_ARTISTS_QUERIES)
+    .concat(KANNADA_ARTISTS_QUERIES)
+    .concat(PUNJABI_ARTISTS_QUERIES)
+    .concat(TAMIL_ARTISTS_QUERIES)
+    .concat(TELEGU_ARTISTS_QUERIES)
+    .concat(BENGALI_SONGS_QUERIES)
+    .concat(ENGLISH_SONGS_QUERIES)
+    .concat(GUJRATI_SONGS_QUERIES)
+    .concat(HINDI_SONGS_QUERIES)
+    .concat(KANNADA_SONGS_QUERIES)
+    .concat(PUNJABI_SONGS_QUERIES)
+    .concat(TAMIL_SONGS_QUERIES)
+    .concat(TELEGU_SONGS_QUERIES)
