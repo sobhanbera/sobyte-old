@@ -23,6 +23,7 @@ export default [
     'Atif Aslam',
     'Darshan Raval',
     'Tulsi Kumar',
+
     // english artists
     'Ariana Grande',
     'Billie Eilish',
@@ -44,10 +45,12 @@ export default [
     'Camila Cabello',
     'Chainsmoker',
     'Beyoncé Knowles',
+
     // others
     'Blackpink',
     'BTS',
-    // // search queries...
+
+    // search queries...
     // 'new tracks',
     // 'new hits',
     // 'new movies',
