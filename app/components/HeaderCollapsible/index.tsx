@@ -89,6 +89,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                 <SimpleTextInput
                     style={{
                         backgroundColor: props.headerScrollColor,
+                        marginVertical: 0,
                     }}
                     value=""
                     focusable
