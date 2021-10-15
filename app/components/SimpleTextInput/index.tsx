@@ -22,7 +22,6 @@ const SimpleTextInput = (props: TextInputProps) => {
                 },
                 props.style,
             ]}
-            showSoftInputOnFocus={false}
             // keyboard will not be shown when this input will be pressed since its a trigger to open an another screen
             // and this component is a demo or dummy or virual button not text input any more
         />
