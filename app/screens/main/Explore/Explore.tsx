@@ -10,6 +10,7 @@ import {
     GridCategory,
     SongsKeywordResultsRenderer,
     ArtistsKeywordResultsRenderer,
+    CustomSongsListRenderer,
 } from '../../../components'
 import {DefaultStatusBarComponent, PaddingBottomView} from '../../../constants'
 import {
@@ -208,6 +209,9 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         refreshing={loading}
                     />
 
+                    {/* user's custom songs list based on custom queries */}
+                    <CustomSongsListRenderer />
+
                     {/* button to go to the top of the scoll view */}
                     <CenterButtonView
                         title="Go To Top"
@@ -220,6 +224,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         }
                         buttonColor={randomGradient[2]}
                     />
+
                     {/* end of the scrollview we are providing some spacing to look nice */}
                     <PaddingBottomView />
                 </GradientBackground>
