@@ -40,6 +40,7 @@ import {
     formatTrackTitle,
     getRandomNumberString,
     getNotificationPlayerImageFromLinkWithHeight,
+    removeUnnecessaryCharacters,
 } from './Objects'
 export {
     returnNullCallback,
@@ -66,4 +67,5 @@ export {
     formatTrackTitle,
     getRandomNumberString,
     getNotificationPlayerImageFromLinkWithHeight,
+    removeUnnecessaryCharacters,
 }

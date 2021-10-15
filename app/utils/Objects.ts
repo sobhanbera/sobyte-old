@@ -207,9 +207,33 @@ export function capitalizeWords(string: string): string {
      *
      * this is one of the edge case....
      */
-    return string.toLowerCase().replace(/(?:^|\s)\S/g, function (character) {
-        return character.toUpperCase()
-    })
+    return string
+        .toLowerCase()
+        .replace(/(?:^|\s)\S/g, function (character) {
+            // upper case character after every space
+            return character.toUpperCase()
+        })
+        .replace(/(?:\.)\S/g, function (character) {
+            /**
+             * uppercase character after every period
+             * this will be helpful to show artist name
+             * like - a.r. rahman will be A.r. Rahman without this function
+             * and with this function it will be A.R. Rahman
+             * which is the correct format of the artists to show in the UI
+             */
+            return character.toUpperCase()
+        })
+}
+
+/**
+ *
+ * @param trackTitle the song's title or the artists list in string format
+ * @returns a string which does not contain Unnecessary Characters
+ */
+export function removeUnnecessaryCharacters(trackTitle: string): string {
+    return trackTitle // replacing every unnecessary characters
+        .replace("'", '') // '
+        .replace('"', '') // "
 }
 
 /**
@@ -226,7 +250,9 @@ export function formatTrackTitle(trackTitle: string): string {
         ).toUpperCase()
     }
     return capitalizeWords(
-        trackTitle.replace(BRACKET_BRACES_AND_PARENTHESIS_INSIDE_TEXT, ''),
+        removeUnnecessaryCharacters(
+            trackTitle.replace(BRACKET_BRACES_AND_PARENTHESIS_INSIDE_TEXT, ''),
+        ),
     )
 }
 
