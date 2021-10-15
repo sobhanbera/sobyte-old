@@ -135,6 +135,7 @@ const globalStyles = StyleSheet.create({
      */
     simpleTextInput: {
         marginHorizontal: 20,
+        marginVertical: 8,
         paddingHorizontal: 20,
         paddingVertical: 8,
         borderWidth: 0.5,
