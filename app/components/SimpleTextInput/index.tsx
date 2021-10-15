@@ -3,7 +3,6 @@ import {TextInput, TextInputProps} from 'react-native'
 import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
 
-interface Props {}
 const SimpleTextInput = (props: TextInputProps) => {
     const {placeholder} = useTheme().themeColors
 
