@@ -130,6 +130,18 @@ const globalStyles = StyleSheet.create({
         borderWidth: 0.6,
     },
 
+    /**
+     * simple textinput styles
+     */
+    simpleTextInput: {
+        marginHorizontal: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 8,
+        borderWidth: 0.5,
+        borderRadius: 100,
+        fontSize: 16,
+    },
+
     fullImageBackground: {
         width: '100%',
         height: '100%',
