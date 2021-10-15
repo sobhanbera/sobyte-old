@@ -112,9 +112,14 @@ const Player: FC<PlayerProps> = props => {
     // initializing the songs list...
     const initializeMusicPlayer = () => {
         // random song query before loading songs...
-        console.log
+        const randomQuery = getRandomSearchQuery()
+        /**
+         * debug code below...
+         */
+        console.log(randomQuery)
+
         search(
-            getRandomSearchQuery(),
+            'Arijit Singh',
             'SONG',
             false,
             true,
