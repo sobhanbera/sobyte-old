@@ -17,7 +17,7 @@ export function returnNullCallback(nullableValue: any, defaultValue: any): any {
         : nullableValue
 }
 
-export function IF(condition: boolean, yes: any, no: any) {
+export function IF(condition: boolean, yes: any, no: any): any {
     return condition ? yes : no
 }
 
@@ -29,7 +29,7 @@ export function getHighQualityImage(
     imageLink: string,
     height: number,
     resultHeight: number | string,
-) {
+): string {
     // demo url - https://lh3.googleusercontent.com/WP7l4p-2WhWzLM6lXJ0n2gXLK6u07eCejpybWzb-yhEyt9Y0aOkxMlLhpayO7PdXYOYy2NgkWu9hGBPy=w60-h60-l90-rj
     // here size is 60
     const heighQuery = `w${height}-h${height}-l90-rj`
@@ -39,7 +39,7 @@ export function getHighQualityImage(
 export const getHighQualityImageFromSongImage = (
     image: ThumbnailObject,
     height: number | string,
-) =>
+): string =>
     image.url.replace(
         IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
         `w${height}-h${height}-l90-rj`,
@@ -47,7 +47,7 @@ export const getHighQualityImageFromSongImage = (
 export const getHighQualityImageFromSongImageArray = (
     image: Array<ThumbnailObject>,
     height: number | string,
-) =>
+): string =>
     image[0].url.replace(
         IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
         `w${height}-h${height}-l100-rj`,
@@ -55,7 +55,7 @@ export const getHighQualityImageFromSongImageArray = (
 export const getHighQualityImageFromSong = (
     song: SongObject,
     height: number | string,
-) =>
+): string =>
     song.thumbnails[0].url.replace(
         IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
         `w${height}-h${height}-l100-rj`,
@@ -63,7 +63,7 @@ export const getHighQualityImageFromSong = (
 export const getHightQualityImageFromLink = (
     imageLink: string,
     height: number | string,
-) =>
+): string =>
     imageLink.replace(
         IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX,
         `w${height}-h${height}-l100-rj`,
@@ -73,7 +73,7 @@ export const getHighQualityImageFromLinkWithHeight = (
     initialHeight: number | string,
     height: number | string = 244,
     imageQuality: number | string = 90,
-) =>
+): string =>
     imageLink
         .replace(
             `=w${initialHeight}-h${initialHeight}`,
@@ -84,7 +84,7 @@ export const getHighQualityImageFromLinkWithHeight = (
 export const getNotificationPlayerImageFromLinkWithHeight = (
     imageLink: string,
     initialHeight: number | string,
-) => {
+): string => {
     return imageLink
         .replace(
             `=w${initialHeight}-h${initialHeight}`,
@@ -98,7 +98,9 @@ export const getNotificationPlayerImageFromLinkWithHeight = (
  * @param artists array of artists with multiple values
  * @returns the string of list of names of artist in the arguments of function
  */
-export function formatArtistsListFromArray(artists: Array<SongArtistObject>) {
+export function formatArtistsListFromArray(
+    artists: Array<SongArtistObject>,
+): string {
     let str = ''
     for (let i = 0; i < artists.length; ++i) {
         str += firstLetterCap(`${artists[i].name}`)
@@ -111,7 +113,7 @@ export function formatArtistsListFromArray(artists: Array<SongArtistObject>) {
  * @param artists only takes a single artist object with name and browserId
  * @returns the name of artist
  */
-export function formatArtistSingle(artists: SongArtistObject) {
+export function formatArtistSingle(artists: SongArtistObject): string {
     return firstLetterCap(artists.name)
 }
 /**
@@ -121,7 +123,7 @@ export function formatArtistSingle(artists: SongArtistObject) {
  */
 export function formatArtists(
     artists: Array<SongArtistObject> | SongArtistObject,
-) {
+): string {
     if (Array.isArray(artists)) {
         return formatArtistsListFromArray(artists)
     } else {
@@ -136,26 +138,26 @@ export function formatArtists(
 export function trimLargeString(
     text: string,
     length: number = MAX_DISPLAY_TEXT_LENGTH,
-) {
+): string {
     if (text.length > length) return text.substring(0, length) + '...'
     return firstLetterCap(text)
 }
 
-export function firstLetterCap(text: string) {
+export function firstLetterCap(text: string): string {
     return text.charAt(0).toUpperCase() + text.slice(1)
 }
 
 /**
  * @returns function which returns a random number in a range
  */
-export function randomNumber(min: number, max: number) {
+export function randomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min) + min)
 }
 /**
  * this function is the exact same as the above one but the difference is that this function provides the string of that number
  * @returns a random string constaining numbers
  */
-export function getRandomNumberString() {
+export function getRandomNumberString(): string {
     return Math.random().toString(36).substring(7)
 }
 
@@ -163,7 +165,7 @@ export function getRandomNumberString() {
  * @param password the password string for which the checks must be done,
  * @returns if the password is allowed or not or in other words if the password contains both alphabets and numbers (alphanumeric)...
  */
-export function checkIfPasswordIsAlphanumeric(password: string) {
+export function checkIfPasswordIsAlphanumeric(password: string): boolean {
     return ALPHA_NUMERIC_PASSWORD_REGEX.test(password)
 }
 
@@ -171,7 +173,7 @@ export function checkIfPasswordIsAlphanumeric(password: string) {
  * @returns a random string with alphanumeric characters
  * this could be used as a password generator...
  */
-export function generateRandomPassword(lengthOfPassword: number = 10) {
+export function generateRandomPassword(lengthOfPassword: number = 10): string {
     let password = ''
     for (var i = 0, n = PASSWORD_CHARACTERS.length; i < lengthOfPassword; ++i) {
         password += PASSWORD_CHARACTERS.charAt(randomNumber(0, n))
@@ -183,7 +185,7 @@ export function generateRandomPassword(lengthOfPassword: number = 10) {
  * @param email a email string
  * @returns true if the email is temporary mail else false
  */
-export function isEmailBlocked(email: string) {
+export function isEmailBlocked(email: string): boolean {
     for (let i in FakeMailsList)
         if (email.includes(FakeMailsList[i])) return true
     return false
@@ -194,7 +196,7 @@ export function isEmailBlocked(email: string) {
  * @param string the sentence or the statement
  * @returns a string which contains capital letter after each spaces...
  */
-export function capitalizeWords(string: string) {
+export function capitalizeWords(string: string): string {
     /**
      * we are converting the whole string to lowercase because
      * the input string may be like this:
@@ -215,7 +217,7 @@ export function capitalizeWords(string: string) {
  * @returns the capitalized words string
  * but the change is this function replaces text between (), [] and {} to null/empty
  */
-export function formatTrackTitle(trackTitle: string) {
+export function formatTrackTitle(trackTitle: string): string {
     // we are checking if the trackTitle contain only one word
     // in that case we will return the full uppercase of the word...
     if (trackTitle.split(' ').length - 1 <= 0) {
@@ -232,7 +234,7 @@ export function formatTrackTitle(trackTitle: string) {
  * @param {Array} array an array of any type of variables
  * @returns a random and shuffled order of the same array
  */
-export function shuffleArray(array: Array<any>) {
+export function shuffleArray(array: Array<any>): Array<any> {
     var currIndex = array.length,
         temp,
         random
