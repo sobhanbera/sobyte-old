@@ -14,28 +14,27 @@ const CenterButtonView = (props: Props) => {
     const {text, primary} = useTheme().themeColors
 
     return (
-        <View style={styles.centerButtonWrapper}>
-            <TouchableOpacity onPress={() => props.onPress()}>
-                <View
+        <TouchableOpacity
+            onPress={() => props.onPress()}
+            style={[styles.centerButtonWrapper]}>
+            <View
+                style={[
+                    styles.button,
+                    {
+                        backgroundColor: props.buttonColor ?? primary.dark[0],
+                    },
+                ]}>
+                <Text
                     style={[
-                        styles.button,
+                        styles.buttonText,
                         {
-                            backgroundColor:
-                                props.buttonColor ?? primary.dark[0],
+                            color: text[0],
                         },
                     ]}>
-                    <Text
-                        style={[
-                            styles.buttonText,
-                            {
-                                color: text[0],
-                            },
-                        ]}>
-                        {props.title}
-                    </Text>
-                </View>
-            </TouchableOpacity>
-        </View>
+                    {props.title}
+                </Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 
