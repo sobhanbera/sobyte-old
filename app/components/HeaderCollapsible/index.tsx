@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next'
 import {HEADER_MIN_HEIGHT} from '../../constants'
 import globalStyles from '../../styles/global.styles'
 import {useTheme} from '../../context'
+import SimpleTextInput from '../SimpleTextInput'
 
 interface Props {
     headerScrollHeight?: any
@@ -85,16 +86,9 @@ const HeaderCollapsible: React.FC<Props> = props => {
                 </Animated.Text>
             </View>
             <View>
-                <TextInput
+                <SimpleTextInput
                     style={{
                         backgroundColor: props.headerScrollColor,
-                        marginHorizontal: 20,
-                        paddingHorizontal: 20,
-                        paddingVertical: 8,
-                        borderWidth: 0.5,
-                        borderColor: placeholder[0],
-                        borderRadius: 100,
-                        fontSize: 16,
                     }}
                     value=""
                     focusable
