@@ -1,13 +1,19 @@
 import React, {useEffect, useState} from 'react'
-import {View, ToastAndroid} from 'react-native'
+import {View, ToastAndroid, Pressable, Alert} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import {Text} from 'react-native-paper'
 
 import CenterButtonView from '../CenterButtonView'
 import SongsKeywordResultsRenderer from '../KeywordResultsRenderer/Songs'
 import SimpleTextInput from '../SimpleTextInput'
 import TopicTitle from '../TopicTitle'
 
-import {USERS_CUSTOM_SONGS_LISTS} from '../../constants'
+import {
+    USERS_CUSTOM_SONGS_LISTS,
+    MAXIMUM_USERS_CUSTOM_SONGS_LISTS,
+    DEFAULT_TINY_ICON_SIZE,
+} from '../../constants'
 
 import {useTheme} from '../../context'
 
@@ -18,8 +24,8 @@ interface CustomSongModal {
 }
 
 interface Props {}
-const CustomSongsListRenderer = (props: Props) => {
-    const {randomGradient} = useTheme()
+const CustomSongsListRenderer = (_props: Props) => {
+    const {randomGradient, themeColors} = useTheme()
 
     /**
      * we are providing a new feature in which users could add custom queries to the existing list of queries
@@ -31,6 +37,7 @@ const CustomSongsListRenderer = (props: Props) => {
      */
     const [songsList, setSongsList] = useState<CustomSongModal[]>([])
     const [canAddNewList, setCanAddNewList] = useState(false)
+    const [showAddSongsSection, setShowAddSongsSection] = useState(false)
     const [title, setTitle] = useState('')
     const [query, setQuery] = useState('')
 
@@ -41,10 +48,13 @@ const CustomSongsListRenderer = (props: Props) => {
     const getAndUpdateCustomSongsList = () => {
         AsyncStorage.getItem(
             USERS_CUSTOM_SONGS_LISTS,
-            function (error, result: any) {
+            function (_error, result: any) {
                 const parsedResult = JSON.parse(result)
-
-                if (Array.isArray(parsedResult) && parsedResult.length > 0) {
+                console.log(parsedResult)
+                if (
+                    (Array.isArray(parsedResult) || parsedResult === []) &&
+                    parsedResult.length >= 0
+                ) {
                     // the data is present and is a valid array
                     // now we need to check if the elements of array which are objects is in form of {CustomSongModal} interface
                     const finalSongsList = parsedResult.filter(
@@ -52,7 +62,7 @@ const CustomSongsListRenderer = (props: Props) => {
                             // these are the same check which were done while creating a new user custom songs list
                             if (
                                 songListItem.id > 0 &&
-                                songListItem.title.length > 5 &&
+                                songListItem.title.length > 0 &&
                                 songListItem.query.length > 0
                             ) {
                                 return true
@@ -60,6 +70,17 @@ const CustomSongsListRenderer = (props: Props) => {
                             return false
                         },
                     )
+                    if (
+                        finalSongsList.length >=
+                        MAXIMUM_USERS_CUSTOM_SONGS_LISTS
+                    ) {
+                        // the limit is excceded
+                        // no furthure custom songs list could be added now...
+                        // or the list may become so long
+                        setCanAddNewList(false)
+                    } else {
+                        setCanAddNewList(true)
+                    }
                     setSongsList(finalSongsList)
                 } else {
                     // no data regarding the custom songs list is present in the local storage then create one
@@ -99,9 +120,10 @@ const CustomSongsListRenderer = (props: Props) => {
                 title,
                 query,
             })
+            const finalSongsList = JSON.stringify(localSongsList)
             AsyncStorage.setItem(
                 USERS_CUSTOM_SONGS_LISTS,
-                JSON.stringify(localSongsList),
+                finalSongsList,
                 error => {
                     if (error) {
                         // error occurred while adding new data to local storage
@@ -118,6 +140,7 @@ const CustomSongsListRenderer = (props: Props) => {
                         // set the title and the query to ''
                         setTitle('')
                         setQuery('')
+                        setShowAddSongsSection(false)
                         // load the data
                         getAndUpdateCustomSongsList()
                     }
@@ -129,53 +152,145 @@ const CustomSongsListRenderer = (props: Props) => {
     /**
      * delete an existing custom user's songs list from the local data
      */
-    const deleteASongList = () => {}
+    const deleteASongList = (id: number | Date) => {
+        Alert.alert('Alert Title', 'My Alert Msg', [
+            {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ])
+        //    itterate over the songs list
+        // and find where is the song list with id is found and remove it
+        const finalSongsList = songsList.filter(item => {
+            return item.id !== id
+        })
+
+        // saving to the local storage
+        const stringifyValue = JSON.stringify(finalSongsList)
+        AsyncStorage.setItem(USERS_CUSTOM_SONGS_LISTS, stringifyValue)
+
+        // after filtering the array we are updating the state
+        // optional..............
+        setSongsList(finalSongsList)
+
+        // loading the data from local storage again so that the data is synced
+        // BTW this code below could replace the state update in this function
+        // only one thing is needed
+        // the state update or the getAndUpdateCustomSongsList() function
+        getAndUpdateCustomSongsList()
+    }
 
     return (
         <View>
             {songsList.map(list => {
                 return (
                     // i know what i am doing
-                    // string toString...
-                    // :)
+                    // string toString :)
                     <React.Fragment key={String(list.id.toString())}>
                         <SongsKeywordResultsRenderer
                             title={list.title}
                             keyword={list.query}
                             refreshing={false}
                         />
+                        <Pressable
+                            onPress={() => deleteASongList(list.id)}
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                paddingHorizontal: 10,
+                            }}>
+                            <>
+                                <MaterialCommunityIcons
+                                    name="delete-outline"
+                                    size={DEFAULT_TINY_ICON_SIZE}
+                                    color={
+                                        themeColors.themecolorrevert[0] + '7F'
+                                    }
+                                />
+                                <Text
+                                    style={{
+                                        color:
+                                            themeColors.themecolorrevert[0] +
+                                            '7F',
+                                        paddingHorizontal: 6,
+                                    }}>
+                                    Delete List
+                                </Text>
+                            </>
+                        </Pressable>
                     </React.Fragment>
                 )
             })}
 
-            <TopicTitle title="Add New Custom List" />
-            <SimpleTextInput
-                value={title}
-                onChangeText={setTitle}
-                placeholder="Enter a Title"
-            />
-            <SimpleTextInput
-                value={query}
-                onChangeText={setQuery}
-                placeholder="Enter the Search Query"
-            />
+            {canAddNewList ? (
+                <>
+                    {showAddSongsSection ? (
+                        <>
+                            <TopicTitle title="Add More Songs" />
+                            <SimpleTextInput
+                                value={title}
+                                onChangeText={setTitle}
+                                placeholder="Enter a Title"
+                            />
+                            <SimpleTextInput
+                                value={query}
+                                onChangeText={setQuery}
+                                placeholder="Enter the Search Query"
+                            />
 
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
-                }}>
-                <CenterButtonView
-                    title="Cancel"
-                    onPress={() => {}}
-                    buttonColor={randomGradient[2]}
-                />
-                <CenterButtonView
-                    title="Add New List"
-                    onPress={addNewSongsList}
-                    buttonColor={randomGradient[2]}
-                />
-            </View>
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-around',
+                                }}>
+                                <CenterButtonView
+                                    title="Cancel"
+                                    onPress={() =>
+                                        setShowAddSongsSection(false)
+                                    }
+                                    buttonColor={randomGradient[2]}
+                                />
+                                <CenterButtonView
+                                    title="Add New List"
+                                    onPress={addNewSongsList}
+                                    buttonColor={randomGradient[2]}
+                                />
+                            </View>
+                        </>
+                    ) : (
+                        <Pressable
+                            onPress={() => setShowAddSongsSection(true)}
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: 'flex-start',
+                                alignItems: 'center',
+                                paddingHorizontal: 10,
+                            }}>
+                            <>
+                                <MaterialCommunityIcons
+                                    name="filter-variant-plus"
+                                    size={DEFAULT_TINY_ICON_SIZE}
+                                    color={
+                                        themeColors.themecolorrevert[0] + '7F'
+                                    }
+                                />
+                                <Text
+                                    style={{
+                                        color:
+                                            themeColors.themecolorrevert[0] +
+                                            '7F',
+                                        paddingHorizontal: 6,
+                                    }}>
+                                    Add New List
+                                </Text>
+                            </>
+                        </Pressable>
+                    )}
+                </>
+            ) : null}
 
             {/* are you sorrow */}
             {title && query ? (
