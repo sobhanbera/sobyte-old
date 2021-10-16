@@ -26,6 +26,19 @@ const GridSongItem = React.memo(
     ({item, imageQuality, index, subColor, textColor, id}: Props) => {
         const {play} = usePlayer()
 
+        /**
+         * MAJOR CHANGE
+         * if the image url is not present than we could show the app icon but that's a big task for which we have to setup
+         * dynamic image size in backend api and much more.
+         * but we could always return null in this case.
+         */
+        try {
+            if (item.thumbnails[0].url === null) {
+                // some track has no image array or thumbnail array for that this is needed
+                return null
+            }
+        } catch (e) {}
+
         const songImage = useMemo(
             () =>
                 getHighQualityImageFromLinkWithHeight(
