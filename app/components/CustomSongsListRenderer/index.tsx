@@ -13,6 +13,7 @@ import {
     USERS_CUSTOM_SONGS_LISTS,
     MAXIMUM_USERS_CUSTOM_SONGS_LISTS,
     DEFAULT_TINY_ICON_SIZE,
+    PaddingBottomView,
 } from '../../constants'
 
 import {useTheme} from '../../context'
@@ -31,12 +32,11 @@ const CustomSongsListRenderer = (_props: Props) => {
      * we are providing a new feature in which users could add custom queries to the existing list of queries
      * so that the list is long enough
      * @var {Array} songsList - if true than only we will be able to add new custom songs list
-     * @var {boolean} canAddNewList - if true than only we will be able to add new custom songs list
+     * @var {boolean} showAddSongsSection - if the section to add songs to show or not
      * @var {string} title - the title to show in the cards...
      * @var {string} query - the query to search for...
      */
     const [songsList, setSongsList] = useState<CustomSongModal[]>([])
-    const [canAddNewList, setCanAddNewList] = useState(false)
     const [showAddSongsSection, setShowAddSongsSection] = useState(false)
     const [title, setTitle] = useState('')
     const [query, setQuery] = useState('')
@@ -69,17 +69,7 @@ const CustomSongsListRenderer = (_props: Props) => {
                             return false
                         },
                     )
-                    if (
-                        finalSongsList.length >=
-                        MAXIMUM_USERS_CUSTOM_SONGS_LISTS
-                    ) {
-                        // the limit is excceded
-                        // no furthure custom songs list could be added now...
-                        // or the list may become so long
-                        setCanAddNewList(false)
-                    } else {
-                        setCanAddNewList(true)
-                    }
+
                     setSongsList(finalSongsList)
                 } else {
                     // no data regarding the custom songs list is present in the local storage then create one
@@ -172,6 +162,16 @@ const CustomSongsListRenderer = (_props: Props) => {
         getAndUpdateCustomSongsList()
     }
 
+    const showAddSongsSectionPart = () => {
+        if (songsList.length < MAXIMUM_USERS_CUSTOM_SONGS_LISTS)
+            setShowAddSongsSection(true)
+        else
+            ToastAndroid.show(
+                'The number of list limits exceeded. Delete some lists to add a new one.',
+                ToastAndroid.SHORT,
+            )
+    }
+
     return (
         <View>
             {songsList.map(list => {
@@ -212,70 +212,63 @@ const CustomSongsListRenderer = (_props: Props) => {
                 )
             })}
 
-            {canAddNewList ? (
+            {showAddSongsSection ? (
                 <>
-                    {showAddSongsSection ? (
-                        <>
-                            <TopicTitle title="Add More Songs" />
-                            <SimpleTextInput
-                                value={title}
-                                onChangeText={setTitle}
-                                placeholder="Enter a Title"
-                            />
-                            <SimpleTextInput
-                                value={query}
-                                onChangeText={setQuery}
-                                placeholder="Enter the Search Query"
-                            />
+                    <TopicTitle title="Add More Songs" />
+                    <SimpleTextInput
+                        value={title}
+                        onChangeText={setTitle}
+                        placeholder="Enter a Title"
+                    />
+                    <SimpleTextInput
+                        value={query}
+                        onChangeText={setQuery}
+                        placeholder="Enter the Search Query"
+                    />
 
-                            <View
-                                style={{
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-around',
-                                }}>
-                                <CenterButtonView
-                                    title="Cancel"
-                                    onPress={() =>
-                                        setShowAddSongsSection(false)
-                                    }
-                                    buttonColor={randomGradient[2]}
-                                />
-                                <CenterButtonView
-                                    title="Add New List"
-                                    onPress={addNewSongsList}
-                                    buttonColor={randomGradient[2]}
-                                />
-                            </View>
-                        </>
-                    ) : (
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'flex-start',
-                                alignItems: 'center',
-                                paddingHorizontal: 10,
-                            }}>
-                            <MaterialCommunityIcons
-                                onPress={() => setShowAddSongsSection(true)}
-                                name="filter-variant-plus"
-                                size={DEFAULT_TINY_ICON_SIZE}
-                                color={themeColors.themecolorrevert[0] + '7F'}
-                            />
-                            <Text
-                                onPress={() => setShowAddSongsSection(true)}
-                                style={{
-                                    color:
-                                        themeColors.themecolorrevert[0] + '7F',
-                                    paddingHorizontal: 6,
-                                }}>
-                                Add New List
-                            </Text>
-                        </View>
-                    )}
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-around',
+                        }}>
+                        <CenterButtonView
+                            title="Cancel"
+                            onPress={() => setShowAddSongsSection(false)}
+                            buttonColor={randomGradient[2]}
+                        />
+                        <CenterButtonView
+                            title="Add New List"
+                            onPress={addNewSongsList}
+                            buttonColor={randomGradient[2]}
+                        />
+                    </View>
                 </>
-            ) : null}
+            ) : (
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        paddingHorizontal: 10,
+                    }}>
+                    <MaterialCommunityIcons
+                        onPress={() => setShowAddSongsSection(true)}
+                        name="filter-variant-plus"
+                        size={DEFAULT_TINY_ICON_SIZE}
+                        color={themeColors.themecolorrevert[0] + '7F'}
+                    />
+                    <Text
+                        onPress={showAddSongsSectionPart}
+                        style={{
+                            color: themeColors.themecolorrevert[0] + '7F',
+                            paddingHorizontal: 6,
+                        }}>
+                        {`Add New List (${songsList.length}/${MAXIMUM_USERS_CUSTOM_SONGS_LISTS})`}
+                    </Text>
+                </View>
+            )}
 
-            {/* are you sorrow */}
+            {/* demo / preview of the card */}
             {title && query ? (
                 <SongsKeywordResultsRenderer
                     keyword={query}
@@ -283,6 +276,9 @@ const CustomSongsListRenderer = (_props: Props) => {
                     refreshing={false} // default is false - no loading
                 />
             ) : null}
+
+            {/* without this padding components press is overlapping */}
+            <PaddingBottomView paddingBottom={40} />
         </View>
     )
 }
