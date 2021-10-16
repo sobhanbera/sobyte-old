@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, ToastAndroid, Pressable, Alert} from 'react-native'
+import {View, ToastAndroid, Pressable} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import {Text} from 'react-native-paper'
@@ -50,7 +50,6 @@ const CustomSongsListRenderer = (_props: Props) => {
             USERS_CUSTOM_SONGS_LISTS,
             function (_error, result: any) {
                 const parsedResult = JSON.parse(result)
-                console.log(parsedResult)
                 if (
                     (Array.isArray(parsedResult) || parsedResult === []) &&
                     parsedResult.length >= 0
@@ -87,7 +86,6 @@ const CustomSongsListRenderer = (_props: Props) => {
                     // this might be when the user has logged in just now and there is no data currently
                     // this could also be due to data cleaning of the apk...
                     // in this case we are saving a initial array to the local storage
-                    console.log('INIT')
                     AsyncStorage.setItem(
                         USERS_CUSTOM_SONGS_LISTS,
                         JSON.stringify([]),
@@ -153,15 +151,7 @@ const CustomSongsListRenderer = (_props: Props) => {
      * delete an existing custom user's songs list from the local data
      */
     const deleteASongList = (id: number | Date) => {
-        Alert.alert('Alert Title', 'My Alert Msg', [
-            {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-            },
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ])
-        //    itterate over the songs list
+        // itterate over the songs list
         // and find where is the song list with id is found and remove it
         const finalSongsList = songsList.filter(item => {
             return item.id !== id
