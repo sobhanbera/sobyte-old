@@ -40,7 +40,7 @@ const CenterButtonView = (props: Props) => {
 
 const styles = StyleSheet.create({
     centerButtonWrapper: {
-        width: '100%',
+        // width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 15,
