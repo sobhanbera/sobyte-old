@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, ToastAndroid} from 'react-native'
+import {View, ToastAndroid, Alert} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import {Text} from 'react-native-paper'
@@ -172,6 +172,27 @@ const CustomSongsListRenderer = (_props: Props) => {
             )
     }
 
+    const deleteAllSongsList = () => {
+        const confirmDeleteAllSongsLists = () => {
+            AsyncStorage.setItem(USERS_CUSTOM_SONGS_LISTS, JSON.stringify([]))
+            getAndUpdateCustomSongsList()
+        }
+        // Alert.alert(
+        //     'Delete Songs?',
+        //     'Are you sure! All songs list you have created will be deleted permanently.',
+        //     [
+        //         {
+        //             text: 'Cancel',
+        //             style: 'destructive',
+        //         },
+        //         {
+        //             text: 'Delete',
+        //             style: 'default',
+        //         },
+        //     ],
+        // )
+    }
+
     return (
         <View>
             {songsList.map(list => {
@@ -247,24 +268,53 @@ const CustomSongsListRenderer = (_props: Props) => {
                 <View
                     style={{
                         flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        paddingHorizontal: 10,
+                        justifyContent: 'space-between',
+                        paddingTop: 15, // padding so that the above small buttons are not pressed by mistake
                     }}>
-                    <MaterialCommunityIcons
-                        onPress={() => setShowAddSongsSection(true)}
-                        name="filter-variant-plus"
-                        size={DEFAULT_TINY_ICON_SIZE}
-                        color={themeColors.themecolorrevert[0] + '7F'}
-                    />
-                    <Text
-                        onPress={showAddSongsSectionPart}
+                    <View
                         style={{
-                            color: themeColors.themecolorrevert[0] + '7F',
-                            paddingHorizontal: 6,
+                            flexDirection: 'row',
+                            justifyContent: 'flex-start',
+                            alignItems: 'center',
+                            paddingHorizontal: 10,
                         }}>
-                        {`Add New List (${songsList.length}/${MAXIMUM_USERS_CUSTOM_SONGS_LISTS})`}
-                    </Text>
+                        <MaterialCommunityIcons
+                            onPress={showAddSongsSectionPart}
+                            name="filter-variant-plus"
+                            size={DEFAULT_TINY_ICON_SIZE}
+                            color={themeColors.themecolorrevert[0] + '7F'}
+                        />
+                        <Text
+                            onPress={showAddSongsSectionPart}
+                            style={{
+                                color: themeColors.themecolorrevert[0] + '7F',
+                                paddingHorizontal: 6,
+                            }}>
+                            {`Add New List (${songsList.length}/${MAXIMUM_USERS_CUSTOM_SONGS_LISTS})`}
+                        </Text>
+                    </View>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'flex-start',
+                            alignItems: 'center',
+                            paddingHorizontal: 10,
+                        }}>
+                        <MaterialCommunityIcons
+                            onPress={deleteAllSongsList}
+                            name="delete-outline"
+                            size={DEFAULT_TINY_ICON_SIZE}
+                            color={themeColors.themecolorrevert[0] + '7F'}
+                        />
+                        <Text
+                            onPress={deleteAllSongsList}
+                            style={{
+                                color: themeColors.themecolorrevert[0] + '7F',
+                                paddingHorizontal: 6,
+                            }}>
+                            {`Delete All Lists`}
+                        </Text>
+                    </View>
                 </View>
             )}
 
