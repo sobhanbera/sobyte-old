@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, ToastAndroid, Pressable} from 'react-native'
+import {View, ToastAndroid} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import {Text} from 'react-native-paper'
@@ -184,33 +184,30 @@ const CustomSongsListRenderer = (_props: Props) => {
                             keyword={list.query}
                             refreshing={false}
                         />
-                        <Pressable
-                            onPress={() => deleteASongList(list.id)}
+                        <View
                             style={{
                                 flexDirection: 'row',
                                 justifyContent: 'flex-end',
                                 alignItems: 'center',
                                 paddingHorizontal: 10,
+                                alignSelf: 'flex-end',
                             }}>
-                            <>
-                                <MaterialCommunityIcons
-                                    name="delete-outline"
-                                    size={DEFAULT_TINY_ICON_SIZE}
-                                    color={
-                                        themeColors.themecolorrevert[0] + '7F'
-                                    }
-                                />
-                                <Text
-                                    style={{
-                                        color:
-                                            themeColors.themecolorrevert[0] +
-                                            '7F',
-                                        paddingHorizontal: 6,
-                                    }}>
-                                    Delete List
-                                </Text>
-                            </>
-                        </Pressable>
+                            <MaterialCommunityIcons
+                                onPress={() => deleteASongList(list.id)}
+                                name="delete-outline"
+                                size={DEFAULT_TINY_ICON_SIZE}
+                                color={themeColors.themecolorrevert[0] + '7F'}
+                            />
+                            <Text
+                                onPress={() => deleteASongList(list.id)}
+                                style={{
+                                    color:
+                                        themeColors.themecolorrevert[0] + '7F',
+                                    paddingHorizontal: 6,
+                                }}>
+                                Delete List
+                            </Text>
+                        </View>
                     </React.Fragment>
                 )
             })}
@@ -251,33 +248,29 @@ const CustomSongsListRenderer = (_props: Props) => {
                             </View>
                         </>
                     ) : (
-                        <Pressable
-                            onPress={() => setShowAddSongsSection(true)}
+                        <View
                             style={{
                                 flexDirection: 'row',
                                 justifyContent: 'flex-start',
                                 alignItems: 'center',
                                 paddingHorizontal: 10,
                             }}>
-                            <>
-                                <MaterialCommunityIcons
-                                    name="filter-variant-plus"
-                                    size={DEFAULT_TINY_ICON_SIZE}
-                                    color={
-                                        themeColors.themecolorrevert[0] + '7F'
-                                    }
-                                />
-                                <Text
-                                    style={{
-                                        color:
-                                            themeColors.themecolorrevert[0] +
-                                            '7F',
-                                        paddingHorizontal: 6,
-                                    }}>
-                                    Add New List
-                                </Text>
-                            </>
-                        </Pressable>
+                            <MaterialCommunityIcons
+                                onPress={() => setShowAddSongsSection(true)}
+                                name="filter-variant-plus"
+                                size={DEFAULT_TINY_ICON_SIZE}
+                                color={themeColors.themecolorrevert[0] + '7F'}
+                            />
+                            <Text
+                                onPress={() => setShowAddSongsSection(true)}
+                                style={{
+                                    color:
+                                        themeColors.themecolorrevert[0] + '7F',
+                                    paddingHorizontal: 6,
+                                }}>
+                                Add New List
+                            </Text>
+                        </View>
                     )}
                 </>
             ) : null}
