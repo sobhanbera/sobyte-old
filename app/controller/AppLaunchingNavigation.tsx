@@ -260,14 +260,11 @@ const AppLaunchingNavigation = (_props: Props) => {
             <SobyteAlertBox
                 setVisibility={setShowLogoutConfirm}
                 visible={showLogoutConfirm}
-                title="Confirm Logout!!"
                 description="Are you sure to logout from your account? This will remove all authentication data and user data from your device. You have to login again to continue with this account."
                 activeOpacity={0.5}
                 cancelText="No"
                 confirmText="Yes"
                 onConfirm={() => logoutCurrentUser()}
-                cancelBackgroundColor={'blue'}
-                confirmBackgroundColor={'transparent'}
             />
             <FullScreenLoading visible={loading} />
         </NavigationContainer>
