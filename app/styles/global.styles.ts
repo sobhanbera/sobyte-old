@@ -230,8 +230,8 @@ const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'transparent',
         overflow: 'hidden',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
     },
 
     /**
