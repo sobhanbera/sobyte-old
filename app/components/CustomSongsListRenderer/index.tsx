@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, ToastAndroid, Alert} from 'react-native'
+import {View, ToastAndroid} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import {Text} from 'react-native-paper'
@@ -8,6 +8,7 @@ import CenterButtonView from '../CenterButtonView'
 import SongsKeywordResultsRenderer from '../KeywordResultsRenderer/Songs'
 import SimpleTextInput from '../SimpleTextInput'
 import TopicTitle from '../TopicTitle'
+import SobyteAlert from '../SobyteAlert'
 
 import {
     USERS_CUSTOM_SONGS_LISTS,
@@ -15,7 +16,6 @@ import {
     DEFAULT_TINY_ICON_SIZE,
     PaddingBottomView,
 } from '../../constants'
-
 import {useTheme} from '../../context'
 
 interface CustomSongModal {
@@ -195,6 +195,17 @@ const CustomSongsListRenderer = (_props: Props) => {
 
     return (
         <View>
+            <SobyteAlert
+                visible={true}
+                setVisibility={() => {}}
+                // title="Delete Songs?"
+                // title="asdf"
+                description="Are you sure! All songs list you have created will be deleted permanently."
+                onConfirm={() => {}}
+                // onlyConfirmButton
+                activeOpacity={1}
+            />
+
             {songsList.map(list => {
                 return (
                     // i know what i am doing
