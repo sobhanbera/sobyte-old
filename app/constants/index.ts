@@ -178,6 +178,8 @@ export const GRADIENT_COLOR_SCHEME_ARRAY_MAX_LENGTH = 8
 
 export const AUTO_SCROLL_AFTER_USER_SCROLL_DURATION = 1000 // duration after which the song's lyrics will be auto scrolled to its perfect position. NOTE: if the user has scrolled to different position of lyrics than this will work...
 
+export const MAXIMUM_USERS_CUSTOM_SONGS_LISTS = 10 // the maximum numbers of custom user's songs list that can be created...
+
 /** equal partition arrays for linear gradient locations */
 export const LINEAR_GRADIENT_LOCATIONS_2 = [0, 0.5]
 export const LINEAR_GRADIENT_LOCATIONS_3 = [0, 0.33, 0.66]
