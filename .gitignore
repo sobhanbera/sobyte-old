@@ -1,3 +1,10 @@
+# Customs
+*/**/*.apk
+/assets/*
+*.keystore
+.env
+
+
 # OSX
 #
 .DS_Store
@@ -58,9 +65,3 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-
-# Customs
-*/**/*.apk
-/assets/*
-*.keystore
-.env
