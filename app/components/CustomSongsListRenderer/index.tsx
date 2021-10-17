@@ -41,6 +41,8 @@ const CustomSongsListRenderer = (_props: Props) => {
     const [title, setTitle] = useState('')
     const [query, setQuery] = useState('')
 
+    const [showDeleteAlertBox, setShowDeleteAlertBox] = useState(false)
+
     /**
      * get the list of custom songs
      * if there any in the local storage
@@ -172,38 +174,22 @@ const CustomSongsListRenderer = (_props: Props) => {
             )
     }
 
-    const deleteAllSongsList = () => {
-        const confirmDeleteAllSongsLists = () => {
-            AsyncStorage.setItem(USERS_CUSTOM_SONGS_LISTS, JSON.stringify([]))
-            getAndUpdateCustomSongsList()
-        }
-        // Alert.alert(
-        //     'Delete Songs?',
-        //     'Are you sure! All songs list you have created will be deleted permanently.',
-        //     [
-        //         {
-        //             text: 'Cancel',
-        //             style: 'destructive',
-        //         },
-        //         {
-        //             text: 'Delete',
-        //             style: 'default',
-        //         },
-        //     ],
-        // )
+    const deleteAllSongsList = () => setShowDeleteAlertBox(true)
+
+    const confirmDeleteAllSongsLists = () => {
+        AsyncStorage.setItem(USERS_CUSTOM_SONGS_LISTS, JSON.stringify([]))
+        getAndUpdateCustomSongsList()
     }
 
     return (
         <View>
             <SobyteAlert
-                visible={true}
-                setVisibility={() => {}}
-                // title="Delete Songs?"
-                // title="asdf"
+                visible={showDeleteAlertBox}
+                setVisibility={(value: boolean) => {
+                    setShowDeleteAlertBox(value)
+                }}
                 description="Are you sure! All songs list you have created will be deleted permanently."
-                onConfirm={() => {}}
-                // onlyConfirmButton
-                activeOpacity={1}
+                onConfirm={() => confirmDeleteAllSongsLists()}
             />
 
             {songsList.map(list => {
