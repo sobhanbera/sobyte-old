@@ -63,3 +63,4 @@ buck-out/
 */**/*.apk
 /assets/*
 *.keystore
+.env
