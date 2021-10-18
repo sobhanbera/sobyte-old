@@ -12,6 +12,7 @@ import {useEffect} from 'react'
 
 import {
     DefaultStatusBarComponent,
+    DEFAULT_ANIMATION_DURATION,
     DEFAULT_OVERLAY_OPACITY_MIN,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
     HEADER_MAX_HEIGHT,
@@ -60,14 +61,16 @@ const AnimatedHeader = (props: Props) => {
      * of the screen and show the image not the animated fixed header
      */
     const showHeaderTitle = () => {
-        headerTitleReference.current?.slideInDown(300)
+        // headerTitleReference.current?.slideInDown(300)
+        headerTitleReference.current?.fadeIn(DEFAULT_ANIMATION_DURATION)
     }
     /**
      * hide the image header and progressively show the fixed animated header
      * this function will be called when the user scroll down
      */
     const hideHeaderTitle = () => {
-        headerTitleReference.current?.slideOutUp(600)
+        // headerTitleReference.current?.slideOutUp(600)
+        headerTitleReference.current?.fadeOut(DEFAULT_ANIMATION_DURATION)
     }
 
     /**
