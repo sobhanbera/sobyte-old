@@ -327,7 +327,7 @@ export const GLOBAL_QUERIES = [
     'most played romantic songs',
 ]
 
-const EXTRA__DEV__SPECIFIC_QUERIES = ['Nashe Si Chadh Gayi']
+const EXTRA__DEV__SPECIFIC_QUERIES = ['Nashe si chadh gai slowed version']
 
 /**
  * default export will be the concatation of all these above queries
