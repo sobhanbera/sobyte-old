@@ -14,7 +14,7 @@ import {useFetcher, useMusicApi, usePlayer, useTheme} from '../../../context'
 import {
     GradientBackground,
     MusicPlayerSongView,
-    BackgroundBluredImage,
+    // BackgroundBluredImage,
 } from '../../../components'
 import {
     DefaultStatusBarComponent,
