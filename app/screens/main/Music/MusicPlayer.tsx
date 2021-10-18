@@ -3,7 +3,6 @@ import {
     View,
     Animated,
     ListRenderItemInfo,
-    StyleSheet,
     Text,
     FlatList,
     ToastAndroid,
@@ -119,7 +118,7 @@ const Player: FC<PlayerProps> = props => {
         console.log(randomQuery)
 
         search(
-            'Arijit Singh',
+            randomQuery,
             'SONG',
             false,
             true,
