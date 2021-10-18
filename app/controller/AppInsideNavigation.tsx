@@ -5,6 +5,7 @@ import {DarkTheme} from '@react-navigation/native'
 import {useTranslation} from 'react-i18next'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import {useTheme, useMusicApi} from '../context'
@@ -53,7 +54,7 @@ const AppInsideNavigationWithMaterialTabBar = () => {
                 borderTopColor: 'transparent',
                 borderTopWidth: 0,
             }}
-            initialRouteName={'Explore'}>
+            initialRouteName={'MusicPlayer'}>
             {/* default will be MusicPlayer screen */}
             <BarNavigator.Screen
                 name="Explore"
@@ -63,8 +64,12 @@ const AppInsideNavigationWithMaterialTabBar = () => {
                     tabBarColor: themeColors.surface[0] + '7f',
                     tabBarLabel: t('words:explore'),
                     tabBarIcon: ({focused, color}) => (
-                        <Ionicons
-                            name={focused ? 'md-search' : 'md-search-outline'}
+                        <MaterialCommunityIcons
+                            name={
+                                focused
+                                    ? 'home-variant'
+                                    : 'home-variant-outline'
+                            }
                             size={DEFAULT_ICON_SIZE}
                             color={color}
                         />
@@ -239,7 +244,7 @@ export const AppInsideNavigationWithSimpleTabBar = () => {
 // }: FloatingTabBarIconProps) => {
 //     return (
 //         <View style={styles.floatingIconContainer}>
-//             <Scaler touchableOpacity={1} onPress={onPress}>
+//             <Scaler touchableOpacity={1} onPress={() => onPress()}>
 //                 <View
 //                     style={[
 //                         styles.floatingIconContainerWrapper,
