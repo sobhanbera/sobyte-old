@@ -164,6 +164,7 @@ export const IMAGE_PADDING_V_TO_SHOW = 5 // padding vertical of the image which 
 export const DEFAULT_IMAGE_BORDER_RADIUS = 10
 export const DEFAULT_TITLE_MARGIN = 9
 
+export const DEFAULT_ANIMATION_DURATION = 550 // the duration for default animation globally in the application...
 export const LIKE_ANIMATION_DISAPPEAR_DURATION = 1650 // the duration after which the like animation while be hidden
 export const HIGHEST_Z_INDEX_VALUE = 987654 // the largest z index value
 
