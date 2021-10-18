@@ -327,23 +327,35 @@ export const GLOBAL_QUERIES = [
     'most played romantic songs',
 ]
 
+const EXTRA__DEV__SPECIFIC_QUERIES = ['Nashe Si Chadh Gayi']
+
 /**
  * default export will be the concatation of all these above queries
  * this feature is just for now
  */
-export default GLOBAL_QUERIES.concat(BENGALI_ARTISTS_QUERIES)
-    .concat(ENGLISH_ARTISTS_QUERIES)
-    .concat(GUJRATI_ARTISTS_QUERIES)
-    .concat(HINDI_ARTISTS_QUERIES)
-    .concat(KANNADA_ARTISTS_QUERIES)
-    .concat(PUNJABI_ARTISTS_QUERIES)
-    .concat(TAMIL_ARTISTS_QUERIES)
-    .concat(TELEGU_ARTISTS_QUERIES)
-    .concat(BENGALI_SONGS_QUERIES)
-    .concat(ENGLISH_SONGS_QUERIES)
-    .concat(GUJRATI_SONGS_QUERIES)
-    .concat(HINDI_SONGS_QUERIES)
-    .concat(KANNADA_SONGS_QUERIES)
-    .concat(PUNJABI_SONGS_QUERIES)
-    .concat(TAMIL_SONGS_QUERIES)
-    .concat(TELEGU_SONGS_QUERIES)
+const DEFAULT_EXPORT = EXTRA__DEV__SPECIFIC_QUERIES // only for developmennt purpose
+/**
+ * below concatenations should not be used when
+ * only one query is to be searched on development branch
+ *
+ * for testing purpose below concatenations should be commented
+ */
+// .concat(GLOBAL_QUERIES) // global/universal queries
+// .concat(BENGALI_ARTISTS_QUERIES) // bengali aritst
+// .concat(ENGLISH_ARTISTS_QUERIES) // english aritst
+// .concat(GUJRATI_ARTISTS_QUERIES) // gujrati aritst
+// .concat(HINDI_ARTISTS_QUERIES) // hindi aritst
+// .concat(KANNADA_ARTISTS_QUERIES) // kannada aritst
+// .concat(PUNJABI_ARTISTS_QUERIES) // punjabi aritst
+// .concat(TAMIL_ARTISTS_QUERIES) // tamil aritst
+// .concat(TELEGU_ARTISTS_QUERIES) // telegu aritst
+// .concat(BENGALI_SONGS_QUERIES) // bengali songs
+// .concat(ENGLISH_SONGS_QUERIES) // english songs
+// .concat(GUJRATI_SONGS_QUERIES) // gujrati songs
+// .concat(HINDI_SONGS_QUERIES) // hindi songs
+// .concat(KANNADA_SONGS_QUERIES) // kannada songs
+// .concat(PUNJABI_SONGS_QUERIES) // punjabi songs
+// .concat(TAMIL_SONGS_QUERIES) // tamil songs
+// .concat(TELEGU_SONGS_QUERIES) // telegu songs
+
+export default DEFAULT_EXPORT
