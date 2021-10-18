@@ -13,7 +13,7 @@ import {NativeModules, Dimensions} from 'react-native'
 const {StatusBarManager} = NativeModules
 
 import * as Limits from './limits'
-import queries from './queries'
+import DEFAULT_APP_SEARCH_QUERIES from './queries'
 export {Limits}
 
 import {
@@ -267,7 +267,9 @@ export const ViewabilityConfig = {
 }
 
 export const RANDOM_SEARCH_QUERY = () =>
-    shuffleArray(queries)[Math.floor(Math.random() * queries.length)]
+    shuffleArray(DEFAULT_APP_SEARCH_QUERIES)[
+        Math.floor(Math.random() * DEFAULT_APP_SEARCH_QUERIES.length)
+    ]
 
 /**
  * this is the same constant colors which are primarily provided in theme prop interfaces containing file
