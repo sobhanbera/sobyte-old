@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: FontRobotoBold,
-        fontSize: 19,
+        fontSize: 18,
     },
 })
 
