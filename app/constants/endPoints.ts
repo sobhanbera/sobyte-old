@@ -11,6 +11,3 @@ export const UPDATE_LAST_LOGIN_ROUTE_ENDPOINT =
 
 // accounts related routes
 export const VERIFY_EMAIL_ROUTE_ENDPOINT = '/account/verifyemail'
-
-// nothing
-// just watching test
