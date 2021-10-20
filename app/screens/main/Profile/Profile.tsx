@@ -105,7 +105,7 @@ const Profile: React.FC<ProfileProps> = props => {
                             ]}
                             onPress={() =>
                                 openLinkInBrowser(
-                                    'https://github.com/sobhanbera',
+                                    'https://sobhanbera.github.io',
                                 )
                             }>
                             <Text
