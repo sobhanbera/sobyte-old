@@ -1,45 +1,206 @@
 import React from 'react'
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native'
+import {
+    View,
+    StyleSheet,
+    TouchableOpacity,
+    Image,
+    ImageBackground,
+    Animated,
+} from 'react-native'
+import {Text} from 'react-native-paper'
+import {BlurView} from '@react-native-community/blur'
 
-import {useTheme} from '../../context'
-import {DEVICE_STATUSBAR_HEIGHT_CONSTANT} from '../../constants'
+import {
+    DEVICE_STATUSBAR_HEIGHT_CONSTANT,
+    HEADER_MIN_HEIGHT,
+} from '../../constants'
+import {useTheme, useUserData} from '../../context'
+// import {formatNames} from '../../utils'
+
+const AnimatedImageBackground =
+    Animated.createAnimatedComponent(ImageBackground)
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
+const HEADER_HEIGHT_EXPANDED = 90
+const HEADER_HEIGHT_NARROWED =
+    DEVICE_STATUSBAR_HEIGHT_CONSTANT + HEADER_MIN_HEIGHT
 
 interface Props {
+    scrollY: Animated.Value
+
     navigation: any
 }
 const HeaderProfile = (props: Props) => {
-    const {surface} = useTheme().themeColors
+    const {themecolorrevert, themecolor} = useTheme().themeColors
+    const {username, fullname} = useUserData().data
 
     return (
-        <View
-            style={[
-                styles.header,
-                {
-                    backgroundColor: surface[0],
-                    marginTop: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // the height of the statusbar of the device
-                },
-            ]}>
-            <TouchableOpacity
-                activeOpacity={0.9}
-                onPress={() => {
-                    props.navigation.navigate('setting')
-                }}>
+        <>
+            {/* settign icon to navigate to settings screen */}
+            <View style={styles.headerIcon}>
+                <TouchableOpacity
+                    activeOpacity={0.9}
+                    onPress={() => {
+                        props.navigation.navigate('setting')
+                    }}>
+                    {/* the actual setting icon in form of an image */}
+                    <Image
+                        style={{
+                            width: 23,
+                            height: 23,
+                            margin: 8,
+                        }}
+                        source={require('../../assets/images/icons/setting.png')}
+                    />
+                </TouchableOpacity>
+            </View>
+
+            {/* the animated username area */}
+            <Animated.View
+                style={[
+                    styles.headerAnimatedArea,
+                    {
+                        // opacity animated as user scrolls down..
+                        opacity: props.scrollY.interpolate({
+                            inputRange: [90, 110],
+                            outputRange: [0, 1],
+                        }),
+                    },
+                ]}>
                 <Image
-                    style={styles.icon}
-                    source={require('../../assets/images/icons/setting.png')}
+                    source={{
+                        uri: 'https://avatars.githubusercontent.com/u/50291544?v=4',
+                    }}
+                    style={[
+                        styles.headerProfileImage,
+                        {borderColor: themecolor[0]},
+                    ]}
                 />
-            </TouchableOpacity>
-        </View>
+                <View style={styles.headerAnimatedInnerArea}>
+                    <Text
+                        style={[
+                            styles.headerFullname,
+                            {color: themecolorrevert[0]},
+                        ]}
+                        numberOfLines={1}>
+                        {/* {formatNames(fullname)} */}
+                        {fullname}
+                    </Text>
+
+                    <Text
+                        style={[
+                            styles.headerUsername,
+                            {color: themecolorrevert[0]},
+                        ]}
+                        numberOfLines={1}>
+                        {/* @{formatNames(username)} */}@{username}
+                    </Text>
+                </View>
+            </Animated.View>
+
+            <AnimatedImageBackground
+                source={{
+                    uri: 'https://fast-cdn.dynamicwallpaper.club/wallpapers%2Fci7xe3twgfv%2Fthumbs%2F800%2F1.jpg?generation=1564525549295848&alt=media',
+                }}
+                style={[
+                    styles.headerBackgroundImage,
+                    {
+                        transform: [
+                            {
+                                scale: props.scrollY.interpolate({
+                                    inputRange: [-200, 0],
+                                    outputRange: [5, 1],
+                                    extrapolateLeft: 'extend',
+                                    extrapolateRight: 'clamp',
+                                }),
+                            },
+                        ],
+                    },
+                ]}>
+                <AnimatedBlurView
+                    blurType="dark"
+                    blurAmount={10}
+                    style={[
+                        styles.headerBlurView,
+                        {
+                            opacity: props.scrollY.interpolate({
+                                inputRange: [-50, 0, 50, 100],
+                                outputRange: [1, 0, 0, 1],
+                            }),
+                        },
+                    ]}
+                />
+            </AnimatedImageBackground>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
     header: {
-        width: '100%',
-        height: 55,
-        justifyContent: 'center',
+        // flexDirection: 'row',
+        justifyContent: 'flex-start',
         alignItems: 'flex-end',
         paddingHorizontal: 10,
+        width: '100%',
+        height: '100%',
+        // height: 55,
+    },
+    headerBackgroundImage: {
+        height: HEADER_HEIGHT_EXPANDED + HEADER_HEIGHT_NARROWED,
+        zIndex: 1,
+        position: 'absolute',
+        left: 0,
+        right: 0,
+    },
+    headerBlurView: {
+        ...StyleSheet.absoluteFillObject,
+        zIndex: 2,
+        width: '100%',
+        height: '100%',
+    },
+    headerProfileImage: {
+        width: 38,
+        height: 38,
+        borderRadius: 100,
+        borderWidth: 1,
+        marginHorizontal: 10,
+    },
+    headerIcon: {
+        width: 30,
+        height: 30,
+        zIndex: 2,
+        position: 'absolute',
+        top: DEVICE_STATUSBAR_HEIGHT_CONSTANT + 10,
+        right: 20, // shift towards right side of the absolute screen
+        borderRadius: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    headerAnimatedArea: {
+        maxWidth: 250,
+        zIndex: 2,
+        position: 'absolute',
+        top: DEVICE_STATUSBAR_HEIGHT_CONSTANT + 6,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 15, // so that some space all around
+        marginLeft: 10, // image should have some space too in left side
+    },
+    headerAnimatedInnerArea: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+    headerFullname: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: -3,
+    },
+    headerUsername: {
+        fontWeight: 'bold',
+        fontSize: 13,
     },
 
     icon: {
