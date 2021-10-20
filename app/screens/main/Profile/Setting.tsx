@@ -44,6 +44,10 @@ const Setting: React.FC<SettingProps> = props => {
         })
     }
 
+    const openMusicLanguageChooser = () => {
+        props.navigation.navigate('languagepicker')
+    }
+
     return (
         <GradientBackground uniformColor>
             <DefaultStatusBarComponent
@@ -92,6 +96,14 @@ const Setting: React.FC<SettingProps> = props => {
                             t('setting:app_language'),
                         )
                     }
+                />
+
+                <Area
+                    title={t('setting:Music Language')}
+                    description={
+                        'Choose your prefered/primary languages for tracks.'
+                    }
+                    onPress={() => openMusicLanguageChooser()}
                 />
 
                 <AreaTitle title="Data Saving" />
