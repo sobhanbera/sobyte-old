@@ -2,6 +2,7 @@ export default {
     name: 'Sobyte',
     displayName: 'Sobyte',
     author: 'Sobhan Bera <https://github.com/sobhanbera>',
+    developerName: 'Sobhan Bera',
     /** @version = String( @vc + "." + @vn )
      *
      * this version if derived like this
