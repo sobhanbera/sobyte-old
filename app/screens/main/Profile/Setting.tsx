@@ -357,16 +357,6 @@ const Setting: React.FC<SettingProps> = props => {
                     }
                 />
 
-                <AreaTitle title="Danger" />
-                {/* danger button for logging out user's account */}
-                {/* THIS IS AT THE LAST AND IS LOGOUT BUTTON.... */}
-                <Area
-                    danger
-                    title={t('setting:logout')}
-                    description={'User data will be removed from your device.'}
-                    onPress={() => logout()}
-                />
-
                 <AreaTitle title="Information" />
                 <Area
                     icon={false}
@@ -410,6 +400,16 @@ const Setting: React.FC<SettingProps> = props => {
                         'Information you must know before using this application.'
                     }
                     onPress={() => {}}
+                />
+
+                <AreaTitle title="Danger" />
+                {/* danger button for logging out user's account */}
+                {/* THIS IS AT THE LAST AND IS LOGOUT BUTTON.... */}
+                <Area
+                    danger
+                    title={t('setting:logout')}
+                    description={'User data will be removed from your device.'}
+                    onPress={() => logout()}
                 />
 
                 <PaddingBottomView />
