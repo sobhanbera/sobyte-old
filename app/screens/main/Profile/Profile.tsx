@@ -39,6 +39,12 @@ const Profile: React.FC<ProfileProps> = props => {
 
     const scrollY = useRef(new Animated.Value(0)).current
 
+    const openLinkInBrowser = (webpage: string) => {
+        props.navigation.navigate('webview', {
+            webpage,
+        })
+    }
+
     return (
         <View style={globalStyles.flex}>
             {/* the android statusbar */}
@@ -97,9 +103,11 @@ const Profile: React.FC<ProfileProps> = props => {
                                     borderColor: grey[0] + '50',
                                 },
                             ]}
-                            onPress={() => {
-                                console.log('edit profile')
-                            }}>
+                            onPress={() =>
+                                openLinkInBrowser(
+                                    'https://github.com/sobhanbera',
+                                )
+                            }>
                             <Text
                                 style={{
                                     color: themecolorrevert[0] + 'BF',
@@ -199,7 +207,7 @@ const Profile: React.FC<ProfileProps> = props => {
                     {/* line separator */}
                     <Separator color={themecolorrevert[0] + '20'} />
 
-                    <Text style={{fontSize: 20, color: 'white'}}>
+                    {/* <Text style={{fontSize: 20, color: 'white'}}>
                         Other User data like playlists, liked songs, downloaded
                         songs list, queue, history, settings and other types of
                         user related data will go here. Curently to check the
@@ -214,7 +222,7 @@ const Profile: React.FC<ProfileProps> = props => {
                         text more text more text more text more text more text
                         more text more text more text more text more text more
                         text more text
-                    </Text>
+                    </Text> */}
 
                     {/* line separator */}
                     <Separator color={themecolorrevert[0] + '20'} />
