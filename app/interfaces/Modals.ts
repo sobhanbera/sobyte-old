@@ -93,6 +93,14 @@ export interface AppUserData {
     verified_email: number
     access_token?: string | null
     refresh_token?: string | null
+
+    facebook?: string | null
+    instagram?: string | null
+    github?: string | null
+    linkedin?: string | null
+    snapchat?: string | null
+    twitter?: string | null
+    youtube?: string | null
 }
 
 /**
