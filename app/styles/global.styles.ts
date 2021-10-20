@@ -63,6 +63,10 @@ const globalStyles = StyleSheet.create({
         borderBottomColor: '#7f7f7f16',
     },
 
+    boldText: {
+        fontWeight: 'bold',
+    },
+
     flex: {
         flex: 1,
     },
