@@ -13,6 +13,7 @@ import {ToastAndroid} from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import {NavigationContainer, DarkTheme} from '@react-navigation/native'
 import AsyncStorage from '@react-native-community/async-storage'
+import {Provider} from 'react-native-paper'
 
 import AuthenticationNavigation from './Authentication'
 import AppInsideNavigation from './AppInsideNavigation'
@@ -37,6 +38,7 @@ const UserDataContext = React.createContext<ContextArttributs>({
         uid: 0,
         email: '',
         username: '',
+        fullname: '',
         profile_image: null,
         phone: null,
         gender: '',
@@ -52,6 +54,14 @@ const UserDataContext = React.createContext<ContextArttributs>({
         verified_account: 0,
         verified_email: 0,
         access_token: '',
+
+        facebook: '',
+        instagram: '',
+        github: '',
+        linkedin: '',
+        snapchat: '',
+        twitter: '',
+        youtube: '',
     },
     setLocalUserData: (_data: string) => {},
     loadUserDataAgain: () => {},
@@ -62,7 +72,7 @@ const AppLaunchingNavigation = (_props: Props) => {
     const {makeApiRequestPOST} = useBackendApi()
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false) // initial value must be false... true only for development purpose
     const [loading, setLoading] = useState<boolean>(true)
-    const [userData, setUserData] = useState<AppUserData>({})
+    const [userData, setUserData] = useState<AppUserData>()
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
 
     function updateLastLogin(userID: number) {
@@ -248,24 +258,27 @@ const AppLaunchingNavigation = (_props: Props) => {
     }
     return (
         <NavigationContainer linking={DeepLinkingConfig} theme={DarkTheme}>
-            <UserDataContext.Provider value={userDataValues}>
-                {userLoggedIn ? (
-                    <AppInsideNavigation />
-                ) : (
-                    <AuthenticationNavigation />
-                )}
-            </UserDataContext.Provider>
+            {/* react-native-paper provider */}
+            <Provider>
+                <UserDataContext.Provider value={userDataValues}>
+                    {userLoggedIn ? (
+                        <AppInsideNavigation />
+                    ) : (
+                        <AuthenticationNavigation />
+                    )}
+                </UserDataContext.Provider>
 
-            {/* logout confirm alert box */}
-            <SobyteAlertBox
-                setVisibility={setShowLogoutConfirm}
-                visible={showLogoutConfirm}
-                description="Are you sure to logout from your account? This will remove all authentication data and user data from your device. You have to login again to continue with this account."
-                cancelText="No"
-                confirmText="Yes"
-                onConfirm={() => logoutCurrentUser()}
-            />
-            <FullScreenLoading visible={loading} />
+                {/* logout confirm alert box */}
+                <SobyteAlertBox
+                    setVisibility={setShowLogoutConfirm}
+                    visible={showLogoutConfirm}
+                    description="Are you sure to logout from your account? This will remove all authentication data and user data from your device. You have to login again to continue with this account."
+                    cancelText="No"
+                    confirmText="Yes"
+                    onConfirm={() => logoutCurrentUser()}
+                />
+                <FullScreenLoading visible={loading} />
+            </Provider>
         </NavigationContainer>
     )
 }
