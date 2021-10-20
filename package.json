@@ -36,6 +36,7 @@
         "dayjs": "^1.10.7",
         "i18next": "^20.3.2",
         "i18next-react-native-language-detector": "^1.0.2",
+        "link-preview-js": "^2.1.8",
         "lodash": "^4.17.21",
         "lottie-react-native": "^4.0.3",
         "querystring": "^0.2.1",
