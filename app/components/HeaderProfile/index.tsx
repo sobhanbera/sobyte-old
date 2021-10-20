@@ -11,6 +11,7 @@ import {Text} from 'react-native-paper'
 import {BlurView} from '@react-native-community/blur'
 
 import {
+    DEFAULT_IMAGE_BLUR,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
     HEADER_MIN_HEIGHT,
 } from '../../constants'
@@ -118,7 +119,7 @@ const HeaderProfile = (props: Props) => {
                 ]}>
                 <AnimatedBlurView
                     blurType="dark"
-                    blurAmount={10}
+                    blurAmount={DEFAULT_IMAGE_BLUR}
                     style={[
                         styles.headerBlurView,
                         {
