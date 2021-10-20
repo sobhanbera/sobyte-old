@@ -76,6 +76,7 @@ export interface AppUserData {
     uid?: number
     email?: string
     username?: string
+    fullname?: string
     profile_image?: string | null
     phone?: string | null
     gender?: string | null
