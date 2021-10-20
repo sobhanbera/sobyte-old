@@ -1,12 +1,20 @@
 import React, {useRef} from 'react'
-import {Animated, StyleSheet, View} from 'react-native'
-import {Text, TouchableRipple} from 'react-native-paper'
+import {Animated, Linking, StyleSheet, View} from 'react-native'
+import {Text} from 'react-native-paper'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import dayjs from 'dayjs'
 
-import {GradientBackground, HeaderProfile} from '../../../components'
+import {
+    // GradientBackground,
+    HeaderProfile,
+    Scaler,
+    TopicTitle,
+} from '../../../components'
 import {
     DefaultStatusBarComponent,
     DEFAULT_LARGE_ICON_SIZE,
+    DEFAULT_TINY_ICON_SIZE,
+    DEVELOPER_DETAILS,
     DEVICE_STATUSBAR_HEIGHT_CONSTANT,
     HEADER_MIN_HEIGHT,
     PaddingBottomView,
@@ -14,6 +22,7 @@ import {
 } from '../../../constants'
 import {useTheme, useUserData} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
+import AppData from '../../../../app.data.details'
 
 const HEADER_HEIGHT_EXPANDED = 90
 const HEADER_HEIGHT_NARROWED =
@@ -24,7 +33,9 @@ interface ProfileProps {
 }
 const Profile: React.FC<ProfileProps> = props => {
     const {themecolor, themecolorrevert, grey} = useTheme().themeColors
-    // const {username, fullname} = useUserData().data
+    const {username, fullname, created_on} = useUserData().data
+
+    const createdOn = dayjs(created_on).format('MMMM, YYYY').toString()
 
     const scrollY = useRef(new Animated.Value(0)).current
 
@@ -79,11 +90,11 @@ const Profile: React.FC<ProfileProps> = props => {
                         />
 
                         {/* edit profile custom button */}
-                        <TouchableRipple
-                            style={[
+                        <Scaler
+                            containerStyle={[
                                 styles.buttons,
                                 {
-                                    borderColor: grey[0] + '7F',
+                                    borderColor: grey[0] + '50',
                                 },
                             ]}
                             onPress={() => {
@@ -95,7 +106,7 @@ const Profile: React.FC<ProfileProps> = props => {
                                 }}>
                                 Edit Profile
                             </Text>
-                        </TouchableRipple>
+                        </Scaler>
                     </View>
 
                     {/* profile user's fullname */}
@@ -107,8 +118,7 @@ const Profile: React.FC<ProfileProps> = props => {
                             },
                         ]}
                         numberOfLines={1}>
-                        {/* {fullname} */}
-                        Sobhan Bera
+                        {fullname}
                     </Text>
 
                     {/* profile user's username */}
@@ -116,12 +126,11 @@ const Profile: React.FC<ProfileProps> = props => {
                         style={[
                             styles.usernameText,
                             {
-                                color: grey[0],
+                                color: themecolorrevert[0] + 'AF',
                             },
                         ]}
                         numberOfLines={1}>
-                        {/* @{username} */}
-                        sobhanbera
+                        @{username}
                     </Text>
 
                     {/* line separator */}
@@ -195,7 +204,7 @@ const Profile: React.FC<ProfileProps> = props => {
                     {/* line separator */}
                     <Separator color={themecolorrevert[0] + '20'} />
 
-                    <Text style={{fontSize: 35, color: 'white'}}>
+                    <Text style={{fontSize: 20, color: 'white'}}>
                         Other User data like playlists, liked songs, downloaded
                         songs list, queue, history, settings and other types of
                         user related data will go here. Curently to check the
@@ -204,14 +213,82 @@ const Profile: React.FC<ProfileProps> = props => {
                         text more text more text more textmore text more text
                         more textmore text more text more text more text more
                         text more text more text more text more text more text
+                        text more text more text more text more text more text
+                        text more text more text more text more text more text
+                        text more text more text more text more text more text
+                        text more text more text more text more text more text
                         more text more text more text more text more text more
                         text more text
                     </Text>
+
+                    {/* line separator */}
+                    <Separator color={themecolorrevert[0] + '20'} />
+
+                    <TopicTitle title={`Joined On - ${createdOn}\n`} />
+
+                    <MadeInText />
 
                     <PaddingBottomView paddingBottom={200} />
                 </View>
             </Animated.ScrollView>
         </View>
+    )
+}
+
+/**
+ * this section was somewhat looking meesy in the above main component so I made
+ * it as separate component
+ * @returns the made in detail of the application
+ */
+const MadeInText = () => {
+    const {themecolorrevert, red, accent} = useTheme().themeColors
+
+    const IndianFlagColors = {
+        saffron: '#FF9933',
+        white: '#FFFFFF',
+        green: '#138808',
+        navy_blue: '#000080',
+    }
+
+    const openDeveloperDetailsWebsite = () => {
+        Linking.openURL(DEVELOPER_DETAILS)
+    }
+
+    return (
+        <Text
+            style={{
+                letterSpacing: 1,
+                color: themecolorrevert[0] + 'DF',
+                textAlignVertical: 'center',
+                textAlign: 'center',
+            }}>
+            {'Made with '}
+            <MaterialCommunityIcons
+                name="heart"
+                size={DEFAULT_TINY_ICON_SIZE - 2}
+                color={red[0] + 'DF'}
+            />
+            {' in '}
+            <Text style={globalStyles.boldText}>
+                <Text style={{color: IndianFlagColors.saffron}}>I</Text>
+                <Text style={{color: IndianFlagColors.saffron}}>N</Text>
+                <Text style={{color: IndianFlagColors.white}}>D</Text>
+                <Text style={{color: IndianFlagColors.green}}>I</Text>
+                <Text style={{color: IndianFlagColors.green}}>A</Text>
+            </Text>
+            {' by '}
+            <Text
+                style={[
+                    globalStyles.boldText,
+                    {
+                        color: accent.light[0],
+                    },
+                ]}
+                onPress={() => openDeveloperDetailsWebsite()}>
+                {AppData.developerName}
+            </Text>
+            {'.'}
+        </Text>
     )
 }
 
@@ -225,13 +302,14 @@ const styles = StyleSheet.create({
     fullnameText: {
         fontSize: 22,
         marginBottom: -3,
-        fontWeight: 'bold',
         marginTop: 10,
+        fontWeight: 'bold',
     },
     usernameText: {
         fontSize: 15,
         marginBottom: 15,
         fontWeight: 'bold',
+        marginTop: 10,
     },
     descriptionText: {
         fontSize: 16,
@@ -244,7 +322,7 @@ const styles = StyleSheet.create({
     },
     buttons: {
         borderRadius: 8,
-        borderWidth: 1,
+        borderWidth: 0.65,
         paddingHorizontal: 12,
         paddingVertical: 6,
     },
