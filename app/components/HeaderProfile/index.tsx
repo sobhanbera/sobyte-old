@@ -32,7 +32,7 @@ interface Props {
 }
 const HeaderProfile = (props: Props) => {
     const {themecolorrevert, themecolor} = useTheme().themeColors
-    const {username, fullname} = useUserData().data
+    const {username} = useUserData().data
 
     return (
         <>
@@ -77,15 +77,14 @@ const HeaderProfile = (props: Props) => {
                     ]}
                 />
                 <View style={styles.headerAnimatedInnerArea}>
-                    <Text
+                    {/* <Text
                         style={[
                             styles.headerFullname,
                             {color: themecolorrevert[0]},
                         ]}
                         numberOfLines={1}>
-                        {/* {formatNames(fullname)} */}
                         {fullname}
-                    </Text>
+                    </Text> */}
 
                     <Text
                         style={[
@@ -93,7 +92,8 @@ const HeaderProfile = (props: Props) => {
                             {color: themecolorrevert[0]},
                         ]}
                         numberOfLines={1}>
-                        {/* @{formatNames(username)} */}@{username}
+                        {/* @{formatNames(username)} */}
+                        {username}
                     </Text>
                 </View>
             </Animated.View>
@@ -185,9 +185,8 @@ const styles = StyleSheet.create({
         right: 0,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         paddingHorizontal: 15, // so that some space all around
-        marginLeft: 10, // image should have some space too in left side
     },
     headerAnimatedInnerArea: {
         flexDirection: 'column',
@@ -201,9 +200,8 @@ const styles = StyleSheet.create({
     },
     headerUsername: {
         fontWeight: 'bold',
-        fontSize: 13,
+        fontSize: 16,
     },
-
     icon: {
         width: 23,
         height: 23,
