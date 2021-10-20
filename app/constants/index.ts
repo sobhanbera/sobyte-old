@@ -111,6 +111,8 @@ export const TERM_AND_CONDITIONS_LINK = 'https://sobhanbera.vercel.app'
 export const APP_LOGO_LINK =
     'https://raw.githubusercontent.com/sobhanbera/sobyte/master/app/assets/images/sobyte_logo_white.png?token=AL7WGWAQBBGY7A53625TI43A7LSNU'
 
+export const DEVELOPER_DETAILS = 'http://linkedin.com/in/sobhanbera'
+
 /**
  * 000@webhosting .com
  * @password          - Tl2Kb1z1KmCp7wSZcQLW
