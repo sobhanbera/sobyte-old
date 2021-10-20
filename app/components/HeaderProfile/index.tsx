@@ -124,7 +124,7 @@ const HeaderProfile = (props: Props) => {
                         styles.headerBlurView,
                         {
                             opacity: props.scrollY.interpolate({
-                                inputRange: [-50, 0, 50, 100],
+                                inputRange: [-90, 0, 90, 140],
                                 outputRange: [1, 0, 0, 1],
                             }),
                         },
