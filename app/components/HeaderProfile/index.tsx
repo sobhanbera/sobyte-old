@@ -61,7 +61,7 @@ const HeaderProfile = (props: Props) => {
                     {
                         // opacity animated as user scrolls down..
                         opacity: props.scrollY.interpolate({
-                            inputRange: [90, 110],
+                            inputRange: [150, 180],
                             outputRange: [0, 1],
                         }),
                     },
