@@ -249,6 +249,13 @@ const MadeInText = () => {
         green: '#138808',
         navy_blue: '#000080',
     }
+    const IndiaText = [
+        {char: 'I', color: IndianFlagColors.saffron},
+        {char: 'N', color: IndianFlagColors.saffron},
+        {char: 'D', color: IndianFlagColors.white},
+        {char: 'I', color: IndianFlagColors.green},
+        {char: 'A', color: IndianFlagColors.green},
+    ]
 
     const openDeveloperDetailsWebsite = () => {
         Linking.openURL(DEVELOPER_DETAILS)
@@ -269,13 +276,20 @@ const MadeInText = () => {
                 color={red[0] + 'DF'}
             />
             {' in '}
-            <Text style={globalStyles.boldText}>
-                <Text style={{color: IndianFlagColors.saffron}}>I</Text>
-                <Text style={{color: IndianFlagColors.saffron}}>N</Text>
-                <Text style={{color: IndianFlagColors.white}}>D</Text>
-                <Text style={{color: IndianFlagColors.green}}>I</Text>
-                <Text style={{color: IndianFlagColors.green}}>A</Text>
-            </Text>
+
+            {/* new way to render India character */}
+            {IndiaText.map((char, _) => (
+                <Text
+                    key={_}
+                    style={{
+                        fontWeight: 'bold',
+                        color: char.color,
+                        letterSpacing: 2,
+                    }}>
+                    {char.char}
+                </Text>
+            ))}
+
             {' by '}
             <Text
                 style={[
