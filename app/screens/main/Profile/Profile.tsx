@@ -156,24 +156,9 @@ const Profile: React.FC<ProfileProps> = props => {
                         style={{
                             paddingVertical: 10,
                             flexDirection: 'row',
-                            alignItems: 'center',
                             justifyContent: 'space-between',
+                            alignItems: 'center',
                         }}>
-                        <Text
-                            style={[
-                                styles.descriptionText,
-                                {
-                                    color: themecolorrevert[0] + 'EF',
-                                },
-                            ]}>
-                            Other accounts:
-                        </Text>
-
-                        <MaterialCommunityIcons
-                            name="twitter"
-                            size={DEFAULT_LARGE_ICON_SIZE}
-                            color={themecolorrevert[0] + 'EF'}
-                        />
                         <MaterialCommunityIcons
                             name="facebook"
                             size={DEFAULT_LARGE_ICON_SIZE}
@@ -181,6 +166,11 @@ const Profile: React.FC<ProfileProps> = props => {
                         />
                         <MaterialCommunityIcons
                             name="instagram"
+                            size={DEFAULT_LARGE_ICON_SIZE}
+                            color={themecolorrevert[0] + 'EF'}
+                        />
+                        <MaterialCommunityIcons
+                            name="github"
                             size={DEFAULT_LARGE_ICON_SIZE}
                             color={themecolorrevert[0] + 'EF'}
                         />
@@ -195,7 +185,12 @@ const Profile: React.FC<ProfileProps> = props => {
                             color={themecolorrevert[0] + 'EF'}
                         />
                         <MaterialCommunityIcons
-                            name="github"
+                            name="twitter"
+                            size={DEFAULT_LARGE_ICON_SIZE}
+                            color={themecolorrevert[0] + 'EF'}
+                        />
+                        <MaterialCommunityIcons
+                            name="youtube"
                             size={DEFAULT_LARGE_ICON_SIZE}
                             color={themecolorrevert[0] + 'EF'}
                         />
@@ -343,3 +338,11 @@ const styles = StyleSheet.create({
 })
 
 export default Profile
+
+// facebook
+// insta
+// github
+// linkedin
+// snapchat
+// twitter
+// youtube
