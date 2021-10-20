@@ -257,6 +257,15 @@ export function formatTrackTitle(trackTitle: string): string {
 }
 
 /**
+ * @param {string} name the name string which is to be formated
+ * @return the formatted username or the fullname whatever is passed as the parameter
+ */
+export function formatNames(name: string) {
+    name = name.trim()
+    return name.length > 15 ? name.substring(0, 15).concat('...') : name
+}
+
+/**
  * @param {Array} array an array of any type of variables
  * @returns a random and shuffled order of the same array
  */

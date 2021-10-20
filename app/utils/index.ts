@@ -41,6 +41,7 @@ import {
     getRandomNumberString,
     getNotificationPlayerImageFromLinkWithHeight,
     removeUnnecessaryCharacters,
+    formatNames,
 } from './Objects'
 export {
     returnNullCallback,
@@ -68,4 +69,5 @@ export {
     getRandomNumberString,
     getNotificationPlayerImageFromLinkWithHeight,
     removeUnnecessaryCharacters,
+    formatNames,
 }
