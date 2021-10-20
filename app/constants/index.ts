@@ -20,6 +20,7 @@ import {
     DefaultStatusBarComponent,
     PaddingBottomView,
     DefaultDeviceHeightView,
+    Separator,
 } from './components'
 import {shuffleArray} from '../utils'
 import {CommonColors} from '../themes/ThemeProps'
@@ -37,7 +38,12 @@ export const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT
  *
  *
  */
-export {DefaultStatusBarComponent, PaddingBottomView, DefaultDeviceHeightView}
+export {
+    DefaultStatusBarComponent,
+    PaddingBottomView,
+    DefaultDeviceHeightView,
+    Separator,
+}
 
 /** Author Details */
 export const AUTHOR_NAME = 'Sobhan Bera'

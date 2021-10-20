@@ -43,3 +43,16 @@ export const DefaultDeviceHeightView = () => (
         }}
     />
 )
+
+export const Separator = (props: {color: string}) => (
+    <View
+        style={[
+            {
+                borderTopWidth: 0.5,
+                paddingHorizontal: 20,
+                marginVertical: 8,
+                borderTopColor: props.color,
+            },
+        ]}
+    />
+)
