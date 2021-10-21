@@ -5,7 +5,6 @@ import Profile from '../../screens/main/Profile/Profile'
 import Setting from '../../screens/main/Profile/Setting'
 import SettingsUpdater from '../../screens/main/Profile/SettingsUpdater'
 import LanguagePicker from '../../screens/main/Profile/LanguagePicker'
-import WebViewScreen from '../../screens/main/common/WebViewScreen'
 
 const ProfileStack = createStackNavigator()
 interface Props {}
@@ -28,7 +27,6 @@ const ProfileStackNavigator = (props: Props) => {
                 name="settingsupdater"
                 component={SettingsUpdater}
             />
-            <ProfileStack.Screen name="webview" component={WebViewScreen} />
         </ProfileStack.Navigator>
     )
 }
