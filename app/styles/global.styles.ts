@@ -107,6 +107,28 @@ const globalStyles = StyleSheet.create({
         paddingVertical: 3,
     },
 
+    extraPaddingHor: {
+        paddingHorizontal: 100,
+    },
+    highPaddingHor: {
+        paddingHorizontal: 60,
+    },
+    mediumPaddingHor: {
+        paddingHorizontal: 40,
+    },
+    smallPaddingHor: {
+        paddingHorizontal: 20,
+    },
+    verySmallPaddingHor: {
+        paddingHorizontal: 10,
+    },
+    tinyPaddingHor: {
+        paddingHorizontal: 5,
+    },
+    veryTinyPaddingHor: {
+        paddingHorizontal: 3,
+    },
+
     textFontElikaGorica: {
         fontFamily: FontElikaGorica,
     },
@@ -250,6 +272,10 @@ const globalStyles = StyleSheet.create({
     simpleButtonText: {
         textAlign: 'center',
         textAlignVertical: 'center',
+    },
+
+    border5: {
+        borderRadius: 6,
     },
 
     /**
