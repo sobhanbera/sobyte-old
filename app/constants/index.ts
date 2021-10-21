@@ -113,6 +113,13 @@ export const APP_LOGO_LINK =
 
 export const DEVELOPER_DETAILS = 'http://linkedin.com/in/sobhanbera'
 
+export const FACEBOOK_ENDPOINT = 'https://www.facebook.com'
+export const INSTAGRAM_ENDPOINT = 'https://www.instagram.com'
+export const GITHUB_ENDPOINT = 'https://www.instagram.com'
+export const LINKEDIN_ENDPOINT = 'https://www.linkedin.com/in'
+export const SNAPCHAT_ENDPOINT = 'https://www.snapchat.com/add'
+export const TWITTER_ENDPOINT = 'https://twitter.com'
+
 /**
  * 000@webhosting .com
  * @password          - Tl2Kb1z1KmCp7wSZcQLW
