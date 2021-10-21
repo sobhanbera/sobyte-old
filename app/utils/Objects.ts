@@ -6,8 +6,15 @@ import {
     DEFAULT_NOTIFICATION_IMAGE_SIZE,
     MAX_DISPLAY_TEXT_LENGTH,
     PASSWORD_CHARACTERS,
+    FACEBOOK_ENDPOINT,
+    INSTAGRAM_ENDPOINT,
+    GITHUB_ENDPOINT,
+    LINKEDIN_ENDPOINT,
+    SNAPCHAT_ENDPOINT,
+    TWITTER_ENDPOINT,
 } from '../constants'
 import {FakeMailsList} from '../constants/fakeMails'
+import {Linking} from 'react-native'
 
 export function returnNullCallback(nullableValue: any, defaultValue: any): any {
     return !nullableValue ||
@@ -282,4 +289,66 @@ export function shuffleArray(array: Array<any>): Array<any> {
         array[random] = temp
     }
     return array
+}
+
+/**
+ * some below functions will return the link to the social media pages
+ * we can use this function like where we need to redirect user to social media pages
+ * of other users...
+ */
+/**
+ * facebook link getter function
+ * @param username facebook username
+ * @return the facebook webpage of the user whatever the username is passed through the arguments...
+ */
+export function getFacebookLink(username: string): string {
+    return `${FACEBOOK_ENDPOINT}/${username}`
+}
+/**
+ * Instagram link getter function
+ * @param username Instagram username
+ * @return the Instagram webpage of the user whatever the username is passed through the arguments...
+ */
+export function getInstagramLink(username: string): string {
+    return `${INSTAGRAM_ENDPOINT}/${username}`
+}
+/**
+ * GitHub link getter function
+ * @param username GitHub username
+ * @return the GitHub webpage of the user whatever the username is passed through the arguments...
+ */
+export function getGitHubLink(username: string): string {
+    return `${GITHUB_ENDPOINT}/${username}`
+}
+/**
+ * Linkedin link getter function
+ * @param username Linkedin username
+ * @return the Linkedin webpage of the user whatever the username is passed through the arguments...
+ */
+export function getLinkedinLink(username: string): string {
+    return `${LINKEDIN_ENDPOINT}/${username}`
+}
+/**
+ * Snapchat link getter function
+ * @param username Snapchat username
+ * @return the Snapchat webpage of the user whatever the username is passed through the arguments...
+ */
+export function getSnapchatLink(username: string): string {
+    return `${SNAPCHAT_ENDPOINT}/${username}`
+}
+/**
+ * Twitter link getter function
+ * @param username Twitter username
+ * @return the Twitter webpage of the user whatever the username is passed through the arguments...
+ */
+export function getTwitterLink(username: string): string {
+    return `${TWITTER_ENDPOINT}/${username}`
+}
+
+/**
+ * this function will redirect the user to some website or some app/browser anything like that
+ * @param webpage the website where to redirect...
+ */
+export async function redirectToWebsite(webpage: string): Promise<any> {
+    return await Linking.openURL(webpage)
 }
