@@ -27,6 +27,15 @@ import {
     PROFILE_STACK__UPDATE_PROFILE_SCREEN,
     PROFILE_STACK__UPDATE_SOCIAL_MEDIA_LINKS_SCREEN,
 } from '../../../constants/screens'
+import {
+    getFacebookLink,
+    getGitHubLink,
+    getInstagramLink,
+    getLinkedinLink,
+    getSnapchatLink,
+    getTwitterLink,
+    redirectToWebsite,
+} from '../../../utils'
 
 const HEADER_HEIGHT_EXPANDED = 90
 const HEADER_HEIGHT_NARROWED =
@@ -190,6 +199,11 @@ const Profile: React.FC<ProfileProps> = props => {
                                     name="facebook"
                                     size={DEFAULT_LARGE_ICON_SIZE}
                                     color={themecolorrevert[0] + 'EF'}
+                                    onPress={() =>
+                                        redirectToWebsite(
+                                            getFacebookLink(facebook),
+                                        )
+                                    }
                                 />
                             )}
                             {instagram && (
@@ -197,6 +211,11 @@ const Profile: React.FC<ProfileProps> = props => {
                                     name="instagram"
                                     size={DEFAULT_LARGE_ICON_SIZE}
                                     color={themecolorrevert[0] + 'EF'}
+                                    onPress={() =>
+                                        redirectToWebsite(
+                                            getInstagramLink(instagram),
+                                        )
+                                    }
                                 />
                             )}
                             {github && (
@@ -204,6 +223,9 @@ const Profile: React.FC<ProfileProps> = props => {
                                     name="github"
                                     size={DEFAULT_LARGE_ICON_SIZE}
                                     color={themecolorrevert[0] + 'EF'}
+                                    onPress={() =>
+                                        redirectToWebsite(getGitHubLink(github))
+                                    }
                                 />
                             )}
                             {linkedin && (
@@ -211,6 +233,11 @@ const Profile: React.FC<ProfileProps> = props => {
                                     name="linkedin"
                                     size={DEFAULT_LARGE_ICON_SIZE}
                                     color={themecolorrevert[0] + 'EF'}
+                                    onPress={() =>
+                                        redirectToWebsite(
+                                            getLinkedinLink(linkedin),
+                                        )
+                                    }
                                 />
                             )}
                             {snapchat && (
@@ -218,6 +245,11 @@ const Profile: React.FC<ProfileProps> = props => {
                                     name="snapchat"
                                     size={DEFAULT_LARGE_ICON_SIZE}
                                     color={themecolorrevert[0] + 'EF'}
+                                    onPress={() =>
+                                        redirectToWebsite(
+                                            getSnapchatLink(snapchat),
+                                        )
+                                    }
                                 />
                             )}
                             {twitter && (
@@ -225,6 +257,11 @@ const Profile: React.FC<ProfileProps> = props => {
                                     name="twitter"
                                     size={DEFAULT_LARGE_ICON_SIZE}
                                     color={themecolorrevert[0] + 'EF'}
+                                    onPress={() =>
+                                        redirectToWebsite(
+                                            getTwitterLink(twitter),
+                                        )
+                                    }
                                 />
                             )}
                         </View>
