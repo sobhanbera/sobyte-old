@@ -231,7 +231,7 @@ const Profile: React.FC<ProfileProps> = props => {
                     ) : null}
 
                     <SimpleButton
-                        title={'Edit Social Media Links'}
+                        title={'Update Social Media Links'}
                         onPress={() =>
                             openProfileSocialMediaLinksUpdateScreen()
                         }
