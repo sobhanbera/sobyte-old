@@ -23,6 +23,10 @@ import {
 import {useTheme, useUserData} from '../../../context'
 import globalStyles from '../../../styles/global.styles'
 import AppData from '../../../../app.data.details'
+import {
+    PROFILE_STACK__UPDATE_PROFILE_SCREEN,
+    PROFILE_STACK__UPDATE_SOCIAL_MEDIA_LINKS_SCREEN,
+} from '../../../constants/screens'
 
 const HEADER_HEIGHT_EXPANDED = 90
 const HEADER_HEIGHT_NARROWED =
@@ -62,6 +66,15 @@ const Profile: React.FC<ProfileProps> = props => {
     const createdOn = dayjs(created_on).format('MMMM, YYYY').toString()
 
     const scrollY = useRef(new Animated.Value(0)).current
+
+    const openProfileUpdateScreen = () => {
+        props.navigation.navigate(PROFILE_STACK__UPDATE_PROFILE_SCREEN)
+    }
+    const openProfileSocialMediaLinksUpdateScreen = () => {
+        props.navigation.navigate(
+            PROFILE_STACK__UPDATE_SOCIAL_MEDIA_LINKS_SCREEN,
+        )
+    }
 
     return (
         <View style={globalStyles.flex}>
@@ -117,7 +130,7 @@ const Profile: React.FC<ProfileProps> = props => {
                         {/* TODO: onPress Function */}
                         <SimpleButton
                             title={'Edit Profile'}
-                            onPress={() => {}}
+                            onPress={() => openProfileUpdateScreen()}
                         />
                     </View>
 
@@ -219,7 +232,9 @@ const Profile: React.FC<ProfileProps> = props => {
 
                     <SimpleButton
                         title={'Edit Social Media Links'}
-                        onPress={() => {}}
+                        onPress={() =>
+                            openProfileSocialMediaLinksUpdateScreen()
+                        }
                     />
 
                     {/* line separator */}
