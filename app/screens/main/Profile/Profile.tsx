@@ -63,10 +63,6 @@ const Profile: React.FC<ProfileProps> = props => {
 
     const scrollY = useRef(new Animated.Value(0)).current
 
-    const openLinkInBrowser = (webpage: string) => {
-        Linking.openURL(webpage)
-    }
-
     return (
         <View style={globalStyles.flex}>
             {/* the android statusbar */}
@@ -125,11 +121,7 @@ const Profile: React.FC<ProfileProps> = props => {
                                     borderColor: grey[0] + '50',
                                 },
                             ]}
-                            onPress={() =>
-                                openLinkInBrowser(
-                                    'https://sobhanbera.github.io',
-                                )
-                            }>
+                            onPress={() => {}}>
                             <Text
                                 style={{
                                     color: themecolorrevert[0] + 'BF',
