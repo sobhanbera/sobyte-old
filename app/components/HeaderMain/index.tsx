@@ -1,9 +1,15 @@
 import React from 'react'
-import {View, Text, StyleSheet, StyleProp, ViewStyle} from 'react-native'
+import {
+    View,
+    Text,
+    StyleSheet,
+    StyleProp,
+    ViewStyle,
+    Pressable,
+} from 'react-native'
 
 import Entypo from 'react-native-vector-icons/Entypo'
 import {DEVICE_STATUSBAR_HEIGHT_CONSTANT, FontRobotoBold} from '../../constants'
-import Scaler from '../Scaler'
 import {useTheme} from '../../context'
 
 interface Props {
@@ -32,13 +38,13 @@ const HeaderMain = (props: Props) => {
                 },
                 props.style,
             ]}>
-            <Scaler onPress={() => props.navigation.goBack()}>
+            <Pressable onPress={() => props.navigation.goBack()}>
                 <Entypo
                     name="chevron-thin-left"
                     color={props.color}
                     size={20}
                 />
-            </Scaler>
+            </Pressable>
             <Text
                 style={[
                     styles.title,
