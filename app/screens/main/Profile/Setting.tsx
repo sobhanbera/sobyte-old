@@ -16,6 +16,10 @@ import {
     PaddingBottomView,
     SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
 } from '../../../constants'
+import {
+    PROFILE_STACK__LANGUAGE_PICKER_SCREEN,
+    PROFILE_STACK__SETTINGS_UPDATER_SCREEN,
+} from '../../../constants/screens'
 import AboutAppDetail from '../../../../app.data.details'
 
 interface SettingProps {
@@ -38,14 +42,14 @@ const Setting: React.FC<SettingProps> = props => {
     }
 
     const openSettingsUpdater = (dataForSettings: any, title: string) => {
-        props.navigation.navigate('settingsupdater', {
+        props.navigation.navigate(PROFILE_STACK__SETTINGS_UPDATER_SCREEN, {
             ...dataForSettings,
             title,
         })
     }
 
     const openMusicLanguageChooser = () => {
-        props.navigation.navigate('languagepicker')
+        props.navigation.navigate(PROFILE_STACK__LANGUAGE_PICKER_SCREEN)
     }
 
     return (
