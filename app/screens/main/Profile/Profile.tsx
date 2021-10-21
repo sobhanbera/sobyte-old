@@ -115,7 +115,10 @@ const Profile: React.FC<ProfileProps> = props => {
 
                         {/* edit profile custom button */}
                         {/* TODO: onPress Function */}
-                        <SimpleButton onPress={() => {}} />
+                        <SimpleButton
+                            title={'Edit Profile'}
+                            onPress={() => {}}
+                        />
                     </View>
 
                     {/* profile user's fullname */}
@@ -213,6 +216,11 @@ const Profile: React.FC<ProfileProps> = props => {
                             )}
                         </View>
                     ) : null}
+
+                    <SimpleButton
+                        title={'Edit Social Media Links'}
+                        onPress={() => {}}
+                    />
 
                     {/* line separator */}
                     <Separator color={themecolorrevert[0] + '20'} />
