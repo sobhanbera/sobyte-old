@@ -247,6 +247,10 @@ const globalStyles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 6,
     },
+    simpleButtonText: {
+        textAlign: 'center',
+        textAlignVertical: 'center',
+    },
 
     /**
      * animated header style design ends

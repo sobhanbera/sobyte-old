@@ -7,6 +7,7 @@ import {useTheme} from '../../context'
 
 interface Props {
     onPress: Function
+    title: string
     style?: StyleProp<ViewStyle>
 }
 const SimpleButton = (props: Props) => {
@@ -23,10 +24,13 @@ const SimpleButton = (props: Props) => {
             ]}
             onPress={() => props.onPress()}>
             <Text
-                style={{
-                    color: themecolorrevert[0] + 'BF',
-                }}>
-                Edit Profile
+                style={[
+                    globalStyles.simpleButtonText,
+                    {
+                        color: themecolorrevert[0] + 'BF',
+                    },
+                ]}>
+                {props.title}
             </Text>
         </Scaler>
     )
