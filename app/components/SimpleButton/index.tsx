@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text} from 'react-native'
+import {StyleProp, Text, ViewStyle} from 'react-native'
 
 import globalStyles from '../../styles/global.styles'
 import Scaler from '../Scaler'
@@ -7,6 +7,7 @@ import {useTheme} from '../../context'
 
 interface Props {
     onPress: Function
+    style?: StyleProp<ViewStyle>
 }
 const SimpleButton = (props: Props) => {
     const {grey, themecolorrevert} = useTheme().themeColors
@@ -18,6 +19,7 @@ const SimpleButton = (props: Props) => {
                 {
                     borderColor: grey[0] + '50',
                 },
+                props.style,
             ]}
             onPress={() => props.onPress()}>
             <Text
