@@ -13,6 +13,7 @@ interface Props {
     goBack?: boolean
     color: string
     backgroundColor?: string
+    borderColor?: string
     onPress?: Function
     style?: StyleProp<ViewStyle>
 }
@@ -25,7 +26,7 @@ const HeaderMain = (props: Props) => {
                 styles.header,
                 {
                     backgroundColor: props.backgroundColor || surfacelight[0],
-                    borderBottomColor: border[0],
+                    borderBottomColor: props.borderColor || border[0],
                     borderBottomWidth: 1,
                     marginTop: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // the height of the statusbar of the device
                 },
