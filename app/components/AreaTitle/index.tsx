@@ -3,9 +3,11 @@ import {View, Text} from 'react-native'
 
 import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
+import {FontVerdana, FontVerdanaBold} from '../../constants'
 
 interface Props {
     title: string
+    notBold?: boolean
 }
 
 const AreaTitle = (props: Props) => {
@@ -20,7 +22,18 @@ const AreaTitle = (props: Props) => {
                 paddingHorizontal: 22,
                 paddingTop: 10,
             }}>
-            <Text style={globalStyles.areaBoldTitle}>{props.title}</Text>
+            {/* if there is no arguments for against bold then show bold by default */}
+            <Text
+                style={[
+                    globalStyles.areaBoldTitle,
+                    {
+                        fontFamily: props.notBold
+                            ? FontVerdana
+                            : FontVerdanaBold,
+                    },
+                ]}>
+                {props.title}
+            </Text>
         </View>
     )
 }
