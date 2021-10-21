@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 import {
     // GradientBackground,
     HeaderProfile,
-    Scaler,
+    SimpleButton,
     TopicTitle,
 } from '../../../components'
 import {
@@ -32,7 +32,7 @@ interface ProfileProps {
     navigation?: any
 }
 const Profile: React.FC<ProfileProps> = props => {
-    const {themecolor, themecolorrevert, grey} = useTheme().themeColors
+    const {themecolor, themecolorrevert} = useTheme().themeColors
     const {
         username,
         fullname,
@@ -114,21 +114,8 @@ const Profile: React.FC<ProfileProps> = props => {
                         />
 
                         {/* edit profile custom button */}
-                        <Scaler
-                            containerStyle={[
-                                styles.buttons,
-                                {
-                                    borderColor: grey[0] + '50',
-                                },
-                            ]}
-                            onPress={() => {}}>
-                            <Text
-                                style={{
-                                    color: themecolorrevert[0] + 'BF',
-                                }}>
-                                Edit Profile
-                            </Text>
-                        </Scaler>
+                        {/* TODO: onPress Function */}
+                        <SimpleButton onPress={() => {}} />
                     </View>
 
                     {/* profile user's fullname */}
