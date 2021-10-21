@@ -175,62 +175,60 @@ const Profile: React.FC<ProfileProps> = props => {
                     <Separator color={themecolorrevert[0] + '20'} />
 
                     {anySocialLinkExists ? (
-                        <>
-                            <View
-                                style={{
-                                    paddingVertical: 10,
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                }}>
-                                {facebook && (
-                                    <MaterialCommunityIcons
-                                        name="facebook"
-                                        size={DEFAULT_LARGE_ICON_SIZE}
-                                        color={themecolorrevert[0] + 'EF'}
-                                    />
-                                )}
-                                {instagram && (
-                                    <MaterialCommunityIcons
-                                        name="instagram"
-                                        size={DEFAULT_LARGE_ICON_SIZE}
-                                        color={themecolorrevert[0] + 'EF'}
-                                    />
-                                )}
-                                {github && (
-                                    <MaterialCommunityIcons
-                                        name="github"
-                                        size={DEFAULT_LARGE_ICON_SIZE}
-                                        color={themecolorrevert[0] + 'EF'}
-                                    />
-                                )}
-                                {linkedin && (
-                                    <MaterialCommunityIcons
-                                        name="linkedin"
-                                        size={DEFAULT_LARGE_ICON_SIZE}
-                                        color={themecolorrevert[0] + 'EF'}
-                                    />
-                                )}
-                                {snapchat && (
-                                    <MaterialCommunityIcons
-                                        name="snapchat"
-                                        size={DEFAULT_LARGE_ICON_SIZE}
-                                        color={themecolorrevert[0] + 'EF'}
-                                    />
-                                )}
-                                {twitter && (
-                                    <MaterialCommunityIcons
-                                        name="twitter"
-                                        size={DEFAULT_LARGE_ICON_SIZE}
-                                        color={themecolorrevert[0] + 'EF'}
-                                    />
-                                )}
-                            </View>
-
-                            {/* line separator */}
-                            <Separator color={themecolorrevert[0] + '20'} />
-                        </>
+                        <View
+                            style={{
+                                paddingVertical: 10,
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                            }}>
+                            {facebook && (
+                                <MaterialCommunityIcons
+                                    name="facebook"
+                                    size={DEFAULT_LARGE_ICON_SIZE}
+                                    color={themecolorrevert[0] + 'EF'}
+                                />
+                            )}
+                            {instagram && (
+                                <MaterialCommunityIcons
+                                    name="instagram"
+                                    size={DEFAULT_LARGE_ICON_SIZE}
+                                    color={themecolorrevert[0] + 'EF'}
+                                />
+                            )}
+                            {github && (
+                                <MaterialCommunityIcons
+                                    name="github"
+                                    size={DEFAULT_LARGE_ICON_SIZE}
+                                    color={themecolorrevert[0] + 'EF'}
+                                />
+                            )}
+                            {linkedin && (
+                                <MaterialCommunityIcons
+                                    name="linkedin"
+                                    size={DEFAULT_LARGE_ICON_SIZE}
+                                    color={themecolorrevert[0] + 'EF'}
+                                />
+                            )}
+                            {snapchat && (
+                                <MaterialCommunityIcons
+                                    name="snapchat"
+                                    size={DEFAULT_LARGE_ICON_SIZE}
+                                    color={themecolorrevert[0] + 'EF'}
+                                />
+                            )}
+                            {twitter && (
+                                <MaterialCommunityIcons
+                                    name="twitter"
+                                    size={DEFAULT_LARGE_ICON_SIZE}
+                                    color={themecolorrevert[0] + 'EF'}
+                                />
+                            )}
+                        </View>
                     ) : null}
+
+                    {/* line separator */}
+                    <Separator color={themecolorrevert[0] + '20'} />
 
                     {/* <Text style={{fontSize: 20, color: 'white'}}>
                         Other User data like playlists, liked songs, downloaded
