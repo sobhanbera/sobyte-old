@@ -42,6 +42,13 @@ import {
     getNotificationPlayerImageFromLinkWithHeight,
     removeUnnecessaryCharacters,
     formatNames,
+    getFacebookLink,
+    getInstagramLink,
+    getGitHubLink,
+    getLinkedinLink,
+    getSnapchatLink,
+    getTwitterLink,
+    redirectToWebsite,
 } from './Objects'
 export {
     returnNullCallback,
@@ -70,4 +77,11 @@ export {
     getNotificationPlayerImageFromLinkWithHeight,
     removeUnnecessaryCharacters,
     formatNames,
+    getFacebookLink,
+    getInstagramLink,
+    getGitHubLink,
+    getLinkedinLink,
+    getSnapchatLink,
+    getTwitterLink,
+    redirectToWebsite,
 }
