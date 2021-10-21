@@ -100,7 +100,6 @@ export interface AppUserData {
     linkedin?: string | null
     snapchat?: string | null
     twitter?: string | null
-    youtube?: string | null
 }
 
 /**
