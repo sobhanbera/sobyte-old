@@ -15,7 +15,7 @@ import {
     FontVerdana,
     FontVerdanaBold,
 } from '../constants'
-import {StyleSheet} from 'react-native'
+import {StyleProp, StyleSheet} from 'react-native'
 
 const globalStyles = StyleSheet.create({
     appName: {
@@ -282,6 +282,20 @@ const globalStyles = StyleSheet.create({
      * animated header style design ends
      */
 })
+
+/**
+ * custom styles which accepts arguments tooooo...
+ * NOTE:  every style in the stylesheet must contain only and only one style line
+ */
+export const CustomGlobalStyles = (value: any) =>
+    StyleSheet.create({
+        borderColor: {
+            borderColor: value,
+        },
+        color: {
+            color: value,
+        },
+    })
 
 export const songComponentsStyles = StyleSheet.create({
     commonCard: {
