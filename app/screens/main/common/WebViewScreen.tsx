@@ -277,13 +277,13 @@ const WebViewScreen = (props: Props) => {
                             name={'arrow-left'}
                             size={DEFAULT_ICON_SIZE} // smaller then the size of text...
                             color={white[0] + 'BF'}
-                            onPress={() => goForward()}
+                            onPress={() => goBackward()}
                         />
                         <MaterialCommunityIcons
                             name={'arrow-right'}
                             size={DEFAULT_ICON_SIZE} // smaller then the size of text...
                             color={white[0] + 'BF'}
-                            onPress={() => goBackward()}
+                            onPress={() => goForward()}
                         />
                         <MaterialCommunityIcons
                             name={'refresh'}
