@@ -16,6 +16,7 @@ import {
     HEADER_MIN_HEIGHT,
 } from '../../constants'
 import {useTheme, useUserData} from '../../context'
+import {PROFILE_STACK__SETTINGS_SCREEN} from '../../constants/screens'
 // import {formatNames} from '../../utils'
 
 const AnimatedImageBackground =
@@ -41,7 +42,9 @@ const HeaderProfile = (props: Props) => {
                 <TouchableOpacity
                     activeOpacity={0.9}
                     onPress={() => {
-                        props.navigation.navigate('setting')
+                        props.navigation.navigate(
+                            PROFILE_STACK__SETTINGS_SCREEN,
+                        )
                     }}>
                     {/* the actual setting icon in form of an image */}
                     <Image
