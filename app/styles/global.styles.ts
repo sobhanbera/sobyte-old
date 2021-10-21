@@ -239,6 +239,16 @@ const globalStyles = StyleSheet.create({
     },
 
     /**
+     * buttons
+     */
+    simpleButton: {
+        borderRadius: 8,
+        borderWidth: 0.65,
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+    },
+
+    /**
      * animated header style design ends
      */
 })

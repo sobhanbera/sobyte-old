@@ -58,6 +58,7 @@ import CommonArtistItem from './CommonArtistItem'
 
 import CustomSongsListRenderer from './CustomSongsListRenderer'
 import SimpleTextInput from './SimpleTextInput'
+import SimpleButton from './SimpleButton'
 
 import SongsKeywordResultsRenderer from './KeywordResultsRenderer/Songs'
 import ArtistsKeywordResultsRenderer from './KeywordResultsRenderer/Artists'
@@ -104,6 +105,7 @@ export {
     ArtistsKeywordResultsRenderer,
     CustomSongsListRenderer,
     SimpleTextInput,
+    SimpleButton,
 }
 
 export {CommonSongList, CommonSongItem, CommonArtistList, CommonArtistItem}
