@@ -33,16 +33,38 @@ interface ProfileProps {
 }
 const Profile: React.FC<ProfileProps> = props => {
     const {themecolor, themecolorrevert, grey} = useTheme().themeColors
-    const {username, fullname, created_on} = useUserData().data
+    const {
+        username,
+        fullname,
+        created_on,
+        facebook,
+        instagram,
+        github,
+        linkedin,
+        snapchat,
+        twitter,
+    } = useUserData().data
+    /**
+     * if any of the above links, username, or endpoint contain any string or text than
+     * this below variable will be true and if it is true we will change the UI accordingly...
+     */
+    const anySocialLinkExists: boolean =
+        (
+            facebook ||
+            instagram ||
+            github ||
+            linkedin ||
+            snapchat ||
+            twitter ||
+            ''
+        ).length > 0
 
     const createdOn = dayjs(created_on).format('MMMM, YYYY').toString()
 
     const scrollY = useRef(new Animated.Value(0)).current
 
     const openLinkInBrowser = (webpage: string) => {
-        props.navigation.navigate('webview', {
-            webpage,
-        })
+        Linking.openURL(webpage)
     }
 
     return (
@@ -160,52 +182,63 @@ const Profile: React.FC<ProfileProps> = props => {
                     {/* line separator */}
                     <Separator color={themecolorrevert[0] + '20'} />
 
-                    <View
-                        style={{
-                            paddingVertical: 10,
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                        }}>
-                        <MaterialCommunityIcons
-                            name="facebook"
-                            size={DEFAULT_LARGE_ICON_SIZE}
-                            color={themecolorrevert[0] + 'EF'}
-                        />
-                        <MaterialCommunityIcons
-                            name="instagram"
-                            size={DEFAULT_LARGE_ICON_SIZE}
-                            color={themecolorrevert[0] + 'EF'}
-                        />
-                        <MaterialCommunityIcons
-                            name="github"
-                            size={DEFAULT_LARGE_ICON_SIZE}
-                            color={themecolorrevert[0] + 'EF'}
-                        />
-                        <MaterialCommunityIcons
-                            name="linkedin"
-                            size={DEFAULT_LARGE_ICON_SIZE}
-                            color={themecolorrevert[0] + 'EF'}
-                        />
-                        <MaterialCommunityIcons
-                            name="snapchat"
-                            size={DEFAULT_LARGE_ICON_SIZE}
-                            color={themecolorrevert[0] + 'EF'}
-                        />
-                        <MaterialCommunityIcons
-                            name="twitter"
-                            size={DEFAULT_LARGE_ICON_SIZE}
-                            color={themecolorrevert[0] + 'EF'}
-                        />
-                        <MaterialCommunityIcons
-                            name="youtube"
-                            size={DEFAULT_LARGE_ICON_SIZE}
-                            color={themecolorrevert[0] + 'EF'}
-                        />
-                    </View>
+                    {anySocialLinkExists ? (
+                        <>
+                            <View
+                                style={{
+                                    paddingVertical: 10,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                }}>
+                                {facebook && (
+                                    <MaterialCommunityIcons
+                                        name="facebook"
+                                        size={DEFAULT_LARGE_ICON_SIZE}
+                                        color={themecolorrevert[0] + 'EF'}
+                                    />
+                                )}
+                                {instagram && (
+                                    <MaterialCommunityIcons
+                                        name="instagram"
+                                        size={DEFAULT_LARGE_ICON_SIZE}
+                                        color={themecolorrevert[0] + 'EF'}
+                                    />
+                                )}
+                                {github && (
+                                    <MaterialCommunityIcons
+                                        name="github"
+                                        size={DEFAULT_LARGE_ICON_SIZE}
+                                        color={themecolorrevert[0] + 'EF'}
+                                    />
+                                )}
+                                {linkedin && (
+                                    <MaterialCommunityIcons
+                                        name="linkedin"
+                                        size={DEFAULT_LARGE_ICON_SIZE}
+                                        color={themecolorrevert[0] + 'EF'}
+                                    />
+                                )}
+                                {snapchat && (
+                                    <MaterialCommunityIcons
+                                        name="snapchat"
+                                        size={DEFAULT_LARGE_ICON_SIZE}
+                                        color={themecolorrevert[0] + 'EF'}
+                                    />
+                                )}
+                                {twitter && (
+                                    <MaterialCommunityIcons
+                                        name="twitter"
+                                        size={DEFAULT_LARGE_ICON_SIZE}
+                                        color={themecolorrevert[0] + 'EF'}
+                                    />
+                                )}
+                            </View>
 
-                    {/* line separator */}
-                    <Separator color={themecolorrevert[0] + '20'} />
+                            {/* line separator */}
+                            <Separator color={themecolorrevert[0] + '20'} />
+                        </>
+                    ) : null}
 
                     {/* <Text style={{fontSize: 20, color: 'white'}}>
                         Other User data like playlists, liked songs, downloaded
