@@ -49,8 +49,9 @@ interface Props {
 
 /**
  * while any link for downloading file is pressed the app crashes
+ * @deprecated
+ * the use of this component is deprecated for now since there is no fix for the downloading files crash issue.
  */
-
 const WebViewScreen = (props: Props) => {
     const {webpage} = props.route.params
     const {border, surfacelight, white} = useTheme().themeColors
