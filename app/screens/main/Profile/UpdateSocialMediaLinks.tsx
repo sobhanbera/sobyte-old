@@ -29,6 +29,54 @@ const UpdateSocialMediaLinks = (props: Props) => {
     const [snapchatLink, setSnapchatLink] = useState(data.snapchat || '')
     const [twitterLink, setTwitterLink] = useState(data.twitter || '')
 
+    /***
+     * whenever the github username changes in the UI or updates
+     * we will check if the username's account exists or not.
+     * this function will validate the username if exists in the GitHub's database or not...
+     */
+    const GitHubUsernameValidator = useCallback(() => {}, [githubLink])
+    useEffect(() => GitHubUsernameValidator(), [githubLink])
+
+    /***
+     * whenever the facebook username changes in the UI or updates
+     * we will check if the username's account exists or not.
+     * this function will validate the username if exists in the Facebook's database or not...
+     */
+    const FacebookUsernameValidator = useCallback(() => {}, [facebookLink])
+    useEffect(() => FacebookUsernameValidator(), [facebookLink])
+
+    /***
+     * whenever the instagram username changes in the UI or updates
+     * we will check if the username's account exists or not.
+     * this function will validate the username if exists in the Instagram's database or not...
+     */
+    const InstagramUsernameValidator = useCallback(() => {}, [instagramLink])
+    useEffect(() => InstagramUsernameValidator(), [instagramLink])
+
+    /***
+     * whenever the linkedin username changes in the UI or updates
+     * we will check if the username's account exists or not.
+     * this function will validate the username if exists in the Linkedin's database or not...
+     */
+    const LinkedinUsernameValidator = useCallback(() => {}, [linkedinLink])
+    useEffect(() => LinkedinUsernameValidator(), [linkedinLink])
+
+    /***
+     * whenever the snapchat username changes in the UI or updates
+     * we will check if the username's account exists or not.
+     * this function will validate the username if exists in the Snapchat's database or not...
+     */
+    const SnapchatUsernameValidator = useCallback(() => {}, [snapchatLink])
+    useEffect(() => SnapchatUsernameValidator(), [snapchatLink])
+
+    /***
+     * whenever the twitter username changes in the UI or updates
+     * we will check if the username's account exists or not.
+     * this function will validate the username if exists in the Twitter's database or not...
+     */
+    const TwitterUsernameValidator = useCallback(() => {}, [twitterLink])
+    useEffect(() => TwitterUsernameValidator(), [twitterLink])
+
     const updateSocialMediaLinksInDatabase = () => {}
 
     const commonTextInputStyle = [
