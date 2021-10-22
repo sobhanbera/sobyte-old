@@ -88,6 +88,8 @@ export interface AppUserData {
     last_login_ip?: string | null
     last_updated_on: Date
     last_updated_ip?: string | null
+    last_social_media_links_updated_on: Date
+    last_social_media_links_updated_ip: string | null
     disabled: number
     verified_account: number
     verified_email: number
