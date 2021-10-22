@@ -67,12 +67,23 @@ const UpdateSocialMediaLinks = (props: Props) => {
         InitialUserSocialMediaErrors,
     )
 
-    const updateError = (update: UserSocialMediaError) => {
-        setError(value => ({
-            ...value,
-            ...update,
-        }))
-    }
+    const updateError = useCallback(
+        (update: UserSocialMediaError) => {
+            console.log('err')
+            setError(value => ({
+                ...value,
+                ...update,
+            }))
+        },
+        [
+            facebookUsername,
+            instagramUsername,
+            githubUsername,
+            linkedinUsername,
+            snapchatUsername,
+            twitterUsername,
+        ],
+    )
 
     /***
      * whenever the github username changes in the UI or updates
@@ -84,9 +95,8 @@ const UpdateSocialMediaLinks = (props: Props) => {
         axios
             .get(`${GITHUB_API_ENDPOINT}/users/${githubUsername}`)
             .then(response => {
-                console.log(response.data)
                 // login gives the username
-                // if the login is equal to githubUsername variable then the entered username is correct
+                // if the data is available then we will not show error
                 // else show error
                 if (response.data?.login === githubUsername) {
                     // setting the value of github error to false
@@ -102,7 +112,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 updateError({github: false})
             })
     }, [githubUsername])
-    useEffect(() => GitHubUsernameValidator(), [githubUsername])
 
     /***
      * whenever the facebook username changes in the UI or updates
@@ -110,7 +119,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * this function will validate the username if exists in the Facebook's database or not...
      */
     const FacebookUsernameValidator = useCallback(() => {}, [facebookUsername])
-    useEffect(() => FacebookUsernameValidator(), [facebookUsername])
 
     /***
      * whenever the instagram username changes in the UI or updates
@@ -120,7 +128,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
     const InstagramUsernameValidator = useCallback(() => {}, [
         instagramUsername,
     ])
-    useEffect(() => InstagramUsernameValidator(), [instagramUsername])
 
     /***
      * whenever the linkedin username changes in the UI or updates
@@ -128,7 +135,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * this function will validate the username if exists in the Linkedin's database or not...
      */
     const LinkedinUsernameValidator = useCallback(() => {}, [linkedinUsername])
-    useEffect(() => LinkedinUsernameValidator(), [linkedinUsername])
 
     /***
      * whenever the snapchat username changes in the UI or updates
@@ -136,7 +142,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * this function will validate the username if exists in the Snapchat's database or not...
      */
     const SnapchatUsernameValidator = useCallback(() => {}, [snapchatUsername])
-    useEffect(() => SnapchatUsernameValidator(), [snapchatUsername])
 
     /***
      * whenever the twitter username changes in the UI or updates
@@ -144,7 +149,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * this function will validate the username if exists in the Twitter's database or not...
      */
     const TwitterUsernameValidator = useCallback(() => {}, [twitterUsername])
-    useEffect(() => TwitterUsernameValidator(), [twitterUsername])
 
     const updateSocialMediaLinksInDatabase = () => {}
 
@@ -175,7 +179,14 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 {/* facebook link update */}
                 <AreaTitle title={'Facebook Username'} notBold />
                 <SimpleTextInput
-                    style={commonTextInputStyle}
+                    style={[
+                        commonTextInputStyle,
+                        {
+                            borderColor: error.facebook
+                                ? themeColors.onError[0]
+                                : themeColors.placeholder[0],
+                        },
+                    ]}
                     value={facebookUsername}
                     onChangeText={setFacebookUsername}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
@@ -186,7 +197,14 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 {/* instagram link update */}
                 <AreaTitle title={'Instagram Username'} notBold />
                 <SimpleTextInput
-                    style={commonTextInputStyle}
+                    style={[
+                        commonTextInputStyle,
+                        {
+                            borderColor: error.instagram
+                                ? themeColors.onError[0]
+                                : themeColors.placeholder[0],
+                        },
+                    ]}
                     value={instagramUsername}
                     onChangeText={setInstagramUsername}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
@@ -197,7 +215,14 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 {/* github link update */}
                 <AreaTitle title={'GitHub Username'} notBold />
                 <SimpleTextInput
-                    style={commonTextInputStyle}
+                    style={[
+                        commonTextInputStyle,
+                        {
+                            borderColor: error.github
+                                ? themeColors.onError[0]
+                                : themeColors.placeholder[0],
+                        },
+                    ]}
                     value={githubUsername}
                     onChangeText={setGitHubUsername}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
@@ -208,7 +233,14 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 {/* linkedin link update */}
                 <AreaTitle title={'Linkedin Username'} notBold />
                 <SimpleTextInput
-                    style={commonTextInputStyle}
+                    style={[
+                        commonTextInputStyle,
+                        {
+                            borderColor: error.linkedin
+                                ? themeColors.onError[0]
+                                : themeColors.placeholder[0],
+                        },
+                    ]}
                     value={linkedinUsername}
                     onChangeText={setLinkedinUsername}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
@@ -219,7 +251,14 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 {/* snapchat link update */}
                 <AreaTitle title={'Snapchat Username'} notBold />
                 <SimpleTextInput
-                    style={commonTextInputStyle}
+                    style={[
+                        commonTextInputStyle,
+                        {
+                            borderColor: error.snapchat
+                                ? themeColors.onError[0]
+                                : themeColors.placeholder[0],
+                        },
+                    ]}
                     value={snapchatUsername}
                     onChangeText={setSnapchatUsername}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
@@ -230,7 +269,14 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 {/* twitter link update */}
                 <AreaTitle title={'Twitter Username'} notBold />
                 <SimpleTextInput
-                    style={commonTextInputStyle}
+                    style={[
+                        commonTextInputStyle,
+                        {
+                            borderColor: error.twitter
+                                ? themeColors.onError[0]
+                                : themeColors.placeholder[0],
+                        },
+                    ]}
                     value={twitterUsername}
                     onChangeText={setTwitterUsername}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
