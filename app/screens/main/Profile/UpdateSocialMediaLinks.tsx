@@ -40,6 +40,15 @@ const InitialUserSocialMediaErrors: UserSocialMediaError = {
     twitter: false,
 }
 
+const UsernameLengthLimit = {
+    facebook: 50,
+    github: 39,
+    instagram: 30,
+    linkedin: 60,
+    snapchat: 15,
+    twitter: 15,
+}
+
 interface Props {
     navigation?: any
 }
@@ -122,7 +131,21 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * this function will validate the username if exists in the Facebook's database or not...
      */
     const FacebookUsernameValidator = useCallback(
-        username => {},
+        username => {
+            // making request to facebook's public api endpoint
+            axios
+                .get(`${FACEBOOK_API_ENDPOINT}/${username}`)
+                .then(() => {
+                    // login gives the username
+                    // if the data is available then we will not show error
+                    // else show error
+                    updateError({facebook: false})
+                })
+                .catch(() => {
+                    // show error in this case too
+                    updateError({facebook: true})
+                })
+        },
         [facebookUsername],
     )
 
@@ -132,7 +155,21 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * this function will validate the username if exists in the Instagram's database or not...
      */
     const InstagramUsernameValidator = useCallback(
-        username => {},
+        username => {
+            // making request to instagram's public api endpoint
+            axios
+                .get(`${INSTAGRAM_API_ENDPOINT}/${username}`)
+                .then(() => {
+                    // login gives the username
+                    // if the data is available then we will not show error
+                    // else show error
+                    updateError({instagram: false})
+                })
+                .catch(() => {
+                    // show error in this case too
+                    updateError({instagram: true})
+                })
+        },
         [instagramUsername],
     )
 
@@ -211,6 +248,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Facebook Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
+                    maxLength={UsernameLengthLimit.facebook}
                 />
 
                 {/* instagram link update */}
@@ -232,6 +270,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Instagram Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
+                    maxLength={UsernameLengthLimit.instagram}
                 />
 
                 {/* github link update */}
@@ -253,6 +292,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter GitHub Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
+                    maxLength={UsernameLengthLimit.github}
                 />
 
                 {/* linkedin link update */}
@@ -274,6 +314,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Linkedin Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
+                    maxLength={UsernameLengthLimit.linkedin}
                 />
 
                 {/* snapchat link update */}
@@ -295,6 +336,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Snapchat Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
+                    maxLength={UsernameLengthLimit.snapchat}
                 />
 
                 {/* twitter link update */}
@@ -316,6 +358,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Twitter Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
+                    maxLength={UsernameLengthLimit.twitter}
                 />
 
                 <SimpleButton
