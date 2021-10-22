@@ -272,6 +272,9 @@ const Profile: React.FC<ProfileProps> = props => {
                         onPress={() =>
                             openProfileSocialMediaLinksUpdateScreen()
                         }
+                        style={{
+                            paddingVertical: 8,
+                        }}
                     />
 
                     {/* line separator */}
