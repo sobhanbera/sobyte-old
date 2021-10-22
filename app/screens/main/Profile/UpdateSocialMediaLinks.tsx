@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useState} from 'react'
 import {ScrollView} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
@@ -90,65 +90,81 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * we will check if the username's account exists or not.
      * this function will validate the username if exists in the GitHub's database or not...
      */
-    const GitHubUsernameValidator = useCallback(() => {
-        // making request to github's public api endpoint
-        axios
-            .get(`${GITHUB_API_ENDPOINT}/users/${githubUsername}`)
-            .then(response => {
-                // login gives the username
-                // if the data is available then we will not show error
-                // else show error
-                if (response.data?.login === githubUsername) {
-                    // setting the value of github error to false
-                    // so that no error show
+    const GitHubUsernameValidator = useCallback(
+        username => {
+            // making request to github's public api endpoint
+            axios
+                .get(`${GITHUB_API_ENDPOINT}/users/${username}`)
+                .then(response => {
+                    // login gives the username
+                    // if the data is available then we will not show error
+                    // else show error
+                    if (response.data?.login === username) {
+                        // setting the value of github error to false
+                        // so that no error show
+                        updateError({github: false})
+                    } else {
+                        // show error
+                        updateError({github: true})
+                    }
+                })
+                .catch(() => {
+                    // show error in this case too
                     updateError({github: true})
-                } else {
-                    // show error
-                    updateError({github: false})
-                }
-            })
-            .catch(error => {
-                // show error in this case too
-                updateError({github: false})
-            })
-    }, [githubUsername])
+                })
+        },
+        [githubUsername],
+    )
 
     /***
      * whenever the facebook username changes in the UI or updates
      * we will check if the username's account exists or not.
      * this function will validate the username if exists in the Facebook's database or not...
      */
-    const FacebookUsernameValidator = useCallback(() => {}, [facebookUsername])
+    const FacebookUsernameValidator = useCallback(
+        username => {},
+        [facebookUsername],
+    )
 
     /***
      * whenever the instagram username changes in the UI or updates
      * we will check if the username's account exists or not.
      * this function will validate the username if exists in the Instagram's database or not...
      */
-    const InstagramUsernameValidator = useCallback(() => {}, [
-        instagramUsername,
-    ])
+    const InstagramUsernameValidator = useCallback(
+        username => {},
+        [instagramUsername],
+    )
 
     /***
      * whenever the linkedin username changes in the UI or updates
      * we will check if the username's account exists or not.
      * this function will validate the username if exists in the Linkedin's database or not...
      */
-    const LinkedinUsernameValidator = useCallback(() => {}, [linkedinUsername])
+    const LinkedinUsernameValidator = useCallback(
+        username => {},
+        [linkedinUsername],
+    )
 
     /***
      * whenever the snapchat username changes in the UI or updates
      * we will check if the username's account exists or not.
      * this function will validate the username if exists in the Snapchat's database or not...
      */
-    const SnapchatUsernameValidator = useCallback(() => {}, [snapchatUsername])
+    const SnapchatUsernameValidator = useCallback(
+        username => {},
+        [snapchatUsername],
+    )
 
     /***
      * whenever the twitter username changes in the UI or updates
      * we will check if the username's account exists or not.
      * this function will validate the username if exists in the Twitter's database or not...
      */
-    const TwitterUsernameValidator = useCallback(() => {}, [twitterUsername])
+    const TwitterUsernameValidator = useCallback(
+        username => {},
+        [twitterUsername],
+    )
 
     const updateSocialMediaLinksInDatabase = () => {}
 
@@ -188,7 +204,10 @@ const UpdateSocialMediaLinks = (props: Props) => {
                         },
                     ]}
                     value={facebookUsername}
-                    onChangeText={setFacebookUsername}
+                    onChangeText={value => {
+                        setFacebookUsername(value)
+                        FacebookUsernameValidator(value)
+                    }}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Facebook Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
@@ -206,7 +225,10 @@ const UpdateSocialMediaLinks = (props: Props) => {
                         },
                     ]}
                     value={instagramUsername}
-                    onChangeText={setInstagramUsername}
+                    onChangeText={value => {
+                        setInstagramUsername(value)
+                        InstagramUsernameValidator(value)
+                    }}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Instagram Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
@@ -224,7 +246,10 @@ const UpdateSocialMediaLinks = (props: Props) => {
                         },
                     ]}
                     value={githubUsername}
-                    onChangeText={setGitHubUsername}
+                    onChangeText={value => {
+                        setGitHubUsername(value)
+                        GitHubUsernameValidator(value)
+                    }}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter GitHub Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
@@ -242,7 +267,10 @@ const UpdateSocialMediaLinks = (props: Props) => {
                         },
                     ]}
                     value={linkedinUsername}
-                    onChangeText={setLinkedinUsername}
+                    onChangeText={value => {
+                        setLinkedinUsername(value)
+                        LinkedinUsernameValidator(value)
+                    }}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Linkedin Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
@@ -260,7 +288,10 @@ const UpdateSocialMediaLinks = (props: Props) => {
                         },
                     ]}
                     value={snapchatUsername}
-                    onChangeText={setSnapchatUsername}
+                    onChangeText={value => {
+                        setSnapchatUsername(value)
+                        SnapchatUsernameValidator(value)
+                    }}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Snapchat Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
@@ -278,7 +309,10 @@ const UpdateSocialMediaLinks = (props: Props) => {
                         },
                     ]}
                     value={twitterUsername}
-                    onChangeText={setTwitterUsername}
+                    onChangeText={value => {
+                        setTwitterUsername(value)
+                        TwitterUsernameValidator(value)
+                    }}
                     placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Twitter Username'}
                     selectionColor={themeColors.themecolorrevert[0] + '7F'}
