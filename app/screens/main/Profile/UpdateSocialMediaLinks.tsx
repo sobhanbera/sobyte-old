@@ -139,9 +139,17 @@ const UpdateSocialMediaLinks = (props: Props) => {
      */
     const FacebookUsernameValidator = useCallback(
         username => {
+            if (typeof facebookCancelToken != typeof undefined)
+                facebookCancelToken.cancel(
+                    'Cancelling the previous token for new request.',
+                )
+            facebookCancelToken = axios.CancelToken.source()
+
             // making request to facebook's public api endpoint
             axios
-                .get(`${FACEBOOK_API_ENDPOINT}/${username}`)
+                .get(`${FACEBOOK_API_ENDPOINT}/${username}`, {
+                    cancelToken: facebookCancelToken.token,
+                })
                 .then(() => {
                     // login gives the username
                     // if the data is available then we will not show error
@@ -163,9 +171,17 @@ const UpdateSocialMediaLinks = (props: Props) => {
      */
     const InstagramUsernameValidator = useCallback(
         username => {
+            if (typeof instagramCancelToken != typeof undefined)
+                instagramCancelToken.cancel(
+                    'Cancelling the previous token for new request.',
+                )
+            instagramCancelToken = axios.CancelToken.source()
+
             // making request to instagram's public api endpoint
             axios
-                .get(`${INSTAGRAM_API_ENDPOINT}/${username}`)
+                .get(`${INSTAGRAM_API_ENDPOINT}/${username}`, {
+                    cancelToken: instagramCancelToken.token,
+                })
                 .then(() => {
                     // login gives the username
                     // if the data is available then we will not show error
@@ -197,9 +213,17 @@ const UpdateSocialMediaLinks = (props: Props) => {
      */
     const SnapchatUsernameValidator = useCallback(
         username => {
+            if (typeof snapchatCancelToken != typeof undefined)
+                snapchatCancelToken.cancel(
+                    'Cancelling the previous token for new request.',
+                )
+            snapchatCancelToken = axios.CancelToken.source()
+
             // making request to snapchat's public api endpoint
             axios
-                .get(`${SNAPCHAT_API_ENDPOINT}/${username}`)
+                .get(`${SNAPCHAT_API_ENDPOINT}/${username}`, {
+                    cancelToken: snapchatCancelToken.token,
+                })
                 .then(() => {
                     // login gives the username
                     // if the data is available then we will not show error
