@@ -19,7 +19,7 @@ const SimpleButton = (props: Props) => {
             containerStyle={[
                 globalStyles.simpleButton,
                 {
-                    borderColor: grey[0] + '50',
+                    borderColor: grey[0] + '55',
                 },
                 props.style,
             ]}
@@ -28,7 +28,7 @@ const SimpleButton = (props: Props) => {
                 style={[
                     globalStyles.simpleButtonText,
                     {
-                        color: themecolorrevert[0] + 'BF',
+                        color: themecolorrevert[0] + 'EF',
                     },
                     props.textStyle,
                 ]}>
