@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from 'react'
 import {KeyboardAvoidingView, ScrollView} from 'react-native'
 import {useTranslation} from 'react-i18next'
+import axios, {CancelTokenSource} from 'axios'
 
 import {useSetting, useTheme, useUserData} from '../../../context'
 
@@ -21,7 +22,6 @@ import {
     SimpleButton,
     SimpleTextInput,
 } from '../../../components'
-import axios from 'axios'
 
 interface UserSocialMediaError {
     facebook?: boolean
@@ -76,6 +76,16 @@ const UpdateSocialMediaLinks = (props: Props) => {
         InitialUserSocialMediaErrors,
     )
 
+    /**
+     * cancelToken variables for every api requests we are making....
+     */
+    let facebookCancelToken: CancelTokenSource = axios.CancelToken.source()
+    let instagramCancelToken: CancelTokenSource = axios.CancelToken.source()
+    let githubCancelToken: CancelTokenSource = axios.CancelToken.source()
+    let linkedinCancelToken: CancelTokenSource = axios.CancelToken.source()
+    let snapchatCancelToken: CancelTokenSource = axios.CancelToken.source()
+    let twitterCancelToken: CancelTokenSource = axios.CancelToken.source()
+
     const updateError = (update: UserSocialMediaError) => {
         setError(value => ({
             ...value,
@@ -90,9 +100,17 @@ const UpdateSocialMediaLinks = (props: Props) => {
      */
     const GitHubUsernameValidator = useCallback(
         username => {
+            if (typeof githubCancelToken != typeof undefined)
+                githubCancelToken.cancel(
+                    'Cancelling the previous token for new request.',
+                )
+            githubCancelToken = axios.CancelToken.source()
+
             // making request to github's public api endpoint
             axios
-                .get(`${GITHUB_API_ENDPOINT}/users/${username}`)
+                .get(`${GITHUB_API_ENDPOINT}/users/${username}`, {
+                    cancelToken: githubCancelToken.token,
+                })
                 .then(response => {
                     // login gives the username
                     // if the data is available then we will not show error
@@ -378,6 +396,17 @@ const UpdateSocialMediaLinks = (props: Props) => {
                         fontWeight: 'bold',
                         color: themeColors.themecolor[0],
                     }}
+                />
+
+                <AreaTitle
+                    title={
+                        'NOTE: These data are optional. Even then if you are providing please provide the correct data. Also you can only update these data once in a week.'
+                    }
+                    style={{
+                        textAlign: 'center',
+                        color: themeColors.themecolorrevert[0] + 'AF',
+                    }}
+                    notBold
                 />
 
                 <PaddingBottomView />
