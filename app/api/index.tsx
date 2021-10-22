@@ -9,7 +9,7 @@
  */
 
 import React, {useState} from 'react' // as usual import
-import axios from 'axios' // for making api requests
+import axios, {CancelTokenSource} from 'axios' // for making api requests
 import RNLocalize from 'react-native-localize' // to pass the location of user in the api call
 import querystring from 'querystring' // string methods
 import _ from 'lodash' // util methods
@@ -474,6 +474,7 @@ const MusicApi = (props: MusicApiProps) => {
         endpointName: string,
         inputVariables: Object,
         inputQuery = {},
+        // cancelToken?: CancelTokenSource,
         cancelToken: any = '',
     ) => {
         // if (error)
@@ -517,7 +518,7 @@ const MusicApi = (props: MusicApiProps) => {
                     ),
                     {
                         responseType: 'json',
-                        headers: {...headers, cancelToken},
+                        headers: {...headers, cancelToken: cancelToken.token},
                     },
                 )
                 .then(res => {
