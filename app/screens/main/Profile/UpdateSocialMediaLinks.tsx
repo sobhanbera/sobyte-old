@@ -259,6 +259,27 @@ const UpdateSocialMediaLinks = (props: Props) => {
             paddingVertical: 10,
         },
     ]
+    /**
+     * since there are many text inputs in this UI
+     * therefore we are creating a common variable which will store the common props of all this
+     * text input component
+     *
+     * this is an optimized way I have discovered to create common text inputs in same UI
+     * without any children component
+     * and it also gives the look of code more small and elegant
+     **/
+    const someTextInputDefaultAndCommonProps = {
+        style: [
+            commonTextInputStyle,
+            {
+                borderColor: error.facebook
+                    ? themeColors.onError[0]
+                    : themeColors.placeholder[0],
+            },
+        ],
+        placeholderTextColor: themeColors.placeholder[0] + 'AF',
+        selectionColor: themeColors.themecolorrevert[0] + '7F',
+    }
     return (
         <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
             <HeaderMain
@@ -277,133 +298,79 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 {/* facebook link update */}
                 <AreaTitle title={'Facebook Username'} notBold />
                 <SimpleTextInput
-                    style={[
-                        commonTextInputStyle,
-                        {
-                            borderColor: error.facebook
-                                ? themeColors.onError[0]
-                                : themeColors.placeholder[0],
-                        },
-                    ]}
                     value={facebookUsername}
                     onChangeText={value => {
                         setFacebookUsername(value)
                         FacebookUsernameValidator(value)
                     }}
-                    placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Facebook Username'}
-                    selectionColor={themeColors.themecolorrevert[0] + '7F'}
                     maxLength={UsernameLengthLimit.facebook}
+                    {...someTextInputDefaultAndCommonProps}
                 />
 
                 {/* instagram link update */}
                 <AreaTitle title={'Instagram Username'} notBold />
                 <SimpleTextInput
-                    style={[
-                        commonTextInputStyle,
-                        {
-                            borderColor: error.instagram
-                                ? themeColors.onError[0]
-                                : themeColors.placeholder[0],
-                        },
-                    ]}
                     value={instagramUsername}
                     onChangeText={value => {
                         setInstagramUsername(value)
                         InstagramUsernameValidator(value)
                     }}
-                    placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Instagram Username'}
-                    selectionColor={themeColors.themecolorrevert[0] + '7F'}
                     maxLength={UsernameLengthLimit.instagram}
+                    {...someTextInputDefaultAndCommonProps}
                 />
 
                 {/* github link update */}
                 <AreaTitle title={'GitHub Username'} notBold />
                 <SimpleTextInput
-                    style={[
-                        commonTextInputStyle,
-                        {
-                            borderColor: error.github
-                                ? themeColors.onError[0]
-                                : themeColors.placeholder[0],
-                        },
-                    ]}
                     value={githubUsername}
                     onChangeText={value => {
                         setGitHubUsername(value)
                         GitHubUsernameValidator(value)
                     }}
-                    placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter GitHub Username'}
-                    selectionColor={themeColors.themecolorrevert[0] + '7F'}
                     maxLength={UsernameLengthLimit.github}
+                    {...someTextInputDefaultAndCommonProps}
                 />
 
                 {/* linkedin link update */}
                 <AreaTitle title={'Linkedin Username'} notBold />
                 <SimpleTextInput
-                    style={[
-                        commonTextInputStyle,
-                        {
-                            borderColor: error.linkedin
-                                ? themeColors.onError[0]
-                                : themeColors.placeholder[0],
-                        },
-                    ]}
                     value={linkedinUsername}
                     onChangeText={value => {
                         setLinkedinUsername(value)
                         LinkedinUsernameValidator(value)
                     }}
-                    placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Linkedin Username'}
-                    selectionColor={themeColors.themecolorrevert[0] + '7F'}
                     maxLength={UsernameLengthLimit.linkedin}
+                    {...someTextInputDefaultAndCommonProps}
                 />
 
                 {/* snapchat link update */}
                 <AreaTitle title={'Snapchat Username'} notBold />
                 <SimpleTextInput
-                    style={[
-                        commonTextInputStyle,
-                        {
-                            borderColor: error.snapchat
-                                ? themeColors.onError[0]
-                                : themeColors.placeholder[0],
-                        },
-                    ]}
                     value={snapchatUsername}
                     onChangeText={value => {
                         setSnapchatUsername(value)
                         SnapchatUsernameValidator(value)
                     }}
-                    placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Snapchat Username'}
-                    selectionColor={themeColors.themecolorrevert[0] + '7F'}
                     maxLength={UsernameLengthLimit.snapchat}
+                    {...someTextInputDefaultAndCommonProps}
                 />
 
                 {/* twitter link update */}
                 <AreaTitle title={'Twitter Username'} notBold />
                 <SimpleTextInput
-                    style={[
-                        commonTextInputStyle,
-                        {
-                            borderColor: error.twitter
-                                ? themeColors.onError[0]
-                                : themeColors.placeholder[0],
-                        },
-                    ]}
                     value={twitterUsername}
                     onChangeText={value => {
                         setTwitterUsername(value)
                         TwitterUsernameValidator(value)
                     }}
-                    placeholderTextColor={themeColors.placeholder[0] + 'AF'}
                     placeholder={'Enter Twitter Username'}
-                    selectionColor={themeColors.themecolorrevert[0] + '7F'}
                     maxLength={UsernameLengthLimit.twitter}
+                    {...someTextInputDefaultAndCommonProps}
                 />
 
                 <SimpleButton
