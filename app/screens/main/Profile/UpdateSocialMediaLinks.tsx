@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react'
-import {ScrollView} from 'react-native'
+import {KeyboardAvoidingView, ScrollView} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {useSetting, useTheme, useUserData} from '../../../context'
@@ -178,7 +178,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
         },
     ]
     return (
-        <>
+        <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
             <HeaderMain
                 navigation={props.navigation}
                 title={'Update Social Media Links'}
@@ -336,7 +336,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
 
                 <PaddingBottomView />
             </ScrollView>
-        </>
+        </KeyboardAvoidingView>
     )
 }
 
