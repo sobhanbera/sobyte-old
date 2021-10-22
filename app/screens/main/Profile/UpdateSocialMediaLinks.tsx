@@ -76,23 +76,12 @@ const UpdateSocialMediaLinks = (props: Props) => {
         InitialUserSocialMediaErrors,
     )
 
-    const updateError = useCallback(
-        (update: UserSocialMediaError) => {
-            console.log('err')
-            setError(value => ({
-                ...value,
-                ...update,
-            }))
-        },
-        [
-            facebookUsername,
-            instagramUsername,
-            githubUsername,
-            linkedinUsername,
-            snapchatUsername,
-            twitterUsername,
-        ],
-    )
+    const updateError = (update: UserSocialMediaError) => {
+        setError(value => ({
+            ...value,
+            ...update,
+        }))
+    }
 
     /***
      * whenever the github username changes in the UI or updates
@@ -189,7 +178,21 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * this function will validate the username if exists in the Snapchat's database or not...
      */
     const SnapchatUsernameValidator = useCallback(
-        username => {},
+        username => {
+            // making request to snapchat's public api endpoint
+            axios
+                .get(`${SNAPCHAT_API_ENDPOINT}/${username}`)
+                .then(() => {
+                    // login gives the username
+                    // if the data is available then we will not show error
+                    // else show error
+                    updateError({snapchat: false})
+                })
+                .catch(() => {
+                    // show error in this case too
+                    updateError({snapchat: true})
+                })
+        },
         [snapchatUsername],
     )
 
