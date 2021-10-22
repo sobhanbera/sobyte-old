@@ -13,7 +13,7 @@ interface Props {
 }
 
 const AreaTitle = (props: Props) => {
-    const {grey} = useTheme().themeColors
+    const {grey, themecolorrevert} = useTheme().themeColors
 
     return (
         <View
@@ -35,6 +35,7 @@ const AreaTitle = (props: Props) => {
                         fontFamily: props.notBold
                             ? FontVerdana
                             : FontVerdanaBold,
+                        color: themecolorrevert[0] + 'DF',
                     },
                     props.style,
                 ]}>

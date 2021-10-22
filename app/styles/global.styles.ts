@@ -172,7 +172,6 @@ const globalStyles = StyleSheet.create({
     },
 
     areaBoldTitle: {
-        color: '#DFDFDF',
         fontSize: 14,
         fontFamily: FontVerdanaBold,
         paddingTop: 10,
