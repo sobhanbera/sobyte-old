@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next'
 
 import {useSetting, useTheme, useUserData} from '../../../context'
 
-import globalStyles, {CustomGlobalStyles} from '../../../styles/global.styles'
+import globalStyles from '../../../styles/global.styles'
 import {DefaultStatusBarComponent} from '../../../constants'
 import {AreaTitle, HeaderMain, SimpleTextInput} from '../../../components'
 
@@ -27,8 +27,11 @@ const UpdateSocialMediaLinks = (props: Props) => {
     const commonTextInputStyle = [
         globalStyles.border5,
         globalStyles.smallPaddingHor,
-        CustomGlobalStyles(themeColors.themecolorrevert[0] + '45').borderColor,
-        CustomGlobalStyles(themeColors.themecolorrevert[0] + 'DF').color,
+        {
+            borderColor: themeColors.themecolorrevert[0] + '45',
+            color: themeColors.themecolorrevert[0] + 'DF',
+            paddingVertical: 10,
+        },
     ]
 
     return (
