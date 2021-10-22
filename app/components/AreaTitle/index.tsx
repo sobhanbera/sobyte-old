@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleProp, ViewProps, TextProps} from 'react-native'
+import {View, Text, StyleProp, TextStyle, ViewStyle} from 'react-native'
 
 import {useTheme} from '../../context'
 import globalStyles from '../../styles/global.styles'
@@ -8,8 +8,8 @@ import {FontVerdana, FontVerdanaBold} from '../../constants'
 interface Props {
     title: string
     notBold?: boolean
-    containerStyle?: StyleProp<ViewProps>
-    style?: StyleProp<TextProps>
+    containerStyle?: StyleProp<ViewStyle>
+    style?: StyleProp<TextStyle>
 }
 
 const AreaTitle = (props: Props) => {
