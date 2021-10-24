@@ -73,8 +73,6 @@ const SearchResult: React.FC<Props> = props => {
     // this variable will provide than continous data is loading or not
     const [continuing, setCotinuing] = useState<boolean>(false)
     const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
-    const [showSearchSuggestions, setShowSearchSuggestions] =
-        useState<boolean>(false)
 
     /**
      * we are saving a query to local storage whenever the user search any query
@@ -130,8 +128,7 @@ const SearchResult: React.FC<Props> = props => {
             getSearchSuggestions(searchText)
                 .then((res: string[]) => {
                     // if any data is not loading then only we will show suggestions
-                    if (!showSearchSuggestions && !loading && !continuing)
-                        setShowSearchSuggestions(searchText.length > 0)
+                    if (!loading && !continuing) setSearchSuggestions([])
                     setSearchSuggestions(res)
                 })
                 .catch(err => {
@@ -146,7 +143,6 @@ const SearchResult: React.FC<Props> = props => {
     // const checkWheatherSearchTextAvailable = () => {
     //     if (searchText.length <= 0) {
     //         setSearchSuggestions(previouslySearchedQueries)
-    //         setShowSearchSuggestions(true)
     //     }
     // }
 
@@ -182,7 +178,8 @@ const SearchResult: React.FC<Props> = props => {
         if (query.length <= 0) return null
 
         Keyboard.dismiss()
-        setShowSearchSuggestions(false)
+        setSearchSuggestions([])
+        // (false)
 
         search(query, 'ARTIST')
             .then((res: FetchedArtistObject) => {
@@ -200,7 +197,7 @@ const SearchResult: React.FC<Props> = props => {
 
     const hideSuggestions = () => {
         Keyboard.dismiss()
-        setShowSearchSuggestions(false)
+        setSearchSuggestions([])
     }
 
     const startSearch = (_query: string = searchText) => {
@@ -264,7 +261,8 @@ const SearchResult: React.FC<Props> = props => {
         <>
             <DefaultStatusBarComponent backgroundColor={surfacelight[0]} />
 
-            {showSearchSuggestions && Array.isArray(searchSuggestions) ? (
+            {searchSuggestions.length > 0 &&
+            Array.isArray(searchSuggestions) ? (
                 <View
                     style={{
                         position: 'absolute',
@@ -325,11 +323,7 @@ const SearchResult: React.FC<Props> = props => {
                             onCancel={hideSuggestions}
                             text={searchText}
                             onChangeText={setSearchText}
-                            goBack={() =>
-                                // showSearchSuggestions
-                                //     ? hideSuggestions() :
-                                props.navigation.goBack()
-                            }
+                            goBack={() => props.navigation.goBack()}
                         />
 
                         {/* tracking when the scroll reaches end */}
