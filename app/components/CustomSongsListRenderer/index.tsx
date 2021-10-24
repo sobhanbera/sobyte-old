@@ -256,6 +256,8 @@ const CustomSongsListRenderer = (_props: Props) => {
                         placeholder="Enter a Title"
                         maxLength={30}
                         {...someTextInputDefaultAndCommonProps}
+                        // making auto focus so that keyboard instantly show up
+                        autoFocus
                     />
                     <SimpleTextInput
                         value={query}
