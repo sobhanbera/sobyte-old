@@ -30,7 +30,7 @@ interface ExploreTabProps {
     navigation?: any
 }
 const Explore: React.FC<ExploreTabProps> = props => {
-    const {themeColors, randomGradient, setRandomColorScheme} = useTheme()
+    const {themeColors, randomGradient} = useTheme()
     const {initMusicApi, error} = useMusicApi()
 
     const [loading, setLoading] = useState<boolean>(false)
@@ -92,7 +92,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                                 // nothing for now
                                 // actually this function was to change the random gradient color to a
                                 // different set of random gradient color array
-                                setRandomColorScheme()
+                                // setRandomColorScheme()
                             }}
                             headerScrollColor={themeColors.transparent[0]}
                             onInputFocus={launchSearchScreen}
