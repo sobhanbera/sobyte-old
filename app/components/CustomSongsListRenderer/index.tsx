@@ -268,17 +268,19 @@ const CustomSongsListRenderer = (_props: Props) => {
                     <View
                         style={{
                             flexDirection: 'row',
-                            justifyContent: 'space-around',
+                            justifyContent: 'space-between',
                         }}>
                         <SimpleButton
                             title={'Cancel'}
-                            onPress={() => {}}
+                            onPress={() => setShowAddSongsSection(false)}
                             style={{
                                 paddingVertical: 12,
                                 marginHorizontal: 20,
                                 marginVertical: 20,
                                 backgroundColor:
                                     themeColors.themecolorrevert[0] + 'EF',
+                                minWidth: 130, // so that the width of this and the next button looks equal...
+                                // 130 width + 130 width + 20 padding + 20 padding both side = 300px remaining 60px
                             }}
                             textStyle={{
                                 fontSize: 16,
@@ -288,7 +290,7 @@ const CustomSongsListRenderer = (_props: Props) => {
                         />
                         <SimpleButton
                             title={'Add New List'}
-                            onPress={() => {}}
+                            onPress={addNewSongsList}
                             style={{
                                 paddingVertical: 12,
                                 marginHorizontal: 20,
@@ -300,6 +302,8 @@ const CustomSongsListRenderer = (_props: Props) => {
                                 fontSize: 16,
                                 fontWeight: 'bold',
                                 color: themeColors.themecolor[0],
+                                minWidth: 130, // so that the width of this and the previous button looks equal...
+                                // 130 width + 130 width + 20 padding + 20 padding both side = 300px remaining 60px
                             }}
                         />
                         {/* <CenterButtonView
