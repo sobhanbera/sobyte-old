@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Animated, Pressable, TextInput} from 'react-native'
+import {View, Animated, Pressable} from 'react-native'
 import {useTranslation} from 'react-i18next'
 
 import {HEADER_MIN_HEIGHT} from '../../constants'
@@ -16,7 +16,7 @@ interface Props {
 }
 const HeaderCollapsible: React.FC<Props> = props => {
     const {t} = useTranslation()
-    const {placeholder, white} = useTheme().themeColors
+    const {placeholder, white, themecolorrevert} = useTheme().themeColors
 
     /**
      * logo animation rotate property variables and functions
@@ -90,6 +90,8 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     style={{
                         backgroundColor: props.headerScrollColor,
                         marginVertical: 0,
+                        borderColor: themecolorrevert[0] + '60',
+                        color: themecolorrevert[0] + 'DF',
                     }}
                     value=""
                     focusable

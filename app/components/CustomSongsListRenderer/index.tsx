@@ -28,7 +28,7 @@ interface CustomSongModal {
 
 interface Props {}
 const CustomSongsListRenderer = (_props: Props) => {
-    const {randomGradient, themeColors} = useTheme()
+    const {themeColors} = useTheme()
 
     /**
      * we are providing a new feature in which users could add custom queries to the existing list of queries
@@ -306,16 +306,6 @@ const CustomSongsListRenderer = (_props: Props) => {
                                 // 130 width + 130 width + 20 padding + 20 padding both side = 300px remaining 60px
                             }}
                         />
-                        {/* <CenterButtonView
-                            title="Cancel"
-                            onPress={() => setShowAddSongsSection(false)}
-                            buttonColor={randomGradient[2]}
-                        />
-                        <CenterButtonView
-                            title="Add New List"
-                            onPress={addNewSongsList}
-                            buttonColor={randomGradient[2]}
-                        /> */}
                     </View>
                 </>
             ) : (
