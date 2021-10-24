@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         // width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: 'center', // or it will cover the full width
         paddingVertical: 15,
         paddingHorizontal: 8,
     },
