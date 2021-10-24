@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import {Text} from 'react-native-paper'
 
-import CenterButtonView from '../CenterButtonView'
+// import CenterButtonView from '../CenterButtonView'
 import SongsKeywordResultsRenderer from '../KeywordResultsRenderer/Songs'
 import SimpleTextInput from '../SimpleTextInput'
 import TopicTitle from '../TopicTitle'
@@ -17,6 +17,8 @@ import {
     PaddingBottomView,
 } from '../../constants'
 import {useTheme} from '../../context'
+import SimpleButton from '../SimpleButton'
+import globalStyles from '../../styles/global.styles'
 
 interface CustomSongModal {
     id: number | Date
@@ -181,6 +183,21 @@ const CustomSongsListRenderer = (_props: Props) => {
         getAndUpdateCustomSongsList()
     }
 
+    const commonTextInputStyle = [
+        globalStyles.border5,
+        globalStyles.smallPaddingHor,
+        {
+            borderColor: themeColors.themecolorrevert[0] + '45',
+            color: themeColors.themecolorrevert[0] + 'DF',
+            paddingVertical: 10,
+        },
+    ]
+    const someTextInputDefaultAndCommonProps = {
+        style: commonTextInputStyle,
+        placeholderTextColor: themeColors.placeholder[0] + 'AF',
+        selectionColor: themeColors.themecolorrevert[0] + '7F',
+    }
+
     return (
         <View>
             <SobyteAlert
@@ -237,11 +254,15 @@ const CustomSongsListRenderer = (_props: Props) => {
                         value={title}
                         onChangeText={setTitle}
                         placeholder="Enter a Title"
+                        maxLength={30}
+                        {...someTextInputDefaultAndCommonProps}
                     />
                     <SimpleTextInput
                         value={query}
                         onChangeText={setQuery}
                         placeholder="Enter the Search Query"
+                        maxLength={30}
+                        {...someTextInputDefaultAndCommonProps}
                     />
 
                     <View
@@ -249,7 +270,39 @@ const CustomSongsListRenderer = (_props: Props) => {
                             flexDirection: 'row',
                             justifyContent: 'space-around',
                         }}>
-                        <CenterButtonView
+                        <SimpleButton
+                            title={'Cancel'}
+                            onPress={() => {}}
+                            style={{
+                                paddingVertical: 12,
+                                marginHorizontal: 20,
+                                marginVertical: 20,
+                                backgroundColor:
+                                    themeColors.themecolorrevert[0] + 'EF',
+                            }}
+                            textStyle={{
+                                fontSize: 16,
+                                fontWeight: 'bold',
+                                color: themeColors.themecolor[0],
+                            }}
+                        />
+                        <SimpleButton
+                            title={'Add New List'}
+                            onPress={() => {}}
+                            style={{
+                                paddingVertical: 12,
+                                marginHorizontal: 20,
+                                marginVertical: 20,
+                                backgroundColor:
+                                    themeColors.themecolorrevert[0] + 'EF',
+                            }}
+                            textStyle={{
+                                fontSize: 16,
+                                fontWeight: 'bold',
+                                color: themeColors.themecolor[0],
+                            }}
+                        />
+                        {/* <CenterButtonView
                             title="Cancel"
                             onPress={() => setShowAddSongsSection(false)}
                             buttonColor={randomGradient[2]}
@@ -258,7 +311,7 @@ const CustomSongsListRenderer = (_props: Props) => {
                             title="Add New List"
                             onPress={addNewSongsList}
                             buttonColor={randomGradient[2]}
-                        />
+                        /> */}
                     </View>
                 </>
             ) : (
