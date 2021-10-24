@@ -1,44 +1,17 @@
-import React, {useCallback, useState} from 'react'
+import React, {useState} from 'react'
 import {KeyboardAvoidingView, ScrollView} from 'react-native'
 import {useTranslation} from 'react-i18next'
-import axios, {CancelTokenSource} from 'axios'
 
 import {useSetting, useTheme, useUserData} from '../../../context'
 
 import globalStyles from '../../../styles/global.styles'
-import {
-    DefaultStatusBarComponent,
-    FACEBOOK_API_ENDPOINT,
-    INSTAGRAM_API_ENDPOINT,
-    GITHUB_API_ENDPOINT,
-    LINKEDIN_API_ENDPOINT,
-    SNAPCHAT_API_ENDPOINT,
-    TWITTER_API_ENDPOINT,
-    PaddingBottomView,
-} from '../../../constants'
+import {DefaultStatusBarComponent, PaddingBottomView} from '../../../constants'
 import {
     AreaTitle,
     HeaderMain,
     SimpleButton,
     SimpleTextInput,
 } from '../../../components'
-
-interface UserSocialMediaError {
-    facebook?: boolean
-    instagram?: boolean
-    github?: boolean
-    linkedin?: boolean
-    snapchat?: boolean
-    twitter?: boolean
-}
-const InitialUserSocialMediaErrors: UserSocialMediaError = {
-    facebook: false,
-    github: false,
-    instagram: false,
-    linkedin: false,
-    snapchat: false,
-    twitter: false,
-}
 
 const UsernameLengthLimit = {
     facebook: 50,
@@ -72,181 +45,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
         data.snapchat || '',
     )
     const [twitterUsername, setTwitterUsername] = useState(data.twitter || '')
-    const [error, setError] = useState<UserSocialMediaError>(
-        InitialUserSocialMediaErrors,
-    )
-
-    /**
-     * cancelToken variables for every api requests we are making....
-     */
-    let facebookCancelToken: CancelTokenSource = axios.CancelToken.source()
-    let instagramCancelToken: CancelTokenSource = axios.CancelToken.source()
-    let githubCancelToken: CancelTokenSource = axios.CancelToken.source()
-    let linkedinCancelToken: CancelTokenSource = axios.CancelToken.source()
-    let snapchatCancelToken: CancelTokenSource = axios.CancelToken.source()
-    let twitterCancelToken: CancelTokenSource = axios.CancelToken.source()
-
-    const updateError = (update: UserSocialMediaError) => {
-        setError(value => ({
-            ...value,
-            ...update,
-        }))
-    }
-
-    /***
-     * whenever the github username changes in the UI or updates
-     * we will check if the username's account exists or not.
-     * this function will validate the username if exists in the GitHub's database or not...
-     */
-    const GitHubUsernameValidator = useCallback(
-        username => {
-            if (typeof githubCancelToken != typeof undefined)
-                githubCancelToken.cancel(
-                    'Cancelling the previous token for new request.',
-                )
-            githubCancelToken = axios.CancelToken.source()
-
-            // making request to github's public api endpoint
-            axios
-                .get(`${GITHUB_API_ENDPOINT}/users/${username}`, {
-                    cancelToken: githubCancelToken.token,
-                })
-                .then(response => {
-                    // login gives the username
-                    // if the data is available then we will not show error
-                    // else show error
-                    if (response.data?.login === username) {
-                        // setting the value of github error to false
-                        // so that no error show
-                        updateError({github: false})
-                    } else {
-                        // show error
-                        updateError({github: true})
-                    }
-                })
-                .catch(() => {
-                    // show error in this case too
-                    updateError({github: true})
-                })
-        },
-        [githubUsername],
-    )
-
-    /***
-     * whenever the facebook username changes in the UI or updates
-     * we will check if the username's account exists or not.
-     * this function will validate the username if exists in the Facebook's database or not...
-     */
-    const FacebookUsernameValidator = useCallback(
-        username => {
-            if (typeof facebookCancelToken != typeof undefined)
-                facebookCancelToken.cancel(
-                    'Cancelling the previous token for new request.',
-                )
-            facebookCancelToken = axios.CancelToken.source()
-
-            // making request to facebook's public api endpoint
-            axios
-                .get(`${FACEBOOK_API_ENDPOINT}/${username}`, {
-                    cancelToken: facebookCancelToken.token,
-                })
-                .then(() => {
-                    // login gives the username
-                    // if the data is available then we will not show error
-                    // else show error
-                    updateError({facebook: false})
-                })
-                .catch(() => {
-                    // show error in this case too
-                    updateError({facebook: true})
-                })
-        },
-        [facebookUsername],
-    )
-
-    /***
-     * whenever the instagram username changes in the UI or updates
-     * we will check if the username's account exists or not.
-     * this function will validate the username if exists in the Instagram's database or not...
-     */
-    const InstagramUsernameValidator = useCallback(
-        username => {
-            if (typeof instagramCancelToken != typeof undefined)
-                instagramCancelToken.cancel(
-                    'Cancelling the previous token for new request.',
-                )
-            instagramCancelToken = axios.CancelToken.source()
-
-            // making request to instagram's public api endpoint
-            axios
-                .get(`${INSTAGRAM_API_ENDPOINT}/${username}`, {
-                    cancelToken: instagramCancelToken.token,
-                })
-                .then(() => {
-                    // login gives the username
-                    // if the data is available then we will not show error
-                    // else show error
-                    updateError({instagram: false})
-                })
-                .catch(() => {
-                    // show error in this case too
-                    updateError({instagram: true})
-                })
-        },
-        [instagramUsername],
-    )
-
-    /***
-     * whenever the linkedin username changes in the UI or updates
-     * we will check if the username's account exists or not.
-     * this function will validate the username if exists in the Linkedin's database or not...
-     */
-    const LinkedinUsernameValidator = useCallback(
-        username => {},
-        [linkedinUsername],
-    )
-
-    /***
-     * whenever the snapchat username changes in the UI or updates
-     * we will check if the username's account exists or not.
-     * this function will validate the username if exists in the Snapchat's database or not...
-     */
-    const SnapchatUsernameValidator = useCallback(
-        username => {
-            if (typeof snapchatCancelToken != typeof undefined)
-                snapchatCancelToken.cancel(
-                    'Cancelling the previous token for new request.',
-                )
-            snapchatCancelToken = axios.CancelToken.source()
-
-            // making request to snapchat's public api endpoint
-            axios
-                .get(`${SNAPCHAT_API_ENDPOINT}/${username}`, {
-                    cancelToken: snapchatCancelToken.token,
-                })
-                .then(() => {
-                    // login gives the username
-                    // if the data is available then we will not show error
-                    // else show error
-                    updateError({snapchat: false})
-                })
-                .catch(() => {
-                    // show error in this case too
-                    updateError({snapchat: true})
-                })
-        },
-        [snapchatUsername],
-    )
-
-    /***
-     * whenever the twitter username changes in the UI or updates
-     * we will check if the username's account exists or not.
-     * this function will validate the username if exists in the Twitter's database or not...
-     */
-    const TwitterUsernameValidator = useCallback(
-        username => {},
-        [twitterUsername],
-    )
 
     const updateSocialMediaLinksInDatabase = () => {}
 
@@ -269,14 +67,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
      * and it also gives the look of code more small and elegant
      **/
     const someTextInputDefaultAndCommonProps = {
-        style: [
-            commonTextInputStyle,
-            {
-                borderColor: error.facebook
-                    ? themeColors.onError[0]
-                    : themeColors.placeholder[0],
-            },
-        ],
+        style: commonTextInputStyle,
         placeholderTextColor: themeColors.placeholder[0] + 'AF',
         selectionColor: themeColors.themecolorrevert[0] + '7F',
     }
@@ -301,7 +92,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     value={facebookUsername}
                     onChangeText={value => {
                         setFacebookUsername(value)
-                        FacebookUsernameValidator(value)
                     }}
                     placeholder={'Enter Facebook Username'}
                     maxLength={UsernameLengthLimit.facebook}
@@ -314,7 +104,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     value={instagramUsername}
                     onChangeText={value => {
                         setInstagramUsername(value)
-                        InstagramUsernameValidator(value)
                     }}
                     placeholder={'Enter Instagram Username'}
                     maxLength={UsernameLengthLimit.instagram}
@@ -327,7 +116,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     value={githubUsername}
                     onChangeText={value => {
                         setGitHubUsername(value)
-                        GitHubUsernameValidator(value)
                     }}
                     placeholder={'Enter GitHub Username'}
                     maxLength={UsernameLengthLimit.github}
@@ -340,7 +128,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     value={linkedinUsername}
                     onChangeText={value => {
                         setLinkedinUsername(value)
-                        LinkedinUsernameValidator(value)
                     }}
                     placeholder={'Enter Linkedin Username'}
                     maxLength={UsernameLengthLimit.linkedin}
@@ -353,7 +140,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     value={snapchatUsername}
                     onChangeText={value => {
                         setSnapchatUsername(value)
-                        SnapchatUsernameValidator(value)
                     }}
                     placeholder={'Enter Snapchat Username'}
                     maxLength={UsernameLengthLimit.snapchat}
@@ -366,7 +152,6 @@ const UpdateSocialMediaLinks = (props: Props) => {
                     value={twitterUsername}
                     onChangeText={value => {
                         setTwitterUsername(value)
-                        TwitterUsernameValidator(value)
                     }}
                     placeholder={'Enter Twitter Username'}
                     maxLength={UsernameLengthLimit.twitter}

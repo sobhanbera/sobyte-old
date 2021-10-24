@@ -125,12 +125,23 @@ export const TWITTER_ENDPOINT = 'https://twitter.com'
 /**
  * social media endpoint for api which are currently
  * only used for validating username
+ *
+ * currently these variables are deprecated and could not be used any more
+ * since we have rolled back and the feture for validating the username in not available now
+ * since if the device is low end then it might lag a bit
+ *
+ * @deprecated
  */
 export const FACEBOOK_API_ENDPOINT = 'https://www.facebook.com'
+/** @deprecated */
 export const INSTAGRAM_API_ENDPOINT = 'https://www.instagram.com'
+/** @deprecated */
 export const GITHUB_API_ENDPOINT = 'https://api.github.com'
+/** @deprecated */
 export const LINKEDIN_API_ENDPOINT = 'https://www.linkedin.com/in'
+/** @deprecated */
 export const SNAPCHAT_API_ENDPOINT = 'https://www.snapchat.com/add'
+/** @deprecated */
 export const TWITTER_API_ENDPOINT = 'https://twitter.com'
 
 /**
