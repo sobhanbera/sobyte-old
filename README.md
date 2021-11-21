@@ -91,7 +91,7 @@ yarn global add react-native
     react-native run-android
     ```
 
-5. This step is crucial and important too.
+1. This step is crucial and important too.
 
     1. There is only one patch for now :-
 
@@ -113,7 +113,7 @@ yarn global add react-native
              ...
         ```
 
-6. This is also a IMP setup for the music fetcher to work.
+2. This is also a IMP setup for the music fetcher to work.
     1. Change the following lines in `react-native-ytdl` package `info.js` file :-
         ```diff
         const ytdl = (link, options) => {
@@ -123,6 +123,23 @@ yarn global add react-native
             });
         };
         ```
+
+3. Step for vim/nvim users.
+    1. Install ctags for the system.
+    2. Run following command to generate tags file.
+    - For full tags
+    ```
+    ctags -R .
+    ```
+    - For compressed size tags file.
+    ```
+    ctags -R --exclude=.git --exclude=.github --exclude=.github_src --exclude=.vim --exclude=.vscode --exclude=android --exclude=ios --exclude=node_modules --exclude=others .
+    ```
+
+    - For extended tags file.
+    ```
+    ctags -R --exclude=.git --exclude=android --exclude=.buckconfig --exclude=CODE_OF_CONDUCT.md --exclude=CONTRIBUTING.mddev_build.keystore --exclude=dev_build.keystore --exclude= --exclude= --exclude= --exclude= --exclude=.editorconfig --exclude=.env --exclude=.eslintignore --exclude=.git --exclude=.gitattributes --exclude=.github --exclude=.github_src --exclude=.gitignore --exclude=.gitmodules --exclude=init.vim --exclude=ios --exclude=.md --exclude=node_modules --exclude=.node-version --exclude=.npmrc --exclude=others --exclude=package.json --exclude=package-lock.json --exclude=.prettierignore --exclude=README.md --exclude=sobyte.session.sql --exclude=tags --exclude=tags_previous --exclude=tags_src --exclude=test.rest --exclude=.vim --exclude=.vimrc --exclude=.vscode --exclude=.watchmanconfig --exclude=yarn.lock .
+    ```
 
 ## File Structure (Tree)
 
