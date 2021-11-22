@@ -343,3 +343,4 @@ export const COMMON_COLORS: CommonColors = {
         '#6fba82',
     ],
 }
+
