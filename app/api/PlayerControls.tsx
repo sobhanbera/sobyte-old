@@ -1,10 +1,10 @@
-import {SongObject} from 'app/interfaces'
 import React, {createContext, FC, useContext, useEffect} from 'react'
 import {useRef} from 'react'
 
 import TrackPlayer, {STATE_PAUSED} from 'react-native-track-player'
 
 import {useApp, useFetcher} from '../context'
+import {SongObject} from '../interfaces'
 
 /**
  * the data type or the object type for each Tracks of the song
