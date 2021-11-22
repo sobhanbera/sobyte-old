@@ -1,7 +1,7 @@
 /**
  * artists query lists
  */
-export const BENGALI_ARTISTS_QUERIES = [
+export const BENGALI_ARTISTS_QUERIES: string[] = [
     'Kishore Kumar',
     'Lata Mangeshkar',
     'Manna Dey',
@@ -21,7 +21,7 @@ export const BENGALI_ARTISTS_QUERIES = [
     'Bappi Lahiri',
     '',
 ]
-export const ENGLISH_ARTISTS_QUERIES = [
+export const ENGLISH_ARTISTS_QUERIES: string[] = [
     'Ariana Grande',
     'Billie Eilish',
     'Justin Beiber',
@@ -45,8 +45,8 @@ export const ENGLISH_ARTISTS_QUERIES = [
     'Blackpink',
     'BTS',
 ]
-export const GUJRATI_ARTISTS_QUERIES = []
-export const HINDI_ARTISTS_QUERIES = [
+export const GUJRATI_ARTISTS_QUERIES: string[] = []
+export const HINDI_ARTISTS_QUERIES: string[] = [
     'Kishore Kumar',
     'Alka Yagnik',
     'Udit Narayan',
@@ -71,7 +71,7 @@ export const HINDI_ARTISTS_QUERIES = [
     'Darshan Raval',
     'Tulsi Kumar',
 ]
-export const KANNADA_ARTISTS_QUERIES = [
+export const KANNADA_ARTISTS_QUERIES: string[] = [
     'Karthik',
     'SP. Balasubramaniam',
     'Rajkumar',
@@ -97,7 +97,7 @@ export const KANNADA_ARTISTS_QUERIES = [
     'Manjula Gururaj',
     'BR. Chaya',
 ]
-export const PUNJABI_ARTISTS_QUERIES = [
+export const PUNJABI_ARTISTS_QUERIES: string[] = [
     'Miss Pooja',
     'Hans Raj Hans',
     'Kuldeep Manak',
@@ -129,7 +129,7 @@ export const PUNJABI_ARTISTS_QUERIES = [
     'Charanjit Channi',
     'Pammi Bai',
 ]
-export const TAMIL_ARTISTS_QUERIES = [
+export const TAMIL_ARTISTS_QUERIES: string[] = [
     'SP. Balasubramaniam',
     'Chitra',
     'Yesudas',
@@ -156,7 +156,7 @@ export const TAMIL_ARTISTS_QUERIES = [
     'AR. Rahman',
     'Suchitra',
 ]
-export const TELEGU_ARTISTS_QUERIES = [
+export const TELEGU_ARTISTS_QUERIES: string[] = [
     'SP. Balasubramaniam',
     'Chitra',
     'Shreya Ghoshal',
@@ -186,7 +186,7 @@ export const TELEGU_ARTISTS_QUERIES = [
 /**
  * songs queries lists
  */
-export const BENGALI_SONGS_QUERIES = [
+export const BENGALI_SONGS_QUERIES: string[] = [
     'bengali kishore kumar songs',
     'bengali songs',
     'bengali song',
@@ -202,7 +202,7 @@ export const BENGALI_SONGS_QUERIES = [
     'most rated bengali songs',
     'most played bengali songs',
 ]
-export const ENGLISH_SONGS_QUERIES = [
+export const ENGLISH_SONGS_QUERIES: string[] = [
     'most rated english songs',
     'most played english songs',
     'english songs',
@@ -217,7 +217,7 @@ export const ENGLISH_SONGS_QUERIES = [
     'english 2020',
     'english 2019',
 ]
-export const GUJRATI_SONGS_QUERIES = [
+export const GUJRATI_SONGS_QUERIES: string[] = [
     'most rated gujrati songs',
     'most played gujrati songs',
     'new gujrati songs',
@@ -228,7 +228,7 @@ export const GUJRATI_SONGS_QUERIES = [
     'gujarati dj hit song',
     'gujarati hot romantic song',
 ]
-export const HINDI_SONGS_QUERIES = [
+export const HINDI_SONGS_QUERIES: string[] = [
     'most rated hindi songs',
     'hindi remake',
     'hindi mix',
@@ -245,7 +245,7 @@ export const HINDI_SONGS_QUERIES = [
     'new hindi trendings',
     'top hindi raps',
 ]
-export const KANNADA_SONGS_QUERIES = [
+export const KANNADA_SONGS_QUERIES: string[] = [
     'most rated kannada songs',
     'most played kannada songs',
     'most listened kannada songs',
@@ -257,7 +257,7 @@ export const KANNADA_SONGS_QUERIES = [
     'kannada remix',
     'top kannada songs',
 ]
-export const PUNJABI_SONGS_QUERIES = [
+export const PUNJABI_SONGS_QUERIES: string[] = [
     'most rated punjabi songs',
     'most played punjabi songs',
     'most listened punjabi songs',
@@ -269,7 +269,7 @@ export const PUNJABI_SONGS_QUERIES = [
     'punjabi remix',
     'top punjabi songs',
 ]
-export const TAMIL_SONGS_QUERIES = [
+export const TAMIL_SONGS_QUERIES: string[] = [
     'most rated tamil songs',
     'most played tamil songs',
     'most listened tamil songs',
@@ -281,7 +281,7 @@ export const TAMIL_SONGS_QUERIES = [
     'tamil remix',
     'top tamil songs',
 ]
-export const TELEGU_SONGS_QUERIES = [
+export const TELEGU_SONGS_QUERIES: string[] = [
     'most rated telegu songs',
     'most played telegu songs',
     'most listened telugu songs',
@@ -297,7 +297,7 @@ export const TELEGU_SONGS_QUERIES = [
 /**
  * global search queries for every languages
  */
-export const GLOBAL_QUERIES = [
+export const GLOBAL_QUERIES: string[] = [
     // search queries...
     'new tracks',
     'new hits',
@@ -327,13 +327,15 @@ export const GLOBAL_QUERIES = [
     'most played romantic songs',
 ]
 
-const EXTRA__DEV__SPECIFIC_QUERIES = ['Weekly Top Hindi Songs']
+export const EXTRA__DEV__SPECIFIC_QUERIES: string[] = [
+    'New hindi romantic songs',
+]
 
 /**
  * default export will be the concatation of all these above queries
  * this feature is just for now
  */
-const DEFAULT_EXPORT = EXTRA__DEV__SPECIFIC_QUERIES // only for developmennt purpose
+const DEFAULT_EXPORT: Array<string> = EXTRA__DEV__SPECIFIC_QUERIES // only for developmennt purpose
 /**
  * below concatenations should not be used when
  * only one query is to be searched on development branch
