@@ -10,6 +10,8 @@ interface Props {
     title: string
     style?: StyleProp<ViewStyle>
     textStyle?: StyleProp<TextStyle>
+    leftIcon?: React.ReactNode
+    rightIcon?: React.ReactNode
 }
 const SimpleButton = (props: Props) => {
     const {grey, themecolorrevert} = useTheme().themeColors
@@ -24,6 +26,7 @@ const SimpleButton = (props: Props) => {
                 props.style,
             ]}
             onPress={() => props.onPress()}>
+            {props.leftIcon}
             <Text
                 style={[
                     globalStyles.simpleButtonText,
@@ -34,6 +37,7 @@ const SimpleButton = (props: Props) => {
                 ]}>
                 {props.title}
             </Text>
+            {props.rightIcon}
         </Scaler>
     )
 }
