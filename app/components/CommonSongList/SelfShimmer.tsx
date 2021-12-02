@@ -17,7 +17,8 @@ const SelfShimmer = ({shimmerDirection}: Props) => {
                     opacity={1}
                     animating
                     direction={shimmerDirection}
-                    animationOpacity={0.1}>
+                    animationOpacity={0.1}
+                >
                     <TouchableOpacity activeOpacity={0.75} onPress={() => {}}>
                         <View style={songComponentsStyles.commonCard}>
                             <View style={songComponentsStyles.commonCardMain}>
@@ -28,12 +29,14 @@ const SelfShimmer = ({shimmerDirection}: Props) => {
                                         {
                                             borderRadius: 5,
                                         },
-                                    ]}></View>
+                                    ]}
+                                ></View>
 
                                 <View
                                     style={
                                         songComponentsStyles.commonSongDetails
-                                    }>
+                                    }
+                                >
                                     <View
                                         style={[
                                             songComponentsStyles.textDummy,

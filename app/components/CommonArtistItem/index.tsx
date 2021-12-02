@@ -52,7 +52,8 @@ const CommonSongItem = ({
                     image: highQualityImage,
                 })
             }
-            activeOpacity={0.75}>
+            activeOpacity={0.75}
+        >
             <View style={songComponentsStyles.commonCard}>
                 <View style={songComponentsStyles.commonCardMain}>
                     <Image
@@ -74,7 +75,8 @@ const CommonSongItem = ({
                             {
                                 color: textColor,
                             },
-                        ]}>
+                        ]}
+                    >
                         {firstLetterCap(artist.name)}
                     </Text>
                 </View>

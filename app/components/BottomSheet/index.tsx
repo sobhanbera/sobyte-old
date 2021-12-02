@@ -79,7 +79,8 @@ const BottomSheet = (props: Props) => {
             handleHeight={40}
             keyboardBehavior="extend"
             keyboardBlurBehavior="restore"
-            animateOnMount>
+            animateOnMount
+        >
             <View style={[styles.flex, styles.flexEnd]}>
                 <BottomSheetScrollView
                     style={{
@@ -87,7 +88,8 @@ const BottomSheet = (props: Props) => {
                         flex: 1,
                     }}
                     showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}>
+                    showsHorizontalScrollIndicator={false}
+                >
                     {props.buttons.map((button, _) => {
                         if (button.type === 'input') {
                             return (
@@ -118,7 +120,8 @@ const BottomSheet = (props: Props) => {
                                             onPress={() => {
                                                 button.onPress()
                                             }}
-                                            style={{padding: 15}}>
+                                            style={{padding: 15}}
+                                        >
                                             <MaterialIcon
                                                 name="done"
                                                 size={DEFAULT_ICON_SIZE}
@@ -134,7 +137,8 @@ const BottomSheet = (props: Props) => {
                                                     fontSize: 14,
                                                     color: onWarning[0],
                                                 },
-                                            ]}>
+                                            ]}
+                                        >
                                             {button.errorText
                                                 ? button.errorText
                                                 : ''}
@@ -156,7 +160,8 @@ const BottomSheet = (props: Props) => {
                                     {
                                         borderBottomColor: border[0],
                                     },
-                                ]}>
+                                ]}
+                            >
                                 <Text
                                     style={[
                                         styles.textItem,
@@ -164,7 +169,8 @@ const BottomSheet = (props: Props) => {
                                         button.extraText?.length
                                             ? styles.startingTextAlign
                                             : {},
-                                    ]}>
+                                    ]}
+                                >
                                     {button.text}
                                 </Text>
                                 <Text style={[styles.textItem]}>

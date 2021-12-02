@@ -35,7 +35,8 @@ const SobyteTextInput: React.FC<SobyteTextInputProps> = props => {
                               themeColors.secondary.main[0] + 'ff',
                               themeColors.primary.main[0] + 'ef',
                           ]
-                }>
+                }
+            >
                 <TouchableWithoutFeedback>
                     <TextInput
                         allowFontScaling

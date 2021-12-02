@@ -29,7 +29,8 @@ const HeaderSearch: React.FC<Props> = props => {
                     borderBottomColor: black[0] + '40',
                     borderBottomWidth: 1,
                 },
-            ]}>
+            ]}
+        >
             <Entypo
                 onPress={() => props.goBack()}
                 name="chevron-thin-left"
@@ -64,7 +65,8 @@ const HeaderSearch: React.FC<Props> = props => {
                         textAlign: 'center',
                         height: '100%',
                         textAlignVertical: 'center',
-                    }}>
+                    }}
+                >
                     {t('words:cancel')}
                 </Text>
             </TouchableOpacity>

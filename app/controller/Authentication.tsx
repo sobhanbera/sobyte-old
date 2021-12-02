@@ -12,7 +12,8 @@ const AuthenticationNavigation = () => {
         <AuthenticationNavigator.Navigator
             screenOptions={{
                 headerShown: false,
-            }}>
+            }}
+        >
             <AuthenticationNavigator.Screen name="Intro" component={Intro} />
             <AuthenticationNavigator.Screen name="Login" component={Login} />
             <AuthenticationNavigator.Screen

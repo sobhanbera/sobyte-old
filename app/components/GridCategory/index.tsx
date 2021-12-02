@@ -30,19 +30,21 @@ class GridCategory extends PureComponent<Props> {
                                 useAngle
                                 angleCenter={{x: 0.5, y: 0.5}}
                                 colors={category.color}
-                                style={styles.linearGradient}>
+                                style={styles.linearGradient}
+                            >
                                 <Pressable
-                                    onPress={() =>
-                                        this.props.onPress(category)
-                                    }>
+                                    onPress={() => this.props.onPress(category)}
+                                >
                                     <ImageBackground
                                         fadeDuration={500}
                                         source={{uri: category.image}}
-                                        style={[styles.image]}>
+                                        style={[styles.image]}
+                                    >
                                         <View style={styles.background}>
                                             <Text
                                                 style={styles.text}
-                                                numberOfLines={10}>
+                                                numberOfLines={10}
+                                            >
                                                 {category.name}
                                             </Text>
                                         </View>

@@ -226,7 +226,8 @@ const CustomSongsListRenderer = (_props: Props) => {
                                 alignItems: 'center',
                                 paddingHorizontal: 10,
                                 alignSelf: 'flex-end',
-                            }}>
+                            }}
+                        >
                             <MaterialCommunityIcons
                                 onPress={() => deleteASongList(list.id)}
                                 name="delete-outline"
@@ -239,7 +240,8 @@ const CustomSongsListRenderer = (_props: Props) => {
                                     color:
                                         themeColors.themecolorrevert[0] + '7F',
                                     paddingHorizontal: 6,
-                                }}>
+                                }}
+                            >
                                 Delete List
                             </Text>
                         </View>
@@ -271,7 +273,8 @@ const CustomSongsListRenderer = (_props: Props) => {
                         style={{
                             flexDirection: 'row',
                             justifyContent: 'space-between',
-                        }}>
+                        }}
+                    >
                         <SimpleButton
                             title={'Cancel'}
                             onPress={() => setShowAddSongsSection(false)}
@@ -316,14 +319,16 @@ const CustomSongsListRenderer = (_props: Props) => {
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         paddingTop: 15, // padding so that the above small buttons are not pressed by mistake
-                    }}>
+                    }}
+                >
                     <View
                         style={{
                             flexDirection: 'row',
                             justifyContent: 'flex-start',
                             alignItems: 'center',
                             paddingHorizontal: 10,
-                        }}>
+                        }}
+                    >
                         <MaterialCommunityIcons
                             onPress={showAddSongsSectionPart}
                             name="filter-variant-plus"
@@ -335,7 +340,8 @@ const CustomSongsListRenderer = (_props: Props) => {
                             style={{
                                 color: themeColors.themecolorrevert[0] + '7F',
                                 paddingHorizontal: 6,
-                            }}>
+                            }}
+                        >
                             {`Add New List (${songsList.length}/${MAXIMUM_USERS_CUSTOM_SONGS_LISTS})`}
                         </Text>
                     </View>
@@ -345,7 +351,8 @@ const CustomSongsListRenderer = (_props: Props) => {
                             justifyContent: 'flex-start',
                             alignItems: 'center',
                             paddingHorizontal: 10,
-                        }}>
+                        }}
+                    >
                         <MaterialCommunityIcons
                             onPress={deleteAllSongsList}
                             name="delete-outline"
@@ -357,7 +364,8 @@ const CustomSongsListRenderer = (_props: Props) => {
                             style={{
                                 color: themeColors.themecolorrevert[0] + '7F',
                                 paddingHorizontal: 6,
-                            }}>
+                            }}
+                        >
                             {`Delete All Lists`}
                         </Text>
                     </View>

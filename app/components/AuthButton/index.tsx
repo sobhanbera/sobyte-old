@@ -40,12 +40,14 @@ const AuthButton = (props: ButtonProps) => {
                           themeColors.primary.main[0],
                           themeColors.secondary.main[0],
                       ]
-            }>
+            }
+        >
             <Text
                 style={[
                     props.touchableButtonTextStyle,
                     styles.touchableButtonText,
-                ]}>
+                ]}
+            >
                 {props.title}
             </Text>
             {props.buttonRight && (
@@ -58,7 +60,8 @@ const AuthButton = (props: ButtonProps) => {
                 style={[
                     props.touchableButtonTextStyle,
                     styles.touchableButtonText,
-                ]}>
+                ]}
+            >
                 {props.title}
             </Text>
             <View style={styles.iconHolder}>{props.buttonRight}</View>

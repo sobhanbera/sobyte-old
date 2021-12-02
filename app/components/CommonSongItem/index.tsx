@@ -57,7 +57,8 @@ const CommonSongItem = ({
                     artwork: highQualityImage,
                 })
             }
-            activeOpacity={0.75}>
+            activeOpacity={0.75}
+        >
             <View style={songComponentsStyles.commonCard}>
                 <View style={songComponentsStyles.commonCardMain}>
                     <FastImage
@@ -83,7 +84,8 @@ const CommonSongItem = ({
                                 {
                                     color: textColor,
                                 },
-                            ]}>
+                            ]}
+                        >
                             {trimLargeString(song.name)}
                         </Text>
                         <Text
@@ -93,7 +95,8 @@ const CommonSongItem = ({
                                 {
                                     color: subColor,
                                 },
-                            ]}>
+                            ]}
+                        >
                             {artist}
                         </Text>
                     </View>

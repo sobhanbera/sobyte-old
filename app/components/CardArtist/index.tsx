@@ -43,7 +43,8 @@ const CardSong = ({
                               opacity={1}
                               animating
                               direction={shimmerDirection}
-                              animationOpacity={0.1}>
+                              animationOpacity={0.1}
+                          >
                               <TouchableOpacity>
                                   <View
                                       style={{
@@ -52,7 +53,8 @@ const CardSong = ({
                                           flexDirection: 'row',
                                           justifyContent: 'flex-start',
                                           alignItems: 'center',
-                                      }}>
+                                      }}
+                                  >
                                       <View
                                           style={[
                                               styles.imageDummy,
@@ -97,7 +99,8 @@ const CardSong = ({
                                       image: highQualityImage,
                                   })
                               }
-                              activeOpacity={0.75}>
+                              activeOpacity={0.75}
+                          >
                               <View style={styles.card}>
                                   <View style={styles.cardMain}>
                                       <Image
@@ -119,7 +122,8 @@ const CardSong = ({
                                               {
                                                   color: textColor,
                                               },
-                                          ]}>
+                                          ]}
+                                      >
                                           {firstLetterCap(artist.name)}
                                       </Text>
                                   </View>

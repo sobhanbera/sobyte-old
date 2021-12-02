@@ -85,7 +85,8 @@ const Explore: React.FC<ExploreTabProps> = props => {
                         />
                     }
                     ref={scrollViewReference}
-                    showsVerticalScrollIndicator={false}>
+                    showsVerticalScrollIndicator={false}
+                >
                     <GradientBackground>
                         <HeaderCollapsible
                             onPress={() => {
@@ -117,22 +118,26 @@ const Explore: React.FC<ExploreTabProps> = props => {
                                 //     3 * 5 + // bottom padding of image
                                 //     0, // a random height to fit the items
                             }}
-                            noBackground={true}>
+                            noBackground={true}
+                        >
                             <Block
                                 style={globalStyles.blockOrCardinnerBlock}
-                                noBackground={true}>
+                                noBackground={true}
+                            >
                                 <BlockTitle
                                     style={[
                                         globalStyles.topicTitle,
                                         {color: themeColors.text[0]},
-                                    ]}>
+                                    ]}
+                                >
                                     {'Moods & Genres'}
                                 </BlockTitle>
                             </Block>
 
                             <ScrollView
                                 horizontal
-                                showsHorizontalScrollIndicator={false}>
+                                showsHorizontalScrollIndicator={false}
+                            >
                                 <GridCategory
                                     categories={MoodCategories.concat(
                                         GenresCategories,

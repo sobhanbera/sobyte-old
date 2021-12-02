@@ -173,7 +173,8 @@ const AnimatedHeader = (props: Props) => {
                             backgroundColor: 'black',
                         },
                         // globalStyles.lightBottomBorder,
-                    ]}>
+                    ]}
+                >
                     <FastImage
                         source={{
                             uri: props.headerImage,
@@ -197,7 +198,8 @@ const AnimatedHeader = (props: Props) => {
                             {
                                 height: '100%',
                             },
-                        ]}>
+                        ]}
+                    >
                         <Pressable onPress={() => {}}>
                             <Text style={globalStyles.animatedHeaderTitle}>
                                 {props.headerNameTitle}
@@ -217,23 +219,27 @@ const AnimatedHeader = (props: Props) => {
                             top: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // since the status bar is overflowing with the application...
                         },
                     ]}
-                    ref={headerTitleReference}>
+                    ref={headerTitleReference}
+                >
                     <Text
                         style={[
                             globalStyles.animatedHeaderTitle,
                             {
                                 fontSize: 20,
                             },
-                        ]}>
+                        ]}
+                    >
                         {props.headerTitle}
                     </Text>
                 </Animatable.View>
-            )}>
+            )}
+        >
             <TriggeringView
                 onBeginHidden={showHeaderTitle}
                 onHide={showHeaderTitle}
                 onBeginDisplayed={hideHeaderTitle}
-                onDisplay={hideHeaderTitle}>
+                onDisplay={hideHeaderTitle}
+            >
                 <View style={{backgroundColor: themeColors.themecolor[0]}}>
                     <DefaultStatusBarComponent
                         backgroundColor={'white'}

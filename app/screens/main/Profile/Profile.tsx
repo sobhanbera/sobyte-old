@@ -99,18 +99,21 @@ const Profile: React.FC<ProfileProps> = props => {
                     [{nativeEvent: {contentOffset: {y: scrollY}}}],
                     {useNativeDriver: true},
                 )}
-                style={styles.scrollView}>
+                style={styles.scrollView}
+            >
                 <View
                     style={[
                         globalStyles.flex,
                         {backgroundColor: themecolor[0], paddingHorizontal: 20},
-                    ]}>
+                    ]}
+                >
                     <View
                         style={{
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                        }}>
+                        }}
+                    >
                         {/* profile avatar */}
                         <Animated.Image
                             source={{
@@ -151,7 +154,8 @@ const Profile: React.FC<ProfileProps> = props => {
                                 color: themecolorrevert[0],
                             },
                         ]}
-                        numberOfLines={1}>
+                        numberOfLines={1}
+                    >
                         {fullname}
                     </Text>
 
@@ -163,7 +167,8 @@ const Profile: React.FC<ProfileProps> = props => {
                                 color: themecolorrevert[0] + 'AF',
                             },
                         ]}
-                        numberOfLines={1}>
+                        numberOfLines={1}
+                    >
                         @{username}
                     </Text>
 
@@ -177,7 +182,8 @@ const Profile: React.FC<ProfileProps> = props => {
                             {
                                 color: themecolorrevert[0] + 'EF',
                             },
-                        ]}>
+                        ]}
+                    >
                         Very enthusiastic about open-source development. I am
                         very passionate to learn new things quickly. I am an
                         experienced web developer and an android developer.
@@ -193,7 +199,8 @@ const Profile: React.FC<ProfileProps> = props => {
                                 flexDirection: 'row',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                            }}>
+                            }}
+                        >
                             {facebook && (
                                 <MaterialCommunityIcons
                                     name="facebook"
@@ -344,7 +351,8 @@ const MadeInText = () => {
                 color: themecolorrevert[0] + 'DF',
                 textAlignVertical: 'center',
                 textAlign: 'center',
-            }}>
+            }}
+        >
             {'Made with '}
             <MaterialCommunityIcons
                 name="heart"
@@ -361,7 +369,8 @@ const MadeInText = () => {
                         fontWeight: 'bold',
                         color: char.color,
                         letterSpacing: 2,
-                    }}>
+                    }}
+                >
                     {char.char}
                 </Text>
             ))}
@@ -374,7 +383,8 @@ const MadeInText = () => {
                         color: accent.light[0],
                     },
                 ]}
-                onPress={() => openDeveloperDetailsWebsite()}>
+                onPress={() => openDeveloperDetailsWebsite()}
+            >
                 {AppData.developerName}
             </Text>
             {'.'}

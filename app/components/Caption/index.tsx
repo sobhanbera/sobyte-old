@@ -25,7 +25,8 @@ const Caption = (props: Props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexDirection: 'row',
-            }}>
+            }}
+        >
             {props.leftIcon}
 
             <Text
@@ -38,7 +39,8 @@ const Caption = (props: Props) => {
                         textAlign: props.align || 'center',
                     },
                     props.style,
-                ]}>
+                ]}
+            >
                 {props.title}
             </Text>
 

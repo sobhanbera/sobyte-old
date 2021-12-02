@@ -46,7 +46,8 @@ const SongLyricsRenderer = ({navigation, route}: Props) => {
         <ImageBackground
             source={{uri: highQualityImage}}
             style={{width, height}}
-            blurRadius={DEFAULT_IMAGE_BLUR}>
+            blurRadius={DEFAULT_IMAGE_BLUR}
+        >
             <DefaultStatusBarComponent
                 backgroundColor={themeColors.black[0] + '7F'}
             />

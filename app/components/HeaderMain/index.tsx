@@ -37,7 +37,8 @@ const HeaderMain = (props: Props) => {
                     marginTop: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // the height of the statusbar of the device
                 },
                 props.style,
-            ]}>
+            ]}
+        >
             <Pressable onPress={() => props.navigation.goBack()}>
                 <Entypo
                     name="chevron-thin-left"
@@ -53,7 +54,8 @@ const HeaderMain = (props: Props) => {
                         paddingHorizontal: 20,
                     },
                 ]}
-                numberOfLines={1}>
+                numberOfLines={1}
+            >
                 {props.title}
             </Text>
             {/* this below is a temporary component for making the parent center the title text component */}

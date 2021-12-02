@@ -69,7 +69,8 @@ const GridSongItem = React.memo(
                             keyword: id,
                         },
                     )
-                }>
+                }
+            >
                 <View
                     style={[
                         styles.contentWrapper,
@@ -81,7 +82,8 @@ const GridSongItem = React.memo(
                             : //     : index === contentLength - 1
                               //     ? styles.lastContent
                               {},
-                    ]}>
+                    ]}
+                >
                     <FastImage
                         source={{
                             uri: songImage,
@@ -103,7 +105,8 @@ const GridSongItem = React.memo(
                                 color: textColor,
                             },
                         ]}
-                        numberOfLines={1}>
+                        numberOfLines={1}
+                    >
                         {trimLargeString(item.name)}
                     </Text>
                     <Text
@@ -113,7 +116,8 @@ const GridSongItem = React.memo(
                                 color: subColor,
                             },
                         ]}
-                        numberOfLines={1}>
+                        numberOfLines={1}
+                    >
                         {artist}
                     </Text>
                 </View>

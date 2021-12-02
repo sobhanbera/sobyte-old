@@ -36,7 +36,8 @@ const ScalerAuthButton: React.FC<ScalerAuthButtonProps> = props => {
                 touchableOpacity={props.touchableOpacity}
                 onPress={props.onPress}
                 onLongPress={props.onLongPress}
-                center={props.center}>
+                center={props.center}
+            >
                 <AuthButton
                     simpleGradientColor={props.simpleGradientColor}
                     title={props.title}

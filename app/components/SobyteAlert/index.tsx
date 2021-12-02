@@ -35,7 +35,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 },
-            ]}>
+            ]}
+        >
             <View
                 style={{
                     width: 310,
@@ -46,7 +47,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: themeColors.surfacelight[0],
-                }}>
+                }}
+            >
                 <Text
                     style={{
                         color: themeColors.white[0],
@@ -56,7 +58,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                         textAlign: 'center',
                         textAlignVertical: 'center',
                         fontFamily: FontRoboto,
-                    }}>
+                    }}
+                >
                     {props.description ??
                         'Alert Box Description... This is the text which tell the details about the alert or in other word the meaning of the title. This is demo description.'}
                 </Text>
@@ -68,7 +71,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                         alignItems: 'center',
                         flexDirection: 'row',
                         paddingTop: 12.5,
-                    }}>
+                    }}
+                >
                     <Pressable
                         onPress={() => props.setVisibility(false)}
                         style={{
@@ -77,7 +81,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                             paddingHorizontal: 8,
                             backgroundColor: themeColors.surface[0] + '50',
                             borderBottomLeftRadius: 8,
-                        }}>
+                        }}
+                    >
                         <Text
                             style={{
                                 fontSize: 16,
@@ -87,7 +92,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                 textAlignVertical: 'center',
                                 textAlign: 'center',
                                 alignSelf: 'center',
-                            }}>
+                            }}
+                        >
                             {props.cancelText ?? 'Cancel'}
                         </Text>
                     </Pressable>
@@ -99,7 +105,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                             borderRightWidth: 1,
                             backgroundColor: themeColors.surface[0] + '50',
                             paddingVertical: 10,
-                        }}></Text>
+                        }}
+                    ></Text>
 
                     <Pressable
                         onPress={() => {
@@ -117,7 +124,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                             backgroundColor: themeColors.surface[0] + '50',
                             borderBottomRightRadius: 8,
                             borderBottomLeftRadius: 0,
-                        }}>
+                        }}
+                    >
                         <Text
                             style={{
                                 fontSize: 16,
@@ -126,7 +134,8 @@ const SobyteAlert: React.FC<SobyteAlertProps> = props => {
                                 color: themeColors.white[0],
                                 textAlignVertical: 'center',
                                 textAlign: 'center',
-                            }}>
+                            }}
+                        >
                             {props.confirmText ?? 'OK'}
                         </Text>
                     </Pressable>

@@ -46,10 +46,12 @@ const CardSong = ({
                               opacity={1}
                               animating
                               direction={shimmerDirection}
-                              animationOpacity={0.1}>
+                              animationOpacity={0.1}
+                          >
                               <TouchableOpacity
                                   activeOpacity={0.75}
-                                  onPress={() => {}}>
+                                  onPress={() => {}}
+                              >
                                   <View style={styles.card}>
                                       <View style={styles.cardMain}>
                                           <View
@@ -59,7 +61,8 @@ const CardSong = ({
                                                   {
                                                       borderRadius: 5,
                                                   },
-                                              ]}></View>
+                                              ]}
+                                          ></View>
 
                                           <View style={styles.songDetails}>
                                               <View
@@ -118,7 +121,8 @@ const CardSong = ({
                                       artwork: highQualityImage,
                                   })
                               }
-                              activeOpacity={0.75}>
+                              activeOpacity={0.75}
+                          >
                               <View style={styles.card}>
                                   <View style={styles.cardMain}>
                                       <Image
@@ -141,7 +145,8 @@ const CardSong = ({
                                                   {
                                                       color: textColor,
                                                   },
-                                              ]}>
+                                              ]}
+                                          >
                                               {trimLargeString(song.name)}
                                           </Text>
                                           <Text
@@ -151,7 +156,8 @@ const CardSong = ({
                                                   {
                                                       color: subColor,
                                                   },
-                                              ]}>
+                                              ]}
+                                          >
                                               {artist}
                                           </Text>
                                       </View>

@@ -30,7 +30,8 @@ const Block = (props: Props) => {
                         : surfacelight[0],
                 },
                 props.style,
-            ]}>
+            ]}
+        >
             {props.children}
         </View>
     )
