@@ -159,7 +159,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
                 />
 
                 <SimpleButton
-                    title={'Update Social Media Links'}
+                    title={'Update Links'}
                     onPress={() => updateSocialMediaLinksInDatabase()}
                     style={{
                         paddingVertical: 12,
