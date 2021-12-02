@@ -32,6 +32,7 @@ const SimpleButton = (props: Props) => {
                     globalStyles.simpleButtonText,
                     {
                         color: themecolorrevert[0] + 'EF',
+                        textAlign: 'center',
                     },
                     props.textStyle,
                 ]}>
