@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, ImageBackground} from 'react-native'
+import {Text, View, ImageBackground, Dimensions} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import MarqueeText from 'react-native-text-ticker'
 
@@ -13,6 +13,7 @@ import {
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     MUSIC_PLAYER_BLUR,
+    DEFAULT_MUSIC_PLAYER_IMAGE_SIZE,
 } from '../../constants'
 import {
     formatArtists,
@@ -68,13 +69,15 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                     paddingBottom: 20, // the main bottom tab bar navigation height is overlping the children component so providing a padding bottom of 15~25
                     // opacity: 0,
                 }}
-                blurRadius={MUSIC_PLAYER_BLUR}>
+                blurRadius={MUSIC_PLAYER_BLUR}
+            >
                 <View
                     style={{
                         width: '85%',
                         alignSelf: 'flex-start',
                         marginHorizontal: 20,
-                    }}>
+                    }}
+                >
                     <MarqueeText
                         style={{
                             fontSize: 25,
@@ -93,7 +96,8 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                         bounceSpeed={1}
                         scrollSpeed={1}
                         animationType="scroll"
-                        marqueeDelay={1000}>
+                        marqueeDelay={1000}
+                    >
                         {title}
                     </MarqueeText>
                     <Text
@@ -105,7 +109,8 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                             paddingHorizontal: 5,
                             // backgroundColor: '#000000AF', // background is only just for testing purpose
                         }}
-                        numberOfLines={1}>
+                        numberOfLines={1}
+                    >
                         {artistsString}
                     </Text>
                 </View>
@@ -117,8 +122,8 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                         // cache: 'web',
                     }}
                     style={{
-                        width: 260,
-                        height: 260,
+                        width: DEFAULT_MUSIC_PLAYER_IMAGE_SIZE,
+                        height: DEFAULT_MUSIC_PLAYER_IMAGE_SIZE,
                         borderRadius: 5,
                         marginVertical: 20,
                     }}
@@ -130,7 +135,8 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                         alignItems: 'center',
                         width: '100%',
                         // backgroundColor: themeColors.themecolor[0] + '50',
-                    }}>
+                    }}
+                >
                     <TrackButtonControls
                         launchLyrics={() =>
                             navigation.navigate('lyrics', {song})
