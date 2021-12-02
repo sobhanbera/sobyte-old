@@ -111,7 +111,7 @@ const Player: FC<PlayerProps> = props => {
     // initializing the songs list...
     const initializeMusicPlayer = () => {
         // random song query before loading songs...
-        const randomQuery = getRandomSearchQuery()
+        const randomQuery = 'Adele - Easy On Me' || getRandomSearchQuery()
         /**
          * debug code below...
          */
@@ -608,8 +608,7 @@ const Player: FC<PlayerProps> = props => {
                 randomGradient[5] + 'AF', // because the extreme backgorund is black in color
             ]}
             location={[0.2, 0.4, 0.6, 0.8]}
-            angle={175}
-        >
+            angle={175}>
             <DefaultStatusBarComponent backgroundColor={'transparent'} />
 
             {/* this section is temporarily commented */}
@@ -635,8 +634,7 @@ const Player: FC<PlayerProps> = props => {
                     height: 100,
                     backgroundColor: 'green',
                     position: 'absolute',
-                }}
-            ></View>
+                }}></View>
 
             {songs?.content.length && songs.content[0].musicId.length > 0 ? (
                 <Animated.FlatList
@@ -699,8 +697,7 @@ const Player: FC<PlayerProps> = props => {
                         top: '50%',
                         left: '50%',
                         backgroundColor: 'black',
-                    }}
-                >
+                    }}>
                     <LottieView
                         ref={likeAnimRef}
                         source={PopupLikeAnimation}
