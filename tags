@@ -6991,6 +6991,8 @@ DEFAULT_IMAGE_BORDER_RADIUS	app/constants/index.ts	/^export const DEFAULT_IMAGE_
 DEFAULT_IMAGE_QUALITY	app/constants/index.ts	/^export const DEFAULT_IMAGE_QUALITY = '90' \/\/ default image quality in string...$/;"	C
 DEFAULT_IMAGE_SIZE	app/constants/index.ts	/^export const DEFAULT_IMAGE_SIZE = '200' \/\/ default image width and height in string...$/;"	C
 DEFAULT_LARGE_ICON_SIZE	app/constants/index.ts	/^export const DEFAULT_LARGE_ICON_SIZE = 26 \/\/ this is the default large icon size ad may be cha/;"	C
+DEFAULT_MUSIC_PLAYER_IMAGE_SCREEN_GAP	app/constants/index.ts	/^export const DEFAULT_MUSIC_PLAYER_IMAGE_SCREEN_GAP = 0.15 \/\/ 15 % of the full screen's width$/;"	C
+DEFAULT_MUSIC_PLAYER_IMAGE_SIZE	app/constants/index.ts	/^export const DEFAULT_MUSIC_PLAYER_IMAGE_SIZE =$/;"	C
 DEFAULT_NOTIFICATION_IMAGE_QUALITY	app/constants/index.ts	/^export const DEFAULT_NOTIFICATION_IMAGE_QUALITY = '90' \/\/ the quality of the image which will /;"	C
 DEFAULT_NOTIFICATION_IMAGE_SIZE	app/constants/index.ts	/^export const DEFAULT_NOTIFICATION_IMAGE_SIZE = '250' \/\/ the size (width\/height) of the image /;"	C
 DEFAULT_OVERLAY_OPACITY	app/constants/index.ts	/^export const DEFAULT_OVERLAY_OPACITY = 0.55 \/\/ threshold default opacity overlay over any view/;"	C
@@ -7068,7 +7070,7 @@ IMAGE_TINY_SIZE_TO_SHOW	app/constants/index.ts	/^export const IMAGE_TINY_SIZE_TO
 IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX	app/utils/Objects.ts	/^export const IMAGE_WIDTH_HEIGHT_FORMATTING_REGEX =$/;"	C
 IMAGE_WIDTH_TO_SHOW	app/constants/index.ts	/^export const IMAGE_WIDTH_TO_SHOW = 145 \/\/ width and height of the normal sized image which sho/;"	C
 INFINITE_SCROLL_OFFSET	app/constants/index.ts	/^export const INFINITE_SCROLL_OFFSET = 1000 \/\/ default image width and height in string...$/;"	C
-INITIAL_NUMBER_OF_TRACKS_TO_LOAD	app/constants/index.ts	/^export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD = 5 \/\/ the initial number of tracks we have to l/;"	C
+INITIAL_NUMBER_OF_TRACKS_TO_LOAD	app/constants/index.ts	/^export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD = 10 \/\/ the initial number of tracks we have to /;"	C
 INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB	app/constants/index.ts	/^export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB = 11 \/\/ the initial number of tra/;"	C
 INSTAGRAM_API_ENDPOINT	app/constants/index.ts	/^export const INSTAGRAM_API_ENDPOINT = 'https:\/\/www.instagram.com'$/;"	C
 INSTAGRAM_ENDPOINT	app/constants/index.ts	/^export const INSTAGRAM_ENDPOINT = 'https:\/\/www.instagram.com'$/;"	C
