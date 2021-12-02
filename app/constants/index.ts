@@ -174,6 +174,11 @@ export const GRID_COLUMNS = 2 // number of columns per grid component for song l
 export const DEFAULT_OVERLAY_OPACITY_MAX = 0.73128946 // maximum opacity overlay over any view, component, image, etc
 export const DEFAULT_OVERLAY_OPACITY = 0.55 // threshold default opacity overlay over any view, component, image, etc
 export const DEFAULT_OVERLAY_OPACITY_MIN = 0.375692 // minimum opacity overlay over any view, component, image, etc
+
+export const DEFAULT_MUSIC_PLAYER_IMAGE_SCREEN_GAP = 0.15 // 15 % of the full screen's width
+export const DEFAULT_MUSIC_PLAYER_IMAGE_SIZE =
+    SCREEN_WIDTH - SCREEN_WIDTH * DEFAULT_MUSIC_PLAYER_IMAGE_SCREEN_GAP * 2 // we have to provide gap on both side of the screen so multiplying by 2 here in this constant value
+
 export const DEFAULT_IMAGE_SIZE = '200' // default image width and height in string...
 export const DEFAULT_IMAGE_QUALITY = '90' // default image quality in string...
 export const DEFAULT_HIGH_IMAGE_SIZE = '576' // default high quality image width and height in string...
@@ -207,7 +212,7 @@ export const DEFAULT_ANIMATION_DURATION = 550 // the duration for default animat
 export const LIKE_ANIMATION_DISAPPEAR_DURATION = 1650 // the duration after which the like animation while be hidden
 export const HIGHEST_Z_INDEX_VALUE = 987654 // the largest z index value
 
-export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD = 5 // the initial number of tracks we have to load when the app launched and music player UI is shown
+export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD = 10 // the initial number of tracks we have to load when the app launched and music player UI is shown
 export const INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB = 11 // the initial number of tracks we have to load when the app launched and exlore tab is shown
 
 export const LIKE_ICON_OR_TEXT_COLOR = '#D61F26'
@@ -343,4 +348,3 @@ export const COMMON_COLORS: CommonColors = {
         '#6fba82',
     ],
 }
-
