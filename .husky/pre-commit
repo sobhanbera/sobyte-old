@@ -15,7 +15,7 @@ echo "
   █▀▀ █▀█ █▀█ █▀▄▀█ ▄▀█ ▀█▀ ▀█▀ █ █▄░█ █▀▀   █▀▀ █ █░░ █▀▀ █▀
   █▀░ █▄█ █▀▄ █░▀░█ █▀█ ░█░ ░█░ █ █░▀█ █▄█   █▀░ █ █▄▄ ██▄ ▄█ ▄ ▄ ▄
   "
-yarn pretty-quick --staged | tee logs/prettier.last.log
+yarn pretty-quick --staged --pattern "**/*.*(ts|tsx|js|jsx|json)" | tee logs/prettier.last.log
 
 # showing the git status
 echo "
