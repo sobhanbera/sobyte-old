@@ -11,21 +11,23 @@
         "url": "https://github.com/sobhanbera/sobyte.git"
     },
     "scripts": {
+        "test": "jest",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
         "start": "react-native start",
         "reset": "yarn start --reset-cache",
-        "test": "jest",
         "prettier-check": "yarn prettier -c app",
         "prettier-format": "yarn prettier --write app && git status",
-        "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "lint:fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
-        "tsnumoflines": "find app/ -name '*.ts*' | xargs wc -l",
-        "jsnumoflines": "find app/ -name '*.js*' | xargs wc -l",
-        "tree": "tree app",
+        "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "build": "cd android && ./gradlew bundleRelease",
         "bd": "cd android && ./gradlew bundleRelease",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "tree": "tree app",
+        "lines": "find . -regex \".*\\.\\(js\\|jsx\\|ts\\|tsx\\|json\\)\" ! -path \"./node_modules/*\" | xargs wc -l",
+        "tslines": "find . -name '*.js*' ! -path \"./node_modules/*\" ! -path \"./android/*\" ! -path \"./ios/*\" | xargs wc -l",
+        "jslines": "find . -name '*.ts*' ! -path \"./node_modules/*\" ! -path \"./android/*\" ! -path \"./ios/*\" | xargs wc -l",
+        "tjslines": "find . -regex \".*\\.\\(js\\|jsx\\|ts\\|tsx\\|json\\)\" ! -path \"./node_modules/*\" ! -path \"./android/*\" ! -path \"./ios/*\" | xargs wc -l"
     },
     "dependencies": {
         "@gorhom/bottom-sheet": "^4.0.0-alpha.25",
