@@ -87,8 +87,7 @@ const SettingsUpdater: React.FC<Props> = realProps => {
                                             button.onPress()
                                             realProps.navigation.goBack()
                                         }}
-                                        style={{padding: 15}}
-                                    >
+                                        style={{padding: 15}}>
                                         <MaterialIcon
                                             name="done"
                                             size={DEFAULT_ICON_SIZE}
@@ -104,8 +103,7 @@ const SettingsUpdater: React.FC<Props> = realProps => {
                                                 fontSize: 14,
                                                 color: onWarning[0],
                                             },
-                                        ]}
-                                    >
+                                        ]}>
                                         {button.errorText
                                             ? button.errorText
                                             : ''}
@@ -127,8 +125,7 @@ const SettingsUpdater: React.FC<Props> = realProps => {
                                 {
                                     borderBottomColor: border[0],
                                 },
-                            ]}
-                        >
+                            ]}>
                             <Text style={[styles.textItem]}>{button.text}</Text>
                             <Text style={[styles.textItem]}>
                                 {button.extraText}

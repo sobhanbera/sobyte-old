@@ -34,8 +34,7 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                         this.props.shimmerDirection === 'down'
                             ? 10
                             : -10
-                    }
-                >
+                    }>
                     <Pressable onPress={() => {}}>
                         <View
                             style={[
@@ -46,8 +45,7 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                                 // : index === this.props.contentLength - 1
                                 // ? styles.lastContent
                                 // : {},
-                            ]}
-                        >
+                            ]}>
                             <View
                                 style={[
                                     styles.contentImage,
@@ -81,8 +79,7 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                         this.props.shimmerDirection === 'down'
                             ? 10
                             : -10
-                    }
-                >
+                    }>
                     <Pressable onPress={() => {}}>
                         <View
                             style={[
@@ -92,8 +89,7 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                                 //     : index === this.props.contentLength - 1
                                 //     ? styles.lastContent
                                 //     : {},
-                            ]}
-                        >
+                            ]}>
                             <View
                                 style={[
                                     styles.contentImage,
@@ -127,8 +123,7 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                         this.props.shimmerDirection === 'down'
                             ? 10
                             : -10
-                    }
-                >
+                    }>
                     <Pressable onPress={() => {}}>
                         <View
                             style={[
@@ -139,8 +134,7 @@ class GridSongList_SelfShimmer extends React.PureComponent<Props> {
                                 // ?
                                 styles.lastContent,
                                 // : {},
-                            ]}
-                        >
+                            ]}>
                             <View
                                 style={[
                                     styles.contentImage,

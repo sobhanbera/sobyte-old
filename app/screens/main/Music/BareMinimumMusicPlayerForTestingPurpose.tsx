@@ -322,8 +322,7 @@ const Player: FC<PlayerProps> = props => {
                 randomGradient[5] + 'AF', // because the extreme backgorund is black in color
             ]}
             location={[0.2, 0.4, 0.6, 0.8]}
-            angle={175}
-        >
+            angle={175}>
             <DefaultStatusBarComponent backgroundColor={'transparent'} />
 
             {/* main content of this particular tab */}
@@ -393,8 +392,7 @@ const Player: FC<PlayerProps> = props => {
                         top: '50%',
                         left: '50%',
                         backgroundColor: 'black',
-                    }}
-                >
+                    }}>
                     <LottieView
                         ref={likeAnimRef}
                         source={PopupLikeAnimation}

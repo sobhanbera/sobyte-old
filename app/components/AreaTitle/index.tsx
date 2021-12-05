@@ -26,8 +26,7 @@ const AreaTitle = (props: Props) => {
                     paddingTop: 10,
                 },
                 props.containerStyle,
-            ]}
-        >
+            ]}>
             {/* if there is no arguments for against bold then show bold by default */}
             <Text
                 style={[
@@ -39,8 +38,7 @@ const AreaTitle = (props: Props) => {
                         color: themecolorrevert[0] + 'DF',
                     },
                     props.style,
-                ]}
-            >
+                ]}>
                 {props.title}
             </Text>
         </View>

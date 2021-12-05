@@ -25,8 +25,7 @@ const SimpleButton = (props: Props) => {
                 },
                 props.style,
             ]}
-            onPress={() => props.onPress()}
-        >
+            onPress={() => props.onPress()}>
             {props.leftIcon}
             <Text
                 style={[
@@ -36,8 +35,7 @@ const SimpleButton = (props: Props) => {
                         textAlign: 'center',
                     },
                     props.textStyle,
-                ]}
-            >
+                ]}>
                 {props.title}
             </Text>
             {props.rightIcon}

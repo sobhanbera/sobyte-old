@@ -35,8 +35,7 @@ const Area = (props: Props) => {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'flex-start',
-            }}
-        >
+            }}>
             <>
                 <View
                     style={{
@@ -44,8 +43,7 @@ const Area = (props: Props) => {
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                    }}
-                >
+                    }}>
                     <Text style={globalStyles.areaTitle}>{props.title}</Text>
 
                     {/**

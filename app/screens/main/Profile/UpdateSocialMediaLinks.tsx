@@ -83,8 +83,7 @@ const UpdateSocialMediaLinks = (props: Props) => {
             <ScrollView
                 style={globalStyles.flex}
                 showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-            >
+                showsHorizontalScrollIndicator={false}>
                 <DefaultStatusBarComponent backgroundColor={'black'} />
 
                 {/* facebook link update */}

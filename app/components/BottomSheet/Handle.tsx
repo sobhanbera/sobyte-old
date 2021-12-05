@@ -141,8 +141,7 @@ export const Handle: React.FC<HandleProps> = ({style, animatedIndex}) => {
     return (
         <Animated.View
             style={[containerStyle, containerAnimatedStyle]}
-            renderToHardwareTextureAndroid={true}
-        >
+            renderToHardwareTextureAndroid={true}>
             <Animated.View
                 style={[leftIndicatorStyle, leftIndicatorAnimatedStyle]}
             />

@@ -24,8 +24,7 @@ const Intro = (props: IntroProps) => {
             angleCenter={{x: 0.5, y: 0.5}}
             useAngle={true}
             style={{width: '100%', flex: 1}}
-            colors={themeColors.backgroundgradient}
-        >
+            colors={themeColors.backgroundgradient}>
             <View style={styles.wrapper}>
                 <View>
                     <Scaler onPress={() => {}} scale={1}>
@@ -48,8 +47,7 @@ const Intro = (props: IntroProps) => {
                             touchableOpacity={0.95}
                             scale={0.97}
                             center
-                            containerStyle={globalStyles.circle}
-                        >
+                            containerStyle={globalStyles.circle}>
                             <AuthButton
                                 buttonRight={
                                     <Icon
@@ -71,8 +69,7 @@ const Intro = (props: IntroProps) => {
                             touchableOpacity={0.95}
                             scale={0.97}
                             center
-                            containerStyle={globalStyles.circle}
-                        >
+                            containerStyle={globalStyles.circle}>
                             <AuthButton
                                 buttonRight={
                                     <Icon

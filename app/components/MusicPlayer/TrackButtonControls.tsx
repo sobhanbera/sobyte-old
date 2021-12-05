@@ -76,8 +76,7 @@ const TrackButtonControls = (props: Props) => {
                 <Scaler
                     onPress={() => props.likeIsMusic()} // TODO like feature
                     touchableOpacity={1}
-                    scale={0.85}
-                >
+                    scale={0.85}>
                     <FontAwesome
                         style={styles.icon}
                         size={DEFAULT_ICON_SIZE}

@@ -45,8 +45,7 @@ const HeaderProfile = (props: Props) => {
                         props.navigation.navigate(
                             PROFILE_STACK__SETTINGS_SCREEN,
                         )
-                    }}
-                >
+                    }}>
                     {/* the actual setting icon in form of an image */}
                     <Image
                         style={{
@@ -70,8 +69,7 @@ const HeaderProfile = (props: Props) => {
                             outputRange: [0, 1],
                         }),
                     },
-                ]}
-            >
+                ]}>
                 <Image
                     source={{
                         uri: 'https://avatars.githubusercontent.com/u/50291544?v=4',
@@ -96,8 +94,7 @@ const HeaderProfile = (props: Props) => {
                             styles.headerUsername,
                             {color: themecolorrevert[0]},
                         ]}
-                        numberOfLines={1}
-                    >
+                        numberOfLines={1}>
                         {/* @{formatNames(username)} */}
                         {username}
                     </Text>
@@ -122,8 +119,7 @@ const HeaderProfile = (props: Props) => {
                             },
                         ],
                     },
-                ]}
-            >
+                ]}>
                 <AnimatedBlurView
                     blurType="dark"
                     blurAmount={DEFAULT_IMAGE_BLUR}

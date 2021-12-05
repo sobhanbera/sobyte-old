@@ -23,15 +23,13 @@ const Header = (props: HeaderProps) => {
                 {
                     backgroundColor: '#000000' + props.transparency || '00',
                 },
-            ]}
-        >
+            ]}>
             <View style={styles.innerHeader}>
                 <Scaler
                     scale={0.9}
                     onPress={() =>
                         props.goBack ? props.navigation.goBack() : null
-                    }
-                >
+                    }>
                     <Icon
                         style={styles.headerIcon}
                         name="arrow-left"
@@ -43,8 +41,7 @@ const Header = (props: HeaderProps) => {
                     style={[
                         styles.headerTitle,
                         {color: props.color ?? '#ffffff'},
-                    ]}
-                >
+                    ]}>
                     {props.headerTitle ?? ''}
                 </Text>
             </View>

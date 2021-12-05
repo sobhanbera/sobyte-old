@@ -17,8 +17,7 @@ const SelfShimmer = ({shimmerDirection}: Props) => {
                     opacity={1}
                     animating
                     direction={shimmerDirection}
-                    animationOpacity={0.1}
-                >
+                    animationOpacity={0.1}>
                     <TouchableOpacity>
                         <View
                             style={{
@@ -27,8 +26,7 @@ const SelfShimmer = ({shimmerDirection}: Props) => {
                                 flexDirection: 'row',
                                 justifyContent: 'flex-start',
                                 alignItems: 'center',
-                            }}
-                        >
+                            }}>
                             <View
                                 style={[
                                     songComponentsStyles.imageTinyDummy,

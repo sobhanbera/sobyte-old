@@ -70,16 +70,14 @@ const LanguagePicker: React.FC<Props> = props => {
                     height: 100,
                     marginVertical: 10,
                     borderRadius: 4,
-                }}
-            >
+                }}>
                 <Text
                     style={{
                         textAlign: 'center',
                         textAlignVertical: 'center',
                         color: 'white',
                         fontSize: 16,
-                    }}
-                >
+                    }}>
                     {item.lang}
                 </Text>
             </View>

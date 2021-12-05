@@ -17,8 +17,7 @@ const PaddingView = (props: HighPaddingViewProps) => {
                     : props.padding === 'extra'
                     ? globalStyles.extraPaddingView
                     : globalStyles.smallPaddingView
-            }
-        >
+            }>
             {props.children}
         </View>
     )

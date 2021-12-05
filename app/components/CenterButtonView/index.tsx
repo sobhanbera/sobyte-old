@@ -16,24 +16,21 @@ const CenterButtonView = (props: Props) => {
     return (
         <TouchableOpacity
             onPress={() => props.onPress()}
-            style={[styles.centerButtonWrapper]}
-        >
+            style={[styles.centerButtonWrapper]}>
             <View
                 style={[
                     styles.button,
                     {
                         backgroundColor: props.buttonColor ?? primary.dark[0],
                     },
-                ]}
-            >
+                ]}>
                 <Text
                     style={[
                         styles.buttonText,
                         {
                             color: text[0],
                         },
-                    ]}
-                >
+                    ]}>
                     {props.title}
                 </Text>
             </View>

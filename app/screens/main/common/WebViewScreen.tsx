@@ -144,8 +144,7 @@ const WebViewScreen = (props: Props) => {
         <View
             style={{
                 flex: 1,
-            }}
-        >
+            }}>
             <View
                 style={[
                     styles.header,
@@ -155,8 +154,7 @@ const WebViewScreen = (props: Props) => {
                         borderBottomWidth: 1,
                         marginTop: DEVICE_STATUSBAR_HEIGHT_CONSTANT, // the height of the statusbar of the device
                     },
-                ]}
-            >
+                ]}>
                 <Feather
                     name="x"
                     color={white[0] + 'BF'}
@@ -177,8 +175,7 @@ const WebViewScreen = (props: Props) => {
                                 color: white[0],
                             },
                         ]}
-                        numberOfLines={1}
-                    >
+                        numberOfLines={1}>
                         {URLData?.title || 'Loading...'}
                     </Text>
 
@@ -186,8 +183,7 @@ const WebViewScreen = (props: Props) => {
                         style={{
                             flexDirection: 'row',
                             alignItems: 'center',
-                        }}
-                    >
+                        }}>
                         <Ionicons
                             name={trustedWebPage ? 'lock-closed' : 'warning'}
                             size={8} // smaller then the size of text...
@@ -201,8 +197,7 @@ const WebViewScreen = (props: Props) => {
                                     color: white[0] + 'BF',
                                 },
                             ]}
-                            numberOfLines={1}
-                        >
+                            numberOfLines={1}>
                             {url.hostname}
                         </Text>
                     </View>
@@ -229,8 +224,7 @@ const WebViewScreen = (props: Props) => {
                             color={white[0] + 'BF'}
                             onPress={openMenu}
                         />
-                    }
-                >
+                    }>
                     <Menu.Item
                         style={{height: 40}}
                         onPress={() => reloadWebPage()}
@@ -279,8 +273,7 @@ const WebViewScreen = (props: Props) => {
                             flexDirection: 'row',
                             paddingVertical: 10,
                             justifyContent: 'space-evenly',
-                        }}
-                    >
+                        }}>
                         <MaterialCommunityIcons
                             name={'arrow-left'}
                             size={DEFAULT_ICON_SIZE} // smaller then the size of text...

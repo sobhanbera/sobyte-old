@@ -147,8 +147,7 @@ const LyricLineRenderer = (props: Pops) => {
                 fontFamily: FontUbuntuBold,
                 paddingHorizontal: 20,
                 paddingVertical: isActive ? 11 : 15,
-            }}
-        >
+            }}>
             {lyricLine.content}
         </Text>
     )

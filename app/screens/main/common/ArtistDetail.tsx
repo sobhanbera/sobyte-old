@@ -75,8 +75,7 @@ const ArtistDetail = (props: Props) => {
             headerNameTitle={artist.name}
             headerTitle={artist.name}
             infiniteScrollOffset={100}
-            onReachedEnd={() => {}}
-        >
+            onReachedEnd={() => {}}>
             <TopicTitle title="Hits By Artist" />
             <CommonSongList songs={songsByArtist.content} />
 

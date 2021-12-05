@@ -41,8 +41,7 @@ const GridArtistItem = React.memo(
                             : //     : index === contentLength - 1
                               //     ? styles.lastContent
                               {},
-                    ]}
-                >
+                    ]}>
                     <FastImage
                         source={{
                             uri: highQualityImage,
@@ -63,8 +62,7 @@ const GridArtistItem = React.memo(
                             {
                                 color: textColor,
                             },
-                        ]}
-                    >
+                        ]}>
                         {trimLargeString(item.name)}
                     </Text>
                 </View>

@@ -22,14 +22,12 @@ const TrackProgress = (props: Props) => {
                 width: '90%',
                 alignItems: 'center',
                 justifyContent: 'center',
-            }}
-        >
+            }}>
             <View
                 style={{
                     width: '100%',
                     alignItems: 'center',
-                }}
-            >
+                }}>
                 <Slider
                     step={0.01}
                     value={actualPosition}

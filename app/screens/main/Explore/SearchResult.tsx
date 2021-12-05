@@ -276,8 +276,7 @@ const SearchResult: React.FC<Props> = props => {
                         backgroundColor: surfacelight[0],
                         paddingVertical: 0,
                         zIndex: 1000,
-                    }}
-                >
+                    }}>
                     {searchSuggestions.map(suggestion => {
                         /** we are ignoring those suggestions which includes video on it since only songs, musics could be shown */
                         if (suggestion.includes('video')) return null
@@ -293,8 +292,7 @@ const SearchResult: React.FC<Props> = props => {
                                     borderBottomColor: '#7f7f7f16',
                                     paddingHorizontal: 20,
                                     paddingVertical: 2,
-                                }}
-                            >
+                                }}>
                                 <Icon
                                     accessibilityLabel="search songs"
                                     name="search-outline"
@@ -308,8 +306,7 @@ const SearchResult: React.FC<Props> = props => {
                                         paddingHorizontal: 20,
                                         paddingVertical: 13,
                                         fontSize: 17,
-                                    }}
-                                >
+                                    }}>
                                     {suggestion}
                                 </Text>
                             </TouchableOpacity>
@@ -341,8 +338,7 @@ const SearchResult: React.FC<Props> = props => {
                                 />
                             }
                             showsVerticalScrollIndicator={false}
-                            showsHorizontalScrollIndicator={false}
-                        >
+                            showsHorizontalScrollIndicator={false}>
                             {/* render the previously seached queries */}
                             {previouslySearchedQueries.length > 0 &&
                             !loading &&
@@ -362,8 +358,7 @@ const SearchResult: React.FC<Props> = props => {
                                             justifyContent: 'flex-start',
                                             marginVertical: 10,
                                             marginHorizontal: 20,
-                                        }}
-                                    >
+                                        }}>
                                         {previouslySearchedQueries.map(
                                             searchQuery => {
                                                 return (
@@ -385,8 +380,7 @@ const SearchResult: React.FC<Props> = props => {
                                                             borderWidth: 1,
                                                             marginHorizontal: 4,
                                                             marginVertical: 5,
-                                                        }}
-                                                    >
+                                                        }}>
                                                         {searchQuery}
                                                     </Text>
                                                 )

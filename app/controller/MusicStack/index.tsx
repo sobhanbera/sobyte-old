@@ -13,8 +13,7 @@ const MusicPlayerStackNavigator = (props: Props) => {
             screenOptions={{
                 headerShown: false,
             }}
-            initialRouteName="music"
-        >
+            initialRouteName="music">
             <ProfileStack.Screen name="music" component={Music} />
             <ProfileStack.Screen name="lyrics" component={SongsLyricsScreen} />
         </ProfileStack.Navigator>

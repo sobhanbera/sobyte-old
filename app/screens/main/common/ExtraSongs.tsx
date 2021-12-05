@@ -84,8 +84,7 @@ const ExtraSongs = (props: Props) => {
             headerNameTitle={''}
             headerTitle={''}
             infiniteScrollOffset={100}
-            onReachedEnd={continueLoadingData}
-        >
+            onReachedEnd={continueLoadingData}>
             <TopicTitle title="Hits By Artist" />
             <CommonSongList songs={songs.content} />
 

@@ -20,8 +20,7 @@ const ProfileStackNavigator = (props: Props) => {
                 gestureEnabled: true,
                 gestureDirection: 'vertical',
             }}
-            initialRouteName="explore"
-        >
+            initialRouteName="explore">
             <ProfileStack.Screen name="explore" component={Explore} />
             <ProfileStack.Screen name="search" component={SearchResult} />
             <ProfileStack.Screen

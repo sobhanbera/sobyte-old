@@ -48,8 +48,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                 backgroundColor: props.headerScrollColor,
                 paddingTop: 25,
                 marginTop: 15,
-            }}
-        >
+            }}>
             <View
                 style={{
                     height: props.headerScrollHeight || HEADER_MIN_HEIGHT,
@@ -60,14 +59,12 @@ const HeaderCollapsible: React.FC<Props> = props => {
                     alignItems: 'center',
                     marginHorizontal: 20,
                     paddingHorizontal: 10,
-                }}
-            >
+                }}>
                 <Pressable
                     onPress={() => {
                         handleLogoRotateAnimation()
                         props.onPress()
-                    }}
-                >
+                    }}>
                     <Animated.Image
                         source={require('../../assets/images/sobyte_logo_white.png')}
                         style={{
@@ -84,8 +81,7 @@ const HeaderCollapsible: React.FC<Props> = props => {
                             color: white[0],
                             fontSize: 27,
                         },
-                    ]}
-                >
+                    ]}>
                     {t('common:appName')}
                 </Animated.Text>
             </View>

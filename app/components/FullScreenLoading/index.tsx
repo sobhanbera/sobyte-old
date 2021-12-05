@@ -19,16 +19,14 @@ const FullScreenLoading: React.FC<LoadingProps> = props => {
                 angleCenter={{x: 0.5, y: 0.5}}
                 useAngle={true}
                 style={{width: '100%', flex: 1}}
-                colors={themeColors.backgroundgradient}
-            >
+                colors={themeColors.backgroundgradient}>
                 <View
                     style={{
                         flex: 1,
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: '#00000026',
-                    }}
-                >
+                    }}>
                     <Scaler onPress={() => {}} autoAnimate>
                         <View
                             style={{
@@ -38,8 +36,7 @@ const FullScreenLoading: React.FC<LoadingProps> = props => {
                                 borderRadius: 8,
                                 borderWidth: 0.8,
                                 borderColor: themeColors.primary.main[0] + '5f',
-                            }}
-                        >
+                            }}>
                             <ActivityIndicator
                                 color="white"
                                 size={DEFAULT_ICON_SIZE}

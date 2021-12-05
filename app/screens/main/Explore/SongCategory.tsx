@@ -104,8 +104,7 @@ const SongCategoryScreen = (props: Props) => {
             headerImage={category.highimage}
             headerNameTitle={category.name}
             sortedBackgroundGradientColors={category.color}
-            headerTitle={headerTitle || category.name}
-        >
+            headerTitle={headerTitle || category.name}>
             {/* main content here */}
             <TopicTitle title={'Artists'} />
             <GridArtistList

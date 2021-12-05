@@ -150,8 +150,7 @@ const Login = (props: LoginProps) => {
                 angleCenter={{x: 0.5, y: 0.5}}
                 useAngle={true}
                 style={{width: '100%', flex: 1}}
-                colors={themeColors.backgroundgradient}
-            >
+                colors={themeColors.backgroundgradient}>
                 <Header
                     navigation={props.navigation}
                     headerTitle="Sign In"

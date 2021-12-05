@@ -28,8 +28,7 @@ const SingleBlockSongs = (props: Props) => {
                           elevation: props.noBackground ? 0 : 30,
                       },
             ]}
-            noBackground={props.noBackground}
-        >
+            noBackground={props.noBackground}>
             <Block
                 style={[
                     globalStyles.blockOrCardinnerBlock,
@@ -40,14 +39,12 @@ const SingleBlockSongs = (props: Props) => {
                                 : themeColors.themecolorrevert[0] + '16',
                     },
                 ]}
-                noBackground={props.noBackground}
-            >
+                noBackground={props.noBackground}>
                 <BlockTitle
                     style={[
                         globalStyles.topicTitle,
                         {color: themeColors.text[0]},
-                    ]}
-                >
+                    ]}>
                     {props.cardTitle}
                 </BlockTitle>
             </Block>

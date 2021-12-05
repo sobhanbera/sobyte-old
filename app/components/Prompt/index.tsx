@@ -58,8 +58,7 @@ const Prompt = (props: Props) => {
                 width: '90%',
                 backgroundColor: 'transparent',
                 borderRadius: 7,
-            }}
-        >
+            }}>
             <Text
                 onPress={() => clearPrompt()}
                 style={{
@@ -75,8 +74,7 @@ const Prompt = (props: Props) => {
                     color: themeColors.white[0],
                     fontFamily: FontUbuntu,
                     backgroundColor: themeColors.surfacelight[0] + 'DF',
-                }}
-            >
+                }}>
                 {title}
             </Text>
         </Modal>

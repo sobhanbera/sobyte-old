@@ -54,8 +54,7 @@ const AppInsideNavigationWithMaterialTabBar = () => {
                 borderTopColor: 'transparent',
                 borderTopWidth: 0,
             }}
-            initialRouteName={'MusicPlayer'}
-        >
+            initialRouteName={'MusicPlayer'}>
             {/* default will be MusicPlayer screen */}
             <BarNavigator.Screen
                 name="Explore"
@@ -172,8 +171,7 @@ export const AppInsideNavigationWithSimpleTabBar = () => {
                 }
             }
             backBehavior="history"
-            initialRouteName={'MusicPlayer'}
-        >
+            initialRouteName={'MusicPlayer'}>
             <BottomTabBarNavigator.Screen
                 name="Explore"
                 component={ExploreStackNavigator}

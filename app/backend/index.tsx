@@ -218,8 +218,7 @@ const AppMainBackendApi = (props: Props) => {
     }
     return (
         <AppMainBackendApiContext.Provider
-            value={appMainBackendApiContextValues}
-        >
+            value={appMainBackendApiContextValues}>
             {props.children}
         </AppMainBackendApiContext.Provider>
     )

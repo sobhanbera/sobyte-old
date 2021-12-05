@@ -36,8 +36,7 @@ export default function Scaler(props: ScalerProps) {
                 styles.containerStyle,
                 props.containerStyle,
                 {transform: [{scale}]},
-            ]}
-        >
+            ]}>
             {props.children}
         </Animated.View>
     )

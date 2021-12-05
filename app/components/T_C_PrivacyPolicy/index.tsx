@@ -30,19 +30,16 @@ const TC_AND_PRIVACY_POLICY = (props: Props) => {
             style={[
                 styles.privacyHolder,
                 {paddingVertical: props.padding ?? 25},
-            ]}
-        >
+            ]}>
             <Text style={styles.privacyAndTCText}>
                 By signing up, you agree to our{' '}
                 <TouchableOpacity
-                    onPress={() => openLink(TERM_AND_CONDITIONS_LINK)}
-                >
+                    onPress={() => openLink(TERM_AND_CONDITIONS_LINK)}>
                     <Text
                         style={[
                             styles.privacyAndTCText,
                             styles.privacyKeyWords,
-                        ]}
-                    >
+                        ]}>
                         Terms & Conditions
                     </Text>
                 </TouchableOpacity>
@@ -52,8 +49,7 @@ const TC_AND_PRIVACY_POLICY = (props: Props) => {
                         style={[
                             styles.privacyAndTCText,
                             styles.privacyKeyWords,
-                        ]}
-                    >
+                        ]}>
                         Privacy Policy.
                     </Text>
                 </TouchableOpacity>
