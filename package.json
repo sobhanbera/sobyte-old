@@ -5,6 +5,11 @@
     "license": "MIT",
     "description": "Listen to evergreen free musics anywhere, anytime. Free download any song.",
     "author": "Sobhan Bera",
+    "homepage": "https://github.com/sobhanbera/sobyte",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sobhanbera/sobyte.git"
+    },
     "scripts": {
         "android": "react-native run-android",
         "ios": "react-native run-ios",
@@ -18,13 +23,7 @@
         "jsnumoflines": "find app/ -name '*.js*' | xargs wc -l",
         "tree": "tree app",
         "build": "cd android && ./gradlew bundleRelease",
-        "bd": "cd android && ./gradlew bundleRelease",
-        "postinstall": "yarn husky install"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "yarn pretty-quick --staged"
-        }
+        "bd": "cd android && ./gradlew bundleRelease"
     },
     "dependencies": {
         "@gorhom/bottom-sheet": "^4.0.0-alpha.25",
@@ -98,7 +97,6 @@
         "@types/styled-components": "^5.1.10",
         "babel-jest": "^26.6.3",
         "eslint": "^7.14.0",
-        "husky": "^7.0.4",
         "jest": "^26.6.3",
         "metro-react-native-babel-preset": "^0.64.0",
         "neovim": "^4.10.0",
@@ -107,11 +105,6 @@
         "react-test-renderer": "17.0.1",
         "typescript": "^3.8.3",
         "typescript-language-server": "^0.6.5"
-    },
-    "homepage": "https://github.com/sobhanbera/sobyte",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/sobhanbera/sobyte.git"
     },
     "resolutions": {
         "@types/react": "^17"
