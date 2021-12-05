@@ -1,0 +1,16 @@
+On branch master
+Your branch is ahead of 'origin/master' by 8 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   .husky/pre-commit
+	new file:   logs/git.status.log
+	new file:   logs/prettier.last.log
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/git.status.log
+	modified:   logs/prettier.last.log
+
