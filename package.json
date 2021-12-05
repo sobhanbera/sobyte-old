@@ -19,11 +19,13 @@
         "prettier-check": "yarn prettier -c app",
         "prettier-format": "yarn prettier --write app && git status",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+        "lint:fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
         "tsnumoflines": "find app/ -name '*.ts*' | xargs wc -l",
         "jsnumoflines": "find app/ -name '*.js*' | xargs wc -l",
         "tree": "tree app",
         "build": "cd android && ./gradlew bundleRelease",
-        "bd": "cd android && ./gradlew bundleRelease"
+        "bd": "cd android && ./gradlew bundleRelease",
+        "prepare": "husky install"
     },
     "dependencies": {
         "@gorhom/bottom-sheet": "^4.0.0-alpha.25",
@@ -104,7 +106,8 @@
         "pretty-quick": "^3.1.2",
         "react-test-renderer": "17.0.1",
         "typescript": "^3.8.3",
-        "typescript-language-server": "^0.6.5"
+        "typescript-language-server": "^0.6.5",
+        "husky": "^7.0.0"
     },
     "resolutions": {
         "@types/react": "^17"
