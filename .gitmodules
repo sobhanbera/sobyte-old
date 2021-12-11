@@ -1,3 +1,0 @@
-[submodule "any-project"]
-	path = any-project
-	url = git@github.com:[username]/any-project.git
