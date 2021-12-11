@@ -4,12 +4,26 @@ Your branch is ahead of 'origin/master' by 1 commit.
 
 Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
-	modified:   app/screens/main/Music/MusicPlayer.tsx
+	modified:   app/api/index.tsx
+	modified:   app/components/index.ts
+	modified:   app/constants/apiCodes.ts
+	modified:   app/constants/fakeMails.ts
+	modified:   app/constants/index.ts
+	modified:   app/context/index.ts
+	modified:   app/controller/AppLaunchingNavigation.tsx
+	modified:   app/i18n/index.js
+	modified:   app/interfaces/Modals.ts
+	modified:   app/interfaces/index.ts
+	modified:   app/rules/index.ts
+	modified:   app/screens/authentication/Login.tsx
+	modified:   app/themes/DarkTheme.ts
+	modified:   app/themes/ThemeProps.ts
+	modified:   app/themes/ThemeProvider.tsx
+	modified:   app/themes/Themes.ts
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
 	modified:   logs/git.status.log
 	modified:   logs/prettier.last.log
-	modified:   tags
 
