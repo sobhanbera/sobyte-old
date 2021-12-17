@@ -3,6 +3,8 @@
 /assets/*
 *.keystore
 .env
+*/**/tags
+tags
 
 
 # OSX

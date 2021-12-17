@@ -1,9 +1,10 @@
 On branch development
+Your branch is up to date with 'origin/development'.
+
 Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
-	modified:   app/components/Scaler/index.tsx
-	modified:   package.json
-	modified:   tags
+	modified:   .gitignore
+	deleted:    tags
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
