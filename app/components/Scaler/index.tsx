@@ -26,41 +26,47 @@ export default function Scaler(props: ScalerProps) {
     })
 
     const onPressIn = () => {
-        if (!props.autoAnimate)
+        if (!props.autoAnimate) {
             Animated.spring(animation, {
                 toValue: 1,
                 useNativeDriver: true,
             }).start()
+        }
     }
     const onPressOut = () => {
-        if (!props.autoAnimate)
+        if (!props.autoAnimate) {
             Animated.spring(animation, {
                 toValue: 0,
                 useNativeDriver: true,
                 mass: 2,
             }).start()
+        }
     }
 
     const autoAnimateContinue = () => {
-        if (props.autoAnimate)
+        if (props.autoAnimate) {
             Animated.spring(animation, {
                 toValue: 1,
                 useNativeDriver: true,
                 delay: 0,
             }).start(autoAnimate)
+        }
     }
 
     const autoAnimate = () => {
-        if (props.autoAnimate)
+        if (props.autoAnimate) {
             Animated.spring(animation, {
                 toValue: 0,
                 useNativeDriver: true,
                 delay: 0,
             }).start(autoAnimateContinue)
+        }
     }
 
     useEffect(() => {
-        if (props.autoAnimate) autoAnimate()
+        if (props.autoAnimate) {
+            autoAnimate()
+        }
     }, [])
 
     return (

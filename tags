@@ -9,6 +9,12 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210905.0/
+.	node_modules/react/package.json	/^    ".": {$/;"	o	object:exports
+./*	node_modules/react/package.json	/^    ".\/*": ".\/*"$/;"	s	object:exports
+./build-info.json	node_modules/react/package.json	/^    ".\/build-info.json": ".\/build-info.json",$/;"	s	object:exports
+./index	node_modules/react/package.json	/^    ".\/index": {$/;"	o	object:exports
+./jsx-dev-runtime	node_modules/react/package.json	/^    ".\/jsx-dev-runtime": ".\/jsx-dev-runtime.js",$/;"	s	object:exports
+./jsx-runtime	node_modules/react/package.json	/^    ".\/jsx-runtime": ".\/jsx-runtime.js",$/;"	s	object:exports
 0	app/assets/animations/animation.json	/^                                "x": [0.167, 0.167, 0.167],$/;"	n	array:layers.0.ks.s.k.0.o.x
 0	app/assets/animations/animation.json	/^                                "x": [0.167, 0.167, 0.167],$/;"	n	array:layers.0.ks.s.k.1.o.x
 0	app/assets/animations/animation.json	/^                                "x": [0.167, 0.167, 0.167],$/;"	n	array:layers.0.ks.s.k.10.o.x
@@ -2089,6 +2095,9 @@
 0	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
 0	app/assets/animations/qr_scanning.json	/^        {$/;"	o	array:assets
 0	app/assets/animations/qr_scanning.json	/^        {$/;"	o	array:layers
+0	node_modules/react/package.json	/^      "loose-envify"$/;"	s	array:browserify.transform
+0	node_modules/react/package.json	/^    "LICENSE",$/;"	s	array:files
+0	node_modules/react/package.json	/^    "react"$/;"	s	array:keywords
 0	package-lock.json	/^                "https:\/\/github.com\/fb55\/htmlparser2?sponsor=1",$/;"	s	array:packages.node_modules/htmlparser2.funding
 0	package-lock.json	/^                "node >=0.8.0"$/;"	s	array:packages.node_modules/temp.engines
 0	package-lock.json	/^                {$/;"	o	array:packages.node_modules/base64-js.funding
@@ -4046,6 +4055,7 @@
 1	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:assets.0.layers
 1	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
 1	app/assets/animations/qr_scanning.json	/^        {$/;"	o	array:layers
+1	node_modules/react/package.json	/^    "README.md",$/;"	s	array:files
 1	package-lock.json	/^                {$/;"	o	array:packages.node_modules/base64-js.funding
 1	package-lock.json	/^                {$/;"	o	array:packages.node_modules/buffer.funding
 1	package-lock.json	/^                {$/;"	o	array:packages.node_modules/htmlparser2.funding
@@ -4947,6 +4957,7 @@
 2	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:assets.0.layers
 2	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
 2	app/assets/animations/qr_scanning.json	/^        {$/;"	o	array:layers
+2	node_modules/react/package.json	/^    "build-info.json",$/;"	s	array:files
 2	package-lock.json	/^                {$/;"	o	array:packages.node_modules/base64-js.funding
 2	package-lock.json	/^                {$/;"	o	array:packages.node_modules/buffer.funding
 2	package-lock.json	/^                {$/;"	o	array:packages.node_modules/ieee754.funding
@@ -5187,6 +5198,7 @@
 3	app/assets/animations/qr_scanning.json	/^                        {$/;"	o	array:layers.2.shapes.9.it
 3	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:assets.0.layers
 3	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
+3	node_modules/react/package.json	/^    "index.js",$/;"	s	array:files
 3	package.json	/^            "jsx",$/;"	s	array:jest.moduleFileExtensions
 3	package.json	/^        "online music player",$/;"	s	array:keywords
 3	tsconfig.json	/^        "jest.config.js"$/;"	s	array:exclude
@@ -5266,6 +5278,7 @@
 4	app/assets/animations/qr_scanning.json	/^                        {$/;"	o	array:layers.2.shapes.23.it
 4	app/assets/animations/qr_scanning.json	/^                        {$/;"	o	array:layers.2.shapes.9.it
 4	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
+4	node_modules/react/package.json	/^    "cjs\/",$/;"	s	array:files
 4	package.json	/^            "json",$/;"	s	array:jest.moduleFileExtensions
 4	package.json	/^        "offline music player",$/;"	s	array:keywords
 4. Unacceptable Behavior	CODE_OF_CONDUCT.md	/^## 4. Unacceptable Behavior$/;"	s	chapter:Citizen Code of Conduct
@@ -5343,6 +5356,7 @@
 5	app/assets/animations/qr_scanning.json	/^                        {$/;"	o	array:layers.2.shapes.21.it
 5	app/assets/animations/qr_scanning.json	/^                        {$/;"	o	array:layers.2.shapes.23.it
 5	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
+5	node_modules/react/package.json	/^    "umd\/",$/;"	s	array:files
 5	package.json	/^            "node"$/;"	s	array:jest.moduleFileExtensions
 5	package.json	/^        "music streamer",$/;"	s	array:keywords
 5. Weapons Policy	CODE_OF_CONDUCT.md	/^## 5. Weapons Policy$/;"	s	chapter:Citizen Code of Conduct
@@ -5411,6 +5425,7 @@
 6	app/assets/animations/qr_scanning.json	/^                                        [59.5, 40],$/;"	a	array:layers.2.shapes.2.it.0.ks.k.v
 6	app/assets/animations/qr_scanning.json	/^                                        [76, 59.5],$/;"	a	array:layers.2.shapes.9.it.0.ks.k.v
 6	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
+6	node_modules/react/package.json	/^    "jsx-runtime.js",$/;"	s	array:files
 6	package.json	/^        "music downloader",$/;"	s	array:keywords
 6. Consequences of Unacceptable Behavior	CODE_OF_CONDUCT.md	/^## 6. Consequences of Unacceptable Behavior$/;"	s	chapter:Citizen Code of Conduct
 7	app/assets/animations/animation.json	/^                        {$/;"	o	array:layers.0.ks.s.k
@@ -5475,6 +5490,7 @@
 7	app/assets/animations/qr_scanning.json	/^                                        [59.5, 0.001],$/;"	a	array:layers.2.shapes.2.it.0.ks.k.v
 7	app/assets/animations/qr_scanning.json	/^                                        [76, -20.5],$/;"	a	array:layers.2.shapes.9.it.0.ks.k.v
 7	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
+7	node_modules/react/package.json	/^    "jsx-dev-runtime.js",$/;"	s	array:files
 7	package.json	/^        "free music",$/;"	s	array:keywords
 7. Reporting Guidelines	CODE_OF_CONDUCT.md	/^## 7. Reporting Guidelines$/;"	s	chapter:Citizen Code of Conduct
 8	app/assets/animations/animation.json	/^                        {$/;"	o	array:layers.0.ks.s.k
@@ -5535,6 +5551,7 @@
 8	app/assets/animations/qr_scanning.json	/^                                        [20.5, 0.001],$/;"	a	array:layers.2.shapes.2.it.0.ks.k.v
 8	app/assets/animations/qr_scanning.json	/^                                        [36, -20.5],$/;"	a	array:layers.2.shapes.9.it.0.ks.k.v
 8	app/assets/animations/qr_scanning.json	/^                {$/;"	o	array:layers.2.shapes
+8	node_modules/react/package.json	/^    "unstable-shared-subset.js"$/;"	s	array:files
 8	package.json	/^        "listen to free songs",$/;"	s	array:keywords
 8. Addressing Grievances	CODE_OF_CONDUCT.md	/^## 8. Addressing Grievances$/;"	s	chapter:Citizen Code of Conduct
 9	app/assets/animations/animation.json	/^                        {$/;"	o	array:layers.0.ks.s.k
@@ -8360,7 +8377,7 @@ base64-js	package-lock.json	/^                "base64-js": "^1.5.1",$/;"	s	objec
 base64-js	package-lock.json	/^                "base64-js": "^1.5.1",$/;"	s	object:packages.node_modules/plist.dependencies
 base64-js	package-lock.json	/^        "base64-js": {$/;"	o	object:dependencies
 baseUrl	tsconfig.json	/^        "baseUrl": ".",$/;"	s	object:compilerOptions
-bd	package.json	/^        "bd": "cd android && .\/gradlew bundleRelease"$/;"	s	object:scripts
+bd	package.json	/^        "bd": "cd android && .\/gradlew bundleRelease",$/;"	s	object:scripts
 bengali	app/i18n/bn.json	/^            "bengali": "বাংলা"$/;"	s	object:common.langs
 bengali	app/i18n/en.json	/^            "bengali": "বাংলা"$/;"	s	object:common.langs
 bengali	app/i18n/hi.json	/^            "bengali": "বাংলা"$/;"	s	object:common.langs
@@ -8596,6 +8613,7 @@ browseId	app/interfaces/SongObject.ts	/^    browseId: string$/;"	p	interface:Son
 browser-process-hrtime	package-lock.json	/^                "browser-process-hrtime": "^1.0.0"$/;"	s	object:dependencies.w3c-hr-time.requires
 browser-process-hrtime	package-lock.json	/^                "browser-process-hrtime": "^1.0.0"$/;"	s	object:packages.node_modules/w3c-hr-time.dependencies
 browser-process-hrtime	package-lock.json	/^        "browser-process-hrtime": {$/;"	o	object:dependencies
+browserify	node_modules/react/package.json	/^  "browserify": {$/;"	o
 browserslist	package-lock.json	/^                "browserslist": "^4.16.6",$/;"	s	object:dependencies.@babel/helper-compilation-targets.requires
 browserslist	package-lock.json	/^                "browserslist": "^4.16.6",$/;"	s	object:packages.node_modules/@babel/helper-compilation-targets.dependencies
 browserslist	package-lock.json	/^                "browserslist": "^4.17.5",$/;"	s	object:dependencies.core-js-compat.requires
@@ -8633,6 +8651,7 @@ bufferutil	package-lock.json	/^                "bufferutil": "^4.0.1",$/;"	s	obj
 bufferutil	package-lock.json	/^                "bufferutil": "^4.0.1",$/;"	s	object:packages.node_modules/react-devtools-core/node_modules/ws.peerDependencies
 bufferutil	package-lock.json	/^                "bufferutil": {$/;"	o	object:packages.node_modules/jsdom/node_modules/ws.peerDependenciesMeta
 bufferutil	package-lock.json	/^                "bufferutil": {$/;"	o	object:packages.node_modules/react-devtools-core/node_modules/ws.peerDependenciesMeta
+bugs	node_modules/react/package.json	/^  "bugs": "https:\/\/github.com\/facebook\/react\/issues",$/;"	s
 build	package.json	/^        "build": "cd android && .\/gradlew bundleRelease",$/;"	s	object:scripts
 buildEndpointContext	app/api/utils.js	/^export const buildEndpointContext = (typeName, browseId) => {$/;"	C
 bytes	package-lock.json	/^                "bytes": "3.0.0",$/;"	s	object:dependencies.compression.requires
@@ -9357,6 +9376,8 @@ deepmerge	package-lock.json	/^                "deepmerge": {$/;"	o	object:depend
 deepmerge	package-lock.json	/^        "deepmerge": {$/;"	o	object:dependencies
 default	app/interfaces/ArtistObject.ts	/^export default interface FetchedArtistObject {$/;"	C
 default	app/styles/global.styles.ts	/^export default globalStyles$/;"	C
+default	node_modules/react/package.json	/^      "default": ".\/index.js"$/;"	s	object:exports..
+default	node_modules/react/package.json	/^      "default": ".\/index.js"$/;"	s	object:exports../index
 default_app_language	app/i18n/bn.json	/^        "default_app_language": "ডিফল্ট অ্যাপ ভাষা",$/;"	s	object:setting
 default_app_language	app/i18n/en.json	/^        "default_app_language": "Default App Language",$/;"	s	object:setting
 default_app_language	app/i18n/hi.json	/^        "default_app_language": "डिफ़ॉल्ट ऐप भाषा",$/;"	s	object:setting
@@ -9429,6 +9450,7 @@ depd	package-lock.json	/^                "depd": "~1.1.2",$/;"	s	object:dependen
 depd	package-lock.json	/^                "depd": "~1.1.2",$/;"	s	object:packages.node_modules/http-errors.dependencies
 depd	package-lock.json	/^                "depd": "~1.1.2",$/;"	s	object:packages.node_modules/send.dependencies
 depd	package-lock.json	/^        "depd": {$/;"	o	object:dependencies
+dependencies	node_modules/react/package.json	/^  "dependencies": {$/;"	o
 dependencies	package-lock.json	/^                    "dependencies": {$/;"	o	object:dependencies.css-select.dependencies.dom-serializer
 dependencies	package-lock.json	/^                    "dependencies": {$/;"	o	object:dependencies.define-property.dependencies.is-accessor-descriptor
 dependencies	package-lock.json	/^                    "dependencies": {$/;"	o	object:dependencies.define-property.dependencies.is-data-descriptor
@@ -10246,6 +10268,7 @@ deprecated	package-lock.json	/^            "deprecated": "some dependency vulner
 deprecated	package-lock.json	/^            "deprecated": "support for ECMAScript is superseded by `uglify-js` as of v3.13.0",$/;"	s	object:packages.node_modules/uglify-es
 description	app/api/parsers.js	/^        description: '',$/;"	p	class:result
 description	app/interfaces/Modals.ts	/^    description?: string$/;"	p	interface:MusicTrack
+description	node_modules/react/package.json	/^  "description": "React is a JavaScript library for building user interfaces.",$/;"	s
 description	package.json	/^    "description": "Listen to evergreen free musics anywhere, anytime. Free download any song.",$/;"	s
 descriptionContext	app/api/parsers.js	/^    const descriptionContext = utils.fv($/;"	C
 destroy	package-lock.json	/^                "destroy": "~1.0.4",$/;"	s	object:dependencies.send.requires
@@ -10907,6 +10930,7 @@ dijkstrajs	package-lock.json	/^                "dijkstrajs": "^1.0.1",$/;"	s	obj
 dijkstrajs	package-lock.json	/^                "dijkstrajs": "^1.0.1",$/;"	s	object:packages.node_modules/qrcode.dependencies
 dijkstrajs	package-lock.json	/^        "dijkstrajs": {$/;"	o	object:dependencies
 dimGrey	app/themes/ThemeProps.ts	/^    dimGrey: string[]$/;"	p	interface:CommonColors
+directory	node_modules/react/package.json	/^    "directory": "packages\/react"$/;"	s	object:repository
 disabled	app/interfaces/Modals.ts	/^    disabled: number$/;"	p	interface:AppUserData
 disco	app/i18n/bn.json	/^        "disco": "ডিস্কো",$/;"	s	object:setting
 disco	app/i18n/en.json	/^        "disco": "Disco",$/;"	s	object:setting
@@ -11047,6 +11071,7 @@ end	app/components/AnimatedGradient/index.js	/^            end = {x: 0, y: 1},$/
 end-of-stream	package-lock.json	/^                "end-of-stream": "^1.1.0",$/;"	s	object:dependencies.pump.requires
 end-of-stream	package-lock.json	/^                "end-of-stream": "^1.1.0",$/;"	s	object:packages.node_modules/pump.dependencies
 end-of-stream	package-lock.json	/^        "end-of-stream": {$/;"	o	object:dependencies
+engines	node_modules/react/package.json	/^  "engines": {$/;"	o
 engines	package-lock.json	/^            "engines": [$/;"	a	object:packages.node_modules/temp
 engines	package-lock.json	/^            "engines": {$/;"	o	object:packages.node_modules/@babel/code-frame
 engines	package-lock.json	/^            "engines": {$/;"	o	object:packages.node_modules/@babel/compat-data
@@ -11997,6 +12022,7 @@ exports	.prettierrc.js	/^module.exports = {$/;"	c	class:module
 exports	app/api/playerServices.js	/^module.exports = async function () {$/;"	f	function:module
 exports	babel.config.js	/^module.exports = {$/;"	c	class:module
 exports	metro.config.js	/^module.exports = {$/;"	c	class:module
+exports	node_modules/react/package.json	/^  "exports": {$/;"	o
 exports	react-native.config.js	/^module.exports = {$/;"	c	class:module
 extend-shallow	package-lock.json	/^                        "extend-shallow": "^2.0.1",$/;"	s	object:dependencies.jscodeshift.dependencies.braces.requires
 extend-shallow	package-lock.json	/^                        "extend-shallow": "^2.0.1",$/;"	s	object:dependencies.jscodeshift.dependencies.fill-range.requires
@@ -12087,6 +12113,7 @@ file-entry-cache	package-lock.json	/^        "file-entry-cache": {$/;"	o	object:
 file-type	package-lock.json	/^                "file-type": "^9.0.0",$/;"	s	object:dependencies.@jimp/core.requires
 file-type	package-lock.json	/^                "file-type": "^9.0.0",$/;"	s	object:packages.node_modules/@jimp/core.dependencies
 file-type	package-lock.json	/^        "file-type": {$/;"	o	object:dependencies
+files	node_modules/react/package.json	/^  "files": [$/;"	a
 fill-range	package-lock.json	/^                        "fill-range": "^4.0.0",$/;"	s	object:dependencies.jscodeshift.dependencies.braces.requires
 fill-range	package-lock.json	/^                        "fill-range": "^4.0.0",$/;"	s	object:dependencies.sane.dependencies.braces.requires
 fill-range	package-lock.json	/^                "fill-range": "^4.0.0",$/;"	s	object:packages.node_modules/jscodeshift/node_modules/braces.dependencies
@@ -12773,6 +12800,7 @@ hoist-non-react-statics	package-lock.json	/^                "hoist-non-react-sta
 hoist-non-react-statics	package-lock.json	/^                "hoist-non-react-statics": "^3.3.2",$/;"	s	object:dependencies.react-native-elements.requires
 hoist-non-react-statics	package-lock.json	/^                "hoist-non-react-statics": "^3.3.2",$/;"	s	object:packages.node_modules/react-native-elements.dependencies
 hoist-non-react-statics	package-lock.json	/^        "hoist-non-react-statics": {$/;"	o	object:dependencies
+homepage	node_modules/react/package.json	/^  "homepage": "https:\/\/reactjs.org\/",$/;"	s
 homepage	package.json	/^    "homepage": "https:\/\/github.com\/sobhanbera\/sobyte",$/;"	s
 hosted-git-info	package-lock.json	/^                "hosted-git-info": "^2.1.4",$/;"	s	object:dependencies.normalize-package-data.requires
 hosted-git-info	package-lock.json	/^                "hosted-git-info": "^2.1.4",$/;"	s	object:packages.node_modules/normalize-package-data.dependencies
@@ -12802,6 +12830,7 @@ https-proxy-agent	package-lock.json	/^        "https-proxy-agent": {$/;"	o	objec
 human-signals	package-lock.json	/^                        "human-signals": "^1.1.1",$/;"	s	object:dependencies.jest-changed-files.dependencies.execa.requires
 human-signals	package-lock.json	/^                "human-signals": "^1.1.1",$/;"	s	object:packages.node_modules/jest-changed-files/node_modules/execa.dependencies
 human-signals	package-lock.json	/^        "human-signals": {$/;"	o	object:dependencies
+husky	package.json	/^        "husky": "^7.0.4",$/;"	s	object:devDependencies
 i	app/assets/animations/animation.json	/^                            "i": {"x": 0.833, "y": 0.833},$/;"	o	object:layers.1.ks.p.k.0
 i	app/assets/animations/animation.json	/^                            "i": {"x": 0.833, "y": 0.833},$/;"	o	object:layers.1.ks.p.k.1
 i	app/assets/animations/animation.json	/^                            "i": {"x": 0.833, "y": 0.833},$/;"	o	object:layers.1.ks.p.k.10
@@ -16985,7 +17014,7 @@ jsesc	package-lock.json	/^                "jsesc": "~0.5.0"$/;"	s	object:depende
 jsesc	package-lock.json	/^                "jsesc": "~0.5.0"$/;"	s	object:packages.node_modules/regjsparser.dependencies
 jsesc	package-lock.json	/^                "jsesc": {$/;"	o	object:dependencies.regjsparser.dependencies
 jsesc	package-lock.json	/^        "jsesc": {$/;"	o	object:dependencies
-jsnumoflines	package.json	/^        "jsnumoflines": "find app\/ -name '*.js*' | xargs wc -l",$/;"	s	object:scripts
+jslines	package.json	/^        "jslines": "find . -name '*.ts*' ! -path \\".\/node_modules\/*\\" ! -path \\".\/android\//;"	s	object:scripts
 json-parse-better-errors	package-lock.json	/^                "json-parse-better-errors": "^1.0.1"$/;"	s	object:dependencies.parse-json.requires
 json-parse-better-errors	package-lock.json	/^                "json-parse-better-errors": "^1.0.1"$/;"	s	object:packages.node_modules/parse-json.dependencies
 json-parse-better-errors	package-lock.json	/^        "json-parse-better-errors": {$/;"	o	object:dependencies
@@ -17724,6 +17753,7 @@ k	app/assets/animations/qr_scanning.json	/^                "s": {"a": 0, "k": [1
 k	app/assets/animations/qr_scanning.json	/^                "s": {"a": 0, "k": [100, 100, 100], "ix": 6}$/;"	a	object:layers.1.ks.s
 k	app/assets/animations/qr_scanning.json	/^                "s": {"a": 0, "k": [100, 100, 100], "ix": 6}$/;"	a	object:layers.2.ks.s
 key	app/interfaces/Modals.ts	/^    key?: string$/;"	p	interface:AllApiPostBodyArttributes
+keywords	node_modules/react/package.json	/^  "keywords": [$/;"	a
 keywords	package.json	/^    "keywords": [$/;"	a
 kind-of	package-lock.json	/^                        "kind-of": "^3.0.2"$/;"	s	object:dependencies.define-property.dependencies.is-accessor-descriptor.requires
 kind-of	package-lock.json	/^                        "kind-of": "^3.0.2"$/;"	s	object:dependencies.define-property.dependencies.is-data-descriptor.requires
@@ -17894,12 +17924,14 @@ levn	package-lock.json	/^                "levn": "~0.3.0",$/;"	s	object:packages
 levn	package-lock.json	/^                "levn": {$/;"	o	object:dependencies.escodegen.dependencies
 levn	package-lock.json	/^        "levn": {$/;"	o	object:dependencies
 lib	tsconfig.json	/^        "lib": ["es2017"],$/;"	a	object:compilerOptions
+license	node_modules/react/package.json	/^  "license": "MIT",$/;"	s
 license	package-lock.json	/^            "license": "MIT",$/;"	s	object:packages.
 license	package.json	/^    "license": "MIT",$/;"	s
 lightBlue	app/themes/ThemeProps.ts	/^    lightBlue: string[]$/;"	p	interface:CommonColors
 lightMuted	app/interfaces/Modals.ts	/^    lightMuted: string | ''$/;"	p	interface:DominatingColors
 lightSlateGrey	app/themes/ThemeProps.ts	/^    lightSlateGrey: string[]$/;"	p	interface:CommonColors
 lightVibrant	app/interfaces/Modals.ts	/^    lightVibrant: string | ''$/;"	p	interface:DominatingColors
+lines	package.json	/^        "lines": "find . -regex \\".*\\\\.\\\\(js\\\\|jsx\\\\|ts\\\\|tsx\\\\|json\\\\)\\" ! -pat/;"	s	object:scripts
 lines-and-columns	package-lock.json	/^                        "lines-and-columns": "^1.1.6"$/;"	s	object:dependencies.read-pkg.dependencies.parse-json.requires
 lines-and-columns	package-lock.json	/^                "lines-and-columns": "^1.1.6"$/;"	s	object:packages.node_modules/read-pkg/node_modules/parse-json.dependencies
 lines-and-columns	package-lock.json	/^        "lines-and-columns": {$/;"	o	object:dependencies
@@ -17908,6 +17940,7 @@ link-preview-js	package-lock.json	/^        "link-preview-js": {$/;"	o	object:de
 link-preview-js	package.json	/^        "link-preview-js": "^2.1.8",$/;"	s	object:dependencies
 linkedin	app/interfaces/Modals.ts	/^    linkedin?: string | null$/;"	p	interface:AppUserData
 lint	package.json	/^        "lint": "eslint . --ext .js,.jsx,.ts,.tsx",$/;"	s	object:scripts
+lint:fix	package.json	/^        "lint:fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",$/;"	s	object:scripts
 lj	app/assets/animations/like.json	/^                                    "lj": 1,$/;"	n	object:assets.0.layers.0.shapes.0.it.1
 lj	app/assets/animations/like.json	/^                                    "lj": 1,$/;"	n	object:assets.1.layers.0.shapes.0.it.1
 lj	app/assets/animations/like.json	/^                                    "lj": 1,$/;"	n	object:assets.1.layers.1.shapes.0.it.1
@@ -18016,6 +18049,7 @@ logkitty	package-lock.json	/^        "logkitty": {$/;"	o	object:dependencies
 logout	app/i18n/bn.json	/^        "logout": "লগ আউট করুন",$/;"	s	object:setting
 logout	app/i18n/en.json	/^        "logout": "Logout",$/;"	s	object:setting
 logout	app/i18n/hi.json	/^        "logout": "Logout",$/;"	s	object:setting
+loose-envify	node_modules/react/package.json	/^    "loose-envify": "^1.1.0",$/;"	s	object:dependencies
 loose-envify	package-lock.json	/^                "loose-envify": "^1.0.0"$/;"	s	object:dependencies.invariant.requires
 loose-envify	package-lock.json	/^                "loose-envify": "^1.0.0"$/;"	s	object:packages.node_modules/invariant.dependencies
 loose-envify	package-lock.json	/^                "loose-envify": "^1.0.0",$/;"	s	object:dependencies.fbjs.requires
@@ -18050,6 +18084,7 @@ m	app/assets/animations/qr_scanning.json	/^                            "m": 1,$/
 m	app/assets/animations/qr_scanning.json	/^                            "m": 1,$/;"	n	object:assets.0.layers.1.shapes.1
 m	app/assets/animations/qr_scanning.json	/^                            "m": 1,$/;"	n	object:assets.0.layers.2.shapes.1
 m	app/assets/animations/qr_scanning.json	/^                            "m": 1,$/;"	n	object:assets.0.layers.3.shapes.1
+main	node_modules/react/package.json	/^  "main": "index.js",$/;"	s
 make-dir	package-lock.json	/^                "make-dir": "^2.0.0",$/;"	s	object:dependencies.find-cache-dir.requires
 make-dir	package-lock.json	/^                "make-dir": "^2.0.0",$/;"	s	object:packages.node_modules/find-cache-dir.dependencies
 make-dir	package-lock.json	/^                "make-dir": "^2.1.0",$/;"	s	object:dependencies.@babel/register.requires
@@ -18567,6 +18602,7 @@ name	app/interfaces/SongCategory.ts	/^    name: string$/;"	p	interface:SongCateg
 name	app/interfaces/SongObject.ts	/^    name: string$/;"	p	interface:SongArtistObject
 name	app/interfaces/SongObject.ts	/^    name: string$/;"	p	interface:SongObject
 name	app/interfaces/SongObject.ts	/^    name: string$/;"	p	interface:SongObjectWithArtistAsString
+name	node_modules/react/package.json	/^  "name": "react",$/;"	s
 name	package-lock.json	/^            "name": "sobyte",$/;"	s	object:packages.
 name	package-lock.json	/^    "name": "sobyte",$/;"	s
 name	package.json	/^    "name": "sobyte",$/;"	s
@@ -18879,6 +18915,7 @@ noUnusedParameters	tsconfig.json	/^        "noUnusedParameters": true,$/;"	b	obj
 nocache	package-lock.json	/^                "nocache": "^2.1.0",$/;"	s	object:dependencies.@react-native-community/cli-server-api.requires
 nocache	package-lock.json	/^                "nocache": "^2.1.0",$/;"	s	object:packages.node_modules/@react-native-community/cli-server-api.dependencies
 nocache	package-lock.json	/^        "nocache": {$/;"	o	object:dependencies
+node	node_modules/react/package.json	/^    "node": ">=0.10.0"$/;"	s	object:engines
 node	package-lock.json	/^                "node": "*"$/;"	s	object:packages.node_modules/glob.engines
 node	package-lock.json	/^                "node": "*"$/;"	s	object:packages.node_modules/jsonify.engines
 node	package-lock.json	/^                "node": "*"$/;"	s	object:packages.node_modules/minimatch.engines
@@ -21146,6 +21183,7 @@ o	app/assets/animations/qr_scanning.json	/^                "o": {"a": 0, "k": 10
 ob1	package-lock.json	/^                "ob1": "0.64.0",$/;"	s	object:dependencies.metro-source-map.requires
 ob1	package-lock.json	/^                "ob1": "0.64.0",$/;"	s	object:packages.node_modules/metro-source-map.dependencies
 ob1	package-lock.json	/^        "ob1": {$/;"	o	object:dependencies
+object-assign	node_modules/react/package.json	/^    "object-assign": "^4.1.1"$/;"	s	object:dependencies
 object-assign	package-lock.json	/^                "object-assign": "^4.1.0",$/;"	s	object:dependencies.fbjs.requires
 object-assign	package-lock.json	/^                "object-assign": "^4.1.0",$/;"	s	object:packages.node_modules/fbjs.dependencies
 object-assign	package-lock.json	/^                "object-assign": "^4.1.1"$/;"	s	object:dependencies.react.requires
@@ -21789,6 +21827,7 @@ prelude-ls	package-lock.json	/^                "prelude-ls": "~1.1.2",$/;"	s	obj
 prelude-ls	package-lock.json	/^                "prelude-ls": {$/;"	o	object:dependencies.levn.dependencies
 prelude-ls	package-lock.json	/^                "prelude-ls": {$/;"	o	object:dependencies.optionator.dependencies
 prelude-ls	package-lock.json	/^        "prelude-ls": {$/;"	o	object:dependencies
+prepare	package.json	/^        "prepare": "husky install",$/;"	s	object:scripts
 preset	package.json	/^        "preset": "react-native",$/;"	s	object:jest
 presets	babel.config.js	/^    presets: ['module:metro-react-native-babel-preset'],$/;"	p	class:module.exports
 prettier	package-lock.json	/^                "prettier": ">= 1.13.0"$/;"	s	object:packages.node_modules/eslint-plugin-prettier.peerDependencies
@@ -21830,6 +21869,7 @@ pretty-format	package-lock.json	/^                "pretty-format": "^26.6.2",$/;
 pretty-format	package-lock.json	/^                "pretty-format": "^26.6.2",$/;"	s	object:packages.node_modules/jest-message-util.dependencies
 pretty-format	package-lock.json	/^                "pretty-format": "^26.6.2",$/;"	s	object:packages.node_modules/jest-snapshot.dependencies
 pretty-format	package-lock.json	/^        "pretty-format": {$/;"	o	object:dependencies
+pretty-quick	package.json	/^        "pretty-quick": "^3.1.2",$/;"	s	object:devDependencies
 prevColors	app/components/AnimatedGradient/index.js	/^            prevColors: colors,$/;"	p	class:AnimatedGradient.constructor.state
 previousTrack	app/api/PlayerControlsCommons.ts	/^export const previousTrack = () => {$/;"	C
 primary	app/themes/ThemeProps.ts	/^    primary: {$/;"	p	interface:ThemeColors
@@ -22344,6 +22384,8 @@ react-refresh	package-lock.json	/^                "react-refresh": "^0.4.0"$/;"	
 react-refresh	package-lock.json	/^                "react-refresh": "^0.4.0",$/;"	s	object:dependencies.react-native.requires
 react-refresh	package-lock.json	/^                "react-refresh": "^0.4.0",$/;"	s	object:packages.node_modules/react-native.dependencies
 react-refresh	package-lock.json	/^        "react-refresh": {$/;"	o	object:dependencies
+react-server	node_modules/react/package.json	/^      "react-server": ".\/unstable-shared-subset.js",$/;"	s	object:exports..
+react-server	node_modules/react/package.json	/^      "react-server": ".\/unstable-shared-subset.js",$/;"	s	object:exports../index
 react-shallow-renderer	package-lock.json	/^                "react-shallow-renderer": "^16.13.1",$/;"	s	object:dependencies.react-test-renderer.requires
 react-shallow-renderer	package-lock.json	/^                "react-shallow-renderer": "^16.13.1",$/;"	s	object:packages.node_modules/react-test-renderer.dependencies
 react-shallow-renderer	package-lock.json	/^        "react-shallow-renderer": {$/;"	o	object:dependencies
@@ -22447,6 +22489,7 @@ repeat-string	package-lock.json	/^                "repeat-string": "^1.6.1"$/;"	
 repeat-string	package-lock.json	/^                "repeat-string": "^1.6.1",$/;"	s	object:packages.node_modules/jscodeshift/node_modules/fill-range.dependencies
 repeat-string	package-lock.json	/^                "repeat-string": "^1.6.1",$/;"	s	object:packages.node_modules/sane/node_modules/fill-range.dependencies
 repeat-string	package-lock.json	/^        "repeat-string": {$/;"	o	object:dependencies
+repository	node_modules/react/package.json	/^  "repository": {$/;"	o
 repository	package.json	/^    "repository": {$/;"	o
 require-directory	package-lock.json	/^                        "require-directory": "^2.1.1",$/;"	s	object:dependencies.qrcode.dependencies.yargs.requires
 require-directory	package-lock.json	/^                        "require-directory": "^2.1.1",$/;"	s	object:dependencies.react-native-vector-icons.dependencies.yargs.requires
@@ -26376,7 +26419,7 @@ stacktrace-parser	package-lock.json	/^                "stacktrace-parser": "^0.1
 stacktrace-parser	package-lock.json	/^        "stacktrace-parser": {$/;"	o	object:dependencies
 start	app/components/AnimatedGradient/index.js	/^                start={start}$/;"	M	class:GradientHelper.render.start
 start	app/components/AnimatedGradient/index.js	/^            start = {x: 0, y: 0},$/;"	c	class:GradientHelper.render
-start	package.json	/^        "start": "react-native start",$/;"	s	object:scripts
+start	package.json	/^        "start": "react-native start --port 8001",$/;"	s	object:scripts
 state	app/components/AnimatedGradient/index.js	/^        this.state = {$/;"	c	class:AnimatedGradient.constructor
 static-extend	package-lock.json	/^                "static-extend": "^0.1.1"$/;"	s	object:dependencies.class-utils.requires
 static-extend	package-lock.json	/^                "static-extend": "^0.1.1"$/;"	s	object:packages.node_modules/class-utils.dependencies
@@ -26782,6 +26825,7 @@ tinycolor2	package-lock.json	/^                "tinycolor2": "^1.4.1"$/;"	s	obje
 tinycolor2	package-lock.json	/^        "tinycolor2": {$/;"	o	object:dependencies
 title	app/api/parsers.js	/^        title: '',$/;"	p	class:result
 title	app/interfaces/Modals.ts	/^    title: string$/;"	p	interface:MusicTrack
+tjslines	package.json	/^        "tjslines": "find . -regex \\".*\\\\.\\\\(js\\\\|jsx\\\\|ts\\\\|tsx\\\\|json\\\\)\\" ! -/;"	s	object:scripts
 tmpl	package-lock.json	/^                "tmpl": "1.0.5"$/;"	s	object:dependencies.makeerror.requires
 tmpl	package-lock.json	/^                "tmpl": "1.0.5"$/;"	s	object:packages.node_modules/makeerror.dependencies
 tmpl	package-lock.json	/^        "tmpl": {$/;"	o	object:dependencies
@@ -26873,6 +26917,7 @@ tr46	package-lock.json	/^        "tr46": {$/;"	o	object:dependencies
 trackCount	app/api/parsers.js	/^        trackCount: 0,$/;"	p	class:result
 tracks	app/api/parsers.js	/^        tracks: [],$/;"	p	class:result
 trailingComma	.prettierrc.js	/^    trailingComma: 'all',$/;"	p	class:module.exports
+transform	node_modules/react/package.json	/^    "transform": [$/;"	a	object:browserify
 transformer	metro.config.js	/^  transformer: {$/;"	c	class:module.exports
 transparent	app/themes/ThemeProps.ts	/^    transparent: string[]$/;"	p	interface:CommonColors
 tree	package.json	/^        "tree": "tree app",$/;"	s	object:scripts
@@ -26889,7 +26934,7 @@ tslib	package-lock.json	/^                "tslib": "^2.2.0"$/;"	s	object:depende
 tslib	package-lock.json	/^                "tslib": "^2.2.0"$/;"	s	object:packages.node_modules/cheerio.dependencies
 tslib	package-lock.json	/^                "tslib": {$/;"	o	object:dependencies.tsutils.dependencies
 tslib	package-lock.json	/^        "tslib": {$/;"	o	object:dependencies
-tsnumoflines	package.json	/^        "tsnumoflines": "find app\/ -name '*.ts*' | xargs wc -l",$/;"	s	object:scripts
+tslines	package.json	/^        "tslines": "find . -name '*.js*' ! -path \\".\/node_modules\/*\\" ! -path \\".\/android\//;"	s	object:scripts
 tsserver	package-lock.json	/^                "tsserver": "bin\/tsserver"$/;"	s	object:packages.node_modules/typescript.bin
 tsutils	package-lock.json	/^                "tsutils": "^3.17.1"$/;"	s	object:dependencies.@typescript-eslint/eslint-plugin.requires
 tsutils	package-lock.json	/^                "tsutils": "^3.17.1"$/;"	s	object:dependencies.@typescript-eslint/typescript-estree.requires
@@ -27163,6 +27208,7 @@ type	app/interfaces/ArtistObject.ts	/^    type: string$/;"	p	interface:ArtistObj
 type	app/interfaces/Modals.ts	/^    type?: 'default' | 'dash' | 'hls' | 'smoothstreaming'$/;"	p	interface:MusicTrack
 type	app/interfaces/SongObject.ts	/^    type: string$/;"	p	interface:SongObject
 type	app/interfaces/SongObject.ts	/^    type: string$/;"	p	interface:SongObjectWithArtistAsString
+type	node_modules/react/package.json	/^    "type": "git",$/;"	s	object:repository
 type	package-lock.json	/^                    "type": "consulting",$/;"	s	object:packages.node_modules/base64-js.funding.2
 type	package-lock.json	/^                    "type": "consulting",$/;"	s	object:packages.node_modules/buffer.funding.2
 type	package-lock.json	/^                    "type": "consulting",$/;"	s	object:packages.node_modules/ieee754.funding.2
@@ -27291,6 +27337,7 @@ urix	package-lock.json	/^                "urix": "^0.1.0"$/;"	s	object:packages.
 urix	package-lock.json	/^        "urix": {$/;"	o	object:dependencies
 url	app/interfaces/Modals.ts	/^    url: string$/;"	p	interface:MusicTrack
 url	app/interfaces/SongObject.ts	/^    url: string$/;"	p	interface:ThumbnailObject
+url	node_modules/react/package.json	/^    "url": "https:\/\/github.com\/facebook\/react.git",$/;"	s	object:repository
 url	package-lock.json	/^                    "url": "https:\/\/feross.org\/support"$/;"	s	object:packages.node_modules/base64-js.funding.2
 url	package-lock.json	/^                    "url": "https:\/\/feross.org\/support"$/;"	s	object:packages.node_modules/buffer.funding.2
 url	package-lock.json	/^                    "url": "https:\/\/feross.org\/support"$/;"	s	object:packages.node_modules/ieee754.funding.2
@@ -27532,6 +27579,7 @@ verified_email	app/interfaces/Modals.ts	/^    verified_email: number$/;"	p	inter
 version	app/i18n/bn.json	/^        "version": "ভার্সন",$/;"	s	object:setting
 version	app/i18n/en.json	/^        "version": "Version",$/;"	s	object:setting
 version	app/i18n/hi.json	/^        "version": "वर्जन",$/;"	s	object:setting
+version	node_modules/react/package.json	/^  "version": "18.0.0-alpha-fd5e01c2e-20210913",$/;"	s
 version	package-lock.json	/^                            "version": "0.1.1",$/;"	s	object:dependencies.jscodeshift.dependencies.braces.dependencies.is-extendable
 version	package-lock.json	/^                            "version": "0.1.1",$/;"	s	object:dependencies.jscodeshift.dependencies.fill-range.dependencies.is-extendable
 version	package-lock.json	/^                            "version": "0.1.1",$/;"	s	object:dependencies.sane.dependencies.braces.dependencies.is-extendable
