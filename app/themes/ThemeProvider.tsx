@@ -23,8 +23,11 @@ import {
     GRADIENT_COLOR_SCHEME_ARRAY_MAX_LENGTH,
 } from '../constants'
 import {DarkTheme} from './DarkTheme'
+import {LightTheme} from './LightTheme'
 import {ColorGradientCodeName} from 'app/interfaces'
 import ThemeColors from './ThemeProps'
+
+type ThemeType = 'd' | 'l' | 'c'
 
 /**
  * interface for the context api we are providing through
@@ -33,6 +36,7 @@ import ThemeColors from './ThemeProps'
 interface ThemeContextProps {
     theme: string
     themeColors: ThemeColors
+    setTheme: (theme: ThemeType) => null
     randomGradient: string[]
     ChooseThemeOptions(
         _darkOption: any,
@@ -55,6 +59,7 @@ const ThemeContext = createContext<ThemeContextProps>({
     themeColors: {
         ...DarkTheme,
     },
+    setTheme: (_theme: ThemeType) => null,
     randomGradient: DarkTheme.backgroundgradient,
     // setTheme: (_theme = 'd') => null,
     ChooseThemeOptions: (
@@ -148,15 +153,15 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
         setRandomGradient(colorsArray[random])
     }
 
-    // const setAppTheme = async (theme: string) => {
-    //     if (['d', 'l', 'c'].includes(theme)) {
-    //         setTheme(theme)
-    //         await AsyncStorage.setItem(THEME_STORAGE_KEY, theme)
-    //     } else {
-    //         await AsyncStorage.setItem(THEME_STORAGE_KEY, 'd')
-    //         setTheme('d')
-    //     }
-    // }
+    const setAppTheme = async (themeType: ThemeType) => {
+        if (['d', 'l', 'c'].includes(theme)) {
+            await AsyncStorage.setItem(THEME_STORAGE_KEY, themeType)
+            getTheme()
+        } else {
+            await AsyncStorage.setItem(THEME_STORAGE_KEY, 'd')
+            getTheme()
+        }
+    }
 
     function ChooseThemeOptions(
         darkOption: any,
@@ -177,9 +182,9 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
 
     const themeValue = {
         theme,
-        themeColors: ChooseThemeOptions(DarkTheme, DarkTheme, DarkTheme),
+        themeColors: ChooseThemeOptions(DarkTheme, LightTheme, DarkTheme),
         randomGradient: randomGradient,
-        // setTheme: setAppTheme,
+        setTheme: setAppTheme,
         ChooseThemeOptions,
         setRandomColorScheme,
     }
