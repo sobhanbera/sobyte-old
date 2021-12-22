@@ -27,7 +27,7 @@ interface SettingProps {
 }
 const Setting: React.FC<SettingProps> = props => {
     const {t} = useTranslation()
-    const {themeColors} = useTheme()
+    const {themeColors, setTheme} = useTheme()
     const {setSetting, changeLanguage} = useSetting()
     const {logout} = useUserData()
 
@@ -52,6 +52,8 @@ const Setting: React.FC<SettingProps> = props => {
         props.navigation.navigate(PROFILE_STACK__LANGUAGE_PICKER_SCREEN)
     }
 
+    const setThemeType = () => {}
+
     return (
         <GradientBackground uniformColor>
             <DefaultStatusBarComponent
@@ -61,373 +63,409 @@ const Setting: React.FC<SettingProps> = props => {
                 <HeaderMain
                     navigation={props.navigation}
                     title={t('setting:settings')}
-                    color={themeColors.white[0] + 'DD'}
+                    color={themeColors.text[0] + 'DD'}
                 />
 
                 {/* main settings of the application */}
-                <AreaTitle title="Language" />
+                <AreaTitle title="Language">
+                    <Area
+                        title={t('setting:app_language')}
+                        description={"Update application's language"}
+                        onPress={() =>
+                            openSettingsUpdater(
+                                {
+                                    buttons: [
+                                        {
+                                            text: t(
+                                                'setting:default_app_language',
+                                            ), // default - english
+                                            onPress: () => changeLanguage('en'),
+                                        },
+                                        {
+                                            text: t('common:langs:english'), // english language
+                                            onPress: () => changeLanguage('en'),
+                                        },
+                                        {
+                                            text: t('common:langs:bengali'), // bengali language
+                                            onPress: () => {
+                                                changeLanguage('bn')
+                                            },
+                                        },
+                                        {
+                                            text: t('common:langs:hindi'), // hindi language
+                                            onPress: () => {
+                                                changeLanguage('hi')
+                                            },
+                                        },
+                                    ],
+                                },
+                                t('setting:app_language'),
+                            )
+                        }
+                    />
 
-                {/* component to update the global application language  */}
-                <Area
-                    title={t('setting:app_language')}
-                    description={"Update application's language"}
-                    onPress={() =>
-                        openSettingsUpdater(
-                            {
-                                buttons: [
-                                    {
-                                        text: t('setting:default_app_language'), // default - english
-                                        onPress: () => changeLanguage('en'),
-                                    },
-                                    {
-                                        text: t('common:langs:english'), // english language
-                                        onPress: () => changeLanguage('en'),
-                                    },
-                                    {
-                                        text: t('common:langs:bengali'), // bengali language
-                                        onPress: () => {
-                                            changeLanguage('bn')
-                                        },
-                                    },
-                                    {
-                                        text: t('common:langs:hindi'), // hindi language
-                                        onPress: () => {
-                                            changeLanguage('hi')
-                                        },
-                                    },
-                                ],
-                            },
-                            t('setting:app_language'),
-                        )
-                    }
-                />
+                    <Area
+                        title={t('setting:Music Language')}
+                        description={
+                            'Choose your prefered/primary languages for tracks.'
+                        }
+                        onPress={() => openMusicLanguageChooser()}
+                    />
+                </AreaTitle>
 
-                <Area
-                    title={t('setting:Music Language')}
-                    description={
-                        'Choose your prefered/primary languages for tracks.'
-                    }
-                    onPress={() => openMusicLanguageChooser()}
-                />
+                {/* background color settings */}
 
-                <AreaTitle title="Data Saving" />
-                {/* component to update audio quality throughout the application */}
-                <Area
-                    title={t('setting:choose_audio_quality')}
-                    description={'Choose audio quality for music'}
-                    onPress={() =>
-                        openSettingsUpdater(
-                            {
-                                buttons: [
-                                    {
-                                        text: t('setting:extreme'),
-                                        onPress: () => {
-                                            setSetting(
-                                                AUDIO_QUALITY_STORAGE_KEY,
-                                                'extreme',
-                                            )
+                <AreaTitle title="Data Saving">
+                    {/* component to update audio quality throughout the application */}
+                    <Area
+                        title={t('setting:choose_audio_quality')}
+                        description={'Choose audio quality for music'}
+                        onPress={() =>
+                            openSettingsUpdater(
+                                {
+                                    buttons: [
+                                        {
+                                            text: t('setting:extreme'),
+                                            onPress: () => {
+                                                setSetting(
+                                                    AUDIO_QUALITY_STORAGE_KEY,
+                                                    'extreme',
+                                                )
+                                            },
                                         },
-                                    },
-                                    {
-                                        text: t('setting:good'),
-                                        onPress: () => {
-                                            setSetting(
-                                                AUDIO_QUALITY_STORAGE_KEY,
-                                                'good',
-                                            )
+                                        {
+                                            text: t('setting:good'),
+                                            onPress: () => {
+                                                setSetting(
+                                                    AUDIO_QUALITY_STORAGE_KEY,
+                                                    'good',
+                                                )
+                                            },
                                         },
-                                    },
-                                    {
-                                        text: t('setting:poor'),
-                                        onPress: () => {
-                                            setSetting(
-                                                AUDIO_QUALITY_STORAGE_KEY,
-                                                'poor',
-                                            )
+                                        {
+                                            text: t('setting:poor'),
+                                            onPress: () => {
+                                                setSetting(
+                                                    AUDIO_QUALITY_STORAGE_KEY,
+                                                    'poor',
+                                                )
+                                            },
                                         },
-                                    },
-                                    {
-                                        text: t('setting:auto'),
-                                        onPress: () => {
-                                            setSetting(
-                                                AUDIO_QUALITY_STORAGE_KEY,
-                                                'auto',
-                                            )
+                                        {
+                                            text: t('setting:auto'),
+                                            onPress: () => {
+                                                setSetting(
+                                                    AUDIO_QUALITY_STORAGE_KEY,
+                                                    'auto',
+                                                )
+                                            },
                                         },
-                                    },
-                                ],
-                            },
-                            t('setting:choose_audio_quality'),
-                        )
-                    }
-                />
-                {/* component to update image quality throughout the application */}
-                <Area
-                    title={t('setting:image_optimization')}
-                    description={
-                        'Choose the image quality to be loaded for songs'
-                    }
-                    onPress={() =>
-                        openSettingsUpdater(
-                            {
-                                buttons: [
-                                    {
-                                        text: t('setting:extreme'),
-                                        extraText: '720px',
-                                        onPress: () => {
-                                            setSetting(
-                                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                                '720',
-                                            )
-                                        },
-                                    },
-                                    {
-                                        text: t('setting:very_high_quality'),
-                                        extraText: '512px',
-                                        onPress: () => {
-                                            setSetting(
-                                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                                '512',
-                                            )
-                                        },
-                                    },
-                                    {
-                                        text: t('setting:high_quality'),
-                                        extraText: '420px',
-                                        onPress: () => {
-                                            setSetting(
-                                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                                '420',
-                                            )
-                                        },
-                                    },
-                                    {
-                                        text: t('setting:medium_quality'),
-                                        extraText: '300px',
-                                        onPress: () => {
-                                            setSetting(
-                                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                                '300',
-                                            )
-                                        },
-                                    },
-                                    {
-                                        text: t('setting:low_quality'),
-                                        extraText: '200px',
-                                        onPress: () => {
-                                            setSetting(
-                                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                                '200',
-                                            )
-                                        },
-                                    },
-                                    {
-                                        text: t('setting:clear_quality'),
-                                        extraText: '120px',
-                                        onPress: () => {
-                                            setSetting(
-                                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                                '120',
-                                            )
-                                        },
-                                    },
-                                    {
-                                        text: t('setting:blurred_quality'),
-                                        extraText: '60px',
-                                        onPress: () => {
-                                            setSetting(
-                                                SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                                '60',
-                                            )
-                                        },
-                                    },
-                                    {
-                                        text: customImageQuality,
-                                        onPress: () => {
-                                            if (
-                                                Number(customImageQuality) >=
-                                                    60 &&
-                                                Number(customImageQuality) <=
-                                                    720
-                                            ) {
+                                    ],
+                                },
+                                t('setting:choose_audio_quality'),
+                            )
+                        }
+                    />
+                    {/* component to update image quality throughout the application */}
+                    <Area
+                        title={t('setting:image_optimization')}
+                        description={
+                            'Choose the image quality to be loaded for songs'
+                        }
+                        onPress={() =>
+                            openSettingsUpdater(
+                                {
+                                    buttons: [
+                                        {
+                                            text: t('setting:extreme'),
+                                            extraText: '720px',
+                                            onPress: () => {
                                                 setSetting(
                                                     SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
-                                                    customImageQuality,
+                                                    '720',
                                                 )
-                                            } else
-                                                ToastAndroid.show(
-                                                    t(
-                                                        'sentences:valid_number_above_60_below_720',
-                                                    ),
-                                                    ToastAndroid.SHORT,
-                                                )
+                                            },
                                         },
-                                        type: 'input',
-                                        placeholder:
-                                            'Enter Custom Image Quality',
-                                        setText: setCustomImageQuality,
-                                        inputProps: {},
-                                        extraText: '90px',
-                                        errorText:
-                                            Number(customImageQuality) >= 512
-                                                ? t(
-                                                      'sentences:increase_image_quality_warning',
-                                                  )
-                                                : '',
-                                    },
-                                ],
-                            },
-                            t('setting:choose_audio_quality'),
-                        )
-                    }
-                />
+                                        {
+                                            text: t(
+                                                'setting:very_high_quality',
+                                            ),
+                                            extraText: '512px',
+                                            onPress: () => {
+                                                setSetting(
+                                                    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                                    '512',
+                                                )
+                                            },
+                                        },
+                                        {
+                                            text: t('setting:high_quality'),
+                                            extraText: '420px',
+                                            onPress: () => {
+                                                setSetting(
+                                                    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                                    '420',
+                                                )
+                                            },
+                                        },
+                                        {
+                                            text: t('setting:medium_quality'),
+                                            extraText: '300px',
+                                            onPress: () => {
+                                                setSetting(
+                                                    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                                    '300',
+                                                )
+                                            },
+                                        },
+                                        {
+                                            text: t('setting:low_quality'),
+                                            extraText: '200px',
+                                            onPress: () => {
+                                                setSetting(
+                                                    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                                    '200',
+                                                )
+                                            },
+                                        },
+                                        {
+                                            text: t('setting:clear_quality'),
+                                            extraText: '120px',
+                                            onPress: () => {
+                                                setSetting(
+                                                    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                                    '120',
+                                                )
+                                            },
+                                        },
+                                        {
+                                            text: t('setting:blurred_quality'),
+                                            extraText: '60px',
+                                            onPress: () => {
+                                                setSetting(
+                                                    SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                                    '60',
+                                                )
+                                            },
+                                        },
+                                        {
+                                            text: customImageQuality,
+                                            onPress: () => {
+                                                if (
+                                                    Number(
+                                                        customImageQuality,
+                                                    ) >= 60 &&
+                                                    Number(
+                                                        customImageQuality,
+                                                    ) <= 720
+                                                ) {
+                                                    setSetting(
+                                                        SONG_IMAGE_DEFAULT_QUALITY_STORAGE_KEY,
+                                                        customImageQuality,
+                                                    )
+                                                } else
+                                                    ToastAndroid.show(
+                                                        t(
+                                                            'sentences:valid_number_above_60_below_720',
+                                                        ),
+                                                        ToastAndroid.SHORT,
+                                                    )
+                                            },
+                                            type: 'input',
+                                            placeholder:
+                                                'Enter Custom Image Quality',
+                                            setText: setCustomImageQuality,
+                                            inputProps: {},
+                                            extraText: '90px',
+                                            errorText:
+                                                Number(customImageQuality) >=
+                                                512
+                                                    ? t(
+                                                          'sentences:increase_image_quality_warning',
+                                                      )
+                                                    : '',
+                                        },
+                                    ],
+                                },
+                                t('setting:choose_audio_quality'),
+                            )
+                        }
+                    />
+                </AreaTitle>
 
-                <AreaTitle title="Customization" />
-                {/* component to update theme throughout the application */}
-                <Area
-                    title={t('setting:customize_background_theme')}
-                    description={
-                        'Change global application theme according to your preference'
-                    }
-                    onPress={() =>
-                        openSettingsUpdater(
-                            {
-                                extraFunction: willWorkOnNextLaunch,
-                                buttons: [
-                                    {
-                                        text: t('setting:random'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                '',
-                                            ),
-                                    },
-                                    {
-                                        text: t('setting:bisman'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                'bisman',
-                                            ),
-                                    },
-                                    {
-                                        text: t('setting:flamingo'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                'flamingo',
-                                            ),
-                                    },
-                                    {
-                                        text: t('setting:phoenix'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                'phoenix',
-                                            ),
-                                    },
-                                    {
-                                        text: t('setting:emerald'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                'emerald',
-                                            ),
-                                    },
-                                    {
-                                        text: t('setting:canary'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                'canary',
-                                            ),
-                                    },
-                                    {
-                                        text: t('setting:celeste'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                'celeste',
-                                            ),
-                                    },
-                                    {
-                                        text: t('setting:graphite'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                'graphite',
-                                            ),
-                                    },
-                                    {
-                                        text: t('setting:disco'),
-                                        onPress: () =>
-                                            setSetting(
-                                                BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
-                                                'disco',
-                                            ),
-                                    },
-                                ],
-                            },
-                            t('setting:choose_audio_quality'),
-                        )
-                    }
-                />
+                <AreaTitle title="Customization">
+                    {/* component to update the global theme type of the application */}
+                    <Area
+                        title={t('setting:customize_theme')}
+                        description="Change global theme."
+                        onPress={() =>
+                            openSettingsUpdater(
+                                {
+                                    buttons: [
+                                        {
+                                            text: t('settings:dark_theme'),
+                                            onPress: () => setTheme('d'),
+                                        },
+                                        {
+                                            text: t('settings:light_theme'),
+                                            onPress: () => setTheme('l'),
+                                        },
+                                    ],
+                                },
+                                t('settings:customize_theme'),
+                            )
+                        }
+                    />
 
-                <AreaTitle title="Information" />
-                <Area
-                    icon={false}
-                    disabled
-                    title={t('setting:version')}
-                    description={AboutAppDetail.version}
-                    onPress={() => {}}
-                />
-                <Area
-                    icon={false}
-                    title={t('setting:terms_and_conditions')}
-                    description={
-                        'Information you must know before using this application.'
-                    }
-                    onPress={() => {}}
-                />
-                <Area
-                    icon={false}
-                    title={t('setting:privacy_policy')}
-                    description={
-                        'Our privacy policies. This is very important for both of us.'
-                    }
-                    onPress={() => {}}
-                />
-                <Area
-                    title={t('setting:give_feedback')}
-                    description={'We are always waiting for your response.'}
-                    onPress={() => {}}
-                />
-                <Area
-                    title={t('setting:support')}
-                    description={
-                        'Any difficulty using the app? Submit a query.'
-                    }
-                    onPress={() => {}}
-                />
-                <Area
-                    icon={false}
-                    title={t('setting:app info about contributors')}
-                    description={
-                        'Information you must know before using this application.'
-                    }
-                    onPress={() => {}}
-                />
+                    {/* component to update theme throughout the application */}
+                    <Area
+                        title={t('setting:customize_background_theme')}
+                        description={
+                            'Change global application theme according to your preference'
+                        }
+                        onPress={() =>
+                            openSettingsUpdater(
+                                {
+                                    extraFunction: willWorkOnNextLaunch,
+                                    buttons: [
+                                        {
+                                            text: t('setting:random'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    '',
+                                                ),
+                                        },
+                                        {
+                                            text: t('setting:bisman'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    'bisman',
+                                                ),
+                                        },
+                                        {
+                                            text: t('setting:flamingo'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    'flamingo',
+                                                ),
+                                        },
+                                        {
+                                            text: t('setting:phoenix'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    'phoenix',
+                                                ),
+                                        },
+                                        {
+                                            text: t('setting:emerald'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    'emerald',
+                                                ),
+                                        },
+                                        {
+                                            text: t('setting:canary'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    'canary',
+                                                ),
+                                        },
+                                        {
+                                            text: t('setting:celeste'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    'celeste',
+                                                ),
+                                        },
+                                        {
+                                            text: t('setting:graphite'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    'graphite',
+                                                ),
+                                        },
+                                        {
+                                            text: t('setting:disco'),
+                                            onPress: () =>
+                                                setSetting(
+                                                    BACKGROUND_COLOR_OR_THEME_STORAGE_KEY,
+                                                    'disco',
+                                                ),
+                                        },
+                                    ],
+                                },
+                                t('setting:customize_background_theme'),
+                            )
+                        }
+                    />
+                </AreaTitle>
 
-                <AreaTitle title="Danger" />
-                {/* danger button for logging out user's account */}
-                {/* THIS IS AT THE LAST AND IS LOGOUT BUTTON.... */}
-                <Area
-                    danger
-                    title={t('setting:logout')}
-                    description={'User data will be removed from your device.'}
-                    onPress={() => logout()}
-                />
+                <AreaTitle title="Information">
+                    <Area
+                        icon={false}
+                        disabled
+                        title={t('setting:version')}
+                        description={AboutAppDetail.version}
+                        onPress={() => {}}
+                    />
+                    <Area
+                        icon={false}
+                        title={t('setting:terms_and_conditions')}
+                        description={
+                            'Information you must know before using this application.'
+                        }
+                        onPress={() => {}}
+                    />
+                    <Area
+                        icon={false}
+                        title={t('setting:privacy_policy')}
+                        description={
+                            'Our privacy policies. This is very important for both of us.'
+                        }
+                        onPress={() => {}}
+                    />
+                    <Area
+                        title={t('setting:give_feedback')}
+                        description={'We are always waiting for your response.'}
+                        onPress={() => {}}
+                    />
+                    <Area
+                        title={t('setting:support')}
+                        description={
+                            'Any difficulty using the app? Submit a query.'
+                        }
+                        onPress={() => {}}
+                    />
+                    <Area
+                        icon={false}
+                        title={t('setting:app info about contributors')}
+                        description={
+                            'Information you must know before using this application.'
+                        }
+                        onPress={() => {}}
+                    />
+                </AreaTitle>
 
+                <AreaTitle title="Danger">
+                    {/* danger button for logging out user's account */}
+                    {/* THIS IS AT THE LAST AND IS LOGOUT BUTTON.... */}
+                    <Area
+                        danger
+                        title={t('setting:logout')}
+                        description={
+                            'User data will be removed from your device.'
+                        }
+                        onPress={() => logout()}
+                    />
+                </AreaTitle>
                 <PaddingBottomView />
             </ScrollView>
         </GradientBackground>
