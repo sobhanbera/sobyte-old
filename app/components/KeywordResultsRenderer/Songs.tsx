@@ -6,6 +6,7 @@ import {
     FetchedSongObject,
 } from '../../interfaces'
 import {INITIAL_NUMBER_OF_TRACKS_TO_LOAD_IN_EXPLORE_TAB} from '../../constants'
+import {formatArtists} from '../../utils'
 
 interface Props {
     keyword: string
@@ -35,6 +36,10 @@ const SongsKeywordResultsRenderer = ({keyword, title, refreshing}: Props) => {
         ])
             .then((results: FetchedSongObject) => {
                 setMusicData(results)
+                console.log(keyword, title)
+                // for(let i in results.content) {
+                //     console.log(results.content[i].name, formatArtists(results.content[i].artist), results.content[i].thumbnails[0].url)
+                // }
             })
             .catch(_err => {})
     }

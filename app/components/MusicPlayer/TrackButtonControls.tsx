@@ -36,6 +36,12 @@ const TrackButtonControls = (props: Props) => {
     const [localPlayingState, setLocalPlayingState] =
         useState<LocalPlayState>('paused')
 
+    useEffect(async () => {
+        console.log(
+            await TrackPlayer.getCurrentTrack().then(res => console.log(res)),
+        )
+    }, [])
+
     useEffect(() => {
         // triggered when the song/track is played from notification/lock-screen/other parts of the android
         const playEvent = TrackPlayer.addEventListener('remote-play', () => {
@@ -175,7 +181,7 @@ const styles = StyleSheet.create({
     wrapper: {
         width: '100%',
         paddingVertical: 6,
-        paddingHorizontal: 8,
+        paddingHorizontal: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
