@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 import {Scaler} from '../'
+import {DEVICE_STATUSBAR_HEIGHT_CONSTANT} from '../../constants'
 
 interface HeaderProps {
     headerTitle?: string
@@ -22,6 +23,7 @@ const Header = (props: HeaderProps) => {
                 styles.header,
                 {
                     backgroundColor: '#000000' + props.transparency || '00',
+                    top: DEVICE_STATUSBAR_HEIGHT_CONSTANT,
                 },
             ]}>
             <View style={styles.innerHeader}>

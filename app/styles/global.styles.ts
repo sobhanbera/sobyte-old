@@ -179,7 +179,6 @@ const globalStyles = StyleSheet.create({
         // includeFontPadding: true,
     },
     areaTitle: {
-        color: '#DFDFDF',
         fontSize: 16,
         fontFamily: FontVerdana,
         paddingBottom: 4,

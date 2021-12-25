@@ -10,7 +10,6 @@ import globalStyles from '../../styles/global.styles'
 interface Props {
     backgroundColor?: string
     title: string
-    description?: string
     onPress?: Function
     icon?: React.ReactNode
     iconName?: string
@@ -19,7 +18,7 @@ interface Props {
 }
 
 const Area = (props: Props) => {
-    const {grey, surface, red} = useTheme().themeColors
+    const {grey, surface, red, text} = useTheme().themeColors
 
     return (
         <TouchableRipple
@@ -44,7 +43,15 @@ const Area = (props: Props) => {
                         justifyContent: 'space-between',
                         alignItems: 'center',
                     }}>
-                    <Text style={globalStyles.areaTitle}>{props.title}</Text>
+                    <Text
+                        style={[
+                            globalStyles.areaTitle,
+                            {
+                                color: text[0],
+                            },
+                        ]}>
+                        {props.title}
+                    </Text>
 
                     {/**
                      * if the component `icon` props is not defined then it will be displayed
@@ -58,12 +65,6 @@ const Area = (props: Props) => {
                         />
                     ) : null}
                 </View>
-
-                {props.description ? (
-                    <Text style={globalStyles.areaDescription}>
-                        {props.description}
-                    </Text>
-                ) : null}
             </>
         </TouchableRipple>
     )

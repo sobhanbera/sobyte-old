@@ -73,6 +73,8 @@ const Player: FC<PlayerProps> = props => {
     const {initMusicApi, search, getContinuation, error} = useMusicApi()
     const {fetchMusic} = useFetcher()
 
+    const str: string = 'some value in string'
+
     /**
      * initial value just for rendering the laoding properly or else if there
      * is no songs.content and it would be undefined and
@@ -127,6 +129,8 @@ const Player: FC<PlayerProps> = props => {
         )
             .then((res: FetchedSongObject) => {
                 setSongs(res)
+                // for(let i in res.content)
+                //     console.log(res.content[i].name, res.content[i].thumbnails[1].url)
 
                 // initial data
                 const initialTrack = res.content[0]
