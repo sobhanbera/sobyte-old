@@ -731,3 +731,4 @@ export default Player
 // test commit
 // these are done since to check the code even works in production or not with different commits...
 // recently an error occurred due to git while generating the application
+// test commit to check the branch activities in github
