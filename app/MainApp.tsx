@@ -28,7 +28,7 @@ const MainApp = () => {
         setShowLoading: setLoading,
         toggleLoader,
     }
-
+// wrong formatted comment
     useEffect(() => {
         TrackPlayer.updateOptions({
             stopWithApp: false,
