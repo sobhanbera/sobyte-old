@@ -153,6 +153,13 @@ const ThemeProvider = (props: {children: React.ReactChild}) => {
         setRandomGradient(colorsArray[random])
     }
 
+    /**
+     * @deprecated
+     * this feature is not required for the first build of this application as many other colorschemes are already there present in the setting's section
+     * that why I am deprecating this feature for now
+     * this function may be useful in the future...
+     * @param {ThemeType} themeType: the type of theme the user wants to set d for dark, l for light, c for custom and so on...
+     */
     const setAppTheme = async (themeType: ThemeType) => {
         if (['d', 'l', 'c'].includes(theme)) {
             await AsyncStorage.setItem(THEME_STORAGE_KEY, themeType)
