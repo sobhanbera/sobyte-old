@@ -1,6 +1,0 @@
-yarn run v1.22.17
-$ '/home/sobhanbera/Documents/Projects/Open Source/sobyte/node_modules/.bin/pretty-quick' --staged --pattern '**/*.*(ts|tsx|js|jsx|json)'
-🔍  Finding changed files since git revision 404ce2a.
-🎯  Found 2 changed files.
-✅  Everything is awesome!
-Done in 1.91s.
