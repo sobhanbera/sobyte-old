@@ -522,7 +522,7 @@ const MusicApi = (props: MusicApiProps) => {
                     },
                 )
                 .then(res => {
-                    if (res.data.hasOwnProperty('responseContext')) {
+                    if (res.data?.hasOwnProperty('responseContext')) {
                         resolve(res.data)
                     }
                 })
