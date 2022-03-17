@@ -61,7 +61,6 @@ const UserDataContext = React.createContext<ContextArttributs>({
         linkedin: '',
         snapchat: '',
         twitter: '',
-        youtube: '',
     },
     setLocalUserData: (_data: string) => {},
     loadUserDataAgain: () => {},
