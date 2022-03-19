@@ -90,9 +90,15 @@ export interface AppUserData {
     last_updated_ip?: string | null
     last_social_media_links_updated_on: Date
     last_social_media_links_updated_ip: string | null
+
     disabled: number
+    disabled_on: string
+
     verified_account: number
+    verified_account_on: string
     verified_email: number
+    verified_email_on: string
+
     access_token?: string | null
     refresh_token?: string | null
 
@@ -102,6 +108,9 @@ export interface AppUserData {
     linkedin?: string | null
     snapchat?: string | null
     twitter?: string | null
+
+    hidden: number
+    hidden_on: string
 }
 
 /**
