@@ -6,12 +6,14 @@ import {
     Text,
     FlatList,
     ToastAndroid,
+    StyleSheet,
 } from 'react-native'
 import LottieView from 'lottie-react-native'
 import TrackPlayer from 'react-native-track-player'
 
 import {useFetcher, useMusicApi, usePlayer, useTheme} from '../../../context'
 import {
+    BackgroundBluredImage,
     GradientBackground,
     MusicPlayerSongView,
     // BackgroundBluredImage,
@@ -28,7 +30,12 @@ import {
     formatArtists,
     getNotificationPlayerImageFromLinkWithHeight,
 } from '../../../utils'
-import {FetchedSongObject, MusicTrack, SongObject} from '../../../interfaces'
+import {
+    BareSongObjectInstance,
+    FetchedSongObject,
+    MusicTrack,
+    SongObject,
+} from '../../../interfaces'
 import globalStyles from '../../../styles/global.styles'
 import {Track} from '../../../interfaces'
 
@@ -85,6 +92,9 @@ const Player: FC<PlayerProps> = props => {
             clickTrackingParams: '',
         },
     })
+    const [displayQueue, setDisplayQueue] = useState<Array<SongObject>>([
+        BareSongObjectInstance,
+    ])
 
     /**
      * a variable which provides the music id of the track which is played currently
@@ -102,11 +112,8 @@ const Player: FC<PlayerProps> = props => {
      */
     const currentlyPlayingTrackID = useRef<string>('')
 
-    const scrollX = React.useRef(new Animated.Value(0)).current
+    const scrollPos = React.useRef(new Animated.Value(0)).current
     const scrollReference = useRef<FlatList>(null)
-
-    const likeAnimRef = useRef<LottieView>(null)
-    const isAnimationPlaying = useRef<boolean>(false)
 
     // initializing the songs list...
     const initializeMusicPlayer = () => {
@@ -127,6 +134,7 @@ const Player: FC<PlayerProps> = props => {
         )
             .then((res: FetchedSongObject) => {
                 setSongs(res)
+                setDisplayQueue(res.content.slice(0, 4))
                 // for(let i in res.content)
                 //     console.log(res.content[i].name, res.content[i].thumbnails[1].url)
 
@@ -141,20 +149,20 @@ const Player: FC<PlayerProps> = props => {
                 // without this below line the songs will only scroll after the user somewhat scrolls the flatlist...
                 currentlyPlayingTrackID.current = initialTrack.musicId // setting the first song which would be played so that there is no such user interaction is required to auto scroll from next time
 
-                play(
-                    {
-                        artist,
-                        artwork: trackImage,
-                        id: initialTrack.musicId,
-                        duration: initialTrack.duration,
-                        playlistId: initialTrack.playlistId,
-                        title: initialTrack.name,
-                        url: '',
-                    },
-                    '',
-                    false,
-                    false,
-                )
+                // play(
+                //     {
+                //         artist,
+                //         artwork: trackImage,
+                //         id: initialTrack.musicId,
+                //         duration: initialTrack.duration,
+                //         playlistId: initialTrack.playlistId,
+                //         title: initialTrack.name,
+                //         url: '',
+                //     },
+                //     '',
+                //     false,
+                //     false,
+                // )
 
                 // loading the next songs data...
                 if (
@@ -184,34 +192,6 @@ const Player: FC<PlayerProps> = props => {
                 )
             })
     }, [error])
-
-    // a reference variable for the duration after which the like animation will be disappear...
-    let TimeOutVar = setTimeout(() => {}, 0)
-    const playLikeAnimationForMusicId = useCallback((musicId: string) => {
-        /**
-         * clearing the previous timeout since we are going to do a new time out
-         * if we don't clear the previous time out then
-         * let the user have liked the song and duration is 3sec here if the user again liked the song after 2sec
-         * then the like animation will end in 3-2=1sec which is not good since the duration is 3sec
-         * so we are clearing the last timeout and overwiting it with a new one
-         */
-        clearTimeout(TimeOutVar)
-        // after clearing the timeout we can reset the like animation and play it
-        likeAnimRef.current?.reset()
-        likeAnimRef.current?.play(0, 65)
-
-        // set a new timeout for the like animation hiding trigger
-        TimeOutVar = setTimeout(() => {
-            likeAnimRef.current?.reset()
-        }, LIKE_ANIMATION_DISAPPEAR_DURATION)
-
-        /**
-         * here we can make api requests to the backend to include the liked musicID
-         * in the user's liked playlist's songs list
-         * ACTUAL LIKE WORKING.....
-         */
-        console.log('YOU LIKED THIS SONG WITH ID:: ', musicId)
-    }, [])
 
     /**
      * this function will be called when the songs list has reached to its bottom or the list of songs is ended
@@ -472,13 +452,37 @@ const Player: FC<PlayerProps> = props => {
      */
     const renderItem = useCallback(
         (itemDetails: ListRenderItemInfo<SongObject>) => {
-            const {item} = itemDetails
+            const {item, index} = itemDetails
+
+            //             if (songs.content.length >= 2)
+            //                 if (item.musicId === currentlyPlayingTrackID.current) {
+            //                     // if the songs item is the currently playing one
+            //                     // then display the song item
+            //                 } else if (
+            //                     index > 0 &&
+            //                     songs.content[index - 1].musicId ===
+            //                         currentlyPlayingTrackID.current
+            //                 ) {
+            //                     // if the songs is just previous of the current then display it
+            //                 } else if (
+            //                     index < songs.content.length - 1 &&
+            //                     songs.content[index + 1].musicId ===
+            //                         currentlyPlayingTrackID.current
+            //                 ) {
+            //                     // if the songs is just next of the current then display it
+            //                 } else {
+            //                     // if the songs index and the current songs index has a difference of 2 or more
+            //                     return null
+            //                 }
+
             return (
                 <MusicPlayerSongView
                     song={item}
-                    likeIsMusic={() =>
-                        playLikeAnimationForMusicId(item.musicId)
-                    }
+                    index={index}
+                    onLike={() => {
+                        console.log('ASD')
+                    }}
+                    scrollPos={scrollPos}
                     navigation={props.navigation}
                 />
             )
@@ -508,8 +512,8 @@ const Player: FC<PlayerProps> = props => {
      * file
      */
     const ViewabilityConfig = useRef({
-        minimumViewTime: 1000, // there should be a miminum time only after which the process of playing the song or else should start
-        viewAreaCoveragePercentThreshold: 99, // since when we are giving a less area view port it occur much before the scroll actually occurs
+        minimumViewTime: 0, // there should be a miminum time only after which the process of playing the song or else should start
+        viewAreaCoveragePercentThreshold: 100, // since when we are giving a less area view port it occur much before the scroll actually occurs
         // itemVisiblePercentThreshold: 90, // percent %
         waitForInteraction: false, // true because we want the song must be after the user has interacted with the UI. this would be helpful if the user doesnot want to remain in music player after launching and want to go to profile only than no need to play song automatically
         // and if this value is false because we want change the song even if the scrollview is scrolled automatically...
@@ -615,16 +619,16 @@ const Player: FC<PlayerProps> = props => {
 
             {/* this section is temporarily commented */}
             {/* main content of this particular tab */}
-            {/* {songs?.content.length && songs?.content[0].musicId.length ? (
+            {/* {songs.content.length && songs.content[0].musicId.length ? (
                 <View style={StyleSheet.absoluteFillObject}>
                     {songs.content.map((song, _) => {
                         // return null
                         return (
                             <BackgroundBluredImage
                                 key={`${song.id}-${_}`}
-                                image={song.thumbnails[1].url}
+                                thumbnails={song.thumbnails}
                                 index={_}
-                                scrollX={scrollX}
+                                scrollX={scrollPos}
                             />
                         )
                     })}
@@ -638,24 +642,53 @@ const Player: FC<PlayerProps> = props => {
                     position: 'absolute',
                 }}></View>
 
-            {songs?.content.length && songs.content[0].musicId.length > 0 ? (
+            <Animated.FlatList
+                data={songs.content}
+                renderItem={renderItem}
+                keyExtractor={keyExtractor}
+                getItemLayout={getItemLayout}
+                ref={scrollReference}
+                decelerationRate={'fast'}
+                scrollEventThrottle={16}
+                scrollToOverflowEnabled
+                overScrollMode={'never'}
+                pagingEnabled
+                snapToStart
+                snapToAlignment="start"
+                nestedScrollEnabled
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                onMomentumScrollEnd={event => {
+                    const songsIndex = Math.floor(
+                        event.nativeEvent.contentOffset.y / SCREEN_HEIGHT,
+                    )
+                    currentlyPlayingTrackID.current =
+                        songs.content[songsIndex].musicId
+                    // console.log(songs.content[songsIndex].name, songsIndex)
+                }}
+                onScroll={Animated.event(
+                    [{nativeEvent: {contentOffset: {y: scrollPos}}}],
+                    {
+                        useNativeDriver: true,
+                        // listener: scrollChangedHandler,
+                    },
+                )}
+            />
+
+            {/* {displayQueue.length && displayQueue[0].musicId.length ? (
                 <Animated.FlatList
-                    data={songs.content}
+                    data={displayQueue}
                     renderItem={renderItem}
                     keyExtractor={keyExtractor}
                     getItemLayout={getItemLayout}
                     ref={scrollReference}
                     viewabilityConfig={ViewabilityConfig}
-                    onViewableItemsChanged={onViewableItemsChanged}
+                    // onViewableItemsChanged={onViewableItemsChanged}
                     scrollEventThrottle={16}
-                    // onResponderRelease={re => {
-                    //     console.log(re)
-                    // }}
                     scrollToOverflowEnabled
                     overScrollMode={'never'}
                     pagingEnabled
                     bounces
-                    // horizontal
                     snapToAlignment="start"
                     snapToStart
                     nestedScrollEnabled
@@ -664,9 +697,9 @@ const Player: FC<PlayerProps> = props => {
                     alwaysBounceHorizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    onEndReached={() => loadMoreSongsDatas()} // more data when the end is reaching close while scrolling...
+                    // onEndReached={() => loadMoreSongsDatas()} // more data when the end is reaching close while scrolling...
                     onScroll={Animated.event(
-                        [{nativeEvent: {contentOffset: {y: scrollX}}}],
+                        [{nativeEvent: {contentOffset: {y: scrollPos}}}],
                         {
                             useNativeDriver: true,
                             listener: event => {
@@ -675,51 +708,20 @@ const Player: FC<PlayerProps> = props => {
                         },
                     )}
                 />
-            ) : (
-                <View style={globalStyles.loadingArea}>
-                    <LottieView
-                        source={AppLoadingAnimation}
-                        style={globalStyles.appLogoAnimation}
-                        speed={1}
-                        autoPlay
-                        loop
-                    />
-                    <Text style={globalStyles.loadingText}>Loading...</Text>
-                </View>
-            )}
 
-            {/* like animation when the user presses the like button or double tap the track (on the screen) */}
-            {isAnimationPlaying.current || true ? (
-                <View
-                    onStartShouldSetResponder={() => false} // a event variable is also received from this function
-                    style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        backgroundColor: 'black',
-                    }}>
-                    <LottieView
-                        ref={likeAnimRef}
-                        source={PopupLikeAnimation}
-                        style={{
-                            width: 250,
-                            position: 'absolute',
-                            // borderRadius: 1000,
-                            // overflow: 'hidden',
-                            // top: 0,
-                            // left: 0,
-                            zIndex: 1000,
-                        }}
-                        speed={2}
-                        autoSize={false}
-                        autoPlay={false}
-                        // cacheStrategy="strong"
-                        loop={false}
-                    />
-                </View>
-            ) : null}
+            ) : (
+
+                 <View style={globalStyles.loadingArea}>
+                     <LottieView
+                         source={AppLoadingAnimation}
+                         style={globalStyles.appLogoAnimation}
+                         speed={1}
+                         autoPlay
+                         loop
+                     />
+                     <Text style={globalStyles.loadingText}>Loading...</Text>
+                 </View>
+             )} */}
         </GradientBackground>
     )
 }

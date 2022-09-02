@@ -28,7 +28,7 @@ type LocalPlayState = 'playing' | 'paused' | 'buffering' | 'ready'
 interface Props {
     color: string
     isLiked: boolean
-    likeIsMusic: Function
+    onLike: Function
     launchLyrics: Function
 }
 const TrackButtonControls = (props: Props) => {
@@ -36,11 +36,11 @@ const TrackButtonControls = (props: Props) => {
     const [localPlayingState, setLocalPlayingState] =
         useState<LocalPlayState>('paused')
 
-    useEffect(async () => {
-        console.log(
-            await TrackPlayer.getCurrentTrack().then(res => console.log(res)),
-        )
-    }, [])
+    // useEffect(async () => {
+    // console.log(
+    //     await TrackPlayer.getCurrentTrack().then(res => console.log(res)),
+    // )
+    // }, [])
 
     useEffect(() => {
         // triggered when the song/track is played from notification/lock-screen/other parts of the android
@@ -80,7 +80,7 @@ const TrackButtonControls = (props: Props) => {
         <View style={styles.wrapper}>
             <View style={styles.innerWrapper}>
                 <Scaler
-                    onPress={() => props.likeIsMusic()} // TODO like feature
+                    onPress={() => props.onLike()} // TODO like feature
                     touchableOpacity={1}
                     scale={0.85}>
                     <FontAwesome
