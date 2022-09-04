@@ -160,6 +160,7 @@ export const DOUBLE_TAP_DELAY = 500 // the delay in milliseconds between two pre
 export const PROMPT_DURATION = 3500 // duration for showing prompt in milliseconds
 export const MARQUEE_TEXT_PROGRESS_DURATION = 2000 // duration for showing prompt in milliseconds
 export const MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION = 6500 // duration for scrolling the song name which is a large string or so...
+export const MARQUEE_SCROLL_SPEED = 40 // higher the number lower the speed, what a nonsense thing (react-native-marquee), anyway!
 
 export const BOTTOM_TAB_BAR_NAVIGATION_HEIGHT = 54 // this is the height of the bottom tab bar navigation in the AppInside.tsx file navigator
 export const HEADER_MAX_HEIGHT = 85 // collapsible header max height
@@ -175,7 +176,7 @@ export const DEFAULT_OVERLAY_OPACITY_MAX = 0.73128946 // maximum opacity overlay
 export const DEFAULT_OVERLAY_OPACITY = 0.55 // threshold default opacity overlay over any view, component, image, etc
 export const DEFAULT_OVERLAY_OPACITY_MIN = 0.375692 // minimum opacity overlay over any view, component, image, etc
 
-export const DEFAULT_MUSIC_PLAYER_IMAGE_SCREEN_GAP = 0.15 // 15 % of the full screen's width
+export const DEFAULT_MUSIC_PLAYER_IMAGE_SCREEN_GAP = 0.06 // 6 % of the full screen's width
 export const DEFAULT_MUSIC_PLAYER_IMAGE_SIZE =
     SCREEN_WIDTH - SCREEN_WIDTH * DEFAULT_MUSIC_PLAYER_IMAGE_SCREEN_GAP * 2 // we have to provide gap on both side of the screen so multiplying by 2 here in this constant value
 
@@ -208,6 +209,7 @@ export const IMAGE_PADDING_V_TO_SHOW = 5 // padding vertical of the image which 
 export const DEFAULT_IMAGE_BORDER_RADIUS = 10
 export const DEFAULT_TITLE_MARGIN = 9
 
+export const SONG_CARD_PARALLAX_MULTIPLIER = 0.5
 export const DEFAULT_ANIMATION_DURATION = 550 // the duration for default animation globally in the application...
 export const LIKE_ANIMATION_DISAPPEAR_DURATION = 1650 // the duration after which the like animation while be hidden
 export const HIGHEST_Z_INDEX_VALUE = 987654 // the largest z index value

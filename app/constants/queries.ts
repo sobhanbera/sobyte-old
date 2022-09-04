@@ -327,9 +327,7 @@ export const GLOBAL_QUERIES: string[] = [
     'most played romantic songs',
 ]
 
-export const EXTRA__DEV__SPECIFIC_QUERIES: string[] = [
-    'top new romantic hindi songs',
-]
+export const EXTRA__DEV__SPECIFIC_QUERIES: string[] = ['trending reels songs']
 
 /**
  * default export will be the concatation of all these above queries

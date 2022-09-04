@@ -36,6 +36,9 @@ export function getBaseURL(musicID: string) {
     return `https://www.youtube.com/watch?v=${musicID.trim()}`
 }
 
+const BASE_URL = 'https://www.youtube.com/'
+const BASE_PARAMETER = 'watch?v='
+
 /**
  * @param musicID the music ID
  * @param options other specific details that need to be checked before providing the actual final data
@@ -52,7 +55,7 @@ export async function getTrackURL(
     const finalOptions: MusicDataFetchOptions = {
         hasAudio: true,
         hasVideo: false,
-        audioQuality: 'extreme',
+        audioQuality: 'auto',
         ...options,
     }
 
@@ -63,7 +66,7 @@ export async function getTrackURL(
          * and default settings...
          */
         const trackResultData: MusicFormats = await getMusicDetails(
-            getBaseURL(musicID),
+            `${BASE_URL}${BASE_PARAMETER}${musicID}`,
         )
         // extracting the formats from whole data...
         const {formats} = trackResultData

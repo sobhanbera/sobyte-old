@@ -37,9 +37,11 @@ const SongsKeywordResultsRenderer = ({
         // search results for the keyword provided in the props
         // promising all because we need many type of artists data like romance, hits, mashups, pops, etc... in one variable.
         Promise.all(
-            keywords.map(keyword => search(keyword, 'ARTIST', false, true)), // providing an array of the promises
+            [search(keywords[0], 'ARTIST', false, true)],
+            // keywords.map(keyword => search(keyword, 'ARTIST', false, true)), // providing an array of the promises
         )
             .then((res: FetchedArtistObject[]) => {
+                console.log(res)
                 // this is the list which would be assigned to the main UI component or the state of this component
                 const DiffTypesOfArtistsList: ArtistObject[] = []
                 for (let i in res) {
@@ -65,7 +67,8 @@ const SongsKeywordResultsRenderer = ({
                         }
                     }
                 }
-                setArtistsData(DiffTypesOfArtistsList)
+
+                console.log(DiffTypesOfArtistsList, keywords[0])
             })
             .catch(_err => {})
     }

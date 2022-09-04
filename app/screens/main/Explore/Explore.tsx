@@ -144,7 +144,7 @@ const Explore: React.FC<ExploreTabProps> = props => {
                             </ScrollView>
                         </Block>
 
-                        {/* these are the seperated component for 
+                        {/* these are the seperated component for
                         all kinds of music data or card blocks
                         or card which hold songs list, music list, etc */}
 

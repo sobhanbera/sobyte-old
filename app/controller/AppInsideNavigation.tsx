@@ -27,7 +27,7 @@ const AppInsideNavigationWithMaterialTabBar = () => {
         //     console.log('Music Api Init...')
         initMusicApi()
         // }
-    }, [])
+    }, [initMusicApi])
 
     return (
         <BarNavigator.Navigator
@@ -131,7 +131,7 @@ export const AppInsideNavigationWithSimpleTabBar = () => {
         //     console.log('Music Api Init...')
         initMusicApi()
         // }
-    }, [])
+    }, [initMusicApi])
 
     return (
         <BottomTabBarNavigator.Navigator

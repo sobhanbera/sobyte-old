@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, ImageBackground, Dimensions} from 'react-native'
+import {Text, View, Dimensions, Animated, StyleSheet} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import MarqueeText from 'react-native-text-ticker'
 
@@ -14,6 +14,9 @@ import {
     SCREEN_HEIGHT,
     MUSIC_PLAYER_BLUR,
     DEFAULT_MUSIC_PLAYER_IMAGE_SIZE,
+    APP_LOGO_LINK,
+    MARQUEE_SCROLL_SPEED,
+    SONG_CARD_PARALLAX_MULTIPLIER,
 } from '../../constants'
 import {
     formatArtists,
@@ -23,42 +26,72 @@ import {
 } from '../../utils'
 import {SongObject} from '../../interfaces'
 
+const AnimatedFastImage = Animated.createAnimatedComponent(FastImage)
+const AnimatedMarqueeText = Animated.createAnimatedComponent(MarqueeText)
+
+const {width, height} = Dimensions.get('screen')
+
 interface SongView {
     song: SongObject
-    likeIsMusic: Function
+    index: number
+    onLike: Function
     navigation: any
+    scrollPos: Animated.Value
 }
-const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
+const MusicPlayerSongView = ({
+    song,
+    index,
+    onLike,
+    navigation,
+    scrollPos,
+}: SongView) => {
     const {themeColors} = useTheme()
-    const averageQualityImage = getHighQualityImageFromLinkWithHeight(
-        song.thumbnails[0].url,
-        song.thumbnails[0].height,
-        '300',
-        50,
-    )
+    const {thumbnails, name, artist, duration} = song
+
     const highQualityImage = getHighQualityImageFromLinkWithHeight(
-        song.thumbnails[0].url,
-        song.thumbnails[0].height,
+        thumbnails[0].url,
+        thumbnails[0].height,
         DEFAULT_HIGH_IMAGE_SIZE,
         DEFAULT_HIGH_IMAGE_QUALITY,
     )
-    const title = formatTrackTitle(song.name)
-    const artistsString = capitalizeWords(formatArtists(song.artist))
+    const title = formatTrackTitle(name)
+    const artistsString = capitalizeWords(formatArtists(artist))
+
+    const inputRange = [
+        (index - 1) * height,
+        index * height,
+        (index + 1) * height,
+    ]
+    const opacity = scrollPos.interpolate({
+        inputRange: inputRange,
+        outputRange: [0, 1, 0],
+    })
+    const translateY = scrollPos.interpolate({
+        inputRange,
+        outputRange: [
+            -height * SONG_CARD_PARALLAX_MULTIPLIER,
+            0,
+            height * SONG_CARD_PARALLAX_MULTIPLIER,
+        ],
+    })
 
     return (
-        <DoubleTap onDoubleTap={likeIsMusic}>
-            <ImageBackground
-                // loadingIndicatorSource={{
-                // uri: highQualityImage,
-                // cache: 'force-cache',
-                // scale: 1,
-                // }}
+        <View>
+            <Animated.Image
+                style={[
+                    StyleSheet.absoluteFillObject,
+                    {
+                        opacity: opacity,
+                    },
+                ]}
                 source={{
-                    uri: averageQualityImage,
+                    uri: thumbnails[1].url || APP_LOGO_LINK,
                     // cache: 'force-cache',
-                    // scale: 1,
                 }}
-                fadeDuration={500}
+                blurRadius={MUSIC_PLAYER_BLUR}
+            />
+
+            <View
                 style={{
                     flex: 1,
                     width: SCREEN_WIDTH,
@@ -68,15 +101,14 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                     alignItems: 'center',
                     paddingBottom: 20, // the main bottom tab bar navigation height is overlping the children component so providing a padding bottom of 15~25
                     // opacity: 0,
-                }}
-                blurRadius={MUSIC_PLAYER_BLUR}>
+                }}>
                 <View
                     style={{
                         width: '85%',
                         alignSelf: 'flex-start',
-                        marginHorizontal: 20,
+                        marginHorizontal: 25,
                     }}>
-                    <MarqueeText
+                    <AnimatedMarqueeText
                         style={{
                             fontSize: 25,
                             fontFamily: FontUbuntuBold,
@@ -85,25 +117,24 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                             width: '100%',
                             alignSelf: 'flex-start',
                             paddingVertical: 3,
-                            paddingHorizontal: 5,
                         }}
                         loop
                         scroll
+                        bounce={false}
                         useNativeDriver
-                        duration={MARQUEE_SCROLL_LONG_TEXT_PROGRESS_DURATION}
-                        bounceSpeed={1}
-                        scrollSpeed={1}
-                        animationType="scroll"
+                        scrollSpeed={MARQUEE_SCROLL_SPEED}
+                        animationType="auto"
+                        repeatSpacer={250}
                         marqueeDelay={1000}>
                         {title}
-                    </MarqueeText>
+                    </AnimatedMarqueeText>
+
                     <Text
                         style={{
                             fontSize: 18,
                             fontFamily: FontUbuntuBold,
                             color: themeColors.white[0] + 'AF',
                             paddingVertical: 1,
-                            paddingHorizontal: 5,
                             // backgroundColor: '#000000AF', // background is only just for testing purpose
                         }}
                         numberOfLines={1}>
@@ -111,19 +142,33 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                     </Text>
                 </View>
 
-                <FastImage
-                    source={{
-                        uri: highQualityImage,
-                        // priority: 'high',
-                        // cache: 'web',
-                    }}
+                <View
                     style={{
                         width: DEFAULT_MUSIC_PLAYER_IMAGE_SIZE,
                         height: DEFAULT_MUSIC_PLAYER_IMAGE_SIZE,
-                        borderRadius: 5,
+                        overflow: 'hidden',
+                        alignItems: 'center',
+
+                        borderRadius: 2,
                         marginVertical: 20,
-                    }}
-                />
+                    }}>
+                    <AnimatedFastImage
+                        source={{
+                            uri: highQualityImage,
+                            // priority: 'high',
+                            // cache: 'web',
+                        }}
+                        style={{
+                            width: DEFAULT_MUSIC_PLAYER_IMAGE_SIZE,
+                            height: DEFAULT_MUSIC_PLAYER_IMAGE_SIZE,
+                            transform: [
+                                {
+                                    translateY,
+                                },
+                            ],
+                        }}
+                    />
+                </View>
 
                 <View
                     style={{
@@ -137,17 +182,17 @@ const MusicPlayerSongView = ({song, likeIsMusic, navigation}: SongView) => {
                             navigation.navigate('lyrics', {song})
                         }
                         isLiked={false}
-                        likeIsMusic={likeIsMusic}
+                        onLike={onLike}
                         color={themeColors.themecolorrevert[0]}
                     />
 
                     <TrackProgress
                         color={themeColors.themecolorrevert[0]}
-                        duration={song.duration}
+                        duration={duration}
                     />
                 </View>
-            </ImageBackground>
-        </DoubleTap>
+            </View>
+        </View>
     )
 }
 export default MusicPlayerSongView

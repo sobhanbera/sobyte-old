@@ -1,17 +1,17 @@
 import React from 'react'
+const {width, height} = Dimensions.get('screen')
 import {StyleSheet, Animated, Dimensions} from 'react-native'
 
 import {APP_LOGO_LINK, MUSIC_PLAYER_BLUR} from '../../constants'
-
-const {width, height} = Dimensions.get('screen')
+import {ThumbnailObject} from '../../interfaces'
 
 interface Props {
-    image: string
+    thumbnails: Array<ThumbnailObject>
     scrollX: Animated.Value
     index: number
 }
 const BackgroundBluredImage = (props: Props) => {
-    const {image, scrollX, index} = props
+    const {thumbnails, scrollX, index} = props
     const inputRange = [
         (index - 1) * height,
         index * height,
@@ -31,7 +31,7 @@ const BackgroundBluredImage = (props: Props) => {
                 },
             ]}
             source={{
-                uri: image || APP_LOGO_LINK,
+                uri: thumbnails[1].url || APP_LOGO_LINK,
                 // cache: 'force-cache',
             }}
             blurRadius={MUSIC_PLAYER_BLUR}
